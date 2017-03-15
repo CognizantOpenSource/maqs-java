@@ -4,11 +4,6 @@
 		<listener class-name="org.uncommons.reportng.HTMLReporter" />
 		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
 	</listeners>
-	<test name="BaseGenericTest">
-		<classes>
-            <class name="magenic.maqs.utilities.unitTests.BaseGenericTestUnitTest" />
-        </classes>
-	</test>
 	<test name="Config">
 		<classes>
             <class name="magenic.maqs.utilities.unitTests.ConfigUnitTest" />

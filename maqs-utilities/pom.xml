@@ -2,9 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>com.magenic.jmaqs-base</groupId>
+		<artifactId>jmaqs-base</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../Jmaqs/pom.xml</relativePath>
+	</parent>
+
 	<groupId>magenic.maqs.utilities</groupId>
 	<artifactId>maqs-utilities</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>maqs-utilities</name>
 
 	<repositories>
@@ -103,29 +109,29 @@
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-        		<version>3.0.0</version>
-        		<configuration>
-        			<descriptorRefs> 
-            			<descriptorRef>jar-with-dependencies</descriptorRef>
-          			</descriptorRefs> 
-          			<files>
-          				<file>src/main/Resources/config.properties</file>
-          			</files>
-        		</configuration>  		 
-        		<executions>
-          			<execution>
-            			<id>make-assembly</id> 
-            			<phase>package</phase> 
-            			<goals>
-              				<goal>single</goal>
-            			</goals>
-          			</execution>  
-        		</executions>
+				<version>3.0.0</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<files>
+						<file>src/main/Resources/config.properties</file>
+					</files>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 
