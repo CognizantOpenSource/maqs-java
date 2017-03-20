@@ -283,7 +283,9 @@ public abstract class BaseGenericTest
 	 */
 	protected String getFullyQualifiedTestClassName()
 	{
-		return this.testObject.get().getFullyQualifiedTestName();
+		TestObject instanceTO = this.testObject.get();
+		String testName = instanceTO.getFullyQualifiedTestName();
+		return testName;
 	}
 
 	/**

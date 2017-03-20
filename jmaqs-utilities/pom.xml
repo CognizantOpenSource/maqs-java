@@ -9,9 +9,9 @@
 		<relativePath>../Jmaqs/pom.xml</relativePath>
 	</parent>
 
-	<groupId>magenic.maqs.utilities</groupId>
-	<artifactId>maqs-utilities</artifactId>
-	<name>maqs-utilities</name>
+	<groupId>com.magenic.jmaqs-utilities</groupId>
+	<artifactId>jmaqs-utilities</artifactId>
+	<name>jmaqs-utilities</name>
 
 	<repositories>
 		<repository>

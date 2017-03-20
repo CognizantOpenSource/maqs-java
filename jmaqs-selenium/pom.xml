@@ -2,27 +2,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>magenic.maqs.webservices</groupId>
-	<artifactId>maqs-webservices</artifactId>
+	<groupId>com.magenic.jmaqs-selenium</groupId>
+	<artifactId>jmaqs-selenium</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>maqs-webservices</name>
+	<name>jmaqs-selenium</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>magenic.maqs.utilities</id>
-			<name>jMAQS WebServices</name>
-			<url>https://magenic.visualstudio.com/MaqsFramework/Development-Java/</url>
-		</repository>
-	</repositories>
-
 	<dependencies>
+		<dependency>
+			<groupId>magenic.maqs.utilities</groupId>
+			<artifactId>maqs-utilities</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -30,20 +26,34 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.2</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.53.1</version>
 		</dependency>
 		<dependency>
-			<groupId>source.maqs-utilities</groupId>
-			<artifactId>maqs-utilities</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
+			<version>2.53.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-firefox-driver</artifactId>
+			<version>2.53.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-ie-driver</artifactId>
+			<version>2.53.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.9.10</version>
-			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.codeborne</groupId>
+			<artifactId>phantomjsdriver</artifactId>
+			<version>1.3.0</version>
 		</dependency>
 	</dependencies>
 
@@ -72,4 +82,10 @@
 			</plugin>
 		</plugins>
 	</build>
+	<parent>
+		<relativePath>../Jmaqs/pom.xml</relativePath>
+		<groupId>com.magenic.jmaqs-base</groupId>
+		<artifactId>jmaqs-base</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 </project>

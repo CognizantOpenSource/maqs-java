@@ -24,7 +24,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest
 	{
 		String testName = this.getFullyQualifiedTestClassName();
 		
-		Assert.assertEquals(testName, "magenic.maqs.utilities.unitTests.BaseGenericTestUnitTest.fullyQualifiedTestNameTest");
+		Assert.assertEquals(testName, "com.magenic.jmaqs.baseTest.unitTests.BaseGenericTestUnitTest.fullyQualifiedTestNameTest");
 	}
 	
 	/**
