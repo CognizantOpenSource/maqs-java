@@ -14,3 +14,7 @@ hs_err_pid*
 *.project
 *.classpath
 *.prefs
+
+# TestNG related
+*/test-output/
+.recommenders/
