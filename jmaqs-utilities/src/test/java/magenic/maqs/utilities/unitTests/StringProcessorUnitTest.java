@@ -9,7 +9,7 @@ package magenic.maqs.utilities.unitTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import magenic.maqs.utilities.Helper.StringProcessor;
+import com.magenic.jmaqs.utilities.Helper.StringProcessor;
 
 /**
  * Unit tests for the StringProcessor class

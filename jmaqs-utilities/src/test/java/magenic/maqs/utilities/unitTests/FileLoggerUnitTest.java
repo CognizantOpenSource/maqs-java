@@ -10,8 +10,8 @@ import java.io.File;
 
 import org.testng.annotations.Test;
 
-import magenic.maqs.utilities.Logging.FileLogger;
-import magenic.maqs.utilities.Logging.MessageType;
+import com.magenic.jmaqs.utilities.Logging.FileLogger;
+import com.magenic.jmaqs.utilities.Logging.MessageType;
 
 /**
  * Unit test class for FileLogger.java

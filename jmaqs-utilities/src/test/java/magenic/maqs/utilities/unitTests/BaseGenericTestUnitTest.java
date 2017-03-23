@@ -11,8 +11,8 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
-import magenic.maqs.utilities.BaseTest.BaseGenericTest;
-import magenic.maqs.utilities.Logging.FileLogger;
+import com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest;
+import com.magenic.jmaqs.utilities.Logging.FileLogger;
 
 /**
  * Unit test class for BaseGenericTest class

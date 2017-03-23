@@ -6,7 +6,7 @@
 
 package magenic.maqs.webservices.BaseWebServiceTest;
 
-import magenic.maqs.utilities.Helper.Config;
+import com.magenic.jmaqs.utilities.Helper.Config;
 
 public final class WebServiceConfig {
 	/**

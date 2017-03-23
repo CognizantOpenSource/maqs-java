@@ -9,8 +9,8 @@ package magenic.maqs.webservices.BaseWebServiceTest;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
-import magenic.maqs.utilities.Logging.Logger;
-import magenic.maqs.utilities.Logging.LoggingEnabled;
+import com.magenic.jmaqs.utilities.Logging.Logger;
+import com.magenic.jmaqs.utilities.Logging.LoggingEnabled;
 
 // TODO extend from TestObject once the TestObject class has been updated to follow similar to the MAQS version
 public abstract class WebServiceTestObject {

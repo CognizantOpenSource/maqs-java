@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import magenic.maqs.utilities.Helper.Config;
-import magenic.maqs.utilities.Helper.ListProcessor;
-import magenic.maqs.utilities.Helper.StringProcessor;
+import com.magenic.jmaqs.utilities.Helper.Config;
+import com.magenic.jmaqs.utilities.Helper.ListProcessor;
+import com.magenic.jmaqs.utilities.Helper.StringProcessor;
 
 /**
  * Unit tests for the ListProcessor class

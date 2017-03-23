@@ -10,7 +10,7 @@ package magenic.maqs.utilities.unitTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import magenic.maqs.utilities.Helper.Config;
+import com.magenic.jmaqs.utilities.Helper.Config;
 
 /**
  * Configuration unit test class

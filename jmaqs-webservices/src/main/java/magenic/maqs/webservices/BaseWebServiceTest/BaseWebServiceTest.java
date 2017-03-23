@@ -7,8 +7,10 @@
 package magenic.maqs.webservices.BaseWebServiceTest;
 
 import org.testng.ITestResult;
+
+import com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest;
+
 import sun.net.www.http.HttpClient;
-import magenic.maqs.utilities.BaseTest.BaseGenericTest;
 
 public class BaseWebServiceTest extends BaseGenericTest {
 	// The HttpClient
