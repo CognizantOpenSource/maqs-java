@@ -1,12 +1,18 @@
-package com.magenic.jmaqs.baseTest.unitTests;
+// --------------------------------------------------
+// <copyright file="BaseGenericTest.java" company="Magenic">
+// Copyright 2017 Magenic, All rights Reserved
+// </copyright>
+// <summary>Message type enumeration</summary>
+// --------------------------------------------------
+
+package magenic.maqs.utilities.unitTests;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
-import com.magenic.jmaqs.baseTest.BaseGenericTest;
-
-import magenic.maqs.utilities.Logging.FileLogger;
+import com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest;
+import com.magenic.jmaqs.utilities.Logging.FileLogger;
 
 /**
  * Unit test class for BaseGenericTest class
@@ -24,7 +30,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest
 	{
 		String testName = this.getFullyQualifiedTestClassName();
 		
-		Assert.assertEquals(testName, "com.magenic.jmaqs.baseTest.unitTests.BaseGenericTestUnitTest.fullyQualifiedTestNameTest");
+		Assert.assertEquals(testName, "magenic.maqs.utilities.unitTests.BaseGenericTestUnitTest.fullyQualifiedTestNameTest");
 	}
 	
 	/**
