@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------
 
-package magenic.maqs.webservices.BaseWebServiceTest;
+package com.magenic.jmaqs.webservices.BaseWebServiceTest;
 
 import org.testng.ITestResult;
 

@@ -1,4 +1,4 @@
-package magenic.maqs.webservices.maqs_webservices;
+package com.magenic.jmaqs.webservices.maqs_webservices;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

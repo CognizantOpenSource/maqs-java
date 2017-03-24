@@ -5,7 +5,7 @@
 // <summary>Class contains the Http Client features. To be expanded later.</summary>
 // --------------------------------------------------
 
-package magenic.maqs.webservices.BaseWebServiceTest;
+package com.magenic.jmaqs.webservices.BaseWebServiceTest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
