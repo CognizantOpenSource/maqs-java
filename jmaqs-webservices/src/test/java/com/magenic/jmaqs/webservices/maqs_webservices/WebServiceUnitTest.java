@@ -1,11 +1,11 @@
-package magenic.maqs.webservices.maqs_webservices;
-
-import magenic.maqs.webservices.BaseWebServiceTest.HttpClientWrapper;
+package com.magenic.jmaqs.webservices.maqs_webservices;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.magenic.jmaqs.webservices.BaseWebServiceTest.HttpClientWrapper;
 
 public class WebServiceUnitTest {
 
