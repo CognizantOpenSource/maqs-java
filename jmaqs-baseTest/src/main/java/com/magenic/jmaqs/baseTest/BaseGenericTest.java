@@ -152,8 +152,9 @@ public abstract class BaseGenericTest
 		String testName = method.getDeclaringClass() + "." + method.getName();
 		testName = testName.replaceFirst("class ", "");
 
-		this.testObject.set(new TestObject(testName, this.setupLogging()));
-
+		this.testObject.set(new TestObject(testName));
+		this.testObject.get().setLogger(this.setupLogging());
+		
 		try
 		{
 			// File loggers should append

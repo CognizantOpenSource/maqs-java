@@ -24,6 +24,17 @@ public class TestObject
 	 * 
 	 * @param fullyQualifiedTestName
 	 * 			  The Fully Qualified Test Name
+	 */
+	public TestObject(String fullyQualifiedTestName)
+	{
+		this.testName = fullyQualifiedTestName;
+	}
+	
+	/**
+	 * Initializes a new instance of the TestObject class
+	 * 
+	 * @param fullyQualifiedTestName
+	 * 			  The Fully Qualified Test Name
 	 * @param logger
 	 * 			  The Logger object
 	 */
