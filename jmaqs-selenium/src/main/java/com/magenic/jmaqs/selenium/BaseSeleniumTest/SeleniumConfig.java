@@ -7,6 +7,7 @@
 
 package com.magenic.jmaqs.selenium.BaseSeleniumTest;
 
+
 import com.magenic.jmaqs.utilities.Helper.Config;
 import com.magenic.jmaqs.utilities.Helper.StringProcessor;
 import org.openqa.selenium.WebDriver;
