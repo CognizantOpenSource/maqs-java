@@ -2,12 +2,19 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.magenic.jmaqs-selenium</groupId>
+	<groupId>com.magenic.jmaqs.selenium</groupId>
 	<artifactId>jmaqs-selenium</artifactId>
 	<packaging>jar</packaging>
 
 	<name>jmaqs-selenium</name>
 	<url>http://maven.apache.org</url>
+
+	<parent>
+		<relativePath>../Jmaqs/pom.xml</relativePath>
+		<groupId>com.magenic.jmaqs.base</groupId>
+		<artifactId>jmaqs-base</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,7 +56,12 @@
 			<artifactId>phantomjsdriver</artifactId>
 			<version>1.3.0</version>
 		</dependency>
-    </dependencies>
+		<dependency>
+			<groupId>com.magenic.jmaqs.utilities</groupId>
+			<artifactId>jmaqs-utilities</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -76,10 +88,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<parent>
-		<relativePath>../Jmaqs/pom.xml</relativePath>
-		<groupId>com.magenic.jmaqs-base</groupId>
-		<artifactId>jmaqs-base</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+
 </project>

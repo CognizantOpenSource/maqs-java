@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.magenic.jmaqs-base</groupId>
+	<groupId>com.magenic.jmaqs.base</groupId>
 	<artifactId>jmaqs-base</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
@@ -12,6 +12,7 @@
 		<module>../jmaqs-utilities</module>
 		<module>../jmaqs-baseTest</module>
 		<module>../jmaqs-selenium</module>
+		<module>../jmaqs-webservices</module>
 	</modules>
 
 	<repositories>
