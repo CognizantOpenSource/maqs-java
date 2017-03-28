@@ -21,7 +21,7 @@ import com.magenic.jmaqs.selenium.BaseSeleniumTest.ElementHandler;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest.SeleniumConfig;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest.SeleniumWait;
 
-import magenic.maqs.utilities.Helper.ListProcessor;
+import com.magenic.jmaqs.utilities.Helper.ListProcessor;
 
 /**
  * Unit tests for ElementHandler class

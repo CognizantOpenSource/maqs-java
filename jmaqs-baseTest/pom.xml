@@ -22,8 +22,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>magenic.maqs.utilities</groupId>
-			<artifactId>maqs-utilities</artifactId>
+			<groupId>com.magenic.jmaqs-utilities</groupId>
+			<artifactId>jmaqs-utilities</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

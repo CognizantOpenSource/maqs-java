@@ -4,7 +4,7 @@
 // </copyright>
 // <summary>Unit tests for the string processor</summary>
 //--------------------------------------------------
-package magenic.maqs.utilities.unitTests;
+package com.magenic.jmaqs.utilities.unitTests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

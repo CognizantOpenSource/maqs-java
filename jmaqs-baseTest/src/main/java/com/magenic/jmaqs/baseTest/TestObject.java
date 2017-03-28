@@ -1,6 +1,6 @@
 package com.magenic.jmaqs.baseTest;
 
-import magenic.maqs.utilities.Logging.Logger;
+import com.magenic.jmaqs.utilities.Logging.Logger;
 
 /**
  * The TestObject class

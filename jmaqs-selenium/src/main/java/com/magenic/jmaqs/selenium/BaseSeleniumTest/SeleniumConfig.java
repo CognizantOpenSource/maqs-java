@@ -7,6 +7,8 @@
 
 package com.magenic.jmaqs.selenium.BaseSeleniumTest;
 
+import com.magenic.jmaqs.utilities.Helper.Config;
+import com.magenic.jmaqs.utilities.Helper.StringProcessor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -26,9 +28,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import magenic.maqs.utilities.Helper.Config;
-import magenic.maqs.utilities.Helper.StringProcessor;
 
 /**
  * Config class

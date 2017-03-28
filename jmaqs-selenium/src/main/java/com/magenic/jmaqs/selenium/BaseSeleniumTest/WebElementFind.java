@@ -7,14 +7,13 @@
 
 package com.magenic.jmaqs.selenium.BaseSeleniumTest;
 
-import java.util.List;
-
+import com.magenic.jmaqs.utilities.Helper.StringProcessor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import magenic.maqs.utilities.Helper.StringProcessor;
+import java.util.List;
 
 public class WebElementFind
 {
