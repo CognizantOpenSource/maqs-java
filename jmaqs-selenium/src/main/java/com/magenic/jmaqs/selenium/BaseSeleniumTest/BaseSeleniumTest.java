@@ -4,8 +4,8 @@ package com.magenic.jmaqs.selenium.BaseSeleniumTest;
 import com.magenic.jmaqs.baseTest.BaseGenericTest;
 import com.magenic.jmaqs.utilities.Helper.StringProcessor;
 import com.magenic.jmaqs.utilities.Logging.MessageType;
-import com.magenic.jmaqs.utilities.Logging.TestResultType;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 
 /**
  * Base Selenium Test class
@@ -21,12 +21,6 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
 	public BaseSeleniumTest()
 	{	
 	}
-
-	@Override
-	protected void postSetupLogging() {
-
-	}
-
 
 
 	/**
@@ -67,8 +61,8 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
 	/**
 	 * Log info about the web driver setup
 	 */
-	protected void PostSetupLoggin()
-	{
+	@Override
+	protected void postSetupLogging() {
 		try
 		{
 			
@@ -96,8 +90,8 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
 	 * 
 	 * @param resultType
 	 */
-	protected void BeforeLogginggTeardown(TestResultType resultType)
-	{
+	@Override
+	protected void beforeLoggingTeardown(ITestResult resultType) {
 		// Try to take a screen shot
 		try
 		{
