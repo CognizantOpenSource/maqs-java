@@ -1,15 +1,16 @@
 package com.magenic.jmaqs.selenium.BaseSeleniumTest;
 
+import com.magenic.jmaqs.baseTest.TestObject;
+import com.magenic.jmaqs.utilities.Logging.Logger;
 import org.openqa.selenium.WebDriver;
-import magenic.maqs.utilities.Logging.Logger;
-import magenic.maqs.utilities.BaseTest.TestObject;
+
 
 /**
  * The SeleniumTestObject Class
  * 
  * @author ErikSo
  */
-public class SeleniumTestObject extends TestObject{
+public class SeleniumTestObject extends TestObject {
 
 	/**
 	 * The WebDriver Object
