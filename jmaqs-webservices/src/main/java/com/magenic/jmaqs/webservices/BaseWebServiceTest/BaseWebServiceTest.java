@@ -6,7 +6,8 @@
 
 package com.magenic.jmaqs.webservices.BaseWebServiceTest;
 
-import com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest;
+
+import com.magenic.jmaqs.baseTest.BaseGenericTest;
 import org.testng.ITestResult;
 import sun.net.www.http.HttpClient;
 
