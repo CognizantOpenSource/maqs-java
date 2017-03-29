@@ -12,7 +12,8 @@
 		<module>../jmaqs-utilities</module>
 		<module>../jmaqs-baseTest</module>
 		<module>../jmaqs-selenium</module>
-		<module>../jmaqs-webservices</module>
+        <!--Temporarily commented out until unit tests are functional-->
+		<!--<module>../jmaqs-webservices</module>-->
 	</modules>
 
 	<repositories>

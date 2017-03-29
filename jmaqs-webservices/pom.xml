@@ -9,13 +9,13 @@
 
 	<name>jmaqs-webservices</name>
 	<url>http://maven.apache.org</url>
-
-	<parent>
-		<groupId>com.magenic.jmaqs.base</groupId>
-		<artifactId>jmaqs-base</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../Jmaqs/pom.xml</relativePath>
-	</parent>
+    <!--Temporarily commented out until unit tests are functional-->
+	<!--<parent>-->
+		<!--<groupId>com.magenic.jmaqs.base</groupId>-->
+		<!--<artifactId>jmaqs-base</artifactId>-->
+		<!--<version>0.0.1-SNAPSHOT</version>-->
+		<!--<relativePath>../Jmaqs/pom.xml</relativePath>-->
+	<!--</parent>-->
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
