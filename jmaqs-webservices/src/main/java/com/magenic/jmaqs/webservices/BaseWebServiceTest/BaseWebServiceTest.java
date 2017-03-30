@@ -6,10 +6,8 @@
 
 package com.magenic.jmaqs.webservices.BaseWebServiceTest;
 
-import org.testng.ITestResult;
-
 import com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest;
-
+import org.testng.ITestResult;
 import sun.net.www.http.HttpClient;
 
 public class BaseWebServiceTest extends BaseGenericTest {
@@ -42,7 +40,7 @@ public class BaseWebServiceTest extends BaseGenericTest {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see magenic.maqs.utilities.BaseTest.BaseGenericTest#postSetupLogging()
+	 * @see com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest#postSetupLogging()
 	 */
 	@Override
 	protected void postSetupLogging() {
@@ -50,11 +48,12 @@ public class BaseWebServiceTest extends BaseGenericTest {
 
 	}
 
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * magenic.maqs.utilities.BaseTest.BaseGenericTest#beforeLoggingTeardown
+	 * com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest#beforeLoggingTeardown
 	 * (org.testng.ITestResult)
 	 */
 	@Override

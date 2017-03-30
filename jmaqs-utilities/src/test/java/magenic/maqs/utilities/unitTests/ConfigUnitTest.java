@@ -5,7 +5,7 @@
 // <summary>Unit test configuration tests</summary>
 // --------------------------------------------------
 
-package magenic.maqs.utilities.unitTests;
+package com.magenic.jmaqs.utilities.unitTests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

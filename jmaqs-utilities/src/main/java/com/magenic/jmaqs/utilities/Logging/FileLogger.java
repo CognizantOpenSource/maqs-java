@@ -7,16 +7,12 @@
 
 package com.magenic.jmaqs.utilities.Logging;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import com.magenic.jmaqs.utilities.Helper.Config;
 import com.magenic.jmaqs.utilities.Helper.StringProcessor;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Helper class for adding logs to a plain text file. Allows configurable file
@@ -189,7 +185,7 @@ public class FileLogger extends Logger
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see magenic.maqs.utilities.Logging.Logger#logMessage(java.lang.String,
+	 * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(java.lang.String,
 	 * java.lang.Object[])
 	 */
 	@Override
@@ -202,7 +198,7 @@ public class FileLogger extends Logger
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * magenic.maqs.utilities.Logging.Logger#logMessage(magenic.maqs.utilities.
+	 * com.magenic.jmaqs.utilities.Logging.Logger#logMessage(com.magenic.jmaqs.utilities.
 	 * Logging.MessageType, java.lang.String, java.lang.Object[])
 	 */
 	@Override

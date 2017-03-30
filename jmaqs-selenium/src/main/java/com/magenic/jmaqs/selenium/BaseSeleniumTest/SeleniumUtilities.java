@@ -6,10 +6,10 @@
 
 package com.magenic.jmaqs.selenium.BaseSeleniumTest;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-
+import com.magenic.jmaqs.utilities.Logging.FileLogger;
+import com.magenic.jmaqs.utilities.Logging.Logger;
+import com.magenic.jmaqs.utilities.Logging.LoggingConfig;
+import com.magenic.jmaqs.utilities.Logging.MessageType;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -18,10 +18,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import magenic.maqs.utilities.Logging.FileLogger;
-import magenic.maqs.utilities.Logging.Logger;
-import magenic.maqs.utilities.Logging.LoggingConfig;
-import magenic.maqs.utilities.Logging.MessageType;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 /**
  * Static class for the selenium utilities, ported from MAQS

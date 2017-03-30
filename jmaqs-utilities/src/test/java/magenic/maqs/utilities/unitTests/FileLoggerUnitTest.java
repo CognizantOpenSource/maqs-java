@@ -4,7 +4,7 @@
 // </copyright>
 // <summary>Unit test for FileLogger.java</summary>
 // --------------------------------------------------
-package magenic.maqs.utilities.unitTests;
+package com.magenic.jmaqs.utilities.unitTests;
 
 import java.io.File;
 

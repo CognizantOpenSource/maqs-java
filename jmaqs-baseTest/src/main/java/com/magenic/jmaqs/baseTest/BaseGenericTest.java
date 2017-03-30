@@ -1,25 +1,20 @@
 package com.magenic.jmaqs.baseTest;
 
-import java.lang.reflect.Method;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.concurrent.ConcurrentHashMap;
-
+import com.magenic.jmaqs.utilities.Helper.StringProcessor;
+import com.magenic.jmaqs.utilities.Logging.*;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import magenic.maqs.utilities.Helper.StringProcessor;
-import magenic.maqs.utilities.Logging.ConsoleLogger;
-import magenic.maqs.utilities.Logging.FileLogger;
-import magenic.maqs.utilities.Logging.Logger;
-import magenic.maqs.utilities.Logging.LoggingConfig;
-import magenic.maqs.utilities.Logging.LoggingEnabled;
-import magenic.maqs.utilities.Logging.MessageType;
+import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Base test class

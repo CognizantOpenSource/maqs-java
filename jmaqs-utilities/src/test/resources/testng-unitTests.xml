@@ -6,22 +6,22 @@
 	</listeners>
 	<test name="Config">
 		<classes>
-            <class name="magenic.maqs.utilities.unitTests.ConfigUnitTest" />
+            <class name="com.magenic.jmaqs.utilities.unitTests.ConfigUnitTest" />
         </classes>
 	</test>
 	<test name="File Logger">
 		<classes>
-            <class name="magenic.maqs.utilities.unitTests.FileLoggerUnitTest" />
+            <class name="com.magenic.jmaqs.utilities.unitTests.FileLoggerUnitTest" />
         </classes>
 	</test>
 	<test name="List Processor">
 		<classes>
-            <class name="magenic.maqs.utilities.unitTests.ListProcessorUnitTest" />
+            <class name="com.magenic.jmaqs.utilities.unitTests.ListProcessorUnitTest" />
         </classes>
 	</test>
 	<test name="String Processor">
 		<classes>
-            <class name="magenic.maqs.utilities.unitTests.StringProcessorUnitTest" />
+            <class name="com.magenic.jmaqs.utilities.unitTests.StringProcessorUnitTest" />
         </classes>
 	</test>
 </suite>

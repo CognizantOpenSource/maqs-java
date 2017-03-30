@@ -4,7 +4,7 @@
 // </copyright>
 // <summary>unit tests for list processing </summary>
 // --------------------------------------------------
-package magenic.maqs.utilities.unitTests;
+package com.magenic.jmaqs.utilities.unitTests;
 
 import java.util.ArrayList;
 

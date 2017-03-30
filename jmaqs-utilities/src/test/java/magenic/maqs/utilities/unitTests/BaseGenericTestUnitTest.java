@@ -5,7 +5,7 @@
 // <summary>Message type enumeration</summary>
 // --------------------------------------------------
 
-package magenic.maqs.utilities.unitTests;
+package com.magenic.jmaqs.utilities.unitTests;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -30,7 +30,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest
 	{
 		String testName = this.getFullyQualifiedTestClassName();
 		
-		Assert.assertEquals(testName, "magenic.maqs.utilities.unitTests.BaseGenericTestUnitTest.fullyQualifiedTestNameTest");
+		Assert.assertEquals(testName, "com.magenic.jmaqs.utilities.unitTests.BaseGenericTestUnitTest.fullyQualifiedTestNameTest");
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest
 	}
 	
 	/* (non-Javadoc)
-	 * @see magenic.maqs.utilities.BaseTest.BaseGenericTest#postSetupLogging()
+	 * @see com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest#postSetupLogging()
 	 */
 	@Override
 	protected void postSetupLogging()
@@ -57,7 +57,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest
 	}
 
 	/* (non-Javadoc)
-	 * @see magenic.maqs.utilities.BaseTest.BaseGenericTest#beforeLoggingTeardown(org.testng.ITestResult)
+	 * @see com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest#beforeLoggingTeardown(org.testng.ITestResult)
 	 */
 	@Override
 	protected void beforeLoggingTeardown(ITestResult resultType)
