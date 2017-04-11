@@ -6,8 +6,10 @@ package com.magenic.jmaqs.webservices.unitTests;
 
 import com.magenic.jmaqs.webservices.baseWebServiceTest.HttpClientWrapper;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;
+import org.apache.http.util.EntityUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -24,7 +26,9 @@ public class WebServiceUnitTest {
     HttpClientWrapper client = new HttpClientWrapper("http://magenicautomation.azurewebsites.net",
         ContentType.TEXT_PLAIN);
     CloseableHttpResponse response = client.getWithResponse("/api/String/1", true);
-    Assert.assertTrue(response.toString().contains("Tomato Soup"),
+    HttpEntity entity = response.getEntity();
+    String responseString = EntityUtils.toString(entity);
+    Assert.assertTrue(responseString.contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + response.toString());
   }
 }

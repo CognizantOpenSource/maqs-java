@@ -27,8 +27,7 @@ public abstract class WebServiceTestObject {
    * @param loggers
    *          The logger
    */
-  public WebServiceTestObject(HttpClientWrapper webServiceWrapper,
-      ConcurrentHashMap<String, Logger> loggers) {
+  public WebServiceTestObject(HttpClientWrapper webServiceWrapper, ConcurrentHashMap<String, Logger> loggers) {
     this.webServiceWrapper = webServiceWrapper;
     this.loggers = loggers;
     loggedExceptions = new ConcurrentHashMap<String, ArrayList<String>>();

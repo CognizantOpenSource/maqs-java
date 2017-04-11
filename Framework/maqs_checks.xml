@@ -12,7 +12,7 @@ Java MAQS coding style
 <module name="Checker">
   <property name="severity" value="warning"/>
   <property name="charset" value="UTF-8"/>
-  <property name="fileExtensions" value="java, properties, xml"/>
+  <property name="fileExtensions" value="java"/>
   <module name="TreeWalker">
     <module name="OuterTypeFilename"/>
     <module name="IllegalTokenText">
@@ -27,7 +27,7 @@ Java MAQS coding style
     </module>
     <module name="LineLength">
       <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
-      <property name="max" value="100"/>
+      <property name="max" value="120"/>
     </module>
     <module name="AvoidStarImport"/>
     <module name="OneTopLevelClass"/>
@@ -38,7 +38,7 @@ Java MAQS coding style
     </module>
     <module name="NeedBraces"/>
     <module name="LeftCurly">
-      <property name="maxLineLength" value="100"/>
+      <property name="maxLineLength" value="120"/>
     </module>
     <module name="RightCurly">
       <property name="id" value="RightCurlySame"/>
@@ -188,10 +188,6 @@ Java MAQS coding style
     <property name="eachLine" value="true"/>
   </module>
   <module name="Header">
-    <property name="headerFile" value="C:\Users\troyw\git\JMAQS\Framework\copyright.txt"/>
-  </module>
-  <module name="RegexpOnFilename">
-    <property name="ignoreFileNameExtensions" value="true"/>
-    <property name="fileExtensions" value="properties xml"/>
+    <property name="header" value="/* \n * Copyright 2017 (C) Magenic, All rights Reserved\n */\n"/>
   </module>
 </module>

@@ -20,7 +20,7 @@ import org.testng.ITestResult;
 public abstract class BaseSeleniumTest extends BaseGenericTest {
 
   /**
-   * Initialize a new instance of the BaseSeleniumTest class.
+   * Initialize a new instance of the BaseSeleniumTest class
    */
   public BaseSeleniumTest() {
   }
@@ -68,17 +68,21 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
         this.getLogger().logMessage(MessageType.INFORMATION, "Remote driver: %s",
             SeleniumConfig.getRemoteBrowserName());
       } else {
-        this.getLogger().logMessage(MessageType.INFORMATION, "Loaded driver: %s",
-            SeleniumConfig.getBrowserName());
+        this.getLogger().logMessage(MessageType.INFORMATION, "Loaded driver: %s", SeleniumConfig.getBrowserName());
       }
+
+      WebDriver driver = SeleniumConfig.browser();
+      SeleniumWait wait = new SeleniumWait(driver);
+
+      seleniumTestObject
+          .set(new SeleniumTestObject(driver, wait, this.getLogger(), this.getFullyQualifiedTestClassName()));
+
       // TODO Add SetWaitDriver
       // this.WebDriver.SetWaitDriver(SeleniumConfig.GetWaitDriver(this.WebDriver));
       // Set wait driver? SeleniumConfig is missing GetWaitDriver
     } catch (Exception e) {
-      this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s",
-          e.getMessage());
-      System.out.println(
-          StringProcessor.safeFormatter("Browser type %s is not supported", e.getMessage()));
+      this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s", e.getMessage());
+      System.out.println(StringProcessor.safeFormatter("Browser type %s is not supported", e.getMessage()));
     }
   }
 
