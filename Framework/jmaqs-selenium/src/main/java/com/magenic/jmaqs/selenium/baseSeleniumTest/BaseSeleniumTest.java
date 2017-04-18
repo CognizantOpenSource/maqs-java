@@ -12,26 +12,23 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 
 /**
- * Base Selenium Test class
- * 
- * @author ErikSo
- *
+ * Base Selenium Test class.
  */
 public abstract class BaseSeleniumTest extends BaseGenericTest {
 
   /**
-   * Initialize a new instance of the BaseSeleniumTest class
+   * Initialize a new instance of the BaseSeleniumTest class.
    */
   public BaseSeleniumTest() {
   }
 
   /**
-   * Thread local storage of SeleniumTestObject
+   * Thread local storage of SeleniumTestObject.
    */
   private ThreadLocal<SeleniumTestObject> seleniumTestObject = new ThreadLocal<SeleniumTestObject>();
 
   /**
-   * Get WebDriver
+   * Get WebDriver.
    * 
    * @return WebDriver
    */
@@ -40,7 +37,7 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
   }
 
   /**
-   * Get SeleniumWait
+   * Get SeleniumWait.
    * 
    * @return SeleniumWait
    */
@@ -49,7 +46,7 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
   }
 
   /**
-   * Get the seleniumTestObject for this test
+   * Get the seleniumTestObject for this test.
    * 
    * @return The seleniumTestObject
    */
@@ -58,7 +55,7 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
   }
 
   /**
-   * Log info about the web driver setup
+   * Log info about the web driver setup.
    */
   @Override
   protected void postSetupLogging() {
@@ -87,7 +84,7 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
   }
 
   /**
-   * Take a screen shot if needed and tear down the web driver
+   * Take a screen shot if needed and tear down the web driver.
    * 
    * @param resultType
    *          The test result type

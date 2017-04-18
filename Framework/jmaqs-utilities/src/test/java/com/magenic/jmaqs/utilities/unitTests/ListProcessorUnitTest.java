@@ -14,11 +14,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for the ListProcessor class
+ * Unit tests for the ListProcessor class.
  */
 public class ListProcessorUnitTest {
   /**
-   * Unit Test for creating a comma delimited string
+   * Unit Test for creating a comma delimited string.
    */
 
   @Test
@@ -42,7 +42,7 @@ public class ListProcessorUnitTest {
   }
 
   /**
-   * Unit Test for creating a sorted comma delimited string
+   * Unit Test for creating a sorted comma delimited string.
    */
 
   @Test
@@ -65,7 +65,7 @@ public class ListProcessorUnitTest {
   }
 
   /**
-   * Unit Test for comparing two lists of strings
+   * Unit Test for comparing two lists of strings.
    */
 
   @Test
@@ -96,7 +96,7 @@ public class ListProcessorUnitTest {
   }
 
   /**
-   * Unit Test for comparing two lists of strings by order
+   * Unit Test for comparing two lists of strings by order.
    */
   @Test
   public void listOfStringsComparerByOrderTest() {

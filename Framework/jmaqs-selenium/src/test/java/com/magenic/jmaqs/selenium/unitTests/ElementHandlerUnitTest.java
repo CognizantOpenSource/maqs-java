@@ -17,70 +17,67 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for ElementHandler class
- * 
- * @author SudeepA
- *
+ * Unit tests for ElementHandler class.
  */
 public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
   /**
-   * Url for the site
+   * Url for the site.
    */
   private static String siteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
-   * Automation site url
+   * Automation site url.
    */
   private static String siteAutomationUrl = siteUrl + "Automation/";
 
   /**
-   * Options for computer parts list
+   * Options for computer parts list.
    */
   private static By computerPartsListOptions = By.cssSelector("#computerParts > option");
 
   /**
-   * Swagger link
+   * Swagger link.
    */
   private static By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
 
   /**
-   * First name textbox
+   * First name textbox.
    */
   private static By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
 
   /**
-   * Female radio button
+   * Female radio button.
    */
   private static By femaleRadioButton = By.cssSelector("#FemaleRadio");
 
   /**
-   * First checkbox
+   * First checkbox.
    */
   private static By checkbox = By.cssSelector("#Checkbox1");
 
   /**
-   * Name dropdown list
+   * Name dropdown list.
    */
   private static By nameDropdown = By.cssSelector("#namesDropdown");
 
   /**
-   * Computer parts list
+   * Computer parts list.
    */
   private static By computerPartsList = By.cssSelector("#computerParts");
 
   /**
-   * Employee link
+   * Employee link.
    */
   private static By employeeButton = By.cssSelector("#EmployeeButton > a");
 
   /**
-   * Employee page title
+   * Employee page title.
    */
   private static By employeePageTitle = By.cssSelector("body > div.container.body-content > h2");
 
   /**
-   * Unit Test for creating a sorted comma delimited String
+   * Unit Test for creating a sorted comma delimited String.
    */
   @Test
   public void createSortedCommaDelimitedStringFromWebElementsTest() {
@@ -91,7 +88,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit Test for creating a sorted comma delimited String
+   * Unit Test for creating a sorted comma delimited String.
    */
   @Test
   public void createCommaDelimitedStringFromWebElementsTest() {
@@ -102,7 +99,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit test for entering text into a textbox and getting text from a textbox
+   * Unit test for entering text into a textbox and getting text from a textbox.
    */
   @Test
   public void setTextBoxAndVerifyValueTest() {
@@ -114,7 +111,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit Test for checking a radio button
+   * Unit Test for checking a radio button.
    */
   @Test
   public void checkRadioButtonTest() {
@@ -125,7 +122,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit Test for checking a checkbox
+   * Unit Test for checking a checkbox.
    */
   @Test
   public void checkCheckBoxTest() {
@@ -135,7 +132,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit Test for get element attribute function
+   * Unit Test for get element attribute function.
    */
   @Test
   public void getElementAttributeTest() {
@@ -147,7 +144,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
   /**
    * Unit Test for selecting an item from a dropdown and getting the selected item from a dropdown
-   * (By actual value)
+   * (By actual value).
    */
   @Test
   public void selectItemFromDropDownTest() {
@@ -160,7 +157,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
   /**
    * Unit Test for selecting an item from a dropdown and getting the selected item from a dropdown
-   * (By list value)
+   * (By list value).
    */
   @Test
   public void selectItemFromDropDownByValueTest() {
@@ -173,7 +170,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
   /**
    * Unit Test for selecting multiple items from a list box and getting all selected items in a list
-   * box(By actual value)
+   * box(By actual value).
    */
   @Test
   public void selectMultipleItemsFromListBoxTest() {
@@ -194,7 +191,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
   /**
    * Unit Test for selecting multiple items from a list box and getting all selected items in a list
-   * box(By list value)
+   * box(By list value).
    */
   @Test
   public void selectMultipleItemsFromListBoxTestByValue() {
@@ -213,7 +210,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit test for ClickElementByJavaScript using a hover dropdown, where dropdown is not visible
+   * Unit test for ClickElementByJavaScript using a hover dropdown, where dropdown is not visible.
    */
   @Test
   public void clickElementByJavascriptFromHoverDropdown() {
@@ -224,7 +221,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test to verify scrolling into view
+   * Test to verify scrolling into view.
    */
   @Test
   public void scrollIntoView() {
@@ -233,7 +230,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test to verify scrolling into view
+   * Test to verify scrolling into view.
    */
   @Test
   public void scrollIntoViewWithCoords() {
@@ -242,7 +239,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test to verify scrolling into view
+   * Test to verify scrolling into view.
    */
   @Test
   public void executingScrolling() {
@@ -251,7 +248,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit test for ClickElementByJavaScript where the element is not present
+   * Unit test for ClickElementByJavaScript where the element is not present.
    */
   @Test(expectedExceptions = NoSuchElementException.class)
   public void clickElementByJavascriptFromHoverDropdownNotFound() {
@@ -260,7 +257,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Verify slow type text is correctly typed
+   * Verify slow type text is correctly typed.
    */
   @Test
   public void slowTypeTest() {
@@ -271,7 +268,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Verify two Strings are equal. If not fail test
+   * Verify two Strings are equal. If not fail test.
    * 
    * @param actualValue
    *          Actual displayed text
@@ -283,7 +280,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Navigate to test page url and wait for page to load
+   * Navigate to test page url and wait for page to load.
    */
   private void navigateToUrl() {
 

@@ -22,31 +22,61 @@ import org.testng.Assert;
 /**
  * Selenium waiter This is the tool-class used for waiting. It can be used to wait for many
  * circumstances (element exist, not exist, be visible, to equal a desired value, etc..
- *
- * @author TroyW -- adapted to JMAQS by TraceR.
  */
 public class SeleniumWait {
   // TODO these values need to be removed, and instead accessed from the Config/Execution properties
   // once implemented
+  
+  /**
+   * The default timeout.
+   */
   private static final int DEFAULT_TIMEOUT = 20;
+  
+  /**
+   * The clear time.
+   */
   private static final int CLEARTIME = 5;
+  
+  /**
+   * The default retry time.
+   */
   private static final int DEFAULT_FLUENT_RETRY_TIME = 250;
+  
+  /**
+   * One thousand.
+   */
   private static final int ONE_THOUSAND = 1000;
 
-  // default value of the Header size... Your header's size may be different.
+  /**
+   * The default value of the Header size... Your header's size may be different.
+   */
   private static final int HEADER_SIZE = 90;
-  // default value of the page's body. Your page might have a different Header value
+
+  /**
+   * The default value of the page's body. Your page might have a different Header value.
+   */
   private static final By BODY_BY = By.cssSelector("BODY");
 
-  // the Webdriver that the test is currently running on
+
+  /**
+   * The Webdriver that the test is currently running on.
+   */
   private WebDriver browser;
+  
+  
+  /**
+   * The retry time.
+   */
   private int fluentRetryTime;
 
-  //
+
+  /**
+   * The implicit wait timeout.
+   */
   private int implicitWaitTimeout;
 
   /**
-   * Constructor for SeleniumWait object
+   * Constructor for SeleniumWait object.
    * 
    * @param browser
    *          WebDriver
@@ -56,7 +86,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Constructor for SeleniumWait object
+   * Constructor for SeleniumWait object.
    * 
    * @param browser
    *          WebDriver
@@ -68,7 +98,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Constructor for SeleniumWait object
+   * Constructor for SeleniumWait object.
    * 
    * @param browser
    *          WebDriver
@@ -85,7 +115,7 @@ public class SeleniumWait {
 
   /**
    * Wait for the specified element to be present on the pages DOM. The first element located with
-   * the specified By value is returned
+   * the specified By value is returned.
    * 
    * @param by
    *          Selector to wait for, and return
@@ -97,7 +127,7 @@ public class SeleniumWait {
 
   /**
    * Wait for the specified element to be present on the pages DOM. The first element located with
-   * the specified By value is returned
+   * the specified By value is returned.
    * 
    * @param by
    *          Selector to wait for and return
@@ -118,7 +148,7 @@ public class SeleniumWait {
 
   /**
    * Wait for the specified element to be present on the pages DOM. The first element located with
-   * the specified By value is returned
+   * the specified By value is returned.
    * 
    * @param by
    *          Selector to wait for, and return
@@ -135,7 +165,7 @@ public class SeleniumWait {
 
   /**
    * Wait for the specified element to be present on the pages DOM. The first element located with
-   * the specified By value is returned
+   * the specified By value is returned.
    * 
    * @param by
    *          Selector to wait for, and return
@@ -167,7 +197,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the element to exist and be visible
+   * Wait for the element to exist and be visible.
    *
    * @param by
    *          Selector to wait for
@@ -180,7 +210,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the element to exist and be visible
+   * Wait for the element to exist and be visible.
    *
    * @param by
    *          Selector to wait for
@@ -191,7 +221,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the element to not be displayed or visible
+   * Wait for the element to not be displayed or visible.
    * 
    * @param by
    *          Selector to not be displayed or visible
@@ -201,7 +231,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the element to not be displayed or visible
+   * Wait for the element to not be displayed or visible.
    * 
    * @param by
    *          Selector to not be displayed or visible
@@ -215,7 +245,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the element to not be displayed or visible
+   * Wait for the element to not be displayed or visible.
    * 
    * @param element
    *          WebElement to be invisible/not displayed
@@ -225,7 +255,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the element to not be displayed or visible
+   * Wait for the element to not be displayed or visible.
    * 
    * @param by
    *          Selector to not be displayed or visible
@@ -239,7 +269,7 @@ public class SeleniumWait {
 
   /**
    * Wait for a selector to present, and then return a list of all WebElements that are located by
-   * that selector
+   * that selector.
    * 
    * @param by
    *          Selector value to wait for
@@ -251,7 +281,7 @@ public class SeleniumWait {
 
   /**
    * Wait for a selector to present, and then return a list of all WebElements that are located by
-   * that selector
+   * that selector.
    * 
    * @param by
    *          Selector value to wait for
@@ -278,7 +308,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the specified element to have the specified text
+   * Wait for the specified element to have the specified text.
    * 
    * @param by
    *          By selector to examine
@@ -291,7 +321,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the specified element to have the specified text
+   * Wait for the specified element to have the specified text.
    * 
    * @param by
    *          By selector to examine
@@ -324,7 +354,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the exact text to be present in the specified element
+   * Wait for the exact text to be present in the specified element.
    * 
    * @param by
    *          Selector to examine for the specified text
@@ -337,7 +367,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the exact text to be present in the specified element
+   * Wait for the exact text to be present in the specified element.
    * 
    * @param by
    *          Selector to examine for the specified text
@@ -371,7 +401,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an element to contain a specified text
+   * Wait for an element to contain a specified text.
    * 
    * @param by
    *          Selector to check the containing text
@@ -384,7 +414,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an element to contain a specified text
+   * Wait for an element to contain a specified text.
    * 
    * @param by
    *          Selector to check the containing text
@@ -404,7 +434,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an element to contain a specified text
+   * Wait for an element to contain a specified text.
    * 
    * @param by
    *          Selector to check the containing text
@@ -432,7 +462,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present
+   * Wait for an attribute of the specified selector to be present.
    * 
    * @param by
    *          Selector to look for
@@ -457,7 +487,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present and equal the desired value
+   * Wait for an attribute of the specified selector to be present and equal the desired value.
    * 
    * @param by
    *          Selector to look for
@@ -473,7 +503,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present
+   * Wait for an attribute of the specified selector to be present.
    * 
    * @param by
    *          Selector to look for
@@ -491,7 +521,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present
+   * Wait for an attribute of the specified selector to be present.
    * 
    * @param by
    *          Selector to look for
@@ -510,7 +540,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present and equal the desired value
+   * Wait for an attribute of the specified selector to be present and equal the desired value.
    * 
    * @param by
    *          Selector to look for
@@ -540,7 +570,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present, and contain the specified text
+   * Wait for an attribute of the specified selector to be present, and contain the specified text.
    * 
    * @param by
    *          Selector to look for
@@ -556,7 +586,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present, and contain the specified text
+   * Wait for an attribute of the specified selector to be present, and contain the specified text.
    * 
    * @param by
    *          Selector to look for
@@ -574,7 +604,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present, and contain the specified text
+   * Wait for an attribute of the specified selector to be present, and contain the specified text.
    * 
    * @param by
    *          Selector to look for
@@ -594,7 +624,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present, and contain the specified text
+   * Wait for an attribute of the specified selector to be present, and contain the specified text.
    * 
    * @param by
    *          Selector to look for
@@ -625,7 +655,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable
+   * Scroll an element into view, and wait for it to be clickable.
    * 
    * @param by
    *          Selector to wait for and focus on
@@ -636,7 +666,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable
+   * Scroll an element into view, and wait for it to be clickable.
    * 
    * @param by
    *          Selector to wait for and focus on
@@ -651,7 +681,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable
+   * Scroll an element into view, and wait for it to be clickable.
    * 
    * @param by
    *          Selector to wait for and focus on
@@ -662,7 +692,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable
+   * Scroll an element into view, and wait for it to be clickable.
    * 
    * @param by
    *          Selector to wait for and focus on
@@ -677,7 +707,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the specified selector to be clickable
+   * Wait for the specified selector to be clickable.
    * 
    * @param by
    *          Selector to wait for
@@ -688,7 +718,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the specified selector to be clickable
+   * Wait for the specified selector to be clickable.
    * 
    * @param by
    *          Selector to wait for
@@ -708,7 +738,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the element specified by the provided selector to be clickable
+   * Wait for the element specified by the provided selector to be clickable.
    * 
    * @param by
    *          Selector to wait for to be clickable
@@ -719,7 +749,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the element specified by the provided selector to be clickable
+   * Wait for the element specified by the provided selector to be clickable.
    * 
    * @param by
    *          Selector to wait for to be clickable
@@ -755,7 +785,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Fluently wait for an element to be removed
+   * Fluently wait for an element to be removed.
    * 
    * @param by
    *          Selector to wait to be removed
@@ -766,7 +796,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Fluently wait for an element to be removed
+   * Fluently wait for an element to be removed.
    * 
    * @param by
    *          Selector to wait to be removed
@@ -799,7 +829,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the page to load by waiting for the source to stop changing for at least a second
+   * Wait for the page to load by waiting for the source to stop changing for at least a second.
    * Asserts the page loads
    */
   public void waitForPageLoad() {
@@ -809,7 +839,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for the page to load by waiting for the source to stop changing for at least a second
+   * Wait for the page to load by waiting for the source to stop changing for at least a second.
    * 
    * @return true if it's successfully loaded, false if timed out and not finished loading
    */
@@ -834,7 +864,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present, and contain the specified text
+   * Wait for an attribute of the specified selector to be present, and contain the specified text.
    * 
    * @param by
    *          Selector to look for
@@ -873,7 +903,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Scroll the webpage so the selector is visible
+   * Scroll the webpage so the selector is visible.
    * 
    * @param by
    *          Selector to make visible
@@ -899,7 +929,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Fluent wait for an element to be removed
+   * Fluent wait for an element to be removed.
    * 
    * @param element
    *          WebElement to be removed
@@ -916,7 +946,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Check if the specified selector is displayed
+   * Check if the specified selector is displayed.
    * 
    * @param browser
    *          Web Driver
@@ -939,7 +969,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Check if the element is clickable
+   * Check if the element is clickable.
    * 
    * @param browser
    *          WebDriver
@@ -957,7 +987,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Check the text value of an attribute
+   * Check the text value of an attribute.
    * 
    * @param browser
    *          - web driver
@@ -985,7 +1015,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Print error if/when selector isn't found
+   * Print error if/when selector isn't found.
    * 
    * @param output
    *          String to print to the console
@@ -997,7 +1027,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Checks if the text of the elements are equal TODO - should have fuzzy validation incorporated
+   * Checks if the text of the elements are equal TODO - should have fuzzy validation incorporated.
    * 
    * @param by
    *          Selector to examine
@@ -1021,7 +1051,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Set the implicit wait time
+   * Set the implicit wait time.
    * 
    * @param wait
    *          int value of seconds to wait
@@ -1035,7 +1065,7 @@ public class SeleniumWait {
   }
 
   /**
-   * Reset the implicit wait time
+   * Reset the implicit wait time.
    */
   private void resetImplicitWait() {
     setImplicitWait(this.implicitWaitTimeout);

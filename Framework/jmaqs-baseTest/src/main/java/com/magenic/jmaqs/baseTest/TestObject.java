@@ -7,23 +7,21 @@ package com.magenic.jmaqs.baseTest;
 import com.magenic.jmaqs.utilities.logging.Logger;
 
 /**
- * The TestObject class
- * 
- * @author ColeBo
+ * The TestObject class.
  */
 public class TestObject {
   /**
-   * The Logger object
+   * The Logger object.
    */
   protected Logger logger;
 
   /**
-   * The Fully Qualified Test Name
+   * The Fully Qualified Test Name.
    */
   protected String testName;
 
   /**
-   * Initializes a new instance of the TestObject class
+   * Initializes a new instance of the TestObject class.
    * 
    * @param fullyQualifiedTestName
    *          The Fully Qualified Test Name
@@ -33,7 +31,7 @@ public class TestObject {
   }
 
   /**
-   * Initializes a new instance of the TestObject class
+   * Initializes a new instance of the TestObject class.
    * 
    * @param fullyQualifiedTestName
    *          The Fully Qualified Test Name
@@ -46,7 +44,7 @@ public class TestObject {
   }
 
   /**
-   * Get the Fully Qualified Test Name
+   * Get the Fully Qualified Test Name.
    * 
    * @return The fully qualified test name
    */
@@ -55,7 +53,7 @@ public class TestObject {
   }
 
   /**
-   * Get the Logger
+   * Get the Logger.
    * 
    * @return A Logger object
    */
@@ -64,7 +62,7 @@ public class TestObject {
   }
 
   /**
-   * Set the Logger for the TestObject
+   * Set the Logger for the TestObject.
    * 
    * @param log
    *          The Logger object

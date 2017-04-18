@@ -22,39 +22,39 @@ import java.nio.file.Paths;
 
 public class FileLogger extends Logger {
   /**
-   * The default log file save location
+   * The default log file save location.
    */
   protected static final String DEFAULTLOGFOLDER = System.getProperty("java.io.tmpdir");
 
   /**
-   * Initializes a new instance of the FileLogger class
+   * Initializes a new instance of the FileLogger class.
    */
   private static final String DEFAULTLOGNAME = "FileLog.txt";
 
   /**
-   * Creates a private boolean of append
+   * Creates a private boolean of append.
    */
   private boolean append;
 
   /**
-   * Create a private string for the path of the file
+   * Create a private string for the path of the file.
    */
   private String filePath;
 
   /**
-   * Creates a private string for the directory of the folder
+   * Creates a private string for the directory of the folder.
    */
   private String directory;
 
   /**
-   * Initializes a new instance of the FileLogger class
+   * Initializes a new instance of the FileLogger class.
    */
   public FileLogger() {
     this(false, "", DEFAULTLOGNAME);
   }
 
   /**
-   * Initializes a new instance of the FileLogger class
+   * Initializes a new instance of the FileLogger class.
    * 
    * @param append
    *          Append document if true
@@ -64,7 +64,7 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Initializes a new instance of the FileLogger class
+   * Initializes a new instance of the FileLogger class.
    * 
    * @param logFolder
    *          Where log files should be saved
@@ -74,7 +74,7 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Initializes a new instance of the FileLogger class
+   * Initializes a new instance of the FileLogger class.
    * 
    * @param append
    *          Append document if true
@@ -86,7 +86,7 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Initializes a new instance of the FileLogger class
+   * Initializes a new instance of the FileLogger class.
    * 
    * @param logFolder
    *          Where log files should be saved
@@ -98,7 +98,7 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Initializes a new instance of the FileLogger class
+   * Initializes a new instance of the FileLogger class.
    * 
    * @param append
    *          Append document if true
@@ -129,7 +129,7 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Gets a value indicating whether to append the value
+   * Gets a value indicating whether to append the value.
    * 
    * @return a boolean
    */
@@ -138,7 +138,7 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * sets a value indicating whether to append the value
+   * Sets a value indicating whether to append the value.
    * 
    * @param bol
    *          sets this.append to true or false
@@ -148,7 +148,7 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Gets the FilePath value
+   * Gets the FilePath value.
    * 
    * @return returns the file path
    */
@@ -157,7 +157,7 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Sets the FilePath value
+   * Sets the FilePath value.
    * 
    * @param path
    *          sets the file path
@@ -212,7 +212,7 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Take a name sting and make it a valid file name
+   * Take a name sting and make it a valid file name.
    * 
    * @param name
    *          The string to cleanup

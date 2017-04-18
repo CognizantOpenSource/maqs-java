@@ -9,9 +9,13 @@ import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
 import java.io.File;
 
+/**
+ * Get logging config data.
+ *
+ */
 public class LoggingConfig {
   /**
-   * Get our logging state - Yes, no or on failure
+   * Get our logging state - Yes, no or on failure.
    * 
    * @return The log enabled state
    */
@@ -30,7 +34,7 @@ public class LoggingConfig {
   }
 
   /**
-   * Get the logger
+   * Get the logger.
    * 
    * @param fileName
    *          File name to use for the log
@@ -58,7 +62,7 @@ public class LoggingConfig {
   }
 
   /**
-   * Gets the File Directory to store log files
+   * Gets the File Directory to store log files.
    * 
    * @return String of file path
    */

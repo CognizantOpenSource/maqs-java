@@ -5,9 +5,8 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: MAQS Checks
-    Description: 
-Java MAQS coding style
+    Checkstyle-Configuration: MAQS_Check
+    Description: none
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
@@ -183,6 +182,9 @@ Java MAQS coding style
     </module>
     <module name="CommentsIndentation"/>
     <module name="TodoComment"/>
+    <module name="SummaryJavadoc"/>
+    <module name="JavadocType"/>
+    <module name="JavadocVariable"/>
   </module>
   <module name="FileTabCharacter">
     <property name="eachLine" value="true"/>

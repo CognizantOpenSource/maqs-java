@@ -5,9 +5,7 @@
 package com.magenic.jmaqs.utilities.helper;
 
 /**
- * Initializes a new instance of the StringProcessor class
- * 
- * @author Magenic Technologies, Inc.
+ * Initializes a new instance of the StringProcessor class.
  */
 public final class StringProcessor {
   /**

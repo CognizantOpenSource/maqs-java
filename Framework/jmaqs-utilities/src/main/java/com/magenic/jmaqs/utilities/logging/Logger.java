@@ -8,25 +8,23 @@ import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
 /**
- * Abstract logging interface base class
- * 
- * @author Magenic Technologies, Inc.
+ * Abstract logging interface base class.
  */
 public abstract class Logger {
   /**
-   * Default date format
+   * Default date format.
    */
   protected static final String DEFAULT_DATE_FORMAT = "uuuu-MM-dd HH:mm:ss.SSS";
 
   /**
-   * Initializes a new instance of the class
+   * Initializes a new instance of the class.
    */
   public Logger() {
 
   }
 
   /**
-   * Write the formatted message (one line) to the console as a generic message
+   * Write the formatted message (one line) to the console as a generic message.
    * 
    * @param messageType
    *          The type of message
@@ -38,7 +36,7 @@ public abstract class Logger {
   public abstract void logMessage(MessageType messageType, String message, Object... args);
 
   /**
-   * Write the formatted message (one line) to the console as a generic message
+   * Write the formatted message (one line) to the console as a generic message.
    * 
    * @param message
    *          The message text

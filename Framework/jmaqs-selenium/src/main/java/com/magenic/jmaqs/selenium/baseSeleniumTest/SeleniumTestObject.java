@@ -10,24 +10,22 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import org.openqa.selenium.WebDriver;
 
 /**
- * The SeleniumTestObject Class
- * 
- * @author ErikSo
+ * The SeleniumTestObject Class.
  */
 public class SeleniumTestObject extends TestObject {
 
   /**
-   * The WebDriver Object
+   * The WebDriver Object.
    */
   protected WebDriver webDriver;
 
   /**
-   * The SeleniumWait Object
+   * The SeleniumWait Object.
    */
   protected SeleniumWait seleniumWait;
 
   /**
-   * Initializes a new instance of the SeleniunTestObject
+   * Initializes a new instance of the SeleniunTestObject.
    * 
    * @param driver
    *          The WebDriver Object
@@ -44,7 +42,7 @@ public class SeleniumTestObject extends TestObject {
   }
 
   /**
-   * Get the SeleniumWait Object
+   * Get the SeleniumWait Object.
    * 
    * @return A SeleniumWait Object
    */
@@ -53,7 +51,7 @@ public class SeleniumTestObject extends TestObject {
   }
 
   /**
-   * Set the SeleniumWait for the SeleniumTestObject
+   * Set the SeleniumWait for the SeleniumTestObject.
    * 
    * @param wait
    *          The SeleniumWait Object
@@ -63,7 +61,7 @@ public class SeleniumTestObject extends TestObject {
   }
 
   /**
-   * Get the WebDriver Object
+   * Get the WebDriver Object.
    * 
    * @return A WebDriver Object
    */
@@ -72,7 +70,7 @@ public class SeleniumTestObject extends TestObject {
   }
 
   /**
-   * Set the WebDriver for the SeleniumTestObject
+   * Set the WebDriver for the SeleniumTestObject.
    * 
    * @param driver
    *          The WebDriver Object

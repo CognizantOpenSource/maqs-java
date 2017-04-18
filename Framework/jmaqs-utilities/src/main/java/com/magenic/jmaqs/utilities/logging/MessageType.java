@@ -5,33 +5,31 @@
 package com.magenic.jmaqs.utilities.logging;
 
 /**
- * The type of message
- * 
- * @author Magenic Technologies, Inc.
+ * The type of message.
  */
 public enum MessageType {
   /**
-   * Error message
+   * Error message.
    */
   ERROR,
 
   /**
-   * Warning message
+   * Warning message.
    */
   WARNING,
 
   /**
-   * Success message
+   * Success message.
    */
   SUCCESS,
 
   /**
-   * Informational message
+   * Informational message.
    */
   INFORMATION,
 
   /**
-   * Generic message - Our default message type
+   * Generic message - Our default message type.
    */
   GENERIC;
 }

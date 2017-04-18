@@ -10,11 +10,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for the StringProcessor class
+ * Unit tests for the StringProcessor class.
  */
 public class StringProcessorUnitTest {
   /**
-   * Test method for checking string format
+   * Test method for checking string format.
    */
   @Test
   public void stringFormatterCheckForStringFormat() {

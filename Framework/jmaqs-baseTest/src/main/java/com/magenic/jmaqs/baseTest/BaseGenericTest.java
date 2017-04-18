@@ -27,9 +27,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 /**
- * Base test class
- * 
- * @author Magenic Technologies, Inc.
+ * Base test class.
  */
 public abstract class BaseGenericTest {
 
@@ -49,19 +47,19 @@ public abstract class BaseGenericTest {
   private ITestResult testResult;
 
   /**
-   * Thread local storage of TestObject
+   * Thread local storage of TestObject.
    */
   private ThreadLocal<TestObject> testObject = new ThreadLocal<TestObject>();
 
   /**
-   * Initializes a new instance of the BaseGenericTest class
+   * Initializes a new instance of the BaseGenericTest class.
    */
   public BaseGenericTest() {
     loggedExceptions = new ConcurrentHashMap<String, ArrayList<String>>();
   }
 
   /**
-   * Gets the Logger for this test
+   * Gets the Logger for this test.
    * 
    * @return Logger object
    */
@@ -80,7 +78,7 @@ public abstract class BaseGenericTest {
   }
 
   /**
-   * Gets the Logging Enabled setting
+   * Gets the Logging Enabled setting.
    * 
    * @return Logging Enabled setting
    */
@@ -89,7 +87,7 @@ public abstract class BaseGenericTest {
   }
 
   /**
-   * Set the Logging Enabled setting
+   * Set the Logging Enabled setting.
    * 
    * @param setting
    *          The LoggingEnabled enum
@@ -99,7 +97,7 @@ public abstract class BaseGenericTest {
   }
 
   /**
-   * Get logged exceptions for this test
+   * Get logged exceptions for this test.
    * 
    * @return ArrayList of logged exceptions for this test
    */
@@ -111,18 +109,13 @@ public abstract class BaseGenericTest {
     }
   }
 
-  /**
-   * Set the logged exceptions for this test
-   * 
-   * @param exceptions
-   *          the exceptions to log
-   */
+
   public void setLoggedException(ArrayList<String> exceptions) {
     this.loggedExceptions.put(this.getFullyQualifiedTestClassName(), exceptions);
   }
 
   /**
-   * Get the TestObject for this test
+   * Get the TestObject for this test.
    * 
    * @return The TestObject
    */
@@ -131,7 +124,7 @@ public abstract class BaseGenericTest {
   }
 
   /**
-   * Setup before a test
+   * Setup before a test.
    * 
    * @param method
    *          The initial executing Method object
@@ -165,7 +158,7 @@ public abstract class BaseGenericTest {
   }
 
   /**
-   * Cleanup after a test
+   * Cleanup after a test.
    */
   @AfterMethod
   public void teardown() {
@@ -202,7 +195,7 @@ public abstract class BaseGenericTest {
   }
 
   /**
-   * Set the test result after each test execution
+   * Set the test result after each test execution.
    * 
    * @param testResult
    *          The result object
@@ -213,12 +206,12 @@ public abstract class BaseGenericTest {
   }
 
   /**
-   * Overload function for doing post setup logging
+   * Overload function for doing post setup logging.
    */
   protected abstract void postSetupLogging();
 
   /**
-   * Steps to do before logging teardown results
+   * Steps to do before logging teardown results.
    * 
    * @param resultType
    *          The test result
@@ -226,7 +219,7 @@ public abstract class BaseGenericTest {
   protected abstract void beforeLoggingTeardown(ITestResult resultType);
 
   /**
-   * Setup logging data
+   * Setup logging data.
    * 
    * @return Logger
    */
@@ -248,7 +241,7 @@ public abstract class BaseGenericTest {
   }
 
   /**
-   * Get the fully qualified test name
+   * Get the fully qualified test name.
    * 
    * @return The test name including class
    */
@@ -257,7 +250,7 @@ public abstract class BaseGenericTest {
   }
 
   /**
-   * Try to log a message - Do not fail if the message is not logged
+   * Try to log a message - Do not fail if the message is not logged.
    * 
    * @param messageType
    *          The type of message

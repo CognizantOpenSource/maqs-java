@@ -28,12 +28,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
- * Config class
+ * Selenium specific configuration class.
  */
 public final class SeleniumConfig {
 
   /**
-   * Get the browser type name - Example: Chrome
+   * Get the browser type name - Example: Chrome.
    * 
    * @return The browser type
    */
@@ -42,7 +42,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the web site base url
+   * Get the web site base url.
    * 
    * @return The web site base url
    */
@@ -51,7 +51,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the hint path for the web driver
+   * Get the hint path for the web driver.
    * 
    * @return The hint path for the web driver
    */
@@ -61,7 +61,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the remote browser type name
+   * Get the remote browser type name.
    * 
    * @return The browser type being used on grid
    */
@@ -70,7 +70,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the remote platform type name
+   * Get the remote platform type name.
    * 
    * @return The platform (or OS) to run remote tests against
    */
@@ -79,7 +79,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the remote browser version
+   * Get the remote browser version.
    * 
    * @return The browser version to run against on grid
    */
@@ -98,7 +98,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the webdriver based for the provided browser, Browser are maximized by default
+   * Get the webdriver based for the provided browser, Browser are maximized by default.
    * 
    * @param browser
    *          The browser type we want to use
@@ -182,7 +182,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Set the script and page timeouts
+   * Set the script and page timeouts.
    * 
    * @param driver
    *          Brings in a WebDriver
@@ -194,7 +194,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the remote desired capability
+   * Get the remote desired capability.
    * 
    * @return The remote desired capability
    */
@@ -243,7 +243,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the web driver location
+   * Get the web driver location.
    * 
    * @param driverFile
    *          The web drive file, including extension
@@ -295,7 +295,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the web driver location
+   * Get the web driver location.
    * 
    * @param driverFile
    *          The web drive file, including extension
@@ -307,7 +307,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the web driver location
+   * Get the web driver location.
    * 
    * @param driverFile
    *          The web drive file, including extension
@@ -322,7 +322,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the programs file folder which contains given file
+   * Get the programs file folder which contains given file.
    * 
    * @param folderName
    *          The programs file sub folder

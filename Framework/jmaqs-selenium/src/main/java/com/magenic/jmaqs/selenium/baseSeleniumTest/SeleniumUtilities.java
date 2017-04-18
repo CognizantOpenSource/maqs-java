@@ -22,15 +22,12 @@ import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
- * Static class for the selenium utilities, ported from MAQS
- * 
- * @author SudeepA
- *
+ * Static class for the selenium utilities, ported from MAQS.
  */
 public class SeleniumUtilities {
 
   /**
-   * To capture a screenshot during execution
+   * To capture a screenshot during execution.
    * 
    * @param webDriver
    *          The WebDriver
@@ -68,7 +65,7 @@ public class SeleniumUtilities {
   }
 
   /**
-   * To capture a screenshot during execution
+   * To capture a screenshot during execution.
    * 
    * @param webDriver
    *          The WebDriver
@@ -100,7 +97,7 @@ public class SeleniumUtilities {
   }
 
   /**
-   * Get the web driver from a web element
+   * Get the web driver from a web element.
    * 
    * @param webElement
    *          The web element

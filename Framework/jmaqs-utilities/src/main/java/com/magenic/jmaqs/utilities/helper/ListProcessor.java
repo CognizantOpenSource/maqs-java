@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Contains methods for processing lists
- *
+ * Contains methods for processing lists.
  */
 
 public class ListProcessor {
   /**
-   * Create a comma delimited string from a ArrayList of strings
+   * Create a comma delimited string from a ArrayList of strings.
    * 
    * @param stringList
    *          ArrayList of strings
@@ -46,7 +45,7 @@ public class ListProcessor {
   }
 
   /**
-   * Compares two lists to see if they contain the same values
+   * Compares two lists to see if they contain the same values.
    * 
    * @param expectedList
    *          First ArrayList of strings to compare

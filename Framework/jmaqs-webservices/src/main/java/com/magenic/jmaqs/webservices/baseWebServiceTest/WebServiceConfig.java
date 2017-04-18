@@ -6,6 +6,9 @@ package com.magenic.jmaqs.webservices.baseWebServiceTest;
 
 import com.magenic.jmaqs.utilities.helper.Config;
 
+/**
+ * Web service specific configuration settings.
+ */
 public final class WebServiceConfig {
   /**
    * Grabs the URI for the Web Service.

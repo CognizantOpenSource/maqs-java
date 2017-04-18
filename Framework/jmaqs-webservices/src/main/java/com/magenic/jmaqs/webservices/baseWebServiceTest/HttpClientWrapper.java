@@ -28,14 +28,23 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 
+/**
+ * The HTTP client wrapper.
+ */
 public class HttpClientWrapper {
-  // The HttpClient to be used
+  
+  /**
+   * The base HTTP client control.
+   */
   private CloseableHttpClient baseHttpClient;
-  // The URI to be stored for the Web Service
+
+  /**
+   * The URI to be stored for the Web Service.
+   */
   private URI baseAddress;
 
   /**
-   * Constructor
+   * Constructor.
    * 
    * @param baseAddress
    *          The base URI address to use
@@ -47,7 +56,7 @@ public class HttpClientWrapper {
   }
 
   /**
-   * Constructor
+   * Constructor.
    * 
    * @param baseAddress
    *          The base URI address to use
@@ -61,6 +70,8 @@ public class HttpClientWrapper {
   }
 
   /**
+   * Get the Http client.
+   * 
    * @return a HttpClient to interact with
    */
   public HttpClient getHttpClient() {
@@ -68,6 +79,8 @@ public class HttpClientWrapper {
   }
 
   /**
+   * Get the base URI.
+   * 
    * @return A URI containing the Web Service Address
    */
   public URI getBaseWebServiceAddress() {
@@ -75,7 +88,7 @@ public class HttpClientWrapper {
   }
 
   /**
-   * Sets the base Web Service address for the HttpClientWrapper
+   * Sets the base Web Service address for the HttpClientWrapper.
    * 
    * @param address
    *          The string to set the URI to
@@ -86,12 +99,25 @@ public class HttpClientWrapper {
     this.baseAddress = new URI(address);
   }
 
-  public CloseableHttpResponse getWithResponse(String requestUri, boolean expectSuccess) throws Exception {
+  /**
+   * Execute an HTTP get.
+   * 
+   * @param requestUri
+   *          The request uri
+   * @param expectSuccess
+   *          Do we expect the request to succeed
+   * @return The HTTP response
+   * @throws Exception
+   *           An error occurred getting the response
+   */
+  public CloseableHttpResponse getWithResponse(String requestUri, boolean expectSuccess)
+      throws Exception {
 
     return getContent(requestUri, expectSuccess);
   }
 
-  protected CloseableHttpResponse getContent(String requestUri, boolean expectSuccess) throws Exception {
+  protected CloseableHttpResponse getContent(String requestUri, boolean expectSuccess)
+      throws Exception {
     HttpGet newGet = new HttpGet(new URIBuilder(this.baseAddress).setPath(requestUri).build());
 
     CloseableHttpResponse response = this.baseHttpClient.execute(newGet);
@@ -110,8 +136,8 @@ public class HttpClientWrapper {
     return newEntity;
   }
 
-  protected CloseableHttpResponse putContent(String requestUri, HttpEntity content, boolean expectSuccess)
-      throws Exception {
+  protected CloseableHttpResponse putContent(String requestUri, HttpEntity content,
+      boolean expectSuccess) throws Exception {
     HttpPut newPut = new HttpPut(new URIBuilder(this.baseAddress).setPath(requestUri).build());
     newPut.setEntity(content);
     CloseableHttpResponse response = this.baseHttpClient.execute(newPut);
@@ -124,8 +150,8 @@ public class HttpClientWrapper {
     return response;
   }
 
-  protected CloseableHttpResponse postContent(String requestUri, HttpEntity content, boolean expectSuccess)
-      throws Exception {
+  protected CloseableHttpResponse postContent(String requestUri, HttpEntity content,
+      boolean expectSuccess) throws Exception {
     HttpPost newPost = new HttpPost(new URIBuilder(this.baseAddress).setPath(requestUri).build());
     newPost.setEntity(content);
     CloseableHttpResponse response = this.baseHttpClient.execute(newPost);
@@ -138,9 +164,10 @@ public class HttpClientWrapper {
     return response;
   }
 
-  protected CloseableHttpResponse deleteContent(String requestUri, String returnMediaType, boolean expectSuccess)
-      throws Exception {
-    HttpDelete newDelete = new HttpDelete(new URIBuilder(this.baseAddress).setPath(requestUri).build());
+  protected CloseableHttpResponse deleteContent(String requestUri, String returnMediaType,
+      boolean expectSuccess) throws Exception {
+    HttpDelete newDelete = new HttpDelete(
+        new URIBuilder(this.baseAddress).setPath(requestUri).build());
     CloseableHttpResponse response = this.baseHttpClient.execute(newDelete);
 
     // Should we check for success
@@ -162,12 +189,18 @@ public class HttpClientWrapper {
     if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
       String body = response.getStatusLine().toString();
 
-      throw new Exception(String.format("Response did not indicate a success. %s Response code was: %s ",
-          System.lineSeparator(), body));
+      throw new Exception(
+          String.format("Response did not indicate a success. %s Response code was: %s ",
+              System.lineSeparator(), body));
     }
 
   }
 
+  /**
+   * Get the request configuration.
+   * 
+   * @return The request configuration
+   */
   private RequestConfig getRequestConfig() {
 
     return RequestConfig.copy(RequestConfig.DEFAULT)

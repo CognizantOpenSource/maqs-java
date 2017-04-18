@@ -7,12 +7,11 @@ package com.magenic.jmaqs.utilities.logging;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
 /**
- * Helper class for logging to the console
- * 
+ * Helper class for logging to the console.
  */
 public class ConsoleLogger extends Logger {
   /**
-   * Write the formatted message (one line) to the console as a generic message
+   * Write the formatted message (one line) to the console as a generic message.
    * 
    * @param message
    *          The message text
@@ -25,7 +24,7 @@ public class ConsoleLogger extends Logger {
   }
 
   /**
-   * Write the formatted message (one line) to the console as the specified type
+   * Write the formatted message (one line) to the console as the specified type.
    * 
    * @param messageType
    *          The type of message
@@ -41,7 +40,7 @@ public class ConsoleLogger extends Logger {
   }
 
   /**
-   * Write the formatted message to the console as a generic message
+   * Write the formatted message to the console as a generic message.
    * 
    * @param message
    *          The message text
@@ -53,7 +52,7 @@ public class ConsoleLogger extends Logger {
   }
 
   /**
-   * Write the formatted message to the console as the given message type
+   * Write the formatted message to the console as the given message type.
    * 
    * @param type
    *          The type of message
@@ -67,7 +66,7 @@ public class ConsoleLogger extends Logger {
   }
 
   /**
-   * Write the formatted message followed by a line break to the console as a generic message
+   * Write the formatted message followed by a line break to the console as a generic message.
    * 
    * @param message
    *          The message text
@@ -79,7 +78,7 @@ public class ConsoleLogger extends Logger {
   }
 
   /**
-   * Write the formatted message followed by a line break to the console as the given message type
+   * Write the formatted message followed by a line break to the console as the given message type.
    * 
    * @param type
    *          The type of message
@@ -93,7 +92,7 @@ public class ConsoleLogger extends Logger {
   }
 
   /**
-   * write the message to the console
+   * write the message to the console.
    * 
    * 
    * @param type
@@ -123,7 +122,5 @@ public class ConsoleLogger extends Logger {
       System.out.println(StringProcessor.safeFormatter("Failed to write to the console because: %s",
           e.getMessage()));
     }
-
   }
-
 }

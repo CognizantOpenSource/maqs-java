@@ -13,10 +13,13 @@ import org.apache.http.util.EntityUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Web service wrapper unit tests.
+ */
 public class WebServiceUnitTest {
 
   /**
-   * Verifies that basic GET features work with the HttpClientWrapper
+   * Verifies that basic GET features work with the HttpClientWrapper.
    * 
    * @throws Exception
    *           Web service get failed

@@ -10,9 +10,12 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Selenium configuration tests.
+ */
 public class SeleniumConfigTest {
   /**
-   * Browser check
+   * Browser check.
    */
   @Test
   public void getBrowser() {
@@ -25,7 +28,7 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Browser name
+   * Browser name.
    */
   @Test
   public void getBrowserName() {
@@ -36,7 +39,7 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Web site base
+   * Web site base.
    */
   @Test
   public void getWebsiteBase() {
@@ -47,7 +50,7 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Driver hint path
+   * Driver hint path.
    */
   @Test
   public void getDriverHintPath() {
@@ -58,7 +61,7 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Remote browser name test
+   * Remote browser name test.
    */
   @Test
   public void getRemoteBrowserName() {
@@ -69,7 +72,7 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Remote platform test
+   * Remote platform test.
    */
   @Test
   public void getRemotePlatform() {
@@ -80,7 +83,7 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Remote browser version
+   * Remote browser version.
    */
   @Test
   public void getRemoteBrowserVersion() {
@@ -91,7 +94,7 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Browser with string
+   * Browser with string.
    */
   @Test
   public void getBrowserWithString() {

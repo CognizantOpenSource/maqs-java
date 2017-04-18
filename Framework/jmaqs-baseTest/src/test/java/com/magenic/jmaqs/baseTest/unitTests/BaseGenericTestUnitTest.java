@@ -12,14 +12,12 @@ import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
- * Unit test class for BaseGenericTest class
- * 
- * @author ColeBo
+ * Unit test class for BaseGenericTest class.
  */
 @Test
 public class BaseGenericTestUnitTest extends BaseGenericTest {
   /**
-   * Verify fully qualified test name
+   * Verify fully qualified test name.
    */
   @Test
   public void fullyQualifiedTestNameTest() {
@@ -30,7 +28,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Validate setting a new logger
+   * Validate setting a new logger.
    */
   @Test
   public void fileLoggerTest() {

@@ -12,27 +12,21 @@ import java.net.URLDecoder;
 import java.util.Properties;
 
 /**
- * Config class
- * 
- * @author Magenic Technologies, Inc.
- */
-/**
- * @author TroyW
- *
+ * Configuration class.
  */
 public final class Config {
   /**
-   * Constant platform independent new line
+   * Constant platform independent new line.
    */
   public static final String NEW_LINE = System.getProperty("line.separator");
 
   /**
-   * properties variable
+   * Properties variable.
    */
   private static Properties configReader;
 
   /**
-   * Get the configuration value for a specific key
+   * Get the configuration value for a specific key.
    * 
    * @param key
    *          Config file key
@@ -43,7 +37,7 @@ public final class Config {
   }
 
   /**
-   * Get the configuration value for a specific key
+   * Get the configuration value for a specific key.
    * 
    * @param key
    *          Config file key
@@ -65,7 +59,7 @@ public final class Config {
   }
 
   /**
-   * Get the default wait timeout
+   * Get the default wait timeout.
    * 
    * @return The default wait timeout
    */
@@ -83,7 +77,7 @@ public final class Config {
   }
 
   /**
-   * Get the default wait time
+   * Get the default wait time.
    * 
    * @return The default wait time
    */
@@ -100,7 +94,7 @@ public final class Config {
   }
 
   /**
-   * Get the log path
+   * Get the log path.
    * 
    * @return The log file path
    */

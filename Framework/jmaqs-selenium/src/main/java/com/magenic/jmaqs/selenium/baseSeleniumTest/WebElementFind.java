@@ -13,10 +13,13 @@ import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * Web element find helper class.
+ */
 public class WebElementFind {
 
   /**
-   * General Find Element
+   * General Find Element.
    * 
    * @param driver
    *          Web Driver
@@ -40,7 +43,7 @@ public class WebElementFind {
   }
 
   /**
-   * General Find Element
+   * General Find Element.
    * 
    * @param driver
    *          Web Driver
@@ -53,7 +56,7 @@ public class WebElementFind {
   }
 
   /**
-   * Find a specified Web Element by text
+   * Find a specified Web Element by text.
    * 
    * @param driver
    *          Web Driver
@@ -86,7 +89,7 @@ public class WebElementFind {
   }
 
   /**
-   * Find a specified Web Element by text
+   * Find a specified Web Element by text.
    * 
    * @param driver
    *          Web Driver
@@ -102,7 +105,7 @@ public class WebElementFind {
   }
 
   /**
-   * Finds the index of the specified Web Element
+   * Finds the index of the specified Web Element.
    * 
    * @param driver
    *          Web Driver
@@ -134,7 +137,7 @@ public class WebElementFind {
   }
 
   /**
-   * Finds the index of the specified Web Element
+   * Finds the index of the specified Web Element.
    * 
    * @param driver
    *          Web Driver
@@ -149,7 +152,7 @@ public class WebElementFind {
   }
 
   /**
-   * Find the Index of the Specified Web Element Collection
+   * Find the Index of the Specified Web Element Collection.
    * 
    * @param list
    *          ICollection of Web Elements
@@ -188,7 +191,7 @@ public class WebElementFind {
   }
 
   /**
-   * Find the Index of the Specified Web Element Collection
+   * Find the Index of the Specified Web Element Collection.
    * 
    * @param list
    *          ICollection of Web Elements
@@ -202,7 +205,7 @@ public class WebElementFind {
   }
 
   /**
-   * Function to get the Web Collection
+   * Function to get the Web Collection.
    * 
    * @param driver
    *          Web Driver

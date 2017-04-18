@@ -9,12 +9,18 @@ import com.magenic.jmaqs.baseTest.BaseGenericTest;
 import org.apache.http.client.HttpClient;
 import org.testng.ITestResult;
 
+/**
+ * Base web service test class.
+ */
 public class BaseWebServiceTest extends BaseGenericTest {
-  // The HttpClient
+  
+  /**
+   * The Http client wrapper.
+   */
   private HttpClientWrapper webServiceWrapper;
 
   /**
-   * Constructor
+   * Constructor.
    */
   // TODO Update constructor to take in the WebServiceTestObject
   public BaseWebServiceTest(HttpClientWrapper webServiceWrapper) {
@@ -23,14 +29,14 @@ public class BaseWebServiceTest extends BaseGenericTest {
   }
 
   /**
-   * @return A HttpClient object to interact with
+   * @return A HttpClient object to interact with.
    */
   public HttpClient getHttpClient() {
     return (HttpClient) webServiceWrapper.getHttpClient();
   }
 
   /**
-   * @return A String containing the default Web Service URI
+   * @return A String containing the default Web Service URI.
    */
   protected String getBaseWebServiceUrl() {
     return WebServiceConfig.getWebServiceUri();

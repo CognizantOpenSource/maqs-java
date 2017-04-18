@@ -13,13 +13,10 @@ import org.testng.annotations.Test;
 
 /**
  * Unit test class for FileLogger.java
- * 
- * @author BrentS
- *
  */
 public class FileLoggerUnitTest {
   /**
-   * Test logging to a new file
+   * Test logging to a new file.
    */
   @Test
   public void fileLoggerNoAppendTest() {
@@ -30,7 +27,7 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Test logging to an existing file
+   * Test logging to an existing file.
    */
   @Test
   public void fileLoggerAppendFileTest() {

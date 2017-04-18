@@ -10,12 +10,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Configuration unit test class
- *
+ * Configuration unit test class.
  */
 public class ConfigUnitTest {
   /**
-   * Gets a value from a string
+   * Gets a value from a string.
    */
   @Test
   public void getValueWithString() {
@@ -24,7 +23,7 @@ public class ConfigUnitTest {
   }
 
   /**
-   * Gets a value with a string or default
+   * Gets a value with a string or default.
    */
   @Test
   public void getValueWithStringAndDefault() {

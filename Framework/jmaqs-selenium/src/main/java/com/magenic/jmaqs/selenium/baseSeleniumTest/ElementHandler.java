@@ -16,15 +16,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 /**
- * Contains functions for interacting with WebElement objects
- * 
- * @author SudeepA
- *
+ * Contains functions for interacting with WebElement objects.
  */
 public class ElementHandler {
 
   /**
-   * Get selected option from drop down
+   * Get selected option from drop down.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -40,7 +37,7 @@ public class ElementHandler {
   }
 
   /**
-   * Get a ArrayList of the items selected in a drop down
+   * Get a ArrayList of the items selected in a drop down.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -70,7 +67,7 @@ public class ElementHandler {
   }
 
   /**
-   * Get the value of a specific attribute for an element
+   * Get the value of a specific attribute for an element.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -83,7 +80,7 @@ public class ElementHandler {
   }
 
   /**
-   * Get the value of a specific attribute for an element
+   * Get the value of a specific attribute for an element.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -120,7 +117,7 @@ public class ElementHandler {
   }
 
   /**
-   * Create a comma delimited String from a ArrayList of WebElement objects
+   * Create a comma delimited String from a ArrayList of WebElement objects.
    * 
    * @param webDriver
    *          The WebDriver
@@ -141,7 +138,7 @@ public class ElementHandler {
   }
 
   /**
-   * Create a comma delimited String from a ArrayList of WebElement objects
+   * Create a comma delimited String from a ArrayList of WebElement objects.
    * 
    * @param webDriver
    *          The WebDriver
@@ -174,7 +171,7 @@ public class ElementHandler {
   }
 
   /**
-   * Select multiple items from a ArrayList box
+   * Select multiple items from a ArrayList box.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -194,7 +191,7 @@ public class ElementHandler {
   }
 
   /**
-   * Select multiple items from a ArrayList box
+   * Select multiple items from a ArrayList box.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -214,7 +211,7 @@ public class ElementHandler {
   }
 
   /**
-   * Select an option from a drop down using displayed text
+   * Select an option from a drop down using displayed text.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -229,7 +226,7 @@ public class ElementHandler {
   }
 
   /**
-   * Select an option from a drop down using the value attribute
+   * Select an option from a drop down using the value attribute.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -244,7 +241,7 @@ public class ElementHandler {
   }
 
   /**
-   * Enter text into a textbox. NOTE: This function clears the textbox before entering text
+   * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -271,7 +268,7 @@ public class ElementHandler {
   }
 
   /**
-   * Enter text into a textbox. NOTE: This function clears the textbox before entering text
+   * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -301,7 +298,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view
+   * JavaScript method to scroll an element into the view.
    * 
    * @param webDriver
    *          The WebDriver
@@ -314,7 +311,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view5
+   * JavaScript method to scroll an element into the view.
    * 
    * @param webElement
    *          The web element
@@ -329,7 +326,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view
+   * JavaScript method to scroll an element into the view.
    * 
    * @param webDriver
    *          The web driver
@@ -346,7 +343,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view
+   * JavaScript method to scroll an element into the view.
    * 
    * @param webElement
    *          The web element
@@ -363,7 +360,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view
+   * JavaScript method to scroll an element into the view.
    * 
    * @param webDriver
    *          The web driver
@@ -379,7 +376,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view
+   * JavaScript method to scroll an element into the view.
    * 
    * @param webElement
    *          The web element
@@ -395,7 +392,7 @@ public class ElementHandler {
 
   /**
    * Method to slowly type a String Used for scenarios where normal SendKeys types too quickly and
-   * causes issues with a website
+   * causes issues with a website.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
