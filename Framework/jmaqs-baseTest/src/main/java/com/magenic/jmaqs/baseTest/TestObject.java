@@ -38,7 +38,8 @@ public class TestObject {
    * @param logger
    *          The Logger object
    */
-  public TestObject(String fullyQualifiedTestName, Logger logger) {
+  public TestObject(String fullyQualifiedTestName, Logger logger)
+  {
     this.testName = fullyQualifiedTestName;
     this.logger = logger;
   }

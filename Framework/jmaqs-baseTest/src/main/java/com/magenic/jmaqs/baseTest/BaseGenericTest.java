@@ -46,9 +46,7 @@ public abstract class BaseGenericTest {
    */
   private ITestResult testResult;
 
-  /**
-   * Thread local storage of TestObject.
-   */
+
   private ThreadLocal<TestObject> testObject = new ThreadLocal<TestObject>();
 
   /**
