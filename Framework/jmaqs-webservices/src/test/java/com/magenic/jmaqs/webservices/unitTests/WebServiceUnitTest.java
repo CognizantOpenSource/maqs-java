@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.webservices.unitTests;
 
-import com.magenic.jmaqs.webservices.baseWebServiceTest.HttpClientWrapper;
+import com.magenic.jmaqs.webservices.baseWebServiceTest.BaseWebServiceTest;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -16,22 +16,16 @@ import org.testng.annotations.Test;
 /**
  * Web service wrapper unit tests.
  */
-public class WebServiceUnitTest {
-
-  /**
-   * Verifies that basic GET features work with the HttpClientWrapper.
-   * 
-   * @throws Exception
-   *           Web service get failed
-   */
+public class WebServiceUnitTest extends BaseWebServiceTest {
   @Test
   public void webServiceGetVerificationTest() throws Exception {
-    HttpClientWrapper client = new HttpClientWrapper("http://magenicautomation.azurewebsites.net",
-        ContentType.TEXT_PLAIN);
-    CloseableHttpResponse response = client.getWithResponse("/api/String/1", true);
+
+    CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/String/1",
+        ContentType.TEXT_PLAIN, true);
     HttpEntity entity = response.getEntity();
     String responseString = EntityUtils.toString(entity);
     Assert.assertTrue(responseString.contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + response.toString());
   }
+
 }

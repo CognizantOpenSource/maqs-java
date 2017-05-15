@@ -4,52 +4,51 @@
 
 package com.magenic.jmaqs.webservices.baseWebServiceTest;
 
+import com.magenic.jmaqs.baseTest.TestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
-
-import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
-
-// TODO extend from TestObject 
 
 /**
  * Web service test object class.
  */
-public abstract class WebServiceTestObject {
-
-  /**
-   * Thread safe collection of loggers.
-   */
-  protected ConcurrentHashMap<String, Logger> loggers;
-  
-  /**
-   * Thread safe collection of logged exceptions.
-   */
-  protected ConcurrentHashMap<String, ArrayList<String>> loggedExceptions;
-  
-  /**
-   * The logging level.
-   */
-  protected LoggingEnabled loggingEnabledSetting;
+public class WebServiceTestObject extends TestObject {
 
   /**
    * The HTTP client wrapper.
    */
-  public HttpClientWrapper webServiceWrapper;
-
+  protected HttpClientWrapper webServiceWrapper;
+  
   /**
-   * Web service test object constructor.
+   * Initializes a new instance of the WebServiceTestObject.
    * 
    * @param webServiceWrapper
    *          The web service wrapper
-   * @param loggers
-   *          The logger
+   * @param logger
+   *          The Logger Object
+   * @param fullyQualifiedTestName
+   *          The fully qualified test name
    */
-  public WebServiceTestObject(HttpClientWrapper webServiceWrapper,
-      ConcurrentHashMap<String, Logger> loggers) {
+  public WebServiceTestObject(HttpClientWrapper webServiceWrapper, Logger logger, String fullyQualifiedTestName) {
+    super(fullyQualifiedTestName, logger);
     this.webServiceWrapper = webServiceWrapper;
-    this.loggers = loggers;
-    loggedExceptions = new ConcurrentHashMap<String, ArrayList<String>>();
+  }
+  
+  /**
+   * Get the web service wrapper for the WebServiceTestObject.
+   * 
+   * @return A web service wrapper object
+   */
+  public HttpClientWrapper getWebServiceWrapper() {
+    return this.webServiceWrapper;
+  }
+
+  /**
+   * Set the web service wrapper for the WebServiceTestObject.
+   * 
+   * @param webServiceWrapper
+   *          The web service wrapper object
+   */
+  public void setWebServiceWrapper(HttpClientWrapper webServiceWrapper) {
+    this.webServiceWrapper = webServiceWrapper;
   }
 
 }
