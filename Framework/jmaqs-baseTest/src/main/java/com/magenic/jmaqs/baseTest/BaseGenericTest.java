@@ -109,7 +109,6 @@ public abstract class BaseGenericTest {
     }
   }
 
-
   public void setLoggedException(ArrayList<String> exceptions) {
     this.loggedExceptions.put(this.getFullyQualifiedTestClassName(), exceptions);
   }
