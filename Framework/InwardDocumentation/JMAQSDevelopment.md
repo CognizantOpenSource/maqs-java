@@ -9,7 +9,7 @@ A Parent level POM (maven reference) holds the structure information.
  jmaqs-webservices module
 
 2. Branches
-[PR's vs Dev vs Master](link here)
+[PR's vs Dev vs Master](Dev_Master_Release)
 
 ## PR
 0. Create a branch for your work from within your PBI or Task item by clicking Create Branch link  
