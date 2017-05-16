@@ -24,7 +24,6 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
@@ -341,21 +340,6 @@ public class HttpClientWrapper {
     }
 
     return response;
-  }
-
-  /**
-   * Create a HTTP entity.
-   * 
-   * @param contentMessage
-   *          The entity content as text
-   * @param contentType
-   *          The type of content
-   * @return An HTTP entity
-   */
-  protected HttpEntity createEntity(String contentMessage, ContentType contentType) {
-    HttpEntity newEntity = new StringEntity(contentMessage, contentType);
-    // TODO Should this exist here
-    return newEntity;
   }
 
   /**

@@ -47,7 +47,6 @@ public class BaseWebServiceTest extends BaseGenericTest {
     HttpClientWrapper wrapper = new HttpClientWrapper(WebServiceConfig.getWebServiceUri());
     webServiceTestObject.set(
         new WebServiceTestObject(wrapper, this.getLogger(), this.getFullyQualifiedTestClassName()));
-
   }
 
   /*
@@ -58,8 +57,6 @@ public class BaseWebServiceTest extends BaseGenericTest {
    */
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
-    // TODO Fill in once more info on how this is designed works.
-
+    // There is no before logging tear-down required
   }
-
 }
