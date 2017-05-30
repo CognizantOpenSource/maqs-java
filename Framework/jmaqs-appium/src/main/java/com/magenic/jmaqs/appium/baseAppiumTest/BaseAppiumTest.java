@@ -14,7 +14,6 @@ import io.appium.java_client.AppiumDriver;
 import org.testng.ITestResult;
 
 
-
 /**
  * Base Appium Test Class.
  *
@@ -89,12 +88,12 @@ public abstract class BaseAppiumTest extends BaseGenericTest {
    */
   protected void beforeLoggingTeardown(ITestResult resultType) {
     try {
-      // TODO add screen capture once SeleniumUtilities has been created
-      /*
-       * if (this.Log is FileLogger && resultType != TestResultType.PASS &&
-       * this.LoggingEnabledSetting != LoggingEnabled.NO) {
-       * SeleniumUtilities.CaptureScreenshot(this.WebDriver, this.Log); }
-       */
+      // TODO add screen capture once AppiumUtilities has been created
+      /*if ((this.getLogger() instanceof FileLogger) && (resultType != TestResultType.PASS) && (
+          this.loggingEnabledSetting != LoggingEnabled.NO))
+      {
+        AppiumUtilities.CaptureScreenshot(this.getAppiumDriver(), this.getLogger());
+      }*/
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
     }
