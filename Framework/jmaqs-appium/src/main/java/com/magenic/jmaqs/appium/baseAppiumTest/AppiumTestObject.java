@@ -2,7 +2,7 @@
  * Copyright 2017 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.maqs.appium.baseAppiumTest;
+package com.magenic.jmaqs.appium.baseAppiumTest;
 
 import com.magenic.jmaqs.baseTest.TestObject;
 import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumWait;
