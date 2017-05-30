@@ -61,7 +61,7 @@ public class SeleniumWait {
   /**
    * The Webdriver that the test is currently running on.
    */
-  private WebDriver browser;
+  protected WebDriver browser;
   
   
   /**
@@ -1056,7 +1056,7 @@ public class SeleniumWait {
    * @param wait
    *          int value of seconds to wait
    */
-  private void setImplicitWait(int wait) {
+  protected void setImplicitWait(int wait) {
     // implicit wait must first be set to zero to nullify it
     browser.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
