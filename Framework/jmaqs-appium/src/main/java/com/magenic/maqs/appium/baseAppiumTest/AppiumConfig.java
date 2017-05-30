@@ -30,7 +30,7 @@ public class AppiumConfig {
    *
    * @return the mobile device OS
    */
-  public static String getMobileDeviceOS() {
+  public static String getMobileDeviceOs() {
     return Config.getValue("MobileOSType", "Android");
   }
 
@@ -39,7 +39,7 @@ public class AppiumConfig {
    *
    * @return the mobile device UDID
    */
-  public static String getMobileDeviceUDID() {
+  public static String getMobileDeviceUdid() {
     return Config.getValue("DeviceUDID");
   }
 
@@ -48,7 +48,7 @@ public class AppiumConfig {
    *
    * @return the bundle ID
    */
-  public static String getBundleID() {
+  public static String getBundleId() {
     return Config.getValue("BundleID");
   }
 
@@ -57,7 +57,7 @@ public class AppiumConfig {
    *
    * @return the OS version
    */
-  public static String getOSVersion() {
+  public static String getOsVersion() {
     return Config.getValue("OSVersion");
   }
 
@@ -76,7 +76,7 @@ public class AppiumConfig {
    * @return the appium driver
    */
   public static AppiumDriver mobileDevice() {
-    return mobileDevice(getMobileDeviceOS());
+    return mobileDevice(getMobileDeviceOs());
   }
 
   /**
@@ -171,14 +171,14 @@ public class AppiumConfig {
 
     DesiredCapabilities capabilities = null;
 
-    String mobileDeviceOS = getMobileDeviceOS();
+    String mobileDeviceOS = getMobileDeviceOs();
     capabilities = new DesiredCapabilities();
 
     switch (mobileDeviceOS.toUpperCase()) {
       case "ANDROID":
 
         capabilities.setCapability(CapabilityType.PLATFORM, Platform.ANDROID);
-        capabilities.setCapability("appPackage", getBundleID());
+        capabilities.setCapability("appPackage", getBundleId());
         if (Config.getValue("AppActivity", null) != null) {
           capabilities.setCapability("appActivity", Config.getValue("AppActivity"));
         }
@@ -186,8 +186,8 @@ public class AppiumConfig {
 
       case "IOS":
 
-        capabilities.setCapability("bundleId", getBundleID());
-        capabilities.setCapability("udid", getMobileDeviceUDID());
+        capabilities.setCapability("bundleId", getBundleId());
+        capabilities.setCapability("udid", getMobileDeviceUdid());
         break;
 
       default:
@@ -198,8 +198,8 @@ public class AppiumConfig {
 
     // TODO: Check capabilities
     capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, getOSVersion());
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, getMobileDeviceOS());
+    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, getOsVersion());
+    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, getMobileDeviceOs());
 
     if ((Config.getValue("SauceLabs").toUpperCase()).equals("YES")) {
 
@@ -207,14 +207,14 @@ public class AppiumConfig {
       capabilities.setCapability("deviceName", getDeviceName());
       capabilities.setCapability("deviceOrientation", Config.getValue("Orientation"));
       capabilities.setCapability("browserName", "");
-      capabilities.setCapability("platformName", getMobileDeviceOS());
+      capabilities.setCapability("platformName", getMobileDeviceOs());
       capabilities.setCapability("app", Config.getValue("AppLocation"));
       capabilities.setCapability("username", Config.getValue("SauceUsername"));
       capabilities.setCapability("accessKey", Config.getValue("SauceAccessKey"));
 
     } else {
       // capabilities.setCapability(CapabilityType.BROWSER_NAME, getDeviceName());
-      capabilities.setCapability(CapabilityType.VERSION, getOSVersion());
+      capabilities.setCapability(CapabilityType.VERSION, getOsVersion());
       capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, getDeviceName());
     }
 

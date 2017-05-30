@@ -10,26 +10,26 @@ import org.testng.annotations.Test;
 public class AppiumConfigUnitTests {
 //    @Test
 //    public void testGetMobileDeviceOS() throws Exception {
-//        String mobileDeviceOS = AppiumConfig.getMobileDeviceOS();
+//        String mobileDeviceOS = AppiumConfig.getMobileDeviceOs();
 //        Assert.assertTrue(mobileDeviceOS.equalsIgnoreCase("Android"));
 //
 //    }
 
     @Test
     public void testGetMobileDeviceUDID() throws Exception {
-        String mobileDeviceUDID = AppiumConfig.getMobileDeviceUDID();
+        String mobileDeviceUDID = AppiumConfig.getMobileDeviceUdid();
         Assert.assertTrue(mobileDeviceUDID.equalsIgnoreCase("1234567890ACDEF1234687890ABCDEF"));
     }
 
     @Test
     public void testGetBundleID() throws Exception {
-        String bundleID = AppiumConfig.getBundleID();
+        String bundleID = AppiumConfig.getBundleId();
         Assert.assertTrue(bundleID.equalsIgnoreCase("com.magenic.maqs.appium.tester"));
     }
 
     @Test
     public void testGetOSVersion() throws Exception {
-        String osVersion = AppiumConfig.getOSVersion();
+        String osVersion = AppiumConfig.getOsVersion();
         Assert.assertTrue(osVersion.equalsIgnoreCase("6.0"));
     }
 

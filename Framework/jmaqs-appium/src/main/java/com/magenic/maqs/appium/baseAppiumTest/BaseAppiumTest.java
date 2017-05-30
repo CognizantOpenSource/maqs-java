@@ -66,7 +66,7 @@ public abstract class BaseAppiumTest extends BaseGenericTest {
     try {
       // TODO: Compare to C# version
       /*
-       * if (AppiumConfig.getMobileDeviceOS().equalsIgnoreCase("Remote")) {
+       * if (AppiumConfig.getMobileDeviceOs().equalsIgnoreCase("Remote")) {
        * this.getLogger().logMessage(MessageType.INFORMATION, "Remote driver: %s",
        * AppiumConfig.getRemoteMobileDevice()); } else {
        */
@@ -76,7 +76,7 @@ public abstract class BaseAppiumTest extends BaseGenericTest {
       appiumTestObject.set(new AppiumTestObject(driver, wait, this.getFullyQualifiedTestClassName(),
           this.getLogger()));
       this.getLogger().logMessage(MessageType.INFORMATION, "Loaded driver: %s",
-          AppiumConfig.getMobileDeviceOS());
+          AppiumConfig.getMobileDeviceOs());
       // }
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s",
