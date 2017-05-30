@@ -58,6 +58,8 @@ public class SeleniumWait {
   private static final By BODY_BY = By.cssSelector("BODY");
 
 
+
+
   /**
    * The Webdriver that the test is currently running on.
    */
@@ -111,6 +113,15 @@ public class SeleniumWait {
     this.browser = browser;
     this.implicitWaitTimeout = implicitWaitTimeout;
     this.fluentRetryTime = fluentRetryTime;
+  }
+
+
+  /**
+   * Method getWebDriver returns the webDriver of this SeleniumWait object.
+   * @return the webDriver (type WebDriver) of this SeleniumWait object.
+   */
+  protected WebDriver getWebDriver() {
+    return browser;
   }
 
   /**
@@ -1056,10 +1067,9 @@ public class SeleniumWait {
    * @param wait
    *          int value of seconds to wait
    */
-  private void setImplicitWait(int wait) {
+  protected void setImplicitWait(int wait) {
     // implicit wait must first be set to zero to nullify it
     browser.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-
     browser.manage().timeouts().implicitlyWait(wait, TimeUnit.SECONDS);
     browser.manage().timeouts().setScriptTimeout(wait, TimeUnit.SECONDS);
   }

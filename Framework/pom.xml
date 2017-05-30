@@ -12,6 +12,7 @@
 		<module>jmaqs-baseTest</module>
 		<module>jmaqs-selenium</module>
 		<module>jmaqs-webservices</module>
+		<module>jmaqs-appium</module>
 	</modules>
 
 	<repositories>

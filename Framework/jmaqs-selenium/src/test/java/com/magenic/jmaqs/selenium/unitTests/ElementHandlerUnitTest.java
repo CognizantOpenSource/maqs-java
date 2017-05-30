@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2017 (C) Magenic, All rights Reserved
  */
 
@@ -269,7 +269,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
   /**
    * Verify two Strings are equal. If not fail test.
-   * 
+   *
    * @param actualValue
    *          Actual displayed text
    * @param expectedValue
