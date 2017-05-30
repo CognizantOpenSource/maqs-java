@@ -2,7 +2,7 @@
  * Copyright 2017 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.maqs.appium.baseAppiumTest;
+package com.magenic.jmaqs.appium.baseAppiumTest;
 
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
