@@ -10,9 +10,7 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import io.appium.java_client.AppiumDriver;
 
 /**
- * Class AppiumTestObject ...
- *
- * @author jasonedstrom Created on 5/30/17
+ * Class AppiumTestObject.
  */
 public class AppiumTestObject extends TestObject {
 

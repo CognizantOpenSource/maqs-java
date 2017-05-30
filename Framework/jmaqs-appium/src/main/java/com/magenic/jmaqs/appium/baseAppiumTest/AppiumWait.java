@@ -11,9 +11,7 @@ import io.appium.java_client.AppiumDriver;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Class AppiumWait ...
- *
- * @author jasonedstrom Created on 5/29/17
+ * Class AppiumWait.
  */
 public class AppiumWait extends SeleniumWait {
 

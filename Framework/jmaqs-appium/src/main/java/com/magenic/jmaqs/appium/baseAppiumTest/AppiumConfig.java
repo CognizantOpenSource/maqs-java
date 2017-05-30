@@ -20,9 +20,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
- * Class AppiumConfig ...
- *
- * @author jasonedstrom Created on 5/30/17
+ * Class AppiumConfig
  */
 public class AppiumConfig {
 

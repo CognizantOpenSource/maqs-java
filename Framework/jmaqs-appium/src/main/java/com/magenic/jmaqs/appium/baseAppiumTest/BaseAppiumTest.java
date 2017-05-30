@@ -16,8 +16,6 @@ import org.testng.ITestResult;
 
 /**
  * Base Appium Test Class.
- *
- * @author JasonE
  */
 public abstract class BaseAppiumTest extends BaseGenericTest {
 
