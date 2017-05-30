@@ -1,4 +1,4 @@
-/*
+/* 
  * Copyright 2017 (C) Magenic, All rights Reserved
  */
 
@@ -61,8 +61,7 @@ public class AppiumWait extends SeleniumWait {
    */
   @Override
   protected void setImplicitWait(int wait) {
-    browser.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-
-    browser.manage().timeouts().implicitlyWait(wait, TimeUnit.SECONDS);
+    getWebDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    getWebDriver().manage().timeouts().implicitlyWait(wait, TimeUnit.SECONDS);
   }
 }

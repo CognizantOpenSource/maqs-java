@@ -4,13 +4,6 @@
 
 package com.magenic.maqs.appium.baseAppiumTest;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
@@ -19,9 +12,17 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
-// TODO: Auto-generated Javadoc
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 /**
- * Created by jasonedstrom on 2/21/17.
+ * Class AppiumConfig ...
+ *
+ * @author jasonedstrom Created on 5/30/17
  */
 public class AppiumConfig {
 
@@ -71,15 +72,6 @@ public class AppiumConfig {
   }
 
   /**
-   * Mobile device.
-   *
-   * @return the appium driver
-   */
-  public static AppiumDriver mobileDevice() {
-    return mobileDevice(getMobileDeviceOs());
-  }
-
-  /**
    * Checks if is using mobile browser.
    *
    * @return true, if is using mobile browser
@@ -109,9 +101,7 @@ public class AppiumConfig {
    * @return the mobile hub url
    */
   public static URL getMobileHubUrl() {
-    // TODO: close up
-    String string = getMobileHubUrlString();
-    return getMobileHubUrl(string);
+    return getMobileHubUrl(getMobileHubUrlString());
   }
 
   /**
@@ -135,13 +125,22 @@ public class AppiumConfig {
   /**
    * Mobile device.
    *
-   * @param mobileDeviceOS
+   * @return the appium driver
+   */
+  public static AppiumDriver mobileDevice() {
+    return mobileDevice(getMobileDeviceOs());
+  }
+
+  /**
+   * Mobile device.
+   *
+   * @param mobileDeviceOs
    *          the mobile device OS
    * @return the appium driver
    */
-  public static AppiumDriver mobileDevice(String mobileDeviceOS) {
+  public static AppiumDriver mobileDevice(String mobileDeviceOs) {
     AppiumDriver appiumDriver = null;
-    switch (mobileDeviceOS.toUpperCase()) {
+    switch (mobileDeviceOs.toUpperCase()) {
       case "ANDROID":
 
         appiumDriver = new AndroidDriver(getMobileHubUrl(), getMobileCapabilities());
@@ -155,7 +154,7 @@ public class AppiumConfig {
       default:
 
         throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Remote browser type %s is not supported", mobileDeviceOS));
+            .safeFormatter("Remote browser type %s is not supported", mobileDeviceOs));
 
     }
 
@@ -171,10 +170,10 @@ public class AppiumConfig {
 
     DesiredCapabilities capabilities = null;
 
-    String mobileDeviceOS = getMobileDeviceOs();
+    String mobileDeviceOs = getMobileDeviceOs();
     capabilities = new DesiredCapabilities();
 
-    switch (mobileDeviceOS.toUpperCase()) {
+    switch (mobileDeviceOs.toUpperCase()) {
       case "ANDROID":
 
         capabilities.setCapability(CapabilityType.PLATFORM, Platform.ANDROID);
@@ -192,31 +191,17 @@ public class AppiumConfig {
 
       default:
         throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Mobile Device OS type %s is not supported", mobileDeviceOS));
+            .safeFormatter("Mobile Device OS type %s is not supported", mobileDeviceOs));
 
     }
 
-    // TODO: Check capabilities
     capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, getOsVersion());
     capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, getMobileDeviceOs());
 
-    if ((Config.getValue("SauceLabs").toUpperCase()).equals("YES")) {
-
-      capabilities.setCapability("appiumVersion", Config.getValue("AppiumVersion"));
-      capabilities.setCapability("deviceName", getDeviceName());
-      capabilities.setCapability("deviceOrientation", Config.getValue("Orientation"));
-      capabilities.setCapability("browserName", "");
-      capabilities.setCapability("platformName", getMobileDeviceOs());
-      capabilities.setCapability("app", Config.getValue("AppLocation"));
-      capabilities.setCapability("username", Config.getValue("SauceUsername"));
-      capabilities.setCapability("accessKey", Config.getValue("SauceAccessKey"));
-
-    } else {
-      // capabilities.setCapability(CapabilityType.BROWSER_NAME, getDeviceName());
-      capabilities.setCapability(CapabilityType.VERSION, getOsVersion());
-      capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, getDeviceName());
-    }
+    capabilities.setCapability(CapabilityType.BROWSER_NAME, getDeviceName());
+    capabilities.setCapability(CapabilityType.VERSION, getOsVersion());
+    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, getDeviceName());
 
     return capabilities;
   }
@@ -229,7 +214,6 @@ public class AppiumConfig {
    */
   public static void setTimeouts(AppiumDriver driver) {
     int timeoutTime = Integer.parseInt(Config.getValue("Timeout", "0"));
-    driver.manage().timeouts().setScriptTimeout(timeoutTime, null);
     driver.manage().timeouts().pageLoadTimeout(timeoutTime, null);
   }
 }
