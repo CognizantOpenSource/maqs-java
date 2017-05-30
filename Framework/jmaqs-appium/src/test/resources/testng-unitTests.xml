@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Unit Tests" parallel="methods">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter" />
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+    </listeners>
+    <!--<test name="BaseGenericTest">
+        <classes>
+            <class name="magenic.maqs.utilities.unitTests.BaseGenericTestUnitTest" />
+        </classes>
+    </test>-->
+    <test name="Config">
+        <classes>
+            <class name="com.magenic.maqs.appium.UnitTests.AppiumConfigUnitTests" />
+        </classes>
+    </test>
+    <!--<test name="File Logger">
+        <classes>
+            <class name="magenic.maqs.utilities.unitTests.FileLoggerUnitTest" />
+        </classes>
+    </test>
+    <test name="List Processor">
+        <classes>
+            <class name="magenic.maqs.utilities.unitTests.ListProcessorUnitTest" />
+        </classes>
+    </test>
+    <test name="String Processor">
+        <classes>
+            <class name="magenic.maqs.utilities.unitTests.StringProcessorUnitTest" />
+        </classes>
+    </test>-->
+</suite>
