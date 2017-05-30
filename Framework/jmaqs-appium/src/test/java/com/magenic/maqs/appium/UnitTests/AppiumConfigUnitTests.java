@@ -1,11 +1,8 @@
 package com.magenic.maqs.appium.UnitTests;
 
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.maqs.appium.BaseAppiumTest.AppiumConfig;
+import com.magenic.maqs.appium.baseAppiumTest.AppiumConfig;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.io.File;
 
 /**
  * Created by JasonE on 2/22/2017.
