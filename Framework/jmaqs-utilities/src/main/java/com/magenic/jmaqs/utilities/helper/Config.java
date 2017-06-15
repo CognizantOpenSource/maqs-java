@@ -115,10 +115,10 @@ public final class Config {
    * 
    * @return The properties file object
    * @throws IOException
-   *           Problems finding the config.properties file
+   *           Problems finding the JMAQS.properties file
    */
   private static void getPropertiesFile() throws IOException {
-    String configName = "config.properties";
+    String configName = "JMAQS.properties";
 
     Properties config = new Properties();
 
