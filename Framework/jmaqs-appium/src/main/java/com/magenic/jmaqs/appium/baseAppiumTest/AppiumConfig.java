@@ -20,7 +20,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
- * Class AppiumConfig
+ * Class AppiumConfig.
  */
 public class AppiumConfig {
 
