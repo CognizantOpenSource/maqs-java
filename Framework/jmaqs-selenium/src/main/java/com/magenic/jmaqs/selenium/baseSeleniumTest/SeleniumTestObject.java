@@ -33,9 +33,10 @@ public class SeleniumTestObject extends TestObject {
    *          The SeleniumWait Object
    * @param logger
    *          The Logger Object
+   * @param fullyQualifiedTestName
+   *          The fully qualified test name
    */
-  public SeleniumTestObject(WebDriver driver, SeleniumWait wait, Logger logger,
-      String fullyQualifiedTestName) {
+  public SeleniumTestObject(WebDriver driver, SeleniumWait wait, Logger logger, String fullyQualifiedTestName) {
     super(fullyQualifiedTestName, logger);
     this.webDriver = driver;
     this.seleniumWait = wait;

@@ -109,7 +109,6 @@ public abstract class BaseGenericTest {
     }
   }
 
-
   public void setLoggedException(ArrayList<String> exceptions) {
     this.loggedExceptions.put(this.getFullyQualifiedTestClassName(), exceptions);
   }
@@ -208,7 +207,7 @@ public abstract class BaseGenericTest {
   /**
    * Overload function for doing post setup logging.
    */
-  protected abstract void postSetupLogging();
+  protected abstract void postSetupLogging() throws Exception;
 
   /**
    * Steps to do before logging teardown results.
