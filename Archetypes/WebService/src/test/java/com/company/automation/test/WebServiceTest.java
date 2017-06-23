@@ -1,9 +1,9 @@
-package com.magenic.jmaqs.webservices.test;
+package com.company.automation.test;
 
 import com.google.gson.Gson;
 import com.magenic.jmaqs.webservices.baseWebServiceTest.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.baseWebServiceTest.WebServiceUtils;
-import com.magenic.jmaqs.webservices.models.ProductJson;
+import com.company.automation.models.ProductJson;
 import org.apache.http.entity.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;

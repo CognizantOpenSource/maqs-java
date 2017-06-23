@@ -1,4 +1,4 @@
-package com.magenic.jmaqs.webservices.models;
+package com.company.automation.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

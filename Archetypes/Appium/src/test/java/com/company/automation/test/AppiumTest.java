@@ -1,9 +1,9 @@
-package com.magenic.jmaqs.appium.test;
+package com.company.automation.test;
 
 import com.magenic.jmaqs.appium.baseAppiumTest.AppiumConfig;
 import com.magenic.jmaqs.appium.baseAppiumTest.BaseAppiumTest;
-import com.magenic.jmaqs.appium.pagemodels.LoginPageModel;
-import com.magenic.jmaqs.appium.pagemodels.MainPageModel;
+import com.company.automation.pagemodels.LoginPageModel;
+import com.company.automation.pagemodels.MainPageModel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

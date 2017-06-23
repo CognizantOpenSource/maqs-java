@@ -1,8 +1,8 @@
-package com.magenic.jmaqs.selenium.test;
+package com.company.automation.test;
 
 import com.magenic.jmaqs.selenium.baseSeleniumTest.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.pagemodels.HomePageModel;
-import com.magenic.jmaqs.selenium.pagemodels.LoginPageModel;
+import com.company.automation.pagemodels.HomePageModel;
+import com.company.automation.pagemodels.LoginPageModel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

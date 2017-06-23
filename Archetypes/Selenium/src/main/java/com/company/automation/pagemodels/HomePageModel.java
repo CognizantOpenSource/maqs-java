@@ -1,4 +1,4 @@
-package com.magenic.jmaqs.selenium.pagemodels;
+package com.company.automation.pagemodels;
 
 import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumConfig;
 import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumTestObject;
