@@ -37,11 +37,23 @@ public class LoginPageModel extends BasePageModel {
     super(appiumTestObject);
   }
 
+  /**
+   * Enter credentials.
+   *
+   * @param username the username
+   * @param password the password
+   */
   public void enterCredentials(String username, String password) {
     this.appiumTestObject.getAppiumWait().waitForElement(usernameField).sendKeys(username);
     this.appiumTestObject.getAppiumWait().waitForElement(passwordField).sendKeys(password);
   }
 
+  /**
+   * Login with invalid credentials.
+   *
+   * @param username the username
+   * @param password the password
+   */
   public void loginWithInvalidCredentials(String username, String password) {
 
     enterCredentials(username, password);
@@ -50,6 +62,13 @@ public class LoginPageModel extends BasePageModel {
 
   }
 
+  /**
+   * Login with valid credentials main page model.
+   *
+   * @param username the username
+   * @param password the password
+   * @return the main page model
+   */
   public MainPageModel loginWithValidCredentials(String username, String password) {
 
     enterCredentials(username, password);
@@ -58,6 +77,11 @@ public class LoginPageModel extends BasePageModel {
     return new MainPageModel(this.appiumTestObject);
   }
 
+  /**
+   * Gets error message.
+   *
+   * @return the error message
+   */
   public String getErrorMessage() {
     return this.appiumTestObject.getAppiumWait().waitForElement(errorMessage).getText();
   }

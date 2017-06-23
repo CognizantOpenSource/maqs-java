@@ -12,12 +12,18 @@ import org.testng.annotations.Test;
  */
 public class AppiumTest extends BaseAppiumTest {
 
+  /**
+   * Application installed test.
+   */
   @Test
   public void applicationInstalledTest() {
     Assert.assertTrue(this.getAppiumDriver().isAppInstalled(AppiumConfig.getBundleId()),
         "Expected application to be installed");
   }
 
+  /**
+   * Invalid login test.
+   */
   @Test
   public void invalidLoginTest()
   {
@@ -28,6 +34,9 @@ public class AppiumTest extends BaseAppiumTest {
     Assert.assertEquals(errorMessage, expectedError, "Expected error message to be equal");
   }
 
+  /**
+   * Valid login test.
+   */
   @Test
   public void validLoginTest()
   {
