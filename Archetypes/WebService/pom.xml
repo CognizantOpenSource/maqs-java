@@ -8,6 +8,20 @@
     <artifactId>jmaqs-webservices-project</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>jmaqs-internal</id>
+            <name>JMAQS Internal</name>
+            <url>http://10.155.45.36:8081/repository/JMAQS-Internal/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.magenic.jmaqs.webservices</groupId>
