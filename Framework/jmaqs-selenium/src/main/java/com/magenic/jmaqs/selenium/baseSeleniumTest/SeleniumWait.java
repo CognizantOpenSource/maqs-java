@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium.baseSeleniumTest;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -14,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,22 +28,22 @@ import org.testng.Assert;
 public class SeleniumWait {
   // TODO these values need to be removed, and instead accessed from the Config/Execution properties
   // once implemented
-  
+
   /**
    * The default timeout.
    */
   private static final int DEFAULT_TIMEOUT = 20;
-  
+
   /**
    * The clear time.
    */
   private static final int CLEARTIME = 5;
-  
+
   /**
    * The default retry time.
    */
   private static final int DEFAULT_FLUENT_RETRY_TIME = 250;
-  
+
   /**
    * One thousand.
    */
@@ -57,25 +59,25 @@ public class SeleniumWait {
    */
   private static final By BODY_BY = By.cssSelector("BODY");
 
-
-
-
   /**
    * The Webdriver that the test is currently running on.
    */
   private WebDriver browser;
-  
-  
+
   /**
    * The retry time.
    */
   private int fluentRetryTime;
 
-
   /**
    * The implicit wait timeout.
    */
   private int implicitWaitTimeout;
+  
+  /**
+   * Collection for WebDriverWait.
+   */
+  private static ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection;
 
   /**
    * Constructor for SeleniumWait object.
@@ -115,9 +117,9 @@ public class SeleniumWait {
     this.fluentRetryTime = fluentRetryTime;
   }
 
-
   /**
    * Method getWebDriver returns the webDriver of this SeleniumWait object.
+   * 
    * @return the webDriver (type WebDriver) of this SeleniumWait object.
    */
   protected WebDriver getWebDriver() {
@@ -1079,6 +1081,50 @@ public class SeleniumWait {
    */
   private void resetImplicitWait() {
     setImplicitWait(this.implicitWaitTimeout);
+  }
+
+  /**
+   * Get the WebDriverWait.
+   * 
+   * @param driver
+   *          The webdriver
+   * @return The WebDriverWait
+   */
+  public static WebDriverWait getWaitDriver(WebDriver driver) {
+    // Make sure we have the base driver and not the event firing wrapper
+    WebDriver unwrappedDriver = getLowLevelDriver(driver);
+
+    if (waitCollection.containsKey(unwrappedDriver)) {
+      return waitCollection.get(unwrappedDriver);
+    } else {
+      WebDriverWait waiter = SeleniumConfig.getWaitDriver(unwrappedDriver);
+      waitCollection.put(unwrappedDriver, waiter);
+      return waiter;
+    }
+  }
+
+  /**
+   * Sets the WebDriverWait.
+   * 
+   * @param driver
+   *          The webdriver
+   * @param waiter
+   *          The WebDriverWait
+   */
+  public void setWaitDriver(WebDriver driver, WebDriverWait waiter) {
+    waitCollection.put(driver, waiter);
+  }
+
+  /**
+   * Get the underlying web driver.
+   * 
+   * @param driver
+   *          The web driver
+   * @return the underlying web driver
+   */
+  private static WebDriver getLowLevelDriver(WebDriver driver) {
+    return driver instanceof EventFiringWebDriver
+        ? ((EventFiringWebDriver) driver).getWrappedDriver() : driver;
   }
 
 }
