@@ -370,7 +370,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the timeout from config
+   * Get the timeout from config.
    * 
    * @return The timeout time
    */
@@ -379,7 +379,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get wait from config
+   * Get wait from config.
    * 
    * @return The wait time
    */
