@@ -39,7 +39,7 @@ public class SeleniumUtilities {
    */
   public static boolean captureScreenshot(WebDriver webDriver, Logger log, String appendName) {
     try {
-      String path = "";
+      String path;
 
       // Check if we are using a file logger
       if (!(log instanceof FileLogger)) {
@@ -105,7 +105,7 @@ public class SeleniumUtilities {
    */
   public static WebDriver webElementToWebDriver(WebElement webElement) {
 
-    WebDriver driver = null;
+    WebDriver driver;
 
     driver = ((WrapsDriver) webElement).getWrappedDriver();
 

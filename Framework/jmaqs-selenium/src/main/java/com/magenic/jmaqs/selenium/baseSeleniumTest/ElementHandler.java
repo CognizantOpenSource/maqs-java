@@ -47,7 +47,7 @@ public class ElementHandler {
    */
   public static ArrayList<String> getSelectedOptionsFromDropdown(SeleniumWait seleniumWait, By by) {
 
-    ArrayList<WebElement> elements = null;
+    ArrayList<WebElement> elements;
     ArrayList<String> selectedItems = new ArrayList<String>();
     Select select = new Select(seleniumWait.waitForClickableElement(by));
 
@@ -254,7 +254,7 @@ public class ElementHandler {
    */
   public static void setTextBox(SeleniumWait seleniumWait, By by, String textToEnter,
       boolean tabOff) {
-    if (textToEnter != "" && textToEnter != null) {
+    if (!textToEnter.isEmpty() && textToEnter != null) {
       if (tabOff) {
         textToEnter += Keys.TAB;
       }

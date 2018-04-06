@@ -7,12 +7,6 @@ import org.testng.annotations.Test;
 
 
 public class AppiumConfigUnitTests {
-//    @Test
-//    public void testGetMobileDeviceOS() throws Exception {
-//        String mobileDeviceOS = AppiumConfig.getMobileDeviceOs();
-//        Assert.assertTrue(mobileDeviceOS.equalsIgnoreCase("Android"));
-//
-//    }
 
     @Test
     public void testGetMobileDeviceUDID() throws Exception {
@@ -38,30 +32,13 @@ public class AppiumConfigUnitTests {
         Assert.assertTrue(deviceName.equalsIgnoreCase("Samsung Galaxy S6 Device"));
     }
 
-    /*@Test
-    public void testMobileDevice() throws Exception {
-        AppiumDriver driver = AppiumConfig.mobileDevice();
-        Assert.assertNotNull(driver);
-        driver.quit();
-    }*/
-
-//    @Test
-//    public void testIsUsingMobileBrowser() throws Exception {
-//        boolean mobileBrowser = AppiumConfig.isUsingMobileBrowser();
-//        Assert.assertFalse(mobileBrowser);
-//    }
-
     @Test
     public void testGetMobileHubUrlString() throws Exception {
         String mobileHubUrl = AppiumConfig.getMobileHubUrlString();
         Assert.assertTrue(mobileHubUrl.equalsIgnoreCase("http://127.0.0.1:4723/wd/hub"));
     }
 
-
     @Test
     public void testSetTimeouts() throws Exception {
-
     }
-
-
 }

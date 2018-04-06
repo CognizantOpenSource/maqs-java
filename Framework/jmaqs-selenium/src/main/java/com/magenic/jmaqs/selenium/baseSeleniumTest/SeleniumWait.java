@@ -77,7 +77,7 @@ public class SeleniumWait {
   /**
    * Collection for WebDriverWait.
    */
-  private static ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection;
+  private static ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection = new ConcurrentHashMap<>();
 
   /**
    * Constructor for SeleniumWait object.
@@ -818,7 +818,7 @@ public class SeleniumWait {
    * @return boolean - true if the selector is no longer present, else false
    */
   public boolean fluentWaitInvisible(final By by, int clearTime) {
-    boolean isNotVisible = false;
+    boolean isNotVisible;
 
     try {
       browser.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);

@@ -18,7 +18,7 @@ public class SeleniumConfigTest {
    * Browser check.
    */
   @Test
-  public void getBrowser() {
+  public void getBrowser() throws Exception{
 
     WebDriver driver = SeleniumConfig.browser();
 
@@ -97,7 +97,7 @@ public class SeleniumConfigTest {
    * Browser with string.
    */
   @Test
-  public void getBrowserWithString() {
+  public void getBrowserWithString() throws Exception{
 
     WebDriver driver = SeleniumConfig.browser("phantomjs");
 

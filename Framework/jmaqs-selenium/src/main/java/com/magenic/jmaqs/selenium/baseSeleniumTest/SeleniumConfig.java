@@ -19,9 +19,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -35,7 +36,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the browser type name - Example: Chrome.
-   * 
+   *
    * @return The browser type
    */
   public static String getBrowserName() {
@@ -44,7 +45,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the web site base url.
-   * 
+   *
    * @return The web site base url
    */
   public static String getWebSiteBase() {
@@ -53,7 +54,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the hint path for the web driver.
-   * 
+   *
    * @return The hint path for the web driver
    */
   public static String getDriverHintPath() {
@@ -63,7 +64,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the remote browser type name.
-   * 
+   *
    * @return The browser type being used on grid
    */
   public static String getRemoteBrowserName() {
@@ -72,7 +73,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the remote platform type name.
-   * 
+   *
    * @return The platform (or OS) to run remote tests against
    */
   public static String getRemotePlatform() {
@@ -81,7 +82,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the remote browser version.
-   * 
+   *
    * @return The browser version to run against on grid
    */
   public static String getRemoteBrowserVersion() {
@@ -91,102 +92,105 @@ public final class SeleniumConfig {
   /**
    * Get the browser. If no browser is provide in the project configuration file we default to
    * Chrome. Browser are maximized by default
-   * 
+   *
    * @return The web driver
    */
-  public static WebDriver browser() {
+  public static WebDriver browser() throws Exception {
     return browser(getBrowserName());
   }
 
   /**
    * Get the webdriver based for the provided browser, Browser are maximized by default.
-   * 
+   *
    * @param browser
    *          The browser type we want to use
    * @return A WebDriver
    */
-  public static WebDriver browser(String browser) {
+  public static WebDriver browser(String browser) throws Exception {
     WebDriver webDriver = null;
 
-    switch (browser.toUpperCase()) {
-      case "INTERNET EXPLORER":
-      case "INTERNETEXPLORER":
-      case "IE":
-        System.setProperty("webdriver.ie.driver",
-            getDriverLocation("IEDriverServer.exe") + File.separator + "IEDriverServer.exe");
-        webDriver = new InternetExplorerDriver();
-        break;
-      case "FIREFOX":
-        String firefoxPath = getDriverLocation("firefox.exe",
-            getProgramFilesFolder("Mozilla Firefox", "firefox.exe"), false);
+    try {
+      switch (browser.toUpperCase()) {
+        case "INTERNET EXPLORER":
+        case "INTERNETEXPLORER":
+        case "IE":
+          System.setProperty("webdriver.ie.driver",
+                  getDriverLocation("IEDriverServer.exe") + File.separator + "IEDriverServer.exe");
+          webDriver = new InternetExplorerDriver();
+          break;
+        case "FIREFOX":
 
-        if (firefoxPath == null || firefoxPath.isEmpty()) {
-          // Firefox driver location not found by framework so let
-          // Selenium try to find it
-          webDriver = new FirefoxDriver();
-        } else {
+          System.setProperty("webdriver.gecko.driver",
+                  getDriverLocation("geckodriver.exe") + File.separator + "geckodriver.exe");
 
-          FirefoxBinary binary = new FirefoxBinary(new File(firefoxPath, "firefox.exe"));
-          FirefoxProfile profile = new FirefoxProfile();
-          webDriver = new FirefoxDriver(binary, profile);
+          FirefoxOptions options = new FirefoxOptions();
+          options.setProfile(new FirefoxProfile());
 
-        }
+          webDriver = new FirefoxDriver(GeckoDriverService.createDefaultService(), options);
+          break;
+        case "CHROME":
+          ChromeOptions chromeOptions = new ChromeOptions();
+          chromeOptions.addArguments("test-type");
+          chromeOptions.addArguments("--disable-web-security");
+          chromeOptions.addArguments("--allow-running-insecure-content");
+          chromeOptions.addArguments("--disable-extensions");
 
-        break;
-      case "CHROME":
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("test-type");
-        chromeOptions.addArguments("--disable-web-security");
-        chromeOptions.addArguments("--allow-running-insecure-content");
-        chromeOptions.addArguments("--disable-extensions");
+          System.setProperty("webdriver.chrome.driver",
+                  getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
+          webDriver = new ChromeDriver(chromeOptions);
+          break;
+        case "EDGE":
+          EdgeOptions edgeOptions = new EdgeOptions();
+          edgeOptions.setPageLoadStrategy("Normal");
 
-        System.setProperty("webdriver.chrome.driver",
-            getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
-        webDriver = new ChromeDriver(chromeOptions);
-        break;
-      case "EDGE":
-        EdgeOptions edgeOptions = new EdgeOptions();
-        edgeOptions.setPageLoadStrategy("Normal");
+          System.setProperty("webdriver.edge.driver",
+                  getDriverLocation("MicrosoftWebDriver.exe",
+                          getProgramFilesFolder("Microsoft Web Driver", "MicrosoftWebDriver.exe"))
+                          + File.separator + "MicrosoftWebDriver.exe");
+          webDriver = new EdgeDriver(edgeOptions);
+          break;
 
-        System.setProperty("webdriver.edge.driver",
-            getDriverLocation("MicrosoftWebDriver.exe",
-                getProgramFilesFolder("Microsoft Web Driver", "MicrosoftWebDriver.exe"))
-                + File.separator + "MicrosoftWebDriver.exe");
-        webDriver = new EdgeDriver(edgeOptions);
-        break;
+        case "PHANTOMJS":
+          System.setProperty("phantomjs.binary.path",
+                  getDriverLocation("phantomjs.exe") + File.separator + "phantomjs.exe");
+          webDriver = new PhantomJSDriver();
+          break;
 
-      case "PHANTOMJS":
+        case "REMOTE":
+          // MalformedURLException exception is thrown if no protocol is
+          // specified, or an unknown protocol is found, or spec is null.
+          try {
+            webDriver = new RemoteWebDriver(new URL(Config.getValue("HubUrl")),
+                      getRemoteCapabilities());
+          } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+          break;
+        default:
+          throw new RuntimeException(
+                    StringProcessor.safeFormatter("Browser type %s is not supported", browser));
+      }
 
-        System.setProperty("phantomjs.binary.path",
-            getDriverLocation("phantomjs.exe") + File.separator + "phantomjs.exe");
-        webDriver = new PhantomJSDriver();
-
-        break;
-
-      case "REMOTE":
-        // MalformedURLException exception is thrown if no protocol is
-        // specified, or an unknown protocol is found, or spec is null.
+      // Maximize the browser and than return it
+      webDriver.manage().window().maximize();
+      return webDriver;
+    } catch (Exception e) {
+      if (webDriver != null) {
         try {
-          webDriver = new RemoteWebDriver(new URL(Config.getValue("HubUrl")),
-              getRemoteCapabilities());
-        } catch (MalformedURLException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
+          webDriver.quit();
+        } catch (Exception quitExecption) {
+          throw new Exception("Failed to quit Web driver during setup", quitExecption);
         }
-        break;
-      default:
-        throw new RuntimeException(
-            StringProcessor.safeFormatter("Browser type %s is not supported", browser));
-    }
+      }
 
-    // Maximize the browser and than return it
-    webDriver.manage().window().maximize();
-    return webDriver;
+      throw new Exception("Failed to setup web driver. Your driver may be out of date or unsupported.", e);
+    }
   }
 
   /**
    * Set the script and page timeouts.
-   * 
+   *
    * @param driver
    *          Brings in a WebDriver
    */
@@ -198,12 +202,12 @@ public final class SeleniumConfig {
 
   /**
    * Get the remote desired capability.
-   * 
+   *
    * @return The remote desired capability
    */
 
   private static DesiredCapabilities getRemoteCapabilities() {
-    DesiredCapabilities capabilities = null;
+    DesiredCapabilities capabilities;
     String remoteBrowser = getRemoteBrowserName();
     String remotePlatform = getRemotePlatform();
     String remoteBrowserVersion = getRemoteBrowserVersion();
@@ -247,7 +251,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the web driver location.
-   * 
+   *
    * @param driverFile
    *          The web drive file, including extension
    * @param defaultHintPath
@@ -302,7 +306,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the web driver location.
-   * 
+   *
    * @param driverFile
    *          The web drive file, including extension
    * @return The overloaded method
@@ -314,12 +318,12 @@ public final class SeleniumConfig {
 
   /**
    * Get the web driver location.
-   * 
+   *
    * @param driverFile
    *          The web drive file, including extension
    * @param defaultHintPath
    *          The default location for the specific driver
-   * 
+   *
    * @return The overloaded method
    */
   private static String getDriverLocation(String driverFile, String defaultHintPath) {
@@ -329,7 +333,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the programs file folder which contains given file.
-   * 
+   *
    * @param folderName
    *          The programs file sub folder
    * @param file
@@ -371,7 +375,7 @@ public final class SeleniumConfig {
 
   /**
    * Get the timeout from config.
-   * 
+   *
    * @return The timeout time
    */
   private static int getTimeoutTime() {
@@ -380,7 +384,7 @@ public final class SeleniumConfig {
 
   /**
    * Get wait from config.
-   * 
+   *
    * @return The wait time
    */
   private static int getWaitTime() {
@@ -389,10 +393,10 @@ public final class SeleniumConfig {
 
   /**
    * Get the wait default wait driver.
-   * 
+   *
    * @param driver
    *          The WebDriver
-   * 
+   *
    * @return The WebDriverWait
    */
   public static WebDriverWait getWaitDriver(WebDriver driver) {
@@ -401,10 +405,10 @@ public final class SeleniumConfig {
 
   /**
    * Resets wait default wait driver.
-   * 
+   *
    * @return The WebDriverWait
    */
-  public WebDriverWait resetWaitDriver() {
+  public WebDriverWait resetWaitDriver() throws Exception {
     return getWaitDriver(browser());
   }
 

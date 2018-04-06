@@ -37,9 +37,7 @@ public class WebElementFind {
       return null;
     }
 
-    WebElement element = elementList.get(0);
-
-    return element;
+    return elementList.get(0);
   }
 
   /**
@@ -70,17 +68,14 @@ public class WebElementFind {
    */
   public static WebElement findElementWithText(WebDriver driver, By by, String text,
       boolean throwException) {
-    // loop through elementList collection to find text match -- returns if
-    // found, else null
     List<WebElement> elementList = elemList(driver, by, throwException);
 
     if (elementList == null || elementList.size() == 0) {
       return null;
     }
 
-    for (int i = 0; i < elementList.size(); i++) {
-      if (elementList.get(i).toString().equals(text)) {
-        WebElement element = elementList.get(i);
+    for (WebElement element : elementList) {
+      if (element.toString().equals(text)) {
         return element;
       }
     }
@@ -129,7 +124,7 @@ public class WebElementFind {
 
     for (int i = 0; i < elementList.size(); i++) {
       if (elementList.get(i).toString().equals(text)) {
-        return index = i;
+        return i;
       }
     }
 
@@ -166,28 +161,27 @@ public class WebElementFind {
       boolean throwException) {
     int index = -1;
 
-    // if list size was null or empty and assert was true
-    if ((list == null || list.size() == 0) && throwException == true) {
-      throw new NotFoundException(StringProcessor
-          .safeFormatter("Empty or null Element Collection passed in %s", list.toString()));
-    }
-
-    // if throwException was true and list size > 0
-    for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).toString().equals(text)) {
-        list.get(i);
-        return index = i;
+    if (list == null) {
+      if (throwException) {
+        throw new NotFoundException(StringProcessor
+                  .safeFormatter("Element Collection is null"));
+      } else {
+        return index;
       }
     }
 
-    // if throwException is == false and no match was found
-    if (throwException == false) {
-      return index;
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).toString().equals(text)) {
+        return i;
+      }
     }
 
-    // if throwException is == true and no match was found
-    throw new NotFoundException(StringProcessor
-        .safeFormatter("Text did not match any element in collection %s", list.toString()));
+    if (!throwException) {
+      return index;
+    } else {
+      throw new NotFoundException(StringProcessor
+                .safeFormatter("Text did not match any element in collection %s", list.toString()));
+    }
   }
 
   /**
@@ -218,7 +212,7 @@ public class WebElementFind {
   private static List<WebElement> elemList(WebDriver driver, By by, boolean throwException) {
     List<WebElement> elems = driver.findElements(by);
 
-    if (elems.size() > 0 || throwException == false) {
+    if (elems.size() > 0 || !throwException) {
       return elems;
     }
 

@@ -12,6 +12,8 @@
 	<groupId>com.magenic.jmaqs.utilities</groupId>
 	<artifactId>jmaqs-utilities</artifactId>
 	<name>jmaqs-utilities</name>
+    <packaging>jar</packaging>
+    <url>http://maven.apache.org</url>
 
 	<repositories>
 		<repository>
@@ -28,7 +30,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.9.10</version>
+			<version>6.10</version>
 		</dependency>
 		<dependency>
 			<groupId>org.uncommons</groupId>
@@ -44,7 +46,7 @@
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
-			<version>4.1.0</version>
+			<version>4.2.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
