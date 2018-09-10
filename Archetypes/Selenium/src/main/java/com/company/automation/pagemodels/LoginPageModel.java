@@ -13,7 +13,7 @@ public class LoginPageModel extends BasePageModel {
   /**
    * The URL for the page.
    */
-  private static final String PAGE_URL = SeleniumConfig.getWebSiteBase() + "loginPage.html";
+  private static final String PAGE_URL = SeleniumConfig.getWebSiteBase() + "/Static/Training1/loginpage.html";
 
   /**
    * Username Field Selector.
