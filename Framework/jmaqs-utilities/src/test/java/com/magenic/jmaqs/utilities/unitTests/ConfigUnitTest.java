@@ -5,31 +5,89 @@
 package com.magenic.jmaqs.utilities.unitTests;
 
 import com.magenic.jmaqs.utilities.helper.Config;
-
+import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.util.HashMap;
 
 /**
  * Configuration unit test class.
  */
 public class ConfigUnitTest {
   /**
-   * Gets a value from a string.
+   * Test getting an entire section from the config
    */
   @Test
-  public void getValueWithString() {
-    String value = Config.getValue("WaitTime");
-    Assert.assertEquals(value, "100");
+  public void getSectionWithConfigSecEnumTest() {
+    HashMap<String, String> testSection = Config.getSection(ConfigSection.SeleniumMaqs);
+    Assert.assertEquals(testSection.get("TestKey"), "testValueTwo");
+    Assert.assertEquals(testSection.get("Browser"), "Internet Explorer");
   }
 
   /**
-   * Gets a value with a string or default.
+   * Test adding a list of test settings to the config
    */
   @Test
-  public void getValueWithStringAndDefault() {
+  public void addTestSettingValuesNewSectionTest() {
+    HashMap<String, String> newValueMap = new HashMap();
+    newValueMap.put("BROWSER1", "CHROME1");
+    newValueMap.put("DBString2", "Dbstring2222");
 
-    String value = Config.getValue("DoesNotExist", "Default");
+    Config.addTestSettingValues(newValueMap,"NewSection", false);
+    Assert.assertEquals(Config.getSection("NewSection").get("BROWSER1"), "CHROME1");
+    Assert.assertEquals(Config.getSection("NewSection").get("DBString2"), "Dbstring2222");
+  }
 
-    Assert.assertEquals(value, "Default");
+  /**
+   * Test overriding existing values in the config
+   */
+  @Test
+  public void addGeneralTestSettingValuesOverrideValuesTest() {
+    HashMap<String, String> newValueMap = new HashMap();
+    newValueMap.put("BrowserOverride", "CHROME");
+    newValueMap.put("TimeoutOverride", "13333333");
+
+    Config.addGeneralTestSettingValues(newValueMap, true);
+    Assert.assertEquals(Config.getGeneralValue("BrowserOverride"), "CHROME");
+    Assert.assertEquals(Config.getGeneralValue("TimeoutOverride"), "13333333");
+  }
+
+  /**
+   * Test getting a value out of the default section of the config
+   */
+  @Test
+  public void getGeneralValueTest() {
+    Assert.assertEquals(Config.getGeneralValue("TestKey"), "testValue");
+    Assert.assertEquals(Config.getGeneralValue("nonExistentKey", "defaultValue"), "defaultValue");
+  }
+
+  /**
+   * Test getting a value of a specified section of the config
+   */
+  @Test
+  public void getValueForSectionTest() {
+    Assert.assertEquals(Config.getValueForSection("SeleniumMaqs", "TestKey"), "testValueTwo");
+    Assert.assertEquals(Config.getValueForSection(ConfigSection.SeleniumMaqs, "Browser"), "Internet Explorer");
+    Assert.assertEquals(Config.getValueForSection("SeleniumMaqs", "nonExistentKey", "defaultValue"), "defaultValue");
+  }
+
+  /**
+   * Test getting a value from the config using the full defined path
+   */
+  @Test
+  public void getValueTest() {
+    Assert.assertEquals(Config.getValue("TestKey", "defaultValue"), "defaultValue");
+    Assert.assertEquals(Config.getValue("SeleniumMaqs.TestKey"), "testValueTwo");
+  }
+
+  /**
+   * Test checking if the key exists
+   */
+  @Test
+  public void doesKeyExistTest() {
+    Assert.assertTrue(Config.doesKeyExist("SeleniumMaqs.TestKey"));
+    Assert.assertTrue(Config.doesGeneralKeyExist("TimeoutOverride"));
+    Assert.assertTrue(Config.doesKeyExist("HubAddress", ConfigSection.SeleniumMaqs));
+    Assert.assertFalse(Config.doesKeyExist("HubAddress", ConfigSection.MagenicMaqs));
   }
 }

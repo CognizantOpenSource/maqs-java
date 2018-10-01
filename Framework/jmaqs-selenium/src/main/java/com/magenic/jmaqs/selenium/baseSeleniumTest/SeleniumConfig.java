@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium.baseSeleniumTest;
 
 import com.magenic.jmaqs.utilities.helper.Config;
+import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
 import java.io.File;
@@ -33,6 +34,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Selenium specific configuration class.
  */
 public final class SeleniumConfig {
+  /**
+   * The web service configuration section
+   */
+  public static final ConfigSection SELENIUM_SECTION = ConfigSection.SeleniumMaqs;
+
+  /**
+   * The remote selenium configuration section
+   */
+  public static final ConfigSection REMOTE_SELENIUM_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
 
   /**
    * Get the browser type name - Example: Chrome.
@@ -40,7 +50,7 @@ public final class SeleniumConfig {
    * @return The browser type
    */
   public static String getBrowserName() {
-    return Config.getValue("Browser", "Chrome");
+    return Config.getValueForSection(SELENIUM_SECTION,"Browser", "Chrome");
   }
 
   /**
@@ -49,7 +59,7 @@ public final class SeleniumConfig {
    * @return The web site base url
    */
   public static String getWebSiteBase() {
-    return Config.getValue("WebSiteBase");
+    return Config.getValueForSection(SELENIUM_SECTION,"WebSiteBase");
   }
 
   /**
@@ -59,7 +69,7 @@ public final class SeleniumConfig {
    */
   public static String getDriverHintPath() {
     String defaultPath = new java.io.File("Resources").getAbsolutePath();
-    return Config.getValue("WebDriverHintPath", defaultPath);
+    return Config.getValueForSection(SELENIUM_SECTION,"WebDriverHintPath", defaultPath);
   }
 
   /**
@@ -68,7 +78,7 @@ public final class SeleniumConfig {
    * @return The browser type being used on grid
    */
   public static String getRemoteBrowserName() {
-    return Config.getValue("RemoteBrowser", "Chrome");
+    return Config.getValueForSection(SELENIUM_SECTION,"RemoteBrowser", "Chrome");
   }
 
   /**
@@ -77,7 +87,7 @@ public final class SeleniumConfig {
    * @return The platform (or OS) to run remote tests against
    */
   public static String getRemotePlatform() {
-    return Config.getValue("RemotePlatform");
+    return Config.getValueForSection(SELENIUM_SECTION,"RemotePlatform");
   }
 
   /**
@@ -86,7 +96,7 @@ public final class SeleniumConfig {
    * @return The browser version to run against on grid
    */
   public static String getRemoteBrowserVersion() {
-    return Config.getValue("RemoteBrowserVersion");
+    return Config.getValueForSection(SELENIUM_SECTION,"RemoteBrowserVersion");
   }
 
   /**
@@ -160,7 +170,7 @@ public final class SeleniumConfig {
           // MalformedURLException exception is thrown if no protocol is
           // specified, or an unknown protocol is found, or spec is null.
           try {
-            webDriver = new RemoteWebDriver(new URL(Config.getValue("HubUrl")),
+            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,"HubUrl")),
                       getRemoteCapabilities());
           } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
@@ -195,7 +205,7 @@ public final class SeleniumConfig {
    *          Brings in a WebDriver
    */
   public static void setTimeouts(WebDriver driver) {
-    int timeoutTime = Integer.parseInt(Config.getValue("Timeout", "0"));
+    int timeoutTime = Integer.parseInt(Config.getGeneralValue("Timeout", "0"));
     driver.manage().timeouts().setScriptTimeout(timeoutTime, null);
     driver.manage().timeouts().pageLoadTimeout(timeoutTime, null);
   }
@@ -379,7 +389,7 @@ public final class SeleniumConfig {
    * @return The timeout time
    */
   private static int getTimeoutTime() {
-    return Integer.parseInt(Config.getValue("Timeout", "0"));
+    return Integer.parseInt(Config.getGeneralValue("Timeout", "0"));
   }
 
   /**
@@ -388,7 +398,7 @@ public final class SeleniumConfig {
    * @return The wait time
    */
   private static int getWaitTime() {
-    return Integer.parseInt(Config.getValue("WaitTime", "0"));
+    return Integer.parseInt(Config.getGeneralValue("WaitTime", "0"));
   }
 
   /**

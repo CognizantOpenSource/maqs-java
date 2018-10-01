@@ -68,7 +68,7 @@ public abstract class BaseAppiumTest extends BaseGenericTest {
       appiumTestObject.set(new AppiumTestObject(driver, wait, this.getFullyQualifiedTestClassName(),
           this.getLogger()));
       this.getLogger().logMessage(MessageType.INFORMATION, "Loaded driver: %s",
-          AppiumConfig.getMobileDeviceOs());
+          AppiumConfig.getPlaformName());
       // }
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s",

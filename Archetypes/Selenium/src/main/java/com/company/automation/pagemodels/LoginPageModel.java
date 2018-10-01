@@ -36,11 +36,6 @@ public class LoginPageModel extends BasePageModel {
   private static final By LOGIN_BUTTON = By.cssSelector("#Login");
 
   /**
-   * The Selenium Test Object.
-   */
-  private SeleniumTestObject testObject;
-
-  /**
    * Login Page Model Constructor.
    *
    * @param testObject
@@ -70,7 +65,7 @@ public class LoginPageModel extends BasePageModel {
    */
   public HomePageModel loginWithValidCredentials(String userName, String password) {
     this.enterCredentials(userName, password);
-    this.testObject.getSeleniumWait().waitForElement(LOGIN_BUTTON);
+    this.testObject.getSeleniumWait().waitForElement(LOGIN_BUTTON).click();
 
     return new HomePageModel(this.testObject);
   }

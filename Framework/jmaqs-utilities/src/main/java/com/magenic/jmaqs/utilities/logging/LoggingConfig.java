@@ -20,7 +20,7 @@ public class LoggingConfig {
    * @return The log enabled state
    */
   public static LoggingEnabled getLoggingEnabledSetting() {
-    switch (Config.getValue("Log", "NO").toUpperCase()) {
+    switch (Config.getGeneralValue("Log", "NO").toUpperCase()) {
       case "YES":
         return LoggingEnabled.YES;
       case "ONFAIL":
@@ -29,7 +29,7 @@ public class LoggingConfig {
         return LoggingEnabled.NO;
       default:
         throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Log value %s is not a valid option", Config.getValue("Log", "NO")));
+            .safeFormatter("Log value %s is not a valid option", Config.getGeneralValue("Log", "NO")));
     }
   }
 
@@ -50,14 +50,14 @@ public class LoggingConfig {
 
     String logDirectory = getLogDirectory();
 
-    switch (Config.getValue("LogType", "CONSOLE").toUpperCase()) {
+    switch (Config.getGeneralValue("LogType", "CONSOLE").toUpperCase()) {
       case "CONSOLE":
         return new ConsoleLogger();
       case "TXT":
         return new FileLogger(false, logDirectory, fileName);
       default:
         throw new IllegalArgumentException(StringProcessor.safeFormatter(
-            "Log type % is not a valid option", Config.getValue("LogType", "CONSOLE")));
+            "Log type %s is not a valid option", Config.getGeneralValue("LogType", "CONSOLE")));
     }
   }
 
@@ -68,6 +68,6 @@ public class LoggingConfig {
    */
   public static String getLogDirectory() {
     String path = new File("").getAbsolutePath().concat("\\Logs");
-    return Config.getValue("FileLoggerPath", path);
+    return Config.getGeneralValue("FileLoggerPath", path);
   }
 }
