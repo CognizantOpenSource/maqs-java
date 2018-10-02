@@ -40,12 +40,12 @@ public final class Config {
   private static XMLConfiguration xmlConfig;
 
   /**
-   * The base configs object
+   * The base configs object.
    */
   private static Configurations configs = new Configurations();
 
   /**
-   * initialize config object
+   * initialize config object.
    */
   static {
     try {
@@ -114,7 +114,7 @@ public final class Config {
   }
 
   /**
-   * Add dictionary of values to specified section
+   * Add dictionary of values to specified section.
    * @param configurations
    *          Dictionary of configuration values
    * @param section
@@ -133,7 +133,7 @@ public final class Config {
   }
 
   /**
-   * Get the specified value out of the default section
+   * Get the specified value out of the default section.
    * @param key
    *          The key
    * @return The configuration value
@@ -143,7 +143,7 @@ public final class Config {
   }
 
   /**
-   * Get the specified value out of the default section
+   * Get the specified value out of the default section.
    * @param key
    *          The key
    * @param defaultValue
@@ -155,7 +155,7 @@ public final class Config {
   }
 
   /**
-   * Get the specified value out of the specified section
+   * Get the specified value out of the specified section.
    * @param section
    *          The section to search
    * @param key
@@ -167,7 +167,7 @@ public final class Config {
   }
 
   /**
-   * Get the specified value out of the specified section
+   * Get the specified value out of the specified section.
    * @param section
    *          The section to search
    * @param key
@@ -179,7 +179,7 @@ public final class Config {
   }
 
   /**
-   * Get the specified value out of the specified section
+   * Get the specified value out of the specified section.
    * @param section
    *          The section to search
    * @param key
@@ -193,7 +193,7 @@ public final class Config {
   }
 
   /**
-   * Get the specified value out of the specified section
+   * Get the specified value out of the specified section.
    * @param section
    *          The section to search
    * @param key
@@ -241,7 +241,7 @@ public final class Config {
   }
 
   /**
-   * Check the config for a specific key. Searches the specified section
+   * Check the config for a specific key. Searches the specified section.
    * @param key
    *          The key
    * @param section
@@ -253,7 +253,7 @@ public final class Config {
   }
 
   /**
-   * Check the config for a specific key. Searches the specified section
+   * Check the config for a specific key. Searches the specified section.
    * @param key
    *          The key
    * @param section

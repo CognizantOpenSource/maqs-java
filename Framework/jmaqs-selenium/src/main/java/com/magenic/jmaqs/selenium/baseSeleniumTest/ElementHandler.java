@@ -97,7 +97,7 @@ public class ElementHandler {
 
   /**
    * Check or Uncheck a checkbox NOTE: If checkbox is already in desired state, this method takes no
-   * action
+   * action.
    * 
    * @param seleniumWait
    *          SeleniumWait Object
@@ -152,7 +152,7 @@ public class ElementHandler {
   }
 
   /**
-   * Clicks an element
+   * Clicks an element.
    * 
    * @param seleniumWait
    *          SeleniumWait Object

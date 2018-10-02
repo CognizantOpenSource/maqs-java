@@ -12,7 +12,7 @@ import com.magenic.jmaqs.utilities.helper.ConfigSection;
  */
 public final class WebServiceConfig {
   /**
-   * The web service configuration section
+   * The web service configuration section.
    */
   public static final ConfigSection WEBSERVICE_SECTION = ConfigSection.WebServiceMaqs;
 
