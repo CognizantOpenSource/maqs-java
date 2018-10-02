@@ -35,12 +35,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public final class SeleniumConfig {
   /**
-   * The web service configuration section
+   * The web service configuration section.
    */
   public static final ConfigSection SELENIUM_SECTION = ConfigSection.SeleniumMaqs;
 
   /**
-   * The remote selenium configuration section
+   * The remote selenium configuration section.
    */
   public static final ConfigSection REMOTE_SELENIUM_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
 

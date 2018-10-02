@@ -4,9 +4,12 @@
 
 package com.magenic.jmaqs.utilities.helper;
 
-import java.io.*;
-import java.util.*;
-import org.apache.commons.configuration2.*;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
@@ -22,17 +25,17 @@ public final class Config {
   public static final String NEW_LINE = System.getProperty("line.separator");
 
   /**
-   * The default section MagenicMaqs
+   * The default section MagenicMaqs.
    */
   public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MagenicMaqs;
 
   /**
-   * The default config.xml file name
+   * The default config.xml file name.
    */
   public static final String CONFIG_FILE = "config.xml";
 
   /**
-   * The xmlConfig object
+   * The xmlConfig object.
    */
   private static XMLConfiguration xmlConfig;
 
@@ -52,15 +55,14 @@ public final class Config {
         xmlConfig = builder.getConfiguration();
         xmlConfig.setSynchronizer(new ReadWriteSynchronizer());
       }
-    }
-    catch(ConfigurationException exception){
+    } catch (ConfigurationException exception) {
       throw new RuntimeException(StringProcessor
               .safeFormatter("Exception creating the xml configuration object from the file : %s", exception));
     }
   }
 
   /**
-   * Gets a section from the configuration
+   * Gets a section from the configuration.
    * @param section
    *          The desired section
    * @return A HashMap of the values in the section
@@ -70,7 +72,7 @@ public final class Config {
   }
 
   /**
-   * Gets a section from the configuration
+   * Gets a section from the configuration.
    * @param section
    *          The desired section
    * @return A HashMap of the values in the section
@@ -78,7 +80,7 @@ public final class Config {
   public static HashMap<String, String> getSection(String section) {
     HashMap<String, String> sectionValues = new HashMap();
     Iterator<String> paths = xmlConfig.getKeys(section);
-    while(paths.hasNext()) {
+    while (paths.hasNext()) {
       String keys = paths.next();
       sectionValues.put(keys.replaceFirst(section + "\\.", ""), xmlConfig.getString(keys));
     }
@@ -106,7 +108,8 @@ public final class Config {
    * @param overrideExisting
    *          True to override existing values, False otherwise
    */
-  public static void addTestSettingValues(HashMap<String, String> configurations, ConfigSection section, boolean overrideExisting) {
+  public static void addTestSettingValues(HashMap<String, String> configurations, ConfigSection section,
+                                          boolean overrideExisting) {
     addTestSettingValues(configurations, section.toString(), overrideExisting);
   }
 
@@ -119,10 +122,11 @@ public final class Config {
    * @param overrideExisting
    *          True to override existing values, False otherwise
    */
-  public static void addTestSettingValues(HashMap<String, String> configurations, String section, boolean overrideExisting) {
-    for(Map.Entry<String, String> entry : configurations.entrySet()) {
+  public static void addTestSettingValues(HashMap<String, String> configurations, String section,
+                                          boolean overrideExisting) {
+    for (Map.Entry<String, String> entry : configurations.entrySet()) {
       String sectionedKey =  section + "." + entry.getKey();
-      if(overrideExisting || !xmlConfig.containsKey(sectionedKey)) {
+      if (overrideExisting || !xmlConfig.containsKey(sectionedKey)) {
         xmlConfig.setProperty(sectionedKey, entry.getValue());
       }
     }
@@ -134,7 +138,7 @@ public final class Config {
    *          The key
    * @return The configuration value
    */
-  public static String getGeneralValue(String key){
+  public static String getGeneralValue(String key) {
     return getValueForSection(DEFAULT_MAQS_SECTION, key);
   }
 
@@ -232,18 +236,8 @@ public final class Config {
    *          The key
    * @return True if the key exists, false otherwise
    */
-  public static boolean doesKeyExist(String key){
+  public static boolean doesKeyExist(String key) {
     return xmlConfig.containsKey(key);
-  }
-
-  /**
-   * Check the config for a specific key. Searches the default section.
-   * @param key
-   *          The key
-   * @return True if the key exists, false otherwise
-   */
-  public static boolean doesGeneralKeyExist(String key) {
-    return doesKeyExist(key, DEFAULT_MAQS_SECTION);
   }
 
   /**
@@ -269,5 +263,15 @@ public final class Config {
   public static boolean doesKeyExist(String key, String section) {
     String keyWithSection = section + "." + key;
     return xmlConfig.containsKey(keyWithSection);
+  }
+
+  /**
+   * Check the config for a specific key. Searches the default section.
+   * @param key
+   *          The key
+   * @return True if the key exists, false otherwise
+   */
+  public static boolean doesGeneralKeyExist(String key) {
+    return doesKeyExist(key, DEFAULT_MAQS_SECTION);
   }
 }

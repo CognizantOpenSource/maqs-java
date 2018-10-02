@@ -25,12 +25,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 public class AppiumConfig {
   /**
-   * The web service configuration section
+   * The web service configuration section.
    */
   public static final ConfigSection APPIUM_SECTION = ConfigSection.AppiumMaqs;
 
   /**
-   * The web service configuration section
+   * The web service configuration section.
    */
   public static final ConfigSection APPIUM_CAPS_SECTION = ConfigSection.AppiumCapsMaqs;
 
@@ -39,7 +39,9 @@ public class AppiumConfig {
    *
    * @return the mobile device OS
    */
-  public static String getPlaformName() { return Config.getValueForSection(APPIUM_SECTION,"PlatformName", "Android"); }
+  public static String getPlatformName() {
+    return Config.getValueForSection(APPIUM_SECTION,"PlatformName", "Android");
+  }
 
   /**
    * Gets the mobile device UDID.
@@ -134,7 +136,7 @@ public class AppiumConfig {
    * @return the appium driver
    */
   public static AppiumDriver mobileDevice() {
-    return mobileDevice(getPlaformName());
+    return mobileDevice(getPlatformName());
   }
 
   /**
@@ -176,7 +178,7 @@ public class AppiumConfig {
 
     DesiredCapabilities capabilities = null;
 
-    String mobileDeviceOs = getPlaformName();
+    String mobileDeviceOs = getPlatformName();
     capabilities = new DesiredCapabilities();
 
     switch (mobileDeviceOs.toUpperCase()) {
@@ -203,7 +205,7 @@ public class AppiumConfig {
 
     capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, getPlatformVersion());
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, getPlaformName());
+    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, getPlatformName());
 
     capabilities.setCapability(CapabilityType.BROWSER_NAME, getDeviceName());
     capabilities.setCapability(CapabilityType.VERSION, getPlatformVersion());
