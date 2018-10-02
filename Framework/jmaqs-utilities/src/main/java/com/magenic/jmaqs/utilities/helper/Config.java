@@ -89,7 +89,7 @@ public final class Config {
   }
 
   /**
-   * Add dictionary of values to maqs section
+   * Add dictionary of values to maqs section.
    * @param configurations
    *          Dictionary of configuration values
    * @param overrideExisting
@@ -100,7 +100,7 @@ public final class Config {
   }
 
   /**
-   * Add dictionary of values to specified section
+   * Add dictionary of values to specified section.
    * @param configurations
    *          Dictionary of configuration values
    * @param section
