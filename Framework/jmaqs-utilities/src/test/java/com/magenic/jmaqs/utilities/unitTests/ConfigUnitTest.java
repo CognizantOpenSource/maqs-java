@@ -58,19 +58,19 @@ public class ConfigUnitTest {
   @Test
   public void addGeneralTestSettingValuesDontOverrideValuesTest() {
     HashMap<String, String> newValueMap = new HashMap();
-    newValueMap.put("BrowserOverride", "CHROME");
-    newValueMap.put("TimeoutOverride", "13333333");
+    newValueMap.put("DontBrowserOverride", "CHROME");
+    newValueMap.put("DontTimeoutOverride", "13333333");
 
     Config.addGeneralTestSettingValues(newValueMap, false);
-    Assert.assertEquals(Config.getGeneralValue("BrowserOverride"), "FireFox");
-    Assert.assertEquals(Config.getGeneralValue("TimeoutOverride"), "13.52");
+    Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "FireFox");
+    Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "13.52");
 
     HashMap<String, String> newValueMapTwo = new HashMap();
-    newValueMapTwo.put("BrowserOverride", "OverrideOverrideValue");
+    newValueMapTwo.put("DontBrowserOverride", "OverrideOverrideValue");
 
     Config.addGeneralTestSettingValues(newValueMap, true);
     Config.addGeneralTestSettingValues(newValueMapTwo, false);
-    Assert.assertEquals(Config.getGeneralValue("BrowserOverride"), "CHROME");
+    Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "CHROME");
 
   }
 
@@ -111,23 +111,5 @@ public class ConfigUnitTest {
     Assert.assertTrue(Config.doesGeneralKeyExist("TimeoutOverride"));
     Assert.assertTrue(Config.doesKeyExist("HubAddress", ConfigSection.SeleniumMaqs));
     Assert.assertFalse(Config.doesKeyExist("HubAddress", ConfigSection.MagenicMaqs));
-  }
-
-  @Test
-  public void resetOverridesTest() {
-    HashMap<String, String> newValueMap = new HashMap();
-    newValueMap.put("BrowserOverride", "CHROME");
-    newValueMap.put("TimeoutOverride", "13333333");
-
-    // test that values are overrode except those not added to the override dictionary
-    Config.addGeneralTestSettingValues(newValueMap, true);
-    Assert.assertEquals(Config.getGeneralValue("BrowserOverride"), "CHROME");
-    Assert.assertEquals(Config.getGeneralValue("TimeoutOverride"), "13333333");
-    Assert.assertEquals(Config.getGeneralValue("TestKey"), "testValue");
-
-    // reset the override config and make sure default values exist
-    Config.resetOverrideConfig();
-    Assert.assertEquals(Config.getGeneralValue("BrowserOverride"), "FireFox");
-    Assert.assertEquals(Config.getGeneralValue("TimeoutOverride"), "13.52");
   }
 }

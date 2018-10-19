@@ -38,6 +38,8 @@
         <Timeout>13.52</Timeout>
         <BrowserOverride>FireFox</BrowserOverride>
         <TimeoutOverride>13.52</TimeoutOverride>
+        <DontBrowserOverride>FireFox</DontBrowserOverride>
+        <DontTimeoutOverride>13.52</DontTimeoutOverride>
     </MagenicMaqs>
 
     <SeleniumMaqs>
