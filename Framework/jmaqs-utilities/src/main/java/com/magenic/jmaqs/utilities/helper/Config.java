@@ -299,7 +299,7 @@ public final class Config {
   }
 
   /**
-   * Clears the overrides leaving the xmlConfig intact
+   * Clears the overrides leaving the xmlConfig intact.
    */
   public static void resetOverrideConfig() {
     overrideConfig.clear();
