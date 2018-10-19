@@ -75,6 +75,7 @@ public final class Config {
 
       NodeCombiner nodeCombiner = new OverrideCombiner();
       config = new CombinedConfiguration(nodeCombiner);
+      config.setSynchronizer(new ReadWriteSynchronizer());
       config.addConfiguration(overrideConfig);
       config.addConfiguration(xmlConfig);
 
