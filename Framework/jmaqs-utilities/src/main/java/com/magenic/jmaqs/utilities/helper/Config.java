@@ -100,7 +100,7 @@ public final class Config {
     while (configValuePaths.hasNext()) {
       String key = configValuePaths.next();
       String editedKey = key.replaceFirst(section + "\\.", "");
-      if(!sectionValues.containsKey(editedKey)) {
+      if (!sectionValues.containsKey(editedKey)) {
         sectionValues.put(editedKey, configValues.getString(key));
       }
     }
