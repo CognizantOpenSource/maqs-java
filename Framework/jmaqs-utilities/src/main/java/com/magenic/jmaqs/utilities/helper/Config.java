@@ -9,15 +9,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.configuration2.CombinedConfiguration;
-import org.apache.commons.configuration2.HierarchicalConfiguration;
 import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.configuration2.sync.ReadWriteSynchronizer;
-import org.apache.commons.configuration2.tree.NodeCombiner;
-import org.apache.commons.configuration2.tree.OverrideCombiner;
 
 /**
  * Configuration class.
@@ -39,14 +35,9 @@ public final class Config {
   public static final String CONFIG_FILE = "config.xml";
 
   /**
-   * The configuration that is a combination of xmlConfig and overrideConfig.
-   */
-  private static CombinedConfiguration config;
-
-  /**
    * The configuration containing values loaded in from the config.xml file.
    */
-  private static XMLConfiguration xmlConfig;
+  private static XMLConfiguration configValues;
 
   /**
    * The configuration containing values that were added to the configuration.
@@ -66,19 +57,12 @@ public final class Config {
       if ((new File(CONFIG_FILE).exists())) {
         FileBasedConfigurationBuilder<XMLConfiguration> builder = configs.xmlBuilder(CONFIG_FILE);
 
-        xmlConfig = builder.getConfiguration();
-        xmlConfig.setSynchronizer(new ReadWriteSynchronizer());
+        configValues = builder.getConfiguration();
+        configValues.setSynchronizer(new ReadWriteSynchronizer());
       }
 
       overrideConfig = new XMLConfiguration();
       overrideConfig.setSynchronizer(new ReadWriteSynchronizer());
-
-      NodeCombiner nodeCombiner = new OverrideCombiner();
-      config = new CombinedConfiguration(nodeCombiner);
-      config.setSynchronizer(new ReadWriteSynchronizer());
-      config.addConfiguration(overrideConfig);
-      config.addConfiguration(xmlConfig);
-
     } catch (ConfigurationException exception) {
       throw new RuntimeException(StringProcessor
               .safeFormatter("Exception creating the xml configuration object from the file : %s", exception));
@@ -103,10 +87,22 @@ public final class Config {
    */
   public static HashMap<String, String> getSection(String section) {
     HashMap<String, String> sectionValues = new HashMap();
-    Iterator<String> paths = config.getKeys(section);
-    while (paths.hasNext()) {
-      String keys = paths.next();
-      sectionValues.put(keys.replaceFirst(section + "\\.", ""), config.getString(keys));
+
+    // first parse the override config
+    Iterator<String> overridePaths = overrideConfig.getKeys(section);
+    while (overridePaths.hasNext()) {
+      String key = overridePaths.next();
+      sectionValues.put(key.replaceFirst(section + "\\.", ""), overrideConfig.getString(key));
+    }
+
+    // then parse the base config, ignoring duplicates
+    Iterator<String> configValuePaths = configValues.getKeys(section);
+    while (configValuePaths.hasNext()) {
+      String key = configValuePaths.next();
+      String editedKey = key.replaceFirst(section + "\\.", "");
+      if(!sectionValues.containsKey(editedKey)) {
+        sectionValues.put(editedKey, configValues.getString(key));
+      }
     }
 
     return sectionValues;
@@ -150,7 +146,7 @@ public final class Config {
                                           boolean overrideExisting) {
     for (Map.Entry<String, String> entry : configurations.entrySet()) {
       String sectionedKey =  section + "." + entry.getKey();
-      if (overrideExisting || !(overrideConfig.containsKey(sectionedKey) || xmlConfig.containsKey(sectionedKey))) {
+      if (overrideExisting || !(overrideConfig.containsKey(sectionedKey) || configValues.containsKey(sectionedKey))) {
         overrideConfig.setProperty(sectionedKey, entry.getValue());
       }
     }
@@ -228,8 +224,7 @@ public final class Config {
    */
   public static String getValueForSection(String section, String key, String defaultValue) {
     String keyWithSection = section + "." + key;
-    String retVal =  config.getString(keyWithSection, "");
-    return retVal == "" ? defaultValue : retVal.replaceFirst(section + "\\.", "");
+    return getValue(keyWithSection, defaultValue);
   }
 
   /**
@@ -239,7 +234,8 @@ public final class Config {
    * @return The configuration value - Returns the empty string if the key is not found
    */
   public static String getValue(String key) {
-    return config.getString(key, "");
+    String retVal = overrideConfig.getString(key, "");
+    return retVal.isEmpty() ? configValues.getString(key, "") : retVal;
   }
 
   /**
@@ -251,7 +247,8 @@ public final class Config {
    * @return The configuration value - Returns the default string if the key is not found
    */
   public static String getValue(String key, String defaultValue) {
-    return config.getString(key, defaultValue);
+    String retVal = getValue(key);
+    return retVal.isEmpty() ? defaultValue : retVal;
   }
 
   /**
@@ -261,7 +258,7 @@ public final class Config {
    * @return True if the key exists, false otherwise
    */
   public static boolean doesKeyExist(String key) {
-    return config.containsKey(key);
+    return overrideConfig.containsKey(key) ? true : configValues.containsKey(key);
   }
 
   /**
@@ -286,7 +283,7 @@ public final class Config {
    */
   public static boolean doesKeyExist(String key, String section) {
     String keyWithSection = section + "." + key;
-    return config.containsKey(keyWithSection);
+    return doesKeyExist(keyWithSection);
   }
 
   /**
@@ -300,7 +297,7 @@ public final class Config {
   }
 
   /**
-   * Clears the overrides leaving the xmlConfig intact.
+   * Clears the overrides leaving the configValues intact.
    */
   public static void resetOverrideConfig() {
     overrideConfig.clear();
