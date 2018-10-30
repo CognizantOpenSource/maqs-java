@@ -8,6 +8,8 @@ import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.HashMap;
 
 /**

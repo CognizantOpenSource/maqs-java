@@ -130,6 +130,19 @@
 					<parallel>methods</parallel>
 					<threadCount>6</threadCount>
 				</configuration>
+				<executions>
+					<execution>
+						<excludes>
+							<exclude>**/Test*.java</exclude>
+							<exclude>**/*Test.java</exclude>
+							<exclude>**/*Tests.java</exclude>
+							<exclude>**/*TestCase.java</exclude>
+						</excludes>
+						<includes>
+							<include>**/ConfigOverrideUnitTestSequential.java</include>
+						</includes>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
