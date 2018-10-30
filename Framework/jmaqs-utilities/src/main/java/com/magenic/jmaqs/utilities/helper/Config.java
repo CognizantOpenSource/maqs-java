@@ -295,11 +295,4 @@ public final class Config {
   public static boolean doesGeneralKeyExist(String key) {
     return doesKeyExist(key, DEFAULT_MAQS_SECTION);
   }
-
-  /**
-   * Clears the overrides leaving the configValues intact.
-   */
-  public static void resetOverrideConfig() {
-    overrideConfig.clear();
-  }
 }

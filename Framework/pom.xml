@@ -126,29 +126,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version>
-				<executions>
-					<execution>
-						<id>parallel-run</id>
-						<configuration>
-							<parallel>methods</parallel>
-							<threadCount>6</threadCount>
-						</configuration>
-					</execution>
-					<execution>
-						<id>sequential-run</id>
-						<configuration>
-							<excludes>
-								<exclude>**/Test*.java</exclude>
-								<exclude>**/*Test.java</exclude>
-								<exclude>**/*Tests.java</exclude>
-								<exclude>**/*TestCase.java</exclude>
-							</excludes>
-							<includes>
-								<include>**/ConfigOverrideUnitTestSequential.java</include>
-							</includes>
-						</configuration>
-					</execution>
-				</executions>
+				<configuration>
+					<parallel>methods</parallel>
+					<threadCount>6</threadCount>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
