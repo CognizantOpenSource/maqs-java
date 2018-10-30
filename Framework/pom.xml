@@ -128,12 +128,14 @@
 				<version>2.19.1</version>
 				<executions>
 					<execution>
+						<id>parallel-run</id>
 						<configuration>
 							<parallel>methods</parallel>
 							<threadCount>6</threadCount>
 						</configuration>
 					</execution>
 					<execution>
+						<id>sequential-run</id>
 						<configuration>
 							<excludes>
 								<exclude>**/Test*.java</exclude>
