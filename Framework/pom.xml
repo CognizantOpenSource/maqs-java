@@ -132,15 +132,17 @@
 				</configuration>
 				<executions>
 					<execution>
-						<excludes>
-							<exclude>**/Test*.java</exclude>
-							<exclude>**/*Test.java</exclude>
-							<exclude>**/*Tests.java</exclude>
-							<exclude>**/*TestCase.java</exclude>
-						</excludes>
-						<includes>
-							<include>**/ConfigOverrideUnitTestSequential.java</include>
-						</includes>
+						<configuration>
+							<excludes>
+								<exclude>**/Test*.java</exclude>
+								<exclude>**/*Test.java</exclude>
+								<exclude>**/*Tests.java</exclude>
+								<exclude>**/*TestCase.java</exclude>
+							</excludes>
+							<includes>
+								<include>**/ConfigOverrideUnitTestSequential.java</include>
+							</includes>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
