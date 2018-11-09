@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.appium.baseAppiumTest;
 
 import com.magenic.jmaqs.utilities.helper.Config;
+import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
 import io.appium.java_client.AppiumDriver;
@@ -23,14 +24,23 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  * Class AppiumConfig.
  */
 public class AppiumConfig {
+  /**
+   * The web service configuration section.
+   */
+  public static final ConfigSection APPIUM_SECTION = ConfigSection.AppiumMaqs;
+
+  /**
+   * The web service configuration section.
+   */
+  public static final ConfigSection APPIUM_CAPS_SECTION = ConfigSection.AppiumCapsMaqs;
 
   /**
    * Gets the mobile device OS.
    *
    * @return the mobile device OS
    */
-  public static String getMobileDeviceOs() {
-    return Config.getValue("MobileOSType", "Android");
+  public static String getPlatformName() {
+    return Config.getValueForSection(APPIUM_SECTION,"PlatformName", "Android");
   }
 
   /**
@@ -39,7 +49,7 @@ public class AppiumConfig {
    * @return the mobile device UDID
    */
   public static String getMobileDeviceUdid() {
-    return Config.getValue("DeviceUDID");
+    return Config.getValueForSection(APPIUM_SECTION,"DeviceUDID");
   }
 
   /**
@@ -48,7 +58,7 @@ public class AppiumConfig {
    * @return the bundle ID
    */
   public static String getBundleId() {
-    return Config.getValue("BundleID");
+    return Config.getValueForSection(APPIUM_SECTION,"BundleID");
   }
 
   /**
@@ -56,8 +66,8 @@ public class AppiumConfig {
    *
    * @return the OS version
    */
-  public static String getOsVersion() {
-    return Config.getValue("OSVersion");
+  public static String getPlatformVersion() {
+    return Config.getValueForSection(APPIUM_SECTION,"PlatformVersion");
   }
 
   /**
@@ -66,7 +76,7 @@ public class AppiumConfig {
    * @return the device name
    */
   public static String getDeviceName() {
-    return Config.getValue("DeviceName");
+    return Config.getValueForSection(APPIUM_SECTION,"DeviceName");
   }
 
   /**
@@ -75,7 +85,7 @@ public class AppiumConfig {
    * @return true, if is using mobile browser
    */
   public static boolean isUsingMobileBrowser() {
-    String value = Config.getValue("MobileBrowser", "NO");
+    String value = Config.getValueForSection(APPIUM_SECTION,"MobileBrowser", "NO");
 
     if (value.equalsIgnoreCase("YES")) {
       return true;
@@ -90,7 +100,7 @@ public class AppiumConfig {
    * @return the mobile hub url string
    */
   public static String getMobileHubUrlString() {
-    return Config.getValue("MobileHubUrl");
+    return Config.getValueForSection(APPIUM_SECTION,"MobileHubUrl");
   }
 
   /**
@@ -126,7 +136,7 @@ public class AppiumConfig {
    * @return the appium driver
    */
   public static AppiumDriver mobileDevice() {
-    return mobileDevice(getMobileDeviceOs());
+    return mobileDevice(getPlatformName());
   }
 
   /**
@@ -168,7 +178,7 @@ public class AppiumConfig {
 
     DesiredCapabilities capabilities = null;
 
-    String mobileDeviceOs = getMobileDeviceOs();
+    String mobileDeviceOs = getPlatformName();
     capabilities = new DesiredCapabilities();
 
     switch (mobileDeviceOs.toUpperCase()) {
@@ -194,11 +204,11 @@ public class AppiumConfig {
     }
 
     capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, getOsVersion());
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, getMobileDeviceOs());
+    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, getPlatformVersion());
+    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, getPlatformName());
 
     capabilities.setCapability(CapabilityType.BROWSER_NAME, getDeviceName());
-    capabilities.setCapability(CapabilityType.VERSION, getOsVersion());
+    capabilities.setCapability(CapabilityType.VERSION, getPlatformVersion());
     capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, getDeviceName());
 
     return capabilities;

@@ -22,20 +22,20 @@ public class AppiumConfigUnitTests {
 
     @Test
     public void testGetOSVersion() throws Exception {
-        String osVersion = AppiumConfig.getOsVersion();
+        String osVersion = AppiumConfig.getPlatformVersion();
         Assert.assertTrue(osVersion.equalsIgnoreCase("6.0"));
     }
 
     @Test
     public void testGetDeviceName() throws Exception {
         String deviceName = AppiumConfig.getDeviceName();
-        Assert.assertTrue(deviceName.equalsIgnoreCase("Samsung Galaxy S6 Device"));
+        Assert.assertTrue(deviceName.equalsIgnoreCase("Android GoogleAPI Emulator"));
     }
 
     @Test
     public void testGetMobileHubUrlString() throws Exception {
         String mobileHubUrl = AppiumConfig.getMobileHubUrlString();
-        Assert.assertTrue(mobileHubUrl.equalsIgnoreCase("http://127.0.0.1:4723/wd/hub"));
+        Assert.assertTrue(mobileHubUrl.equalsIgnoreCase("http://ondemand.saucelabs.com:80/wd/hub"));
     }
 
     @Test
