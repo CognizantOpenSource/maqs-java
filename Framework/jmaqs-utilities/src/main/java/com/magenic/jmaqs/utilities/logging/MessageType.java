@@ -9,6 +9,11 @@ package com.magenic.jmaqs.utilities.logging;
  */
 public enum MessageType {
   /**
+   * Suspended message.
+   */
+  SUSPENDED,
+
+  /**
    * Error message.
    */
   ERROR,
@@ -24,12 +29,17 @@ public enum MessageType {
   SUCCESS,
 
   /**
-   * Informational message.
+   * Informational message - Our default message type.
    */
   INFORMATION,
 
   /**
-   * Generic message - Our default message type.
+   * Generic message.
    */
-  GENERIC;
+  GENERIC,
+
+  /**
+   * Verbose message.
+   */
+  VERBOSE
 }

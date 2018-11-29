@@ -28,14 +28,41 @@ public class LoggingConfig {
       case "NO":
         return LoggingEnabled.NO;
       default:
-        throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Log value %s is not a valid option", Config.getGeneralValue("Log", "NO")));
+        throw new IllegalArgumentException(StringProcessor.safeFormatter(
+                "Log value %s is not a valid option", Config.getGeneralValue("Log", "NO")));
+    }
+  }
+
+  /**
+   * Get our logging level
+   *
+   * @return MessageType - The current log level
+   */
+  public static MessageType getLoggingLevelSetting() {
+    switch (Config.getGeneralValue("LogLevel", "INFORMATION").toUpperCase()) {
+      case "VERBOSE":
+        return MessageType.VERBOSE;         // Includes this and all of those below
+      case "INFORMATION":
+        return MessageType.INFORMATION;     // Includes this and all of those below
+      case "GENERIC":
+        return MessageType.GENERIC;         // Includes this and all of those below
+      case "SUCCESS":
+        return MessageType.SUCCESS;         // Includes this and all of those below
+      case "WARNING":
+        return MessageType.WARNING;         // Includes this and all of those below
+      case "ERROR":
+        return MessageType.ERROR;           // Includes errors only
+      case "SUSPENDED":
+        return MessageType.SUSPENDED;       // All logging is suspended
+      default:
+        throw new IllegalArgumentException(StringProcessor.safeFormatter(
+                "Logging level value '{0}' is not a valid option", Config.getGeneralValue("LogLevel")));
     }
   }
 
   /**
    * Get the logger.
-   * 
+   *
    * @param fileName
    *          File name to use for the log
    * @return The logger
