@@ -1,3 +1,7 @@
+/*
+ * Copyright 2017 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.utilities.unitTests;
 
 import com.magenic.jmaqs.utilities.helper.Config;
