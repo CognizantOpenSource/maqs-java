@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.utilities.unitTests;
 
 import com.magenic.jmaqs.utilities.helper.Config;
+import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -26,7 +27,8 @@ public class LoggingConfigUnitTest {
         newValueMap.put("Log", "YES");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
-        Assert.assertEquals(LoggingEnabled.YES, LoggingConfig.getLoggingEnabledSetting());
+        Assert.assertEquals(LoggingConfig.getLoggingEnabledSetting(), LoggingEnabled.YES,
+                "Expected Logging Enabled Setting YES");
     }
 
     /**
@@ -39,7 +41,8 @@ public class LoggingConfigUnitTest {
         newValueMap.put("Log", "ONFAIL");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
-        Assert.assertEquals(LoggingEnabled.ONFAIL, LoggingConfig.getLoggingEnabledSetting());
+        Assert.assertEquals(LoggingConfig.getLoggingEnabledSetting(), LoggingEnabled.ONFAIL,
+                "Expected Logging Enabled Setting ONFAIL");
     }
 
     /**
@@ -52,7 +55,8 @@ public class LoggingConfigUnitTest {
         newValueMap.put("Log", "NO");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
-        Assert.assertEquals(LoggingEnabled.NO, LoggingConfig.getLoggingEnabledSetting());
+        Assert.assertEquals(LoggingConfig.getLoggingEnabledSetting(), LoggingEnabled.NO,
+                "Expected Logging Enabled Setting NO");
     }
 
     /**
@@ -65,7 +69,8 @@ public class LoggingConfigUnitTest {
         newValueMap.put("LogLevel", "VERBOSE");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
-        Assert.assertEquals(MessageType.VERBOSE, LoggingConfig.getLoggingLevelSetting());
+        Assert.assertEquals(MessageType.VERBOSE, LoggingConfig.getLoggingLevelSetting(),
+                "Expected Logging Level Setting VERBOSE");
     }
 
     /**
@@ -78,7 +83,8 @@ public class LoggingConfigUnitTest {
         newValueMap.put("LogLevel", "INFORMATION");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
-        Assert.assertEquals(MessageType.INFORMATION, LoggingConfig.getLoggingLevelSetting());
+        Assert.assertEquals(MessageType.INFORMATION, LoggingConfig.getLoggingLevelSetting(),
+                "Expected Logging Level Setting INFORMATION");
     }
 
     /**
@@ -91,7 +97,8 @@ public class LoggingConfigUnitTest {
         newValueMap.put("LogLevel", "GENERIC");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
-        Assert.assertEquals(MessageType.GENERIC, LoggingConfig.getLoggingLevelSetting());
+        Assert.assertEquals(MessageType.GENERIC, LoggingConfig.getLoggingLevelSetting(),
+                "Expected Logging Level Setting GENERIC");
     }
 
     /**
@@ -104,7 +111,8 @@ public class LoggingConfigUnitTest {
         newValueMap.put("LogLevel", "SUCCESS");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
-        Assert.assertEquals(MessageType.SUCCESS, LoggingConfig.getLoggingLevelSetting());
+        Assert.assertEquals(MessageType.SUCCESS, LoggingConfig.getLoggingLevelSetting(),
+                "Expected Logging Level Setting SUCCESS");
     }
 
     /**
@@ -117,7 +125,8 @@ public class LoggingConfigUnitTest {
         newValueMap.put("LogLevel", "WARNING");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
-        Assert.assertEquals(MessageType.WARNING, LoggingConfig.getLoggingLevelSetting());
+        Assert.assertEquals(MessageType.WARNING, LoggingConfig.getLoggingLevelSetting(),
+                "Expected Logging Level Setting WARNING");
     }
 
     /**
@@ -130,7 +139,8 @@ public class LoggingConfigUnitTest {
         newValueMap.put("LogLevel", "SUSPENDED");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
-        Assert.assertEquals(MessageType.SUSPENDED, LoggingConfig.getLoggingLevelSetting());
+        Assert.assertEquals(MessageType.SUSPENDED, LoggingConfig.getLoggingLevelSetting(),
+                "Expected Logging Level Setting SUSPENDED");
     }
 
     /**
@@ -187,6 +197,7 @@ public class LoggingConfigUnitTest {
     @Test
     public void getLogDirectoryTest() {
         String defaultPath = new File("").getAbsolutePath().concat("\\Logs");
-        Assert.assertEquals(defaultPath, LoggingConfig.getLogDirectory());
+        Assert.assertEquals(LoggingConfig.getLogDirectory(), defaultPath, StringProcessor.safeFormatter(
+            "Expected Default Path '{0)'", defaultPath));
     }
 }
