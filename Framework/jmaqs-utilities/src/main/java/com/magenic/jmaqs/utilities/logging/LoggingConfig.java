@@ -34,9 +34,9 @@ public class LoggingConfig {
   }
 
   /**
-   * Get our logging level
+   * Get our logging level.
    *
-   * @return MessageType - The current log level
+   * @return MessageType - The current log level.
    */
   public static MessageType getLoggingLevelSetting() {
     switch (Config.getGeneralValue("LogLevel", "INFORMATION").toUpperCase()) {
