@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 /**
  * Logging Configuration unit test class.
+ * Tests running in serial.
  */
 @Test(singleThreaded = true)
 public class LoggingConfigUnitTest {
@@ -30,6 +31,7 @@ public class LoggingConfigUnitTest {
         Assert.assertEquals(LoggingConfig.getLoggingEnabledSetting(), LoggingEnabled.YES,
                 "Expected Logging Enabled Setting YES.");
     }
+
     /**
      * Test getting Logging Enabled Setting.
      * Override Config to 'ONFAIL'
@@ -42,6 +44,7 @@ public class LoggingConfigUnitTest {
         Assert.assertEquals(LoggingConfig.getLoggingEnabledSetting(), LoggingEnabled.ONFAIL,
                 "Expected Logging Enabled Setting ONFAIL.");
     }
+
     /**
      * Test getting Logging Enabled Setting.
      * Override Config to 'NO'
@@ -54,6 +57,20 @@ public class LoggingConfigUnitTest {
         Assert.assertEquals(LoggingConfig.getLoggingEnabledSetting(), LoggingEnabled.NO,
                 "Expected Logging Enabled Setting NO.");
     }
+
+    /**
+     * Test getting Logging Enabled Setting with an Illegal Argument
+     * Override Config to 'INVALIDVALUE' - Expect IllegalArgumentException
+     */
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void getLoggingSettingIllegalArgumentTest() {
+        HashMap<String, String> newValueMap = new HashMap();
+        newValueMap.put("Log", "INVALIDVALUE");
+        Config.addGeneralTestSettingValues(newValueMap, true);
+
+        LoggingConfig.getLoggingEnabledSetting();
+    }
+
     /**
      * Test getting Logging Level Setting.
      * Override Config to 'VERBOSE'
@@ -66,6 +83,7 @@ public class LoggingConfigUnitTest {
         Assert.assertEquals(MessageType.VERBOSE, LoggingConfig.getLoggingLevelSetting(),
                 "Expected Logging Level Setting VERBOSE.");
     }
+
     /**
      * Test getting Logging Level Setting.
      * Override Config to 'INFORMATION'
@@ -78,6 +96,7 @@ public class LoggingConfigUnitTest {
         Assert.assertEquals(MessageType.INFORMATION, LoggingConfig.getLoggingLevelSetting(),
                 "Expected Logging Level Setting INFORMATION.");
     }
+
     /**
      * Test getting Logging Level Setting.
      * Override Config to 'GENERIC'
@@ -90,6 +109,7 @@ public class LoggingConfigUnitTest {
         Assert.assertEquals(MessageType.GENERIC, LoggingConfig.getLoggingLevelSetting(),
                 "Expected Logging Level Setting GENERIC.");
     }
+
     /**
      * Test getting Logging Level Setting.
      * Override Config to 'SUCCESS'
@@ -102,6 +122,7 @@ public class LoggingConfigUnitTest {
         Assert.assertEquals(MessageType.SUCCESS, LoggingConfig.getLoggingLevelSetting(),
                 "Expected Logging Level Setting SUCCESS.");
     }
+
     /**
      * Test getting Logging Level Setting.
      * Override Config to 'WARNING'
@@ -114,6 +135,20 @@ public class LoggingConfigUnitTest {
         Assert.assertEquals(MessageType.WARNING, LoggingConfig.getLoggingLevelSetting(),
                 "Expected Logging Level Setting WARNING.");
     }
+
+    /**
+     * Test getting Logging Level Setting.
+     * Override Config to 'ERROR'
+     */
+    @Test
+    public void getLoggingLevelErrorSettingTest() {
+        HashMap<String, String> newValueMap = new HashMap();
+        newValueMap.put("LogLevel", "ERROR");
+        Config.addGeneralTestSettingValues(newValueMap, true);
+        Assert.assertEquals(MessageType.ERROR, LoggingConfig.getLoggingLevelSetting(),
+                "Expected Logging Level Setting ERROR.");
+    }
+
     /**
      * Test getting Logging Level Setting.
      * Override Config to 'SUSPENDED'
@@ -126,6 +161,20 @@ public class LoggingConfigUnitTest {
         Assert.assertEquals(MessageType.SUSPENDED, LoggingConfig.getLoggingLevelSetting(),
                 "Expected Logging Level Setting SUSPENDED.");
     }
+
+    /**
+     * Test getting Logging Level Setting with Illegal Argument.
+     * Override Config to 'INVALIDVALUE' - Expect IllegalArgumentException
+     */
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void getLoggingLevelIllegalArgumentTest() {
+        HashMap<String, String> newValueMap = new HashMap();
+        newValueMap.put("LogLevel", "INVALIDVALUE");
+        Config.addGeneralTestSettingValues(newValueMap, true);
+
+        LoggingConfig.getLoggingLevelSetting();
+    }
+
     /**
      * Test getting File Logger.
      * Override Config LogType to 'TXT' which creates FileLogger.
@@ -140,6 +189,7 @@ public class LoggingConfigUnitTest {
         Logger logger = LoggingConfig.getLogger(fileName);
         Assert.assertTrue(logger instanceof FileLogger, "Expected Logger to be of Type FileLogger.");
     }
+
     /**
      * Test getting File Logger.
      * Override Config LogType to 'CONSOLE' which creates ConsoleLogger.
@@ -154,6 +204,7 @@ public class LoggingConfigUnitTest {
         Logger logger = LoggingConfig.getLogger(fileName);
         Assert.assertTrue(logger instanceof ConsoleLogger, "Expected Logger to be of Type ConsoleLogger.");
     }
+
     /**
      * Test getting File Logger.
      * Override Config Log to 'NO' which creates ConsoleLogger by default.
@@ -167,6 +218,7 @@ public class LoggingConfigUnitTest {
         Logger logger = LoggingConfig.getLogger(fileName);
         Assert.assertTrue(logger instanceof ConsoleLogger, "Expected Logger to be of Type ConsoleLogger.");
     }
+
     /**
      * Test getting Log Directory.
      * Config value not defined - Compare to Default Path.
