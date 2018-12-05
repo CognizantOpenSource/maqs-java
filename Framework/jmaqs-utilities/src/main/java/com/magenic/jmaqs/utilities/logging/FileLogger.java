@@ -17,9 +17,7 @@ import java.nio.file.Paths;
 
 /**
  * Helper class for adding logs to a plain text file. Allows configurable file path.
- *
  */
-
 public class FileLogger extends Logger {
   /**
    * The default log file save location.
@@ -47,10 +45,15 @@ public class FileLogger extends Logger {
   private String directory;
 
   /**
+   * Gets the File Extension.
+   */
+  protected String extension = ".txt";
+
+  /**
    * Initializes a new instance of the FileLogger class.
    */
   public FileLogger() {
-    this(false, "", DEFAULTLOGNAME);
+    this(false, "", DEFAULTLOGNAME, MessageType.INFORMATION);
   }
 
   /**
@@ -60,7 +63,7 @@ public class FileLogger extends Logger {
    *          Append document if true
    */
   public FileLogger(boolean append) {
-    this(append, "", DEFAULTLOGNAME);
+    this(append, "", DEFAULTLOGNAME, MessageType.INFORMATION);
   }
 
   /**
@@ -70,7 +73,17 @@ public class FileLogger extends Logger {
    *          Where log files should be saved
    */
   public FileLogger(String logFolder) {
-    this(false, logFolder, DEFAULTLOGNAME);
+    this(false, logFolder, DEFAULTLOGNAME, MessageType.INFORMATION);
+  }
+
+  /**
+   * Initializes a new instance of the FileLogger class.
+   *
+   * @param messageLevel
+   *          Messaging Level
+   */
+  public FileLogger(MessageType messageLevel) {
+        this(false, "", DEFAULTLOGNAME, messageLevel);
   }
 
   /**
@@ -82,7 +95,7 @@ public class FileLogger extends Logger {
    *          Where log files should be saved
    */
   public FileLogger(boolean append, String logFolder) {
-    this(append, logFolder, DEFAULTLOGNAME);
+    this(append, logFolder, DEFAULTLOGNAME, MessageType.INFORMATION);
   }
 
   /**
@@ -94,12 +107,36 @@ public class FileLogger extends Logger {
    *          File Name
    */
   public FileLogger(String logFolder, String name) {
-    this(false, logFolder, name);
+    this(false, logFolder, name, MessageType.INFORMATION);
   }
 
   /**
    * Initializes a new instance of the FileLogger class.
-   * 
+   *
+   * @param logFolder
+   *          Where log files should be saved
+   * @param messageLevel
+   *          Messaging Level
+   */
+  public FileLogger(String logFolder, MessageType messageLevel) {
+      this(false, logFolder, DEFAULTLOGNAME, messageLevel);
+  }
+
+  /**
+   * Initializes a new instance of the FileLogger class.
+   *
+   * @param messageLevel
+   *          Messaging Level
+   * @param name
+   *          File Name
+   */
+  public FileLogger(MessageType messageLevel, String name) {
+      this(false, "", name, messageLevel);
+  }
+
+  /**
+   * Initializes a new instance of the FileLogger class.
+   *
    * @param append
    *          Append document if true
    * @param logFolder
@@ -108,6 +145,67 @@ public class FileLogger extends Logger {
    *          File Name
    */
   public FileLogger(boolean append, String logFolder, String name) {
+      this(append, logFolder, name, MessageType.INFORMATION);
+  }
+
+  /**
+   * Initializes a new instance of the FileLogger class.
+   *
+   * @param append
+   *          Append document if true
+   * @param logFolder
+   *          Where log files should be saved
+   * @param messageLevel
+   *          Messaging Level
+   */
+  public FileLogger(boolean append, String logFolder, MessageType messageLevel) {
+      this(append, logFolder, DEFAULTLOGNAME, messageLevel);
+  }
+
+  /**
+   * Initializes a new instance of the FileLogger class.
+   *
+   * @param name
+   *          File Name
+   * @param append
+   *          Append document if true
+   * @param messageLevel
+   *          Messaging Level
+   */
+  public FileLogger(String name, boolean append, MessageType messageLevel) {
+      this(append, "", name, messageLevel);
+  }
+
+  /**
+   * Initializes a new instance of the FileLogger class.
+   *
+   * @param logFolder
+   *          Where log files should be saved
+   * @param name
+   *          File Name
+   * @param messageLevel
+   *          Messaging Level
+   */
+  public FileLogger(String logFolder, String name, MessageType messageLevel) {
+      this(false, logFolder, name, messageLevel);
+  }
+
+  /**
+   * Initializes a new instance of the FileLogger class.
+   *
+   * @param append
+   *          True to append to an existing log file or false to overwrite it.
+   *          If the file does not exist this, flag will have no affect.
+   * @param logFolder
+   *          Where log files should be saved
+   * @param name
+   *          File Name
+   * @param messageLevel
+   *          Messaging Level
+     */
+  public FileLogger(boolean append, String logFolder, String name, MessageType messageLevel) {
+    super(messageLevel);
+
     if (logFolder == null || logFolder.isEmpty()) {
       this.directory = DEFAULTLOGFOLDER;
     } else {
@@ -121,11 +219,26 @@ public class FileLogger extends Logger {
 
     this.append = append;
 
-    if (!name.toLowerCase().endsWith(".txt")) {
-      name += ".txt";
+    if (!name.toLowerCase().endsWith(this.extension)) {
+      name += this.extension;
     }
 
     this.filePath = Paths.get(this.directory, makeValidFileName(name)).toString();
+
+    File file = new File(this.filePath);
+    if (file.exists() && !this.append) {
+      try {
+        FileWriter writer = new FileWriter(this.filePath, false);
+        writer.write("");
+        writer.flush();
+        writer.close();
+      } catch (Exception e) {
+        // Failed to write to the event log, write error to the console instead
+        ConsoleLogger console = new ConsoleLogger();
+        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
+                "Failed to write to event log because: {0}", e.getMessage()));
+      }
+    }
   }
 
   /**
@@ -141,7 +254,7 @@ public class FileLogger extends Logger {
    * Sets a value indicating whether to append the value.
    * 
    * @param bol
-   *          sets this.append to true or false
+   *          sets append to true or false
    */
   public void setAppend(boolean bol) {
     this.append = bol;
@@ -174,7 +287,7 @@ public class FileLogger extends Logger {
    */
   @Override
   public void logMessage(String message, Object... args) {
-    this.logMessage(MessageType.GENERIC, message, args);
+    this.logMessage(MessageType.INFORMATION, message, args);
   }
 
   /*
@@ -189,25 +302,28 @@ public class FileLogger extends Logger {
     BufferedWriter bw;
     PrintWriter writer;
 
-    try {
-      fw = new FileWriter(this.filePath, this.append);
-      bw = new BufferedWriter(fw);
-      writer = new PrintWriter(bw);
-      writer.println(
-          StringProcessor.safeFormatter("%s%s", Config.NEW_LINE, System.currentTimeMillis()));
-      writer.print(StringProcessor.safeFormatter("%s:\t", messageType.toString()));
+    // If the message level is greater that the current log level then do not log it.
+    if (this.shouldMessageBeLogged(messageType)) {
+      try {
+        fw = new FileWriter(this.filePath, this.append);
+        bw = new BufferedWriter(fw);
+        writer = new PrintWriter(bw);
+        writer.println(
+                StringProcessor.safeFormatter("%s%s", Config.NEW_LINE, System.currentTimeMillis()));
+        writer.print(StringProcessor.safeFormatter("%s:\t", messageType.toString()));
 
-      writer.println(StringProcessor.safeFormatter(message, args));
+        writer.println(StringProcessor.safeFormatter(message, args));
 
-      writer.flush();
-      writer.close();
-    } catch (IOException e) {
-      // Failed to write to the event log, write error to the console
-      // instead
-      ConsoleLogger console = new ConsoleLogger();
-      console.logMessage(MessageType.ERROR,
-          StringProcessor.safeFormatter("Failed to write to event log because: %s", e));
-      console.logMessage(messageType, message, args);
+        writer.flush();
+        writer.close();
+      } catch (IOException e) {
+        // Failed to write to the event log, write error to the console
+        // instead
+        ConsoleLogger console = new ConsoleLogger();
+        console.logMessage(MessageType.ERROR,
+                StringProcessor.safeFormatter("Failed to write to event log because: %s", e));
+        console.logMessage(messageType, message, args);
+      }
     }
   }
 
@@ -221,7 +337,7 @@ public class FileLogger extends Logger {
   private static String makeValidFileName(String name) {
     try {
       if (name == null || name.isEmpty()) {
-        throw new Exception();
+        throw new Exception("Blank file name was provided");
       }
     } catch (Exception e) {
       System.out.println("Blank file name was provide");
