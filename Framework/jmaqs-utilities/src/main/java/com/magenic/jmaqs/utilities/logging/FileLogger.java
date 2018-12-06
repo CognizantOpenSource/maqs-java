@@ -30,6 +30,11 @@ public class FileLogger extends Logger {
   private static final String DEFAULTLOGNAME = "FileLog.txt";
 
   /**
+   * Creates a private string for the name of the file.
+   */
+  private String fileName;
+
+  /**
    * Creates a private boolean of append.
    */
   private boolean append;
@@ -38,6 +43,11 @@ public class FileLogger extends Logger {
    * Create a private string for the path of the file.
    */
   private String filePath;
+
+  /**
+   * Creates a private Message Type.
+   */
+  private MessageType messageType;
 
   /**
    * Creates a private string for the directory of the folder.
@@ -69,11 +79,11 @@ public class FileLogger extends Logger {
   /**
    * Initializes a new instance of the FileLogger class.
    * 
-   * @param logFolder
-   *          Where log files should be saved
+   * @param name
+   *          File name
    */
-  public FileLogger(String logFolder) {
-    this(false, logFolder, DEFAULTLOGNAME, MessageType.INFORMATION);
+  public FileLogger(String name) {
+    this(false, DEFAULTLOGFOLDER, name, MessageType.INFORMATION);
   }
 
   /**
@@ -83,7 +93,7 @@ public class FileLogger extends Logger {
    *          Messaging Level
    */
   public FileLogger(MessageType messageLevel) {
-        this(false, "", DEFAULTLOGNAME, messageLevel);
+        this(false, DEFAULTLOGFOLDER, DEFAULTLOGNAME, messageLevel);
   }
 
   /**
@@ -91,11 +101,23 @@ public class FileLogger extends Logger {
    * 
    * @param append
    *          Append document if true
+   * @param name
+   *          File name
+   */
+  public FileLogger(boolean append, String name) {
+    this(append, DEFAULTLOGFOLDER, name, MessageType.INFORMATION);
+  }
+
+  /**
+   * Initializes a new instance of the FileLogger class.
+   *
    * @param logFolder
    *          Where log files should be saved
+   * @param append
+   *          Append document if true
    */
-  public FileLogger(boolean append, String logFolder) {
-    this(append, logFolder, DEFAULTLOGNAME, MessageType.INFORMATION);
+  public FileLogger(String logFolder, boolean append) {
+        this(append, logFolder, DEFAULTLOGNAME, MessageType.INFORMATION);
   }
 
   /**
@@ -125,13 +147,25 @@ public class FileLogger extends Logger {
   /**
    * Initializes a new instance of the FileLogger class.
    *
+   * @param append
+   *          Append document if true
+   * @param messageLevel
+   *          Messaging Level
+   */
+  public FileLogger(boolean append, MessageType messageLevel) {
+    this(append, DEFAULTLOGFOLDER, DEFAULTLOGNAME, messageLevel);
+  }
+
+  /**
+   * Initializes a new instance of the FileLogger class.
+   *
    * @param messageLevel
    *          Messaging Level
    * @param name
    *          File Name
    */
   public FileLogger(MessageType messageLevel, String name) {
-      this(false, "", name, messageLevel);
+      this(false, DEFAULTLOGFOLDER, name, messageLevel);
   }
 
   /**
@@ -173,7 +207,7 @@ public class FileLogger extends Logger {
    *          Messaging Level
    */
   public FileLogger(String name, boolean append, MessageType messageLevel) {
-      this(append, "", name, messageLevel);
+      this(append, DEFAULTLOGFOLDER, name, messageLevel);
   }
 
   /**
@@ -223,7 +257,9 @@ public class FileLogger extends Logger {
       name += this.extension;
     }
 
+    this.fileName = name;
     this.filePath = Paths.get(this.directory, makeValidFileName(name)).toString();
+    this.messageType = messageLevel;
 
     File file = new File(this.filePath);
     if (file.exists() && !this.append) {
@@ -270,6 +306,26 @@ public class FileLogger extends Logger {
   }
 
   /**
+   * Gets the Message Type value.
+   *
+   * @return
+   *          The Message Type.
+   */
+  public MessageType getMessageType() {
+    return this.messageType;
+  }
+
+  /**
+   * Gets the Directory Path.
+   *
+   * @return
+   *          Returns the Directory
+   */
+  public String getDirectory() {
+    return this.directory;
+  }
+
+  /**
    * Sets the FilePath value.
    * 
    * @param path
@@ -277,6 +333,16 @@ public class FileLogger extends Logger {
    */
   public void setFilePath(String path) {
     this.filePath = path;
+  }
+
+  /**
+   * Gets the File Name value.
+   *
+   * @return
+   *          Returns the File Name.
+   */
+  public String getFileName() {
+    return this.fileName;
   }
 
   /*
