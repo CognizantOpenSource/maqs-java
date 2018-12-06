@@ -22,7 +22,7 @@ public class FileLogger extends Logger {
   /**
    * The default log file save location.
    */
-  protected static final String DEFAULTLOGFOLDER = System.getProperty("java.io.tmpdir");
+  private static final String DEFAULTLOGFOLDER = System.getProperty("java.io.tmpdir");
 
   /**
    * Initializes a new instance of the FileLogger class.
@@ -57,7 +57,7 @@ public class FileLogger extends Logger {
   /**
    * Gets the File Extension.
    */
-  protected String extension = ".txt";
+  private String extension = ".txt";
 
   /**
    * Initializes a new instance of the FileLogger class.
@@ -246,7 +246,7 @@ public class FileLogger extends Logger {
       this.directory = logFolder;
     }
 
-    if (!Files.exists(Paths.get(this.directory))) {
+    if (!Paths.get(this.directory).toFile().exists()) {
       File dir = new File(this.directory);
       dir.mkdir();
     }
@@ -403,9 +403,9 @@ public class FileLogger extends Logger {
   private static String makeValidFileName(String name) {
     try {
       if (name == null || name.isEmpty()) {
-        throw new Exception("Blank file name was provided");
+        throw new IllegalArgumentException("Blank or null file name was provided");
       }
-    } catch (Exception e) {
+    } catch (IllegalArgumentException e) {
       System.out.println("Blank file name was provide");
     }
 
