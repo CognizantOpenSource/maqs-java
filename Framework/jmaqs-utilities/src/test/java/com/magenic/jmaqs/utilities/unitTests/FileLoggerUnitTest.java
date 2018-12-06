@@ -229,9 +229,6 @@ public class FileLoggerUnitTest {
     logger.setFilePath("<>");
 
     logger.logMessage(MessageType.GENERIC, "test throws error");
-
-    File file = new File(logger.getFilePath());
-    file.delete();
   }
 
   /**

@@ -261,26 +261,19 @@ public class FileLogger extends Logger {
     this.filePath = Paths.get(this.directory, makeValidFileName(name)).toString();
     this.messageType = messageLevel;
 
+    FileWriter writer = null;
     File file = new File(this.filePath);
     if (file.exists() && !this.append) {
-      FileWriter writer = null;
       try {
         writer = new FileWriter(this.filePath, false);
         writer.write("");
+        writer.flush();
+        writer.close();
       } catch (IOException e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
                 "Failed to write to event log because: {0}", e.getMessage()));
-      } finally {
-        try {
-          writer.flush();
-          writer.close();
-        } catch (Exception e) {
-          ConsoleLogger console = new ConsoleLogger();
-          console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-                  "Failed to write to event log because: {0}", e.getMessage()));
-        }
       }
     }
   }
@@ -374,7 +367,7 @@ public class FileLogger extends Logger {
   public void logMessage(MessageType messageType, String message, Object... args) {
     FileWriter fw;
     BufferedWriter bw;
-    PrintWriter writer = null;
+    PrintWriter writer;
 
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
@@ -387,6 +380,8 @@ public class FileLogger extends Logger {
         writer.print(StringProcessor.safeFormatter("%s:\t", messageType.toString()));
 
         writer.println(StringProcessor.safeFormatter(message, args));
+        writer.flush();
+        writer.close();
       } catch (IOException e) {
         // Failed to write to the event log, write error to the console
         // instead
@@ -394,15 +389,6 @@ public class FileLogger extends Logger {
         console.logMessage(MessageType.ERROR,
                 StringProcessor.safeFormatter("Failed to write to event log because: %s", e));
         console.logMessage(messageType, message, args);
-      } finally {
-        try {
-          writer.flush();
-          writer.close();
-        } catch (Exception e) {
-          ConsoleLogger console = new ConsoleLogger();
-          console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-                  "Failed to write to event log because: {0}", e.getMessage()));
-        }
       }
     }
   }
