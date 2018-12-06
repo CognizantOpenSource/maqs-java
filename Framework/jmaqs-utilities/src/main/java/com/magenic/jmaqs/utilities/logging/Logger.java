@@ -113,18 +113,4 @@ public abstract class Logger {
     // The message should be logged if it's level is less than or equal to the current logging level
     return messageType.getValue() <= this.logLevel.getValue();
   }
-
-  /**
-   * Get the message for an unkown message type
-   *
-   * @param type
-   *          The Message Type.
-   * @return
-   *          The unknown Message Type.
-   */
-  protected String unknownMessageTypeMessage(MessageType type) {
-    return StringProcessor.safeFormatter("Unknown MessageType: %s%s%s%s", type.name(),
-        Config.NEW_LINE, "Message will be displayed with the MessageType of: ", type.name(),
-        MessageType.GENERIC);
-  }
 }
