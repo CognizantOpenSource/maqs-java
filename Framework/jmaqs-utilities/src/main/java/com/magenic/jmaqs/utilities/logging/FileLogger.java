@@ -267,7 +267,7 @@ public class FileLogger extends Logger {
       try {
         writer = new FileWriter(this.filePath, false);
         writer.write("");
-      } catch (Exception e) {
+      } catch (IOException e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
@@ -372,8 +372,8 @@ public class FileLogger extends Logger {
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
-    FileWriter fw = null;
-    BufferedWriter bw = null;
+    FileWriter fw;
+    BufferedWriter bw;
     PrintWriter writer = null;
 
     // If the message level is greater that the current log level then do not log it.
@@ -396,10 +396,6 @@ public class FileLogger extends Logger {
         console.logMessage(messageType, message, args);
       } finally {
         try {
-          fw.flush();
-          fw.close();
-          bw.flush();
-          bw.close();
           writer.flush();
           writer.close();
         } catch (Exception e) {

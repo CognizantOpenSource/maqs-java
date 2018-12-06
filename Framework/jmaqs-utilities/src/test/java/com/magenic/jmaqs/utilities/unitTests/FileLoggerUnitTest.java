@@ -25,6 +25,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * Unit test class for FileLogger.java
  */
+@Test(singleThreaded = true)
 public class FileLoggerUnitTest {
   @DataProvider(name = "logLevels")
   public static Object[][] data() {
@@ -95,8 +96,8 @@ public class FileLoggerUnitTest {
   public void fileLoggerAppendFileTest() {
     FileLogger logger = new FileLogger(true, "", "WriteToExistingFileLogger");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
-    File file1 = new File(logger.getFilePath());
-    file1.delete();
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -138,6 +139,9 @@ public class FileLoggerUnitTest {
 
     // Fail the test if any soft asserts failed
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -181,7 +185,7 @@ public class FileLoggerUnitTest {
             "Test to ensure that the file in the created directory can be written to."));
     file.delete();
 
-    file = new File(logger.getDirectory());
+    file = new File(LoggingConfig.getLogDirectory());
     try {
       FileUtils.deleteDirectory(file);
     } catch (IOException e) {
@@ -211,6 +215,9 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger(true, "", "FileLoggerSetFilePath", MessageType.GENERIC);
     logger.setFilePath("test file path");
     Assert.assertEquals(logger.getFilePath(), "test file path");
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -222,6 +229,9 @@ public class FileLoggerUnitTest {
     logger.setFilePath("<>");
 
     logger.logMessage(MessageType.GENERIC, "test throws error");
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -239,6 +249,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -256,6 +269,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -274,6 +290,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -291,6 +310,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -308,6 +330,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -325,6 +350,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -342,6 +370,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -359,6 +390,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -376,6 +410,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -393,6 +430,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -411,6 +451,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -429,6 +472,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -448,6 +494,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -467,6 +516,9 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     softAssert.assertAll();
+
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
