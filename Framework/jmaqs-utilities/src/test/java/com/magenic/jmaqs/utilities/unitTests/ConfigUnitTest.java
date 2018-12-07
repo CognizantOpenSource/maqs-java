@@ -63,17 +63,24 @@ public class ConfigUnitTest {
     newValueMap.put("DontBrowserOverride", "CHROME");
     newValueMap.put("DontTimeoutOverride", "13333333");
 
-    Config.addGeneralTestSettingValues(newValueMap, false);
-    Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "FireFox");
-    Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "13.52");
-
     HashMap<String, String> newValueMapTwo = new HashMap();
-    newValueMapTwo.put("DontBrowserOverride", "OverrideOverrideValue");
+    newValueMapTwo.put("DontBrowserOverride", "IE");
+    newValueMapTwo.put("DontTimeoutOverride", "5555");
 
-    Config.addGeneralTestSettingValues(newValueMap, true);
+    // add values to the override config since the values don't exist in the override config
+    Config.addGeneralTestSettingValues(newValueMap, false);
+    Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "CHROME");
+    Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "13333333");
+
+    // don't add the values to the override config since the values do exist in the override config
     Config.addGeneralTestSettingValues(newValueMapTwo, false);
     Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "CHROME");
+    Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "13333333");
 
+    // do add the values because of the override flag
+    Config.addGeneralTestSettingValues(newValueMapTwo, true);
+    Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "IE");
+    Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "5555");
   }
 
   /**
