@@ -375,8 +375,8 @@ public class FileLogger extends Logger {
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
-    FileWriter fw;
-    BufferedWriter bw;
+    FileWriter fw = null;
+    BufferedWriter bw = null;
     PrintWriter writer = null;
 
     // If the message level is greater that the current log level then do not log it.
@@ -400,6 +400,24 @@ public class FileLogger extends Logger {
       } finally {
         if (writer != null) {
           writer.close();
+        }
+        if (fw != null) {
+          try {
+            fw.close();
+          } catch (IOException i) {
+            ConsoleLogger console = new ConsoleLogger();
+            console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
+                      "Failed to close FileWriter: {0}", i.getMessage()));
+          }
+        }
+        if (bw != null) {
+          try {
+            bw.close();
+          } catch (IOException i) {
+            ConsoleLogger console = new ConsoleLogger();
+            console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
+                    "Failed to close BufferedWriter: {0}", i.getMessage()));
+          }
         }
       }
     }
