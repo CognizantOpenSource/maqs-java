@@ -146,7 +146,7 @@ public final class Config {
                                           boolean overrideExisting) {
     for (Map.Entry<String, String> entry : configurations.entrySet()) {
       String sectionedKey =  section + "." + entry.getKey();
-      if (overrideExisting || !(overrideConfig.containsKey(sectionedKey) || configValues.containsKey(sectionedKey))) {
+      if (!overrideConfig.containsKey(sectionedKey) || overrideExisting) {
         overrideConfig.setProperty(sectionedKey, entry.getValue());
       }
     }
