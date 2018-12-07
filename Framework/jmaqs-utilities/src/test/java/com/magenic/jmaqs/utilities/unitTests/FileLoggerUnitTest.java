@@ -231,6 +231,12 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.GENERIC, "test throws error");
   }
 
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void FileLoggerEmptyFileNameException() {
+    FileLogger logger = new FileLogger("");
+
+  }
+
   /**
    * Verify File Logger with No Parameters assigns the correct default values.
    */

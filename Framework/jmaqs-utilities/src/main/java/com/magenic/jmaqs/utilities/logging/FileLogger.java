@@ -252,13 +252,14 @@ public class FileLogger extends Logger {
     }
 
     this.append = append;
+    name = makeValidFileName(name);
 
     if (!name.toLowerCase().endsWith(this.extension)) {
       name += this.extension;
     }
 
     this.fileName = name;
-    this.filePath = Paths.get(this.directory, makeValidFileName(name)).toString();
+    this.filePath = Paths.get(this.directory, name).toString();
     this.messageType = messageLevel;
 
     FileWriter writer = null;
@@ -268,12 +269,21 @@ public class FileLogger extends Logger {
         writer = new FileWriter(this.filePath, false);
         writer.write("");
         writer.flush();
-        writer.close();
       } catch (IOException e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
                 "Failed to write to event log because: {0}", e.getMessage()));
+      } finally {
+        if (writer != null) {
+          try {
+            writer.close();
+          } catch (IOException i) {
+            ConsoleLogger console = new ConsoleLogger();
+            console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
+                      "Failed to close FileWriter: {0}", i.getMessage()));
+          }
+        }
       }
     }
   }
@@ -367,7 +377,7 @@ public class FileLogger extends Logger {
   public void logMessage(MessageType messageType, String message, Object... args) {
     FileWriter fw;
     BufferedWriter bw;
-    PrintWriter writer;
+    PrintWriter writer = null;
 
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
@@ -381,14 +391,16 @@ public class FileLogger extends Logger {
 
         writer.println(StringProcessor.safeFormatter(message, args));
         writer.flush();
-        writer.close();
       } catch (IOException e) {
-        // Failed to write to the event log, write error to the console
-        // instead
+        // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR,
                 StringProcessor.safeFormatter("Failed to write to event log because: %s", e));
         console.logMessage(messageType, message, args);
+      } finally {
+        if (writer != null) {
+          writer.close();
+        }
       }
     }
   }
@@ -401,13 +413,8 @@ public class FileLogger extends Logger {
    * @return returns the string of a valid filename
    */
   private static String makeValidFileName(String name) {
-    try {
-      if (name == null || name.isEmpty()) {
-        throw new IllegalArgumentException("Blank or null file name was provided");
-      }
-    } catch (IllegalArgumentException e) {
-      ConsoleLogger console = new ConsoleLogger();
-      console.logMessage(MessageType.ERROR, "Blank or Null File Name was provided.");
+    if (name == null || name.isEmpty()) {
+      throw new IllegalArgumentException("Blank or null file name was provided");
     }
 
     // Replace invalid characters
