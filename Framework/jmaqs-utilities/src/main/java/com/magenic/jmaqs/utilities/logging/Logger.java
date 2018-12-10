@@ -4,9 +4,6 @@
 
 package com.magenic.jmaqs.utilities.logging;
 
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-
 /**
  * Abstract logging interface base class.
  */

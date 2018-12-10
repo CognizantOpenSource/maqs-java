@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
@@ -33,11 +32,6 @@ public class FileLogger extends Logger {
    * Creates a private string for the name of the file.
    */
   private String fileName;
-
-  /**
-   * Creates a private boolean of append.
-   */
-  private boolean append;
 
   /**
    * Create a private string for the path of the file.
@@ -251,7 +245,6 @@ public class FileLogger extends Logger {
       dir.mkdir();
     }
 
-    this.append = append;
     name = makeValidFileName(name);
 
     if (!name.toLowerCase().endsWith(this.extension)) {
@@ -264,7 +257,7 @@ public class FileLogger extends Logger {
 
     FileWriter writer = null;
     File file = new File(this.filePath);
-    if (file.exists() && !this.append) {
+    if (file.exists() && !append) {
       try {
         writer = new FileWriter(this.filePath, false);
         writer.write("");
@@ -286,25 +279,6 @@ public class FileLogger extends Logger {
         }
       }
     }
-  }
-
-  /**
-   * Gets a value indicating whether to append the value.
-   * 
-   * @return a boolean
-   */
-  public boolean getAppend() {
-    return this.append;
-  }
-
-  /**
-   * Sets a value indicating whether to append the value.
-   * 
-   * @param bol
-   *          sets append to true or false
-   */
-  public void setAppend(boolean bol) {
-    this.append = bol;
   }
 
   /**
@@ -382,7 +356,7 @@ public class FileLogger extends Logger {
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
       try {
-        fw = new FileWriter(this.filePath, this.append);
+        fw = new FileWriter(this.filePath, true);
         bw = new BufferedWriter(fw);
         writer = new PrintWriter(bw);
         writer.println(

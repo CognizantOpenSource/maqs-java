@@ -71,7 +71,7 @@ public class FileLoggerUnitTest {
   @Test(dataProvider = "logLevels")
   public void testHierarchicalTxtFileLogger(String logLevel, HashMap<String, Boolean> levels) {
     FileLogger logger = new FileLogger(true, LoggingConfig.getLogDirectory(),
-            this.getFileName("TestHierarchicalTxtFileLogger" + logLevel, "txt"), MessageType.GENERIC);
+            this.getFileName("TestHierarchicalTxtFileLogger_" + logLevel, "txt"), MessageType.GENERIC);
     this.testHierarchicalLogging(logger, logger.getFilePath(), logLevel, levels);
 
     File file = new File(logger.getFilePath());
@@ -131,7 +131,7 @@ public class FileLoggerUnitTest {
 
     // Verify that logging was suspended
     boolean goodbyeFound = logContents.contains("GoodByE");
-    softAssert.assertFalse(goodbyeFound, "'GoodByE' was not found.  Logging Failed");
+    softAssert.assertFalse(goodbyeFound, "'GoodByE' was found when it should not be written.  Logging Failed");
 
     // Verify that logging was active
     boolean backFound = logContents.contains("BacK");
@@ -177,7 +177,7 @@ public class FileLoggerUnitTest {
   public void FileLoggerConstructorCreateDirectory()
   {
     FileLogger logger = new FileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
-            "FileLoggerCreateDirectory").toString(), "FileLoggerCreateDirectory", MessageType.GENERIC);
+            "FileLoggerCreateDirectoryDelete").toString(), "FileLoggerCreateDirectory", MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "Test to ensure that the file in the created directory can be written to.");
 
     File file = new File(logger.getFilePath());
@@ -185,7 +185,7 @@ public class FileLoggerUnitTest {
             "Test to ensure that the file in the created directory can be written to."));
     file.delete();
 
-    file = new File(LoggingConfig.getLogDirectory());
+    file = new File(logger.getDirectory());
     try {
       FileUtils.deleteDirectory(file);
     } catch (IOException e) {
@@ -245,7 +245,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger();
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertFalse(logger.getAppend(), "Expected Append to be false.");
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
             "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
@@ -265,7 +264,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger(true);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(logger.getAppend(), "Expected Append to be true.");
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
             "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
@@ -286,7 +284,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger("FileNameOnly");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertFalse(logger.getAppend(), "Expected Append to be false.");
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
             "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileNameOnly.txt", logger.getFileName(), "Expected correct File Name.");
@@ -306,7 +303,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger(MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertFalse(logger.getAppend(), "Expected Append to be false.");
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
             "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
@@ -326,7 +322,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger(true, "AppendFileName");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(logger.getAppend(), "Expected Append to be true.");
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
             "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("AppendFileName.txt", logger.getFileName(), "Expected correct File Name.");
@@ -346,7 +341,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger("Append File Directory", true);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(logger.getAppend(), "Expected Append to be true.");
     softAssert.assertEquals("Append File Directory", logger.getDirectory(),
             "Expected Directory 'Append File Directory'.");
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
@@ -366,7 +360,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger("Log Folder File Name Directory", "LogFolderFileName.txt");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertFalse(logger.getAppend(), "Expected Append to be false.");
     softAssert.assertEquals("Log Folder File Name Directory", logger.getDirectory(),
             "Expected Directory 'Log Folder File Name Directory'.");
     softAssert.assertEquals("LogFolderFileName.txt", logger.getFileName(), "Expected correct File Name.");
@@ -386,7 +379,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger("Log Folder Messaging Level Directory", MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertFalse(logger.getAppend(), "Expected Append to be false.");
     softAssert.assertEquals("Log Folder Messaging Level Directory", logger.getDirectory(),
             "Expected Directory 'Log Folder Messaging Level Directory'.");
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
@@ -406,7 +398,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger(true, MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(logger.getAppend(), "Expected Append to be true.");
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
             "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
@@ -426,7 +417,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger(MessageType.WARNING, "MessagingTypeFile.txt");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertFalse(logger.getAppend(), "Expected Append to be false.");
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
             "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("MessagingTypeFile.txt", logger.getFileName(), "Expected correct File Name.");
@@ -447,7 +437,6 @@ public class FileLoggerUnitTest {
             true, "AppendLogFolderFileNameDirectory", "AppendLogFolderFileName.txt");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(logger.getAppend(), "Expected Append to be true.");
     softAssert.assertEquals("AppendLogFolderFileNameDirectory", logger.getDirectory(),
             " Expected Directory AppendLogFolderFileNameDirectory");
     softAssert.assertEquals("AppendLogFolderFileName.txt", logger.getFileName(), "Expected correct File Name.");
@@ -468,7 +457,6 @@ public class FileLoggerUnitTest {
             true, "AppendLogFolderFileNameDirectory", MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(logger.getAppend(), "Expected Append to be true.");
     softAssert.assertEquals("AppendLogFolderFileNameDirectory", logger.getDirectory(),
             " Expected Directory AppendLogFolderFileNameDirectory");
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
@@ -489,7 +477,6 @@ public class FileLoggerUnitTest {
             "FileNameAppendMessagingLevel.txt", true, MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(logger.getAppend(), "Expected Append to be true.");
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
             "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileNameAppendMessagingLevel.txt", logger.getFileName(),
@@ -511,7 +498,6 @@ public class FileLoggerUnitTest {
             "LogFolderFileNameMessagingLevelDirectory", "LogFolderFileNameMessagingLevel.txt", MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertFalse(logger.getAppend(), "Expected Append to be false.");
     softAssert.assertEquals("LogFolderFileNameMessagingLevelDirectory", logger.getDirectory(),
             "Expected Directory 'LogFolderFileNameMessagingLevelDirectory'");
     softAssert.assertEquals("LogFolderFileNameMessagingLevel.txt", logger.getFileName(),
@@ -573,7 +559,9 @@ public class FileLoggerUnitTest {
       if ((level.getKey() != "Row") && (level.getKey() != "LogLevel")) {
         // Verify if the Message Type is found
         boolean logMessageFound = logContents.contains(String.format(logLine, level.getKey()));
-        softAssert.assertEquals(Boolean.toString(logMessageFound), level.getValue().toString(), "Looking for " + level.getKey());
+        softAssert.assertEquals(Boolean.toString(logMessageFound), level.getValue().toString(),
+                "Looking for '" + String.format(logLine, level.getKey())
+                        + "' with Logger of type '" + logLevel.name() + "'. \nLog Contents: " + logContents);
       }
     }
 
