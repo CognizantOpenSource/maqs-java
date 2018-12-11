@@ -422,7 +422,16 @@ public class FileLogger extends Logger {
     return replacedName;
   }
 
-  protected String UnknownMessageTypeMessage(MessageType type) {
-    return StringProcessor.safeFormatter("Unknown MessageType: %s%s%s%s", type.name(), System.lineSeparator(), "Message will be displayed with the MessageType of: ", MessageType.GENERIC.name());
+  /**
+   * Get the message for an unknown message type.
+   *
+   * @param type
+   *          The Message Type.
+   * @return
+   *          The Unknown Message Type Message.
+   */
+  protected String unknownMessageTypeMessage(MessageType type) {
+    return StringProcessor.safeFormatter("Unknown MessageType: %s%s%s%s", type.name(),
+            System.lineSeparator(), "Message will be displayed with the MessageType of: ", MessageType.GENERIC.name());
   }
 }
