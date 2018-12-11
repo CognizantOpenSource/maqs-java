@@ -139,20 +139,6 @@ public abstract class BaseGenericTest {
     this.testObject.set(new TestObject(testName));
     this.testObject.get().setLogger(this.setupLogging());
 
-    try {
-      // File loggers should append
-      if (this.getLogger() instanceof FileLogger) {
-        ((FileLogger) this.getLogger()).setAppend(true);
-      }
-    } catch (Exception e) {
-      this.tryToLog(MessageType.ERROR, "Setup failed because: %s\r\n%s", e.getMessage(),
-          e.getStackTrace());
-
-      // Make sure we do the standard teardown
-      this.teardown();
-      throw e;
-    }
-
     this.postSetupLogging();
   }
 
