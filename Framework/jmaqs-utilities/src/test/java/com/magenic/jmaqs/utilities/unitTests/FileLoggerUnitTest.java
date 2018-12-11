@@ -246,7 +246,7 @@ public class FileLoggerUnitTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
+            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
@@ -265,7 +265,7 @@ public class FileLoggerUnitTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
+            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
@@ -285,7 +285,7 @@ public class FileLoggerUnitTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
+            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileNameOnly.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
@@ -304,7 +304,7 @@ public class FileLoggerUnitTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
+            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
@@ -323,7 +323,7 @@ public class FileLoggerUnitTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
+            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("AppendFileName.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
@@ -399,7 +399,7 @@ public class FileLoggerUnitTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
+            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
@@ -418,7 +418,7 @@ public class FileLoggerUnitTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
+            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("MessagingTypeFile.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
@@ -478,7 +478,7 @@ public class FileLoggerUnitTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '{0)'.", System.getProperty("java.io.tmpdir")));
+            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
     softAssert.assertEquals("FileNameAppendMessagingLevel.txt", logger.getFileName(),
             "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
@@ -601,6 +601,6 @@ public class FileLoggerUnitTest {
    *          A unique file name
    */
   private String getFileName(String testName, String extension) {
-    return StringProcessor.safeFormatter("UtilitiesUnitTesting.{0}-{1}.{2}", testName, UUID.randomUUID(), extension);
+    return StringProcessor.safeFormatter("UtilitiesUnitTesting.%s-%s.%s", testName, UUID.randomUUID().toString(), extension);
   }
 }

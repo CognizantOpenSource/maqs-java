@@ -266,7 +266,7 @@ public class FileLogger extends Logger {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-                "Failed to write to event log because: {0}", e.getMessage()));
+                "Failed to write to event log because: %s", e.getMessage()));
       } finally {
         if (writer != null) {
           try {
@@ -274,7 +274,7 @@ public class FileLogger extends Logger {
           } catch (IOException i) {
             ConsoleLogger console = new ConsoleLogger();
             console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-                      "Failed to close FileWriter: {0}", i.getMessage()));
+                      "Failed to close FileWriter: %s", i.getMessage()));
           }
         }
       }
@@ -381,7 +381,7 @@ public class FileLogger extends Logger {
           } catch (IOException i) {
             ConsoleLogger console = new ConsoleLogger();
             console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-                      "Failed to close FileWriter: {0}", i.getMessage()));
+                      "Failed to close FileWriter: %s", i.getMessage()));
           }
         }
         if (bw != null) {
@@ -390,7 +390,7 @@ public class FileLogger extends Logger {
           } catch (IOException i) {
             ConsoleLogger console = new ConsoleLogger();
             console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-                    "Failed to close BufferedWriter: {0}", i.getMessage()));
+                    "Failed to close BufferedWriter: %s", i.getMessage()));
           }
         }
       }
@@ -416,9 +416,13 @@ public class FileLogger extends Logger {
     } catch (NullPointerException e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-              "Failed to Replace Invalid Characters because: {0}", e.getMessage()));
+              "Failed to Replace Invalid Characters because: %s", e.getMessage()));
     }
 
     return replacedName;
+  }
+
+  protected String UnknownMessageTypeMessage(MessageType type) {
+    return StringProcessor.safeFormatter("Unknown MessageType: %s%s%s%s", type.name(), System.lineSeparator(), "Message will be displayed with the MessageType of: ", MessageType.GENERIC.name());
   }
 }
