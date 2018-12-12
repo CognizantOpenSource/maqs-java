@@ -11,6 +11,23 @@ import com.magenic.jmaqs.utilities.helper.StringProcessor;
  */
 public class ConsoleLogger extends Logger {
   /**
+   * Initializes a new instance of the ConsoleLogger class.
+   */
+  public ConsoleLogger() {
+    this(MessageType.INFORMATION);
+  }
+
+  /**
+   * Initializes a new instance of the ConsoleLogger class.
+   *
+   * @param level
+   *          The logging level.
+   */
+  public ConsoleLogger(MessageType level) {
+    super(level);
+  }
+
+  /**
    * Write the formatted message (one line) to the console as a generic message.
    * 
    * @param message
@@ -48,7 +65,7 @@ public class ConsoleLogger extends Logger {
    *          String format arguments
    */
   public void write(String message, Object... args) {
-    this.writeToConsole(MessageType.GENERIC, false, message, args);
+    this.writeToConsole(MessageType.INFORMATION, false, message, args);
   }
 
   /**
@@ -74,7 +91,7 @@ public class ConsoleLogger extends Logger {
    *          String format arguments
    */
   public void writeLine(String message, Object... args) {
-    this.writeToConsole(MessageType.GENERIC, true, message, args);
+    this.writeToConsole(MessageType.INFORMATION, true, message, args);
   }
 
   /**
@@ -106,7 +123,7 @@ public class ConsoleLogger extends Logger {
    */
   private void writeToConsole(MessageType type, boolean line, String message, Object... args) {
     // Just return if there is no message
-    if (message == null || message.isEmpty()) {
+    if (message == null || message.isEmpty() || !this.shouldMessageBeLogged(type)) {
       return;
     }
 
