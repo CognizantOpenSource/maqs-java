@@ -586,7 +586,7 @@ public class FileLoggerUnitTest {
 
     // Verify that only the logged messages at the log level or below are logged
     for(HashMap.Entry<String, Boolean> level : levels.entrySet()) {
-      if ((level.getKey().equals("Row")) && (level.getKey().equals("LogLevel"))) {
+      if ((!level.getKey().equals("Row")) && (!level.getKey().equals("LogLevel"))) {
         // Verify if the Message Type is found
         boolean logMessageFound = logContents.contains(String.format(logLine, level.getKey()));
         softAssert.assertEquals(Boolean.toString(logMessageFound), level.getValue().toString(),
