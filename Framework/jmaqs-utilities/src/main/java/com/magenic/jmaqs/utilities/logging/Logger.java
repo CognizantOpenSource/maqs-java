@@ -11,7 +11,7 @@ public abstract class Logger {
   /**
    * Default date format.
    */
-  protected static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.fff";
+  protected static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
   /**
    * Log Level value area.

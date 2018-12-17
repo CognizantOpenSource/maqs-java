@@ -208,6 +208,20 @@ public class FileLoggerUnitTest {
   }
 
   /**
+   * Verify that File Logger can log message and defining a Message Type
+   */
+  @Test
+  public void FileLoggerLogMessageSelectType() {
+    FileLogger logger = new FileLogger(true, "", "FileLoggerLogMessage");
+    logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
+    Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains("Test to ensure LogMessage works as expected."),
+            "Expected Log Message to be contained in log.");
+
+    File file = new File(logger.getFilePath());
+    file.delete();
+  }
+
+  /**
    * Verify that File Path field can be accessed and updated
    */
   @Test
