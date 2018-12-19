@@ -4,7 +4,9 @@
 
 package com.magenic.jmaqs.utilities.unitTests;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.PrintStream;
 
 /**
  * Class to copy console output to a file.
