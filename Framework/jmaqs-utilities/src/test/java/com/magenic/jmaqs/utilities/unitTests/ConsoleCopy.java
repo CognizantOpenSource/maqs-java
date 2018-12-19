@@ -6,12 +6,13 @@ package com.magenic.jmaqs.utilities.unitTests;
 
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 /**
  * Class to copy console output to a file.
  */
-public class ConsoleCopy implements AutoCloseable  {
+public class ConsoleCopy implements AutoCloseable {
   /**
    * Used to Write to the log file.
    */
@@ -37,7 +38,7 @@ public class ConsoleCopy implements AutoCloseable  {
     this.oldOut = System.out;
 
     try {
-      this.fileWriter = new PrintStream(new File(path));
+      this.fileWriter = new PrintStream(new FileOutputStream(new File(path), true));
       this.doubleWriter = new DoubleWriter(this.fileWriter, this.oldOut);
     } catch (Exception e) {
       System.out.println("Cannot open file for writing");
@@ -59,6 +60,9 @@ public class ConsoleCopy implements AutoCloseable  {
       this.fileWriter.close();
       this.fileWriter = null;
     }
+    
+    // Suggest to JVM to run garbage collector. No guarantee that this will run.
+    System.gc();
   }
 
   /**
