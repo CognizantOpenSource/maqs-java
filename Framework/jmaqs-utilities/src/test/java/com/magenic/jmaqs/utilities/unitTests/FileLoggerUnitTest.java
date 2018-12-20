@@ -5,10 +5,7 @@
 package com.magenic.jmaqs.utilities.unitTests;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import com.magenic.jmaqs.utilities.logging.*;
 import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -68,6 +66,14 @@ public class FileLoggerUnitTest {
     };
   }
 
+  /**
+   * Verify the text file logger respects hierarchical logging
+   *
+   * @param logLevel
+   *          The type of logging.
+   * @param levels
+   *          What should appear for each level.
+   */
   @Test(dataProvider = "logLevels")
   public void testHierarchicalTxtFileLogger(String logLevel, HashMap<String, Boolean> levels) {
     FileLogger logger = new FileLogger(true, LoggingConfig.getLogDirectory(),
@@ -79,14 +85,37 @@ public class FileLoggerUnitTest {
   }
 
   /**
+   * Verify the console logger respects hierarchical logging
+   *
+   * @param logLevel
+   *          The type of logging.
+   * @param levels
+   *          What should appear for each level.
+   */
+  @Test(dataProvider = "logLevels")
+  public void testHierarchicalConsoleLogger(String logLevel, HashMap<String, Boolean> levels) {
+    // Calculate a file path
+    String path = Paths.get(LoggingConfig.getLogDirectory(),
+            this.getFileName("TestHierarchicalConsoleLogger" + logLevel, "txt")).toString();
+
+    try(ConsoleCopy consoleCopy = new ConsoleCopy(path)) {
+      ConsoleLogger consoleLogger = new ConsoleLogger();
+      this.testHierarchicalLogging(consoleLogger, path, logLevel, levels);
+    }
+
+    File file = new File(path);
+    file.delete();
+  }
+
+  /**
    * Test logging to a new file.
    */
   @Test
   public void fileLoggerNoAppendTest() {
     FileLogger logger = new FileLogger(false, "", "WriteToFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
-    File file1 = new File(logger.getFilePath());
-    file1.delete();
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -231,10 +260,12 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.GENERIC, "test throws error");
   }
 
+  /**
+   * Test File Logger with empty file name throws Illegal Argument Exception.
+   */
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void FileLoggerEmptyFileNameException() {
     FileLogger logger = new FileLogger("");
-
   }
 
   /**
@@ -556,7 +587,7 @@ public class FileLoggerUnitTest {
 
     // Verify that only the logged messages at the log level or below are logged
     for(HashMap.Entry<String, Boolean> level : levels.entrySet()) {
-      if ((level.getKey() != "Row") && (level.getKey() != "LogLevel")) {
+      if ((!level.getKey().equals("Row")) && (!level.getKey().equals("LogLevel"))) {
         // Verify if the Message Type is found
         boolean logMessageFound = logContents.contains(String.format(logLine, level.getKey()));
         softAssert.assertEquals(Boolean.toString(logMessageFound), level.getValue().toString(),
