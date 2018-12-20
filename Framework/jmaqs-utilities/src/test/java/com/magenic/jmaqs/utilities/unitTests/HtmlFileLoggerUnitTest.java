@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.utilities.unitTests;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.HtmlFileLogger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.MessageType;
@@ -41,6 +42,8 @@ public class HtmlFileLoggerUnitTest {
   public void HtmlFileLoggerAppendFileTest() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
+    logger.logMessage(MessageType.WARNING, "This is a test to append to current file.");
+    
     File file = new File(logger.getFilePath());
     file.delete();
   }
@@ -102,6 +105,22 @@ public class HtmlFileLoggerUnitTest {
     logger.logMessage("Test to ensure LogMessage works as expected.");
     String htmlText = this.readTextFile(logger.getFilePath());
 
+
+    File file = new File(logger.getFilePath());
+    file.delete();
+
+    Assert.assertTrue(htmlText.contains("Test to ensure LogMessage works as expected."),
+            "Expected Log Message to be contained in log.");
+  }
+
+  /**
+   * Verify that HTML File Logger can log message and defining a Message Type.
+   */
+  @Test
+  public void HtmlFileLoggerLogMessageSelectType() {
+    HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessageType");
+    logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
+    String htmlText = this.readTextFile(logger.getFilePath());
 
     File file = new File(logger.getFilePath());
     file.delete();

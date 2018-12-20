@@ -299,7 +299,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
                 "Failed to write to event log because: %s", e.getMessage()));
       }
     }
-    
+
+    // Suggest to JVM to run garbage collector. No guarantee that this will run.
     System.gc();
   }
 
