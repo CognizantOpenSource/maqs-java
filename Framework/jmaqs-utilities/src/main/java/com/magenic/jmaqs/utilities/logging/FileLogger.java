@@ -49,11 +49,6 @@ public class FileLogger extends Logger {
   private String directory;
 
   /**
-   * Gets the File Extension.
-   */
-  private String extension = ".txt";
-
-  /**
    * Initializes a new instance of the FileLogger class.
    */
   public FileLogger() {
@@ -230,7 +225,7 @@ public class FileLogger extends Logger {
    *          File Name
    * @param messageLevel
    *          Messaging Level
-     */
+   */
   public FileLogger(boolean append, String logFolder, String name, MessageType messageLevel) {
     super(messageLevel);
 
@@ -247,8 +242,8 @@ public class FileLogger extends Logger {
 
     name = makeValidFileName(name);
 
-    if (!name.toLowerCase().endsWith(this.extension)) {
-      name += this.extension;
+    if (!name.toLowerCase().endsWith(this.getExtension())) {
+      name += this.getExtension();
     }
 
     this.fileName = name;
@@ -328,6 +323,16 @@ public class FileLogger extends Logger {
    */
   public String getFileName() {
     return this.fileName;
+  }
+
+  /**
+   * Gets the file extension.
+   *
+   * @return
+   *          File Extension
+   */
+  protected String getExtension() {
+    return ".txt";
   }
 
   /*

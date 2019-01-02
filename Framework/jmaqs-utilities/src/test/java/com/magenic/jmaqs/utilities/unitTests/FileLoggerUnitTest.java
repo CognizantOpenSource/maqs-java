@@ -108,6 +108,25 @@ public class FileLoggerUnitTest {
   }
 
   /**
+   * Verify the Html File logger respects hierarchical logging
+   *
+   * @param logLevel
+   *          The type of logging.
+   * @param levels
+   *          What should appear for each level.
+   */
+  @Test(dataProvider = "logLevels")
+  public void testHierarchicalHtmlFileLogger(String logLevel, HashMap<String, Boolean> levels) {
+    HtmlFileLogger logger = new HtmlFileLogger(true, LoggingConfig.getLogDirectory(),
+            this.getFileName("TestHierarchicalHtmlFileLogger" + logLevel, "html"), MessageType.GENERIC);
+
+    this.testHierarchicalLogging(logger, logger.getFilePath(), logLevel, levels);
+
+    File file = new File(logger.getFilePath());
+    file.delete();
+  }
+
+  /**
    * Test logging to a new file.
    */
   @Test
@@ -229,6 +248,20 @@ public class FileLoggerUnitTest {
   public void FileLoggerLogMessage() {
     FileLogger logger = new FileLogger(true, "", "FileLoggerLogMessage");
     logger.logMessage("Test to ensure LogMessage works as expected.");
+    Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains("Test to ensure LogMessage works as expected."),
+            "Expected Log Message to be contained in log.");
+
+    File file = new File(logger.getFilePath());
+    file.delete();
+  }
+
+  /**
+   * Verify that File Logger can log message and defining a Message Type
+   */
+  @Test
+  public void FileLoggerLogMessageSelectType() {
+    FileLogger logger = new FileLogger(true, "", "FileLoggerLogMessage");
+    logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
     Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains("Test to ensure LogMessage works as expected."),
             "Expected Log Message to be contained in log.");
 
