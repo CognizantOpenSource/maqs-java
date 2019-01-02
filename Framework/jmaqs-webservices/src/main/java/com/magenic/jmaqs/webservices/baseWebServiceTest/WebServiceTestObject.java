@@ -4,13 +4,13 @@
 
 package com.magenic.jmaqs.webservices.baseWebServiceTest;
 
-import com.magenic.jmaqs.baseTest.TestObject;
+import com.magenic.jmaqs.baseTest.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
 
 /**
  * Web service test object class.
  */
-public class WebServiceTestObject extends TestObject {
+public class WebServiceTestObject extends BaseTestObject {
 
   /**
    * The HTTP client wrapper.
@@ -28,7 +28,7 @@ public class WebServiceTestObject extends TestObject {
    *          The fully qualified test name
    */
   public WebServiceTestObject(HttpClientWrapper webServiceWrapper, Logger logger, String fullyQualifiedTestName) {
-    super(fullyQualifiedTestName, logger);
+    super(logger, fullyQualifiedTestName);
     this.webServiceWrapper = webServiceWrapper;
   }
   

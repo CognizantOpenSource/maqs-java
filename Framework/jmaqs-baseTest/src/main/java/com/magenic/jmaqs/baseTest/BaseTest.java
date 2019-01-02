@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -47,9 +48,24 @@ public abstract class BaseTest {
   private ITestResult testResult;
 
   /**
-   * Thread local storage of TestObject.
+   * The Test Object.
    */
-  private ThreadLocal<TestObject> testObject = new ThreadLocal<TestObject>();
+  private BaseTestObject testObject;
+
+  /**
+   * The Collection of Base Test Objects to use.
+   */
+  private ConcurrentHashMap<String, BaseTestObject> baseTestObjects;
+
+  /**
+   * The Performance Timer Collection.
+   */
+  private PerfTimerCollection perfTimerCollection;
+
+  /**
+   * The Soft Assert.
+   */
+  private SoftAssert softAssert;
 
   /**
    * Initializes a new instance of the BaseTest class.
@@ -59,12 +75,50 @@ public abstract class BaseTest {
   }
 
   /**
+   * Gets the Performance Timer Collection.
+   * 
+   * @return Performance Timer Collection
+   */
+  public PerfTimerCollection getPerfTimerCollection() {
+    return this.perfTimerCollection;
+  }
+
+  /**
+   * Sets the Performance Timer Collection.
+   * 
+   * @param perfTimerCollection
+   *                      Performance Timer Collection to use
+   */
+  public void setPerfTimerCollection(PerfTimerCollection perfTimerCollection) {
+    this.perfTimerCollection = perfTimerCollection;
+  }
+
+  /**
+   * Gets the Soft Assert.
+   * 
+   * @return Soft Assert
+   */
+  public SoftAssert getSoftAssert() {
+    return this.softAssert;
+  }
+
+  /**
+   * Sets the Soft Assert.
+   * 
+   * @param softAssert
+   *                The Soft Assert to use
+   */
+  public void setSoftAssert(SoftAssert softAssert) {
+    this.softAssert = softAssert;
+  }
+
+  /**
    * Gets the Logger for this test.
    * 
    * @return Logger object
    */
   public Logger getLogger() {
-    return this.testObject.get().getLogger();
+    return this.testObject.getLog();
   }
 
   /**
@@ -74,7 +128,7 @@ public abstract class BaseTest {
    *          The Logger object
    */
   public void setLogger(Logger log) {
-    testObject.get().setLogger(log);
+    this.testObject.setLog(log);
   }
 
   /**
@@ -109,17 +163,42 @@ public abstract class BaseTest {
     }
   }
 
-  public void setLoggedException(ArrayList<String> exceptions) {
-    this.loggedExceptions.put(this.getFullyQualifiedTestClassName(), exceptions);
+  /**
+   * Gets the Driver Store.
+   * 
+   * @return The Driver Store
+   */
+  public ManagerDictionary getManagerStore() {
+    return this.testObject.getManagerStore();
   }
 
   /**
-   * Get the TestObject for this test.
+   * Get the BaseTestObject for this test.
    * 
-   * @return The TestObject
+   * @return The BaseTestObject
    */
-  public TestObject getTestObject() {
-    return this.testObject.get();
+  public BaseTestObject getTestObject() {
+    if (!this.baseTestObjects.containsKey(this.getFullyQualifiedTestClassName())) {
+      this.createNewTestObject();
+    }
+    
+    return this.baseTestObjects.get(this.getFullyQualifiedTestClassName());
+  }
+
+  /**
+   * Sets the Test Object.
+   * 
+   * @param baseTestObject
+   *                The Base Test Object to use
+   */
+  public void setTestObject(BaseTestObject baseTestObject) {
+    String key = this.getFullyQualifiedTestClassName();
+    if (this.baseTestObjects.containsKey(key)) {
+      this.baseTestObjects.replace(key, baseTestObject);
+    }
+    else {
+      this.baseTestObjects.put(key, baseTestObject);
+    }
   }
 
   /**
@@ -136,8 +215,8 @@ public abstract class BaseTest {
     String testName = method.getDeclaringClass() + "." + method.getName();
     testName = testName.replaceFirst("class ", "");
 
-    this.testObject.set(new TestObject(testName));
-    this.testObject.get().setLogger(this.setupLogging());
+    this.testObject = new BaseTestObject(testName);
+    this.testObject.setLog(this.createLogger());
 
     this.postSetupLogging();
   }
@@ -208,7 +287,7 @@ public abstract class BaseTest {
    * 
    * @return Logger
    */
-  protected Logger setupLogging() {
+  protected Logger createLogger() {
     Logger log;
 
     this.loggingEnabledSetting = LoggingConfig.getLoggingEnabledSetting();
@@ -231,7 +310,7 @@ public abstract class BaseTest {
    * @return The test name including class
    */
   protected String getFullyQualifiedTestClassName() {
-    return this.testObject.get().getFullyQualifiedTestName();
+    return this.testObject.getFullyQualifiedTestName();
   }
 
   /**
@@ -261,5 +340,10 @@ public abstract class BaseTest {
       System.out.println(formattedMessage);
       System.out.println("Logging failed because: " + e.getMessage());
     }
+  }
+  
+  protected void createNewTestObject() {
+    Logger newLogger = this.createLogger();
+    this.testObject = new BaseTestObject(newLogger, new SoftAssert(newLogger), this.getFullyQualifiedTestClassName());
   }
 }
