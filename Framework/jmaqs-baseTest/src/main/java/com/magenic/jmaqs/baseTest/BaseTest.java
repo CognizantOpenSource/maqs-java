@@ -29,7 +29,7 @@ import org.testng.annotations.BeforeMethod;
 /**
  * Base test class.
  */
-public abstract class BaseGenericTest {
+public abstract class BaseTest {
 
   /**
    * All logged exceptions caught and saved to be thrown later.
@@ -52,9 +52,9 @@ public abstract class BaseGenericTest {
   private ThreadLocal<TestObject> testObject = new ThreadLocal<TestObject>();
 
   /**
-   * Initializes a new instance of the BaseGenericTest class.
+   * Initializes a new instance of the BaseTest class.
    */
-  public BaseGenericTest() {
+  public BaseTest() {
     loggedExceptions = new ConcurrentHashMap<String, ArrayList<String>>();
   }
 

@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.selenium.baseSeleniumTest;
 
-import com.magenic.jmaqs.baseTest.BaseGenericTest;
+import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 
@@ -14,7 +14,7 @@ import org.testng.ITestResult;
 /**
  * Base Selenium Test class.
  */
-public abstract class BaseSeleniumTest extends BaseGenericTest {
+public abstract class BaseSeleniumTest extends BaseTest {
 
   /**
    * Initialize a new instance of the BaseSeleniumTest class.

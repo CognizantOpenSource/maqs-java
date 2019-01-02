@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.baseTest.unitTests;
 
-import com.magenic.jmaqs.baseTest.BaseGenericTest;
+import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 
 import org.testng.Assert;
@@ -12,10 +12,10 @@ import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
- * Unit test class for BaseGenericTest class.
+ * Unit test class for BaseTest class.
  */
 @Test
-public class BaseGenericTestUnitTest extends BaseGenericTest {
+public class BaseGenericTestUnitTest extends BaseTest {
   /**
    * Verify fully qualified test name.
    */
@@ -42,7 +42,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest {
   /*
    * (non-Javadoc)
    * 
-   * @see com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest#postSetupLogging()
+   * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#postSetupLogging()
    */
   @Override
   protected void postSetupLogging() {
@@ -52,7 +52,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest {
   /*
    * (non-Javadoc)
    * 
-   * @see com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest#beforeLoggingTeardown(org.testng.
+   * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#beforeLoggingTeardown(org.testng.
    * ITestResult)
    */
   @Override
