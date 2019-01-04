@@ -5,12 +5,7 @@
 package com.magenic.jmaqs.baseTest;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.logging.*;
 
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -23,6 +18,7 @@ import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -68,10 +64,21 @@ public abstract class BaseTest {
   private SoftAssert softAssert;
 
   /**
+   * The TestNG Test Context.
+   */
+  private ITestContext testContextInstance;
+
+  /**
+   * The Fully Qualified Test Class Name.
+   */
+  private String fullyQualifiedTestClassName;
+
+  /**
    * Initializes a new instance of the BaseTest class.
    */
   public BaseTest() {
-    loggedExceptions = new ConcurrentHashMap<String, ArrayList<String>>();
+    this.loggedExceptions = new ConcurrentHashMap<String, ArrayList<String>>();
+    this.baseTestObjects = new ConcurrentHashMap<String, BaseTestObject>();
   }
 
   /**
@@ -146,7 +153,7 @@ public abstract class BaseTest {
    * @param setting
    *          The LoggingEnabled enum
    */
-  public void setLoggingEnabled(LoggingEnabled setting) {
+  private void setLoggingEnabled(LoggingEnabled setting) {
     this.loggingEnabledSetting = setting;
   }
 
@@ -170,6 +177,25 @@ public abstract class BaseTest {
    */
   public ManagerDictionary getManagerStore() {
     return this.testObject.getManagerStore();
+  }
+
+  /**
+   * Gets the TestNG Test Context.
+   * 
+   * @return The TestNG Test Context
+   */
+  public ITestContext getTestContext() {
+    return this.testContextInstance;
+  }
+
+  /**
+   * Sets the TestNG Test context.
+   * 
+   * @param testContext
+   *                The TestNG Test Context to use
+   */
+  public void setTestContext(ITestContext testContext) {
+    this.testContextInstance = testContext;
   }
 
   /**
@@ -211,14 +237,12 @@ public abstract class BaseTest {
    */
   @BeforeMethod
   public void setup(Method method) throws Exception {
-
+    // Get the Fully Qualified Test Class Name and set it in the object
     String testName = method.getDeclaringClass() + "." + method.getName();
     testName = testName.replaceFirst("class ", "");
-
-    this.testObject = new BaseTestObject(testName);
-    this.testObject.setLog(this.createLogger());
-
-    this.postSetupLogging();
+    this.fullyQualifiedTestClassName = testName;
+    
+    this.createNewTestObject();
   }
 
   /**
@@ -254,8 +278,17 @@ public abstract class BaseTest {
       this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
     }
 
+    // Get the Fully Qualified Test Name
+    String fullyQualifiedTestName = this.getFullyQualifiedTestClassName();
+    
     // Release logged messages
     this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
+    
+    // Release the Base Test Object
+    this.baseTestObjects.remove(fullyQualifiedTestName, this.testObject);
+
+    // Create console logger to log subsequent messages
+    this.testObject = new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName);
   }
 
   /**
@@ -291,7 +324,7 @@ public abstract class BaseTest {
     Logger log;
 
     this.loggingEnabledSetting = LoggingConfig.getLoggingEnabledSetting();
-
+    
     if (this.loggingEnabledSetting != LoggingEnabled.NO) {
       log = LoggingConfig
           .getLogger(StringProcessor.safeFormatter("%s - %s", this.getFullyQualifiedTestClassName(),
@@ -305,12 +338,48 @@ public abstract class BaseTest {
   }
 
   /**
+   * Get the type of test result.
+   * 
+   * @return The type of test result
+   */
+  protected TestResultType getResultType() {
+    switch (this.testResult.getStatus()) {
+      case ITestResult.SUCCESS:
+        return TestResultType.PASS;
+      case ITestResult.FAILURE:
+        return TestResultType.FAIL;
+      case ITestResult.SKIP:
+        return TestResultType.SKIP;
+      default:  
+        return TestResultType.OTHER;  
+    }
+  }
+
+  /**
+   * Get the test result type as text.
+   * 
+   * @return The test result type as text
+   */
+  protected String getResultText() {
+    switch (this.testResult.getStatus()) {
+      case ITestResult.SUCCESS:
+        return "SUCCESS";
+      case ITestResult.FAILURE:
+        return "FAILURE";
+      case ITestResult.SKIP:
+        return "SKIP";
+      default:
+        return "OTHER";
+      }
+  }
+
+  /**
    * Get the fully qualified test name.
    * 
    * @return The test name including class
    */
   protected String getFullyQualifiedTestClassName() {
-    return this.testObject.getFullyQualifiedTestName();
+    return this.fullyQualifiedTestClassName;
   }
 
   /**
@@ -342,6 +411,23 @@ public abstract class BaseTest {
     }
   }
   
+  protected void logVerbose(String message, Object... args) {
+    StringBuilder messages = new StringBuilder();
+    messages.append(StringProcessor.safeFormatter(message, args) + System.lineSeparator());
+
+    for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+      // If the stack trace element is from the com.magenic package (excluding this method) append the stack trace line 
+      if (element.toString().startsWith("com.magenic") && !element.toString().contains("BaseTest.logVerbose")) {
+        messages.append(element.toString() + System.lineSeparator());  
+      }
+    }
+    
+    this.getLogger().logMessage(MessageType.VERBOSE, messages.toString());
+  }
+
+  /**
+   * Create a Base test object.
+   */
   protected void createNewTestObject() {
     Logger newLogger = this.createLogger();
     this.testObject = new BaseTestObject(newLogger, new SoftAssert(newLogger), this.getFullyQualifiedTestClassName());

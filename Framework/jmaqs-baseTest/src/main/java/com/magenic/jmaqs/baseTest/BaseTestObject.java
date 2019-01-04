@@ -45,6 +45,95 @@ public class BaseTestObject implements AutoCloseable {
   private ManagerDictionary managerStore;
 
   /**
+   * Initializes a new instance of the BaseTestObject class.
+   *
+   * @param logger
+   *               The test's logger 
+   * @param softAssert
+   *               The test's soft assert
+   * @param fullyQualifiedTestName
+   *               The test's fully qualified test name
+   */
+  public BaseTestObject(Logger logger, SoftAssert softAssert, String fullyQualifiedTestName) {
+    this.log = logger;
+    this.softAssert = softAssert;
+    this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
+    this.values = new ConcurrentHashMap<String, String>();
+    this.objects = new ConcurrentHashMap<String, Object>();
+    this.managerStore = new ManagerDictionary();
+
+    logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
+  }
+
+  /**
+   * Initializes a new instance of the BaseTestObject class.
+   *
+   * @param logger
+   *               The test's logger 
+   * @param fullyQualifiedTestName
+   *               The test's fully qualified test name
+   */
+  public BaseTestObject(Logger logger, String fullyQualifiedTestName) {
+    this.log = logger;
+    this.softAssert = new SoftAssert(this.log);
+    this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
+    this.values = new ConcurrentHashMap<String, String>();
+    this.objects = new ConcurrentHashMap<String, Object>();
+    this.managerStore = new ManagerDictionary();
+
+    logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
+  }
+
+  /**
+   * Initializes a new instance of the BaseTestObject class.
+   *
+   * @param baseTestObject
+   *               An existing base test object
+   */
+  public BaseTestObject(BaseTestObject baseTestObject) {
+    this.log = baseTestObject.getLog();
+    this.softAssert = baseTestObject.getSoftAssert();
+    this.perfTimerCollection = baseTestObject.getPerfTimerCollection();
+    this.values = baseTestObject.getValues();
+    this.objects = baseTestObject.getObjects();
+    this.managerStore = baseTestObject.getManagerStore();
+
+    baseTestObject.getLog().logMessage(MessageType.INFORMATION, "Setup test object");
+  }
+
+  /**
+   * Sets a string value, will replace if the key already exists.
+   * @param key
+   *            The key
+   * @param value
+   *            The value to associate with the key
+   */
+  public void setValue(String key, String value) {
+    if (this.values.containsKey(key)) {
+      this.values.replace(key, value);
+    }
+    else {
+      this.values.put(key, value);
+    }
+  }
+
+  /**
+   * Sets an object value, will replace if the key already exists.
+   * @param key
+   *            The key
+   * @param value
+   *            The value to associate with the key
+   */
+  public void setObject(String key, Object value) {
+    if (this.objects.containsKey(key)) {
+      this.objects.replace(key, value);
+    }
+    else {
+      this.objects.put(key, value);
+    }
+  }
+
+  /**
    * Gets the logger.
    *
    * @return
@@ -162,95 +251,6 @@ public class BaseTestObject implements AutoCloseable {
    */
   public void setManagerStore(ManagerDictionary managerStore) {
     this.managerStore = managerStore;
-  }
-
-  /**
-   * Initializes a new instance of the BaseTestObject class.
-   *
-   * @param logger
-   *               The test's logger 
-   * @param softAssert
-   *               The test's soft assert
-   * @param fullyQualifiedTestName
-   *               The test's fully qualified test name
-   */
-  public BaseTestObject(Logger logger, SoftAssert softAssert, String fullyQualifiedTestName) {
-    this.log = logger;
-    this.softAssert = softAssert;
-    this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
-    this.values = new ConcurrentHashMap<String, String>();
-    this.objects = new ConcurrentHashMap<String, Object>();
-    this.managerStore = new ManagerDictionary();
-
-    logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
-  }
-
-  /**
-   * Initializes a new instance of the BaseTestObject class.
-   *
-   * @param logger
-   *               The test's logger 
-   * @param fullyQualifiedTestName
-   *               The test's fully qualified test name
-   */
-  public BaseTestObject(Logger logger, String fullyQualifiedTestName) {
-    this.log = logger;
-    this.softAssert = new SoftAssert(this.log);
-    this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
-    this.values = new ConcurrentHashMap<String, String>();
-    this.objects = new ConcurrentHashMap<String, Object>();
-    this.managerStore = new ManagerDictionary();
-
-    logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
-  }
-
-  /**
-   * Initializes a new instance of the BaseTestObject class.
-   *
-   * @param baseTestObject
-   *               An existing base test object
-   */
-  public BaseTestObject(BaseTestObject baseTestObject) {
-    this.log = baseTestObject.getLog();
-    this.softAssert = baseTestObject.getSoftAssert();
-    this.perfTimerCollection = baseTestObject.getPerfTimerCollection();
-    this.values = baseTestObject.getValues();
-    this.objects = baseTestObject.getObjects();
-    this.managerStore = baseTestObject.getManagerStore();
-
-    baseTestObject.getLog().logMessage(MessageType.INFORMATION, "Setup test object");
-  }
-
-  /**
-   * Sets a string value, will replace if the key already exists.
-   * @param key
-   *            The key
-   * @param value
-   *            The value to associate with the key
-   */
-  public void setValue(String key, String value) {
-    if (this.values.containsKey(key)) {
-      this.values.replace(key, value);
-    }
-    else {
-      this.values.put(key, value);
-    }
-  }
-
-  /**
-   * Sets an object value, will replace if the key already exists.
-   * @param key
-   *            The key
-   * @param value
-   *            The value to associate with the key
-   */
-  public void setObject(String key, Object value) {
-    if (this.objects.containsKey(key)) {
-      this.objects.replace(key, value);
-    }
-    else {
-      this.objects.put(key, value);
-    }
   }
 
   @Override

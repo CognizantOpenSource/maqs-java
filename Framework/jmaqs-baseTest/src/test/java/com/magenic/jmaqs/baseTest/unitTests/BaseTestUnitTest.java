@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
  * Unit test class for BaseTest class.
  */
 @Test
-public class BaseGenericTestUnitTest extends BaseTest {
+public class BaseTestUnitTest extends BaseTest {
   /**
    * Verify fully qualified test name.
    */
@@ -24,7 +24,7 @@ public class BaseGenericTestUnitTest extends BaseTest {
     String testName = this.getFullyQualifiedTestClassName();
 
     Assert.assertEquals(testName,
-        "com.magenic.jmaqs.baseTest.unitTests.BaseGenericTestUnitTest.fullyQualifiedTestNameTest");
+        "com.magenic.jmaqs.baseTest.unitTests.BaseTestUnitTest.fullyQualifiedTestNameTest");
   }
 
   /**
