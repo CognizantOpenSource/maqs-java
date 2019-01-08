@@ -1,3 +1,7 @@
+/* 
+ * Copyright 2017 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.baseTest;
 
 import com.magenic.jmaqs.utilities.logging.Logger;

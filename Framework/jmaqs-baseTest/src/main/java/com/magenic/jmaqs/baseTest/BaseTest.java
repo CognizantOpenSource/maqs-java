@@ -5,7 +5,14 @@
 package com.magenic.jmaqs.baseTest;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.*;
+import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
+import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.logging.LoggingConfig;
+import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
+import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.logging.TestResultType;
+import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -17,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -171,6 +177,16 @@ public abstract class BaseTest {
   }
 
   /**
+   * Set Logged Exception List - Add/Update entry in Hash Map with test class name as key.
+   * 
+   * @param loggedExceptionList
+   *                    ArrayList of logged exceptions to use.
+   */
+  public void setLoggedExceptions(ArrayList<String> loggedExceptionList) {
+    this.loggedExceptions.put(this.getFullyQualifiedTestClassName(), loggedExceptionList); 
+  }
+
+  /**
    * Gets the Driver Store.
    * 
    * @return The Driver Store
@@ -232,11 +248,15 @@ public abstract class BaseTest {
    * 
    * @param method
    *          The initial executing Method object
+   * @param testContext
+   *          The initial executing Test Context object  
    * @throws Exception
    *           Throws exception if get logger fails
    */
   @BeforeMethod
-  public void setup(Method method) throws Exception {
+  public void setup(Method method, ITestContext testContext) throws Exception {
+    this.testContextInstance = testContext;  
+      
     // Get the Fully Qualified Test Class Name and set it in the object
     String testName = method.getDeclaringClass() + "." + method.getName();
     testName = testName.replaceFirst("class ", "");
@@ -324,6 +344,7 @@ public abstract class BaseTest {
     Logger log;
 
     this.loggingEnabledSetting = LoggingConfig.getLoggingEnabledSetting();
+    this.setLoggedExceptions(new ArrayList<String>());
     
     if (this.loggingEnabledSetting != LoggingEnabled.NO) {
       log = LoggingConfig
@@ -402,7 +423,7 @@ public abstract class BaseTest {
 
       // If this was an error and written to a file, add it to the console
       // output as well
-      if (messageType == MessageType.ERROR && this.getLogger() instanceof FileLogger) {
+      if (messageType == MessageType.ERROR && !(this.getLogger() instanceof ConsoleLogger)) {
         System.out.println(formattedMessage);
       }
     } catch (Exception e) {

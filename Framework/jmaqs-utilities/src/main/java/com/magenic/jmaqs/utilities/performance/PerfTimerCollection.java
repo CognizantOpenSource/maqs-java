@@ -1,11 +1,14 @@
-package com.magenic.jmaqs.utilities.performance;
+/* 
+ * Copyright 2017 (C) Magenic, All rights Reserved
+ */
 
+package com.magenic.jmaqs.utilities.performance;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
 
 /**
- * Response timer collection class   
- * Object to be owned by Test Class (Object), and passed to page Constructors to insert Performance Timers
+ * Response timer collection class.
+ * Object to be owned by Test Class (Object), and passed to page Constructors to insert Performance Timers.
  */
 public class PerfTimerCollection {
   /**
