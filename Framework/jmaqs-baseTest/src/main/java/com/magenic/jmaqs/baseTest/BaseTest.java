@@ -319,6 +319,7 @@ public abstract class BaseTest {
    */
   @AfterMethod
   public void setTestResult(ITestResult testResult) {
+    this.testContextInstance = testResult.getTestContext();
     this.testResult = testResult;
   }
 
@@ -431,7 +432,15 @@ public abstract class BaseTest {
       System.out.println("Logging failed because: " + e.getMessage());
     }
   }
-  
+
+  /**
+   * Log a verbose message and include the automation specific call stack data.
+   * 
+   * @param message
+   *            The message text
+   * @param args
+   *            String format arguments
+   */
   protected void logVerbose(String message, Object... args) {
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args) + System.lineSeparator());

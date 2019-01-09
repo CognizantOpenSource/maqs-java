@@ -75,7 +75,7 @@ public class BaseTestUnitTest extends BaseTest {
   }
 
   /**
-   * Validate the Logging Enabled Setting is YES (set in Config)
+   * Validate the Logging Enabled Setting is YES (set in Config).
    */
   @Test
   public void loggingEnabledSettingTest() {
@@ -83,7 +83,7 @@ public class BaseTestUnitTest extends BaseTest {
   }
 
   /**
-   * Validate Setting the Test Object to a new Test Object (Console Logger instead of File Logger) 
+   * Validate Setting the Test Object to a new Test Object (Console Logger instead of File Logger). 
    */
   @Test
   public void setTestObjectTest() {
