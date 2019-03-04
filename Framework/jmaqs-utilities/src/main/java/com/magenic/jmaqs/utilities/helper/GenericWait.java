@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.utilities.helper;
 
 import java.time.LocalDateTime;
@@ -222,7 +226,8 @@ public final class GenericWait {
     }
 
     if (!paramsAreEqual) {
-      throw new TimeoutException("Timed out waiting for the supplier to return the expected value of " + comparativeValue);
+      throw new TimeoutException("Timed out waiting for the supplier to return the expected value of "
+          + comparativeValue);
     }
   }
 
@@ -262,8 +267,8 @@ public final class GenericWait {
    *          Parameter to pass to the wait for true function
    * @return True if the wait for true function returned true before timing out
    */
-  public static <T> boolean wait(Function<T,Boolean> waitForTrue, long retryTime, long timeout, boolean throwException, T arg)
-      throws Exception {
+  public static <T> boolean wait(Function<T,Boolean> waitForTrue, long retryTime, long timeout,
+                                 boolean throwException, T arg) throws Exception {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     Exception exception = null;
@@ -309,7 +314,8 @@ public final class GenericWait {
    *          If the last check failed because of an exception should we throw the exception
    * @return True if the wait for true function returned true before timing out
    */
-  public static boolean wait(Supplier<Boolean> waitForTrue, long retryTime, long timeout, boolean throwException) throws Exception {
+  public static boolean wait(Supplier<Boolean> waitForTrue, long retryTime, long timeout,
+                             boolean throwException) throws Exception {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     Exception exception = null;
@@ -353,7 +359,8 @@ public final class GenericWait {
    *          Max timeout for the check
    * @return Return value of the wait for function
    */
-  public static <T> T wait(Supplier<T> waitFor, long retryTime, long timeout) throws InterruptedException, TimeoutException {
+  public static <T> T wait(Supplier<T> waitFor, long retryTime, long timeout)
+      throws InterruptedException, TimeoutException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     Exception exception;
@@ -384,7 +391,8 @@ public final class GenericWait {
    *          MArguments to pass into the wait for function
    * @return Return value of the wait for function
    */
-  public static <T, U> T wait(Function<U, T> waitFor, long retryTime, long timeout, U arg) throws InterruptedException, TimeoutException {
+  public static <T, U> T wait(Function<U, T> waitFor, long retryTime, long timeout, U arg)
+      throws InterruptedException, TimeoutException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     Exception exception;
