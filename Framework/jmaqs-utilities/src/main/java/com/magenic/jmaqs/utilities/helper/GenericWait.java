@@ -4,9 +4,6 @@
 
 package com.magenic.jmaqs.utilities.helper;
 
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
-
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.function.BooleanSupplier;

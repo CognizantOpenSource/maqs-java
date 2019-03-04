@@ -125,6 +125,30 @@ public class GenericWaitUnitTest {
   }
 
   /**
+   * Test waitForTrue passes
+   */
+  @Test
+  public void waitForTruePasses() {
+    try {
+      GenericWait.waitForTrue(() -> 2 == 2);
+    } catch (Exception e) {
+      Assert.fail("waitForTrue threw unexpected exception", e);
+    }
+  }
+
+  /**
+   * Test waitForTrue passes
+   */
+  @Test
+  public void waitForTruePassesWithParameters() {
+    try {
+      GenericWait.waitForTrue((c) -> 2 == c, 2);
+    } catch (Exception e) {
+      Assert.fail("waitForTrue threw unexpected exception", e);
+    }
+  }
+
+  /**
    * Test wait for with no parameters returns the a timeout exception.
    */
   @Test(expectedExceptions = TimeoutException.class)
@@ -255,10 +279,36 @@ public class GenericWaitUnitTest {
   @Test
   public void waitUntilMatch() {
     try {
-      String[] loop = { "a" };
-      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0]+="a", "aa"), "aa");
+      String[] loop = { "" };
+      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0]+="a", "aaa"), "aaa");
     } catch (InterruptedException e) {
       Assert.fail("waitUntil threw unexpected exception", e);
+    }
+  }
+
+  /**
+   * Verify waitUntilMatch with timeout returns as expected
+   */
+  @Test
+  public void waitUntilMatchTimeout() {
+    try {
+      String[] loop = { "aa" };
+      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0]+="", testretry, testtimeout,"bb"), "aa");
+    } catch (InterruptedException e) {
+      Assert.fail("waitUntil threw unexpected exception", e);
+    }
+  }
+
+  /**
+   * Verify waitForMatch with passes as expected
+   */
+  @Test
+  public void waitForMatchPass() {
+    try {
+      String[] loop = {""};
+      GenericWait.waitForMatch(() -> loop[0] += "a", "aaa");
+    } catch (Exception e) {
+      Assert.fail("waitFor threw unexpected exception", e);
     }
   }
 
@@ -272,10 +322,23 @@ public class GenericWaitUnitTest {
   }
 
   /**
+   * Verify waitForMatch with time retry
+   */
+  @Test
+  public void waitForMatchDefinedRetryPass() {
+    try {
+      String[] loop = {""};
+      GenericWait.waitForMatch(() -> loop[0] += "a", testretry, testtimeout, "aaa");
+    } catch (Exception e) {
+      Assert.fail("waitFor threw unexpected exception", e);
+    }
+  }
+
+  /**
    * Verify waitForMatch with time retry and time overridden throws timeout exception
    */
   @Test(expectedExceptions = TimeoutException.class)
-  public void waitForMatchCustomOverrideTimeout() throws InterruptedException, TimeoutException {
+  public void waitForMatchDefinedRetryTimeout() throws InterruptedException, TimeoutException {
     String[] loop = { "a" };
     GenericWait.waitForMatch(() -> loop[0]+="a", testretry, testtimeout, "bb");
   }
