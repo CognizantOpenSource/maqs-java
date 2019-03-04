@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.utilities.helper;
 
 /**
- * Custom FunctionException, as you can't throw a generic exception
+ * Custom FunctionException, as you can't throw a generic exception.
  */
 public class FunctionException extends Exception {
   /**
