@@ -183,8 +183,13 @@ public final class SeleniumConfig {
       }
 
       // Maximize the browser and than return it
-      webDriver.manage().window().maximize();
-      return webDriver;
+      if (webDriver != null) {
+        webDriver.manage().window().maximize();
+        return webDriver;
+      } else {
+        throw new NullPointerException();
+      }
+
     } catch (Exception e) {
       if (webDriver != null) {
         try {
@@ -375,7 +380,7 @@ public final class SeleniumConfig {
     } else {
       Path path = Paths.get(System.getenv("ProgramFiles"), folderName, file);
 
-      if (Files.isRegularFile(path)) {
+      if (path.toFile().isFile()) {
         return path.getParent().toString();
       }
     }
