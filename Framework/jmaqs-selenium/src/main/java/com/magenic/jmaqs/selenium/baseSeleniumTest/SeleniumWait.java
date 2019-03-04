@@ -834,7 +834,7 @@ public class SeleniumWait {
     } catch (Exception e) {
       System.out
           .println("Wait for certain text to be present failed for selector: " + by.toString());
-      e.printStackTrace();
+      System.out.println("Exception thrown e: " + e.getMessage());
     }
     return false;
   }

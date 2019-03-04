@@ -173,8 +173,7 @@ public final class SeleniumConfig {
             webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,"HubUrl")),
                       getRemoteCapabilities());
           } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new Exception("Malformed URL Exception thrown trying to create the remote web driver.", e);
           }
           break;
         default:
