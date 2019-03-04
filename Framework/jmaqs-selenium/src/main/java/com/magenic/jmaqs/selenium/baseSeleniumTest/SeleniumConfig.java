@@ -182,13 +182,8 @@ public final class SeleniumConfig {
       }
 
       // Maximize the browser and than return it
-      if (webDriver != null) {
-        webDriver.manage().window().maximize();
-        return webDriver;
-      } else {
-        throw new NullPointerException();
-      }
-
+      webDriver.manage().window().maximize();
+      return webDriver;
     } catch (Exception e) {
       if (webDriver != null) {
         try {
