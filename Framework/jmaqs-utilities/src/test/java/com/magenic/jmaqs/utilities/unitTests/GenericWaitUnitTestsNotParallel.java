@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.utilities.unitTests;
 
+import com.magenic.jmaqs.utilities.helper.FunctionException;
 import com.magenic.jmaqs.utilities.helper.GenericWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -48,7 +49,7 @@ public class GenericWaitUnitTestsNotParallel {
     try {
       GenericWait.waitFor(GenericWaitUnitTestsNotParallel::isNotParamTest);
     } catch (Exception e) {
-      Assert.fail("waitFor no parameter test failed with exception: " + e);
+      Assert.fail("waitFor no parameter test failed with exception", e);
     }
   }
 
@@ -58,7 +59,11 @@ public class GenericWaitUnitTestsNotParallel {
   @Test
   public void passStringUntilTest() {
     number = 0;
-    Assert.assertTrue(GenericWait.waitUntil(this::isParamTestString, teststring + "3"), "Failed single parameter test");
+    try {
+      Assert.assertTrue(GenericWait.waitUntil(this::isParamTestString, teststring + "3"), "Failed single parameter test");
+    } catch (Exception e) {
+      Assert.fail("waitUntil with parameter failed with exception", e);
+    }
   }
 
   /**
@@ -71,7 +76,7 @@ public class GenericWaitUnitTestsNotParallel {
     try {
       matchedVal = GenericWait.waitUntilMatch(this::functionTestString, "Test String3");
     } catch (Exception e) {
-      Assert.fail("waitUnitMatch parameter test failed with exception: " + e);
+      Assert.fail("waitUnitMatch parameter test failed with exception", e);
     }
 
     Assert.assertTrue(matchedVal.equals("Test String3"), "Failed expected parameter test.");
@@ -88,7 +93,7 @@ public class GenericWaitUnitTestsNotParallel {
     try {
       matchedVal = GenericWait.waitUntilMatch(this::functionTestString, testretry, testtimeout, "Test String3");
     } catch (Exception e) {
-      Assert.fail("waitUnitMatch with parameter and retry/timeouts failed with exception: " + e);
+      Assert.fail("waitUnitMatch with parameter and retry/timeouts failed with exception", e);
     }
 
     Assert.assertTrue(matchedVal.equals("Test String3"), "Failed expected parameter test.");
@@ -103,7 +108,7 @@ public class GenericWaitUnitTestsNotParallel {
     try {
       GenericWait.waitForMatch(() -> teststring + ++number[0], teststring + "3");
     } catch (Exception e) {
-      Assert.fail("waitForMatch parameter test failed with exception: " + e);
+      Assert.fail("waitForMatch parameter test failed with exception", e);
     }
   }
 
@@ -117,7 +122,7 @@ public class GenericWaitUnitTestsNotParallel {
     try {
       GenericWait.waitForMatch(this::functionTestString, testretry, testtimeout, teststring + "3");
     } catch (Exception e) {
-      Assert.fail("waitForMatch parameter test and retry/timeouts failed with exception: " + e);
+      Assert.fail("waitForMatch parameter test and retry/timeouts failed with exception", e);
     }
   }
 
@@ -130,7 +135,7 @@ public class GenericWaitUnitTestsNotParallel {
     try {
       GenericWait.waitFor((p) -> p.equals(teststring + number[0]++), teststring + "3");
     } catch (Exception e) {
-      Assert.fail("waitFor parameter test failed with exception: " + e);
+      Assert.fail("waitFor parameter test failed with exception", e);
     }
   }
 

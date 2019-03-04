@@ -4,6 +4,9 @@
 
 package com.magenic.jmaqs.utilities.helper;
 
+import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
+import com.magenic.jmaqs.utilities.logging.MessageType;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.function.BooleanSupplier;
@@ -16,6 +19,9 @@ import java.util.function.Supplier;
  */
 public final class GenericWait {
 
+  /**
+   * Hide the default public constructor.
+   */
   private GenericWait() {
     throw new IllegalStateException("Utility class");
   }
@@ -38,13 +44,9 @@ public final class GenericWait {
    *          Parameter to pass to the wait for true function
    * @return True if the waitForTrue function returned true before the timeout
    */
-  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg) {
-    try {
-      return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false, arg);
-    } catch (Exception e) {
-      System.out.println(e);
-      return false;
-    }
+  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg)
+      throws InterruptedException, FunctionException {
+    return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false, arg);
   }
 
   /**
@@ -53,13 +55,9 @@ public final class GenericWait {
    *          The function we are waiting to return true
    * @return True if the wait for true function returned true before timing out
    */
-  public static boolean waitUntil(BooleanSupplier waitForTrue) {
-    try {
-      return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false);
-    } catch (Exception e) {
-      System.out.println(e);
-      return false;
-    }
+  public static boolean waitUntil(BooleanSupplier waitForTrue)
+      throws InterruptedException, FunctionException {
+    return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false);
   }
 
   /**
@@ -68,7 +66,8 @@ public final class GenericWait {
    * @param waitForTrue
    *          The function we are waiting to return true
    */
-  public static void waitForTrue(BooleanSupplier waitForTrue) throws Exception {
+  public static void waitForTrue(BooleanSupplier waitForTrue)
+      throws InterruptedException, FunctionException, TimeoutException {
     if (!wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, true)) {
       throw new TimeoutException("Timed out waiting for the function to return true");
     }
@@ -82,7 +81,8 @@ public final class GenericWait {
    * @param arg
    *          Parameter to pass to the wait for true function
    */
-  public static <T> void waitForTrue(Predicate<T> waitForTrue, T arg) throws Exception {
+  public static <T> void waitForTrue(Predicate<T> waitForTrue, T arg)
+      throws InterruptedException, FunctionException, TimeoutException {
     if (!wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, true, arg)) {
       throw new TimeoutException("Timed out waiting for the function to return true");
     }
@@ -270,10 +270,10 @@ public final class GenericWait {
    * @return True if the wait for true function returned true before timing out
    */
   public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout,
-                                 boolean throwException, T arg) throws Exception {
+                                 boolean throwException, T arg) throws InterruptedException, FunctionException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
-    Exception exception = null;
+    FunctionException exception = null;
 
     do {
       try {
@@ -287,7 +287,7 @@ public final class GenericWait {
       } catch (Exception e) {
         // Save of the exception if we want to throw exceptions
         if (throwException) {
-          exception = e;
+          exception = new FunctionException("Predicate exception caught.", e);
         }
       }
 
@@ -317,10 +317,10 @@ public final class GenericWait {
    * @return True if the wait for true function returned true before timing out
    */
   public static boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout,
-                             boolean throwException) throws Exception {
+                             boolean throwException) throws InterruptedException, FunctionException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
-    Exception exception = null;
+    FunctionException exception = null;
 
     do {
       try {
@@ -334,7 +334,7 @@ public final class GenericWait {
       } catch (Exception e) {
         // Save of the exception if we want to throw exceptions
         if (throwException) {
-          exception = e;
+          exception = new FunctionException("BooleanSupplier exception caught.", e);
         }
       }
 
