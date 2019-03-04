@@ -6,7 +6,9 @@ package com.magenic.jmaqs.utilities.helper;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.function.BooleanSupplier;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
@@ -36,7 +38,7 @@ public final class GenericWait {
    *          Parameter to pass to the wait for true function
    * @return True if the waitForTrue function returned true before the timeout
    */
-  public static <T> boolean waitUntil(Function<T, Boolean> waitForTrue, T arg) {
+  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg) {
     try {
       return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false, arg);
     } catch (Exception e) {
@@ -51,7 +53,7 @@ public final class GenericWait {
    *          The function we are waiting to return true
    * @return True if the wait for true function returned true before timing out
    */
-  public static boolean waitUntil(Supplier<Boolean> waitForTrue) {
+  public static boolean waitUntil(BooleanSupplier waitForTrue) {
     try {
       return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false);
     } catch (Exception e) {
@@ -66,7 +68,7 @@ public final class GenericWait {
    * @param waitForTrue
    *          The function we are waiting to return true
    */
-  public static void waitForTrue(Supplier<Boolean> waitForTrue) throws Exception {
+  public static void waitForTrue(BooleanSupplier waitForTrue) throws Exception {
     if (!wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, true)) {
       throw new TimeoutException("Timed out waiting for the function to return true");
     }
@@ -80,7 +82,7 @@ public final class GenericWait {
    * @param arg
    *          Parameter to pass to the wait for true function
    */
-  public static <T> void waitForTrue(Function<T, Boolean> waitForTrue, T arg) throws Exception {
+  public static <T> void waitForTrue(Predicate<T> waitForTrue, T arg) throws Exception {
     if (!wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, true, arg)) {
       throw new TimeoutException("Timed out waiting for the function to return true");
     }
@@ -267,7 +269,7 @@ public final class GenericWait {
    *          Parameter to pass to the wait for true function
    * @return True if the wait for true function returned true before timing out
    */
-  public static <T> boolean wait(Function<T,Boolean> waitForTrue, long retryTime, long timeout,
+  public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout,
                                  boolean throwException, T arg) throws Exception {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
@@ -279,7 +281,7 @@ public final class GenericWait {
         exception = null;
 
         // Check if the function returns true
-        if (waitForTrue.apply(arg)) {
+        if (waitForTrue.test(arg)) {
           return true;
         }
       } catch (Exception e) {
@@ -314,7 +316,7 @@ public final class GenericWait {
    *          If the last check failed because of an exception should we throw the exception
    * @return True if the wait for true function returned true before timing out
    */
-  public static boolean wait(Supplier<Boolean> waitForTrue, long retryTime, long timeout,
+  public static boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout,
                              boolean throwException) throws Exception {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
@@ -326,7 +328,7 @@ public final class GenericWait {
         exception = null;
 
         // Check if the function returns true
-        if (waitForTrue.get()) {
+        if (waitForTrue.getAsBoolean()) {
           return true;
         }
       } catch (Exception e) {
