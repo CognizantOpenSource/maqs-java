@@ -173,8 +173,7 @@ public final class SeleniumConfig {
             webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,"HubUrl")),
                       getRemoteCapabilities());
           } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new Exception("Malformed URL Exception thrown trying to create the remote web driver.", e);
           }
           break;
         default:
@@ -375,7 +374,7 @@ public final class SeleniumConfig {
     } else {
       Path path = Paths.get(System.getenv("ProgramFiles"), folderName, file);
 
-      if (Files.isRegularFile(path)) {
+      if (path.toFile().isFile()) {
         return path.getParent().toString();
       }
     }

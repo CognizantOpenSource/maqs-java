@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium.baseSeleniumTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -153,7 +154,7 @@ public class SeleniumWait {
 
     if (element == null && assertFound) {
       Assert.fail(String.format(
-          "The selector with value [%s] couldn't be found." + System.getProperty("line.separator"),
+          "The selector with value [%s] couldn't be found.%n",
           by.toString()));
     }
     return element;
@@ -253,8 +254,7 @@ public class SeleniumWait {
    */
   public void waitForAbsentElement(final By by, final int waitTime) {
     Assert.assertTrue(this.fluentWaitInvisible(by, waitTime),
-        String.format("The selector [%s] was still found when it should have disappeared."
-            + System.getProperty("line.separator"), by));
+        String.format("The selector [%s] was still found when it should have disappeared.%n", by));
   }
 
   /**
@@ -317,7 +317,7 @@ public class SeleniumWait {
     }
 
     this.resetImplicitWait();
-    return null;
+    return new ArrayList<>();
   }
 
   /**
@@ -349,17 +349,16 @@ public class SeleniumWait {
 
     if (element == null && assertFound) {
       Assert.fail(String.format(
-          "The specified selector [%s] couldn't be found." + System.getProperty("line.separator"),
+          "The specified selector [%s] couldn't be found.%n",
           by.toString()));
     }
 
-    if (!waitUntilExactText(by, text) && assertFound) {
+    if (!waitUntilExactText(by, text) && (element != null) && assertFound) {
       String displayedText = element.getText();
 
       Assert.assertEquals(displayedText, text,
           String.format(
-              "The observed text [%s] didn't equal the expected text [%s] for selector [%s]."
-                  + System.getProperty("line.separator"),
+              "The observed text [%s] didn't equal the expected text [%s] for selector [%s].%n",
               displayedText, text, by.toString()));
     }
 
@@ -463,11 +462,11 @@ public class SeleniumWait {
     if (!this.waitUntilContainsText(by, text, this.implicitWaitTimeout) && assertFound) {
       if (element == null) {
         Assert.fail(
-            String.format("The selector [%s] wasn't found." + System.getProperty("line.separator"),
+            String.format("The selector [%s] wasn't found.%n",
                 by.toString()));
       } else {
-        Assert.fail(String.format("The expected text [%s] wasn't contained in the selector [%s]."
-            + System.getProperty("line.separator"), text, by.toString()));
+        Assert.fail(String.format("The expected text [%s] wasn't contained in the selector [%s].%n",
+            text, by.toString()));
       }
     }
 
@@ -492,8 +491,7 @@ public class SeleniumWait {
         Assert.fail("The specifed element couldn't be found. [" + by.toString() + "]");
       } else {
         Assert.fail(String.format(
-            "The expected text [%s] wasn't contained in the attribute [%s] for selector [%s]."
-                + System.getProperty("line.separator"),
+            "The expected text [%s] wasn't contained in the attribute [%s] for selector [%s].%n",
             text, attribute, by.toString()));
       }
     }
@@ -574,7 +572,7 @@ public class SeleniumWait {
     }
     if (assertFound) {
       Assert.fail(
-          String.format("Selector [%s] couldn't be found." + System.getProperty("line.separator"),
+          String.format("Selector [%s] couldn't be found.%n",
               by.toString()));
     }
 
@@ -659,7 +657,7 @@ public class SeleniumWait {
     }
     if (assertFound) {
       Assert.fail(
-          String.format("Selector [%s] couldn't be found." + System.getProperty("line.separator"),
+          String.format("Selector [%s] couldn't be found.%n",
               by.toString()));
     }
 
@@ -836,7 +834,7 @@ public class SeleniumWait {
     } catch (Exception e) {
       System.out
           .println("Wait for certain text to be present failed for selector: " + by.toString());
-      e.printStackTrace();
+      System.out.println("Exception thrown e: " + e.getMessage());
     }
     return false;
   }
@@ -857,7 +855,7 @@ public class SeleniumWait {
    * @return true if it's successfully loaded, false if timed out and not finished loading
    */
   public boolean waitUntilPageLoad() {
-    String before = this.browser.getPageSource();
+    String before = "";
     String after = "";
     int counter = this.implicitWaitTimeout;
 
@@ -868,8 +866,7 @@ public class SeleniumWait {
         Thread.sleep(ONE_THOUSAND);
         after = this.browser.getPageSource();
       } catch (InterruptedException e) {
-        System.out.println("Failed to wait for the page to laod");
-        e.printStackTrace();
+        Thread.currentThread().interrupt();
       }
     } while (!before.equals(after) && counter > 0);
 
@@ -930,8 +927,7 @@ public class SeleniumWait {
       ((JavascriptExecutor) this.browser).executeScript("arguments[0].scrollIntoView(true);",
           element);
     } catch (Exception e) {
-      System.out.println("Failed to do JavaScript scroll into view..." + e.getStackTrace()
-          + System.getProperty("line.separator"));
+      System.out.println(String.format("Failed to do JavaScript scroll into view...%s%n", e.getStackTrace()));
     }
 
     Coordinates coord = ((Locatable) element).getCoordinates();
