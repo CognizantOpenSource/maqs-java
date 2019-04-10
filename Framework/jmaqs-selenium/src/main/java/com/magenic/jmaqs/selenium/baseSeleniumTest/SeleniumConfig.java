@@ -25,7 +25,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -149,6 +148,19 @@ public final class SeleniumConfig {
                   getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
           webDriver = new ChromeDriver(chromeOptions);
           break;
+        case "HEADLESSCHROME":
+          ChromeOptions headlessChromeOptions = new ChromeOptions();
+          headlessChromeOptions.addArguments("test-type");
+          headlessChromeOptions.addArguments("--disable-web-security");
+          headlessChromeOptions.addArguments("--allow-running-insecure-content");
+          headlessChromeOptions.addArguments("--disable-extensions");
+          headlessChromeOptions.addArguments("--no-sandbox");
+          headlessChromeOptions.addArguments("--headless");
+
+          System.setProperty("webdriver.chrome.driver",
+                  getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
+          webDriver = new ChromeDriver(headlessChromeOptions);
+          break;
         case "EDGE":
           EdgeOptions edgeOptions = new EdgeOptions();
           edgeOptions.setPageLoadStrategy("Normal");
@@ -159,13 +171,6 @@ public final class SeleniumConfig {
                           + File.separator + "MicrosoftWebDriver.exe");
           webDriver = new EdgeDriver(edgeOptions);
           break;
-
-        case "PHANTOMJS":
-          System.setProperty("phantomjs.binary.path",
-                  getDriverLocation("phantomjs.exe") + File.separator + "phantomjs.exe");
-          webDriver = new PhantomJSDriver();
-          break;
-
         case "REMOTE":
           // MalformedURLException exception is thrown if no protocol is
           // specified, or an unknown protocol is found, or spec is null.

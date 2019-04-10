@@ -35,7 +35,7 @@ public class SeleniumConfigTest {
 
     String driverName = SeleniumConfig.getBrowserName();
 
-    Assert.assertTrue(driverName.equalsIgnoreCase("PhantomJS"));
+    Assert.assertTrue(driverName.equalsIgnoreCase("HEADLESSCHROME"));
   }
 
   /**
@@ -99,7 +99,7 @@ public class SeleniumConfigTest {
   @Test
   public void getBrowserWithString() throws Exception{
 
-    WebDriver driver = SeleniumConfig.browser("phantomjs");
+    WebDriver driver = SeleniumConfig.browser("HEADLESSCHROME");
 
     Assert.assertNotNull(driver);
     driver.quit();
