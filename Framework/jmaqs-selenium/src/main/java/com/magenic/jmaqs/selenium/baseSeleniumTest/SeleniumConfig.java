@@ -393,7 +393,7 @@ public final class SeleniumConfig {
    * @return The timeout time
    */
   private static int getTimeoutTime() {
-    return Integer.parseInt(Config.getGeneralValue("Timeout", "0"));
+    return Integer.parseInt(Config.getGeneralValue("BrowserTimeout", "0"));
   }
 
   /**
@@ -402,28 +402,6 @@ public final class SeleniumConfig {
    * @return The wait time
    */
   private static int getWaitTime() {
-    return Integer.parseInt(Config.getGeneralValue("WaitTime", "0"));
-  }
-
-  /**
-   * Get the wait default wait driver.
-   *
-   * @param driver
-   *          The WebDriver
-   *
-   * @return The WebDriverWait
-   */
-  public static WebDriverWait getWaitDriver(WebDriver driver) {
-    return new WebDriverWait(driver, getTimeoutTime(), getWaitTime());
-  }
-
-  /**
-   * Resets wait default wait driver.
-   *
-   * @return The WebDriverWait
-   */
-  public WebDriverWait resetWaitDriver() throws Exception {
-    return getWaitDriver(browser());
-  }
-
+    return Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0"));
+  }  
 }

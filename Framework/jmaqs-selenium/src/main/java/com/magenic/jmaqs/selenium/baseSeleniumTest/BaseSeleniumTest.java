@@ -73,10 +73,7 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
       SeleniumWait wait = new SeleniumWait(driver);
 
       seleniumTestObject.set(new SeleniumTestObject(driver, wait, this.getLogger(),
-          this.getFullyQualifiedTestClassName()));
-
-      wait.setWaitDriver(driver, SeleniumConfig.getWaitDriver(driver));
-      
+          this.getFullyQualifiedTestClassName()));      
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s",
           e.getMessage());
