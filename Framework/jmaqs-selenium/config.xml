@@ -57,7 +57,7 @@
 
         <SoftAssertScreenshot>Yes</SoftAssertScreenshot>
         <SavePagesourceOnFail>Yes</SavePagesourceOnFail>
-        <ImageFormat>Jpeg</ImageFormat>
+        <ImageFormat>jpeg</ImageFormat>
     </SeleniumMaqs>
 
     <RemoteSeleniumCapsMaqs>

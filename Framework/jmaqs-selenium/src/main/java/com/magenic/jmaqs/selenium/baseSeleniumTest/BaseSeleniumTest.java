@@ -6,9 +6,13 @@ package com.magenic.jmaqs.selenium.baseSeleniumTest;
 
 import com.magenic.jmaqs.baseTest.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 
+import com.magenic.jmaqs.utilities.logging.TestResultType;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITest;
 import org.testng.ITestResult;
 
 /**
@@ -92,12 +96,11 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
   protected void beforeLoggingTeardown(ITestResult resultType) {
     // Try to take a screen shot
     try {
-      // TODO add screen capture once SeleniumUtilities has been created
-      /*
-       * if (this.Log is FileLogger && resultType != TestResultType.PASS &&
-       * this.LoggingEnabledSetting != LoggingEnabled.NO) {
-       * SeleniumUtilities.CaptureScreenshot(this.WebDriver, this.Log); }
-       */
+      if (this.getWebDriver() != null && resultType.getStatus() != ITestResult.SUCCESS 
+          && this.getLoggingEnabledSetting() != LoggingEnabled.NO) {
+
+        captureScreenShot(this.getWebDriver(), this.getLogger(), ""); 
+      }       
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
     }
@@ -110,5 +113,13 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to quit because: %s", e.getMessage());
     }
+  }
+
+  /**
+   * Capture Screenshot.
+   * @return Path to screenshot.
+   */
+  protected String captureScreenShot(WebDriver driver, Logger log, String fileName) {
+    return SeleniumUtilities.captureScreenshot(driver, log, fileName);
   }
 }

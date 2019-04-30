@@ -14,6 +14,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -43,6 +44,15 @@ public final class SeleniumConfig {
    */
   public static final ConfigSection REMOTE_SELENIUM_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
 
+  /**
+   * Get Full Screenshot flag.
+   *
+   * @return The flag to turn full screenshots on or off
+   */
+  public static String getScreenShotExtension() {
+    return Config.getValueForSection(SELENIUM_SECTION,"ImageFormat", ".png");
+  }
+  
   /**
    * Get the browser type name - Example: Chrome.
    *
@@ -197,8 +207,8 @@ public final class SeleniumConfig {
           throw new Exception("Failed to quit Web driver during setup", quitExecption);
         }
       }
-
-      throw new Exception("Failed to setup web driver. Your driver may be out of date or unsupported.", e);
+      String errorException = "Failed to setup web driver. Your driver may be out of date or unsupported. Exception: ";
+      throw new Exception(MessageFormat.format("{1} {0}", errorException, e));
     }
   }
 

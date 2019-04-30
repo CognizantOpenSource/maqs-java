@@ -36,6 +36,6 @@ public class HomePageModel extends BasePageModel {
    * @return True if the page was loaded
    */
   public boolean isPageLoaded() {
-    return this.testObject.getSeleniumWait().waitForElement(WELCOME_MESSAGE).isDisplayed();
+    return this.testObject.getSeleniumWait().waitForVisibleElement(WELCOME_MESSAGE).isDisplayed();
   }
 }

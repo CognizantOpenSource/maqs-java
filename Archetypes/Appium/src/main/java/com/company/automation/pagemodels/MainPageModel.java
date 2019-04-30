@@ -33,7 +33,7 @@ public class MainPageModel extends BasePageModel {
    * @return the username value text
    */
   public String getUsernameValueText() {
-    return this.appiumTestObject.getAppiumWait().waitForElement(loginUsernameValue).getText();
+    return this.appiumTestObject.getAppiumWait().waitForVisibleElement(loginUsernameValue).getText();
   }
 
   /**
@@ -42,6 +42,6 @@ public class MainPageModel extends BasePageModel {
    * @return the password value text
    */
   public String getPasswordValueText() {
-    return this.appiumTestObject.getAppiumWait().waitForElement(loginPasswordValue).getText();
+    return this.appiumTestObject.getAppiumWait().waitForVisibleElement(loginPasswordValue).getText();
   }
 }
