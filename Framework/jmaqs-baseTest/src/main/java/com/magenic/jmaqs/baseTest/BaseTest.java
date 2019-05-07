@@ -1,5 +1,5 @@
-/* 
- * Copyright 2017 (C) Magenic, All rights Reserved
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.baseTest;
@@ -89,7 +89,7 @@ public abstract class BaseTest {
 
   /**
    * Gets the Performance Timer Collection.
-   * 
+   *
    * @return Performance Timer Collection
    */
   public PerfTimerCollection getPerfTimerCollection() {
@@ -98,9 +98,8 @@ public abstract class BaseTest {
 
   /**
    * Sets the Performance Timer Collection.
-   * 
-   * @param perfTimerCollection
-   *                      Performance Timer Collection to use
+   *
+   * @param perfTimerCollection Performance Timer Collection to use
    */
   public void setPerfTimerCollection(PerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
@@ -108,7 +107,7 @@ public abstract class BaseTest {
 
   /**
    * Gets the Soft Assert.
-   * 
+   *
    * @return Soft Assert
    */
   public SoftAssert getSoftAssert() {
@@ -117,9 +116,8 @@ public abstract class BaseTest {
 
   /**
    * Sets the Soft Assert.
-   * 
-   * @param softAssert
-   *                The Soft Assert to use
+   *
+   * @param softAssert The Soft Assert to use
    */
   public void setSoftAssert(SoftAssert softAssert) {
     this.softAssert = softAssert;
@@ -127,7 +125,7 @@ public abstract class BaseTest {
 
   /**
    * Gets the Logger for this test.
-   * 
+   *
    * @return Logger object
    */
   public Logger getLogger() {
@@ -136,9 +134,8 @@ public abstract class BaseTest {
 
   /**
    * Set the Logger for this test.
-   * 
-   * @param log
-   *          The Logger object
+   *
+   * @param log The Logger object
    */
   public void setLogger(Logger log) {
     this.testObject.setLog(log);
@@ -146,7 +143,7 @@ public abstract class BaseTest {
 
   /**
    * Gets the Logging Enabled setting.
-   * 
+   *
    * @return Logging Enabled setting
    */
   public LoggingEnabled getLoggingEnabledSetting() {
@@ -155,9 +152,8 @@ public abstract class BaseTest {
 
   /**
    * Set the Logging Enabled setting.
-   * 
-   * @param setting
-   *          The LoggingEnabled enum
+   *
+   * @param setting The LoggingEnabled enum
    */
   private void setLoggingEnabled(LoggingEnabled setting) {
     this.loggingEnabledSetting = setting;
@@ -165,7 +161,7 @@ public abstract class BaseTest {
 
   /**
    * Get logged exceptions for this test.
-   * 
+   *
    * @return ArrayList of logged exceptions for this test
    */
   public ArrayList<String> getLoggedExceptions() {
@@ -178,17 +174,16 @@ public abstract class BaseTest {
 
   /**
    * Set Logged Exception List - Add/Update entry in Hash Map with test class name as key.
-   * 
-   * @param loggedExceptionList
-   *                    ArrayList of logged exceptions to use.
+   *
+   * @param loggedExceptionList ArrayList of logged exceptions to use.
    */
   public void setLoggedExceptions(ArrayList<String> loggedExceptionList) {
-    this.loggedExceptions.put(this.getFullyQualifiedTestClassName(), loggedExceptionList); 
+    this.loggedExceptions.put(this.getFullyQualifiedTestClassName(), loggedExceptionList);
   }
 
   /**
    * Gets the Driver Store.
-   * 
+   *
    * @return The Driver Store
    */
   public ManagerDictionary getManagerStore() {
@@ -197,7 +192,7 @@ public abstract class BaseTest {
 
   /**
    * Gets the TestNG Test Context.
-   * 
+   *
    * @return The TestNG Test Context
    */
   public ITestContext getTestContext() {
@@ -206,9 +201,8 @@ public abstract class BaseTest {
 
   /**
    * Sets the TestNG Test context.
-   * 
-   * @param testContext
-   *                The TestNG Test Context to use
+   *
+   * @param testContext The TestNG Test Context to use
    */
   public void setTestContext(ITestContext testContext) {
     this.testContextInstance = testContext;
@@ -216,60 +210,53 @@ public abstract class BaseTest {
 
   /**
    * Get the BaseTestObject for this test.
-   * 
+   *
    * @return The BaseTestObject
    */
   public BaseTestObject getTestObject() {
     if (!this.baseTestObjects.containsKey(this.getFullyQualifiedTestClassName())) {
       this.createNewTestObject();
     }
-    
+
     return this.baseTestObjects.get(this.getFullyQualifiedTestClassName());
   }
 
   /**
    * Sets the Test Object.
-   * 
-   * @param baseTestObject
-   *                The Base Test Object to use
+   *
+   * @param baseTestObject The Base Test Object to use
    */
   public void setTestObject(BaseTestObject baseTestObject) {
     String key = this.getFullyQualifiedTestClassName();
     if (this.baseTestObjects.containsKey(key)) {
       this.baseTestObjects.replace(key, baseTestObject);
-    }
-    else {
+    } else {
       this.baseTestObjects.put(key, baseTestObject);
     }
   }
 
   /**
    * Setup before a test.
-   * 
-   * @param method
-   *          The initial executing Method object
-   * @param testContext
-   *          The initial executing Test Context object  
-   * @throws Exception
-   *           Throws exception if get logger fails
+   *
+   * @param method      The initial executing Method object
+   * @param testContext The initial executing Test Context object
+   * @throws Exception Throws exception if get logger fails
    */
-  @BeforeMethod
-  public void setup(Method method, ITestContext testContext) throws Exception {
-    this.testContextInstance = testContext;  
-      
+  @BeforeMethod public void setup(Method method, ITestContext testContext) throws Exception {
+    this.testContextInstance = testContext;
+
     // Get the Fully Qualified Test Class Name and set it in the object
     String testName = method.getDeclaringClass() + "." + method.getName();
     testName = testName.replaceFirst("class ", "");
     this.fullyQualifiedTestClassName = testName;
-    
+
     this.createNewTestObject();
   }
 
   /**
    * Cleanup after a test.
    */
-  @AfterMethod
-  public void teardown() {
+  @AfterMethod public void teardown() {
     try {
       this.beforeLoggingTeardown(testResult);
     } catch (Exception e) {
@@ -300,10 +287,10 @@ public abstract class BaseTest {
 
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.getFullyQualifiedTestClassName();
-    
+
     // Release logged messages
     this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
-    
+
     // Release the Base Test Object
     this.baseTestObjects.remove(fullyQualifiedTestName, this.testObject);
 
@@ -313,12 +300,10 @@ public abstract class BaseTest {
 
   /**
    * Set the test result after each test execution.
-   * 
-   * @param testResult
-   *          The result object
+   *
+   * @param testResult The result object
    */
-  @AfterMethod
-  public void setTestResult(ITestResult testResult) {
+  @AfterMethod public void setTestResult(ITestResult testResult) {
     this.testContextInstance = testResult.getTestContext();
     this.testResult = testResult;
   }
@@ -330,15 +315,14 @@ public abstract class BaseTest {
 
   /**
    * Steps to do before logging teardown results.
-   * 
-   * @param resultType
-   *          The test result
+   *
+   * @param resultType The test result
    */
   protected abstract void beforeLoggingTeardown(ITestResult resultType);
 
   /**
    * Setup logging data.
-   * 
+   *
    * @return Logger
    */
   protected Logger createLogger() {
@@ -346,10 +330,10 @@ public abstract class BaseTest {
 
     this.loggingEnabledSetting = LoggingConfig.getLoggingEnabledSetting();
     this.setLoggedExceptions(new ArrayList<String>());
-    
+
     if (this.loggingEnabledSetting != LoggingEnabled.NO) {
-      log = LoggingConfig
-          .getLogger(StringProcessor.safeFormatter("%s - %s", this.getFullyQualifiedTestClassName(),
+      log = LoggingConfig.getLogger(StringProcessor
+          .safeFormatter("%s - %s", this.getFullyQualifiedTestClassName(),
               DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
                   .format(LocalDateTime.now(Clock.systemUTC()))));
     } else {
@@ -361,7 +345,7 @@ public abstract class BaseTest {
 
   /**
    * Get the type of test result.
-   * 
+   *
    * @return The type of test result
    */
   protected TestResultType getResultType() {
@@ -372,14 +356,14 @@ public abstract class BaseTest {
         return TestResultType.FAIL;
       case ITestResult.SKIP:
         return TestResultType.SKIP;
-      default:  
-        return TestResultType.OTHER;  
+      default:
+        return TestResultType.OTHER;
     }
   }
 
   /**
    * Get the test result type as text.
-   * 
+   *
    * @return The test result type as text
    */
   protected String getResultText() {
@@ -392,12 +376,12 @@ public abstract class BaseTest {
         return "SKIP";
       default:
         return "OTHER";
-      }
+    }
   }
 
   /**
    * Get the fully qualified test name.
-   * 
+   *
    * @return The test name including class
    */
   protected String getFullyQualifiedTestClassName() {
@@ -406,13 +390,10 @@ public abstract class BaseTest {
 
   /**
    * Try to log a message - Do not fail if the message is not logged.
-   * 
-   * @param messageType
-   *          The type of message
-   * @param message
-   *          The message text
-   * @param args
-   *          String format arguments
+   *
+   * @param messageType The type of message
+   * @param message     The message text
+   * @param args        String format arguments
    */
   protected void tryToLog(MessageType messageType, String message, Object... args) {
     // Get the formatted message
@@ -435,11 +416,9 @@ public abstract class BaseTest {
 
   /**
    * Log a verbose message and include the automation specific call stack data.
-   * 
-   * @param message
-   *            The message text
-   * @param args
-   *            String format arguments
+   *
+   * @param message The message text
+   * @param args    String format arguments
    */
   protected void logVerbose(String message, Object... args) {
     StringBuilder messages = new StringBuilder();
@@ -447,11 +426,12 @@ public abstract class BaseTest {
 
     for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
       // If the stack trace element is from the com.magenic package (excluding this method) append the stack trace line 
-      if (element.toString().startsWith("com.magenic") && !element.toString().contains("BaseTest.logVerbose")) {
-        messages.append(element.toString() + System.lineSeparator());  
+      if (element.toString().startsWith("com.magenic") && !element.toString()
+          .contains("BaseTest.logVerbose")) {
+        messages.append(element.toString() + System.lineSeparator());
       }
     }
-    
+
     this.getLogger().logMessage(MessageType.VERBOSE, messages.toString());
   }
 
@@ -460,6 +440,7 @@ public abstract class BaseTest {
    */
   protected void createNewTestObject() {
     Logger newLogger = this.createLogger();
-    this.testObject = new BaseTestObject(newLogger, new SoftAssert(newLogger), this.getFullyQualifiedTestClassName());
+    this.testObject = new BaseTestObject(newLogger, new SoftAssert(newLogger),
+        this.getFullyQualifiedTestClassName());
   }
 }

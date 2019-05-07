@@ -83,4 +83,5 @@ public abstract class DriverManager implements AutoCloseable {
     return this.baseDriver;
   }
 
+  public abstract void close() throws Exception;
 }
