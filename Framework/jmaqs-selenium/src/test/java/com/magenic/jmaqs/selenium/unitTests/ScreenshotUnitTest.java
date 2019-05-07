@@ -35,7 +35,7 @@ public class ScreenshotUnitTest extends BaseSeleniumTest {
    */
   @Test
   public void createScreenShotWithLoggerTest() throws IOException {
-    String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getLogger(), "");
+    String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getLog(), "");
     File ss = new File(path);
     Assert.assertTrue(ss.exists() && ss.isFile());
     ss.delete();
@@ -46,9 +46,9 @@ public class ScreenshotUnitTest extends BaseSeleniumTest {
    */
   @Test
   public void createScreenShotWithLoggerFileNameTest() throws IOException {
-    String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getLogger(), "");
+    String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getLog(), "");
     String screenshotNameWithoutExtension = FilenameUtils.getBaseName(path);
-    String loggerNameWithoutExtension = FilenameUtils.getBaseName(((FileLogger) this.getLogger()).getFilePath());   
+    String loggerNameWithoutExtension = FilenameUtils.getBaseName(((FileLogger) this.getLog()).getFilePath());
     Assert.assertEquals(screenshotNameWithoutExtension, loggerNameWithoutExtension);    
   }
 }

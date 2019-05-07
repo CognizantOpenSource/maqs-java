@@ -4,6 +4,8 @@
 
 package com.magenic.jmaqs.utilities.logging;
 
+import com.magenic.jmaqs.utilities.helper.StringProcessor;
+
 /**
  * Abstract logging interface base class.
  */
@@ -110,4 +112,29 @@ public abstract class Logger {
     // The message should be logged if it's level is less than or equal to the current logging level
     return messageType.getValue() <= this.logLevel.getValue();
   }
+
+    // Log a verbose message and include the automation specific call stack data
+    public void logVerbose(String message, Object... args) {
+      StringBuilder messages = new StringBuilder();
+      messages.append(StringProcessor.safeFormatter(message, args));
+
+      StackTraceElement[] stackTrace = new Throwable().getStackTrace();
+
+      //var fullName = methodInfo.DeclaringType.FullName + "." + methodInfo.Name;
+      //var methodInfo = System.MethodBase.GetCurrentMethod();
+      String fullName = new Throwable().getStackTrace()[0].getMethodName();
+
+      for (String stackLevel:stackTrace.toString().split(System.lineSeparator(), -1))
+      {
+        String trimmed = stackLevel.trim();
+
+        // starts with hard coded will have to be changed to work with Java instead of C# log
+        if (!trimmed.startsWith("at Microsoft.") && !trimmed.startsWith("at System.") && !trimmed.startsWith("at NUnit.") && !trimmed.startsWith("at " + fullName))
+        {
+          messages.append(stackLevel);
+        }
+      }
+
+      logMessage(MessageType.VERBOSE, messages.toString());
+    }
 }

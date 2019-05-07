@@ -9,11 +9,11 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 /**
  * The TestObject class.
  */
-public class TestObject {
+public class BaseTestObject {
   /**
    * The Logger object.
    */
-  protected Logger logger;
+  protected Logger Log;
 
   /**
    * The Fully Qualified Test Name.
@@ -26,7 +26,7 @@ public class TestObject {
    * @param fullyQualifiedTestName
    *          The Fully Qualified Test Name
    */
-  public TestObject(String fullyQualifiedTestName) {
+  public BaseTestObject(String fullyQualifiedTestName) {
     this.testName = fullyQualifiedTestName;
   }
 
@@ -38,9 +38,9 @@ public class TestObject {
    * @param logger
    *          The Logger object
    */
-  public TestObject(String fullyQualifiedTestName, Logger logger) {
+  public BaseTestObject(String fullyQualifiedTestName, Logger logger) {
     this.testName = fullyQualifiedTestName;
-    this.logger = logger;
+    this.Log = logger;
   }
 
   /**
@@ -57,17 +57,17 @@ public class TestObject {
    * 
    * @return A Logger object
    */
-  public Logger getLogger() {
-    return this.logger;
+  public Logger getLog() {
+    return this.Log;
   }
 
   /**
    * Set the Logger for the TestObject.
    * 
-   * @param log
+   * @param logger
    *          The Logger object
    */
-  public void setLogger(Logger log) {
-    this.logger = log;
+  public void setLog(Logger logger) {
+    this.Log = logger;
   }
 }

@@ -32,9 +32,9 @@ public class BaseGenericTestUnitTest extends BaseGenericTest {
    */
   @Test
   public void fileLoggerTest() {
-    this.setLogger(new FileLogger());
+    this.setLog(new FileLogger());
 
-    if (!(this.getLogger() instanceof FileLogger)) {
+    if (!(this.getLog() instanceof FileLogger)) {
       Assert.fail("FileLogger was not set.");
     }
   }

@@ -49,7 +49,7 @@ public abstract class BaseGenericTest {
   /**
    * Thread local storage of TestObject.
    */
-  private ThreadLocal<TestObject> testObject = new ThreadLocal<TestObject>();
+  private ThreadLocal<BaseTestObject> testObject = new ThreadLocal<BaseTestObject>();
 
   /**
    * Initializes a new instance of the BaseGenericTest class.
@@ -63,8 +63,8 @@ public abstract class BaseGenericTest {
    * 
    * @return Logger object
    */
-  public Logger getLogger() {
-    return this.testObject.get().getLogger();
+  public Logger getLog() {
+    return this.testObject.get().getLog();
   }
 
   /**
@@ -73,8 +73,8 @@ public abstract class BaseGenericTest {
    * @param log
    *          The Logger object
    */
-  public void setLogger(Logger log) {
-    testObject.get().setLogger(log);
+  public void setLog(Logger log) {
+    testObject.get().setLog(log);
   }
 
   /**
@@ -118,7 +118,7 @@ public abstract class BaseGenericTest {
    * 
    * @return The TestObject
    */
-  public TestObject getTestObject() {
+  public BaseTestObject getTestObject() {
     return this.testObject.get();
   }
 
@@ -136,8 +136,8 @@ public abstract class BaseGenericTest {
     String testName = method.getDeclaringClass() + "." + method.getName();
     testName = testName.replaceFirst("class ", "");
 
-    this.testObject.set(new TestObject(testName));
-    this.testObject.get().setLogger(this.setupLogging());
+    this.testObject.set(new BaseTestObject(testName));
+    this.testObject.get().setLog(this.setupLogging());
 
     this.postSetupLogging();
   }
@@ -167,9 +167,9 @@ public abstract class BaseGenericTest {
 
     // Cleanup log files we don't want
     try {
-      if ((this.getLogger() instanceof FileLogger) && testResult.getStatus() == ITestResult.SUCCESS
+      if ((this.getLog() instanceof FileLogger) && testResult.getStatus() == ITestResult.SUCCESS
           && this.loggingEnabledSetting == LoggingEnabled.ONFAIL) {
-        Files.delete(Paths.get(((FileLogger) this.getLogger()).getFilePath()));
+        Files.delete(Paths.get(((FileLogger) this.getLog()).getFilePath()));
       }
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
@@ -250,11 +250,11 @@ public abstract class BaseGenericTest {
 
     try {
       // Write to the log
-      this.getLogger().logMessage(messageType, formattedMessage);
+      this.getLog().logMessage(messageType, formattedMessage);
 
       // If this was an error and written to a file, add it to the console
       // output as well
-      if (messageType == MessageType.ERROR && this.getLogger() instanceof FileLogger) {
+      if (messageType == MessageType.ERROR && this.getLog() instanceof FileLogger) {
         System.out.println(formattedMessage);
       }
     } catch (Exception e) {
@@ -262,4 +262,32 @@ public abstract class BaseGenericTest {
       System.out.println("Logging failed because: " + e.getMessage());
     }
   }
+
+    // Log a verbose message and include the automation specific call stack data
+  /*
+    protected void logVerbose(String message, Object... args) {
+        StringBuilder messages = new StringBuilder();
+        messages.append(StringProcessor.safeFormatter(message, args));
+
+        StackTraceElement[] stackTrace = new Throwable().getStackTrace();
+
+        //var fullName = methodInfo.DeclaringType.FullName + "." + methodInfo.Name;
+        String fullName = new Throwable().getStackTrace()[0].getMethodName();
+
+        //var methodInfo = System.MethodBase.GetCurrentMethod();
+
+        for (String stackLevel:stackTrace.toString().split(System.lineSeparator(), -1))
+        {
+            String trimmed = stackLevel.trim();
+
+            // starts with hard coded will have to be changed to work with Java instead of C# log
+            if (!trimmed.startsWith("at Microsoft.") && !trimmed.startsWith("at System.") && !trimmed.startsWith("at NUnit.") && !trimmed.startsWith("at " + fullName))
+            {
+                messages.append(stackLevel);
+            }
+        }
+
+        this.getLog().logMessage(MessageType.VERBOSE, messages.toString());
+    }
+    */
 }

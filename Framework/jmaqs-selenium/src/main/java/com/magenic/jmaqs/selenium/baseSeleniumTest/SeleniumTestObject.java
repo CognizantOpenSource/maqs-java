@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.selenium.baseSeleniumTest;
 
-import com.magenic.jmaqs.baseTest.TestObject;
+import com.magenic.jmaqs.baseTest.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
 
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * The SeleniumTestObject Class.
  */
-public class SeleniumTestObject extends TestObject {
+public class SeleniumTestObject extends BaseTestObject {
 
   /**
    * The WebDriver Object.

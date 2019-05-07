@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.appium.baseAppiumTest;
 
-import com.magenic.jmaqs.baseTest.TestObject;
+import com.magenic.jmaqs.baseTest.BaseTestObject;
 import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumWait;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import io.appium.java_client.AppiumDriver;
@@ -12,7 +12,7 @@ import io.appium.java_client.AppiumDriver;
 /**
  * Class AppiumTestObject.
  */
-public class AppiumTestObject extends TestObject {
+public class AppiumTestObject extends BaseTestObject {
 
   /** The appium driver. */
   protected AppiumDriver appiumDriver;
