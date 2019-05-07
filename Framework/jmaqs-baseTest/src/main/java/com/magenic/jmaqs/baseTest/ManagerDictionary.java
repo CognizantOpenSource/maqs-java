@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 (C) Magenic, All rights Reserved
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.baseTest;
@@ -11,81 +11,53 @@ import java.util.*;
 /**
  * Driver manager dictionary.
  */
-public class ManagerDictionary extends Dictionary<String, DriverManager> implements AutoCloseable {
+public class ManagerDictionary extends HashMap<String, DriverManager> implements AutoCloseable {
+
   @Override public void close() throws Exception {
     this.clear();
   }
 
-  @Override public int size() {
-    return 0;
+  @Override public void clear() {
+    for (Map.Entry<String, DriverManager> entry : this.entrySet()) {
+      try {
+        entry.getValue().close();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    super.clear();
   }
 
-  @Override public boolean isEmpty() {
-    return false;
+  //TODO: Check and temp
+  @SuppressWarnings("unchecked") public <T extends Object> T getDriver(String key) {
+    return (T) this.get(key);
   }
 
-  @Override public Enumeration<String> keys() {
-    return null;
+  public void put(DriverManager driverManager) {
+    this.put(driverManager.getClass().getName(), driverManager);
   }
 
-  @Override public Enumeration<DriverManager> elements() {
-    return null;
+  public void putOrOverride(DriverManager driverManager) {
+    this.putOrOverride(driverManager.getClass().getName(), driverManager);
   }
 
-  @Override public DriverManager get(Object key) {
-    return null;
+  public void putOrOverride(String key, DriverManager driverManager) {
+    this.remove(key);
+    this.put(key, driverManager);
   }
 
- /* @Override public DriverManager get(Object object) {
-    String key = object.getClass().getName();
-
-    if (this.containsKey(key))
-    {
+  public boolean Remove(String key) {
+    if (this.containsKey(key)) {
       try {
         this.get(key).close();
       } catch (Exception e) {
         e.printStackTrace();
       }
     }
-  }*/
 
-  private boolean containsKey(String key) {
+    super.remove(key);
+    return this.containsKey(key);
 
-    for (Iterator<String> it = this.keys().asIterator(); it.hasNext(); ) {
-      String keyValue = it.next();
-      if (keyValue.equals(key)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  @Override public DriverManager put(String key, DriverManager value) {
-    return null;
-  }
-
-  @Override public DriverManager remove(Object key) {
-    return null;
-  }
-
-  public void clear() {
-    for (AbstractMap.SimpleEntry<String, DriverManager> driverManagerPair : this.getPairs()) {
-      try {
-        driverManagerPair.getValue().close();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
-  }
-
-  private List<AbstractMap.SimpleEntry<String, DriverManager>> getPairs() {
-    ArrayList<AbstractMap.SimpleEntry<String, DriverManager>> pairList = new ArrayList<>();
-    for (Iterator<String> it = this.keys().asIterator(); it.hasNext(); ) {
-      String key = it.next();
-      DriverManager driverManager = this.get(key);
-      pairList.add(new AbstractMap.SimpleEntry<>(key, driverManager));
-    }
-    return pairList;
   }
 }
 
