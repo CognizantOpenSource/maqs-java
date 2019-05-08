@@ -4,10 +4,9 @@ import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.baseTest.BaseTestObject;
 import com.magenic.jmaqs.baseTest.DriverManager;
 import com.magenic.jmaqs.baseTest.ManagerDictionary;
+import org.apache.commons.lang3.NotImplementedException;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.function.Supplier;
@@ -19,17 +18,28 @@ public class ManagerDictionaryTest extends BaseTest {
   @Test
   public void testClose() {
 
-    try (ManagerDictionary managerDictionary = new ManagerDictionary()) {
-      managerDictionary.put("DM1", getTestDriverManager());
-      managerDictionary.put("DM2", getTestDriverManager());
-      managerDictionary.put("DM3", getTestDriverManager());
+    ManagerDictionary managerDictionary = new ManagerDictionary();
+    final String dm1 = "DM1";
+    managerDictionary.put(dm1, getTestDriverManager());
+    final String dm2 = "DM2";
+    managerDictionary.put(dm2, getTestDriverManager());
+    final String dm3 = "DM3";
+    managerDictionary.put(dm3, getTestDriverManager());
+
+    try {
+      managerDictionary.close();
+      Assert.assertFalse(managerDictionary.containsKey(dm1));
+      Assert.assertFalse(managerDictionary.containsKey(dm2));
+      Assert.assertFalse(managerDictionary.containsKey(dm3));
     } catch (Exception e) {
       e.printStackTrace();
     }
+
   }
 
   @Test
   public void testGetDriver() {
+    throw new NotImplementedException("Unit test not implemented yet");
   }
 
   @Test
@@ -49,10 +59,12 @@ public class ManagerDictionaryTest extends BaseTest {
 
   @Test
   public void testPutOrOverride() {
+    throw new NotImplementedException("Unit test not implemented yet");
   }
 
   @Test
   public void testPutOrOverride1() {
+    throw new NotImplementedException("Unit test not implemented yet");
   }
 
   @Test
@@ -64,6 +76,7 @@ public class ManagerDictionaryTest extends BaseTest {
     managerDictionary.put(dm2, getTestDriverManager());
     Assert.assertTrue(managerDictionary.containsKey(dm1));
     Assert.assertTrue(managerDictionary.containsKey(dm2));
+    System.out.println("Removing DM2 entry...");
     managerDictionary.remove(dm2);
     Assert.assertTrue(managerDictionary.containsKey(dm1));
     Assert.assertFalse(managerDictionary.containsKey(dm2));
@@ -92,7 +105,7 @@ public class ManagerDictionaryTest extends BaseTest {
 
     @Override
     public void close() throws Exception {
-
+      System.out.println("Closing Driver Manager...");
     }
   }
 }

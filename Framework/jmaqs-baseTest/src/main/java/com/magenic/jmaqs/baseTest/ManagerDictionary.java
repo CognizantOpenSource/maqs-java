@@ -46,7 +46,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager> implements
     this.put(key, driverManager);
   }
 
-  public boolean Remove(String key) {
+  public boolean remove(String key) {
     if (this.containsKey(key)) {
       try {
         this.get(key).close();
