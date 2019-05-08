@@ -13,11 +13,13 @@ import java.util.*;
  */
 public class ManagerDictionary extends HashMap<String, DriverManager> implements AutoCloseable {
 
-  @Override public void close() throws Exception {
+  @Override
+  public void close() throws Exception {
     this.clear();
   }
 
-  @Override public void clear() {
+  @Override
+  public void clear() {
     for (Map.Entry<String, DriverManager> entry : this.entrySet()) {
       try {
         entry.getValue().close();
@@ -29,7 +31,8 @@ public class ManagerDictionary extends HashMap<String, DriverManager> implements
   }
 
   //TODO: Check and temp
-  @SuppressWarnings("unchecked") public <T extends Object> T getDriver(String key) {
+  @SuppressWarnings("unchecked")
+  public <T extends Object> T getDriver(String key) {
     return (T) this.get(key);
   }
 
@@ -56,7 +59,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager> implements
     }
 
     super.remove(key);
-    return this.containsKey(key);
+    return !this.containsKey(key);
 
   }
 }

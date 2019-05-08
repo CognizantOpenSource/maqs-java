@@ -57,7 +57,7 @@ public abstract class BaseTest {
   /**
    * The Collection of Base Test Objects to use.
    */
-  private ConcurrentHashMap<String, BaseTestObject> baseTestObjects;
+  ConcurrentHashMap<String, BaseTestObject> baseTestObjects;
 
   /**
    * The Performance Timer Collection.
@@ -242,7 +242,8 @@ public abstract class BaseTest {
    * @param testContext The initial executing Test Context object
    * @throws Exception Throws exception if get logger fails
    */
-  @BeforeMethod public void setup(Method method, ITestContext testContext) throws Exception {
+  @BeforeMethod
+  public void setup(Method method, ITestContext testContext) throws Exception {
     this.testContextInstance = testContext;
 
     // Get the Fully Qualified Test Class Name and set it in the object
@@ -256,7 +257,8 @@ public abstract class BaseTest {
   /**
    * Cleanup after a test.
    */
-  @AfterMethod public void teardown() {
+  @AfterMethod
+  public void teardown() {
     try {
       this.beforeLoggingTeardown(testResult);
     } catch (Exception e) {
@@ -303,7 +305,8 @@ public abstract class BaseTest {
    *
    * @param testResult The result object
    */
-  @AfterMethod public void setTestResult(ITestResult testResult) {
+  @AfterMethod
+  public void setTestResult(ITestResult testResult) {
     this.testContextInstance = testResult.getTestContext();
     this.testResult = testResult;
   }

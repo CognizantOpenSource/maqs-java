@@ -47,12 +47,9 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Initializes a new instance of the BaseTestObject class.
    *
-   * @param logger
-   *               The test's logger 
-   * @param softAssert
-   *               The test's soft assert
-   * @param fullyQualifiedTestName
-   *               The test's fully qualified test name
+   * @param logger                 The test's logger
+   * @param softAssert             The test's soft assert
+   * @param fullyQualifiedTestName The test's fully qualified test name
    */
   public BaseTestObject(Logger logger, SoftAssert softAssert, String fullyQualifiedTestName) {
     this.log = logger;
@@ -68,10 +65,8 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Initializes a new instance of the BaseTestObject class.
    *
-   * @param logger
-   *               The test's logger 
-   * @param fullyQualifiedTestName
-   *               The test's fully qualified test name
+   * @param logger                 The test's logger
+   * @param fullyQualifiedTestName The test's fully qualified test name
    */
   public BaseTestObject(Logger logger, String fullyQualifiedTestName) {
     this.log = logger;
@@ -87,8 +82,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Initializes a new instance of the BaseTestObject class.
    *
-   * @param baseTestObject
-   *               An existing base test object
+   * @param baseTestObject An existing base test object
    */
   public BaseTestObject(BaseTestObject baseTestObject) {
     this.log = baseTestObject.getLog();
@@ -103,32 +97,28 @@ public class BaseTestObject implements AutoCloseable {
 
   /**
    * Sets a string value, will replace if the key already exists.
-   * @param key
-   *            The key
-   * @param value
-   *            The value to associate with the key
+   *
+   * @param key   The key
+   * @param value The value to associate with the key
    */
   public void setValue(String key, String value) {
     if (this.values.containsKey(key)) {
       this.values.replace(key, value);
-    }
-    else {
+    } else {
       this.values.put(key, value);
     }
   }
 
   /**
    * Sets an object value, will replace if the key already exists.
-   * @param key
-   *            The key
-   * @param value
-   *            The value to associate with the key
+   *
+   * @param key   The key
+   * @param value The value to associate with the key
    */
   public void setObject(String key, Object value) {
     if (this.objects.containsKey(key)) {
       this.objects.replace(key, value);
-    }
-    else {
+    } else {
       this.objects.put(key, value);
     }
   }
@@ -136,8 +126,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Gets the logger.
    *
-   * @return
-   *          The logger
+   * @return The logger
    */
   public Logger getLog() {
     return this.log;
@@ -146,8 +135,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Sets the logger.
    *
-   * @param logger
-   *                The logger to use
+   * @param logger The logger to use
    */
   public void setLog(Logger logger) {
     this.log = logger;
@@ -156,8 +144,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Gets the Performance Timer Collection.
    *
-   * @return
-   *          Performance Timer Collection
+   * @return Performance Timer Collection
    */
   public PerfTimerCollection getPerfTimerCollection() {
     return this.perfTimerCollection;
@@ -166,8 +153,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Sets the Performance Timer Collection.
    *
-   * @param perfTimerCollection
-   *                            Performance Timer Collection
+   * @param perfTimerCollection Performance Timer Collection
    */
   public void setPerfTimerCollection(PerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
@@ -176,8 +162,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Gets the Soft Assert.
    *
-   * @return
-   *          The Soft Assert
+   * @return The Soft Assert
    */
   public SoftAssert getSoftAssert() {
     return this.softAssert;
@@ -186,8 +171,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Sets the Soft Assert.
    *
-   * @param softAssert
-   *                    The Soft Assert to use
+   * @param softAssert The Soft Assert to use
    */
   public void setSoftAssert(SoftAssert softAssert) {
     this.softAssert = softAssert;
@@ -196,8 +180,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Gets the Concurrent Hash Map of string key value pairs.
    *
-   * @return
-   *          Concurrent Hash Map of string key value pairs
+   * @return Concurrent Hash Map of string key value pairs
    */
   public ConcurrentHashMap<String, String> getValues() {
     return this.values;
@@ -206,8 +189,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Sets the Concurrent Hash Map of string key and object value pairs.
    *
-   * @param values
-   *                Concurrent Hash Map of string key value pairs to use
+   * @param values Concurrent Hash Map of string key value pairs to use
    */
   private void setValues(ConcurrentHashMap<String, String> values) {
     this.values = values;
@@ -216,8 +198,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Gets the Concurrent Hash Map of string key and object value pairs.
    *
-   * @return
-   *          Concurrent Hash Map of string key and object value pairs
+   * @return Concurrent Hash Map of string key and object value pairs
    */
   public ConcurrentHashMap<String, Object> getObjects() {
     return this.objects;
@@ -226,8 +207,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Sets the Concurrent Hash Map of string key and object value pairs.
    *
-   * @param objects
-   *                Concurrent Hash Map of string key and object value pairs to use
+   * @param objects Concurrent Hash Map of string key and object value pairs to use
    */
   public void setObjects(ConcurrentHashMap<String, Object> objects) {
     this.objects = objects;
@@ -236,8 +216,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Gets the Concurrent Hash Map of string key and driver value pairs.
    *
-   * @return
-   *          Concurrent Hash Map of string key and driver value pairs
+   * @return Concurrent Hash Map of string key and driver value pairs
    */
   public ManagerDictionary getManagerStore() {
     return this.managerStore;
@@ -246,8 +225,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Sets the Concurrent Hash Map of string key and driver value pairs.
    *
-   * @param managerStore
-   *               Concurrent Hash Map of string key and driver value pairs to use.
+   * @param managerStore Concurrent Hash Map of string key and driver value pairs to use.
    */
   public void setManagerStore(ManagerDictionary managerStore) {
     this.managerStore = managerStore;

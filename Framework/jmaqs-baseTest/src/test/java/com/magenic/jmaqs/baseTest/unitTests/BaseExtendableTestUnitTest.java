@@ -1,0 +1,23 @@
+package com.magenic.jmaqs.baseTest.unitTests;
+
+import com.magenic.jmaqs.baseTest.BaseExtendableTest;
+import org.testng.ITestResult;
+
+public class BaseExtendableTestUnitTest extends BaseExtendableTest {
+
+
+  @Override
+  protected void postSetupLogging() throws Exception {
+
+  }
+
+  @Override
+  protected void beforeLoggingTeardown(ITestResult resultType) {
+
+  }
+
+  @Override
+  protected void createNewTestObject() {
+
+  }
+}

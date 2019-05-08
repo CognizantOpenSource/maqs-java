@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 import static org.testng.Assert.*;
 
-public class ManagerDictionaryTest extends BaseTest {
+public class ManagerDictionaryUnitTest extends BaseTest {
 
   @Test
   public void testClose() {
@@ -77,7 +77,7 @@ public class ManagerDictionaryTest extends BaseTest {
     Assert.assertTrue(managerDictionary.containsKey(dm1));
     Assert.assertTrue(managerDictionary.containsKey(dm2));
     System.out.println("Removing DM2 entry...");
-    managerDictionary.remove(dm2);
+    Assert.assertTrue(managerDictionary.remove(dm2),"Checking if remove reported as successful");
     Assert.assertTrue(managerDictionary.containsKey(dm1));
     Assert.assertFalse(managerDictionary.containsKey(dm2));
   }
@@ -105,7 +105,7 @@ public class ManagerDictionaryTest extends BaseTest {
 
     @Override
     public void close() throws Exception {
-      System.out.println("Closing Driver Manager...");
+      System.out.println("Closing Test Driver Manager...");
     }
   }
 }
