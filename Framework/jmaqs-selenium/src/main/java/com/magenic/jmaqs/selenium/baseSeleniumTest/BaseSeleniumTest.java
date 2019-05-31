@@ -129,7 +129,7 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
    *        Throws exception
    */
   protected  WebDriver getBrowser() throws Exception {
-      // Returns the web driver
-      return SeleniumConfig.browser();
+    // Returns the web driver
+    return SeleniumConfig.browser();
   }
 }

@@ -1,23 +1,23 @@
-/*
- * Copyright 2019 (C) Magenic, All rights Reserved
+/* 
+ * Copyright 2017 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium.baseSeleniumTest;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.logging.MessageType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
-import com.magenic.jmaqs.utilities.logging.MessageType;
 
 /**
- * Event Handler Class implementing WebDriverEventListener
+ * Event Handler Class implementing WebDriverEventListener.
  */
-public class EventHandler implements WebDriverEventListener{
+public class EventHandler implements WebDriverEventListener {
   /**
-   * The Event Handler Logger
+   * The Event Handler Logger.
    */  
   private Logger logger;
 
@@ -44,8 +44,7 @@ public class EventHandler implements WebDriverEventListener{
     try {
       this.logger.logMessage(MessageType.INFORMATION, "Before clicking element: {0} Text:{1} Location: X:{2} Y:{3}", 
               element.toString(), element.getText(), element.getLocation().x, element.getLocation().y);
-    }
-    catch (Exception exc) {
+    } catch (Exception exc) {
       this.logger.logMessage(MessageType.INFORMATION, "Before element clicked");
     }
   }
@@ -63,8 +62,7 @@ public class EventHandler implements WebDriverEventListener{
     try {
       this.logger.logMessage(MessageType.INFORMATION, "Element clicked: {0} Text:{1} Location: X:{2} Y:{3}", 
               element.toString(), element.getText(), element.getLocation().x, element.getLocation().y);
-    }
-    catch (Exception exc) {
+    } catch (Exception exc) {
       this.logger.logMessage(MessageType.INFORMATION, "Element clicked");
     }
   }
@@ -211,7 +209,7 @@ public class EventHandler implements WebDriverEventListener{
   }
 
   /**
-   * Log message after navigating to a page
+   * Log message after navigating to a page.
    * 
    * @param url
    *            The URL
