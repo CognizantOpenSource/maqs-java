@@ -37,8 +37,9 @@
         <Browser>Chrome</Browser>
         <Browser>Internet Explorer</Browser>
         <Browser>Firefox</Browser>
-        <Browser>Edge</Browser>-->
-        <Browser>PhantomJS</Browser>
+        <Browser>Edge</Browser>
+        <Browser>HEADLESSCHROME</Browser>-->
+        <Browser>HEADLESSCHROME</Browser>
 
         <!--Remote browser settings-->
         <!--<Browser>REMOTE</Browser>-->
@@ -56,7 +57,7 @@
 
         <SoftAssertScreenshot>Yes</SoftAssertScreenshot>
         <SavePagesourceOnFail>Yes</SavePagesourceOnFail>
-        <ImageFormat>Jpeg</ImageFormat>
+        <ImageFormat>jpeg</ImageFormat>
     </SeleniumMaqs>
 
     <RemoteSeleniumCapsMaqs>

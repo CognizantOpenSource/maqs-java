@@ -250,11 +250,9 @@ public class FileLogger extends Logger {
     this.filePath = Paths.get(this.directory, name).toString();
     this.messageType = messageLevel;
 
-    FileWriter writer = null;
     File file = new File(this.filePath);
     if (file.exists() && !append) {
-      try {
-        writer = new FileWriter(this.filePath, false);
+      try (FileWriter writer =  new FileWriter(this.filePath, false)) {
         writer.write("");
         writer.flush();
       } catch (IOException e) {
@@ -262,16 +260,6 @@ public class FileLogger extends Logger {
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
                 "Failed to write to event log because: %s", e.getMessage()));
-      } finally {
-        if (writer != null) {
-          try {
-            writer.close();
-          } catch (IOException i) {
-            ConsoleLogger console = new ConsoleLogger();
-            console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-                      "Failed to close FileWriter: %s", i.getMessage()));
-          }
-        }
       }
     }
   }
@@ -354,16 +342,12 @@ public class FileLogger extends Logger {
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
-    FileWriter fw = null;
-    BufferedWriter bw = null;
-    PrintWriter writer = null;
-
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
-      try {
-        fw = new FileWriter(this.filePath, true);
-        bw = new BufferedWriter(fw);
-        writer = new PrintWriter(bw);
+      try (
+          FileWriter fw = new FileWriter(this.filePath, true);
+          BufferedWriter bw = new BufferedWriter(fw);
+          PrintWriter writer = new PrintWriter(bw)) {
         writer.println(
                 StringProcessor.safeFormatter("%s%s", Config.NEW_LINE, System.currentTimeMillis()));
         writer.print(StringProcessor.safeFormatter("%s:\t", messageType.toString()));
@@ -376,28 +360,6 @@ public class FileLogger extends Logger {
         console.logMessage(MessageType.ERROR,
                 StringProcessor.safeFormatter("Failed to write to event log because: %s", e));
         console.logMessage(messageType, message, args);
-      } finally {
-        if (writer != null) {
-          writer.close();
-        }
-        if (fw != null) {
-          try {
-            fw.close();
-          } catch (IOException i) {
-            ConsoleLogger console = new ConsoleLogger();
-            console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-                      "Failed to close FileWriter: %s", i.getMessage()));
-          }
-        }
-        if (bw != null) {
-          try {
-            bw.close();
-          } catch (IOException i) {
-            ConsoleLogger console = new ConsoleLogger();
-            console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-                    "Failed to close BufferedWriter: %s", i.getMessage()));
-          }
-        }
       }
     }
   }

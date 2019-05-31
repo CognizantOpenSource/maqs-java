@@ -12,8 +12,11 @@ import com.magenic.jmaqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -37,30 +40,31 @@ public class SeleniumUtilities {
    *          Appends a name to the end of a filename
    * @return Boolean if the save of the image was successful
    */
-  public static boolean captureScreenshot(WebDriver webDriver, Logger log, String appendName) {
+  public static String captureScreenshot(WebDriver webDriver, 
+                                          Logger log, 
+                                          String appendName) {
     try {
       String path;
 
       // Check if we are using a file logger
       if (!(log instanceof FileLogger)) {
-        // Since this is not a file logger we will need to use a generic
-        // file name
-        path = captureScreenshot(webDriver, LoggingConfig.getLogDirectory(),
-            "ScreenCap" + appendName);
+        // Since this is not a file logger we will need to use a generic file name
+        path =  captureScreenshot(webDriver, LoggingConfig.getLogDirectory(),"ScreenCap" + appendName);
+        
       } else {
         // Calculate the file name
         String fullpath = ((FileLogger) log).getFilePath();
         String directory = new File(fullpath).getParent();
-        String fileNameWithoutExtension = new File(fullpath).getName();
+        String fileNameWithoutExtension = FilenameUtils.getBaseName(fullpath);
 
-        path = captureScreenshot(webDriver, directory, fileNameWithoutExtension);
+        path =  captureScreenshot(webDriver, directory, fileNameWithoutExtension);
       }
 
       log.logMessage(MessageType.INFORMATION, "Screenshot saved: " + path);
-      return true;
+      return path;
     } catch (Exception exception) {
       log.logMessage(MessageType.ERROR, "Screenshot error: %s", exception.toString());
-      return false;
+      return "";
     }
   }
 
@@ -77,25 +81,24 @@ public class SeleniumUtilities {
    * @throws IOException
    *           There was a problem creating the screen shot
    */
-  public static String captureScreenshot(WebDriver webDriver, String directory,
-      String fileNameWithoutExtension) throws IOException {
+  public static String captureScreenshot(WebDriver webDriver,
+                                         String directory, 
+                                         String fileNameWithoutExtension) throws IOException {
+    
     File scrFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 
-    // Make sure the directory exists
-    File folder = new File(directory);
-    if (!folder.isDirectory()) {
-      folder.mkdir();
-    }
+    checkDirectory(directory);
 
     // Calculate the file name
-    String path = Paths.get(directory, fileNameWithoutExtension + ".png").toString();
+    String filePath = MessageFormat.format("{0}.{1}",fileNameWithoutExtension, SeleniumConfig.getScreenShotExtension());
+    String fullPath = Paths.get(directory, filePath).toString();
 
     // Save the screenshot
-    FileUtils.copyFile(scrFile, new File(path));
+    FileUtils.copyFile(scrFile, new File(fullPath));
 
-    return path;
-  }
-
+    return fullPath;
+  }  
+  
   /**
    * Get the web driver from a web element.
    * 
@@ -117,4 +120,15 @@ public class SeleniumUtilities {
     return driver;
   }
 
+  /**
+   * Checks if directory exists, creating one if not.
+   * @param directory The directory path
+   */
+  private static void checkDirectory(String directory) {
+    // Make sure the directory exists
+    File folder = new File(directory);
+    if (!folder.isDirectory()) {
+      folder.mkdir();
+    }
+  }
 }

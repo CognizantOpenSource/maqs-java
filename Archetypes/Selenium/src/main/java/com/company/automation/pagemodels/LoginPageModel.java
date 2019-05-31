@@ -65,7 +65,7 @@ public class LoginPageModel extends BasePageModel {
    */
   public HomePageModel loginWithValidCredentials(String userName, String password) {
     this.enterCredentials(userName, password);
-    this.testObject.getSeleniumWait().waitForElement(LOGIN_BUTTON).click();
+    this.testObject.getSeleniumWait().waitForVisibleElement(LOGIN_BUTTON).click();
 
     return new HomePageModel(this.testObject);
   }
@@ -81,8 +81,8 @@ public class LoginPageModel extends BasePageModel {
    */
   public boolean loginWithInvalidCredentials(String userName, String password) {
     this.enterCredentials(userName, password);
-    this.testObject.getSeleniumWait().waitForElement(LOGIN_BUTTON).click();
-    return this.testObject.getSeleniumWait().waitForElement(LOGIN_ERROR).isDisplayed();
+    this.testObject.getSeleniumWait().waitForVisibleElement(LOGIN_BUTTON).click();
+    return this.testObject.getSeleniumWait().waitForVisibleElement(LOGIN_ERROR).isDisplayed();
   }
 
   /**
@@ -94,8 +94,8 @@ public class LoginPageModel extends BasePageModel {
    *          the password
    */
   public void enterCredentials(String userName, String password) {
-    this.testObject.getSeleniumWait().waitForElement(USERNAME_INPUT).sendKeys(userName);
-    this.testObject.getSeleniumWait().waitForElement(PASSWORD_INPUT).sendKeys(password);
+    this.testObject.getSeleniumWait().waitForVisibleElement(USERNAME_INPUT).sendKeys(userName);
+    this.testObject.getSeleniumWait().waitForVisibleElement(PASSWORD_INPUT).sendKeys(password);
   }
 
   public boolean isPageLoaded() {

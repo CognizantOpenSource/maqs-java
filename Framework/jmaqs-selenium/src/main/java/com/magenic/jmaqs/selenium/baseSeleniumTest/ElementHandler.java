@@ -109,9 +109,7 @@ public class ElementHandler {
   public static void checkCheckBox(SeleniumWait seleniumWait, By by, boolean check) {
     WebElement element = seleniumWait.waitForClickableElement(by);
 
-    if (check && !element.isSelected()) {
-      element.click();
-    } else if (!check && element.isSelected()) {
+    if ((check && !element.isSelected()) || (!check && element.isSelected())) {
       element.click();
     }
   }
@@ -409,6 +407,7 @@ public class ElementHandler {
         Thread.sleep(500);
       } catch (InterruptedException e) {
         // Wait
+        Thread.currentThread().interrupt();
       }
     }
   }
