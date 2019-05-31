@@ -237,5 +237,35 @@ public class BaseTestObject implements AutoCloseable {
    */
   @Override
   public void close() {
+    if (this.managerStore == null) {
+      return;
+    }
+
+    this.log.logMessage(MessageType.VERBOSE, "Start dispose");
+
+    for (DriverManager singleDriver : this.managerStore.values()) {
+      if (singleDriver != null) {
+        try {
+          singleDriver.close();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+      this.managerStore = null;
+      this.log.logMessage(MessageType.VERBOSE, "End dispose");
+    }
+
+  }
+
+  /**
+   * Close.
+   *
+   * @param closing the closing
+   */
+  //In C#, but might not be necessary
+  public void close(boolean closing) {
+    if (!closing) {
+      this.close();
+    }
   }
 }
