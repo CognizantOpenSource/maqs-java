@@ -9,6 +9,7 @@ import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.jar.Attributes;
 
 /**
  * The BaseTestObject class.
@@ -232,6 +233,52 @@ public class BaseTestObject implements AutoCloseable {
   }
 
   /**
+   * Add driver manager.
+   *
+   * @param <T>           the type parameter
+   * @param driverManager the driver manager
+   */
+  public <T extends DriverManager> void addDriverManager(T driverManager) {
+    this.addDriverManager(driverManager, false);
+  }
+
+  /**
+   * Add driver manager.
+   *
+   * @param <T>              the type parameter
+   * @param driverManager    the driver manager
+   * @param overrideIfExists the override if exists
+   */
+  public <T extends DriverManager> void addDriverManager(T driverManager,
+      boolean overrideIfExists) {
+    if (overrideIfExists) {
+      //TODO: GENERIC T STRING
+      this.overrideDriverManager("", driverManager);
+    } else {
+      //TODO: GENERIC T STRING
+      this.addDriverManager("", driverManager);
+    }
+  }
+
+  public void overrideDriverManager(String key, DriverManager driverManager) {
+    if (this.managerStore.containsKey(key)) {
+      this.managerStore.putOrOverride(key, driverManager);
+    } else {
+      this.managerStore.put(key, driverManager);
+    }
+  }
+
+  /**
+   * Add driver manager.
+   *
+   * @param key           the key
+   * @param driverManager the driver manager
+   */
+  public void addDriverManager(String key, DriverManager driverManager) {
+    this.managerStore.put(key, driverManager);
+  }
+
+  /**
    * Dispose of the driver store.
    * **NEEDS IMPLEMENTATION
    */
@@ -258,7 +305,7 @@ public class BaseTestObject implements AutoCloseable {
   }
 
   /**
-   * Close.
+   * Dispose of the driver store.
    *
    * @param closing the closing
    */
