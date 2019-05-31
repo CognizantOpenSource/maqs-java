@@ -42,11 +42,11 @@ public class EventHandler implements WebDriverEventListener{
   @Override
   public void beforeClickOn(WebElement element, WebDriver driver) {
     try {
-      this.logger.logVerbose("Before clicking element: {0} Text:{1} Location: X:{2} Y:{3}", 
+      this.logger.logMessage(MessageType.INFORMATION, "Before clicking element: {0} Text:{1} Location: X:{2} Y:{3}", 
               element.toString(), element.getText(), element.getLocation().x, element.getLocation().y);
     }
     catch (Exception exc) {
-      this.logger.logVerbose("Before element clicked");
+      this.logger.logMessage(MessageType.INFORMATION, "Before element clicked");
     }
   }
 
@@ -61,11 +61,11 @@ public class EventHandler implements WebDriverEventListener{
   @Override
   public void afterClickOn(WebElement element, WebDriver driver) {
     try {
-      this.logger.logVerbose("Element clicked: {0} Text:{1} Location: X:{2} Y:{3}", 
+      this.logger.logMessage(MessageType.INFORMATION, "Element clicked: {0} Text:{1} Location: X:{2} Y:{3}", 
               element.toString(), element.getText(), element.getLocation().x, element.getLocation().y);
     }
     catch (Exception exc) {
-      this.logger.logVerbose("Element clicked");
+      this.logger.logMessage(MessageType.INFORMATION, "Element clicked");
     }
   }
 
@@ -113,7 +113,7 @@ public class EventHandler implements WebDriverEventListener{
    */
   @Override
   public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-    this.logger.logVerbose("Before finding element By: {0}", by.toString());
+    this.logger.logMessage(MessageType.INFORMATION, "Before finding element By: {0}", by.toString());
   }
 
   /**
@@ -128,7 +128,7 @@ public class EventHandler implements WebDriverEventListener{
    */
   @Override
   public void afterFindBy(By by, WebElement element, WebDriver driver) {
-    this.logger.logVerbose("Found element By: " + by.toString());
+    this.logger.logMessage(MessageType.INFORMATION, "Found element By: " + by.toString());
   }
 
   /**

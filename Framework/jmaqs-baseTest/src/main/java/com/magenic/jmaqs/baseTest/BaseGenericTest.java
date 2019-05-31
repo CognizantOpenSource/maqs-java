@@ -262,32 +262,4 @@ public abstract class BaseGenericTest {
       System.out.println("Logging failed because: " + e.getMessage());
     }
   }
-
-    // Log a verbose message and include the automation specific call stack data
-  /*
-    protected void logVerbose(String message, Object... args) {
-        StringBuilder messages = new StringBuilder();
-        messages.append(StringProcessor.safeFormatter(message, args));
-
-        StackTraceElement[] stackTrace = new Throwable().getStackTrace();
-
-        //var fullName = methodInfo.DeclaringType.FullName + "." + methodInfo.Name;
-        String fullName = new Throwable().getStackTrace()[0].getMethodName();
-
-        //var methodInfo = System.MethodBase.GetCurrentMethod();
-
-        for (String stackLevel:stackTrace.toString().split(System.lineSeparator(), -1))
-        {
-            String trimmed = stackLevel.trim();
-
-            // starts with hard coded will have to be changed to work with Java instead of C# log
-            if (!trimmed.startsWith("at Microsoft.") && !trimmed.startsWith("at System.") && !trimmed.startsWith("at NUnit.") && !trimmed.startsWith("at " + fullName))
-            {
-                messages.append(stackLevel);
-            }
-        }
-
-        this.getLog().logMessage(MessageType.VERBOSE, messages.toString());
-    }
-    */
 }
