@@ -15,7 +15,6 @@ import java.util.UUID;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Unit test for the GenericWait class.
@@ -115,7 +114,7 @@ public class GenericWaitUnitTest {
   /**
    * Test wait until with a parameter array works when the wait function returns false.
    */
-  @Test(expectedExceptions = NotImplementedException.class)
+  @Test(expectedExceptions = UnsupportedOperationException.class)
   public void throwExceptionWithoutParamTest() throws Throwable {
     try {
       GenericWait.waitForTrue(this::throwError);
@@ -179,7 +178,7 @@ public class GenericWaitUnitTest {
   /**
    * Test wait without parameters returns function exception.
    */
-  @Test(expectedExceptions = NotImplementedException.class)
+  @Test(expectedExceptions = UnsupportedOperationException.class)
   public void throwExceptionWithoutParamWithCustomTimesTest() throws Throwable {
     try {
       GenericWait.wait(this::throwError, testretry, testtimeout, true);
@@ -376,7 +375,7 @@ public class GenericWaitUnitTest {
    * @return Always throws an exception
    */
   private boolean throwError() {
-    throw new NotImplementedException();
+    throw new UnsupportedOperationException();
   }
 
   /**
