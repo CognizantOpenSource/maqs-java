@@ -21,8 +21,7 @@ public class ListProcessorUnitTest {
    * Unit Test for creating a comma delimited string.
    */
 
-  @Test
-  public void createCommaDelimitedStringTest() {
+  @Test public void createCommaDelimitedStringTest() {
     ArrayList<String> stringList = new ArrayList<String>();
 
     stringList.add("Maine");
@@ -36,8 +35,8 @@ public class ListProcessorUnitTest {
     String actualText = ListProcessor.createCommaDelimitedString(stringList, false);
 
     if (!expectedText.equals(actualText)) {
-      Assert.fail(StringProcessor.safeFormatter(
-          "Expected string %s does not match Actual string %s", expectedText, actualText));
+      Assert.fail(StringProcessor
+          .safeFormatter("Expected string %s does not match Actual string %s", expectedText, actualText));
     }
   }
 
@@ -45,8 +44,7 @@ public class ListProcessorUnitTest {
    * Unit Test for creating a sorted comma delimited string.
    */
 
-  @Test
-  public void createSortedCommaDelimitedStringTest() {
+  @Test public void createSortedCommaDelimitedStringTest() {
     ArrayList<String> stringList = new ArrayList<String>();
     stringList.add("Maine");
     stringList.add("Massachusetts");
@@ -59,8 +57,8 @@ public class ListProcessorUnitTest {
     String actualText = ListProcessor.createCommaDelimitedString(stringList, true);
 
     if (!expectedText.equals(actualText)) {
-      Assert.fail(StringProcessor.safeFormatter(
-          "Expected string %s does not match Actual string %s", expectedText, actualText));
+      Assert.fail(StringProcessor
+          .safeFormatter("Expected string %s does not match Actual string %s", expectedText, actualText));
     }
   }
 
@@ -68,8 +66,7 @@ public class ListProcessorUnitTest {
    * Unit Test for comparing two lists of strings.
    */
 
-  @Test
-  public void listOfStringsComparerTest() {
+  @Test public void listOfStringsComparerTest() {
 
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();
@@ -98,8 +95,7 @@ public class ListProcessorUnitTest {
   /**
    * Unit Test for comparing two lists of strings by order.
    */
-  @Test
-  public void listOfStringsComparerByOrderTest() {
+  @Test public void listOfStringsComparerByOrderTest() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();
     final ArrayList<String> actualList = new ArrayList<String>();
@@ -127,8 +123,7 @@ public class ListProcessorUnitTest {
   /**
    * Verify that listOfStringsComparer handles lists of unequal length as expected.
    */
-  @Test
-  public void listOfStringsComparerUnequalLengths() {
+  @Test public void listOfStringsComparerUnequalLengths() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();
     ArrayList<String> actualList = new ArrayList<String>();
@@ -144,8 +139,7 @@ public class ListProcessorUnitTest {
   /**
    * Verify that ListOfStringsComparer handles not finding an item in the expected list correctly.
    */
-  @Test
-  public void listOfStringComparerItemNotFound() {
+  @Test public void listOfStringComparerItemNotFound() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();
     ArrayList<String> actualList = new ArrayList<String>();
@@ -162,8 +156,7 @@ public class ListProcessorUnitTest {
   /**
    * Verify that listOfStringsComparer handles inequality between lists as expected.
    */
-  @Test
-  public void listOfStringsComparerItemNotMatching() {
+  @Test public void listOfStringsComparerItemNotMatching() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();
     ArrayList<String> actualList = new ArrayList<String>();

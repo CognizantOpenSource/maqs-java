@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
@@ -35,33 +35,30 @@ public final class GenericWait {
 
   /**
    * Wait until the wait for true function returns true or times out.
-   * @param waitForTrue
-   *          The function we are waiting to return true
-   * @param arg
-   *          Parameter to pass to the wait for true function
+   *
+   * @param waitForTrue The function we are waiting to return true
+   * @param arg         Parameter to pass to the wait for true function
    * @return True if the waitForTrue function returned true before the timeout
    */
-  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg)
-      throws InterruptedException, FunctionException {
+  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg) throws InterruptedException, FunctionException {
     return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false, arg);
   }
 
   /**
    * Wait until the wait for true function returns true or times out.
-   * @param waitForTrue
-   *          The function we are waiting to return true
+   *
+   * @param waitForTrue The function we are waiting to return true
    * @return True if the wait for true function returned true before timing out
    */
-  public static boolean waitUntil(BooleanSupplier waitForTrue)
-      throws InterruptedException, FunctionException {
+  public static boolean waitUntil(BooleanSupplier waitForTrue) throws InterruptedException, FunctionException {
     return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false);
   }
 
   /**
    * Wait until the wait for true function returns true, an exception will be thrown if the
    * wait times out.
-   * @param waitForTrue
-   *          The function we are waiting to return true
+   *
+   * @param waitForTrue The function we are waiting to return true
    */
   public static void waitForTrue(BooleanSupplier waitForTrue)
       throws InterruptedException, FunctionException, TimeoutException {
@@ -73,10 +70,9 @@ public final class GenericWait {
   /**
    * Wait until the wait for true function returns true, an exception will be thrown if the
    * wait times out.
-   * @param waitForTrue
-   *          The function we are waiting to return true
-   * @param arg
-   *          Parameter to pass to the wait for true function
+   *
+   * @param waitForTrue The function we are waiting to return true
+   * @param arg         Parameter to pass to the wait for true function
    */
   public static <T> void waitForTrue(Predicate<T> waitForTrue, T arg)
       throws InterruptedException, FunctionException, TimeoutException {
@@ -88,14 +84,12 @@ public final class GenericWait {
   /**
    * Waits for a function with a return type T to return a value that is to an argument of the
    * same type. If it times out it returns the value of the function.
-   * @param waitForTrue
-   *          Function that returns type T
-   * @param comparativeValue
-   *          value of the same type as T
+   *
+   * @param waitForTrue      Function that returns type T
+   * @param comparativeValue value of the same type as T
    * @return if it returned before the timeout occurred
    */
-  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue)
-      throws InterruptedException {
+  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue) throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -105,8 +99,7 @@ public final class GenericWait {
     boolean paramsAreEqual = paramsEqual(value, comparativeValue);
 
     // While the params are not equal & the timeout hasn't met, keep checking
-    while (!paramsAreEqual
-        && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
+    while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
       // If they aren't, wait
       Thread.sleep(retryTimeFromConfig);
 
@@ -127,14 +120,11 @@ public final class GenericWait {
    * Waits for a function with a return type T to return a value that is to an argument
    * of the same type.
    * If it times out it returns the value of the function.
-   * @param waitForTrue
-   *          Function that returns type T
-   * @param retryTime
-   *          time to wait between retries
-   * @param timeout
-   *          how long before timing out
-   * @param comparativeValue
-   *          value of the same type as T
+   *
+   * @param waitForTrue      Function that returns type T
+   * @param retryTime        time to wait between retries
+   * @param timeout          how long before timing out
+   * @param comparativeValue value of the same type as T
    * @return if it returned before the timeout occurred
    */
   public static <T> T waitUntilMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
@@ -166,10 +156,9 @@ public final class GenericWait {
   /**
    * Waits for a Function with a type T to return a value that is equal to a
    * comparative value of type T.
-   * @param waitForTrue
-   *          Method to wait for
-   * @param comparativeValue
-   *          value of the same type as T
+   *
+   * @param waitForTrue      Method to wait for
+   * @param comparativeValue value of the same type as T
    */
   public static <T> void waitForMatch(Supplier<T> waitForTrue, T comparativeValue)
       throws InterruptedException, TimeoutException {
@@ -180,8 +169,7 @@ public final class GenericWait {
     boolean paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
 
     // While the params are not equal & the timeout hasn't met, keep checking
-    while (!paramsAreEqual
-        && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
+    while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
       // If they aren't, wait
       Thread.sleep(retryTimeFromConfig);
 
@@ -191,21 +179,17 @@ public final class GenericWait {
     }
 
     if (!paramsAreEqual) {
-      throw new TimeoutException("Timed out waiting for the supplier to return expected value of "
-          + comparativeValue);
+      throw new TimeoutException("Timed out waiting for the supplier to return expected value of " + comparativeValue);
     }
   }
 
   /**
    * Waits for a Function with a type T to return a value that is equal to a comparative value of type T.
-   * @param waitForTrue
-   *          Method to wait for
-   * @param retryTime
-   *          time to wait between retries
-   * @param timeout
-   *          how long before timing out
-   * @param comparativeValue
-   *          The value to compare to what comes out of waitForTrue
+   *
+   * @param waitForTrue      Method to wait for
+   * @param retryTime        time to wait between retries
+   * @param timeout          how long before timing out
+   * @param comparativeValue The value to compare to what comes out of waitForTrue
    */
   public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
       throws InterruptedException, TimeoutException {
@@ -225,15 +209,15 @@ public final class GenericWait {
     }
 
     if (!paramsAreEqual) {
-      throw new TimeoutException("Timed out waiting for the supplier to return the expected value of "
-          + comparativeValue);
+      throw new TimeoutException(
+          "Timed out waiting for the supplier to return the expected value of " + comparativeValue);
     }
   }
 
   /**
    * Wait until the wait for function returns the expected type, an exception will be thrown if the wait times out.
-   * @param waitFor
-   *          The wait for function
+   *
+   * @param waitFor The wait for function
    * @return The wait for function return value
    */
   public static <T> T waitFor(Supplier<T> waitFor) throws InterruptedException, TimeoutException {
@@ -242,10 +226,9 @@ public final class GenericWait {
 
   /**
    * Wait until the wait for function returns the expected type, an exception will be thrown if the wait times out.
-   * @param waitFor
-   *          The wait for function
-   * @param arg
-   *          The wait for function argument
+   *
+   * @param waitFor The wait for function
+   * @param arg     The wait for function argument
    * @return The wait for function return value
    */
   public static <T, U> T waitFor(Function<U, T> waitFor, U arg) throws InterruptedException, TimeoutException {
@@ -254,20 +237,16 @@ public final class GenericWait {
 
   /**
    * Wait until the wait for true function returns true or times out.
-   * @param waitForTrue
-   *          The function we are waiting to return true
-   * @param retryTime
-   *          How long do we wait before retrying the wait for true function
-   * @param timeout
-   *          Max timeout for the check
-   * @param throwException
-   *          If the last check failed because of an exception should we throw the exception
-   * @param arg
-   *          Parameter to pass to the wait for true function
+   *
+   * @param waitForTrue    The function we are waiting to return true
+   * @param retryTime      How long do we wait before retrying the wait for true function
+   * @param timeout        Max timeout for the check
+   * @param throwException If the last check failed because of an exception should we throw the exception
+   * @param arg            Parameter to pass to the wait for true function
    * @return True if the wait for true function returned true before timing out
    */
-  public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout,
-                                 boolean throwException, T arg) throws InterruptedException, FunctionException {
+  public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout, boolean throwException, T arg)
+      throws InterruptedException, FunctionException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     FunctionException exception = null;
@@ -303,18 +282,15 @@ public final class GenericWait {
 
   /**
    * Wait until the wait for true function returns true or times out.
-   * @param waitForTrue
-   *          The function we are waiting to return true
-   * @param retryTime
-   *          How long do we wait before retrying the wait for true function
-   * @param timeout
-   *          Max timeout for the check
-   * @param throwException
-   *          If the last check failed because of an exception should we throw the exception
+   *
+   * @param waitForTrue    The function we are waiting to return true
+   * @param retryTime      How long do we wait before retrying the wait for true function
+   * @param timeout        Max timeout for the check
+   * @param throwException If the last check failed because of an exception should we throw the exception
    * @return True if the wait for true function returned true before timing out
    */
-  public static boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout,
-                             boolean throwException) throws InterruptedException, FunctionException {
+  public static boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout, boolean throwException)
+      throws InterruptedException, FunctionException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     FunctionException exception = null;
@@ -350,12 +326,10 @@ public final class GenericWait {
 
   /**
    * Wait until the wait for function returns the expected type, an exception will be thrown if the wait times out.
-   * @param waitFor
-   *          The wait for function
-   * @param retryTime
-   *          How long do we wait before retrying the wait for true function
-   * @param timeout
-   *          Max timeout for the check
+   *
+   * @param waitFor   The wait for function
+   * @param retryTime How long do we wait before retrying the wait for true function
+   * @param timeout   Max timeout for the check
    * @return Return value of the wait for function
    */
   public static <T> T wait(Supplier<T> waitFor, long retryTime, long timeout)
@@ -380,14 +354,11 @@ public final class GenericWait {
 
   /**
    * Wait until the wait for function returns the expected type, an exception will be thrown if the wait times out.
-   * @param waitFor
-   *          The wait for function
-   * @param retryTime
-   *          How long do we wait before retrying the wait for true function
-   * @param timeout
-   *          Max timeout for the check
-   * @param arg
-   *          MArguments to pass into the wait for function
+   *
+   * @param waitFor   The wait for function
+   * @param retryTime How long do we wait before retrying the wait for true function
+   * @param timeout   Max timeout for the check
+   * @param arg       MArguments to pass into the wait for function
    * @return Return value of the wait for function
    */
   public static <T, U> T wait(Function<U, T> waitFor, long retryTime, long timeout, U arg)
@@ -412,8 +383,8 @@ public final class GenericWait {
 
   /**
    * Checks that the objects all match.
-   * @param param
-   *          objects passed in
+   *
+   * @param param objects passed in
    * @return parameters are all equal as a boolean
    */
   private static boolean paramsEqual(Object... param) {
