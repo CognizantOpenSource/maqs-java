@@ -59,7 +59,8 @@ public class GenericWaitUnitTestsNotParallel {
   public void passStringUntilTest() {
     number = 0;
     try {
-      Assert.assertTrue(GenericWait.waitUntil(this::isParamTestString, teststring + "3"), "Failed single parameter test");
+      Assert.assertTrue(GenericWait.waitUntil(this::isParamTestString, teststring + "3"),
+          "Failed single parameter test");
     } catch (Exception e) {
       Assert.fail("waitUntil with parameter failed with exception", e);
     }

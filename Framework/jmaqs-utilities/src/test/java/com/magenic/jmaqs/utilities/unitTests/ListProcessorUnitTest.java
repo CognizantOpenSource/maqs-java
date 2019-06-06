@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
@@ -125,7 +125,7 @@ public class ListProcessorUnitTest {
   }
 
   /**
-   * Verify that listOfStringsComparer handles lists of unequal length as expected
+   * Verify that listOfStringsComparer handles lists of unequal length as expected.
    */
   @Test
   public void listOfStringsComparerUnequalLengths() {
@@ -142,7 +142,7 @@ public class ListProcessorUnitTest {
   }
 
   /**
-   * Verify that ListOfStringsComparer handles not finding an item in the expected list correctly
+   * Verify that ListOfStringsComparer handles not finding an item in the expected list correctly.
    */
   @Test
   public void listOfStringComparerItemNotFound() {
@@ -160,7 +160,7 @@ public class ListProcessorUnitTest {
   }
 
   /**
-   * Verify that listOfStringsComparer handles inequality between lists as expected
+   * Verify that listOfStringsComparer handles inequality between lists as expected.
    */
   @Test
   public void listOfStringsComparerItemNotMatching() {

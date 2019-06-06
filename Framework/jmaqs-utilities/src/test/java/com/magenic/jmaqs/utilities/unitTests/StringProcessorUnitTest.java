@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  */
 public class StringProcessorUnitTest {
   /**
-   * Test method for checking JSON strings
+   * Test method for checking JSON strings.
    */
   @Test
   public void stringFormatterCheckForJson() {
@@ -32,7 +32,7 @@ public class StringProcessorUnitTest {
   }
 
   /**
-   * Verify that StringProcessor.SafeFormatter handles errors in the message as expected
+   * Verify that StringProcessor.SafeFormatter handles errors in the message as expected.
    */
   @Test
   public void stringFormatterThrowException() {
