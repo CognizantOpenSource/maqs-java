@@ -27,21 +27,6 @@
 		</repository>
 	</repositories>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>jmaqs-internal</id>
-			<name>JMAQS Internal Snapshots</name>
-			<url>http://10.155.45.36:8081/repository/jmaqs-internal-snapshots/</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-		<repository>
-			<id>jmaqs-internal</id>
-			<name>JMAQS Internal Releases</name>
-			<url>http://10.155.45.36:8081/repository/jmaqs-internal-releases/</url>
-			<uniqueVersion>true</uniqueVersion>
-		</repository>
-	</distributionManagement>
-
 	<properties>
 		<vsts_username>Username</vsts_username>
 		<vsts_password>Password</vsts_password>
@@ -73,33 +58,6 @@
 	</reporting>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>${deploy.plugin.version}</version>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>${nexusstaging.plugin.version}</version>
-				<executions>
-					<execution>
-						<id>default-deploy</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deploy</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<serverId>nexus</serverId>
-					<nexusUrl>http://10.155.45.36:8081/nexus/</nexusUrl>
-					<skipStaging>true</skipStaging>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>

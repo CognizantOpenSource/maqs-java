@@ -1,5 +1,5 @@
 /* 
- * Copyright 2017 (C) Magenic, All rights Reserved
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.utilities.unitTests;
@@ -124,4 +124,56 @@ public class ListProcessorUnitTest {
     }
   }
 
+  /**
+   * Verify that listOfStringsComparer handles lists of unequal length as expected
+   */
+  @Test
+  public void listOfStringsComparerUnequalLengths() {
+    final StringBuilder results = new StringBuilder();
+    ArrayList<String> expectedList = new ArrayList<String>();
+    ArrayList<String> actualList = new ArrayList<String>();
+    expectedList.add("A");
+    expectedList.add("B");
+
+    actualList.add("A");
+    boolean isEqual = ListProcessor.listOfStringsComparer(expectedList, actualList, results, true);
+    Assert.assertTrue(results.toString().contains("The following lists are not the same size:"));
+    Assert.assertFalse(isEqual);
+  }
+
+  /**
+   * Verify that ListOfStringsComparer handles not finding an item in the expected list correctly
+   */
+  @Test
+  public void listOfStringComparerItemNotFound() {
+    final StringBuilder results = new StringBuilder();
+    ArrayList<String> expectedList = new ArrayList<String>();
+    ArrayList<String> actualList = new ArrayList<String>();
+    expectedList.add("A");
+    expectedList.add("B");
+
+    actualList.add("A");
+    actualList.add("C");
+    boolean isEqual = ListProcessor.listOfStringsComparer(expectedList, actualList, results, false);
+    Assert.assertTrue(results.toString().contains("[C] was not found in the ArrayList but was expected"));
+    Assert.assertFalse(isEqual);
+  }
+
+  /**
+   * Verify that listOfStringsComparer handles inequality between lists as expected
+   */
+  @Test
+  public void listOfStringsComparerItemNotMatching() {
+    final StringBuilder results = new StringBuilder();
+    ArrayList<String> expectedList = new ArrayList<String>();
+    ArrayList<String> actualList = new ArrayList<String>();
+    expectedList.add("A");
+    expectedList.add("B");
+
+    actualList.add("A");
+    actualList.add("C");
+    boolean isEqual = ListProcessor.listOfStringsComparer(expectedList, actualList, results, true);
+    Assert.assertTrue(results.toString().contains("Expected [C] but found [B]"));
+    Assert.assertFalse(isEqual);
+  }
 }

@@ -4,9 +4,9 @@
 
 package com.magenic.jmaqs.utilities.unitTests;
 
-import com.magenic.jmaqs.utilities.helper.FunctionException;
 import com.magenic.jmaqs.utilities.helper.GenericWait;
 import com.magenic.jmaqs.utilities.helper.TimeoutException;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -43,8 +43,7 @@ public class GenericWaitUnitTest {
   /**
    * Test wait until with no parameters works when the wait function returns true.
    */
-  @Test
-  public void passNoParamUntilTest() {
+  @Test public void passNoParamUntilTest() {
     // have to use an array because the iterator needs to be mutable
     int[] loop = { 0 };
     try {
@@ -57,8 +56,7 @@ public class GenericWaitUnitTest {
   /**
    * Test wait until with an array of parameters works when the wait function returns true.
    */
-  @Test
-  public void passObjectArrayUntilTest() {
+  @Test public void passObjectArrayUntilTest() {
     ArrayList<Object> objects = new ArrayList<>();
     objects.add("one");
     objects.add(new HashMap<Integer, UUID>());
@@ -73,8 +71,7 @@ public class GenericWaitUnitTest {
   /**
    * Test wait for with an array of parameters works when the wait function returns true.
    */
-  @Test
-  public void passObjectArrayForTest() {
+  @Test public void passObjectArrayForTest() {
     ArrayList<Object> objects = new ArrayList<>();
     objects.add("one");
     objects.add(new HashMap<Integer, UUID>());
@@ -89,8 +86,7 @@ public class GenericWaitUnitTest {
   /**
    * Test wait until with a single parameter works when the wait function returns false.
    */
-  @Test
-  public void failStringUntilTest() {
+  @Test public void failStringUntilTest() {
     try {
       Assert.assertFalse(GenericWait.waitUntil(this::isParamTestString, "Bad"), "Failed single parameter test");
     } catch (Exception e) {
@@ -101,11 +97,11 @@ public class GenericWaitUnitTest {
   /**
    * Test wait until with a parameter array works when the wait function returns false.
    */
-  @Test
-  public void failObjectArrayUntilTest() {
+  @Test public void failObjectArrayUntilTest() {
     ArrayList<Object> objects = new ArrayList<>();
     try {
-      Assert.assertFalse(GenericWait.waitUntil(this::isTwoParameters, objects.toArray()), "Failed parameter array test");
+      Assert
+          .assertFalse(GenericWait.waitUntil(this::isTwoParameters, objects.toArray()), "Failed parameter array test");
     } catch (Exception e) {
       Assert.fail("waitUntil failed with exception", e);
     }
@@ -114,8 +110,8 @@ public class GenericWaitUnitTest {
   /**
    * Test wait until with a parameter array works when the wait function returns false.
    */
-  @Test(expectedExceptions = UnsupportedOperationException.class)
-  public void throwExceptionWithoutParamTest() throws Throwable {
+  @Test(expectedExceptions = UnsupportedOperationException.class) public void throwExceptionWithoutParamTest()
+      throws Throwable {
     try {
       GenericWait.waitForTrue(this::throwError);
     } catch (Exception e) {
@@ -126,8 +122,7 @@ public class GenericWaitUnitTest {
   /**
    * Test waitForTrue passes
    */
-  @Test
-  public void waitForTruePasses() {
+  @Test public void waitForTruePasses() {
     try {
       GenericWait.waitForTrue(() -> 2 == 2);
     } catch (Exception e) {
@@ -138,8 +133,7 @@ public class GenericWaitUnitTest {
   /**
    * Test waitForTrue passes
    */
-  @Test
-  public void waitForTruePassesWithParameters() {
+  @Test public void waitForTruePassesWithParameters() {
     try {
       GenericWait.waitForTrue((c) -> 2 == c, 2);
     } catch (Exception e) {
@@ -150,16 +144,15 @@ public class GenericWaitUnitTest {
   /**
    * Test wait for with no parameters returns the a timeout exception.
    */
-  @Test(expectedExceptions = TimeoutException.class)
-  public void throwTimeoutExceptionWithoutParamTest() throws Exception {
+  @Test(expectedExceptions = TimeoutException.class) public void throwTimeoutExceptionWithoutParamTest()
+      throws Exception {
     GenericWait.waitForTrue(this::isParamTest);
   }
 
   /**
    * Test wait for with a parameter returns the function exception when the check times out.
    */
-  @Test(expectedExceptions = RuntimeException.class)
-  public void throwExceptionWithParamTest() throws Throwable {
+  @Test(expectedExceptions = RuntimeException.class) public void throwExceptionWithParamTest() throws Throwable {
     try {
       GenericWait.waitForTrue(this::throwError, teststring);
     } catch (Exception e) {
@@ -170,16 +163,15 @@ public class GenericWaitUnitTest {
   /**
    * Test wait for with parameters returns the a timeout exception.
    */
-  @Test(expectedExceptions = TimeoutException.class)
-  public void throwTimeoutExceptionWithParamTest() throws Exception {
+  @Test(expectedExceptions = TimeoutException.class) public void throwTimeoutExceptionWithParamTest() throws Exception {
     GenericWait.waitForTrue(this::isTwoParameters, (new ArrayList<Object>()).toArray());
   }
 
   /**
    * Test wait without parameters returns function exception.
    */
-  @Test(expectedExceptions = UnsupportedOperationException.class)
-  public void throwExceptionWithoutParamWithCustomTimesTest() throws Throwable {
+  @Test(expectedExceptions = UnsupportedOperationException.class) public void throwExceptionWithoutParamWithCustomTimesTest()
+      throws Throwable {
     try {
       GenericWait.wait(this::throwError, testretry, testtimeout, true);
     } catch (Exception e) {
@@ -190,8 +182,8 @@ public class GenericWaitUnitTest {
   /**
    * Test wait with parameters returns function exception.
    */
-  @Test(expectedExceptions = RuntimeException.class)
-  public void throwExceptionWithParamWithCustomTimesTest() throws Throwable {
+  @Test(expectedExceptions = RuntimeException.class) public void throwExceptionWithParamWithCustomTimesTest()
+      throws Throwable {
     try {
       GenericWait.wait(this::throwError, testretry, testtimeout, true, "Anything");
     } catch (Exception e) {
@@ -202,8 +194,7 @@ public class GenericWaitUnitTest {
   /**
    * Verify custom timeout without parameters works.
    */
-  @Test
-  public void customTimeoutWithoutParamTest() {
+  @Test public void customTimeoutWithoutParamTest() {
     try {
       long max = testtimeout + testretry + testretry;
       LocalDateTime start = LocalDateTime.now();
@@ -218,8 +209,7 @@ public class GenericWaitUnitTest {
   /**
    * Verify custom timeout with parameters works.
    */
-  @Test
-  public void customTimeoutWithParamTest() {
+  @Test public void customTimeoutWithParamTest() {
     try {
       long max = testtimeout + testretry + testretry;
       LocalDateTime start = LocalDateTime.now();
@@ -234,16 +224,15 @@ public class GenericWaitUnitTest {
   /**
    * Verify that Wait with input parameter throws expected exception.
    */
-  @Test(expectedExceptions = TimeoutException.class)
-  public void waitForFunctionWithInputExceptionThrown() throws InterruptedException, TimeoutException {
+  @Test(expectedExceptions = TimeoutException.class) public void waitForFunctionWithInputExceptionThrown()
+      throws InterruptedException, TimeoutException {
     GenericWait.wait(this::throwError, testretry, testtimeout, "input");
   }
 
   /**
    * Verify that WaitFor returns the correct value of its called function.
    */
-  @Test
-  public void waitForTest() {
+  @Test public void waitForTest() {
     try {
       Assert.assertFalse(GenericWait.waitFor(this::isParamTest));
     } catch (Exception e) {
@@ -254,19 +243,18 @@ public class GenericWaitUnitTest {
   /**
    * Verify that Wait without input parameter throws expected exception.
    */
-  @Test(expectedExceptions = TimeoutException.class)
-  public void waitForFunctionWithoutInputExceptionThrown() throws InterruptedException, TimeoutException {
+  @Test(expectedExceptions = TimeoutException.class) public void waitForFunctionWithoutInputExceptionThrown()
+      throws InterruptedException, TimeoutException {
     GenericWait.wait(this::throwError, testretry, testtimeout);
   }
 
   /**
    * Verify waitUntilMatch returns as expected
    */
-  @Test
-  public void waitUntilMatchNeverMatch() {
+  @Test public void waitUntilMatchNeverMatch() {
     try {
       String[] loop = { "aa" };
-      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0]+="", "bb"), "aa");
+      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "", "bb"), "aa");
     } catch (InterruptedException e) {
       Assert.fail("waitUntil threw unexpected exception", e);
     }
@@ -275,11 +263,10 @@ public class GenericWaitUnitTest {
   /**
    * Verify waitUntilMatch returns as expected
    */
-  @Test
-  public void waitUntilMatch() {
+  @Test public void waitUntilMatch() {
     try {
       String[] loop = { "" };
-      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0]+="a", "aaa"), "aaa");
+      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "a", "aaa"), "aaa");
     } catch (InterruptedException e) {
       Assert.fail("waitUntil threw unexpected exception", e);
     }
@@ -288,11 +275,10 @@ public class GenericWaitUnitTest {
   /**
    * Verify waitUntilMatch with timeout returns as expected
    */
-  @Test
-  public void waitUntilMatchTimeout() {
+  @Test public void waitUntilMatchTimeout() {
     try {
       String[] loop = { "aa" };
-      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0]+="", testretry, testtimeout,"bb"), "aa");
+      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "", testretry, testtimeout, "bb"), "aa");
     } catch (InterruptedException e) {
       Assert.fail("waitUntil threw unexpected exception", e);
     }
@@ -301,10 +287,9 @@ public class GenericWaitUnitTest {
   /**
    * Verify waitForMatch with passes as expected
    */
-  @Test
-  public void waitForMatchPass() {
+  @Test public void waitForMatchPass() {
     try {
-      String[] loop = {""};
+      String[] loop = { "" };
       GenericWait.waitForMatch(() -> loop[0] += "a", "aaa");
     } catch (Exception e) {
       Assert.fail("waitFor threw unexpected exception", e);
@@ -314,19 +299,18 @@ public class GenericWaitUnitTest {
   /**
    * Verify waitForMatch throws timeout exception
    */
-  @Test(expectedExceptions = TimeoutException.class)
-  public void waitForMatchTimeoutException() throws InterruptedException, TimeoutException {
+  @Test(expectedExceptions = TimeoutException.class) public void waitForMatchTimeoutException()
+      throws InterruptedException, TimeoutException {
     String[] loop = { "a" };
-    GenericWait.waitForMatch(() -> loop[0]+="a", "bb");
+    GenericWait.waitForMatch(() -> loop[0] += "a", "bb");
   }
 
   /**
    * Verify waitForMatch with time retry
    */
-  @Test
-  public void waitForMatchDefinedRetryPass() {
+  @Test public void waitForMatchDefinedRetryPass() {
     try {
-      String[] loop = {""};
+      String[] loop = { "" };
       GenericWait.waitForMatch(() -> loop[0] += "a", testretry, testtimeout, "aaa");
     } catch (Exception e) {
       Assert.fail("waitFor threw unexpected exception", e);
@@ -336,14 +320,15 @@ public class GenericWaitUnitTest {
   /**
    * Verify waitForMatch with time retry and time overridden throws timeout exception
    */
-  @Test(expectedExceptions = TimeoutException.class)
-  public void waitForMatchDefinedRetryTimeout() throws InterruptedException, TimeoutException {
+  @Test(expectedExceptions = TimeoutException.class) public void waitForMatchDefinedRetryTimeout()
+      throws InterruptedException, TimeoutException {
     String[] loop = { "a" };
-    GenericWait.waitForMatch(() -> loop[0]+="a", testretry, testtimeout, "bb");
+    GenericWait.waitForMatch(() -> loop[0] += "a", testretry, testtimeout, "bb");
   }
 
   /**
    * Test function that always returns false.
+   *
    * @return Always returns false
    */
   private boolean isParamTest() {
@@ -352,8 +337,8 @@ public class GenericWaitUnitTest {
 
   /**
    * Test function that checks if the test string passed in is the same as the constant test string.
-   * @param testString
-   *          The test string
+   *
+   * @param testString The test string
    * @return True if the constant and passed in test strings match
    */
   private boolean isParamTestString(String testString) {
@@ -362,8 +347,8 @@ public class GenericWaitUnitTest {
 
   /**
    * Test function that checks if the object array passed in is in the form expected.
-   * @param parameters
-   *          Object array
+   *
+   * @param parameters Object array
    * @return True if the array is in the form expected
    */
   private boolean isTwoParameters(Object[] parameters) {
@@ -372,6 +357,7 @@ public class GenericWaitUnitTest {
 
   /**
    * Test function that always throws a not implemented exception.
+   *
    * @return Always throws an exception
    */
   private boolean throwError() {
@@ -380,8 +366,8 @@ public class GenericWaitUnitTest {
 
   /**
    * Test function that always throws a runtime exception.
-   * @param testString
-   *          Test string
+   *
+   * @param testString Test string
    * @return Always throws an exception
    */
   private boolean throwError(String testString) {

@@ -130,7 +130,7 @@ public abstract class BaseGenericTest {
    * @throws Exception
    *           Throws exception if get logger fails
    */
-  @BeforeMethod
+  @BeforeMethod(alwaysRun = true)
   public void setup(Method method) throws Exception {
 
     String testName = method.getDeclaringClass() + "." + method.getName();
@@ -145,7 +145,7 @@ public abstract class BaseGenericTest {
   /**
    * Cleanup after a test.
    */
-  @AfterMethod
+  @AfterMethod(alwaysRun = true)
   public void teardown() {
     try {
       this.beforeLoggingTeardown(testResult);
@@ -185,7 +185,7 @@ public abstract class BaseGenericTest {
    * @param testResult
    *          The result object
    */
-  @AfterMethod
+  @AfterMethod(alwaysRun = true)
   public void setTestResult(ITestResult testResult) {
     this.testResult = testResult;
   }

@@ -4,7 +4,6 @@
 
 package com.magenic.jmaqs.utilities.unitTests;
 
-import com.magenic.jmaqs.utilities.helper.FunctionException;
 import com.magenic.jmaqs.utilities.helper.GenericWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;

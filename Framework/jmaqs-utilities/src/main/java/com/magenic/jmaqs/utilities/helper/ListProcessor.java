@@ -64,7 +64,7 @@ public class ListProcessor {
       ArrayList<String> actualList, StringBuilder results, boolean verifyOrder) {
     if (expectedList.size() != actualList.size()) {
       results.append(StringProcessor.safeFormatter(
-          "The following lists are not the same size: Expected %s %s %s and got %s %s",
+          "The following lists are not the same size: Expected %s [%s] %s and got %s [%s]",
           Config.NEW_LINE, createCommaDelimitedString(expectedList, false), Config.NEW_LINE,
           Config.NEW_LINE, createCommaDelimitedString(actualList, false)));
     }
@@ -81,7 +81,7 @@ public class ListProcessor {
       if (!verifyOrder) {
         if (!clonedList.contains(expectedValue)) {
           results.append(StringProcessor.safeFormatter(
-              "%s was not found in the ArrayList but was not expected%s", expectedValue,
+              "[%s] was not found in the ArrayList but was expected%s", expectedValue,
               Config.NEW_LINE));
         } else {
           // Remove these values from the ArrayList to make sure
@@ -89,7 +89,7 @@ public class ListProcessor {
           clonedList.remove(clonedList.indexOf(expectedValue));
         }
       } else if (clonedList.get(i) == null || !clonedList.get(i).equals(expectedValue)) {
-        results.append(StringProcessor.safeFormatter("Expected %s but found %s%s", expectedValue,
+        results.append(StringProcessor.safeFormatter("Expected [%s] but found [%s]%s", expectedValue,
             clonedList.get(i), Config.NEW_LINE));
       }
     }
