@@ -52,13 +52,13 @@ public class ListProcessor {
    *                     same elements are in both lists
    * @return True if the lists are the same
    */
-  public static boolean listOfStringsComparer(ArrayList<String> expectedList, ArrayList<String> actualList,
-      StringBuilder results, boolean verifyOrder) {
+  public static boolean listOfStringsComparer(ArrayList<String> expectedList,
+      ArrayList<String> actualList, StringBuilder results, boolean verifyOrder) {
     if (expectedList.size() != actualList.size()) {
-      results.append(StringProcessor
-          .safeFormatter("The following lists are not the same size: Expected %s [%s] %s and got %s [%s]",
-              Config.NEW_LINE, createCommaDelimitedString(expectedList, false), Config.NEW_LINE, Config.NEW_LINE,
-              createCommaDelimitedString(actualList, false)));
+      results.append(StringProcessor.safeFormatter(
+          "The following lists are not the same size: Expected %s [%s] %s and got %s [%s]",
+          Config.NEW_LINE, createCommaDelimitedString(expectedList, false), Config.NEW_LINE,
+          Config.NEW_LINE, createCommaDelimitedString(actualList, false)));
     }
 
     // Clone the first ArrayList
@@ -73,7 +73,8 @@ public class ListProcessor {
       if (!verifyOrder) {
         if (!clonedList.contains(expectedValue)) {
           results.append(StringProcessor
-              .safeFormatter("[%s] was not found in the ArrayList but was expected%s", expectedValue, Config.NEW_LINE));
+              .safeFormatter("[%s] was not found in the ArrayList but was expected%s",
+                  expectedValue, Config.NEW_LINE));
         } else {
           // Remove these values from the ArrayList to make sure
           // duplicates are handled correctly
@@ -81,7 +82,8 @@ public class ListProcessor {
         }
       } else if (clonedList.get(i) == null || !clonedList.get(i).equals(expectedValue)) {
         results.append(StringProcessor
-            .safeFormatter("Expected [%s] but found [%s]%s", expectedValue, clonedList.get(i), Config.NEW_LINE));
+            .safeFormatter("Expected [%s] but found [%s]%s", expectedValue, clonedList.get(i),
+                Config.NEW_LINE));
       }
     }
 

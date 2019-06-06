@@ -40,7 +40,8 @@ public final class GenericWait {
    * @param arg         Parameter to pass to the wait for true function
    * @return True if the waitForTrue function returned true before the timeout
    */
-  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg) throws InterruptedException, FunctionException {
+  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg)
+      throws InterruptedException, FunctionException {
     return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false, arg);
   }
 
@@ -50,7 +51,8 @@ public final class GenericWait {
    * @param waitForTrue The function we are waiting to return true
    * @return True if the wait for true function returned true before timing out
    */
-  public static boolean waitUntil(BooleanSupplier waitForTrue) throws InterruptedException, FunctionException {
+  public static boolean waitUntil(BooleanSupplier waitForTrue)
+      throws InterruptedException, FunctionException {
     return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false);
   }
 
@@ -89,7 +91,8 @@ public final class GenericWait {
    * @param comparativeValue value of the same type as T
    * @return if it returned before the timeout occurred
    */
-  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue) throws InterruptedException {
+  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue)
+      throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -99,7 +102,8 @@ public final class GenericWait {
     boolean paramsAreEqual = paramsEqual(value, comparativeValue);
 
     // While the params are not equal & the timeout hasn't met, keep checking
-    while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
+    while (!paramsAreEqual
+        && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
       // If they aren't, wait
       Thread.sleep(retryTimeFromConfig);
 
@@ -127,8 +131,8 @@ public final class GenericWait {
    * @param comparativeValue value of the same type as T
    * @return if it returned before the timeout occurred
    */
-  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
-      throws InterruptedException {
+  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, long retryTime, long timeout,
+      T comparativeValue) throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -169,7 +173,8 @@ public final class GenericWait {
     boolean paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
 
     // While the params are not equal & the timeout hasn't met, keep checking
-    while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
+    while (!paramsAreEqual
+        && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
       // If they aren't, wait
       Thread.sleep(retryTimeFromConfig);
 
@@ -179,7 +184,8 @@ public final class GenericWait {
     }
 
     if (!paramsAreEqual) {
-      throw new TimeoutException("Timed out waiting for the supplier to return expected value of " + comparativeValue);
+      throw new TimeoutException(
+          "Timed out waiting for the supplier to return expected value of " + comparativeValue);
     }
   }
 
@@ -191,8 +197,8 @@ public final class GenericWait {
    * @param timeout          how long before timing out
    * @param comparativeValue The value to compare to what comes out of waitForTrue
    */
-  public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
-      throws InterruptedException, TimeoutException {
+  public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout,
+      T comparativeValue) throws InterruptedException, TimeoutException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -231,7 +237,8 @@ public final class GenericWait {
    * @param arg     The wait for function argument
    * @return The wait for function return value
    */
-  public static <T, U> T waitFor(Function<U, T> waitFor, U arg) throws InterruptedException, TimeoutException {
+  public static <T, U> T waitFor(Function<U, T> waitFor, U arg)
+      throws InterruptedException, TimeoutException {
     return wait(waitFor, retryTimeFromConfig, timeoutFromConfig, arg);
   }
 
@@ -245,8 +252,8 @@ public final class GenericWait {
    * @param arg            Parameter to pass to the wait for true function
    * @return True if the wait for true function returned true before timing out
    */
-  public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout, boolean throwException, T arg)
-      throws InterruptedException, FunctionException {
+  public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout,
+      boolean throwException, T arg) throws InterruptedException, FunctionException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     FunctionException exception = null;
@@ -289,8 +296,8 @@ public final class GenericWait {
    * @param throwException If the last check failed because of an exception should we throw the exception
    * @return True if the wait for true function returned true before timing out
    */
-  public static boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout, boolean throwException)
-      throws InterruptedException, FunctionException {
+  public static boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout,
+      boolean throwException) throws InterruptedException, FunctionException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     FunctionException exception = null;

@@ -12,7 +12,8 @@ import org.testng.annotations.Test;
  * Generic wait unit test class.
  * Tests running in serial.
  */
-@Test(singleThreaded = true) public class GenericWaitUnitTestsNotParallel {
+@Test(singleThreaded = true)
+public class GenericWaitUnitTestsNotParallel {
   /**
    * Constant test string.
    */
@@ -41,7 +42,8 @@ import org.testng.annotations.Test;
   /**
    * Test wait for with no parameters works when the wait function returns true.
    */
-  @Test public void passNoParamForTest() {
+  @Test
+  public void passNoParamForTest() {
     initialReturnValue = false;
     try {
       GenericWait.waitFor(GenericWaitUnitTestsNotParallel::isNotParamTest);
@@ -53,11 +55,12 @@ import org.testng.annotations.Test;
   /**
    * Test wait until with one parameter works when the wait function returns true.
    */
-  @Test public void passStringUntilTest() {
+  @Test
+  public void passStringUntilTest() {
     number = 0;
     try {
-      Assert
-          .assertTrue(GenericWait.waitUntil(this::isParamTestString, teststring + "3"), "Failed single parameter test");
+      Assert.assertTrue(GenericWait.waitUntil(this::isParamTestString, teststring + "3"),
+          "Failed single parameter test");
     } catch (Exception e) {
       Assert.fail("waitUntil with parameter failed with exception", e);
     }
@@ -66,7 +69,8 @@ import org.testng.annotations.Test;
   /**
    * Test wait until function returns expected value, then returns the value.
    */
-  @Test public void passStringsEqual() {
+  @Test
+  public void passStringsEqual() {
     number = 0;
     String matchedVal = "";
     try {
@@ -81,12 +85,14 @@ import org.testng.annotations.Test;
   /**
    * Test wait until function returns expected value, then returns the value.
    */
-  @Test public void passStringsEqualOverride() {
+  @Test
+  public void passStringsEqualOverride() {
     number = 0;
     String matchedVal = "";
 
     try {
-      matchedVal = GenericWait.waitUntilMatch(this::functionTestString, testretry, testtimeout, "Test String3");
+      matchedVal = GenericWait
+          .waitUntilMatch(this::functionTestString, testretry, testtimeout, "Test String3");
     } catch (Exception e) {
       Assert.fail("waitUnitMatch with parameter and retry/timeouts failed with exception", e);
     }
@@ -97,7 +103,8 @@ import org.testng.annotations.Test;
   /**
    * Test wait until function returns expected value, throws an exception if a timeout occurs.
    */
-  @Test public void passStringWaitFor() {
+  @Test
+  public void passStringWaitFor() {
     int[] number = { 0 };
     try {
       GenericWait.waitForMatch(() -> teststring + ++number[0], teststring + "3");
@@ -110,7 +117,8 @@ import org.testng.annotations.Test;
    * Tests waits checking that the function returns a value equal to the
    * input value until the input test retry and test timeout before throwing an exception.
    */
-  @Test public void passStringWaitForOverride() {
+  @Test
+  public void passStringWaitForOverride() {
     number = 0;
     try {
       GenericWait.waitForMatch(this::functionTestString, testretry, testtimeout, teststring + "3");
@@ -122,7 +130,8 @@ import org.testng.annotations.Test;
   /**
    * Test wait for with one parameter works when the wait function returns true.
    */
-  @Test public void passStringForTest() {
+  @Test
+  public void passStringForTest() {
     int[] number = { 0 };
     try {
       GenericWait.waitFor((p) -> p.equals(teststring + number[0]++), teststring + "3");

@@ -65,7 +65,8 @@ public final class Config {
       overrideConfig.setSynchronizer(new ReadWriteSynchronizer());
     } catch (ConfigurationException exception) {
       throw new RuntimeException(StringProcessor
-          .safeFormatter("Exception creating the xml configuration object from the file : %s", exception));
+          .safeFormatter("Exception creating the xml configuration object from the file : %s",
+              exception));
     }
   }
 
@@ -114,7 +115,8 @@ public final class Config {
    * @param configurations   Dictionary of configuration values
    * @param overrideExisting True to override existing values, False otherwise
    */
-  public static void addGeneralTestSettingValues(HashMap<String, String> configurations, boolean overrideExisting) {
+  public static void addGeneralTestSettingValues(HashMap<String, String> configurations,
+      boolean overrideExisting) {
     addTestSettingValues(configurations, DEFAULT_MAQS_SECTION, overrideExisting);
   }
 
@@ -125,8 +127,8 @@ public final class Config {
    * @param section          Section to add the value to
    * @param overrideExisting True to override existing values, False otherwise
    */
-  public static void addTestSettingValues(HashMap<String, String> configurations, ConfigSection section,
-      boolean overrideExisting) {
+  public static void addTestSettingValues(HashMap<String, String> configurations,
+      ConfigSection section, boolean overrideExisting) {
     addTestSettingValues(configurations, section.toString(), overrideExisting);
   }
 
