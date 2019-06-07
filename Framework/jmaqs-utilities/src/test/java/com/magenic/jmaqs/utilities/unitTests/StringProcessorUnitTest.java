@@ -6,6 +6,7 @@ package com.magenic.jmaqs.utilities.unitTests;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -16,7 +17,7 @@ public class StringProcessorUnitTest {
   /**
    * Test method for checking JSON strings.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void stringFormatterCheckForJson() {
     String message = StringProcessor.safeFormatter("{This is a test for JSON}");
     Assert.assertEquals("{This is a test for JSON}", message);
@@ -25,7 +26,7 @@ public class StringProcessorUnitTest {
   /**
    * Test method for checking string format.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void stringFormatterCheckForStringFormat() {
     String message = StringProcessor.safeFormatter("This %s should return %s", "Test", "Test");
     Assert.assertEquals("This Test should return Test", message);
@@ -34,7 +35,7 @@ public class StringProcessorUnitTest {
   /**
    * Verify that StringProcessor.safeFormatter handles errors in the message as expected.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void stringFormatterThrowException() {
     String message = StringProcessor
         .safeFormatter("This {0} should return {5}", "Test", "Test", "Test");
