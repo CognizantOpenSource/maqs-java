@@ -45,7 +45,7 @@ public class EventHandler implements WebDriverEventListener {
       this.logger.logMessage(MessageType.INFORMATION, "Before clicking element: {0} Text:{1} Location: X:{2} Y:{3}", 
               element.toString(), element.getText(), element.getLocation().x, element.getLocation().y);
     } catch (Exception exc) {
-      this.logger.logMessage(MessageType.INFORMATION, "Before element clicked");
+      this.logger.logMessage(MessageType.INFORMATION, "Before clicking element");
     }
   }
 
