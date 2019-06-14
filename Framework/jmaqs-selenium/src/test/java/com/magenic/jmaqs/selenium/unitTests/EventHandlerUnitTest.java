@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Unit tests for EventHandler class.
  */
-@Test(singleThreaded = true)
+@Test
 public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Url for the site.
