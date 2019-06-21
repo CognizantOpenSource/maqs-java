@@ -40,16 +40,6 @@ public class TestCategories {
   public static final String Framework = "Base Framework Unit Tests";
 
   /**
-   * String for media type test category.
-   */
-  public static final String MediaType = "Media Type Unit Tests";
-
-  /**
-   * String for MongoDB type test category.
-   */
-  public static final String MongoDB = "MongoDB Unit Tests";
-
-  /**
    * String for Appium unit test category.
    */
   public static final String Appium = "Appium Unit Tests";

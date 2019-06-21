@@ -69,20 +69,20 @@ public class ListProcessor {
     }
 
     for (int i = 0; i < actualList.size(); i++) {
-      String expectedValue = actualList.get(i);
+      String actualValue = actualList.get(i);
       if (!verifyOrder) {
-        if (!clonedList.contains(expectedValue)) {
+        if (!clonedList.contains(actualValue)) {
           results.append(StringProcessor
-              .safeFormatter("[%s] was not found in the ArrayList but was expected%s",
-                  expectedValue, Config.NEW_LINE));
+              .safeFormatter("[%s] was found in the ArrayList but was not expected%s",
+                  actualValue, Config.NEW_LINE));
         } else {
           // Remove these values from the ArrayList to make sure
           // duplicates are handled correctly
-          clonedList.remove(clonedList.indexOf(expectedValue));
+          clonedList.remove(clonedList.indexOf(actualValue));
         }
-      } else if (clonedList.get(i) == null || !clonedList.get(i).equals(expectedValue)) {
+      } else if (clonedList.get(i) == null || !clonedList.get(i).equals(actualValue)) {
         results.append(StringProcessor
-            .safeFormatter("Expected [%s] but found [%s]%s", expectedValue, clonedList.get(i),
+            .safeFormatter("Expected [%s] but found [%s]%s", clonedList.get(i), actualValue,
                 Config.NEW_LINE));
       }
     }

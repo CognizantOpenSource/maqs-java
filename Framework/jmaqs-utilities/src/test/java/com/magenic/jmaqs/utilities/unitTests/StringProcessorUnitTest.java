@@ -15,10 +15,10 @@ import org.testng.annotations.Test;
  */
 public class StringProcessorUnitTest {
   /**
-   * Test method for checking JSON strings.
+   * Test method for checking strings that contain brackets.
    */
   @Test(groups = TestCategories.Utilities)
-  public void stringFormatterCheckForJson() {
+  public void stringFormatterCheckForBrackets() {
     String message = StringProcessor.safeFormatter("{This is a test for JSON}");
     Assert.assertEquals("{This is a test for JSON}", message);
   }

@@ -159,7 +159,7 @@ public class ListProcessorUnitTest {
     actualList.add("C");
     boolean isEqual = ListProcessor.listOfStringsComparer(expectedList, actualList, results, false);
     Assert.assertTrue(
-        results.toString().contains("[C] was not found in the ArrayList but was expected"));
+        results.toString().contains("[C] was found in the ArrayList but was not expected"));
     Assert.assertFalse(isEqual);
   }
 
@@ -177,7 +177,7 @@ public class ListProcessorUnitTest {
     actualList.add("A");
     actualList.add("C");
     boolean isEqual = ListProcessor.listOfStringsComparer(expectedList, actualList, results, true);
-    Assert.assertTrue(results.toString().contains("Expected [C] but found [B]"));
+    Assert.assertTrue(results.toString().contains("Expected [B] but found [C]"));
     Assert.assertFalse(isEqual);
   }
 }
