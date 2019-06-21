@@ -443,7 +443,9 @@ public abstract class BaseTest {
    */
   protected void createNewTestObject() {
     Logger newLogger = this.createLogger();
-    this.testObject = new BaseTestObject(newLogger, new SoftAssert(newLogger),
-        this.getFullyQualifiedTestClassName());
+    /*this.testObject = new BaseTestObject(newLogger, new SoftAssert(newLogger),
+        this.getFullyQualifiedTestClassName());*/
+    this.setTestObject(new BaseTestObject(newLogger, new SoftAssert(newLogger),
+        this.getFullyQualifiedTestClassName()));
   }
 }

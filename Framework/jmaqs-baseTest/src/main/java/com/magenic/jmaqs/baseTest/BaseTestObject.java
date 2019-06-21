@@ -8,8 +8,9 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.jar.Attributes;
 
 /**
  * The BaseTestObject class.
@@ -44,6 +45,7 @@ public class BaseTestObject implements AutoCloseable {
    * Dictionary of String key and driver value pairs.
    */
   private ManagerDictionary managerStore;
+  private ArrayList<String> associatedFiles;
 
   /**
    * Initializes a new instance of the BaseTestObject class.
@@ -253,10 +255,10 @@ public class BaseTestObject implements AutoCloseable {
       boolean overrideIfExists) {
     if (overrideIfExists) {
       //TODO: GENERIC T STRING
-      this.overrideDriverManager("", driverManager);
+      this.overrideDriverManager(driverManager.getClass().getTypeName(), driverManager);
     } else {
       //TODO: GENERIC T STRING
-      this.addDriverManager("", driverManager);
+      this.addDriverManager(driverManager.getClass().getTypeName(), driverManager);
     }
   }
 
@@ -304,6 +306,14 @@ public class BaseTestObject implements AutoCloseable {
 
   }
 
+  public boolean addAssociatedFile(String path) {
+    if (new File(path).exists()) {
+      return this.associatedFiles.add(path);
+    }
+
+    return false;
+  }
+
   /**
    * Dispose of the driver store.
    *
@@ -314,5 +324,17 @@ public class BaseTestObject implements AutoCloseable {
     if (!closing) {
       this.close();
     }
+  }
+
+  public boolean removeAssociatedFile(String path) {
+    return this.associatedFiles.remove(path);
+  }
+
+  public String[] getArrayOfAssociatedFiles() {
+    return (String[]) this.associatedFiles.toArray();
+  }
+
+  public boolean containsAssociatedFile(String path) {
+    return this.associatedFiles.contains(path);
   }
 }
