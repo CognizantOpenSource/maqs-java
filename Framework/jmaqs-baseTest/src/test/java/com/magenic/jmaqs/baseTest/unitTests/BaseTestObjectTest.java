@@ -334,6 +334,18 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testGetArrayOfAssociatedFiles() {
+    BaseTestObject testObject = baseTest.getTestObject();
+    File temp = null;
+    try {
+      temp = File.createTempFile("tempfile", ".tmp");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    assert temp.exists();
+    final String path = temp.getAbsolutePath();
+    Assert.assertTrue(testObject.addAssociatedFile(path),"Checking that associated file was added");
+    Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");
+    Assert.assertEquals(testObject.getArrayOfAssociatedFiles().length, 1, "Checking that array is not empty");
   }
 
   /**
@@ -341,6 +353,18 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testContainsAssociatedFile() {
+    BaseTestObject testObject = baseTest.getTestObject();
+    File temp = null;
+    try {
+      temp = File.createTempFile("tempfile", ".tmp");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    assert temp.exists();
+    final String path = temp.getAbsolutePath();
+    Assert.assertTrue(testObject.addAssociatedFile(path),"Checking that associated file was added");
+    Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");
+    Assert.assertTrue(testObject.containsAssociatedFile(path), "Checking if array contains file");
   }
 
   // Test Setup Objects

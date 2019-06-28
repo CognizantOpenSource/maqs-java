@@ -58,8 +58,8 @@ public class BaseTestObject implements AutoCloseable {
     this.log = logger;
     this.softAssert = softAssert;
     this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
-    this.values = new ConcurrentHashMap<String, String>();
-    this.objects = new ConcurrentHashMap<String, Object>();
+    this.values = new ConcurrentHashMap<>();
+    this.objects = new ConcurrentHashMap<>();
     this.managerStore = new ManagerDictionary();
 
     logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
@@ -75,8 +75,8 @@ public class BaseTestObject implements AutoCloseable {
     this.log = logger;
     this.softAssert = new SoftAssert(this.log);
     this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
-    this.values = new ConcurrentHashMap<String, String>();
-    this.objects = new ConcurrentHashMap<String, Object>();
+    this.values = new ConcurrentHashMap<>();
+    this.objects = new ConcurrentHashMap<>();
     this.managerStore = new ManagerDictionary();
 
     logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
