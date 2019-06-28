@@ -3,8 +3,9 @@
  */
 package com.magenic.jmaqs.baseTest.unitTests;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
-import java.sql.Driver;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
@@ -17,6 +18,8 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
 
 /**
  * The type Base test object test.
@@ -219,12 +222,7 @@ public class BaseTestObjectTest {
   public void testAddDriverManager() {
     BaseTestObject testObject = baseTest.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
-    DriverManager driverManager = new DriverManager(supplier, testObject) {
-      @Override
-      public void close() throws Exception {
-
-      }
-    };
+    DriverManager driverManager = getDriverManager(testObject, supplier);
     Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
     testObject.addDriverManager(driverManager);
     Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
@@ -232,17 +230,35 @@ public class BaseTestObjectTest {
   }
 
   /**
-   * Test add driver manager 1.
+   * Test add driver manager - Overwrite True.
    */
   @Test
-  public void testAddDriverManager1() {
+  public void testAddDriverManagerTrue() {
+    BaseTestObject testObject = baseTest.getTestObject();
+    final Supplier supplier = (Supplier) () -> null;
+    final DriverManager driverManager = getDriverManager(testObject, supplier);
+    final DriverManager driverManager2 = getDriverManager(testObject, supplier);
+    Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
+    testObject.addDriverManager(driverManager, true);
+    Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
+    testObject.addDriverManager(driverManager2, true);
+    Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
   }
 
+
+
   /**
-   * Test override driver manager.
+   * Test add driver manager - Overwrite False.
    */
   @Test
-  public void testOverrideDriverManager() {
+  public void testAddDriverManagerFalse() {
+    BaseTestObject testObject = baseTest.getTestObject();
+    final Supplier supplier = (Supplier) () -> null;
+    final DriverManager driverManager = getDriverManager(testObject, supplier);
+    final DriverManager driverManager2 = getDriverManager(testObject, supplier);
+    Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
+    testObject.addDriverManager(driverManager, false);
+    Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
   }
 
   /**
@@ -250,6 +266,14 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testAddDriverManager2() {
+    BaseTestObject testObject = baseTest.getTestObject();
+    final Supplier supplier = (Supplier) () -> null;
+    final DriverManager driverManager = getDriverManager(testObject, supplier);
+    final String key = "DriverManager1";
+    Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
+    testObject.addDriverManager(key, driverManager);
+    Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
+    Assert.assertTrue(testObject.getManagerStore().containsKey(key), "Checking if key exists in Manager Store");
   }
 
   /**
@@ -257,6 +281,15 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testClose() {
+    BaseTestObject testObject = baseTest.getTestObject();
+    final Supplier supplier = (Supplier) () -> null;
+    final DriverManager driverManager = getDriverManager(testObject, supplier);
+    final String key = "DriverManager1";
+    testObject.addDriverManager(key, driverManager);
+    testObject.close();
+    Assert.assertNull(testObject.getManagerStore(), "Checking that manager store has been closed");
+    Assert.assertEquals(testObject.getValues().size(), 0, "Checking if values in manager store are closed");
+
   }
 
   /**
@@ -264,13 +297,17 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testAddAssociatedFile() {
-  }
+    BaseTestObject testObject = baseTest.getTestObject();
+    File temp = null;
+    try {
+      temp = File.createTempFile("tempfile", ".tmp");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    assert temp.exists();
 
-  /**
-   * Test close 1.
-   */
-  @Test
-  public void testClose1() {
+    Assert.assertTrue(testObject.addAssociatedFile(temp.getAbsolutePath()),"Checking that associated file was added");
+    Assert.assertEquals((testObject.getArrayOfAssociatedFiles()).length, 1, "Checking that one file was added to array.");
   }
 
   /**
@@ -278,6 +315,18 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testRemoveAssociatedFile() {
+    BaseTestObject testObject = baseTest.getTestObject();
+    File temp = null;
+    try {
+      temp = File.createTempFile("tempfile", ".tmp");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    assert temp.exists();
+    final String path = temp.getAbsolutePath();
+
+    Assert.assertTrue(testObject.addAssociatedFile(path),"Checking that associated file was added");
+    Assert.assertTrue(testObject.removeAssociatedFile(path), "Checking that assocai");
   }
 
   /**
@@ -294,6 +343,7 @@ public class BaseTestObjectTest {
   public void testContainsAssociatedFile() {
   }
 
+  // Test Setup Objects
   private Logger getLogger() {
     return new Logger() {
       @Override
@@ -321,6 +371,15 @@ public class BaseTestObjectTest {
       }
     };
 
+  }
+
+  private DriverManager getDriverManager(BaseTestObject testObject, Supplier supplier) {
+    return new DriverManager(supplier, testObject) {
+      @Override
+      public void close() throws Exception {
+
+      }
+    };
   }
 
 }

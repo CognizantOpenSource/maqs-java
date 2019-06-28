@@ -307,6 +307,12 @@ public class BaseTestObject implements AutoCloseable {
   }
 
   public boolean addAssociatedFile(String path) {
+    if (associatedFiles == null)
+    {
+      associatedFiles = new ArrayList<String>();
+    }
+
+
     if (new File(path).exists()) {
       return this.associatedFiles.add(path);
     }
@@ -331,7 +337,7 @@ public class BaseTestObject implements AutoCloseable {
   }
 
   public String[] getArrayOfAssociatedFiles() {
-    return (String[]) this.associatedFiles.toArray();
+    return this.associatedFiles.toArray(new String[0]);
   }
 
   public boolean containsAssociatedFile(String path) {
