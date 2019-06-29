@@ -1,18 +1,24 @@
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.baseTest.unitTests;
+
+import static org.testng.Assert.assertNotNull;
 
 import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.baseTest.BaseTestObject;
 import com.magenic.jmaqs.baseTest.DriverManager;
 import com.magenic.jmaqs.baseTest.ManagerDictionary;
+import java.util.function.Supplier;
 import org.apache.commons.lang3.NotImplementedException;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
-import java.util.function.Supplier;
-
-import static org.testng.Assert.*;
-
+/**
+ * Manager Dictionary Unit Tests.
+ */
 public class ManagerDictionaryUnitTest extends BaseTest {
 
   @Test
@@ -92,14 +98,11 @@ public class ManagerDictionaryUnitTest extends BaseTest {
 
   }
 
+  /**
+   * Test Driver Manager for Unit Tests.
+   */
   private class TestDriverManager extends DriverManager {
-    /**
-     * Instantiates a new Driver manager.
-     *
-     * @param getDriverFunction
-     * @param baseTestObject    the base test object
-     */
-    public TestDriverManager(Supplier<Object> getDriverFunction, BaseTestObject baseTestObject) {
+    TestDriverManager(Supplier<Object> getDriverFunction, BaseTestObject baseTestObject) {
       super(getDriverFunction, baseTestObject);
     }
 
