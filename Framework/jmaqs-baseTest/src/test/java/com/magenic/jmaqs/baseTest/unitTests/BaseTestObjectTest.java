@@ -64,9 +64,9 @@ public class BaseTestObjectTest {
   }
 
   /**
-   * Test Constructor.
+   * Test Constructor with Log and Method.
    */
-  @Test
+  @Test(testName = "Test Constructor with Log and Method")
   public void testBaseTestObject1() {
     final BaseTestObject testObject = baseTest.getTestObject();
     final String methodName = this.method.getName();
@@ -75,9 +75,9 @@ public class BaseTestObjectTest {
   }
 
   /**
-   * Test Constructor.
+   * Test Constructor with Test Object.
    */
-  @Test
+  @Test(testName = "Test Constructor with TestObject")
   public void testBaseTestObject2() {
     final BaseTestObject testObject = baseTest.getTestObject();
     BaseTestObject baseTestObject = new BaseTestObject(testObject);
@@ -88,7 +88,7 @@ public class BaseTestObjectTest {
   /**
    * Test set value.
    */
-  @Test
+  @Test(testName = "Test set value")
   public void testSetValue() {
     BaseTestObject testObject = baseTest.getTestObject();
     final String key = "SetKey";
@@ -103,7 +103,7 @@ public class BaseTestObjectTest {
   /**
    * Test set object.
    */
-  @Test
+  @Test(testName = "Test Set Object")
   public void testSetObject() {
 
     BaseTestObject testObject = baseTest.getTestObject();
@@ -119,7 +119,7 @@ public class BaseTestObjectTest {
   /**
    * Test get log.
    */
-  @Test
+  @Test(testName = "Get Log")
   public void testGetLog() {
     BaseTestObject testObject = baseTest.getTestObject();
     Assert.assertNotNull(testObject.getLog(), "Checking that logger is not null.");
@@ -128,7 +128,7 @@ public class BaseTestObjectTest {
   /**
    * Test set log.
    */
-  @Test
+  @Test(testName = "Test Set Log")
   public void testSetLog() {
     BaseTestObject testObject = baseTest.getTestObject();
     final Logger logger = this.getLogger();
@@ -139,7 +139,7 @@ public class BaseTestObjectTest {
   /**
    * Test get perf timer collection 1.
    */
-  @Test
+  @Test(testName = "Test Get Perf Collection Timer - Not Null")
   public void testGetPerfTimerCollection1() {
     BaseTestObject testObject = baseTest.getTestObject();
     Assert.assertNotNull(testObject.getPerfTimerCollection(), "Checking that logger is not null.");
@@ -148,7 +148,7 @@ public class BaseTestObjectTest {
   /**
    * Test set perf timer collection 1.
    */
-  @Test
+  @Test(testName = "Test Get Perf Collection Timer - Get/Set")
   public void testSetPerfTimerCollection1() {
     BaseTestObject testObject = baseTest.getTestObject();
     final PerfTimerCollection perfTimerCollection = new PerfTimerCollection(testObject.getLog(),
@@ -161,7 +161,7 @@ public class BaseTestObjectTest {
   /**
    * Test get soft assert 1.
    */
-  @Test
+  @Test(testName = "Test Get Soft Assert - Not Null")
   public void testGetSoftAssert1() {
     BaseTestObject testObject = baseTest.getTestObject();
     Assert.assertNotNull(testObject.getSoftAssert(), "Checking that logger is not null.");
@@ -170,7 +170,7 @@ public class BaseTestObjectTest {
   /**
    * Test set soft assert 1.
    */
-  @Test
+  @Test(testName = "Test Get Soft Assert - Get/Set")
   public void testSetSoftAssert1() {
     BaseTestObject testObject = baseTest.getTestObject();
     final SoftAssert softAssert = new SoftAssert(testObject.getLog());
@@ -182,7 +182,7 @@ public class BaseTestObjectTest {
   /**
    * Test get values.
    */
-  @Test
+  @Test(testName = "Test Get Values")
   public void testGetValues() {
     BaseTestObject testObject = baseTest.getTestObject();
     Assert.assertNotNull(testObject.getValues(), "Checking that values is not null.");
@@ -191,7 +191,7 @@ public class BaseTestObjectTest {
   /**
    * Test get objects.
    */
-  @Test
+  @Test(testName = "Test Get Objects")
   public void testGetObjects() {
     BaseTestObject testObject = baseTest.getTestObject();
     Assert.assertNotNull(testObject.getObjects(), "Checking that objects is not null.");
@@ -200,7 +200,7 @@ public class BaseTestObjectTest {
   /**
    * Test set objects.
    */
-  @Test
+  @Test(testName = "Test Set Objects")
   public void testSetObjects() {
     BaseTestObject testObject = baseTest.getTestObject();
     final ConcurrentHashMap<String, Object> objects = new ConcurrentHashMap<>();
@@ -212,7 +212,7 @@ public class BaseTestObjectTest {
   /**
    * Test get manager store 1.
    */
-  @Test
+  @Test (testName = "Test Get Manager Store - Not Null")
   public void testGetManagerStore1() {
     BaseTestObject testObject = baseTest.getTestObject();
     Assert.assertNotNull(testObject.getManagerStore(), "Checking that objects is not null.");
@@ -221,7 +221,7 @@ public class BaseTestObjectTest {
   /**
    * Test set manager store.
    */
-  @Test
+  @Test(testName = "Test Get Manager Store - Get/Set")
   public void testSetManagerStore() {
     BaseTestObject testObject = baseTest.getTestObject();
     final ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -233,7 +233,7 @@ public class BaseTestObjectTest {
   /**
    * Test add driver manager.
    */
-  @Test
+  @Test(testName = "Test Add Driver Manager")
   public void testAddDriverManager() {
     BaseTestObject testObject = baseTest.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -249,7 +249,7 @@ public class BaseTestObjectTest {
   /**
    * Test add driver manager - Overwrite True.
    */
-  @Test
+  @Test(testName = "Test add driver manager - Overwrite True")
   public void testAddDriverManagerTrue() {
     BaseTestObject testObject = baseTest.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -268,7 +268,7 @@ public class BaseTestObjectTest {
   /**
    * Test add driver manager - Overwrite False.
    */
-  @Test
+  @Test(testName = "Test add driver manager - Overwrite False")
   public void testAddDriverManagerFalse() {
     BaseTestObject testObject = baseTest.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -284,7 +284,7 @@ public class BaseTestObjectTest {
   /**
    * Test add driver manager 2.
    */
-  @Test
+  @Test(testName = "Test add driver manager 2")
   public void testAddDriverManager2() {
     BaseTestObject testObject = baseTest.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -302,7 +302,7 @@ public class BaseTestObjectTest {
   /**
    * Test close.
    */
-  @Test
+  @Test(testName = "Test close")
   public void testClose() {
     BaseTestObject testObject = baseTest.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -319,7 +319,7 @@ public class BaseTestObjectTest {
   /**
    * Test add associated file.
    */
-  @Test
+  @Test(testName = "Test add associated file")
   public void testAddAssociatedFile() {
     BaseTestObject testObject = baseTest.getTestObject();
     File temp = null;
@@ -339,7 +339,7 @@ public class BaseTestObjectTest {
   /**
    * Test remove associated file.
    */
-  @Test
+  @Test(testName = "Test remove associated file")
   public void testRemoveAssociatedFile() {
     BaseTestObject testObject = baseTest.getTestObject();
     File temp = null;
@@ -359,7 +359,7 @@ public class BaseTestObjectTest {
   /**
    * Test get array of associated files.
    */
-  @Test
+  @Test(testName = "Test get array of associated files")
   public void testGetArrayOfAssociatedFiles() {
     BaseTestObject testObject = baseTest.getTestObject();
     File temp = null;
@@ -381,7 +381,7 @@ public class BaseTestObjectTest {
   /**
    * Test contains associated file.
    */
-  @Test
+  @Test(testName = "Test contains associated file")
   public void testContainsAssociatedFile() {
     BaseTestObject testObject = baseTest.getTestObject();
     File temp = null;
