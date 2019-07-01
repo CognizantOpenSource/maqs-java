@@ -1,5 +1,5 @@
-/* 
- * Copyright 2017 (C) Magenic, All rights Reserved
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.baseTest;
@@ -14,12 +14,11 @@ public class SoftAssert {
    * The logger.
    */
   private Logger log;
-    
+
   /**
    * Gets the Logger.
    *
-   * @return
-   *          The Logger
+   * @return The Logger
    */
   protected Logger getLog() {
     return this.log;
@@ -28,8 +27,7 @@ public class SoftAssert {
   /**
    * Sets the Logger.
    *
-   * @param logger
-   *                The logger to set.
+   * @param logger The logger to set.
    */
   private void setLog(Logger logger) {
     this.log = logger;
@@ -37,11 +35,10 @@ public class SoftAssert {
 
   /**
    * Initializes a new instance of the SoftAssert class.
-   * 
-   * @param logger
-   *                The logger to use
+   *
+   * @param logger The logger to use
    */
   public SoftAssert(Logger logger) {
-    this.log = logger;  
-  }  
+    this.log = logger;
+  }
 }

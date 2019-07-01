@@ -1,6 +1,7 @@
 /*
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
+
 package com.magenic.jmaqs.baseTest;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
@@ -12,6 +13,9 @@ import java.util.function.Supplier;
  */
 public abstract class DriverManager implements AutoCloseable {
 
+  /**
+   * Base Test Object.
+   */
   private final BaseTestObject baseTestObject;
 
   /**

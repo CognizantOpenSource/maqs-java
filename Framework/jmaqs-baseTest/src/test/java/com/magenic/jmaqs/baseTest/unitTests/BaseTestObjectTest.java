@@ -1,7 +1,17 @@
 /*
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
+
 package com.magenic.jmaqs.baseTest.unitTests;
+
+import com.magenic.jmaqs.baseTest.BaseTest;
+import com.magenic.jmaqs.baseTest.BaseTestObject;
+import com.magenic.jmaqs.baseTest.DriverManager;
+import com.magenic.jmaqs.baseTest.ManagerDictionary;
+import com.magenic.jmaqs.baseTest.SoftAssert;
+import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,25 +19,30 @@ import java.lang.reflect.Method;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
-import com.magenic.jmaqs.baseTest.*;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
-
 /**
  * The type Base test object test.
  */
 public class BaseTestObjectTest {
 
+  /**
+   * Base Test Object.
+   */
   private BaseTest baseTest;
+
+  /**
+   * Method.
+   */
   private Method method;
+
+  /**
+   * testContext.
+   */
   private ITestContext testContext;
 
   /**
@@ -49,7 +64,7 @@ public class BaseTestObjectTest {
   }
 
   /**
-   * Test Constructor
+   * Test Constructor.
    */
   @Test
   public void testBaseTestObject1() {
@@ -60,7 +75,7 @@ public class BaseTestObjectTest {
   }
 
   /**
-   * Test Constructor
+   * Test Constructor.
    */
   @Test
   public void testBaseTestObject2() {
@@ -223,9 +238,11 @@ public class BaseTestObjectTest {
     BaseTestObject testObject = baseTest.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
     DriverManager driverManager = getDriverManager(testObject, supplier);
-    Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
+    Assert.assertEquals(testObject.getManagerStore().size(), 0,
+        "Checking that manager store is empty");
     testObject.addDriverManager(driverManager);
-    Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
+    Assert.assertEquals(testObject.getManagerStore().size(), 1,
+        "Checking that manager store has 1 object added");
 
   }
 
@@ -238,14 +255,15 @@ public class BaseTestObjectTest {
     final Supplier supplier = (Supplier) () -> null;
     final DriverManager driverManager = getDriverManager(testObject, supplier);
     final DriverManager driverManager2 = getDriverManager(testObject, supplier);
-    Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
+    Assert.assertEquals(testObject.getManagerStore().size(), 0,
+        "Checking that manager store is empty");
     testObject.addDriverManager(driverManager, true);
-    Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
+    Assert.assertEquals(testObject.getManagerStore().size(), 1,
+        "Checking that manager store has 1 object added");
     testObject.addDriverManager(driverManager2, true);
-    Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
+    Assert.assertEquals(testObject.getManagerStore().size(), 1,
+        "Checking that manager store has 1 object added");
   }
-
-
 
   /**
    * Test add driver manager - Overwrite False.
@@ -256,9 +274,11 @@ public class BaseTestObjectTest {
     final Supplier supplier = (Supplier) () -> null;
     final DriverManager driverManager = getDriverManager(testObject, supplier);
     final DriverManager driverManager2 = getDriverManager(testObject, supplier);
-    Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
+    Assert.assertEquals(testObject.getManagerStore().size(), 0,
+        "Checking that manager store is empty");
     testObject.addDriverManager(driverManager, false);
-    Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
+    Assert.assertEquals(testObject.getManagerStore().size(), 1,
+        "Checking that manager store has 1 object added");
   }
 
   /**
@@ -270,10 +290,13 @@ public class BaseTestObjectTest {
     final Supplier supplier = (Supplier) () -> null;
     final DriverManager driverManager = getDriverManager(testObject, supplier);
     final String key = "DriverManager1";
-    Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
+    Assert.assertEquals(testObject.getManagerStore().size(), 0,
+        "Checking that manager store is empty");
     testObject.addDriverManager(key, driverManager);
-    Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
-    Assert.assertTrue(testObject.getManagerStore().containsKey(key), "Checking if key exists in Manager Store");
+    Assert.assertEquals(testObject.getManagerStore().size(), 1,
+        "Checking that manager store has 1 object added");
+    Assert.assertTrue(testObject.getManagerStore().containsKey(key),
+        "Checking if key exists in Manager Store");
   }
 
   /**
@@ -288,7 +311,8 @@ public class BaseTestObjectTest {
     testObject.addDriverManager(key, driverManager);
     testObject.close();
     Assert.assertNull(testObject.getManagerStore(), "Checking that manager store has been closed");
-    Assert.assertEquals(testObject.getValues().size(), 0, "Checking if values in manager store are closed");
+    Assert.assertEquals(testObject.getValues().size(), 0,
+        "Checking if values in manager store are closed");
 
   }
 
@@ -306,8 +330,10 @@ public class BaseTestObjectTest {
     }
     assert temp.exists();
 
-    Assert.assertTrue(testObject.addAssociatedFile(temp.getAbsolutePath()),"Checking that associated file was added");
-    Assert.assertEquals((testObject.getArrayOfAssociatedFiles()).length, 1, "Checking that one file was added to array.");
+    Assert.assertTrue(testObject.addAssociatedFile(temp.getAbsolutePath()),
+        "Checking that associated file was added");
+    Assert.assertEquals((testObject.getArrayOfAssociatedFiles()).length, 1,
+        "Checking that one file was added to array.");
   }
 
   /**
@@ -325,7 +351,8 @@ public class BaseTestObjectTest {
     assert temp.exists();
     final String path = temp.getAbsolutePath();
 
-    Assert.assertTrue(testObject.addAssociatedFile(path),"Checking that associated file was added");
+    Assert
+        .assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
     Assert.assertTrue(testObject.removeAssociatedFile(path), "Checking that assocai");
   }
 
@@ -343,9 +370,12 @@ public class BaseTestObjectTest {
     }
     assert temp.exists();
     final String path = temp.getAbsolutePath();
-    Assert.assertTrue(testObject.addAssociatedFile(path),"Checking that associated file was added");
-    Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");
-    Assert.assertEquals(testObject.getArrayOfAssociatedFiles().length, 1, "Checking that array is not empty");
+    Assert
+        .assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
+    Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(),
+        "Checking that array is instantiated");
+    Assert.assertEquals(testObject.getArrayOfAssociatedFiles().length, 1,
+        "Checking that array is not empty");
   }
 
   /**
@@ -362,8 +392,10 @@ public class BaseTestObjectTest {
     }
     assert temp.exists();
     final String path = temp.getAbsolutePath();
-    Assert.assertTrue(testObject.addAssociatedFile(path),"Checking that associated file was added");
-    Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");
+    Assert
+        .assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
+    Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(),
+        "Checking that array is instantiated");
     Assert.assertTrue(testObject.containsAssociatedFile(path), "Checking if array contains file");
   }
 

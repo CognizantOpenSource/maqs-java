@@ -1,5 +1,5 @@
-/* 
- * Copyright 2017 (C) Magenic, All rights Reserved
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.baseTest.unitTests;
@@ -7,13 +7,17 @@ package com.magenic.jmaqs.baseTest.unitTests;
 import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.baseTest.BaseTestObject;
 import com.magenic.jmaqs.baseTest.SoftAssert;
-import com.magenic.jmaqs.utilities.logging.*;
+import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
+import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.logging.LoggingConfig;
+import com.magenic.jmaqs.utilities.logging.MessageType;
+
+import java.util.ArrayList;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 
 /**
  * Unit test class for BaseTest class.
