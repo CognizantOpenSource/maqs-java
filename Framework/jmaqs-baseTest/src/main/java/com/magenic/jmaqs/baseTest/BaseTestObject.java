@@ -67,6 +67,7 @@ public class BaseTestObject implements AutoCloseable {
     this.values = new ConcurrentHashMap<>();
     this.objects = new ConcurrentHashMap<>();
     this.managerStore = new ManagerDictionary();
+    this.associatedFiles = new ArrayList<>();
 
     logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
   }
@@ -84,6 +85,7 @@ public class BaseTestObject implements AutoCloseable {
     this.values = new ConcurrentHashMap<>();
     this.objects = new ConcurrentHashMap<>();
     this.managerStore = new ManagerDictionary();
+    this.associatedFiles = new ArrayList<>();
 
     logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
   }
@@ -100,6 +102,7 @@ public class BaseTestObject implements AutoCloseable {
     this.values = baseTestObject.getValues();
     this.objects = baseTestObject.getObjects();
     this.managerStore = baseTestObject.getManagerStore();
+    this.associatedFiles = new ArrayList<>();
 
     baseTestObject.getLog().logMessage(MessageType.INFORMATION, "Setup test object");
   }
@@ -181,7 +184,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param objects Concurrent Hash Map of string key and object value pairs to use
    */
-  public void setObjects(ConcurrentHashMap<String, Object> objects) {
+  private void setObjects(ConcurrentHashMap<String, Object> objects) {
     this.objects = objects;
   }
 
@@ -199,7 +202,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param managerStore Concurrent Hash Map of string key and driver value pairs to use.
    */
-  public void setManagerStore(ManagerDictionary managerStore) {
+  private void setManagerStore(ManagerDictionary managerStore) {
     this.managerStore = managerStore;
   }
 
@@ -297,10 +300,6 @@ public class BaseTestObject implements AutoCloseable {
    * @return the boolean
    */
   public boolean addAssociatedFile(String path) {
-    if (associatedFiles == null) {
-      associatedFiles = new ArrayList<String>();
-    }
-
     if (new File(path).exists()) {
       return this.associatedFiles.add(path);
     }
