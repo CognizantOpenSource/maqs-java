@@ -12,6 +12,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+
 /**
  * The BaseTestObject class.
  */
@@ -45,6 +47,10 @@ public class BaseTestObject implements AutoCloseable {
    * Dictionary of String key and driver value pairs.
    */
   private ManagerDictionary managerStore;
+
+  /**
+   * ArrayList of Strings for associated files.
+   */
   private ArrayList<String> associatedFiles;
 
   /**
@@ -99,34 +105,6 @@ public class BaseTestObject implements AutoCloseable {
   }
 
   /**
-   * Sets a string value, will replace if the key already exists.
-   *
-   * @param key   The key
-   * @param value The value to associate with the key
-   */
-  public void setValue(String key, String value) {
-    if (this.values.containsKey(key)) {
-      this.values.replace(key, value);
-    } else {
-      this.values.put(key, value);
-    }
-  }
-
-  /**
-   * Sets an object value, will replace if the key already exists.
-   *
-   * @param key   The key
-   * @param value The value to associate with the key
-   */
-  public void setObject(String key, Object value) {
-    if (this.objects.containsKey(key)) {
-      this.objects.replace(key, value);
-    } else {
-      this.objects.put(key, value);
-    }
-  }
-
-  /**
    * Gets the logger.
    *
    * @return The logger
@@ -145,6 +123,15 @@ public class BaseTestObject implements AutoCloseable {
   }
 
   /**
+   * Gets the Soft Assert.
+   *
+   * @return The Soft Assert
+   */
+  public SoftAssert getSoftAssert() {
+    return this.softAssert;
+  }
+
+  /**
    * Gets the Performance Timer Collection.
    *
    * @return Performance Timer Collection
@@ -160,24 +147,6 @@ public class BaseTestObject implements AutoCloseable {
    */
   public void setPerfTimerCollection(PerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
-  }
-
-  /**
-   * Gets the Soft Assert.
-   *
-   * @return The Soft Assert
-   */
-  public SoftAssert getSoftAssert() {
-    return this.softAssert;
-  }
-
-  /**
-   * Sets the Soft Assert.
-   *
-   * @param softAssert The Soft Assert to use
-   */
-  public void setSoftAssert(SoftAssert softAssert) {
-    this.softAssert = softAssert;
   }
 
   /**
@@ -235,6 +204,43 @@ public class BaseTestObject implements AutoCloseable {
   }
 
   /**
+   * Sets the Soft Assert.
+   *
+   * @param softAssert The Soft Assert to use
+   */
+  public void setSoftAssert(SoftAssert softAssert) {
+    this.softAssert = softAssert;
+  }
+
+  /**
+   * Sets a string value, will replace if the key already exists.
+   *
+   * @param key   The key
+   * @param value The value to associate with the key
+   */
+  public void setValue(String key, String value) {
+    if (this.values.containsKey(key)) {
+      this.values.replace(key, value);
+    } else {
+      this.values.put(key, value);
+    }
+  }
+
+  /**
+   * Sets an object value, will replace if the key already exists.
+   *
+   * @param key   The key
+   * @param value The value to associate with the key
+   */
+  public void setObject(String key, Object value) {
+    if (this.objects.containsKey(key)) {
+      this.objects.replace(key, value);
+    } else {
+      this.objects.put(key, value);
+    }
+  }
+
+  /**
    * Add driver manager.
    *
    * @param <T>           the type parameter
@@ -254,19 +260,9 @@ public class BaseTestObject implements AutoCloseable {
   public <T extends DriverManager> void addDriverManager(T driverManager,
       boolean overrideIfExists) {
     if (overrideIfExists) {
-      //TODO: GENERIC T STRING
       this.overrideDriverManager(driverManager.getClass().getTypeName(), driverManager);
     } else {
-      //TODO: GENERIC T STRING
       this.addDriverManager(driverManager.getClass().getTypeName(), driverManager);
-    }
-  }
-
-  public void overrideDriverManager(String key, DriverManager driverManager) {
-    if (this.managerStore.containsKey(key)) {
-      this.managerStore.putOrOverride(key, driverManager);
-    } else {
-      this.managerStore.put(key, driverManager);
     }
   }
 
@@ -278,6 +274,50 @@ public class BaseTestObject implements AutoCloseable {
    */
   public void addDriverManager(String key, DriverManager driverManager) {
     this.managerStore.put(key, driverManager);
+  }
+
+  /**
+   * Override driver manager.
+   *
+   * @param key           the key
+   * @param driverManager the driver manager
+   */
+  public void overrideDriverManager(String key, DriverManager driverManager) {
+    if (this.managerStore.containsKey(key)) {
+      this.managerStore.putOrOverride(key, driverManager);
+    } else {
+      this.managerStore.put(key, driverManager);
+    }
+  }
+
+  /**
+   * Add associated file boolean.
+   *
+   * @param path the path
+   * @return the boolean
+   */
+  public boolean addAssociatedFile(String path) {
+    if (associatedFiles == null) {
+      associatedFiles = new ArrayList<String>();
+    }
+
+    if (new File(path).exists()) {
+      return this.associatedFiles.add(path);
+    }
+
+    return false;
+  }
+
+  /**
+   * Dispose of the driver store.
+   *
+   * @param closing the closing
+   */
+  //In C#, but might not be necessary
+  public void close(boolean closing) {
+    if (!closing) {
+      this.close();
+    }
   }
 
   /**
@@ -304,32 +344,6 @@ public class BaseTestObject implements AutoCloseable {
       this.log.logMessage(MessageType.VERBOSE, "End dispose");
     }
 
-  }
-
-  public boolean addAssociatedFile(String path) {
-    if (associatedFiles == null)
-    {
-      associatedFiles = new ArrayList<String>();
-    }
-
-
-    if (new File(path).exists()) {
-      return this.associatedFiles.add(path);
-    }
-
-    return false;
-  }
-
-  /**
-   * Dispose of the driver store.
-   *
-   * @param closing the closing
-   */
-  //In C#, but might not be necessary
-  public void close(boolean closing) {
-    if (!closing) {
-      this.close();
-    }
   }
 
   public boolean removeAssociatedFile(String path) {
