@@ -12,8 +12,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
-
-
 /**
  * The BaseTestObject class.
  */
@@ -345,14 +343,31 @@ public class BaseTestObject implements AutoCloseable {
 
   }
 
+  /**
+   * Remove associated file boolean.
+   *
+   * @param path the path
+   * @return the boolean
+   */
   public boolean removeAssociatedFile(String path) {
     return this.associatedFiles.remove(path);
   }
 
+  /**
+   * Get array of associated files string [ ].
+   *
+   * @return the string [ ]
+   */
   public String[] getArrayOfAssociatedFiles() {
     return this.associatedFiles.toArray(new String[0]);
   }
 
+  /**
+   * Contains associated file boolean.
+   *
+   * @param path the path
+   * @return the boolean
+   */
   public boolean containsAssociatedFile(String path) {
     return this.associatedFiles.contains(path);
   }
