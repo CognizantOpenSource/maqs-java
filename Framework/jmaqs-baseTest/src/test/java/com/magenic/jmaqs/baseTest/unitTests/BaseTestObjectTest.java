@@ -198,36 +198,12 @@ public class BaseTestObjectTest {
   }
 
   /**
-   * Test set objects.
-   */
-  @Test
-  public void testSetObjects() {
-    BaseTestObject testObject = baseTest.getTestObject();
-    final ConcurrentHashMap<String, Object> objects = new ConcurrentHashMap<>();
-    testObject.setObjects(objects);
-    Assert.assertEquals(testObject.getObjects(), objects,
-        "Checking that object hash map set correctly.");
-  }
-
-  /**
    * Test Get Manager Store - Not Null.
    */
   @Test
   public void testGetManagerStoreNotNull() {
     BaseTestObject testObject = baseTest.getTestObject();
     Assert.assertNotNull(testObject.getManagerStore(), "Checking that objects is not null.");
-  }
-
-  /**
-   * Test Get Manager Store - Get/Set.
-   */
-  @Test
-  public void testSetManagerStore() {
-    BaseTestObject testObject = baseTest.getTestObject();
-    final ManagerDictionary managerDictionary = new ManagerDictionary();
-    testObject.setManagerStore(managerDictionary);
-    Assert.assertEquals(testObject.getManagerStore(), managerDictionary,
-        "Checking that object hash map set correctly.");
   }
 
   /**
