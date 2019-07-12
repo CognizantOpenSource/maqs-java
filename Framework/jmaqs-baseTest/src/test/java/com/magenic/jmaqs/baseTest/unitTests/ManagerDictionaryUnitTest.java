@@ -45,12 +45,15 @@ public class ManagerDictionaryUnitTest extends BaseTest {
 
   @Test
   public void testGetDriver() {
-    throw new NotImplementedException("Unit test not implemented yet");
+    final String dm1 = "DM1";
+    ManagerDictionary managerDictionary = new ManagerDictionary();
+    managerDictionary.putOrOverride(dm1, getTestDriverManager());
+    Assert.assertTrue(managerDictionary.containsKey(dm1));
+    assertNotNull(managerDictionary.getDriver(dm1));
   }
 
   @Test
   public void testPut() {
-
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
     managerDictionary.put(dm1, getTestDriverManager());
@@ -65,12 +68,20 @@ public class ManagerDictionaryUnitTest extends BaseTest {
 
   @Test
   public void testPutOrOverride() {
-    throw new NotImplementedException("Unit test not implemented yet");
+    ManagerDictionary managerDictionary = new ManagerDictionary();
+    TestDriverManager testManager = getTestDriverManager();
+    managerDictionary.putOrOverride(testManager);
+    Assert.assertTrue(managerDictionary.containsValue(testManager));
   }
 
   @Test
   public void testPutOrOverride1() {
-    throw new NotImplementedException("Unit test not implemented yet");
+    final String dm1 = "DM1";
+    ManagerDictionary managerDictionary = new ManagerDictionary();
+    TestDriverManager testManager = getTestDriverManager();
+    managerDictionary.putOrOverride(dm1, testManager);
+    Assert.assertTrue(managerDictionary.containsKey(dm1));
+    assertNotNull(managerDictionary.get(dm1));
   }
 
   @Test
