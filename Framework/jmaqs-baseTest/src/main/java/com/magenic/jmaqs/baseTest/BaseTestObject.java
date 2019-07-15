@@ -319,7 +319,6 @@ public class BaseTestObject implements AutoCloseable {
 
   /**
    * Dispose of the driver store.
-   * **NEEDS IMPLEMENTATION
    */
   @Override
   public void close() {
