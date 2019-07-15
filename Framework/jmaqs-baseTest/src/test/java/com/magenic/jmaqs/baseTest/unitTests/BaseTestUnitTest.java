@@ -6,7 +6,6 @@ package com.magenic.jmaqs.baseTest.unitTests;
 
 import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.baseTest.BaseTestObject;
-import com.magenic.jmaqs.baseTest.SoftAssert;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.Logger;
@@ -92,8 +91,7 @@ public class BaseTestUnitTest extends BaseTest {
   @Test
   public void setTestObjectTest() {
     Logger logger = new ConsoleLogger();
-    BaseTestObject baseTestObject = new BaseTestObject(
-            logger, new SoftAssert(logger), this.getFullyQualifiedTestClassName());
+    BaseTestObject baseTestObject = new BaseTestObject(logger, this.getFullyQualifiedTestClassName());
     this.setTestObject(baseTestObject);
     
     Assert.assertTrue(this.getTestObject().getLog() instanceof ConsoleLogger, 

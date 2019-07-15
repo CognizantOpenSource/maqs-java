@@ -65,11 +65,6 @@ public abstract class BaseTest {
   private PerfTimerCollection perfTimerCollection;
 
   /**
-   * The Soft Assert.
-   */
-  private SoftAssert softAssert;
-
-  /**
    * The TestNG Test Context.
    */
   private ITestContext testContextInstance;
@@ -103,24 +98,6 @@ public abstract class BaseTest {
    */
   public void setPerfTimerCollection(PerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
-  }
-
-  /**
-   * Gets the Soft Assert.
-   *
-   * @return Soft Assert
-   */
-  public SoftAssert getSoftAssert() {
-    return this.softAssert;
-  }
-
-  /**
-   * Sets the Soft Assert.
-   *
-   * @param softAssert The Soft Assert to use
-   */
-  public void setSoftAssert(SoftAssert softAssert) {
-    this.softAssert = softAssert;
   }
 
   /**
@@ -443,7 +420,6 @@ public abstract class BaseTest {
    */
   protected void createNewTestObject() {
     Logger newLogger = this.createLogger();
-    this.setTestObject(new BaseTestObject(newLogger, new SoftAssert(newLogger),
-        this.getFullyQualifiedTestClassName()));
+    this.setTestObject(new BaseTestObject(newLogger, this.getFullyQualifiedTestClassName()));
   }
 }

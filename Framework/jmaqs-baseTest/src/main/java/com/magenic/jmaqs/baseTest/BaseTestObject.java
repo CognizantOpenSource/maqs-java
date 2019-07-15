@@ -27,11 +27,6 @@ public class BaseTestObject implements AutoCloseable {
   private PerfTimerCollection perfTimerCollection;
 
   /**
-   * The Soft Assert.
-   */
-  private SoftAssert softAssert;
-
-  /**
    * Concurrent Hash Map of string key value pairs.
    */
   private ConcurrentHashMap<String, String> values;
@@ -55,30 +50,10 @@ public class BaseTestObject implements AutoCloseable {
    * Initializes a new instance of the BaseTestObject class.
    *
    * @param logger                 The test's logger
-   * @param softAssert             The test's soft assert
-   * @param fullyQualifiedTestName The test's fully qualified test name
-   */
-  public BaseTestObject(Logger logger, SoftAssert softAssert, String fullyQualifiedTestName) {
-    this.log = logger;
-    this.softAssert = softAssert;
-    this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
-    this.values = new ConcurrentHashMap<>();
-    this.objects = new ConcurrentHashMap<>();
-    this.managerStore = new ManagerDictionary();
-    this.associatedFiles = new ArrayList<>();
-
-    logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
-  }
-
-  /**
-   * Initializes a new instance of the BaseTestObject class.
-   *
-   * @param logger                 The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
   public BaseTestObject(Logger logger, String fullyQualifiedTestName) {
     this.log = logger;
-    this.softAssert = new SoftAssert(this.log);
     this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
     this.values = new ConcurrentHashMap<>();
     this.objects = new ConcurrentHashMap<>();
@@ -95,7 +70,6 @@ public class BaseTestObject implements AutoCloseable {
    */
   public BaseTestObject(BaseTestObject baseTestObject) {
     this.log = baseTestObject.getLog();
-    this.softAssert = baseTestObject.getSoftAssert();
     this.perfTimerCollection = baseTestObject.getPerfTimerCollection();
     this.values = baseTestObject.getValues();
     this.objects = baseTestObject.getObjects();
@@ -121,15 +95,6 @@ public class BaseTestObject implements AutoCloseable {
    */
   public void setLog(Logger logger) {
     this.log = logger;
-  }
-
-  /**
-   * Gets the Soft Assert.
-   *
-   * @return The Soft Assert
-   */
-  public SoftAssert getSoftAssert() {
-    return this.softAssert;
   }
 
   /**
@@ -202,15 +167,6 @@ public class BaseTestObject implements AutoCloseable {
    */
   private void setManagerStore(ManagerDictionary managerStore) {
     this.managerStore = managerStore;
-  }
-
-  /**
-   * Sets the Soft Assert.
-   *
-   * @param softAssert The Soft Assert to use
-   */
-  public void setSoftAssert(SoftAssert softAssert) {
-    this.softAssert = softAssert;
   }
 
   /**

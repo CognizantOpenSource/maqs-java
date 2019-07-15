@@ -7,7 +7,6 @@ package com.magenic.jmaqs.baseTest.unitTests;
 import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.baseTest.BaseTestObject;
 import com.magenic.jmaqs.baseTest.DriverManager;
-import com.magenic.jmaqs.baseTest.SoftAssert;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
@@ -118,27 +117,6 @@ public class BaseTestObjectTest extends BaseTest {
     testObject.setPerfTimerCollection(perfTimerCollection);
     Assert.assertEquals(testObject.getPerfTimerCollection(), perfTimerCollection,
         "Checking that perf timer collection set correctly.");
-  }
-
-  /**
-   * Test Get Soft Assert - Not Null.
-   */
-  @Test
-  public void testGetSoftAssertNotNull() {
-    BaseTestObject testObject = this.getTestObject();
-    Assert.assertNotNull(testObject.getSoftAssert(), "Checking that logger is not null.");
-  }
-
-  /**
-   * Test Get Soft Assert - Get/Set.
-   */
-  @Test
-  public void testSetSoftAssertGetSet() {
-    BaseTestObject testObject = this.getTestObject();
-    final SoftAssert softAssert = new SoftAssert(testObject.getLog());
-    testObject.setSoftAssert(softAssert);
-    Assert.assertEquals(testObject.getSoftAssert(), softAssert,
-        "Checking that soft assert set correctly.");
   }
 
   /**
@@ -369,21 +347,6 @@ public class BaseTestObjectTest extends BaseTest {
   protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
-
-  /*private BaseTest getBaseTest() {
-    return new BaseTest() {
-      @Override
-      protected void postSetupLogging() throws Exception {
-
-      }
-
-      @Override
-      protected void beforeLoggingTeardown(ITestResult resultType) {
-
-      }
-    };
-
-  }*/
 
   private DriverManager getDriverManager(BaseTestObject testObject, Supplier supplier) {
     return new DriverManager(supplier, testObject) {
