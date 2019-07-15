@@ -7,70 +7,32 @@ package com.magenic.jmaqs.baseTest.unitTests;
 import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.baseTest.BaseTestObject;
 import com.magenic.jmaqs.baseTest.DriverManager;
-import com.magenic.jmaqs.baseTest.ManagerDictionary;
 import com.magenic.jmaqs.baseTest.SoftAssert;
 import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
  * The type Base test object test.
  */
-public class BaseTestObjectTest {
-
-  /**
-   * Base Test Object.
-   */
-  private BaseTest baseTest;
-
-  /**
-   * Method.
-   */
-  private Method method;
-
-  /**
-   * testContext.
-   */
-  private ITestContext testContext;
-
-  /**
-   * Sets up.
-   *
-   * @param method      the method
-   * @param testContext the test context
-   */
-  @BeforeMethod
-  public void setUp(Method method, ITestContext testContext) {
-    this.method = method;
-    this.testContext = testContext;
-    baseTest = this.getBaseTest();
-    try {
-      baseTest.setup(method, testContext);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+public class BaseTestObjectTest extends BaseTest {
 
   /**
    * Test Constructor with Log and Method.
    */
   @Test
   public void testBaseTestObject1() {
-    final BaseTestObject testObject = baseTest.getTestObject();
-    final String methodName = this.method.getName();
-    BaseTestObject baseTestObject = new BaseTestObject(testObject.getLog(), methodName);
+    final BaseTestObject testObject = this.getTestObject();
+
+    //final String methodName = this.method.getName();
+    BaseTestObject baseTestObject = new BaseTestObject(testObject.getLog(), "FakeTestName");
     Assert.assertNotNull(baseTestObject, "Checking that Base Test Object instantiated correctly");
   }
 
@@ -79,7 +41,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testBaseTestObject2() {
-    final BaseTestObject testObject = baseTest.getTestObject();
+    final BaseTestObject testObject = this.getTestObject();
     BaseTestObject baseTestObject = new BaseTestObject(testObject);
     Assert.assertNotNull(baseTestObject, "Checking that Base Test Object instantiated correctly");
 
@@ -90,7 +52,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testSetValue() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final String key = "SetKey";
     final String value = "SetKey Value";
     testObject.setValue(key, value);
@@ -106,7 +68,7 @@ public class BaseTestObjectTest {
   @Test
   public void testSetObject() {
 
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final String key = "SetObject";
     final Object object = new Object();
     testObject.setObject(key, object);
@@ -121,7 +83,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testGetLog() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getLog(), "Checking that logger is not null.");
   }
 
@@ -130,7 +92,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testSetLog() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final Logger logger = this.getLogger();
     testObject.setLog(logger);
     Assert.assertEquals(testObject.getLog(), logger, "Checking that logger set correctly.");
@@ -141,7 +103,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testGetPerfTimerCollectionNotNull() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getPerfTimerCollection(), "Checking that logger is not null.");
   }
 
@@ -150,9 +112,9 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testSetPerfTimerCollectionGetSet() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final PerfTimerCollection perfTimerCollection = new PerfTimerCollection(testObject.getLog(),
-        method.getName());
+        "FakeTestName");
     testObject.setPerfTimerCollection(perfTimerCollection);
     Assert.assertEquals(testObject.getPerfTimerCollection(), perfTimerCollection,
         "Checking that perf timer collection set correctly.");
@@ -163,7 +125,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testGetSoftAssertNotNull() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getSoftAssert(), "Checking that logger is not null.");
   }
 
@@ -172,7 +134,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testSetSoftAssertGetSet() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final SoftAssert softAssert = new SoftAssert(testObject.getLog());
     testObject.setSoftAssert(softAssert);
     Assert.assertEquals(testObject.getSoftAssert(), softAssert,
@@ -184,7 +146,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testGetValues() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getValues(), "Checking that values is not null.");
   }
 
@@ -193,7 +155,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testGetObjects() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getObjects(), "Checking that objects is not null.");
   }
 
@@ -202,7 +164,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testGetManagerStoreNotNull() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getManagerStore(), "Checking that objects is not null.");
   }
 
@@ -211,7 +173,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testAddDriverManager() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
     DriverManager driverManager = getDriverManager(testObject, supplier);
     Assert.assertEquals(testObject.getManagerStore().size(), 0,
@@ -227,7 +189,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testAddDriverManagerTrue() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
     final DriverManager driverManager = getDriverManager(testObject, supplier);
     final DriverManager driverManager2 = getDriverManager(testObject, supplier);
@@ -246,7 +208,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testAddDriverManagerFalse() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
     final DriverManager driverManager = getDriverManager(testObject, supplier);
     final DriverManager driverManager2 = getDriverManager(testObject, supplier);
@@ -262,7 +224,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testAddDriverManager2() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
     final DriverManager driverManager = getDriverManager(testObject, supplier);
     final String key = "DriverManager1";
@@ -280,7 +242,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testClose() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
     final DriverManager driverManager = getDriverManager(testObject, supplier);
     final String key = "DriverManager1";
@@ -297,7 +259,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testAddAssociatedFile() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     File temp = null;
     try {
       temp = File.createTempFile("tempfile", ".tmp");
@@ -317,7 +279,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testRemoveAssociatedFile() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     File temp = null;
     try {
       temp = File.createTempFile("tempfile", ".tmp");
@@ -337,7 +299,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testGetArrayOfAssociatedFiles() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     File temp = null;
     try {
       temp = File.createTempFile("tempfile", ".tmp");
@@ -359,7 +321,7 @@ public class BaseTestObjectTest {
    */
   @Test
   public void testContainsAssociatedFile() {
-    BaseTestObject testObject = baseTest.getTestObject();
+    BaseTestObject testObject = this.getTestObject();
     File temp = null;
     try {
       temp = File.createTempFile("tempfile", ".tmp");
@@ -376,7 +338,7 @@ public class BaseTestObjectTest {
   }
 
   // Test Setup Objects
-  private Logger getLogger() {
+  /*private Logger getLogger() {
     return new Logger() {
       @Override
       public void logMessage(MessageType messageType, String message, Object... args) {
@@ -388,9 +350,27 @@ public class BaseTestObjectTest {
 
       }
     };
+  }*/
+
+  /**
+   * Overload function for doing post setup logging.
+   */
+  @Override
+  protected void postSetupLogging() throws Exception {
+
   }
 
-  private BaseTest getBaseTest() {
+  /**
+   * Steps to do before logging teardown results.
+   *
+   * @param resultType The test result
+   */
+  @Override
+  protected void beforeLoggingTeardown(ITestResult resultType) {
+
+  }
+
+  /*private BaseTest getBaseTest() {
     return new BaseTest() {
       @Override
       protected void postSetupLogging() throws Exception {
@@ -403,7 +383,7 @@ public class BaseTestObjectTest {
       }
     };
 
-  }
+  }*/
 
   private DriverManager getDriverManager(BaseTestObject testObject, Supplier supplier) {
     return new DriverManager(supplier, testObject) {
