@@ -49,7 +49,7 @@ public abstract class BaseGenericTest {
   /**
    * Thread local storage of TestObject.
    */
-  private ThreadLocal<BaseTestObject> testObject = new ThreadLocal<BaseTestObject>();
+  private ThreadLocal<TestObject> testObject = new ThreadLocal<TestObject>();
 
   /**
    * Initializes a new instance of the BaseGenericTest class.
@@ -118,7 +118,7 @@ public abstract class BaseGenericTest {
    * 
    * @return The TestObject
    */
-  public BaseTestObject getTestObject() {
+  public TestObject getTestObject() {
     return this.testObject.get();
   }
 
@@ -136,7 +136,7 @@ public abstract class BaseGenericTest {
     String testName = method.getDeclaringClass() + "." + method.getName();
     testName = testName.replaceFirst("class ", "");
 
-    this.testObject.set(new BaseTestObject(testName));
+    this.testObject.set(new TestObject(testName));
     this.testObject.get().setLog(this.setupLogging());
 
     this.postSetupLogging();
