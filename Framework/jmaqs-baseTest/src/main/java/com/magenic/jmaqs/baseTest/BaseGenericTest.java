@@ -73,7 +73,7 @@ public abstract class BaseGenericTest {
    * @param log
    *          The Logger object
    */
-  public void setLog(Logger log) {
+  public void setLogger(Logger log) {
     testObject.get().setLog(log);
   }
 
