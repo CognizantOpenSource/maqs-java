@@ -46,7 +46,7 @@ public class BaseWebServiceTest extends BaseGenericTest {
 
     HttpClientWrapper wrapper = new HttpClientWrapper(WebServiceConfig.getWebServiceUri());
     webServiceTestObject.set(
-        new WebServiceTestObject(wrapper, this.getLog(), this.getFullyQualifiedTestClassName()));
+        new WebServiceTestObject(wrapper, this.getLogger(), this.getFullyQualifiedTestClassName()));
   }
 
   /*

@@ -57,7 +57,7 @@ public class TestObject {
    * 
    * @return A Logger object
    */
-  public Logger getLog() {
+  public Logger getLogger() {
     return this.log;
   }
 

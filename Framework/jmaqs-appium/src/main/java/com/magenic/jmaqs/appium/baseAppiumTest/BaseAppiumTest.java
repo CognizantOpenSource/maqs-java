@@ -66,12 +66,12 @@ public abstract class BaseAppiumTest extends BaseGenericTest {
       AppiumWait wait = new AppiumWait(driver);
 
       appiumTestObject.set(new AppiumTestObject(driver, wait, this.getFullyQualifiedTestClassName(),
-          this.getLog()));
-      this.getLog().logMessage(MessageType.INFORMATION, "Loaded driver: %s",
+          this.getLogger()));
+      this.getLogger().logMessage(MessageType.INFORMATION, "Loaded driver: %s",
           AppiumConfig.getPlatformName());
       // }
     } catch (Exception e) {
-      this.getLog().logMessage(MessageType.ERROR, "Failed to start driver because: %s",
+      this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s",
           e.getMessage());
       System.out.println(
           StringProcessor.safeFormatter("Browser type %s is not supported", e.getMessage()));

@@ -34,7 +34,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest {
   public void fileLoggerTest() {
     this.setLog(new FileLogger());
 
-    if (!(this.getLog() instanceof FileLogger)) {
+    if (!(this.getLogger() instanceof FileLogger)) {
       Assert.fail("FileLogger was not set.");
     }
   }

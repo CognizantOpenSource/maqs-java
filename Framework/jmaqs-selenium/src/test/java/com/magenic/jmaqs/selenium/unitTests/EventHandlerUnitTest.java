@@ -84,7 +84,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     
     // Use the Event Firing Web Driver to click an element, then get the log text
     this.eventFiringWebDriver.findElement(this.checkbox).click();
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
     
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -104,7 +104,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Use the Event Firing Web Driver to change the value of an element, then get the log text
     this.eventFiringWebDriver.findElement(this.firstNameTextBox).sendKeys("Change Value");
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -124,7 +124,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Use the Event Firing Web Driver to find an element, then get the log text
     this.eventFiringWebDriver.findElement(this.computerPartsList);
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -145,7 +145,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     // Use the Event Firing Web Driver to navigate back to a page, then get the log text
     this.eventFiringWebDriver.findElement(this.home).click();
     this.eventFiringWebDriver.navigate().back();
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -167,7 +167,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     this.eventFiringWebDriver.findElement(this.home).click();
     this.eventFiringWebDriver.navigate().back();
     this.eventFiringWebDriver.navigate().forward();
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -187,7 +187,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Use the Event Firing Web Driver to refresh the page, then get the log text
     this.eventFiringWebDriver.navigate().refresh();
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -207,7 +207,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Use the Event Firing Web Driver to navigate to a page, then get the log text
     this.eventFiringWebDriver.navigate().to(siteAutomationUrl);
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -228,7 +228,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     // Use the Event Firing Web Driver to execute a script, then get the log text
     JavascriptExecutor javascriptExecutor = (JavascriptExecutor)this.eventFiringWebDriver; 
     javascriptExecutor.executeScript("document.querySelector(\"#homeButton > a\");");
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -250,7 +250,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     ((JavascriptExecutor)this.eventFiringWebDriver).executeScript("window.open()");
     ArrayList<String> tabs = new ArrayList<String>(this.eventFiringWebDriver.getWindowHandles());
     this.eventFiringWebDriver.switchTo().window(tabs.get(1));
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -272,7 +272,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     this.eventFiringWebDriver.findElement(this.alertWithConfirm).click();
     Alert alert = this.eventFiringWebDriver.switchTo().alert();
     alert.accept();
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -294,7 +294,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     this.eventFiringWebDriver.findElement(this.alertWithConfirm).click();
     Alert alert = this.eventFiringWebDriver.switchTo().alert();
     alert.dismiss();
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -314,7 +314,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Use the Event Firing Web Driver to get the text from an element, then get the log text
     this.eventFiringWebDriver.findElement(this.swaggerLinkBy).getText();
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -335,7 +335,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     // Use the Event Firing Web Driver to take a screenshot, then get the log text
     TakesScreenshot takeScreenshot = ((TakesScreenshot)this.eventFiringWebDriver);
     takeScreenshot.getScreenshotAs(OutputType.FILE);
-    String logText = this.readTextFile(((FileLogger)this.getLog()).getFilePath());
+    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
@@ -356,7 +356,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Setup the Event Handler and register the Event Firing Web Driver before each test.
    */
   private void setupEventHandler() {
-    this.eventHandler = new EventHandler(this.getLog());
+    this.eventHandler = new EventHandler(this.getLogger());
     this.eventFiringWebDriver = new EventFiringWebDriver(this.getWebDriver());
     this.eventFiringWebDriver.register(this.eventHandler);
   }

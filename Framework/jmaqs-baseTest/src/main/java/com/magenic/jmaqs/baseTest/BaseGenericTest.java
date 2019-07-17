@@ -63,8 +63,8 @@ public abstract class BaseGenericTest {
    * 
    * @return Logger object
    */
-  public Logger getLog() {
-    return this.testObject.get().getLog();
+  public Logger getLogger() {
+    return this.testObject.get().getLogger();
   }
 
   /**
@@ -167,9 +167,9 @@ public abstract class BaseGenericTest {
 
     // Cleanup log files we don't want
     try {
-      if ((this.getLog() instanceof FileLogger) && testResult.getStatus() == ITestResult.SUCCESS
+      if ((this.getLogger() instanceof FileLogger) && testResult.getStatus() == ITestResult.SUCCESS
           && this.loggingEnabledSetting == LoggingEnabled.ONFAIL) {
-        Files.delete(Paths.get(((FileLogger) this.getLog()).getFilePath()));
+        Files.delete(Paths.get(((FileLogger) this.getLogger()).getFilePath()));
       }
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
@@ -250,11 +250,11 @@ public abstract class BaseGenericTest {
 
     try {
       // Write to the log
-      this.getLog().logMessage(messageType, formattedMessage);
+      this.getLogger().logMessage(messageType, formattedMessage);
 
       // If this was an error and written to a file, add it to the console
       // output as well
-      if (messageType == MessageType.ERROR && this.getLog() instanceof FileLogger) {
+      if (messageType == MessageType.ERROR && this.getLogger() instanceof FileLogger) {
         System.out.println(formattedMessage);
       }
     } catch (Exception e) {
