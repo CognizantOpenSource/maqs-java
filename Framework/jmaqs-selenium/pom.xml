@@ -88,8 +88,8 @@
             <artifactId>annotations</artifactId>
             <version>${jetbrainsannotations.version}</version>
             <scope>compile</scope>
-        </dependency>		
-    </dependencies>
+        </dependency>
+	</dependencies>
 	<build>
 		<pluginManagement>
 			<plugins>
