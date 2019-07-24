@@ -16,6 +16,8 @@ hs_err_pid*
 *.prefs
 *.iml
 
+codemr/
+
 
 .idea
 .vs
