@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.appium.baseAppiumTest;
 
-import com.magenic.jmaqs.baseTest.BaseGenericTest;
+import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumWait;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.MessageType;
@@ -17,7 +17,7 @@ import org.testng.ITestResult;
 /**
  * Base Appium Test Class.
  */
-public abstract class BaseAppiumTest extends BaseGenericTest {
+public abstract class BaseAppiumTest extends BaseTest {
 
   /** Thread local storage of AppiumTestObject. */
   private ThreadLocal<AppiumTestObject> appiumTestObject = new ThreadLocal<AppiumTestObject>();

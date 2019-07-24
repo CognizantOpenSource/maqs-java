@@ -13,7 +13,7 @@ public class TestObject {
   /**
    * The Logger object.
    */
-  protected Logger logger;
+  protected Logger log;
 
   /**
    * The Fully Qualified Test Name.
@@ -40,7 +40,7 @@ public class TestObject {
    */
   public TestObject(String fullyQualifiedTestName, Logger logger) {
     this.testName = fullyQualifiedTestName;
-    this.logger = logger;
+    this.log = logger;
   }
 
   /**
@@ -58,16 +58,16 @@ public class TestObject {
    * @return A Logger object
    */
   public Logger getLogger() {
-    return this.logger;
+    return this.log;
   }
 
   /**
    * Set the Logger for the TestObject.
    * 
-   * @param log
+   * @param logger
    *          The Logger object
    */
-  public void setLogger(Logger log) {
-    this.logger = log;
+  public void setLog(Logger logger) {
+    this.log = logger;
   }
 }

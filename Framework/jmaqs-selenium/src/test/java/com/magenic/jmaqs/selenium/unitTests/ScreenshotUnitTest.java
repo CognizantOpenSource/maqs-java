@@ -48,7 +48,7 @@ public class ScreenshotUnitTest extends BaseSeleniumTest {
   public void createScreenShotWithLoggerFileNameTest() throws IOException {
     String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getLogger(), "");
     String screenshotNameWithoutExtension = FilenameUtils.getBaseName(path);
-    String loggerNameWithoutExtension = FilenameUtils.getBaseName(((FileLogger) this.getLogger()).getFilePath());   
+    String loggerNameWithoutExtension = FilenameUtils.getBaseName(((FileLogger) this.getLogger()).getFilePath());
     Assert.assertEquals(screenshotNameWithoutExtension, loggerNameWithoutExtension);    
   }
 }

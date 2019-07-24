@@ -74,7 +74,7 @@ public abstract class BaseGenericTest {
    *          The Logger object
    */
   public void setLogger(Logger log) {
-    testObject.get().setLogger(log);
+    testObject.get().setLog(log);
   }
 
   /**
@@ -137,7 +137,7 @@ public abstract class BaseGenericTest {
     testName = testName.replaceFirst("class ", "");
 
     this.testObject.set(new TestObject(testName));
-    this.testObject.get().setLogger(this.setupLogging());
+    this.testObject.get().setLog(this.setupLogging());
 
     this.postSetupLogging();
   }

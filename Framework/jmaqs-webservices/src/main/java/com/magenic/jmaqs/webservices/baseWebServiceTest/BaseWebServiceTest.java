@@ -4,14 +4,14 @@
 
 package com.magenic.jmaqs.webservices.baseWebServiceTest;
 
-import com.magenic.jmaqs.baseTest.BaseGenericTest;
+import com.magenic.jmaqs.baseTest.BaseTest;
 
 import org.testng.ITestResult;
 
 /**
  * Base web service test class.
  */
-public class BaseWebServiceTest extends BaseGenericTest {
+public class BaseWebServiceTest extends BaseTest {
 
   /**
    * Thread local storage of web service test object.
@@ -39,7 +39,7 @@ public class BaseWebServiceTest extends BaseGenericTest {
   /*
    * (non-Javadoc)
    * 
-   * @see com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest#postSetupLogging()
+   * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#postSetupLogging()
    */
   @Override
   protected void postSetupLogging() throws Exception {
@@ -52,7 +52,7 @@ public class BaseWebServiceTest extends BaseGenericTest {
   /*
    * (non-Javadoc)
    * 
-   * @see com.magenic.jmaqs.utilities.BaseTest.BaseGenericTest# beforeLoggingTeardown
+   * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest# beforeLoggingTeardown
    * (org.testng.ITestResult)
    */
   @Override

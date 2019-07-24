@@ -4,21 +4,18 @@
 
 package com.magenic.jmaqs.selenium.baseSeleniumTest;
 
-import com.magenic.jmaqs.baseTest.BaseGenericTest;
+import com.magenic.jmaqs.baseTest.BaseTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-
-import com.magenic.jmaqs.utilities.logging.TestResultType;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITest;
 import org.testng.ITestResult;
 
 /**
  * Base Selenium Test class.
  */
-public abstract class BaseSeleniumTest extends BaseGenericTest {
+public abstract class BaseSeleniumTest extends BaseTest {
 
   /**
    * Initialize a new instance of the BaseSeleniumTest class.
@@ -99,7 +96,7 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
       if (this.getWebDriver() != null && resultType.getStatus() != ITestResult.SUCCESS 
           && this.getLoggingEnabledSetting() != LoggingEnabled.NO) {
 
-        captureScreenShot(this.getWebDriver(), this.getLogger(), ""); 
+        captureScreenShot(this.getWebDriver(), this.getLogger(), "");
       }       
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
@@ -121,5 +118,18 @@ public abstract class BaseSeleniumTest extends BaseGenericTest {
    */
   protected String captureScreenShot(WebDriver driver, Logger log, String fileName) {
     return SeleniumUtilities.captureScreenshot(driver, log, fileName);
+  }
+
+  /**
+   * Get the current browser.
+   * 
+   * @return
+   *      Current browser Web Driver
+   * @throws Exception
+   *        Throws exception
+   */
+  protected  WebDriver getBrowser() throws Exception {
+    // Returns the web driver
+    return SeleniumConfig.browser();
   }
 }
