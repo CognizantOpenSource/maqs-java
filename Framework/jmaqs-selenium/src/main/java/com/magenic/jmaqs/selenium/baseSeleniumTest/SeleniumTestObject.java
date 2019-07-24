@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.selenium.baseSeleniumTest;
 
-import com.magenic.jmaqs.baseTest.TestObject;
+import com.magenic.jmaqs.baseTest.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
 
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * The SeleniumTestObject Class.
  */
-public class SeleniumTestObject extends TestObject {
+public class SeleniumTestObject extends BaseTestObject {
 
   /**
    * The WebDriver Object.
@@ -37,7 +37,7 @@ public class SeleniumTestObject extends TestObject {
    *          The fully qualified test name
    */
   public SeleniumTestObject(WebDriver driver, SeleniumWait wait, Logger logger, String fullyQualifiedTestName) {
-    super(fullyQualifiedTestName, logger);
+    super(logger, fullyQualifiedTestName);
     this.webDriver = driver;
     this.seleniumWait = wait;
   }
