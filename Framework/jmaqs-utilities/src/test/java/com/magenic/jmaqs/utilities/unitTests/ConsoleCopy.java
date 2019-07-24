@@ -1,9 +1,8 @@
 /*
- * Copyright 2018 (C) Magenic, All rights Reserved
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.utilities.unitTests;
-
 
 import java.io.File;
 import java.io.FileOutputStream;

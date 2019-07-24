@@ -1,5 +1,5 @@
-/* 
- * Copyright 2017 (C) Magenic, All rights Reserved
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.utilities.helper;
@@ -11,11 +11,9 @@ public final class StringProcessor {
   /**
    * Creates a string based on the arguments. If no args are applied, then we want to just return
    * the message
-   * 
-   * @param message
-   *          The message being used
-   * @param args
-   *          The arguments being used
+   *
+   * @param message The message being used
+   * @param args    The arguments being used
    * @return A final string
    */
   public static String safeFormatter(String message, Object... args) {

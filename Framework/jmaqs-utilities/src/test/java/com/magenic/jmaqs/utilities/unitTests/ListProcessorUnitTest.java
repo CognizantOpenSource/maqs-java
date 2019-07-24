@@ -1,5 +1,5 @@
-/* 
- * Copyright 2017 (C) Magenic, All rights Reserved
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.utilities.unitTests;
@@ -7,6 +7,7 @@ package com.magenic.jmaqs.utilities.unitTests;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ListProcessor;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class ListProcessorUnitTest {
    * Unit Test for creating a comma delimited string.
    */
 
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void createCommaDelimitedStringTest() {
     ArrayList<String> stringList = new ArrayList<String>();
 
@@ -36,8 +37,9 @@ public class ListProcessorUnitTest {
     String actualText = ListProcessor.createCommaDelimitedString(stringList, false);
 
     if (!expectedText.equals(actualText)) {
-      Assert.fail(StringProcessor.safeFormatter(
-          "Expected string %s does not match Actual string %s", expectedText, actualText));
+      Assert.fail(StringProcessor
+          .safeFormatter("Expected string %s does not match Actual string %s", expectedText,
+              actualText));
     }
   }
 
@@ -45,7 +47,7 @@ public class ListProcessorUnitTest {
    * Unit Test for creating a sorted comma delimited string.
    */
 
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void createSortedCommaDelimitedStringTest() {
     ArrayList<String> stringList = new ArrayList<String>();
     stringList.add("Maine");
@@ -59,8 +61,9 @@ public class ListProcessorUnitTest {
     String actualText = ListProcessor.createCommaDelimitedString(stringList, true);
 
     if (!expectedText.equals(actualText)) {
-      Assert.fail(StringProcessor.safeFormatter(
-          "Expected string %s does not match Actual string %s", expectedText, actualText));
+      Assert.fail(StringProcessor
+          .safeFormatter("Expected string %s does not match Actual string %s", expectedText,
+              actualText));
     }
   }
 
@@ -68,7 +71,7 @@ public class ListProcessorUnitTest {
    * Unit Test for comparing two lists of strings.
    */
 
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void listOfStringsComparerTest() {
 
     final StringBuilder results = new StringBuilder();
@@ -98,7 +101,7 @@ public class ListProcessorUnitTest {
   /**
    * Unit Test for comparing two lists of strings by order.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void listOfStringsComparerByOrderTest() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();
@@ -124,4 +127,57 @@ public class ListProcessorUnitTest {
     }
   }
 
+  /**
+   * Verify that listOfStringsComparer handles lists of unequal length as expected.
+   */
+  @Test(groups = TestCategories.Utilities)
+  public void listOfStringsComparerUnequalLengths() {
+    final StringBuilder results = new StringBuilder();
+    ArrayList<String> expectedList = new ArrayList<String>();
+    ArrayList<String> actualList = new ArrayList<String>();
+    expectedList.add("A");
+    expectedList.add("B");
+
+    actualList.add("A");
+    boolean isEqual = ListProcessor.listOfStringsComparer(expectedList, actualList, results, true);
+    Assert.assertTrue(results.toString().contains("The following lists are not the same size:"));
+    Assert.assertFalse(isEqual);
+  }
+
+  /**
+   * Verify that ListOfStringsComparer handles not finding an item in the expected list correctly.
+   */
+  @Test(groups = TestCategories.Utilities)
+  public void listOfStringComparerItemNotFound() {
+    final StringBuilder results = new StringBuilder();
+    ArrayList<String> expectedList = new ArrayList<String>();
+    ArrayList<String> actualList = new ArrayList<String>();
+    expectedList.add("A");
+    expectedList.add("B");
+
+    actualList.add("A");
+    actualList.add("C");
+    boolean isEqual = ListProcessor.listOfStringsComparer(expectedList, actualList, results, false);
+    Assert.assertTrue(
+        results.toString().contains("[C] was found in the ArrayList but was not expected"));
+    Assert.assertFalse(isEqual);
+  }
+
+  /**
+   * Verify that listOfStringsComparer handles inequality between lists as expected.
+   */
+  @Test(groups = TestCategories.Utilities)
+  public void listOfStringsComparerItemNotMatching() {
+    final StringBuilder results = new StringBuilder();
+    ArrayList<String> expectedList = new ArrayList<String>();
+    ArrayList<String> actualList = new ArrayList<String>();
+    expectedList.add("A");
+    expectedList.add("B");
+
+    actualList.add("A");
+    actualList.add("C");
+    boolean isEqual = ListProcessor.listOfStringsComparer(expectedList, actualList, results, true);
+    Assert.assertTrue(results.toString().contains("Expected [B] but found [C]"));
+    Assert.assertFalse(isEqual);
+  }
 }

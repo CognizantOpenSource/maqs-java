@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.utilities.unitTests;
 
-import com.magenic.jmaqs.utilities.helper.FunctionException;
 import com.magenic.jmaqs.utilities.helper.GenericWait;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -43,7 +43,7 @@ public class GenericWaitUnitTestsNotParallel {
   /**
    * Test wait for with no parameters works when the wait function returns true.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void passNoParamForTest() {
     initialReturnValue = false;
     try {
@@ -56,11 +56,12 @@ public class GenericWaitUnitTestsNotParallel {
   /**
    * Test wait until with one parameter works when the wait function returns true.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void passStringUntilTest() {
     number = 0;
     try {
-      Assert.assertTrue(GenericWait.waitUntil(this::isParamTestString, teststring + "3"), "Failed single parameter test");
+      Assert.assertTrue(GenericWait.waitUntil(this::isParamTestString, teststring + "3"),
+          "Failed single parameter test");
     } catch (Exception e) {
       Assert.fail("waitUntil with parameter failed with exception", e);
     }
@@ -69,7 +70,7 @@ public class GenericWaitUnitTestsNotParallel {
   /**
    * Test wait until function returns expected value, then returns the value.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void passStringsEqual() {
     number = 0;
     String matchedVal = "";
@@ -85,13 +86,14 @@ public class GenericWaitUnitTestsNotParallel {
   /**
    * Test wait until function returns expected value, then returns the value.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void passStringsEqualOverride() {
     number = 0;
     String matchedVal = "";
 
     try {
-      matchedVal = GenericWait.waitUntilMatch(this::functionTestString, testretry, testtimeout, "Test String3");
+      matchedVal = GenericWait
+          .waitUntilMatch(this::functionTestString, testretry, testtimeout, "Test String3");
     } catch (Exception e) {
       Assert.fail("waitUnitMatch with parameter and retry/timeouts failed with exception", e);
     }
@@ -102,9 +104,9 @@ public class GenericWaitUnitTestsNotParallel {
   /**
    * Test wait until function returns expected value, throws an exception if a timeout occurs.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void passStringWaitFor() {
-    int[] number = {0};
+    int[] number = { 0 };
     try {
       GenericWait.waitForMatch(() -> teststring + ++number[0], teststring + "3");
     } catch (Exception e) {
@@ -116,7 +118,7 @@ public class GenericWaitUnitTestsNotParallel {
    * Tests waits checking that the function returns a value equal to the
    * input value until the input test retry and test timeout before throwing an exception.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void passStringWaitForOverride() {
     number = 0;
     try {
@@ -129,9 +131,9 @@ public class GenericWaitUnitTestsNotParallel {
   /**
    * Test wait for with one parameter works when the wait function returns true.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void passStringForTest() {
-    int[] number = {0};
+    int[] number = { 0 };
     try {
       GenericWait.waitFor((p) -> p.equals(teststring + number[0]++), teststring + "3");
     } catch (Exception e) {
@@ -141,8 +143,8 @@ public class GenericWaitUnitTestsNotParallel {
 
   /**
    * Test function that checks if the test string passed in is the same as the constant test string.
-   * @param testString
-   *          The test string
+   *
+   * @param testString The test string
    * @return True if the constant and passed in test strings match
    */
   private boolean isParamTestString(String testString) {
@@ -151,6 +153,7 @@ public class GenericWaitUnitTestsNotParallel {
 
   /**
    * Test function that always returns a specific string.
+   *
    * @return Always returns a specific string
    */
   private String functionTestString() {
@@ -159,6 +162,7 @@ public class GenericWaitUnitTestsNotParallel {
 
   /**
    * Test function that always returns true.
+   *
    * @return Always returns true
    */
   private static boolean isNotParamTest() {
