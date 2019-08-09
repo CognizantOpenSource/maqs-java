@@ -2,10 +2,10 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.appium.baseAppiumTest;
+package com.magenic.jmaqs.appium;
 
-import com.magenic.jmaqs.baseTest.BaseTestObject;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumWait;
+import com.magenic.jmaqs.base.BaseTestObject;
+import com.magenic.jmaqs.selenium.SeleniumWait;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import io.appium.java_client.AppiumDriver;
 

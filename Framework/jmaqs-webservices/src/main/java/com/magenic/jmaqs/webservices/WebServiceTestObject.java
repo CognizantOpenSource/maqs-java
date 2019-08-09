@@ -2,9 +2,9 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.webservices.baseWebServiceTest;
+package com.magenic.jmaqs.webservices;
 
-import com.magenic.jmaqs.baseTest.BaseTestObject;
+import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
 
 /**

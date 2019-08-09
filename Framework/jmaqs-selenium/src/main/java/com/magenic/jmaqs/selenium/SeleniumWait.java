@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.baseSeleniumTest;
+package com.magenic.jmaqs.selenium;
 
 import com.google.common.base.Function;
 import com.magenic.jmaqs.utilities.helper.Config;

@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.baseTest;
+package com.magenic.jmaqs.base;
 
 import java.util.HashMap;
 import java.util.Map;

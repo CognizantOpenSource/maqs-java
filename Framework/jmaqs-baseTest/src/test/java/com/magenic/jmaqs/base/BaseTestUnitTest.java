@@ -2,10 +2,10 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.baseTest.unitTests;
+package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.baseTest.BaseTest;
-import com.magenic.jmaqs.baseTest.BaseTestObject;
+import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.Logger;
@@ -31,7 +31,7 @@ public class BaseTestUnitTest extends BaseTest {
     String testName = this.getFullyQualifiedTestClassName();
 
     Assert.assertEquals(testName,
-        "com.magenic.jmaqs.baseTest.unitTests.BaseTestUnitTest.fullyQualifiedTestNameTest");
+        "BaseTestUnitTest.fullyQualifiedTestNameTest");
   }
 
   /**

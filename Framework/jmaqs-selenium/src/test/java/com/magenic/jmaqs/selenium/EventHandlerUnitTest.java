@@ -1,12 +1,12 @@
 /*
- * Copyright 2017 (C) Magenic, All rights Reserved
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.unitTests;
+package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.EventHandler;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumConfig;
+import com.magenic.jmaqs.selenium.BaseSeleniumTest;
+import com.magenic.jmaqs.selenium.EventHandler;
+import com.magenic.jmaqs.selenium.SeleniumConfig;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.EventFiringWebDriver;

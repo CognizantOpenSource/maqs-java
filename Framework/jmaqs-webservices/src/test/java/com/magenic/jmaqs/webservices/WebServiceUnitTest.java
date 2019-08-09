@@ -2,10 +2,10 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.webservices.unitTests;
+package com.magenic.jmaqs.webservices;
 
-import com.magenic.jmaqs.webservices.baseWebServiceTest.BaseWebServiceTest;
-import com.magenic.jmaqs.webservices.baseWebServiceTest.WebServiceUtils;
+import com.magenic.jmaqs.webservices.BaseWebServiceTest;
+import com.magenic.jmaqs.webservices.WebServiceUtils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;

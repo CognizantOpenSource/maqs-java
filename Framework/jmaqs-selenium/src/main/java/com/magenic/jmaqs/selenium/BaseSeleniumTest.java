@@ -2,9 +2,9 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.baseSeleniumTest;
+package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.baseTest.BaseTest;
+import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;

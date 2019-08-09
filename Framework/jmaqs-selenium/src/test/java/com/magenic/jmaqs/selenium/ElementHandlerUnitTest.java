@@ -2,11 +2,11 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.unitTests;
+package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.ElementHandler;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumConfig;
+import com.magenic.jmaqs.selenium.BaseSeleniumTest;
+import com.magenic.jmaqs.selenium.ElementHandler;
+import com.magenic.jmaqs.selenium.SeleniumConfig;
 import com.magenic.jmaqs.utilities.helper.ListProcessor;
 
 import java.util.ArrayList;

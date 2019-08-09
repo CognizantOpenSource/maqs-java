@@ -2,10 +2,8 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.unitTests;
+package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumUtilities;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import org.apache.commons.io.FilenameUtils;
 import org.testng.Assert;

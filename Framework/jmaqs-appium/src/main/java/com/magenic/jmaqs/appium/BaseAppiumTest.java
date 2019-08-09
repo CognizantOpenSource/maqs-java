@@ -2,10 +2,10 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.appium.baseAppiumTest;
+package com.magenic.jmaqs.appium;
 
-import com.magenic.jmaqs.baseTest.BaseTest;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumWait;
+import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.selenium.SeleniumWait;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 

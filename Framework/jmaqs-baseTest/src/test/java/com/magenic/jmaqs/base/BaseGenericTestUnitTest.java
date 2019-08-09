@@ -2,9 +2,9 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.baseTest.unitTests;
+package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.baseTest.BaseGenericTest;
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 
 import org.testng.Assert;
@@ -24,7 +24,7 @@ public class BaseGenericTestUnitTest extends BaseGenericTest {
     String testName = this.getFullyQualifiedTestClassName();
 
     Assert.assertEquals(testName,
-        "com.magenic.jmaqs.baseTest.unitTests.BaseGenericTestUnitTest.fullyQualifiedTestNameTest");
+        "BaseGenericTestUnitTest.fullyQualifiedTestNameTest");
   }
 
   /**

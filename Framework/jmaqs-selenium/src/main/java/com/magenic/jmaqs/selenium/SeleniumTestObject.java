@@ -2,9 +2,9 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.baseSeleniumTest;
+package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.baseTest.BaseTestObject;
+import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
 
 import org.openqa.selenium.WebDriver;

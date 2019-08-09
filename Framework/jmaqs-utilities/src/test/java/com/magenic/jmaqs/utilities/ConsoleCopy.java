@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities.unitTests;
+package com.magenic.jmaqs.utilities;
 
 import java.io.File;
 import java.io.FileOutputStream;

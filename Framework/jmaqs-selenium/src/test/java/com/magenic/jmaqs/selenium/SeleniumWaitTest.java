@@ -1,9 +1,10 @@
-package com.magenic.jmaqs.selenium.unitTests;
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumConfig;
-import com.magenic.jmaqs.selenium.unitTests.unittestpagemodel.IFramePageModel;
-import com.magenic.jmaqs.selenium.unitTests.unittestpagemodel.PageElementsPageModel;
+import com.magenic.jmaqs.selenium.unittestpagemodel.IFramePageModel;
+import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;

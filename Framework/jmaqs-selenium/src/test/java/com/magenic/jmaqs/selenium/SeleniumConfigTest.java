@@ -2,9 +2,9 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.unitTests;
+package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumConfig;
+import com.magenic.jmaqs.selenium.SeleniumConfig;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;

@@ -2,11 +2,11 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.baseTest.unitTests;
+package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.baseTest.BaseTest;
-import com.magenic.jmaqs.baseTest.BaseTestObject;
-import com.magenic.jmaqs.baseTest.DriverManager;
+import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.base.BaseTestObject;
+import com.magenic.jmaqs.base.DriverManager;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 

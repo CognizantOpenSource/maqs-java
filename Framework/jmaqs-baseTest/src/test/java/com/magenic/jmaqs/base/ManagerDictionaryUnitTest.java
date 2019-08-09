@@ -2,16 +2,15 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.baseTest.unitTests;
+package com.magenic.jmaqs.base;
 
 import static org.testng.Assert.assertNotNull;
 
-import com.magenic.jmaqs.baseTest.BaseTest;
-import com.magenic.jmaqs.baseTest.BaseTestObject;
-import com.magenic.jmaqs.baseTest.DriverManager;
-import com.magenic.jmaqs.baseTest.ManagerDictionary;
+import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.base.BaseTestObject;
+import com.magenic.jmaqs.base.DriverManager;
+import com.magenic.jmaqs.base.ManagerDictionary;
 import java.util.function.Supplier;
-import org.apache.commons.lang3.NotImplementedException;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;

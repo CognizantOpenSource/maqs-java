@@ -1,7 +1,10 @@
-package com.magenic.jmaqs.appium.UnitTests;
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+package com.magenic.jmaqs.appium;
 
 
-import com.magenic.jmaqs.appium.baseAppiumTest.AppiumConfig;
+import com.magenic.jmaqs.appium.AppiumConfig;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

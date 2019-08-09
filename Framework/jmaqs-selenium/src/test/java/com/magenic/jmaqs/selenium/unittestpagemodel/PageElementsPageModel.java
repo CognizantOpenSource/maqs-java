@@ -1,7 +1,10 @@
-package com.magenic.jmaqs.selenium.unitTests.unittestpagemodel;
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+package com.magenic.jmaqs.selenium.unittestpagemodel;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumTestObject;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumWait;
+import com.magenic.jmaqs.selenium.SeleniumTestObject;
+import com.magenic.jmaqs.selenium.SeleniumWait;
 import org.openqa.selenium.By;
 
 public class PageElementsPageModel {

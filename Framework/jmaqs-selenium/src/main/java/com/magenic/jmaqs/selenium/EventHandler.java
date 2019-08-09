@@ -1,8 +1,8 @@
-/* 
- * Copyright 2017 (C) Magenic, All rights Reserved
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.baseSeleniumTest;
+package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;

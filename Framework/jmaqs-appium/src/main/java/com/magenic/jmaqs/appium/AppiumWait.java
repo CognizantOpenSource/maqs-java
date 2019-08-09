@@ -2,13 +2,11 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.appium.baseAppiumTest;
+package com.magenic.jmaqs.appium;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumWait;
+import com.magenic.jmaqs.selenium.SeleniumWait;
 
 import io.appium.java_client.AppiumDriver;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Class AppiumWait.

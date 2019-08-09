@@ -1,8 +1,8 @@
-/* 
+/*
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities.unitTests;
+package com.magenic.jmaqs.utilities;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
