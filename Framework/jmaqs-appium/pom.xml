@@ -8,10 +8,10 @@
     <artifactId>jmaqs-appium</artifactId>
 
     <parent>
-        <relativePath>../pom.xml</relativePath>
-        <groupId>com.magenic.jmaqs.base</groupId>
+        <groupId>com.magenic.jmaqs</groupId>
         <artifactId>jmaqs-base</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
