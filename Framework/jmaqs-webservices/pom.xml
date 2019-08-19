@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>com.magenic.jmaqs</groupId>
-        <artifactId>jmaqs-base</artifactId>
+        <artifactId>jmaqs-framework</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -58,7 +58,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.magenic.jmaqs.base</groupId>
-			<artifactId>jmaqs-basetest</artifactId>
+			<artifactId>jmaqs-base</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
