@@ -4,8 +4,6 @@
 
 package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.base.BaseTest;
-import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.Logger;
@@ -31,7 +29,7 @@ public class BaseTestUnitTest extends BaseTest {
     String testName = this.getFullyQualifiedTestClassName();
 
     Assert.assertEquals(testName,
-        "BaseTestUnitTest.fullyQualifiedTestNameTest");
+        "com.magenic.jmaqs.base.BaseTestUnitTest.fullyQualifiedTestNameTest");
   }
 
   /**
@@ -72,9 +70,9 @@ public class BaseTestUnitTest extends BaseTest {
     exceptions.add("Second Exception.");
     exceptions.add("Third Exception.");
     this.setLoggedExceptions(exceptions);
-    
-    Assert.assertTrue(this.getLoggedExceptions().size() == 3, 
-            "Expect that 3 Logged exceptions are in this exception list.");
+
+    Assert.assertTrue(this.getLoggedExceptions().size() == 3,
+        "Expect that 3 Logged exceptions are in this exception list.");
   }
 
   /**
@@ -86,21 +84,22 @@ public class BaseTestUnitTest extends BaseTest {
   }
 
   /**
-   * Validate Setting the Test Object to a new Test Object (Console Logger instead of File Logger). 
+   * Validate Setting the Test Object to a new Test Object (Console Logger instead of File Logger).
    */
   @Test
   public void setTestObjectTest() {
     Logger logger = new ConsoleLogger();
-    BaseTestObject baseTestObject = new BaseTestObject(logger, this.getFullyQualifiedTestClassName());
+    BaseTestObject baseTestObject = new BaseTestObject(logger,
+        this.getFullyQualifiedTestClassName());
     this.setTestObject(baseTestObject);
-    
-    Assert.assertTrue(this.getTestObject().getLog() instanceof ConsoleLogger, 
-            "Expected Test Object to be set to have a Console Logger.");
+
+    Assert.assertTrue(this.getTestObject().getLog() instanceof ConsoleLogger,
+        "Expected Test Object to be set to have a Console Logger.");
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#postSetupLogging()
    */
   @Override
@@ -110,7 +109,7 @@ public class BaseTestUnitTest extends BaseTest {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#beforeLoggingTeardown(org.testng.
    * ITestResult)
    */
