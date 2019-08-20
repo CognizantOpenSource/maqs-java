@@ -9,7 +9,7 @@
 
 	<modules>
 		<module>jmaqs-utilities</module>
-		<module>jmaqs-basetest</module>
+		<module>jmaqs-base</module>
 		<module>jmaqs-selenium</module>
 		<module>jmaqs-webservices</module>
 		<module>jmaqs-appium</module>
@@ -92,10 +92,13 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${surefire.plugin.version}</version>
+				<!-- Temporary disabling concurrency until bug is fixed.
+				Bug #10229:
 				<configuration>
 					<parallel>methods</parallel>
 					<threadCount>6</threadCount>
-				</configuration>
+				</configuration>-->
+
 			</plugin>
 			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
