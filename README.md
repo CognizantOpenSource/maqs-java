@@ -1,3 +1,7 @@
+#Docs
+[JMAQS docs](https://magenic.github.io/JMAQS/#/)
+
+
 #Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
