@@ -5,37 +5,36 @@
 package com.magenic.jmaqs.selenium;
 
 /**
- * Known browser types
+ * Known browser types.
  */
-public enum BrowserType
-{
-    /**
-     * Chrome web browser
-     */
-    Chrome,
+public enum BrowserType {
+  /**
+   * Chrome web browser.
+   */
+  Chrome,
 
-    /**
-     * Edge web browser
-     */
-    Edge,
+  /**
+   * Edge web browser.
+   */
+  Edge,
 
-    /**
-     * Firefox web browser
-     */
-    Firefox,
+  /**
+   * Firefox web browser.
+   */
+  Firefox,
 
-    /**
-     * Chrome web browser - run headless
-     */
-    HeadlessChrome,
+  /**
+   * Chrome web browser - run headless.
+   */
+  HeadlessChrome,
 
-    /**
-     * IE web browser
-     */
-    IE,
+  /**
+   * IE web browser.
+   */
+  IE,
 
-    /**
-     * Remote web browser - Used when executing on Grid or cloud based provides like Sauce Labs
-     */
-    Remote
+  /**
+   * Remote web browser - Used when executing on Grid or cloud based provides like Sauce Labs.
+   */
+  Remote
 }

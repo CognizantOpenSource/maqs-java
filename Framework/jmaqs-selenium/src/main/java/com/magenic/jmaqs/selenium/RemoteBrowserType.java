@@ -5,32 +5,31 @@
 package com.magenic.jmaqs.selenium;
 
 /**
- * Known remote browser types
+ * Known remote browser types.
  */
-public enum RemoteBrowserType
-{
-    /**
-     * Remote Chrome web browser
-     */
-    Chrome,
+public enum RemoteBrowserType {
+  /**
+   * Remote Chrome web browser.
+   */
+  Chrome,
 
-    /**
-     * Remote Edge web browser
-     */
-    Edge,
+  /**
+   * Remote Edge web browser.
+   */
+  Edge,
 
-    /**
-     * Remote Firefox web browser
-     */
-    Firefox,
+  /**
+   * Remote Firefox web browser.
+   */
+  Firefox,
 
-    /**
-     * Remote IE web browser
-     */
-    IE,
+  /**
+   * Remote IE web browser.
+   */
+  IE,
 
-    /**
-     * Remote Safari web browser
-     */
-    Safari
+  /**
+   * Remote Safari web browser.
+   */
+  Safari
 }
