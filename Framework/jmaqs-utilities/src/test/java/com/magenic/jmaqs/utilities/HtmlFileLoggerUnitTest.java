@@ -77,7 +77,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify HtmlFileLogger constructor creates the correct directory if it does not already exist.
    * Delete Directory after each run.
    */
-  @Test
+  /*@Test
   public void HtmlFileLoggerConstructorCreateDirectory() {
     HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
             "HtmlFileLoggerCreateDirectoryDelete").toString(), "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
@@ -94,7 +94,7 @@ public class HtmlFileLoggerUnitTest {
     } catch (IOException e) {
       e.printStackTrace();
     }
-  }
+  }*/
 
   /**
    * Verify that HtmlFileLogger can log message without defining a Message Type
