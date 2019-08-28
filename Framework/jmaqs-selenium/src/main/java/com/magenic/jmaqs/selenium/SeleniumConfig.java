@@ -44,9 +44,9 @@ public final class SeleniumConfig {
   public static final ConfigSection REMOTE_SELENIUM_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
 
   /**
-   * Get Full Screenshot flag.
+   * Get the file extension for the screenshots.
    *
-   * @return The flag to turn full screenshots on or off
+   * @return The type of file, defaults to .png
    */
   public static String getScreenShotExtension() {
     return Config.getValueForSection(SELENIUM_SECTION,"ImageFormat", ".png");
@@ -59,6 +59,15 @@ public final class SeleniumConfig {
    */
   public static String getBrowserName() {
     return Config.getValueForSection(SELENIUM_SECTION,"Browser", "Chrome");
+  }
+
+  /**
+   * Get the hub URL.
+   *
+   * @return the hub URL
+   */
+  public static String getHubUrl() {
+    return Config.getValue("HubUrl");
   }
 
   /**
@@ -90,6 +99,16 @@ public final class SeleniumConfig {
   }
 
   /**
+   * Get the remote browser. If no remote browser is provided in the project configuration file, we
+   * default to Chrome.
+   *
+   * @return The web driver
+   */
+  public static WebDriver getRemoteBrowser() throws Exception {
+    return browser(getRemoteBrowserName());
+  }
+
+  /**
    * Get the remote platform type name.
    *
    * @return The platform (or OS) to run remote tests against
@@ -108,8 +127,8 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the browser. If no browser is provide in the project configuration file we default to
-   * Chrome. Browser are maximized by default
+   * Get the browser. If no browser is provided in the project configuration file, we default to
+   * Chrome. Browsers are maximized by default
    *
    * @return The web driver
    */
@@ -412,5 +431,6 @@ public final class SeleniumConfig {
    */
   private static int getWaitTime() {
     return Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0"));
-  }  
+  }
+
 }

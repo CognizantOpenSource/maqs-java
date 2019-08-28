@@ -18,7 +18,7 @@ public class SeleniumConfigTest {
    * Browser check.
    */
   @Test
-  public void getBrowser() throws Exception{
+  public void getBrowser() throws Exception {
 
     WebDriver driver = SeleniumConfig.browser();
 
@@ -50,6 +50,17 @@ public class SeleniumConfigTest {
   }
 
   /**
+   * Hub Url.
+   */
+  @Test
+  public void getHubUrl() {
+
+    String hubUrl = SeleniumConfig.getHubUrl();
+
+    Assert.assertTrue(hubUrl.equalsIgnoreCase("http://ondemand.saucelabs.com:80/wd/hub"));
+  }
+
+  /**
    * Driver hint path.
    */
   @Test
@@ -69,6 +80,19 @@ public class SeleniumConfigTest {
     String browser = SeleniumConfig.getRemoteBrowserName();
 
     Assert.assertEquals(browser, "Chrome");
+  }
+
+  /**
+   * Remote browser check.
+   */
+  @Test
+  public void getRemoteBrowser() throws Exception {
+
+    WebDriver driver = SeleniumConfig.getRemoteBrowser();
+
+    Assert.assertNotNull(driver);
+    driver.quit();
+
   }
 
   /**
@@ -97,7 +121,7 @@ public class SeleniumConfigTest {
    * Browser with string.
    */
   @Test
-  public void getBrowserWithString() throws Exception{
+  public void getBrowserWithString() throws Exception {
 
     WebDriver driver = SeleniumConfig.browser("HEADLESSCHROME");
 
