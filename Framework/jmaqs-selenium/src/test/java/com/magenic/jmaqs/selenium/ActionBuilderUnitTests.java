@@ -3,7 +3,6 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,9 +12,9 @@ public class ActionBuilderUnitTests extends BaseSeleniumTest {
   private static String siteAutomationUrl = siteUrl + "Automation/";
   private static By manageDropdown = By.cssSelector("body > div.navbar.navbar-inverse.navbar-fixed-top > div > div.navbar-collapse.collapse > ul > li:nth-child(2) > a");
   private static By employeeButton = By.cssSelector("#EmployeeButton > a");
-  private static By automationPageHeader = By.cssSelector("body > div.container.body-content > h2");
-  private static By dialogButton2 = By.cssSelector("#showDialog2");
   private static By employeePageTitle = By.cssSelector("body > div.container.body-content > h2");
+  private static By listBoxOption1 = By.cssSelector("#computerParts > option:nth-child(1)");
+  private static By listBoxOption2 = By.cssSelector("#computerParts > option:nth-child(2)");
   private static By slider = By.cssSelector("#slider > span");
   private static By sliderLabelNumber = By.cssSelector("#sliderNumber");
   private static By rightClickableElementWithContextMenu = By.cssSelector("#rightclickspace");
@@ -29,14 +28,16 @@ public class ActionBuilderUnitTests extends BaseSeleniumTest {
     this.getSeleniumWait().waitForExactText(employeePageTitle, "Index");
   }
 
-  // this isnt a valid test at all
   @Test(groups = TestCategories.Selenium)
   public void pressModifierKeyTest() {
     this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.pressModifierKey(this.getSeleniumWait(), Keys.END);
-    this.getSeleniumWait().waitForVisibleElement(dialogButton2);
-    ActionBuilder.pressModifierKey(this.getSeleniumWait(), Keys.HOME);
-    Assert.assertEquals(this.getSeleniumWait().waitForVisibleElement(automationPageHeader).getText(), "Elements to be automated", "Elements are not the same");
+
+    this.getSeleniumWait().waitForClickableElement(listBoxOption1).click();
+    ActionBuilder.pressModifierKey(this.getSeleniumWait(), Keys.CONTROL.toString());
+    this.getSeleniumWait().waitForClickableElement(listBoxOption2).click();
+
+    Assert.assertTrue(this.getSeleniumWait().waitForClickableElement(listBoxOption1).isSelected());
+    Assert.assertTrue(this.getSeleniumWait().waitForClickableElement(listBoxOption2).isSelected());
   }
 
   @Test(groups = TestCategories.Selenium)
@@ -51,12 +52,6 @@ public class ActionBuilderUnitTests extends BaseSeleniumTest {
     this.navigateToUrl(siteAutomationUrl);
     ActionBuilder.rightClick(this.getSeleniumWait(), rightClickableElementWithContextMenu);
     Assert.assertTrue(this.getWebDriver().findElement(rightClickContextSaveText).isDisplayed());
-  }
-
-  @Test(groups = TestCategories.Selenium, expectedExceptions = TimeoutException.class)
-  public void rightClickToTriggerContextMenuNotFound() {
-    this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.rightClick(this.getSeleniumWait(), By.cssSelector(".none"));
   }
 
   private void navigateToUrl(String url)

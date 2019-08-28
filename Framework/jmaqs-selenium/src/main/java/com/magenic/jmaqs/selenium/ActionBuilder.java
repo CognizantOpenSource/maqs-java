@@ -24,9 +24,9 @@ public class ActionBuilder {
   /**
    * Press non alphanumeric key. Ex. Control, Home, etc.
    * @param seleniumWait The seleniumWait
-   * @param key The key to press.
+   * @param key The key to press. NOTE: Use the Keys class
    */
-  public static void pressModifierKey(SeleniumWait seleniumWait, Keys key) {
+  public static void pressModifierKey(SeleniumWait seleniumWait, String key) {
     Actions builder = new Actions(seleniumWait.getWebDriver());
     builder.sendKeys(key).build().perform();
   }
