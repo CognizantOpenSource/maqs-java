@@ -7,6 +7,7 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.selenium.SeleniumConfig;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -24,7 +25,6 @@ public class SeleniumConfigTest {
 
     Assert.assertNotNull(driver);
     driver.quit();
-
   }
 
   /**
@@ -152,4 +152,47 @@ public class SeleniumConfigTest {
     driver.quit();
   }
 
+  /**
+   * Get Web Wait Driver.
+   * @throws Exception
+   *            Can throw new Exception
+   */
+  @Test
+  public void getWaitDriver() throws Exception {
+    WebDriver driver = SeleniumConfig.browser();
+    WebDriverWait driverWait = SeleniumConfig.getWaitDriver(driver);
+
+    Assert.assertNotNull(driverWait);
+    driver.quit();
+  }
+
+  /**
+   * Verify SavePagesourceOnFail is enabled.
+   */
+  @Test
+  public void getSavePagesourceOnFail() {
+    boolean value = SeleniumConfig.getSavePagesourceOnFail();
+
+    Assert.assertTrue(value);
+  }
+
+  /**
+   * Verify SoftAssertScreenshot is enabled.
+   */
+  @Test
+  public void getSoftAssertScreenshot() {
+    boolean value = SeleniumConfig.getSoftAssertScreenshot();
+
+    Assert.assertTrue(value);
+  }
+
+  /**
+   * Get browser size.
+   */
+  @Test
+  public void getBrowserSize() {
+    String value = SeleniumConfig.getBrowserSize();
+
+    Assert.assertNotNull(value);
+  }
 }

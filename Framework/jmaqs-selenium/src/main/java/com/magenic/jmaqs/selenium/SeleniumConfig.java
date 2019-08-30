@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
+import java.time.Clock;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,6 +29,7 @@ import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Selenium specific configuration class.
@@ -77,6 +79,24 @@ public final class SeleniumConfig {
    */
   public static String getWebSiteBase() {
     return Config.getValueForSection(SELENIUM_SECTION,"WebSiteBase");
+  }
+
+  /**
+   * Get the SavePageSourceOnFail flag from config.
+   *
+   * @return True if the flag is set to "Yes"
+   */
+  public static boolean getSavePagesourceOnFail() {
+    return Config.getValueForSection(SELENIUM_SECTION, "SavePagesourceOnFail").equalsIgnoreCase("Yes");
+  }
+
+  /**
+   * Get the SoftAssertScreenshot flag from config.
+   *
+   * @return True if the flag is set to "Yes"
+   */
+  public static boolean getSoftAssertScreenshot() {
+    return Config.getValueForSection(SELENIUM_SECTION, "SoftAssertScreenshot").equalsIgnoreCase("Yes");
   }
 
   /**
@@ -337,7 +357,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the initialize Selenium timeout
+   * Get the initialize Selenium timeout.
    *
    * @return The initialize timeout
    */
@@ -525,11 +545,22 @@ public final class SeleniumConfig {
   }
 
   /**
+   * Get the default wait driver.
+   *
+   * @param driver
+   *          The Web Driver
+   * @return A WebDriverWait
+   */
+  public static WebDriverWait getWaitDriver(WebDriver driver) {
+    return new WebDriverWait(driver, getTimeoutTime());
+  }
+
+  /**
    * Get the timeout from config.
    *
    * @return The timeout time
    */
-  private static int getTimeoutTime() {
+  public static int getTimeoutTime() {
     return Integer.parseInt(Config.getGeneralValue("BrowserTimeout", "0"));
   }
 
@@ -538,8 +569,17 @@ public final class SeleniumConfig {
    *
    * @return The wait time
    */
-  private static int getWaitTime() {
+  public static int getWaitTime() {
     return Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0"));
+  }
+
+  /**
+   * Get browser size from config.
+   *
+   * @return The browser size
+   */
+  public static String getBrowserSize() {
+    return Config.getValueForSection(SELENIUM_SECTION, "BrowserSize", "MAXIMIZE".toUpperCase());
   }
 
 }
