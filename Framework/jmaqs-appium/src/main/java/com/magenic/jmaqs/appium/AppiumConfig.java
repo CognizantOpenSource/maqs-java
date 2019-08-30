@@ -104,6 +104,11 @@ public class AppiumConfig {
     return Config.getValueForSection(APPIUM_SECTION, "SavePageSourceOnFail").equalsIgnoreCase("Yes");
   }
 
+  public static boolean getSoftAssertScreenShot()
+  {
+    return Config.getValueForSection(APPIUM_SECTION, "SoftAssertScreenShot").equalsIgnoreCase("Yes");
+  }
+
   /**
    * Gets the mobile hub url string.
    *

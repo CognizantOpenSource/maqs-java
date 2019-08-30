@@ -47,4 +47,10 @@ public class AppiumConfigUnitTests {
     boolean savePageSourceOnFail = AppiumConfig.getSavePageSourceOnFail();
     Assert.assertFalse(savePageSourceOnFail, "Checking value of Save Page Source On Fail key");
   }
+
+  @Test
+  public void testGetSoftAssertScreenShot() {
+    boolean softAssertScreenShot = AppiumConfig.getSoftAssertScreenShot();
+    Assert.assertFalse(softAssertScreenShot, "Checking value of Soft Assert Screenshot");
+  }
 }
