@@ -1,17 +1,20 @@
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.selenium;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 /**
- * Contains methods for interactions using selenium Actions class
+ * Contains methods for interactions using selenium Actions class.
  */
 public class ActionBuilder {
 
   /**
-   * Performs a hover over on an element
+   * Performs a hover over on an element.
    * @param seleniumWait The seleniumWait
    * @param by By selector for the element
    */
@@ -26,13 +29,13 @@ public class ActionBuilder {
    * @param seleniumWait The seleniumWait
    * @param key The key to press. NOTE: Use the Keys class
    */
-  public static void pressModifierKey(SeleniumWait seleniumWait, String key) {
+  public static void pressModifierKey(SeleniumWait seleniumWait, CharSequence... key) {
     Actions builder = new Actions(seleniumWait.getWebDriver());
     builder.sendKeys(key).build().perform();
   }
 
   /**
-   * Slider method which will take an offset of X pixels
+   * Slider method which will take an offset of X pixels.
    * @param seleniumWait The seleniumWait
    * @param by By selector for the element
    * @param pixelsOffset Integer of pixels to be moved (Positive or negative)
@@ -43,7 +46,7 @@ public class ActionBuilder {
   }
 
   /**
-   * Performs a right-click on an element
+   * Performs a right-click on an element.
    * @param seleniumWait The seleniumWait
    * @param by By selector for the element
    */
