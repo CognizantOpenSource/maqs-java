@@ -61,6 +61,17 @@ public class SeleniumConfigTest {
   }
 
   /**
+   * Command timeout.
+   */
+  @Test
+  public void getCommandTimeout() {
+
+    int timeout = SeleniumConfig.getCommandTimeout();
+
+    Assert.assertNotNull(timeout);
+  }
+
+  /**
    * Driver hint path.
    */
   @Test
@@ -93,6 +104,18 @@ public class SeleniumConfigTest {
     Assert.assertNotNull(driver);
     driver.quit();
 
+  }
+
+  /**
+   * Remote browser with string.
+   */
+  @Test
+  public void getRemoteBrowserWithString() throws Exception {
+
+    WebDriver driver = SeleniumConfig.getRemoteBrowser("HEADLESSCHROME");
+
+    Assert.assertNotNull(driver);
+    driver.quit();
   }
 
   /**

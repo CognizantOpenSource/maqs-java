@@ -67,7 +67,7 @@ public final class SeleniumConfig {
    * @return the hub URL
    */
   public static String getHubUrl() {
-    return Config.getValue("HubUrl");
+    return Config.getValueForSection(SELENIUM_SECTION, "HubUrl");
   }
 
   /**
@@ -109,6 +109,100 @@ public final class SeleniumConfig {
   }
 
   /**
+   * Get the webdriver for the provided remote browser. Browsers are maximized by default.
+   *
+   * @param remoteBrowser
+   *          The browser type we want to use
+   * @return A WebDriver
+   */
+  public static WebDriver getRemoteBrowser(String remoteBrowser) throws Exception {
+    WebDriver webDriver = null;
+
+    try {
+      switch (remoteBrowser.toUpperCase()) {
+        case "INTERNET EXPLORER":
+        case "INTERNETEXPLORER":
+        case "IE":
+          System.setProperty("webdriver.ie.driver",
+              getDriverLocation("IEDriverServer.exe") + File.separator + "IEDriverServer.exe");
+          webDriver = new InternetExplorerDriver();
+          break;
+        case "FIREFOX":
+
+          System.setProperty("webdriver.gecko.driver",
+              getDriverLocation("geckodriver.exe") + File.separator + "geckodriver.exe");
+
+          FirefoxOptions options = new FirefoxOptions();
+          options.setProfile(new FirefoxProfile());
+
+          webDriver = new FirefoxDriver(GeckoDriverService.createDefaultService(), options);
+          break;
+        case "CHROME":
+          ChromeOptions chromeOptions = new ChromeOptions();
+          chromeOptions.addArguments("test-type");
+          chromeOptions.addArguments("--disable-web-security");
+          chromeOptions.addArguments("--allow-running-insecure-content");
+          chromeOptions.addArguments("--disable-extensions");
+
+          System.setProperty("webdriver.chrome.driver",
+              getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
+          webDriver = new ChromeDriver(chromeOptions);
+          break;
+        case "HEADLESSCHROME":
+          ChromeOptions headlessChromeOptions = new ChromeOptions();
+          headlessChromeOptions.addArguments("test-type");
+          headlessChromeOptions.addArguments("--disable-web-security");
+          headlessChromeOptions.addArguments("--allow-running-insecure-content");
+          headlessChromeOptions.addArguments("--disable-extensions");
+          headlessChromeOptions.addArguments("--no-sandbox");
+          headlessChromeOptions.addArguments("--headless");
+
+          System.setProperty("webdriver.chrome.driver",
+              getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
+          webDriver = new ChromeDriver(headlessChromeOptions);
+          break;
+        case "EDGE":
+          EdgeOptions edgeOptions = new EdgeOptions();
+          edgeOptions.setPageLoadStrategy("Normal");
+
+          System.setProperty("webdriver.edge.driver",
+              getDriverLocation("MicrosoftWebDriver.exe",
+                  getProgramFilesFolder("Microsoft Web Driver", "MicrosoftWebDriver.exe"))
+                  + File.separator + "MicrosoftWebDriver.exe");
+          webDriver = new EdgeDriver(edgeOptions);
+          break;
+        case "REMOTE":
+          // MalformedURLException exception is thrown if no protocol is
+          // specified, or an unknown protocol is found, or spec is null.
+          try {
+            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,"HubUrl")),
+                getRemoteCapabilities());
+          } catch (MalformedURLException e) {
+            throw new Exception("Malformed URL Exception thrown trying to create the remote web driver.", e);
+          }
+          break;
+        default:
+          throw new RuntimeException(
+              StringProcessor.safeFormatter("Browser type %s is not supported", remoteBrowser));
+      }
+
+      // Maximize the browser and than return it
+      webDriver.manage().window().maximize();
+      return webDriver;
+    } catch (Exception e) {
+      if (webDriver != null) {
+        try {
+          webDriver.quit();
+        } catch (Exception quitExecption) {
+          throw new Exception("Failed to quit Web driver during setup", quitExecption);
+        }
+      }
+      String errorException = "Failed to setup web driver. Your driver may be out of date or unsupported. Exception: ";
+      throw new Exception(MessageFormat.format("{1} {0}", errorException, e));
+    }
+  }
+
+  /**
    * Get the remote platform type name.
    *
    * @return The platform (or OS) to run remote tests against
@@ -137,7 +231,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the webdriver based for the provided browser, Browser are maximized by default.
+   * Get the webdriver for the provided browser. Browsers are maximized by default.
    *
    * @param browser
    *          The browser type we want to use
@@ -240,6 +334,21 @@ public final class SeleniumConfig {
     int timeoutTime = Integer.parseInt(Config.getGeneralValue("Timeout", "0"));
     driver.manage().timeouts().setScriptTimeout(timeoutTime, null);
     driver.manage().timeouts().pageLoadTimeout(timeoutTime, null);
+  }
+
+  /**
+   * Get the initialize Selenium timeout
+   *
+   * @return The initialize timeout
+   */
+  public static int getCommandTimeout() {
+    String value = Config.getValueForSection(SELENIUM_SECTION, "SeleniumCommandTimeout", "60000");
+    try {
+      Integer.parseInt(value);
+      return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      throw new NumberFormatException("SeleniumCommandTimeout should be a number, but the current value is: " + value);
+    }
   }
 
   /**
