@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.base.BaseExtendableTest;
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
@@ -15,7 +16,7 @@ import org.testng.ITestResult;
 /**
  * Base Selenium Test class.
  */
-public abstract class BaseSeleniumTest extends BaseTest {
+public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Initialize a new instance of the BaseSeleniumTest class.
@@ -70,11 +71,11 @@ public abstract class BaseSeleniumTest extends BaseTest {
             SeleniumConfig.getBrowserName());
       }
 
-      WebDriver driver = SeleniumConfig.browser();
+      /*WebDriver driver = SeleniumConfig.browser();
       SeleniumWait wait = new SeleniumWait(driver);
 
       seleniumTestObject.set(new SeleniumTestObject(driver, wait, this.getLogger(),
-          this.getFullyQualifiedTestClassName()));      
+          this.getFullyQualifiedTestClassName()));  */
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s",
           e.getMessage());
@@ -131,5 +132,21 @@ public abstract class BaseSeleniumTest extends BaseTest {
   protected  WebDriver getBrowser() throws Exception {
     // Returns the web driver
     return SeleniumConfig.browser();
+  }
+
+  @Override
+  protected void createNewTestObject() {
+    //FIXME: Workaround to get module working.  Must Refactor.
+    Logger logger = this.createLogger();
+    WebDriver driver = null;
+    try {
+      driver = SeleniumConfig.browser();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    SeleniumWait wait = new SeleniumWait(driver);
+    SeleniumTestObject seleniumTestObject = new SeleniumTestObject(driver, wait, logger, this.getFullyQualifiedTestClassName());
+    this.setTestObject(seleniumTestObject);
+    this.seleniumTestObject.set(seleniumTestObject);
   }
 }

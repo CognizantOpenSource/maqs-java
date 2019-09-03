@@ -28,8 +28,8 @@
         <LogType>HTML</LogType>-->
         <LogType>TXT</LogType>
 
-        <!-- Log file path - Defaults to build location if no value is defined
-        <FileLoggerPath>C:\\Frameworks\\</FileLoggerPath> -->
+        <!-- Log file path - Defaults to build location if no value is defined -->
+        <FileLoggerPath>./target/logs</FileLoggerPath>
     </MagenicMaqs>
 
     <SeleniumMaqs>
