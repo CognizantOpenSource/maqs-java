@@ -4,8 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.selenium.SeleniumConfig;
-
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -18,7 +17,7 @@ public class SeleniumConfigTest {
   /**
    * Browser check.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getBrowser() throws Exception {
 
     WebDriver driver = SeleniumConfig.browser();
@@ -30,7 +29,7 @@ public class SeleniumConfigTest {
   /**
    * Browser name.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getBrowserName() {
 
     String driverName = SeleniumConfig.getBrowserName();
@@ -41,7 +40,7 @@ public class SeleniumConfigTest {
   /**
    * Web site base.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getWebsiteBase() {
 
     String website = SeleniumConfig.getWebSiteBase();
@@ -52,7 +51,7 @@ public class SeleniumConfigTest {
   /**
    * Hub Url.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getHubUrl() {
 
     String hubUrl = SeleniumConfig.getHubUrl();
@@ -63,7 +62,7 @@ public class SeleniumConfigTest {
   /**
    * Command timeout.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getCommandTimeout() {
 
     int timeout = SeleniumConfig.getCommandTimeout();
@@ -74,7 +73,7 @@ public class SeleniumConfigTest {
   /**
    * Driver hint path.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getDriverHintPath() {
 
     String path = SeleniumConfig.getDriverHintPath();
@@ -85,7 +84,7 @@ public class SeleniumConfigTest {
   /**
    * Remote browser name test.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getRemoteBrowserName() {
 
     String browser = SeleniumConfig.getRemoteBrowserName();
@@ -96,7 +95,7 @@ public class SeleniumConfigTest {
   /**
    * Remote browser check.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getRemoteBrowser() throws Exception {
 
     WebDriver driver = SeleniumConfig.getRemoteBrowser();
@@ -109,7 +108,7 @@ public class SeleniumConfigTest {
   /**
    * Remote browser with string.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getRemoteBrowserWithString() throws Exception {
 
     WebDriver driver = SeleniumConfig.getRemoteBrowser("HEADLESSCHROME");
@@ -121,7 +120,7 @@ public class SeleniumConfigTest {
   /**
    * Remote platform test.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getRemotePlatform() {
 
     String platform = SeleniumConfig.getRemotePlatform();
@@ -132,7 +131,7 @@ public class SeleniumConfigTest {
   /**
    * Remote browser version.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getRemoteBrowserVersion() {
 
     String version = SeleniumConfig.getRemoteBrowserVersion();
@@ -143,7 +142,7 @@ public class SeleniumConfigTest {
   /**
    * Browser with string.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getBrowserWithString() throws Exception {
 
     WebDriver driver = SeleniumConfig.browser("HEADLESSCHROME");
@@ -157,7 +156,7 @@ public class SeleniumConfigTest {
    * @throws Exception
    *            Can throw new Exception
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getWaitDriver() throws Exception {
     WebDriver driver = SeleniumConfig.browser();
     WebDriverWait driverWait = SeleniumConfig.getWaitDriver(driver);
@@ -169,7 +168,7 @@ public class SeleniumConfigTest {
   /**
    * Verify SavePagesourceOnFail is enabled.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getSavePagesourceOnFail() {
     boolean value = SeleniumConfig.getSavePagesourceOnFail();
 
@@ -179,7 +178,7 @@ public class SeleniumConfigTest {
   /**
    * Verify SoftAssertScreenshot is enabled.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getSoftAssertScreenshot() {
     boolean value = SeleniumConfig.getSoftAssertScreenshot();
 
@@ -189,7 +188,7 @@ public class SeleniumConfigTest {
   /**
    * Get browser size.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void getBrowserSize() {
     String value = SeleniumConfig.getBrowserSize();
 
