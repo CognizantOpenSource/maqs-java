@@ -218,11 +218,13 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Verify FileLogger constructor creates the correct directory if it does not already exist.
-   * Delete Directory after each run.
+   * Verify FileLogger constructor creates the correct directory if it does not
+   * already exist. Delete Directory after each run.
+   * 
+   * @throws IOException
    */
   @Test
-  public void FileLoggerConstructorCreateDirectory()
+  public void FileLoggerConstructorCreateDirectory() throws IOException
   {
     String message = "Test to ensure that the file in the created directory can be written to.";
     FileLogger logger = new FileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
@@ -230,8 +232,8 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.WARNING, "Test to ensure that the file in the created directory can be written to.");
 
     File file = new File(logger.getFilePath());
-    String actualMessage = this.readTextFile(logger.getFilePath());
-    Assert.assertTrue(actualMessage.contains(message), "Expected '" + message + "' but got '" + actualMessage + "' and exist:" + file.exists() + " and path " + logger.getFilePath());
+    String actualMessage = this.readTextFile(file.getCanonicalPath());
+    Assert.assertTrue(actualMessage.contains(message), "Expected '" + message + "' but got '" + actualMessage + "' for: " + file.getCanonicalPath());
     file.delete();
   }
 
