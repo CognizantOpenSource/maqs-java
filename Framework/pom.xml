@@ -12,7 +12,7 @@
 		<module>jmaqs-base</module>
 		<module>jmaqs-selenium</module>
 		<module>jmaqs-webservices</module>
-		<!--<module>jmaqs-appium</module>-->
+		<module>jmaqs-appium</module>
 	</modules>
 
 	<repositories>
@@ -28,8 +28,6 @@
 	</repositories>
 
 	<properties>
-		<vsts_username>Username</vsts_username>
-		<vsts_password>Password</vsts_password>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
 		<deploy.plugin.version>2.8.2</deploy.plugin.version>
