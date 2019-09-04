@@ -5,7 +5,7 @@
         <WaitTime>100</WaitTime>
 
         <!-- Generic time-out in milliseconds -->
-        <Timeout>10000</Timeout>
+        <Timeout>500</Timeout>
 
         <!-- Do you want to create logs for your tests
         <Log>YES</Log>

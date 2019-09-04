@@ -10,9 +10,9 @@
 	<modules>
 		<module>jmaqs-utilities</module>
 		<module>jmaqs-base</module>
-		<module>jmaqs-selenium</module>
+		<!--<module>jmaqs-selenium</module>-->
 		<module>jmaqs-webservices</module>
-		<module>jmaqs-appium</module>
+		<!--<module>jmaqs-appium</module>-->
 	</modules>
 
 	<repositories>
