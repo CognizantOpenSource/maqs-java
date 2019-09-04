@@ -229,11 +229,9 @@ public class FileLoggerUnitTest {
             "FileLoggerCreateDirectoryDelete").toString(), "FileLoggerCreateDirectory", MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "Test to ensure that the file in the created directory can be written to.");
 
-    
-
     File file = new File(logger.getFilePath());
     String actualMessage = this.readTextFile(logger.getFilePath());
-    Assert.assertTrue(actualMessage.contains(message), "Expected '" + message + "' but got '" + actualMessage + "'" );
+    Assert.assertTrue(actualMessage.contains(message), "Expected '" + message + "' but got '" + actualMessage + "' and exist:" + file.exists() + " and path " + logger.getFilePath());
     file.delete();
   }
 
