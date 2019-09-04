@@ -224,6 +224,7 @@ public class FileLoggerUnitTest {
   @Test
   public void FileLoggerConstructorCreateDirectory()
   {
+    String message = "Test to ensure that the file in the created directory can be written to.";
     FileLogger logger = new FileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
             "FileLoggerCreateDirectoryDelete").toString(), "FileLoggerCreateDirectory", MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "Test to ensure that the file in the created directory can be written to.");
@@ -231,17 +232,9 @@ public class FileLoggerUnitTest {
     
 
     File file = new File(logger.getFilePath());
-    Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains(
-            "Test to ensure that the file in the created directory can be written to."));
-   
+    String actualMessage = this.readTextFile(logger.getFilePath());
+    Assert.assertTrue(actualMessage.contains(message), "Expected '" + message + "' but got '" + actualMessage + "'" );
     file.delete();
-//Assert.fail("FileLoggerConstructorCreateDirectory" + logger.getFilePath());
-  //  file = new File(logger.getDirectory());
-  //  try {
-  //    FileUtils.deleteDirectory(file);
-  //  } catch (IOException e) {
-  //    e.printStackTrace();
-  //  }
   }
 
   /**
