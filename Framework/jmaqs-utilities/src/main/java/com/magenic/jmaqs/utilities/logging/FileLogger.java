@@ -247,7 +247,7 @@ public class FileLogger extends Logger {
     }
 
     this.fileName = name;
-    this.filePath = Paths.get(this.directory, name).toString();
+    this.filePath = Paths.get(this.directory, name).normalize().toString();
     this.messageType = messageLevel;
 
     File file = new File(this.filePath);
