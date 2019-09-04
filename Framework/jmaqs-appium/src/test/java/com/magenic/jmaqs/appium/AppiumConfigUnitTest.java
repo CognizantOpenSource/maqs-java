@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class AppiumConfigUnitTests {
+public class AppiumConfigUnitTest {
 
     @Test
     public void testGetMobileDeviceUDID() throws Exception {
