@@ -5,7 +5,7 @@
         <WaitTime>100</WaitTime>
 
         <!-- Generic time-out in milliseconds -->
-        <Timeout>10000</Timeout>
+        <Timeout>500</Timeout>
 
         <!-- Do you want to create logs for your tests
         <Log>YES</Log>
@@ -28,8 +28,8 @@
         <LogType>HTML</LogType>-->
         <LogType>TXT</LogType>
 
-        <!-- Log file path - Defaults to build location if no value is defined
-        <FileLoggerPath>C:\\Frameworks\\</FileLoggerPath> -->
+        <!-- Log file path - Defaults to build location if no value is defined -->
+        <FileLoggerPath>./target/logs</FileLoggerPath>
 
         <!-- CONFIG TEST VALUES -->
         <TestKey>testValue</TestKey>
