@@ -3,13 +3,11 @@
  */
 package com.magenic.jmaqs.appium;
 
-
 import com.magenic.jmaqs.appium.AppiumConfig;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
-public class AppiumConfigUnitTests {
+public class AppiumConfigUnitTest {
 
     @Test
     public void testGetMobileDeviceUDID() throws Exception {
