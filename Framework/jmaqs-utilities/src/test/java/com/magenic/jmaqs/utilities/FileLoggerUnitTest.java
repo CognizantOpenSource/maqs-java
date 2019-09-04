@@ -229,6 +229,7 @@ public class FileLoggerUnitTest {
     String message = "Test to ensure that the file in the created directory can be written to.";
     FileLogger logger = new FileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
             "FileLoggerCreateDirectoryDelete").toString(), "FileLoggerCreateDirectory", MessageType.GENERIC);
+
     logger.logMessage(MessageType.WARNING, "Test to ensure that the file in the created directory can be written to.");
 
     File file = new File(logger.getFilePath());
