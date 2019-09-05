@@ -63,9 +63,9 @@
         <ImageFormat>Png</ImageFormat>
 
         <!-- Do you want to save page source when a Soft Assert fails
-        <SavePagesourceOnFail>YES</SavePagesourceOnFail>
-        <SavePagesourceOnFail>NO</SavePagesourceOnFail> -->
-        <SavePagesourceOnFail>NO</SavePagesourceOnFail>
+        <SavePageSourceOnFail>YES</SavePageSourceOnFail>
+        <SavePageSourceOnFail>NO</SavePageSourceOnFail>-->
+        <SavePageSourceOnFail>NO</SavePageSourceOnFail>
 
         <!-- settings in JMAQS, not in MAQS> -->
         <BundleID>com.magenic.maqs.appium.tester</BundleID>
