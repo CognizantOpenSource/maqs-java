@@ -20,19 +20,16 @@ import org.openqa.selenium.support.events.*;
 import java.sql.Driver;
 
 public class SeleniumDriverManager extends DriverManager {
-  /// <summary>
-  /// Initializes a new instance of the <see cref="SeleniumDriverManager"/> class
-  /// </summary>
-  /// <param name="getDriver">Function for getting an Selenium web driver</param>
-  /// <param name="testObject">The associated test object</param>
-  // public SeleniumDriverManager(Func<WebDriver> getDriver, BaseTestObject testObject) : base(getDriver, testObject)
+  /**
+   * Initializes a new instance of the <see cref="SeleniumDriverManager"/> class
+   * @param webDriver Function for getting an Selenium web driver
+   * @param testObject The associated test object
+   */
   public SeleniumDriverManager(WebDriver webDriver, BaseTestObject testObject) {
-    this.webDriver = webDriver;
-    this.testObject = testObject;
+    super(webDriver, testObject);
   }
 
   public void close() {
-
   }
 
   private WebDriver webDriver;
@@ -42,12 +39,11 @@ public class SeleniumDriverManager extends DriverManager {
    */
   private BaseTestObject testObject;
 
-  /// <summary>
-  /// Get the web driver
-  /// </summary>
-  /// <returns>The web driver</returns>
-  public WebDriver GetWebDriver()
-  {
+  /**
+   * Get the web driver
+   * @return The web driver
+   */
+  public WebDriver getWebDriver() {
     WebDriver tempDriver;
 
     if (!this.isDriverInitialized() &&
@@ -56,44 +52,43 @@ public class SeleniumDriverManager extends DriverManager {
       tempDriver = (WebDriver) getDriver;
       tempDriver = new EventFiringWebDriver(tempDriver);
       //this.MapEvents(tempDriver as EventFiringWebDriver);
-      this.MapEvents((EventFiringWebDriver)tempDriver);
+      this.mapEvents((EventFiringWebDriver)tempDriver);
       this.baseDriver = tempDriver;
 
       // Log the setup
-      this.LoggingStartup(tempDriver);
+      this.loggingStartup(tempDriver);
     }
 
     //return getBase() as WebDriver;
     return (WebDriver) getBase();
   }
 
-  /// <summary>
-  /// Get the web driver
-  /// </summary>
-  /// <returns>The web driver</returns>
-  // @Override
-  public Object Get() {
-    return this.GetWebDriver();
+  /**
+   * Get the web driver
+   * @return The web driver
+   */
+  public Object get() {
+    return this.getWebDriver();
   }
 
-  /// <summary>
-  /// Log a verbose message and include the automation specific call stack data
-  /// </summary>
-  /// <param name="message">The message text</param>
-  /// <param name="args">String format arguments</param>
-  protected void LogVerbose(String message, Object[] args)
-  {
+  /**
+   * Log a verbose message and include the automation specific call stack data
+   * @param message The message text
+   * @param args String format arguments
+   */
+  protected void logVerbose(String message, Object[] args) {
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args));
 
     var methodInfo = MethodBase.GetCurrentMethod();
     var fullName = methodInfo.DeclaringType.FullName + "." + methodInfo.Name;
 
-    for (String stackLevel ; Environment.StackTrace.Split(new String[] { Environment.NewLine }, StringSplitOptions.None))
-    {
-      String trimmed = stackLevel.Trim();
-      if (!trimmed.startsWith("at Microsoft.") && !trimmed.startsWith("at System.") && !trimmed.startsWith("at NUnit.") && !trimmed.startsWith("at " + fullName))
-      {
+    for (String stackLevel : Environment.StackTrace.Split(new String[] { Environment.NewLine }, StringSplitOptions.None)) {
+      String trimmed = stackLevel.trim();
+      if (!trimmed.startsWith("at Microsoft.") &&
+              !trimmed.startsWith("at System.") &&
+              !trimmed.startsWith("at NUnit.") &&
+              !trimmed.startsWith("at " + fullName)) {
         messages.append(stackLevel);
       }
     }
@@ -101,27 +96,22 @@ public class SeleniumDriverManager extends DriverManager {
     Logger.logMessage(MessageType.VERBOSE, messages.toString());
   }
 
-  /// <summary>
-  /// Have the driver cleanup after itself
-  /// </summary>
-  // @Override
-  protected void DriverDispose()
-  {
+  /**
+   * Have the driver cleanup after itself
+   */
+  @Override
+  protected void driverDispose() {
     Logger.logMessage(MessageType.VERBOSE, "Start dispose driver");
 
     // If we never created the driver we don't have any cleanup to do
-    if (!this.isDriverInitialized())
-    {
+    if (!this.isDriverInitialized()) {
       return;
     }
 
-    try
-    {
-      WebDriver driver = this.GetWebDriver();
+    try {
+      WebDriver driver = this.getWebDriver();
       driver?.KillDriver();
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
       Logger.logMessage(MessageType.ERROR, StringProcessor.safeFormatter("Failed to close web driver because: {0}", e.getMessage()));
     }
 
@@ -133,39 +123,34 @@ public class SeleniumDriverManager extends DriverManager {
   /// Log that the web driver setup
   /// </summary>
   /// <param name="webDriver">The web driver</param>
-  private void LoggingStartup(WebDriver webDriver)
-  {
-    try
-    {
+
+  /**
+   * Log that the web driver setup
+   * @param webDriver The web driver
+   */
+  private void loggingStartup(WebDriver webDriver) {
+    try {
       WebDriver driver = Extend.GetLowLevelDriver(webDriver);
       String browserType;
 
       // Get info on what type of browser we are using
       RemoteWebDriver asRemoteDrive = (RemoteWebDriver) driver;
 
-      if (asRemoteDrive != null)
-      {
+      if (asRemoteDrive != null) {
         browserType = asRemoteDrive.getCapabilities().toString();
-      }
-      else
-      {
-        browserType = driver.GetType().ToString();
+      } else {
+        browserType = driver.getType().toString();
       }
 
       //if (SeleniumConfig.getBrowserName().equals("Remote", StringComparison.CurrentCultureIgnoreCase))
-      if(SeleniumConfig.getBrowserName().equalsIgnoreCase("Remote"))
-      {
+      if (SeleniumConfig.getBrowserName().equalsIgnoreCase("Remote")) {
         Logger.logMessage(MessageType.INFORMATION, "Remote driver: {0}" + browserType);
-      }
-      else
-      {
+      } else {
         Logger.logMessage(MessageType.INFORMATION, "Local driver: " + browserType);
       }
 
-      webDriver.SetWaitDriver(SeleniumConfig.getWaitDriver(webDriver));
-    }
-    catch (Exception e)
-    {
+      webDriver.setWaitDriver(SeleniumConfig.getWaitDriver(webDriver));
+    } catch (Exception e) {
       Logger.logMessage(MessageType.ERROR, "Failed to start driver because: {0}", e.getMessage());
       System.out.println(StringProcessor.safeFormatter("Failed to start driver because: {0}", e.getMessage()));
     }
@@ -175,9 +160,14 @@ public class SeleniumDriverManager extends DriverManager {
   /// Map selenium events to log events
   /// </summary>
   /// <param name="eventFiringDriver">The event firing web driver that we want mapped</param>
+
+  /**
+   * Map selenium events to log events
+   * @param eventFiringDriver The event firing web driver that we want mapped
+   */
   // TODO connect to Event Handler
-  private void MapEvents(EventFiringWebDriver eventFiringDriver)
-  {/*
+  private void mapEvents(EventFiringWebDriver eventFiringDriver) {
+    /*
     LoggingEnabled enbled = LoggingConfig.getLoggingEnabledSetting();
 
     if (enbled == LoggingEnabled.YES || enbled == LoggingEnabled.ONFAIL)
