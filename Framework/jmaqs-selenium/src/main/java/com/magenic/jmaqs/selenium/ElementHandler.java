@@ -150,13 +150,13 @@ public class ElementHandler {
   }
 
   /**
-   * Select multiple items from a ArrayList box.
+   * Select multiple items from a List box.
    *
    * @param seleniumWait         SeleniumWait Object
    * @param by                   By selector for the element
-   * @param elementsTextToSelect ArrayList items as Strings to select from ArrayList box
+   * @param elementsTextToSelect ArrayList items as Strings to select from List box
    */
-  public static void selectMultipleElementsFromArrayListBox(SeleniumWait seleniumWait, By by,
+  public static void selectMultipleElementsFromListBox(SeleniumWait seleniumWait, By by,
       ArrayList<String> elementsTextToSelect) {
     Select selectItem = new Select(seleniumWait.waitForClickableElement(by));
 
@@ -167,13 +167,13 @@ public class ElementHandler {
   }
 
   /**
-   * Select multiple items from a ArrayList box.
+   * Select multiple items from a List box.
    *
    * @param seleniumWait SeleniumWait Object
    * @param by           By selector for the element
-   * @param values       ArrayList items as Strings to select from ArrayList box
+   * @param values       ArrayList items as Strings to select from List box
    */
-  public static void selectMultipleElementsFromArrayListBoxByValue(SeleniumWait seleniumWait, By by,
+  public static void selectMultipleElementsFromListBoxByValue(SeleniumWait seleniumWait, By by,
       ArrayList<String> values) {
     Select selectItem = new Select(seleniumWait.waitForClickableElement(by));
 

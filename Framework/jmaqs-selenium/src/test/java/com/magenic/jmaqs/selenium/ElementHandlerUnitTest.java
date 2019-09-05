@@ -184,7 +184,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("Hard Drive");
     itemsToSelect.add("Keyboard");
     navigateToUrl();
-    ElementHandler.selectMultipleElementsFromArrayListBox(getSeleniumWait(), computerPartsList, itemsToSelect);
+    ElementHandler.selectMultipleElementsFromListBox(getSeleniumWait(), computerPartsList, itemsToSelect);
     ArrayList<String> selectedItems = ElementHandler
         .getSelectedOptionsFromDropdown(getSeleniumWait(), computerPartsList);
     ListProcessor.listOfStringsComparer(itemsToSelect, selectedItems, results, false);
@@ -204,7 +204,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("four");
     itemsToSelect.add("five");
     navigateToUrl();
-    ElementHandler.selectMultipleElementsFromArrayListBoxByValue(getSeleniumWait(), computerPartsList, itemsToSelect);
+    ElementHandler.selectMultipleElementsFromListBoxByValue(getSeleniumWait(), computerPartsList, itemsToSelect);
     ArrayList<String> selectedItems = ElementHandler
         .getSelectedOptionsFromDropdown(getSeleniumWait(), computerPartsList);
 
