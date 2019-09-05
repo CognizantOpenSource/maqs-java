@@ -67,7 +67,7 @@ public class SeleniumConfigTest {
 
     int timeout = SeleniumConfig.getCommandTimeout();
 
-    Assert.assertNotNull(timeout);
+    Assert.assertEquals(timeout, 61000);
   }
 
   /**
@@ -78,7 +78,7 @@ public class SeleniumConfigTest {
 
     String path = SeleniumConfig.getDriverHintPath();
 
-    Assert.assertNotNull(path);
+    Assert.assertEquals(path, "./src/test/resources");
   }
 
   /**
