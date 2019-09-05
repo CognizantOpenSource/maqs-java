@@ -298,6 +298,7 @@ public final class SeleniumConfig {
           headlessChromeOptions.addArguments("--disable-extensions");
           headlessChromeOptions.addArguments("--no-sandbox");
           headlessChromeOptions.addArguments("--headless");
+          headlessChromeOptions.addArguments("--window-size=1920,1080");
 
           System.setProperty("webdriver.chrome.driver",
                   getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
