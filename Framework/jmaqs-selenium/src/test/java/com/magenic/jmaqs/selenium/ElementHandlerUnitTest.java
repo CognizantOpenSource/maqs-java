@@ -243,7 +243,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test to verify scrolling into view when passing a WebElement.
+   * Test to verify scrolling into view when passing a parent WebElement.
    */
   @Test(groups = TestCategories.Selenium)
   public void scrollIntoViewElement() {
@@ -253,7 +253,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test to verify scrolling into view when passing a WebElement with coordinates.
+   * Test to verify scrolling into view when passing a parent WebElement with coordinates.
    */
   @Test(groups = TestCategories.Selenium)
   public void scrollIntoViewElementWithCoords() {
@@ -326,7 +326,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     Assert.assertFalse(FileUtils.readFileToString(file).contains("secretKeys"),
         "Failed to assert the logger did not log the secret keys.");
     Assert.assertTrue(FileUtils.readFileToString(file).contains("somethingTest"),
-        "Failed to assert the logger did not continue logging after secret keys.");
+        "Failed to assert the logger did continued logging normally after secret keys.");
   }
 
   /**
