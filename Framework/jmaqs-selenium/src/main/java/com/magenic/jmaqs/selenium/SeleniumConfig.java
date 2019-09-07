@@ -16,6 +16,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.time.Clock;
+import java.util.Dictionary;
+import java.util.HashMap;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -419,6 +421,22 @@ public final class SeleniumConfig {
     }
 
     return capabilities;
+  }
+
+  /**
+   * Get the remote capabilities as a HashMap
+   * @return HashMap of remote capabilities
+   */
+  public static HashMap<String, String> getRemoteCapabilitiesAsStrings() {
+    return Config.getSection(SELENIUM_SECTION.RemoteSeleniumCapsMaqs);
+  }
+
+  /**
+   * Get the remote capabilities as a HashMap
+   * @return HashMap of remote capabilities
+   */
+  public static HashMap<String, Object> getRemoteCapabilitiesAsSObjects() {
+    return new HashMap<>(getRemoteCapabilitiesAsStrings());
   }
 
   /**
