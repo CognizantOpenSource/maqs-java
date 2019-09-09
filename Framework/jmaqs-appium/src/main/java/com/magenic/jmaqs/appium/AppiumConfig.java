@@ -236,4 +236,22 @@ public class AppiumConfig {
     int timeoutTime = Integer.parseInt(Config.getValue("Timeout", "0"));
     driver.manage().timeouts().pageLoadTimeout(timeoutTime, null);
   }
+
+  /**
+   * Gets capabilities as strings.
+   *
+   * @return the capabilities as strings
+   */
+  public static Map<String, String> getCapabilitiesAsStrings() {
+    return Config.getSection(APPIUM_CAPS_SECTION);
+  }
+
+  /**
+   * Gets capabilities as objects.
+   *
+   * @return the capabilities as objects
+   */
+  public static Map<String, Object> getCapabilitiesAsObjects() {
+    return new HashMap<>(getCapabilitiesAsStrings());
+  }
 }
