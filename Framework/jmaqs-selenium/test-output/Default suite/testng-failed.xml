@@ -7,7 +7,6 @@
         <methods>
           <include name="setWaitDriverWhenDriverKeyDoesExist"/>
           <include name="teardown"/>
-          <include name="postSetupLogging"/>
           <include name="getWaitDriverTest"/>
           <include name="setTestResult"/>
           <include name="setup"/>

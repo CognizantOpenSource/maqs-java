@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium;
+package com.magenic.jmaqs.selenium.factories;
 
 import com.google.common.base.Function;
 import com.magenic.jmaqs.utilities.helper.Config;
@@ -34,48 +34,33 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Selenium waiter This is the tool-class used for waiting. It can be used to wait for many
  * circumstances (element exist, not exist, be visible, to equal a desired value, etc..
- * @deprecated {@link SeleniumWait} is no longer supported. Use {@link com.magenic.jmaqs.selenium.factories.UIWaitFactory UIWaitFactory} 
- *             to create {@link com.magenic.jmaqs.selenium.factories.UIWait UIWait} objects instead.
  */
-@Deprecated
-public class SeleniumWait {
+public class UIWait {
 
-  /**
-   * The default value of the Header size... Your header's size may be different.
-   */
+  /** The default value of the Header size... Your header's size may be different. */
   private static final int HEADER_SIZE = 90;
 
-  /**
-   * The default value of the page's body. Your page might have a different Header value.
-   */
+  /** The default value of the page's body. Your page might have a different Header value. */
   private static final By BODY_BY = By.cssSelector("BODY");
 
-  /**
-   * The Webdriver that the test is currently running on.
-   */
+  /** The Webdriver that the test is currently running on. */
   private WebDriver driver;
 
-  /**
-   * The retry time.
-   */
+  /** The retry time. */
   private int fluentRetryTime;
 
-  /**
-   * The timeout time.
-   */
+  /** The timeout time. */
   private int timeout;
-
+  
+  /** The web driver wait that the test is currently running on. */
+  private WebDriverWait waitDriver;
+  
   /**
-   * Collection for WebDriverWait.
-   */
-  private static ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection = new ConcurrentHashMap<>();
-
-  /**
-   * Constructor for SeleniumWait object.
+   * Constructor for {@link UIWait} object.
    *
    * @param driver WebDriver
    */
-  public SeleniumWait(WebDriver driver) {
+  public UIWait(WebDriver driver) {
     this(driver,
         Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserTimeout", "30000")),
         Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserWaitTime", "1000")));
@@ -88,30 +73,20 @@ public class SeleniumWait {
    * @param timeOutInSeconds int value of the total time to wait until timing out
    * @param fluentRetryTime  int value of seconds to use for fluent retry
    */
-  public SeleniumWait(WebDriver driver, final int timeOutInSeconds, final int fluentRetryTime) {
+  UIWait(WebDriver driver, final int timeOutInSeconds, final int fluentRetryTime) {
     this.driver = driver;
     this.timeout = timeOutInSeconds;
     this.fluentRetryTime = fluentRetryTime;
-    setWaitDriver(driver, this.getNewWaitDriver());
+    setWaitDriver(this.getNewWaitDriver());
   }
 
   /**
    * Get the WebDriverWait for use outside of this instance class.
    *
-   * @param driver The webdriver
    * @return The WebDriverWait
    */
-  public WebDriverWait getWaitDriver(WebDriver driver) {
-    // Make sure we have the base driver and not the event firing wrapper
-    WebDriver unwrappedDriver = getLowLevelDriver(driver);
-
-    if (waitCollection.containsKey(unwrappedDriver)) {
-      return waitCollection.get(unwrappedDriver);
-    } else {
-      WebDriverWait waiter = getNewWaitDriver(unwrappedDriver);
-      waitCollection.put(unwrappedDriver, waiter);
-      return waiter;
-    }
+  public WebDriverWait getWaitDriver() {
+    return this.waitDriver;
   }
 
   /**
@@ -120,8 +95,8 @@ public class SeleniumWait {
    * @param driver The webdriver
    * @param waiter The WebDriverWait
    */
-  public void setWaitDriver(WebDriver driver, WebDriverWait waiter) {
-    waitCollection.put(driver, waiter);
+  public void setWaitDriver(WebDriverWait waiter) {
+    this.waitDriver = waiter;
   }
 
   /**
@@ -131,7 +106,7 @@ public class SeleniumWait {
    */
   public WebDriverWait resetWaitDriver() {
     WebDriverWait wait = this.getNewWaitDriver();
-    setWaitDriver(this.driver, wait);
+    setWaitDriver(wait);
     return wait;
   }
   
@@ -142,7 +117,7 @@ public class SeleniumWait {
    * @return Returns the element if present
    */
   public WebElement waitForPresentElement(By by) {
-    return this.waitForPresentElement(by, this.getWaitDriver(this.getWebDriver()));
+    return this.waitForPresentElement(by, this.getWaitDriver());
   }
 
   /**
@@ -180,7 +155,7 @@ public class SeleniumWait {
    * @return WebElement - first one found with by
    */
   public WebElement waitForVisibleElement(final By by) {
-    return this.waitForVisibleElement(by, getWaitDriver(this.driver));
+    return this.waitForVisibleElement(by, getWaitDriver());
   }
 
   /**
@@ -224,7 +199,7 @@ public class SeleniumWait {
    * @return boolean true if element is found
    */
   public boolean waitUntilVisibleElement(final By by) {
-    return waitUntilVisibleElement(by, this.getWaitDriver(this.driver));
+    return waitUntilVisibleElement(by, this.getWaitDriver());
   }
 
   /**
@@ -433,7 +408,7 @@ public class SeleniumWait {
    * @return List of WebElements - all web elements found by the specified selector
    */
   public List<WebElement> waitForElements(final By by) {
-    return this.waitForElements(by, getWaitDriver(this.getWebDriver()));
+    return this.waitForElements(by, getWaitDriver());
   }
 
   /**
@@ -493,7 +468,7 @@ public class SeleniumWait {
    * @return boolean - true if the text was found in the element - else false
    */
   public boolean waitUntilExactText(final By by, final String text) {
-    return this.waitUntilExactText(by, text, getWaitDriver(this.getWebDriver()));
+    return this.waitUntilExactText(by, text, getWaitDriver());
   }
 
   /**
@@ -540,7 +515,7 @@ public class SeleniumWait {
    * @return WebElement containing the text
    */
   public WebElement waitForContainsText(final By by, final String text) {
-    if (waitUntilContainsText(by, text, getWaitDriver(this.getWebDriver()))) {
+    if (waitUntilContainsText(by, text, getWaitDriver())) {
       return this.driver.findElement(by);
     }
     String error = String.format("Selector [%s] couldn't be found.%n", by.toString());
@@ -555,7 +530,7 @@ public class SeleniumWait {
    * @return boolean - true if the text is contained in the selector, else false
    */
   public boolean waitUntilContainsText(final By by, final String text) {
-    return this.waitUntilContainsText(by, text, getWaitDriver(this.getWebDriver()));
+    return this.waitUntilContainsText(by, text, getWaitDriver());
   }
 
   /**
@@ -605,7 +580,7 @@ public class SeleniumWait {
   public boolean waitUntilAttributeTextEquals(final By by,
                                               final String attribute,
                                               final String text) {
-    return this.waitUntilAttribute(by, attribute, text, getWaitDriver(this.getWebDriver()), false);
+    return this.waitUntilAttribute(by, attribute, text, getWaitDriver(), false);
   }
 
   /**
@@ -638,7 +613,7 @@ public class SeleniumWait {
   public WebElement waitForAttributeTextEquals(final By by,
                                                final String attribute,
                                                final String text) {
-    return this.waitForAttributeTextEquals(by, attribute, text, getWaitDriver(this.getWebDriver()));
+    return this.waitForAttributeTextEquals(by, attribute, text, getWaitDriver());
   }
 
   /**
@@ -691,7 +666,7 @@ public class SeleniumWait {
   public boolean waitUntilAttributeTextContains(final By by,
                                                 final String attribute,
                                                 final String text) {
-    return waitUntilAttribute(by, attribute, text, getWaitDriver(this.getWebDriver()), true);
+    return waitUntilAttribute(by, attribute, text, getWaitDriver(), true);
   }
 
   /**
@@ -743,7 +718,7 @@ public class SeleniumWait {
    * @return WebElement
    */
   public WebElement waitForClickableElementAndScrollIntoView(final By by) {
-    return this.waitForClickableElementAndScrollIntoView(by, getWaitDriver(this.getWebDriver()));
+    return this.waitForClickableElementAndScrollIntoView(by, getWaitDriver());
   }
 
   /**
@@ -781,7 +756,7 @@ public class SeleniumWait {
    * @return boolean - true if the element is found and clickable
    */
   public boolean waitUntilClickableElementAndScrollIntoView(final By by) {
-    return this.waitUntilClickableElementAndScrollIntoView(by, getWaitDriver(this.getWebDriver()));
+    return this.waitUntilClickableElementAndScrollIntoView(by, getWaitDriver());
   }
 
   /**
@@ -819,7 +794,7 @@ public class SeleniumWait {
    * @return boolean - true if found and clickable, else false
    */
   public boolean waitUntilClickableElement(final By by) {
-    return this.waitUntilClickableElement(by, getWaitDriver(this.getWebDriver()));
+    return this.waitUntilClickableElement(by, getWaitDriver());
   }
 
   /**
@@ -860,7 +835,7 @@ public class SeleniumWait {
    * @return WebElement that is located, or null if none is found
    */
   public WebElement waitForClickableElement(final By by) {
-    return this.waitForClickableElement(by, getWaitDriver(this.getWebDriver()));
+    return this.waitForClickableElement(by, getWaitDriver());
   }
 
   /**
@@ -937,7 +912,7 @@ public class SeleniumWait {
    * @param by The frame locator
    */
   public boolean waitUntilIframeToLoad(By by) {
-    return waitUntilIframeToLoad(by, this.getWaitDriver(this.getWebDriver()));
+    return waitUntilIframeToLoad(by, this.getWaitDriver());
   }
 
   /**
@@ -977,7 +952,7 @@ public class SeleniumWait {
    * @param by The frame locator
    */
   public void waitForIframeToLoad(By by) {
-    waitForIframeToLoad(by, this.getWaitDriver(this.getWebDriver()));
+    waitForIframeToLoad(by, this.getWaitDriver());
   }
 
   /**
@@ -1061,7 +1036,7 @@ public class SeleniumWait {
   protected WebDriverWait getNewWaitDriver(WebDriver driver, int timeOutInMillis, int sleepInMillis) {
     int timeoutInSeconds = timeOutInMillis / 1000;
     WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds, sleepInMillis);
-    setWaitDriver(this.driver, wait);
+    setWaitDriver(wait);
     return wait;
   }
   
@@ -1215,27 +1190,4 @@ public class SeleniumWait {
     }
     return false;
   } 
-
-  /**
-   * Get the underlying web driver.
-   *
-   * @param driver The web driver
-   * @return the underlying web driver
-   */
-  private static WebDriver getLowLevelDriver(WebDriver driver) {
-    return driver instanceof EventFiringWebDriver
-      ? ((EventFiringWebDriver) driver).getWrappedDriver() : driver;
-  }
 }
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About

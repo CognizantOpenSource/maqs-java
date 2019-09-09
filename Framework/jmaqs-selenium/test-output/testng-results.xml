@@ -2,12 +2,12 @@
 <testng-results skipped="6" failed="0" ignored="0" total="6" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="47" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+  <suite name="Default suite" duration-ms="53" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="47" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+    <test name="Default test" duration-ms="53" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
       <class name="com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest">
-        <test-method status="FAIL" signature="setup(java.lang.reflect.Method, org.testng.ITestContext)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="setup" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="FAIL" signature="setup(java.lang.reflect.Method, org.testng.ITestContext)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="setup" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
@@ -47,11 +47,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="SKIP" signature="postSetupLogging()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="postSetupLogging" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- postSetupLogging -->
-        <test-method status="SKIP" signature="getWaitDriverTest()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="getWaitDriverTest" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="getWaitDriverTest()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="getWaitDriverTest" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
@@ -91,19 +87,15 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getWaitDriverTest -->
-        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setTestResult -->
-        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="teardown" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="teardown" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-        <test-method status="SKIP" signature="postSetupLogging()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="postSetupLogging" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- postSetupLogging -->
-        <test-method status="SKIP" signature="getWaitDriverWhenOneExists()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="getWaitDriverWhenOneExists" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="getWaitDriverWhenOneExists()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="getWaitDriverWhenOneExists" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
@@ -143,19 +135,15 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getWaitDriverWhenOneExists -->
-        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setTestResult -->
-        <test-method status="SKIP" signature="postSetupLogging()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="postSetupLogging" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- postSetupLogging -->
-        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="teardown" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="teardown" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-        <test-method status="SKIP" signature="getWaitDriverWithWebElement()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="getWaitDriverWithWebElement" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="getWaitDriverWithWebElement()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="getWaitDriverWithWebElement" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
@@ -195,15 +183,15 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getWaitDriverWithWebElement -->
-        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setTestResult -->
-        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="teardown" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="teardown" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-        <test-method status="SKIP" signature="removeWaitDriver()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="removeWaitDriver" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="removeWaitDriver()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="removeWaitDriver" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
@@ -243,23 +231,15 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- removeWaitDriver -->
-        <test-method status="SKIP" signature="postSetupLogging()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="postSetupLogging" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- postSetupLogging -->
-        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setTestResult -->
-        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="teardown" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="teardown" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-        <test-method status="SKIP" signature="postSetupLogging()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="postSetupLogging" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- postSetupLogging -->
-        <test-method status="SKIP" signature="setWaitDriverWhenDriverKeyDoesExist()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="setWaitDriverWhenDriverKeyDoesExist" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="setWaitDriverWhenDriverKeyDoesExist()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="setWaitDriverWhenDriverKeyDoesExist" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
@@ -299,19 +279,15 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setWaitDriverWhenDriverKeyDoesExist -->
-        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setTestResult -->
-        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="teardown" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="teardown" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-        <test-method status="SKIP" signature="postSetupLogging()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="postSetupLogging" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- postSetupLogging -->
-        <test-method status="SKIP" signature="setWaitDriverWhenDriverKeyDoesNotExist()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="setWaitDriverWhenDriverKeyDoesNotExist" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="setWaitDriverWhenDriverKeyDoesNotExist()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="setWaitDriverWhenDriverKeyDoesNotExist" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
@@ -351,11 +327,11 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setWaitDriverWhenDriverKeyDoesNotExist -->
-        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="setTestResult(org.testng.ITestResult)[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="setTestResult" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setTestResult -->
-        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@32464a14]" name="teardown" is-config="true" duration-ms="0" started-at="2019-08-26T19:42:05Z" finished-at="2019-08-26T19:42:05Z">
+        <test-method status="SKIP" signature="teardown()[pri:0, instance:com.magenic.jmaqs.selenium.UIWaitFactoryUnitTest@4e4aea35]" name="teardown" is-config="true" duration-ms="0" started-at="2019-09-09T02:08:25Z" finished-at="2019-09-09T02:08:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->

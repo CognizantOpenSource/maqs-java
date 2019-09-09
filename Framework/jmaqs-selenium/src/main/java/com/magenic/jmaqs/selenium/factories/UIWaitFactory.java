@@ -1,14 +1,21 @@
-package com.magenic.jmaqs.selenium;
+package com.magenic.jmaqs.selenium.factories;
 
 import java.util.concurrent.ConcurrentHashMap;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.magenic.jmaqs.selenium.SeleniumUtilities;
+import com.magenic.jmaqs.selenium.UIWait;
+
+/**
+ * UIWaitFactory factory class that is used for creating and maintaining a 
+ * thread-safe collection of wait drivers. 
+ */
 public class UIWaitFactory {
 	
 	/** the collection of wait objects */
-	private static ConcurrentHashMap<WebDriver, SeleniumWait> waitCollection = new ConcurrentHashMap<>();
+	private static ConcurrentHashMap<WebDriver, UIWait> waitCollection = new ConcurrentHashMap<>();
 	
 	/** private constructor so class can't be instantiated */
 	private UIWaitFactory() { }
@@ -20,15 +27,15 @@ public class UIWaitFactory {
 	 * @param driver The web driver to associate with the wait
 	 * @return the Wait object
 	 */
-	public static SeleniumWait getWaitDriver(SearchContext searchContext) {
+	public static UIWait getWaitDriver(SearchContext searchContext) {
 		WebDriver baseDriver = getLowLevelDriver(searchContext);
 		
-		SeleniumWait waitDriver;
+		UIWait waitDriver;
 		if (waitCollection.containsKey(baseDriver)) {
 			waitDriver = waitCollection.get(baseDriver);
 		}
 		else {
-			waitDriver = new SeleniumWait(baseDriver);
+			waitDriver = new UIWait(baseDriver);
 			setWaitDriver(baseDriver, waitDriver);
 		}
 		
@@ -41,7 +48,7 @@ public class UIWaitFactory {
 	 * @param driver The web driver
 	 * @param waitDriver the Wait object
 	 */
-	public static void setWaitDriver(SearchContext driver, SeleniumWait waitDriver) {
+	public static void setWaitDriver(SearchContext driver, UIWait waitDriver) {
 		WebDriver baseDriver = getLowLevelDriver(driver);
 		
 		waitCollection.put(baseDriver, waitDriver);
