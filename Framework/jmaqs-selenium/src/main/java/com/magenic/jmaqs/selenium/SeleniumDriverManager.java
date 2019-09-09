@@ -126,7 +126,7 @@ public class SeleniumDriverManager extends DriverManager {
    */
   private void loggingStartup(WebDriver webDriver) {
     try {
-      WebDriver driver = webDriver;
+      WebDriver driver = Extend.getLowLevelDriver(webDriver);
       String browserType;
 
       // Get info on what type of browser we are using
