@@ -81,4 +81,14 @@ public class AppiumConfigUnitTest {
     softAssert.assertEquals(capabilitiesAsObjects.get(appiumVersion), "1.7.1");
     softAssert.assertAll();
   }
+
+  @Test
+  public void testGetSavePageSourceOnFail() {
+    Assert.assertFalse(AppiumConfig.getSavePageSourceOnFail());
+  }
+
+  @Test
+  public void testGetSoftAssertScreenShot() {
+    Assert.assertFalse(AppiumConfig.getSoftAssertScreenShot());
+  }
 }
