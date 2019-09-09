@@ -11,6 +11,7 @@ import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
+import org.testng.annotations.BeforeMethod;
 
 /**
  * Base Selenium Test class.

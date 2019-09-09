@@ -191,7 +191,7 @@ public class WebElementFind {
    *          ICollection of Web Elements
    * @param text
    *          Text to search the Web Element Collection
-   * @return Returns the index of the Web Element in the inputted WebElement Collection
+   * @return Returns the index of the Web Element in the inputed WebElement Collection
    */
   public static int findIndexOfElementWithText(List<WebElement> list, String text) {
     return findIndexOfElementWithText(list, text, true);
