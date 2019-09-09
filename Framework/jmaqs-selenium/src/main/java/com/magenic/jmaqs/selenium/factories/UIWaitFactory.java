@@ -6,10 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.magenic.jmaqs.selenium.SeleniumUtilities;
-import com.magenic.jmaqs.selenium.UIWait;
 
 /**
- * UIWaitFactory factory class that is used for creating and maintaining a 
+ * Factory class that is used for creating and maintaining a 
  * thread-safe collection of wait drivers. 
  */
 public class UIWaitFactory {
@@ -21,7 +20,7 @@ public class UIWaitFactory {
 	private UIWaitFactory() { }
 	
 	/**
-	 * Gets the Wait object from the wait collection. If none exists,
+	 * Gets the {@link UIWait} object from the wait collection. If none exists,
 	 * one is created and cached using the driver provided.
 	 * 
 	 * @param driver The web driver to associate with the wait

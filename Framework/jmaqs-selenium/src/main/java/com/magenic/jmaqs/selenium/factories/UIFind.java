@@ -30,12 +30,9 @@ public class UIFind {
 	/**
 	 * General Find Element.
 	 * 
-	 * @param by
-	 *          Css Selector
-	 * @param throwException
-	 *          optional assert parameter - throws an assert exception if no element is found
-	 * @return Returns A Web Element
-	 * 
+	 * @param by Css Selector
+	 * @param throwException optional assert parameter - throws an assert exception if no element is found
+	 * @return The Web Element
 	 */
 	public WebElement findElement(By by, boolean throwException) {
 		// returns the 1st element in the collection if it is not null or empty
@@ -50,9 +47,8 @@ public class UIFind {
 	/**
 	 * General Find Element.
 	 * 
-	 * @param by
-	 *          Css Selector
-	 * @return Returns A Web Element
+	 * @param by Css Selector
+	 * @return The Web Element
 	 */
 	public WebElement findElement(By by) {
 		return findElement(by, true);
@@ -61,13 +57,10 @@ public class UIFind {
 	/**
 	 * Find a specified Web Element by text.
 	 * 
-	 * @param by
-	 *          Css Selector
-	 * @param text
-	 *          Text to search the Web Element Collection
-	 * @param throwException
-	 *          optional assert parameter - throws an exception if no element is found
-	 * @return Returns a Web Element
+	 * @param by Css Selector
+	 * @param text Text to search the Web Element Collection
+	 * @param throwException optional assert parameter - throws an exception if no element is found
+	 * @return The Web Element
 	 */
 	public WebElement findElementWithText(By by, String text,
 			boolean throwException) {
@@ -89,11 +82,9 @@ public class UIFind {
 	/**
 	 * Find a specified Web Element by text.
 	 * 
-	 * @param by
-	 *          Css Selector
-	 * @param text
-	 *          Text to search the Web Element Collection
-	 * @return Returns a Web Element
+	 * @param by Css Selector
+	 * @param text Text to search the Web Element Collection
+	 * @return The Web Element
 	 */
 	public WebElement findElementWithText(By by, String text) {
 		return findElementWithText(by, text, true);
@@ -103,13 +94,10 @@ public class UIFind {
 	/**
 	 * Finds the index of the specified Web Element.
 	 * 
-	 * @param by
-	 *          Css Selector
-	 * @param text
-	 *          Text to search the Web Element Collection
-	 * @param throwException
-	 *          optional assert parameter - throws an exception if no element is found
-	 * @return Returns the index of a Web Element
+	 * @param by Css Selector
+	 * @param text Text to search the Web Element Collection
+	 * @param throwException optional assert parameter - throws an exception if no element is found
+	 * @return The index of a Web Element
 	 */
 	public int findIndexOfElementWithText(By by, String text,
 			boolean throwException) {
@@ -133,11 +121,9 @@ public class UIFind {
 	/**
 	 * Finds the index of the specified Web Element.
 	 * 
-	 * @param by
-	 *          Css Selector
-	 * @param text
-	 *          Text to search the Web Element Collection
-	 * @return Returns the index of a Web Element
+	 * @param by Css Selector
+	 * @param text Text to search the Web Element Collection
+	 * @return The index of a Web Element
 	 */
 	public int findIndexOfElementWithText(By by, String text) {
 		return findIndexOfElementWithText(by, text, true);
@@ -146,13 +132,10 @@ public class UIFind {
 	/**
 	 * Find the Index of the Specified Web Element Collection.
 	 * 
-	 * @param list
-	 *          ICollection of Web Elements
-	 * @param text
-	 *          Text to search the Web Element Collection
-	 * @param throwException
-	 *          optional assert parameter - throws an exception if no element is found
-	 * @return Returns the index of the Web Element in the inputted WebElement Collection
+	 * @param list ICollection of Web Elements
+	 * @param text Text to search the Web Element Collection
+	 * @param throwException optional assert parameter - throws an exception if no element is found
+	 * @return The index of the Web Element in the inputted WebElement Collection
 	 */
 	public int findIndexOfElementWithText(List<WebElement> list, String text,
 			boolean throwException) {
@@ -184,11 +167,9 @@ public class UIFind {
 	/**
 	 * Find the Index of the Specified Web Element Collection.
 	 * 
-	 * @param list
-	 *          ICollection of Web Elements
-	 * @param text
-	 *          Text to search the Web Element Collection
-	 * @return Returns the index of the Web Element in the inputed WebElement Collection
+	 * @param list ICollection of Web Elements
+	 * @param text Text to search the Web Element Collection
+	 * @return The index of the Web Element in the inputed WebElement Collection
 	 */
 	public int findIndexOfElementWithText(List<WebElement> list, String text) {
 		return findIndexOfElementWithText(list, text, true);
@@ -198,11 +179,9 @@ public class UIFind {
 	/**
 	 * Function to get the Web Collection.
 	 * 
-	 * @param by
-	 *          Css Selector
-	 * @param throwException
-	 *          optional assert parameter - throws an exception if no element is found
-	 * @return Returns a Web Element Collection
+	 * @param by Css Selector
+	 * @param throwException optional assert parameter - throws an exception if no element is found
+	 * @return The Web Element Collection
 	 */
 	private  List<WebElement> elemList(By by, boolean throwException) {
 		List<WebElement> elems = this.searchItem.findElements(by);

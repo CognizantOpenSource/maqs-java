@@ -3,8 +3,8 @@ package com.magenic.jmaqs.selenium.factories;
 import org.openqa.selenium.SearchContext;
 
 /**
- * UIFindFactory factory class for creating UIFind objects
- *               for the test.
+ * Factory class for creating UIFind objects
+ * for the test.
  */
 public class UIFindFactory {
 	
