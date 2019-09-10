@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.time.Clock;
 
+import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -583,4 +584,15 @@ public final class SeleniumConfig {
     return Config.getValueForSection(SELENIUM_SECTION, "BrowserSize", "MAXIMIZE".toUpperCase());
   }
 
+  public static BrowserType getBrowserType() {
+    return null;
+  }
+
+  public static RemoteBrowserType getRemoteBrowserType() {
+    return null;
+  }
+
+  public static HashMap<String, Object> getRemoteCapabilitiesAsObjects() {
+    return null;
+  }
 }
