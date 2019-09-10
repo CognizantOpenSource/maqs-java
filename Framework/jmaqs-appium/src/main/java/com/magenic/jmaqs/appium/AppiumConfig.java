@@ -7,15 +7,13 @@ package com.magenic.jmaqs.appium;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import org.openqa.selenium.Platform;
@@ -149,6 +147,34 @@ public class AppiumConfig {
     }
 
     return url;
+  }
+
+  /**
+   * Gets command timeout.
+   *
+   * @return the command timeout
+   */
+  public static Duration getCommandTimeout() {
+    String value = Config.getValueForSection(APPIUM_SECTION, "MobileCommandTimeout", "60000");
+    int timeoutValue = 0;
+    try {
+      timeoutValue = Integer.parseInt(value);
+    } catch (NumberFormatException ex) {
+      System.out.println("MobileCommandTimeout in " + APPIUM_SECTION
+          + " should be a number but the current value is: " + value);
+    }
+
+    return Duration.ofMillis((long) timeoutValue);
+  }
+
+  /**
+   * Gets mobile timeout.
+   *
+   * @return the mobile timeout
+   */
+  public static Duration getMobileTimeout() {
+    return Duration.ofMillis(
+        Integer.parseInt(Config.getValueForSection(APPIUM_SECTION, "MobileTimeout", "0")));
   }
 
   /**
