@@ -11,10 +11,10 @@ import org.testng.asserts.SoftAssert;
 
 public class AppiumConfigUnitTest {
 
-  String username = "username";
-  String app = "app";
-  String appiumVersion = "appiumVersion";
-  String accessKey = "accessKey";
+  private String username = "username";
+  private String app = "app";
+  private String appiumVersion = "appiumVersion";
+  private String accessKey = "accessKey";
 
   @Test
   public void testGetMobileDeviceUDID() throws Exception {
@@ -90,5 +90,15 @@ public class AppiumConfigUnitTest {
   @Test
   public void testGetSoftAssertScreenShot() {
     Assert.assertFalse(AppiumConfig.getSoftAssertScreenShot());
+  }
+
+  @Test
+  public void testGetCommandTimeout() {
+    Assert.assertEquals(AppiumConfig.getCommandTimeout().toMillis(), 122000);
+  }
+
+  @Test
+  public void testGetMobileTimeout() {
+    Assert.assertEquals(AppiumConfig.getMobileTimeout().toMillis(), 10000);
   }
 }
