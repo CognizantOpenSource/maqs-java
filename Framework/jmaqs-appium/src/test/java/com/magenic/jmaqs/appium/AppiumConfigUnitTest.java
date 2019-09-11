@@ -4,6 +4,9 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.AppiumConfig;
+import com.magenic.jmaqs.utilities.helper.Config;
+import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -95,6 +98,14 @@ public class AppiumConfigUnitTest {
   @Test
   public void testGetCommandTimeout() {
     Assert.assertEquals(AppiumConfig.getCommandTimeout().toMillis(), 122000);
+  }
+
+  @Test(expectedExceptions = NumberFormatException.class)
+  public void testGetCommandTimeoutError() {
+    HashMap<String, String> configValues = new HashMap<>();
+    configValues.put("MobileCommandTimeout", "sixty thousand");
+    Config.addTestSettingValues(configValues, ConfigSection.AppiumMaqs, true);
+    AppiumConfig.getCommandTimeout();
   }
 
   @Test

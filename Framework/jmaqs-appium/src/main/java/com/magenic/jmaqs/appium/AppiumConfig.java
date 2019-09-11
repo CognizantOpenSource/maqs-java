@@ -160,8 +160,8 @@ public class AppiumConfig {
     try {
       timeoutValue = Integer.parseInt(value);
     } catch (NumberFormatException ex) {
-      System.out.println("MobileCommandTimeout in " + APPIUM_SECTION
-          + " should be a number but the current value is: " + value);
+      throw new NumberFormatException("MobileCommandTimeout in " + APPIUM_SECTION
+          + " should be a number, but the current value is: " + value);
     }
 
     return Duration.ofMillis((long) timeoutValue);
