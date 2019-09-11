@@ -8,9 +8,10 @@ import com.magenic.jmaqs.utilities.helper.ListProcessor;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -365,9 +366,13 @@ public class ElementHandler {
       logger.continueLogging();
     } catch (Exception e) {
       logger.continueLogging();
+
+      StringWriter sw = new StringWriter();
+      e.printStackTrace(new PrintWriter(sw));
+      String stackTrace = sw.toString();
+
       logger.logMessage(MessageType.ERROR,
-          "Exception during sending secret keys: " + e.getMessage() + System.lineSeparator() + ExceptionUtils
-              .getStackTrace(e));
+          "Exception during sending secret keys: " + e.getMessage() + System.lineSeparator() + stackTrace);
       throw e;
     }
   }
