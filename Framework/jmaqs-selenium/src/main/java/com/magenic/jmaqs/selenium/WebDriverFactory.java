@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.PageLoadStrategy;
@@ -34,12 +33,22 @@ import org.openqa.selenium.safari.SafariOptions;
 public class WebDriverFactory {
 
   /**
+   * Private constructor
+   */
+  private WebDriverFactory() {
+  }
+
+  /**
    * Get the default web driver based on the test run configuration.
    *
    * @return A web driver
    */
-  public static WebDriver getDefaultBrowser() throws Exception {
-    return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
+  public static WebDriver getDefaultBrowser() {
+    try {
+      return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   /**
@@ -85,7 +94,10 @@ public class WebDriverFactory {
       } else {
         try {
           // Try to cleanup
-          webDriver.close();
+          if (webDriver != null) {
+            webDriver.quit();
+          }
+
         } catch (Exception quitException) {
           throw new Exception("Web driver setup and teardown failed. Your web driver may be out of date",
               quitException);
@@ -247,12 +259,11 @@ public class WebDriverFactory {
         getProgramFilesFolder("Microsoft Web Driver", "MicrosoftWebDriver.exe"));
 
     // If we can't find an installed edge driver, look in the normal places
-    if (StringUtils.isEmpty(driverLocation)) {
+    if (driverLocation.isEmpty()) {
       driverLocation = getDriverLocation("MicrosoftWebDriver.exe");
     }
 
-    System.setProperty("webdriver.edge.driver", driverLocation + File.separator
-        + "MicrosoftWebDriver.exe");
+    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + "MicrosoftWebDriver.exe");
     EdgeDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -297,7 +308,7 @@ public class WebDriverFactory {
    * @return The remote driver options
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser) {
-    return getRemoteOptions(remoteBrowser, StringUtils.EMPTY, StringUtils.EMPTY, null);
+    return getRemoteOptions(remoteBrowser, "", "", null);
   }
 
   /**
@@ -309,7 +320,7 @@ public class WebDriverFactory {
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
       HashMap<String, Object> remoteCapabilities) {
-    return getRemoteOptions(remoteBrowser, StringUtils.EMPTY, StringUtils.EMPTY, remoteCapabilities);
+    return getRemoteOptions(remoteBrowser, "", "", remoteCapabilities);
   }
 
   /**
@@ -355,12 +366,12 @@ public class WebDriverFactory {
     }
 
     // Add a platform setting if one was provided
-    if (!StringUtils.isEmpty(remotePlatform) && !remoteCapabilities.containsKey("platform")) {
+    if (!remoteBrowserVersion.isEmpty() && !remoteCapabilities.containsKey("platform")) {
       remoteCapabilities.put("platform", remotePlatform);
     }
 
     // Add a remote browser setting if one was provided
-    if (!StringUtils.isEmpty(remoteBrowserVersion) && !remoteCapabilities.containsKey("version")) {
+    if (!remoteBrowserVersion.isEmpty() && !remoteCapabilities.containsKey("version")) {
       remoteCapabilities.put("version", remoteBrowserVersion);
     }
 
@@ -385,7 +396,7 @@ public class WebDriverFactory {
     }
 
     additionalCapabilities.forEach((key, value) -> {
-      if ((value instanceof String) && !StringUtils.isEmpty((String) value)) {
+      if ((value instanceof String) && !((String) value).isEmpty()) {
         driverOptions.setCapability(key, value);
       }
     });
@@ -457,7 +468,7 @@ public class WebDriverFactory {
    * @return The path to the web driver
    */
   public static String getDriverLocation(String driverFile) {
-    return getDriverLocation(driverFile, StringUtils.EMPTY, true);
+    return getDriverLocation(driverFile, "", true);
   }
 
   /**
@@ -485,12 +496,12 @@ public class WebDriverFactory {
     String hintPath = SeleniumConfig.getDriverHintPath();
 
     // Try the hintpath first
-    if (!StringUtils.isEmpty(hintPath) && Files.exists(Paths.get(hintPath, driverFile))) {
+    if (!defaultHintPath.isEmpty() && Files.exists(Paths.get(hintPath, driverFile))) {
       return hintPath;
     }
 
     // Try the default hint path next
-    if (!StringUtils.isEmpty(defaultHintPath) && Files.exists(Paths.get(defaultHintPath, driverFile))) {
+    if (!defaultHintPath.isEmpty() && Files.exists(Paths.get(defaultHintPath, driverFile))) {
       return Paths.get(defaultHintPath).toString();
     }
 
@@ -514,7 +525,7 @@ public class WebDriverFactory {
       throw new RuntimeException(StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
     }
 
-    return StringUtils.EMPTY;
+    return "";
   }
 
   /**
@@ -540,7 +551,7 @@ public class WebDriverFactory {
       return path.getParent().toString();
     }
 
-    return StringUtils.EMPTY;
+    return "";
   }
 
 }

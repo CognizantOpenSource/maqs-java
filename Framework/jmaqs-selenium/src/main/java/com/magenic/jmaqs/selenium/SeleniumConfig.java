@@ -47,6 +47,76 @@ public final class SeleniumConfig {
   public static final ConfigSection REMOTE_SELENIUM_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
 
   /**
+   * Get the browser type
+   * @return The browser type
+   */
+  public static BrowserType getBrowserType() {
+    return getBrowserType(getBrowserName());
+  }
+
+  /**
+   * Get the browser type based on the provided browser name
+   * @param browserName Name of the browse as a string
+   * @return The browser type
+   */
+  public static BrowserType getBrowserType(String browserName) {
+    switch (browserName.toUpperCase()) {
+      case "INTERNET EXPLORER":
+      case "INTERNETEXPLORER":
+      case "IE":
+        return BrowserType.IE;
+      case "FIREFOX":
+        return BrowserType.Firefox;
+      case "CHROME":
+        return BrowserType.Chrome;
+      case "HEADLESSCHROME":
+        return BrowserType.HeadlessChrome;
+      case "EDGE":
+        return BrowserType.Edge;
+      case "REMOTE":
+        return BrowserType.Remote;
+      case "PHANTOMJS":
+      case "PHANTOM JS":
+      case "PHANTOM":
+        throw new IllegalArgumentException("Selenium no longer supports PhantomJS");
+      default:
+        throw new IllegalArgumentException(StringProcessor.safeFormatter("Browser type '%s' is not supported", browserName));
+    }
+  }
+
+  /**
+   * Get the remote browser type
+   * @return The remote browser type
+   */
+  public static RemoteBrowserType getRemoteBrowserType() {
+    return getRemoteBrowserType(getRemoteBrowserName());
+  }
+
+  /**
+   * Get the remote browser type
+   * @param remoteBrowser Name of the remote browser
+   * @return The remote browser type
+   */
+  public static RemoteBrowserType getRemoteBrowserType(String remoteBrowser) {
+    switch (remoteBrowser.toUpperCase()) {
+      case "INTERNET EXPLORER":
+      case "INTERNETEXPLORER":
+      case "IE":
+        return RemoteBrowserType.IE;
+      case "FIREFOX":
+        return RemoteBrowserType.Firefox;
+      case "CHROME":
+        return RemoteBrowserType.Chrome;
+      case "SAFARI":
+        return RemoteBrowserType.Safari;
+      case "EDGE":
+        return RemoteBrowserType.Edge;
+      default:
+        throw new IllegalArgumentException(StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
+    }
+  }
+
+  /**
    * Get the file extension for the screenshots.
    *
    * @return The type of file, defaults to .png
@@ -54,7 +124,7 @@ public final class SeleniumConfig {
   public static String getScreenShotExtension() {
     return Config.getValueForSection(SELENIUM_SECTION,"ImageFormat", ".png");
   }
-  
+
   /**
    * Get the browser type name - Example: Chrome.
    *
@@ -584,14 +654,7 @@ public final class SeleniumConfig {
     return Config.getValueForSection(SELENIUM_SECTION, "BrowserSize", "MAXIMIZE".toUpperCase());
   }
 
-  public static BrowserType getBrowserType() {
-    return null;
-  }
-
-  public static RemoteBrowserType getRemoteBrowserType() {
-    return null;
-  }
-
+  // TODO: Placeholder stub
   public static HashMap<String, Object> getRemoteCapabilitiesAsObjects() {
     return null;
   }
