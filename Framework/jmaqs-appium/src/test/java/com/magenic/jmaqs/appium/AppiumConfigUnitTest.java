@@ -4,6 +4,9 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.AppiumConfig;
+import com.magenic.jmaqs.utilities.helper.Config;
+import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,10 +14,10 @@ import org.testng.asserts.SoftAssert;
 
 public class AppiumConfigUnitTest {
 
-  String username = "username";
-  String app = "app";
-  String appiumVersion = "appiumVersion";
-  String accessKey = "accessKey";
+  private String username = "username";
+  private String app = "app";
+  private String appiumVersion = "appiumVersion";
+  private String accessKey = "accessKey";
 
   @Test
   public void testGetMobileDeviceUDID() throws Exception {
@@ -90,5 +93,23 @@ public class AppiumConfigUnitTest {
   @Test
   public void testGetSoftAssertScreenShot() {
     Assert.assertFalse(AppiumConfig.getSoftAssertScreenShot());
+  }
+
+  @Test
+  public void testGetCommandTimeout() {
+    Assert.assertEquals(AppiumConfig.getCommandTimeout().toMillis(), 122000);
+  }
+
+  @Test(expectedExceptions = NumberFormatException.class)
+  public void testGetCommandTimeoutError() {
+    HashMap<String, String> configValues = new HashMap<>();
+    configValues.put("MobileCommandTimeout", "sixty thousand");
+    Config.addTestSettingValues(configValues, ConfigSection.AppiumMaqs, true);
+    AppiumConfig.getCommandTimeout();
+  }
+
+  @Test
+  public void testGetMobileTimeout() {
+    Assert.assertEquals(AppiumConfig.getMobileTimeout().toMillis(), 10000);
   }
 }
