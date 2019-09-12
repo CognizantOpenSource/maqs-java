@@ -280,12 +280,12 @@ public class AppiumConfig {
   public static PlatformType getDeviceType(String platformName) {
     switch (platformName.toUpperCase().trim()) {
       case "ANDROID":
-        return PlatformType.Android;
+        return PlatformType.ANDROID;
       case "IOS":
-        return PlatformType.iOS;
+        return PlatformType.IOS;
       case "WIN":
       case "WINDOWS":
-        return PlatformType.Windows;
+        return PlatformType.WINDOWS;
       default:
         throw new IllegalArgumentException(
             StringProcessor.safeFormatter("Device type '{0}' is not supported", platformName));
