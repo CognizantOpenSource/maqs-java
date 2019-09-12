@@ -3,7 +3,6 @@
  */
 package com.magenic.jmaqs.appium;
 
-import com.magenic.jmaqs.appium.AppiumConfig;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import java.util.HashMap;
@@ -61,7 +60,8 @@ public class AppiumConfigUnitTest {
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "Partner_Magenic");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
-    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
+    softAssert
+        .assertEquals(capabilitiesAsStrings.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(app));
     softAssert.assertEquals(capabilitiesAsStrings.get(app), "org.openintents.shopping");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(appiumVersion));
@@ -77,7 +77,8 @@ public class AppiumConfigUnitTest {
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(username));
     softAssert.assertEquals(capabilitiesAsObjects.get(username), "Partner_Magenic");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(accessKey));
-    softAssert.assertEquals(capabilitiesAsObjects.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
+    softAssert
+        .assertEquals(capabilitiesAsObjects.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(app));
     softAssert.assertEquals(capabilitiesAsObjects.get(app), "org.openintents.shopping");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(appiumVersion));
@@ -111,5 +112,30 @@ public class AppiumConfigUnitTest {
   @Test
   public void testGetMobileTimeout() {
     Assert.assertEquals(AppiumConfig.getMobileTimeout().toMillis(), 10000);
+  }
+
+  @Test
+  public void testGetDeviceType() {
+    Assert.assertEquals(AppiumConfig.getDeviceType(), PlatformType.ANDROID);
+  }
+
+  @Test
+  public void testGetDeviceTypeAndroid() {
+    Assert.assertEquals(AppiumConfig.getDeviceType("android"), PlatformType.ANDROID);
+  }
+
+  @Test
+  public void testGetDeviceTypeIOS() {
+    Assert.assertEquals(AppiumConfig.getDeviceType("ios"), PlatformType.IOS);
+  }
+
+  @Test
+  public void testGetDeviceTypeWindows() {
+    Assert.assertEquals(AppiumConfig.getDeviceType("windows"), PlatformType.WINDOWS);
+  }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetDeviceTypeError() {
+    AppiumConfig.getDeviceType("linux");
   }
 }

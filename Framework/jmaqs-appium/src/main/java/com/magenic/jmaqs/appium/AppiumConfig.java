@@ -287,4 +287,34 @@ public class AppiumConfig {
   public static Map<String, Object> getCapabilitiesAsObjects() {
     return new HashMap<>(getCapabilitiesAsStrings());
   }
+
+  /**
+   * Gets device type.
+   *
+   * @return the device type
+   */
+  public static PlatformType getDeviceType() {
+    return getDeviceType(getPlatformName());
+  }
+
+  /**
+   * Gets device type.
+   *
+   * @param platformName the platform name
+   * @return the device type
+   */
+  public static PlatformType getDeviceType(String platformName) {
+    switch (platformName.toUpperCase().trim()) {
+      case "ANDROID":
+        return PlatformType.ANDROID;
+      case "IOS":
+        return PlatformType.IOS;
+      case "WIN":
+      case "WINDOWS":
+        return PlatformType.WINDOWS;
+      default:
+        throw new IllegalArgumentException(
+            StringProcessor.safeFormatter("Device type '{0}' is not supported", platformName));
+    }
+  }
 }
