@@ -44,8 +44,6 @@ public final class SeleniumConfig {
   /**
    * The remote selenium configuration section.
    */
-  public static final ConfigSection REMOTE_SELENIUM_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
-
   private static final ConfigSection SELENIUM_CAPS_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
 
   /**

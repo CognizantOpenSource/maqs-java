@@ -29,15 +29,15 @@ public class SeleniumConfigTest {
   /**
    * Remote browser name identifier
    */
-  private String browserName = "username";
+  private String browserName = "browserName";
   /**
    * Remote version platform identifier
    */
-  private String platform = "app";
+  private String platform = "platform";
   /**
    * Remote browser version identifier
    */
-  private String version = "appiumVersion";
+  private String version = "version";
 
   /**
    * Browser check.
