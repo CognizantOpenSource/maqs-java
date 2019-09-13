@@ -33,7 +33,7 @@ import org.openqa.selenium.safari.SafariOptions;
 public class WebDriverFactory {
 
   /**
-   * Private constructor
+   * Private constructor.
    */
   private WebDriverFactory() {
   }
@@ -44,7 +44,7 @@ public class WebDriverFactory {
    * @return A web driver
    */
   public static WebDriver getDefaultBrowser() throws Exception {
-      return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
+    return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
   }
 
   /**
@@ -186,7 +186,7 @@ public class WebDriverFactory {
   /**
    * Initialize a new Chrome driver.
    *
-   * @param chromeOptions  Browser options
+   * @param chromeOptions Browser options
    * @return A new Chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions) {
@@ -196,8 +196,8 @@ public class WebDriverFactory {
   /**
    * Initialize a new Chrome driver.
    *
-   * @param chromeOptions  Browser options
-   * @param size           Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
+   * @param chromeOptions Browser options
+   * @param size          Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
    * @return A new Chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
@@ -240,8 +240,8 @@ public class WebDriverFactory {
   /**
    * Initialize a new Edge driver.
    *
-   * @param edgeOptions    Browser options
-   * @param size           Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
+   * @param edgeOptions Browser options
+   * @param size        Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
    * @return A new Edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
@@ -266,8 +266,7 @@ public class WebDriverFactory {
    * @param size                    Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
    * @return A new IE driver
    */
-  public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions,
-      String size) {
+  public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
     System.setProperty("webdriver.ie.driver",
         getDriverLocation("IEDriverServer.exe") + File.separator + "IEDriverServer.exe");
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
@@ -285,7 +284,7 @@ public class WebDriverFactory {
     RemoteBrowserType remoteBrowser = SeleniumConfig.getRemoteBrowserType();
     String remotePlatform = SeleniumConfig.getRemotePlatform();
     String remoteBrowserVersion = SeleniumConfig.getRemoteBrowserVersion();
-    HashMap<String, Object> capabilities = SeleniumConfig.getRemoteCapabilitiesAsObjects();
+    HashMap<String, Object> capabilities = (HashMap<String, Object>) SeleniumConfig.getRemoteCapabilitiesAsObjects();
 
     return getRemoteOptions(remoteBrowser, remotePlatform, remoteBrowserVersion, capabilities);
   }
