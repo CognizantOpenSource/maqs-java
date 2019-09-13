@@ -108,19 +108,6 @@ public class WebDriverFactoryTest {
   }
 
   @Test
-  public void getEdgeDriverTest() {
-    EdgeDriver driver = null;
-    try {
-      driver = (EdgeDriver) WebDriverFactory.getEdgeDriver(new EdgeOptions(), "MAXIMIZE");
-      Assert.assertNotNull(driver);
-    } finally {
-      if (driver != null) {
-        driver.quit();
-      }
-    }
-  }
-
-  @Test
   public void getInternetExplorerDriverTest() {
     InternetExplorerDriver driver = null;
     try {
