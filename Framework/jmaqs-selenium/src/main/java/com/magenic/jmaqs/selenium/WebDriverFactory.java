@@ -43,12 +43,8 @@ public class WebDriverFactory {
    *
    * @return A web driver
    */
-  public static WebDriver getDefaultBrowser() {
-    try {
+  public static WebDriver getDefaultBrowser() throws Exception {
       return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
-    } catch (Exception e) {
-      return null;
-    }
   }
 
   /**
@@ -60,25 +56,24 @@ public class WebDriverFactory {
    */
   public static WebDriver getBrowserWithDefaultConfiguration(BrowserType browser) throws Exception {
     WebDriver webDriver = null;
-    int timeout = SeleniumConfig.getCommandTimeout();
     String size = SeleniumConfig.getBrowserSize();
 
     try {
       switch (browser) {
         case IE:
-          webDriver = getInternetExplorerDriver(timeout, getDefaultInternetExplorerOptions(), size);
+          webDriver = getInternetExplorerDriver(getDefaultInternetExplorerOptions(), size);
           break;
         case Firefox:
-          webDriver = getFirefoxDriver(timeout, getDefaultFirefoxOptions(), size);
+          webDriver = getFirefoxDriver(getDefaultFirefoxOptions(), size);
           break;
         case Chrome:
-          webDriver = getChromeDriver(timeout, getDefaultChromeOptions(), size);
+          webDriver = getChromeDriver(getDefaultChromeOptions(), size);
           break;
         case HeadlessChrome:
-          webDriver = getHeadlessChromeDriver(timeout, getDefaultHeadlessChromeOptions(size));
+          webDriver = getHeadlessChromeDriver(getDefaultHeadlessChromeOptions(size));
           break;
         case Edge:
-          webDriver = getEdgeDriver(timeout, getDefaultEdgeOptions(), size);
+          webDriver = getEdgeDriver(getDefaultEdgeOptions(), size);
           break;
         case Remote:
           webDriver = new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()), getDefaultRemoteOptions());
@@ -191,23 +186,21 @@ public class WebDriverFactory {
   /**
    * Initialize a new Chrome driver.
    *
-   * @param commandTimeout
    * @param chromeOptions  Browser options
    * @return A new Chrome driver
    */
-  public static WebDriver getChromeDriver(int commandTimeout, ChromeOptions chromeOptions) {
-    return getChromeDriver(commandTimeout, chromeOptions, "MAXIMIZE");
+  public static WebDriver getChromeDriver(ChromeOptions chromeOptions) {
+    return getChromeDriver(chromeOptions, "MAXIMIZE");
   }
 
   /**
    * Initialize a new Chrome driver.
    *
-   * @param commandTimeout
    * @param chromeOptions  Browser options
    * @param size           Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
    * @return A new Chrome driver
    */
-  public static WebDriver getChromeDriver(int commandTimeout, ChromeOptions chromeOptions, String size) {
+  public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
     System.setProperty("webdriver.chrome.driver",
         getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
     WebDriver driver = new ChromeDriver(chromeOptions);
@@ -218,11 +211,10 @@ public class WebDriverFactory {
   /**
    * Initialize a new headless Chrome driver.
    *
-   * @param commandTimeout
    * @param headlessChromeOptions Browser options
    * @return A new headless Chrome driver
    */
-  public static WebDriver getHeadlessChromeDriver(int commandTimeout, ChromeOptions headlessChromeOptions) {
+  public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
     System.setProperty("webdriver.chrome.driver",
         getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
     return new ChromeDriver(headlessChromeOptions);
@@ -231,12 +223,11 @@ public class WebDriverFactory {
   /**
    * Initialize a new Firefox driver.
    *
-   * @param commandTimeout
    * @param firefoxOptions Browser options
    * @param size           Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
    * @return A new Firefox driver
    */
-  public static WebDriver getFirefoxDriver(int commandTimeout, FirefoxOptions firefoxOptions, String size) {
+  public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
     System.setProperty("webdriver.gecko.driver",
         getDriverLocation("geckodriver.exe") + File.separator + "geckodriver.exe");
 
@@ -249,12 +240,11 @@ public class WebDriverFactory {
   /**
    * Initialize a new Edge driver.
    *
-   * @param commandTimeout
    * @param edgeOptions    Browser options
    * @param size           Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
    * @return A new Edge driver
    */
-  public static WebDriver getEdgeDriver(int commandTimeout, EdgeOptions edgeOptions, String size) {
+  public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
     String driverLocation = getDriverLocation("MicrosoftWebDriver.exe",
         getProgramFilesFolder("Microsoft Web Driver", "MicrosoftWebDriver.exe"));
 
@@ -272,12 +262,11 @@ public class WebDriverFactory {
   /**
    * Get a new IE driver.
    *
-   * @param commandTimeout
    * @param internetExplorerOptions Browser options
    * @param size                    Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
    * @return A new IE driver
    */
-  public static WebDriver getInternetExplorerDriver(int commandTimeout, InternetExplorerOptions internetExplorerOptions,
+  public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions,
       String size) {
     System.setProperty("webdriver.ie.driver",
         getDriverLocation("IEDriverServer.exe") + File.separator + "IEDriverServer.exe");
@@ -464,7 +453,7 @@ public class WebDriverFactory {
   /**
    * Get the web driver location.
    *
-   * @param driverFile The web drive file, including extension
+   * @param driverFile The web driver file, including extension
    * @return The path to the web driver
    */
   public static String getDriverLocation(String driverFile) {
@@ -474,7 +463,7 @@ public class WebDriverFactory {
   /**
    * Get the web driver location.
    *
-   * @param driverFile      The web drive file, including extension
+   * @param driverFile      The web driver file, including extension
    * @param defaultHintPath The default location for the specific driver
    * @return The path to the web driver
    */
@@ -485,7 +474,7 @@ public class WebDriverFactory {
   /**
    * Get the web driver location.
    *
-   * @param driverFile      The web drive file, including extension
+   * @param driverFile      The web driver file, including extension
    * @param defaultHintPath The default location for the specific driver
    * @param mustExist       Do we need to know where this drive is located,
    *                        if this is true and the file is not found an error will be thrown

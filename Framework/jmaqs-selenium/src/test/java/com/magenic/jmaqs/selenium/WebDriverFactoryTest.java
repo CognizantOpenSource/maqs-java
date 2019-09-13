@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 public class WebDriverFactoryTest {
 
   @Test
-  public void getDefaultBrowserTest() {
+  public void getDefaultBrowserTest() throws Exception {
     WebDriver driver = null;
     try {
       driver = WebDriverFactory.getDefaultBrowser();
@@ -71,7 +71,7 @@ public class WebDriverFactoryTest {
   public void getChromeDriverTest() {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory.getChromeDriver(0, new ChromeOptions());
+      driver = (ChromeDriver) WebDriverFactory.getChromeDriver(new ChromeOptions());
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -84,7 +84,7 @@ public class WebDriverFactoryTest {
   public void getHeadlessChromeDriverTest() {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory.getHeadlessChromeDriver(0, new ChromeOptions());
+      driver = (ChromeDriver) WebDriverFactory.getHeadlessChromeDriver(new ChromeOptions());
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -98,7 +98,7 @@ public class WebDriverFactoryTest {
   public void getFirefoxDriverTest() {
     FirefoxDriver driver = null;
     try {
-      driver = (FirefoxDriver) WebDriverFactory.getFirefoxDriver(0, new FirefoxOptions(), "MAXIMIZE");
+      driver = (FirefoxDriver) WebDriverFactory.getFirefoxDriver(new FirefoxOptions(), "MAXIMIZE");
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -111,7 +111,7 @@ public class WebDriverFactoryTest {
   public void getEdgeDriverTest() {
     EdgeDriver driver = null;
     try {
-      driver = (EdgeDriver) WebDriverFactory.getEdgeDriver(0, new EdgeOptions(), "MAXIMIZE");
+      driver = (EdgeDriver) WebDriverFactory.getEdgeDriver(new EdgeOptions(), "MAXIMIZE");
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -125,7 +125,7 @@ public class WebDriverFactoryTest {
     InternetExplorerDriver driver = null;
     try {
       driver = (InternetExplorerDriver) WebDriverFactory
-          .getInternetExplorerDriver(0, new InternetExplorerOptions(), "MAXIMIZE");
+          .getInternetExplorerDriver(new InternetExplorerOptions(), "MAXIMIZE");
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -152,7 +152,7 @@ public class WebDriverFactoryTest {
   }
 
   @Test
-  public void setBrowserSizeTest() {
+  public void setBrowserSizeTest() throws Exception {
     WebDriver driver = null;
     try {
       driver = WebDriverFactory.getDefaultBrowser();

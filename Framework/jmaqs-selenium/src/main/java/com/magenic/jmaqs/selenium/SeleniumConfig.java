@@ -432,7 +432,9 @@ public final class SeleniumConfig {
    * Get the initialize Selenium timeout.
    *
    * @return The initialize timeout
+   * @deprecated Deprecated because specifying command timeout does not exist when creating web drivers in java.
    */
+  @Deprecated
   public static int getCommandTimeout() {
     String value = Config.getValueForSection(SELENIUM_SECTION, "SeleniumCommandTimeout", "60000");
     try {
