@@ -10,7 +10,6 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -68,10 +67,10 @@ public class WebDriverFactoryTest {
   }
 
   @Test
-  public void getChromeDriverTest() {
+  public void getChromeDriverTest() throws Exception {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory.getChromeDriver(new ChromeOptions());
+      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.Chrome);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -81,10 +80,10 @@ public class WebDriverFactoryTest {
   }
 
   @Test
-  public void getHeadlessChromeDriverTest() {
+  public void getHeadlessChromeDriverTest() throws Exception {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory.getHeadlessChromeDriver(new ChromeOptions());
+      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.HeadlessChrome);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -93,12 +92,11 @@ public class WebDriverFactoryTest {
     }
   }
 
-  //@Ignore
   @Test
-  public void getFirefoxDriverTest() {
+  public void getFirefoxDriverTest() throws Exception {
     FirefoxDriver driver = null;
     try {
-      driver = (FirefoxDriver) WebDriverFactory.getFirefoxDriver(new FirefoxOptions(), "MAXIMIZE");
+      driver = (FirefoxDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.Firefox);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -108,11 +106,10 @@ public class WebDriverFactoryTest {
   }
 
   @Test
-  public void getInternetExplorerDriverTest() {
+  public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
     try {
-      driver = (InternetExplorerDriver) WebDriverFactory
-          .getInternetExplorerDriver(new InternetExplorerOptions(), "MAXIMIZE");
+      driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.IE);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -132,7 +129,7 @@ public class WebDriverFactoryTest {
     MutableCapabilities options = new ChromeOptions();
     HashMap additionalCapabilities = new HashMap<String, Object>();
     additionalCapabilities.put("testKey", "testValue");
-    options = WebDriverFactory.setDriverOptions(options, additionalCapabilities);
+    WebDriverFactory.setDriverOptions(options, additionalCapabilities);
 
     Assert.assertNotNull(options);
     Assert.assertEquals(options.getCapability("testKey"), "testValue");
