@@ -7,7 +7,6 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.File;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -33,11 +32,31 @@ import org.openqa.selenium.safari.SafariOptions;
  */
 public class WebDriverFactory {
 
+  /**
+   * Constant for the Chrome web driver file.
+   */
   private static final String CHROME_DRIVER_FILE = "chromedriver.exe";
+
+  /**
+   * Constant for the Firefox web driver file.
+   */
   private static final String FIREFOX_DRIVER_FILE = "geckodriver.exe";
+
+  /**
+   * Constant for the Internet Explorer web driver file.
+   */
   private static final String IE_DRIVER_FILE = "IEDriverServer.exe";
+
+  /**
+   * Constant for the Edge web driver file.
+   */
   private static final String EDGE_DRIVER_FILE = "MicrosoftWebDriver.exe";
+
+  /**
+   * Constant for the maximizing browser size.
+   */
   private static final String MAXIMIZE = "MAXIMIZE";
+
   /**
    * Private constructor.
    */
@@ -260,8 +279,7 @@ public class WebDriverFactory {
    * @return A new IE driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
-    System.setProperty("webdriver.ie.driver",
-        getDriverLocation(IE_DRIVER_FILE) + File.separator + IE_DRIVER_FILE);
+    System.setProperty("webdriver.ie.driver", getDriverLocation(IE_DRIVER_FILE) + File.separator + IE_DRIVER_FILE);
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
 
@@ -300,7 +318,7 @@ public class WebDriverFactory {
    * @return The remote driver options
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
-      HashMap<String, Object> remoteCapabilities) {
+      Map<String, Object> remoteCapabilities) {
     return getRemoteOptions(remoteBrowser, "", "", remoteCapabilities);
   }
 
@@ -348,7 +366,7 @@ public class WebDriverFactory {
     }
 
     // Add a platform setting if one was provided
-    if (!remoteBrowserVersion.isEmpty() && !remoteCapabilities.containsKey("platform")) {
+    if (!remotePlatform.isEmpty() && !remoteCapabilities.containsKey("platform")) {
       remoteCapabilities.put("platform", remotePlatform);
     }
 
@@ -368,10 +386,8 @@ public class WebDriverFactory {
    *
    * @param driverOptions          The driver option you want to add capabilities to
    * @param additionalCapabilities Capabilities to add
-   * @return The driver options with capabilities added
    */
-  public static void setDriverOptions(MutableCapabilities driverOptions,
-      Map<String, Object> additionalCapabilities) {
+  public static void setDriverOptions(MutableCapabilities driverOptions, Map<String, Object> additionalCapabilities) {
     // If there are no additional capabilities just return
     if (additionalCapabilities == null) {
       return;
@@ -518,12 +534,12 @@ public class WebDriverFactory {
    */
   static String getProgramFilesFolder(String folderName, String file) {
     Path path = Paths.get(System.getenv("ProgramW6432"), folderName, file);
-    if (Files.isRegularFile(path)) {
+    if (path.toFile().isFile()) {
       return path.getParent().toString();
     }
 
     path = Paths.get(System.getenv("ProgramFiles(x86)"), folderName, file);
-    if (Files.isRegularFile(path)) {
+    if (path.toFile().isFile()) {
       return path.getParent().toString();
     }
 
