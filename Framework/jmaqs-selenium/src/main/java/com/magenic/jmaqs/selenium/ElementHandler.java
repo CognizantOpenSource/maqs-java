@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -23,6 +24,11 @@ import org.openqa.selenium.support.ui.Select;
  * Contains functions for interacting with WebElement objects.
  */
 public class ElementHandler {
+
+  /**
+   * Private constructor.
+   */
+  private ElementHandler() { }
 
   /**
    * Get selected option from drop down.
@@ -44,10 +50,10 @@ public class ElementHandler {
    * @param by           By selector for the element
    * @return String array list of selected items in drop down
    */
-  public static ArrayList<String> getSelectedOptionsFromDropdown(SeleniumWait seleniumWait, By by) {
+  public static List<String> getSelectedOptionsFromDropdown(SeleniumWait seleniumWait, By by) {
 
     ArrayList<WebElement> elements;
-    ArrayList<String> selectedItems = new ArrayList<String>();
+    ArrayList<String> selectedItems = new ArrayList<>();
     Select select = new Select(seleniumWait.waitForClickableElement(by));
 
     // Get a ArrayList of WebElement objects for all selected options from
@@ -114,7 +120,7 @@ public class ElementHandler {
    * @return Returns a comma delimited String
    */
   public static String createCommaDelimitedString(WebDriver webDriver, By by, boolean sort) {
-    ArrayList<String> unsortedList = new ArrayList<String>();
+    ArrayList<String> unsortedList = new ArrayList<>();
 
     for (WebElement element : webDriver.findElements(by)) {
       unsortedList.add(element.getText().trim());
@@ -158,7 +164,7 @@ public class ElementHandler {
    * @param elementsTextToSelect ArrayList items as Strings to select from List box
    */
   public static void selectMultipleElementsFromListBox(SeleniumWait seleniumWait, By by,
-      ArrayList<String> elementsTextToSelect) {
+      List<String> elementsTextToSelect) {
     Select selectItem = new Select(seleniumWait.waitForClickableElement(by));
 
     // Select all desired items in the ArrayListbox
@@ -175,7 +181,7 @@ public class ElementHandler {
    * @param values       ArrayList items as Strings to select from List box
    */
   public static void selectMultipleElementsFromListBoxByValue(SeleniumWait seleniumWait, By by,
-      ArrayList<String> values) {
+      List<String> values) {
     Select selectItem = new Select(seleniumWait.waitForClickableElement(by));
 
     // Select all desired items in the Listbox
@@ -217,7 +223,7 @@ public class ElementHandler {
    * @param tabOff       true to press the Tab key after entering text
    */
   public static void setTextBox(SeleniumWait seleniumWait, By by, String textToEnter, boolean tabOff) {
-    if (!textToEnter.isEmpty() && textToEnter != null) {
+    if (!textToEnter.isEmpty()) {
       if (tabOff) {
         textToEnter += Keys.TAB;
       }
