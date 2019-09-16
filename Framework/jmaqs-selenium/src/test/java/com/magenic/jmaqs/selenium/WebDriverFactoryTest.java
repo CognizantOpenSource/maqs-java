@@ -11,6 +11,7 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -112,6 +113,22 @@ public class WebDriverFactoryTest {
     try {
       driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.IE);
       Assert.assertNotNull(driver);
+    } finally {
+      if (driver != null) {
+        driver.quit();
+      }
+    }
+  }
+
+  @Test(expectedExceptions = Exception.class, groups = TestCategories.Selenium)
+  public void getEdgeDriverTest() throws Exception {
+    EdgeDriver driver = null;
+    try {
+      driver = (EdgeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.Edge);
+      Assert.assertNotNull(driver);
+    } catch (Exception e) {
+      Assert.assertTrue(e.getMessage().contains("Your web driver may be out of date or unsupported."));
+      throw e;
     } finally {
       if (driver != null) {
         driver.quit();
@@ -236,5 +253,22 @@ public class WebDriverFactoryTest {
   public void getDriverLocationTest() {
     String driverLocation = WebDriverFactory.getDriverLocation("chromedriver.exe");
     Assert.assertFalse(driverLocation.isEmpty());
+  }
+
+  @Test(groups = TestCategories.Selenium)
+  public void getDriverLocationDoesNotExistTest() {
+    String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", false);
+    Assert.assertEquals(driverLocation, "");
+  }
+
+  @Test(expectedExceptions = RuntimeException.class, groups = TestCategories.Selenium)
+  public void getDriverLocationMustExistTest() {
+    String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", true);
+  }
+
+  @Test(groups = TestCategories.Selenium)
+  public void getProgramFilesFolderTest() {
+    String driverLocation = WebDriverFactory.getProgramFilesFolder("testFolder", "testFile");
+    Assert.assertEquals(driverLocation, "");
   }
 }

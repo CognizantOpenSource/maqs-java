@@ -210,7 +210,9 @@ public final class SeleniumConfig {
    *
    * @param remoteBrowser The browser type we want to use
    * @return A WebDriver
+   * @deprecated use {@link WebDriverFactory#getBrowserWithDefaultConfiguration(BrowserType)} instead.
    */
+  @Deprecated
   public static WebDriver getRemoteBrowser(String remoteBrowser) throws Exception {
     WebDriver webDriver = null;
 
@@ -319,7 +321,9 @@ public final class SeleniumConfig {
    * Chrome. Browsers are maximized by default
    *
    * @return The web driver
+   * @deprecated use {@link WebDriverFactory#getDefaultBrowser()} instead.
    */
+  @Deprecated
   public static WebDriver browser() throws Exception {
     return browser(getBrowserName());
   }
@@ -329,7 +333,9 @@ public final class SeleniumConfig {
    *
    * @param browser The browser type we want to use
    * @return A WebDriver
+   * @deprecated use {@link WebDriverFactory#getBrowserWithDefaultConfiguration(BrowserType)} ()} instead.
    */
+  @Deprecated
   public static WebDriver browser(String browser) throws Exception {
     WebDriver webDriver = null;
 
@@ -448,8 +454,9 @@ public final class SeleniumConfig {
    * Get the remote desired capability.
    *
    * @return The remote desired capability
+   * @deprecated use {@link WebDriverFactory#getDefaultRemoteOptions()} instead.
    */
-
+  @Deprecated
   private static DesiredCapabilities getRemoteCapabilities() {
     DesiredCapabilities capabilities;
     String remoteBrowser = getRemoteBrowserName();
@@ -519,7 +526,9 @@ public final class SeleniumConfig {
    * @param mustExist       Do we need to know where this drive is located, if this is true and the file is not
    *                        found an error will be thrown
    * @return The path to the web driver
+   * @deprecated use {@link WebDriverFactory#getDriverLocation(String, String, boolean)} instead.
    */
+  @Deprecated
   private static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {
     // Get the hint path from the app.config
     String hintPath = getDriverHintPath();
@@ -565,7 +574,9 @@ public final class SeleniumConfig {
    *
    * @param driverFile The web drive file, including extension
    * @return The overloaded method
+   * @deprecated use {@link WebDriverFactory#getDriverLocation(String)} instead.
    */
+  @Deprecated
   private static String getDriverLocation(String driverFile) {
 
     return getDriverLocation(driverFile, "", true);
@@ -577,7 +588,9 @@ public final class SeleniumConfig {
    * @param driverFile      The web drive file, including extension
    * @param defaultHintPath The default location for the specific driver
    * @return The overloaded method
+   * @deprecated use {@link WebDriverFactory#getDriverLocation(String, String)} instead.
    */
+  @Deprecated
   private static String getDriverLocation(String driverFile, String defaultHintPath) {
 
     return getDriverLocation(driverFile, defaultHintPath, true);
@@ -589,7 +602,9 @@ public final class SeleniumConfig {
    * @param folderName The programs file sub folder
    * @param file       The file we are looking for
    * @return The parent folder of the given file or the empty String if the file is not found
+   * @deprecated use {@link WebDriverFactory#getProgramFilesFolder(String, String)} instead.
    */
+  @Deprecated
   private static String getProgramFilesFolder(String folderName, String file) {
     // Handle 64 bit systems first
     boolean is64bit = false;
