@@ -4,12 +4,12 @@
 
 package com.magenic.jmaqs.selenium.factories;
 
-import com.google.common.base.Function;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -437,13 +437,7 @@ public class UIWait {
 	 * @throws Exception if encountered
 	 */
 	public List<WebElement> waitForElements(final By by, WebDriverWait wait) {
-		List<WebElement> elements;
-		try {
-			elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
-			return elements;
-		} catch (Exception e) {
-			throw e;
-		}
+		return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
 	}
 
 	/**
@@ -858,14 +852,7 @@ public class UIWait {
 	 * @return WebElement that is located, or null if none is found
 	 */
 	public WebElement waitForClickableElement(final By by, WebDriverWait wait) {
-
-		try {
 			return wait.until(ExpectedConditions.elementToBeClickable(by));
-		} catch (NoSuchElementException
-				| StaleElementReferenceException
-				| TimeoutException e) {
-			throw e;
-		}
 	}
 
 	/**
@@ -1053,7 +1040,7 @@ public class UIWait {
 		} 
 		catch (Exception e) {
 			String error = String.format("Failed JavaScript scroll into view...%s%n", (Object[])e.getStackTrace());
-			System.out.println(error);
+			System.err.print(error);
 		}
 
 		Coordinates coord = ((Locatable) element).getCoordinates();

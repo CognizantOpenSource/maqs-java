@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
@@ -37,7 +36,8 @@ public class UIFind {
 	public WebElement findElement(By by, boolean throwException) {
 		// returns the 1st element in the collection if it is not null or empty
 		List<WebElement> elementList = elemList(by, throwException);
-		if (elementList == null || elementList.size() == 0) {
+		
+		if (elementList.isEmpty()) {
 			return null;
 		}
 
@@ -66,7 +66,7 @@ public class UIFind {
 			boolean throwException) {
 		List<WebElement> elementList = elemList(by, throwException);
 
-		if (elementList == null || elementList.size() == 0) {
+		if (elementList.isEmpty()) {
 			return null;
 		}
 
@@ -105,7 +105,7 @@ public class UIFind {
 		List<WebElement> elementList = elemList(by, throwException);
 		int index = -1;
 
-		if (elementList == null || (elementList.size() == 0)) {
+		if (elementList.isEmpty()) {
 			return index;
 		}
 
@@ -186,7 +186,7 @@ public class UIFind {
 	private  List<WebElement> elemList(By by, boolean throwException) {
 		List<WebElement> elems = this.searchItem.findElements(by);
 
-		if (elems.size() > 0 || !throwException) {
+		if (elems.isEmpty() || !throwException) {
 			return elems;
 		}
 
