@@ -141,7 +141,8 @@ public class LazyElement implements WebElement
 	 */
 	public String getTagName() {
 		return this.tryGenericWaitFor(
-				() -> this.getTheExistingElement()).getTagName();
+				() -> this.tryGetElement(
+						() -> this.getTheExistingElement()).getTagName());
 	}
 
 	/**
@@ -150,7 +151,8 @@ public class LazyElement implements WebElement
 	 */
 	public String getText() {
 		return this.tryGenericWaitFor(
-				() -> this.getTheExistingElement()).getText();
+				() -> this.tryGetElement(
+								() -> this.getTheExistingElement())).getText();
 	}
 
 	/**
@@ -159,7 +161,8 @@ public class LazyElement implements WebElement
 	 */
 	public Point getLocation() {
 		return this.tryGenericWaitFor(
-				() -> this.getTheExistingElement()).getLocation();
+				() -> this.tryGetElement(
+						() -> this.getTheExistingElement())).getLocation();
 	}
 
 	/**
@@ -167,7 +170,8 @@ public class LazyElement implements WebElement
 	 */
 	public Dimension getSize() {
 		return this.tryGenericWaitFor(
-				() -> this.getTheExistingElement()).getSize();
+				() -> this.tryGetElement(
+						() -> this.getTheExistingElement())).getSize();
 	}
 
 	/**
@@ -175,10 +179,10 @@ public class LazyElement implements WebElement
 	 */
 	public void click() {
 		this.tryGenericWaitFor(() -> {
-			WebElement element = this.getTheClickableElement();
-			this.executeEvent(() -> element.click(), "Click");
+			WebElement element = this.tryGetElement(() -> this.getTheClickableElement());
+			boolean didClick = this.tryExecuteEvent(() -> element.click(), "Click");
 			
-			return true;
+			return didClick;
 		});
 	}
 
@@ -210,10 +214,10 @@ public class LazyElement implements WebElement
 	 */
 	public void clear() {
 		this.tryGenericWaitFor(() -> {
-				WebElement element = this.getTheVisibleElement();
-				this.executeEvent(() -> element.clear(), "Clear");
+				WebElement element = this.tryGetElement(() -> this.getTheVisibleElement());
+				boolean didClear = this.tryExecuteEvent(() -> element.clear(), "Clear");
 				
-				return true;
+				return didClear;
 			});
 	}
 
@@ -222,10 +226,10 @@ public class LazyElement implements WebElement
 	 */
 	public void submit() {
 		this.tryGenericWaitFor(() -> {
-				WebElement element = this.getTheExistingElement();
-				this.executeEvent(() -> element.submit(), "Submit");
+				WebElement element = this.tryGetElement(() -> this.getTheExistingElement());
+				boolean didSubmit = this.tryExecuteEvent(() -> element.submit(), "Submit");
 				
-				return true;
+				return didSubmit;
 			});
 	}
 
@@ -236,7 +240,8 @@ public class LazyElement implements WebElement
 	 */
 	public String getAttribute(String attributeName) {
 		return this.tryGenericWaitFor(
-				() -> this.getTheExistingElement().getAttribute(attributeName));
+				() -> this.tryGetElement(
+						() -> this.getTheExistingElement())).getAttribute(attributeName);
 	}
 
 	/**
@@ -245,7 +250,8 @@ public class LazyElement implements WebElement
 	 */
 	public String getValue() {
 		return this.tryGenericWaitFor(
-				() -> this.getTheVisibleElement().getAttribute("value"));
+				() -> this.tryGetElement(
+						() -> this.getTheVisibleElement())).getAttribute("value");
 	}
 
 	/**
@@ -256,7 +262,8 @@ public class LazyElement implements WebElement
 	@Override
 	public String getCssValue(String propertyName) {
 		return this.tryGenericWaitFor(
-				() -> this.getTheExistingElement()).getCssValue(propertyName);
+				() -> this.tryGetElement(
+						() -> this.getTheExistingElement())).getCssValue(propertyName);
 	}
 
 	/**
@@ -273,8 +280,8 @@ public class LazyElement implements WebElement
 	}
 
 	/**
-	 * Wait for and get the clickable web element
-	 * @return The clickable web element
+	 * Wait for and get the click-able web element
+	 * @return The click-able web element
 	 */
 	public WebElement getTheClickableElement()
 	{
@@ -316,7 +323,7 @@ public class LazyElement implements WebElement
 	 * @return the {@link org.openqa.selenium.WebElement WebElement} being found
 	 */
 	public WebElement findElement(By by) {
-		return this.getTheExistingElement().findElement(by);
+		return this.tryGetElement(() -> getTheExistingElement()).findElement(by);
 	}
 
 	/**
@@ -326,7 +333,7 @@ public class LazyElement implements WebElement
 	 * @return the List of {@link org.openqa.selenium.WebElement WebElement} being found
 	 */
 	public List<WebElement> findElements(By by) {
-		return this.getTheExistingElement().findElements(by);
+		return this.tryGetElement(() -> getTheExistingElement()).findElements(by);
 	}
 
 	/**
@@ -403,10 +410,16 @@ public class LazyElement implements WebElement
 		}
 	}
 
+	/**
+	 * Gets the screenshot as the target type
+	 * @param target The target output type
+	 * @return The type to get the screenshot as
+	 */
 	@Override
 	public <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.tryGenericWaitFor(
+				() -> this.tryGetElement(
+						() -> this.getTheExistingElement())).getScreenshotAs(target);
 	}
 
 	/**
@@ -417,9 +430,9 @@ public class LazyElement implements WebElement
 	public void sendKeys(CharSequence... keysToSend) {
 		this.tryGenericWaitFor(() -> {
 				WebElement element = this.getTheVisibleElement();
-				this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
+				boolean didSendKeys = this.tryExecuteEvent(() -> element.sendKeys(keysToSend), "SendKeys");
 				
-				return true;
+				return didSendKeys;
 			});
 	}
 
@@ -430,7 +443,7 @@ public class LazyElement implements WebElement
 	@Override
 	public boolean isSelected() {
 		return this.tryGenericWaitFor(
-				() -> this.getTheExistingElement()).isSelected();
+				() -> this.tryGetElement(() -> this.getTheExistingElement())).isSelected();
 	}
 
 	/**
@@ -440,7 +453,7 @@ public class LazyElement implements WebElement
 	@Override
 	public boolean isEnabled() {
 		return this.tryGenericWaitFor(
-				() -> this.getTheExistingElement()).isEnabled();
+			    () -> this.tryGetElement(() -> this.getTheExistingElement())).isEnabled();
 	}
 
 	/**
@@ -450,14 +463,22 @@ public class LazyElement implements WebElement
 	@Override
 	public boolean isDisplayed() {
 		return this.tryGenericWaitFor(
-				() -> this.getTheExistingElement()).isDisplayed();
+				() -> this.tryGetElement(() -> this.getTheExistingElement())).isDisplayed();
 	}
 
+	/**
+	 * Gets the rectangle value that highlights the lazy element location
+	 */
 	@Override
 	public Rectangle getRect() {
 		return new Rectangle(this.getLocation(), this.getSize());
 	}
 	
+	/**
+	 * Trys to execute the generic wait and return it's value
+	 * @param func the function to wait for true
+	 * @return The value being waited for
+	 */
 	private <T> T tryGenericWaitFor(Supplier<T> func) {
 		T value = null;
 		
@@ -465,10 +486,51 @@ public class LazyElement implements WebElement
 			value = GenericWait.waitFor(func);
 		} 
 		catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.getTestObject().getLog().logMessage(
+					MessageType.ERROR, 
+					"Encountered error while waiting for Generic Wait to complete. Either an interruption or a Timeout occurred" +
+					"Caused by: " + e.getMessage() + System.lineSeparator() +
+					"With stack trace: " + e.getStackTrace() + System.lineSeparator());
 		}
 		
 		return value;
+	}
+	
+	/**
+	 * Trys to execute the event and returns if 
+	 * execution was able to succeed
+	 * @param elementFactory The action that will be executed
+	 * @param caller The caller for logging purposes
+	 * @return If the execution was success
+	 */
+	private boolean tryExecuteEvent(Action action, String caller) {
+		boolean didExecute = false;
+		
+		try {
+			this.executeEvent(action, caller);
+			didExecute = true;
+		} 
+		catch (Exception e) {
+			didExecute = false;
+		}
+		
+		return didExecute;
+	}
+	
+	/**
+	 * Trys to the get web element using the supplier function
+	 * @param sup The function to get the element
+	 * @return The WebElement
+	 */
+	private WebElement tryGetElement(Supplier<WebElement> sup) {
+		WebElement webElement = null;
+		
+		try {
+			webElement = this.getElement(sup);
+		} catch (Exception e) {
+			return webElement;
+		}
+	
+		return webElement;
 	}
 }
