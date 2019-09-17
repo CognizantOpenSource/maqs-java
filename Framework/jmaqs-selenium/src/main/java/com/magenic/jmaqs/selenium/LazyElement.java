@@ -1,7 +1,6 @@
 package com.magenic.jmaqs.selenium;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import org.openqa.selenium.By;
@@ -13,9 +12,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.selenium.functionalinterfaces.Action;
 import com.magenic.jmaqs.utilities.helper.GenericWait;
 import com.magenic.jmaqs.utilities.helper.TimeoutException;
+import com.magenic.jmaqs.utilities.helper.functionalinterfaces.Action;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 
 /**
@@ -37,27 +36,6 @@ public class LazyElement implements WebElement
 
 	/** Cached copy of the element or null if we haven't already found the element */
 	private WebElement cachedElement;
-
-	/** Value indicating whether the lazy element is enabled */
-	private boolean isEnabled;
-
-	/** Value indicating whether the lazy element was selected or not */
-	private boolean isSelected;
-
-	/** Value indicating whether the lazy element is displayed */
-	private boolean isDisplayed;
-
-	/** The lazy element's tag name */
-	private String tagName;
-
-	/** The lazy element's text */
-	private String text;
-
-	/** the lazy element's location */
-	private Point location;
-
-	/** The lazy element's size */
-	private Dimension size;
 
 	/**
 	 * Initializes a new instance of the {@link"LazyElement" /> class
@@ -162,18 +140,8 @@ public class LazyElement implements WebElement
 	 * Gets the tag name of the lazy element
 	 */
 	public String getTagName() {
-		String tagName = "";
-
-		try {
-			tagName = GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheExistingElement()).getTagName();
-			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return tagName;
+		return this.tryGenericWaitFor(
+				() -> this.getTheExistingElement()).getTagName();
 	}
 
 	/**
@@ -181,19 +149,8 @@ public class LazyElement implements WebElement
 	 * @return The element text
 	 */
 	public String getText() {
-		String text = "";
-
-		try {
-			text = GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheExistingElement()).getText();
-			});
-		} 
-		catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return text;
+		return this.tryGenericWaitFor(
+				() -> this.getTheExistingElement()).getText();
 	}
 
 	/**
@@ -201,87 +158,28 @@ public class LazyElement implements WebElement
 	 * @return the location as a Point
 	 */
 	public Point getLocation() {
-		Point location = null;
-
-		try {
-			location = GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheVisibleElement()).getLocation();
-			});
-		} 
-		catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return location;
+		return this.tryGenericWaitFor(
+				() -> this.getTheExistingElement()).getLocation();
 	}
 
 	/**
 	 * Gets the lazy element's size
 	 */
 	public Dimension getSize() {
-		Dimension size = null;
-
-		try {
-			size = GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheVisibleElement()).getSize();
-			});
-		} 
-		catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return size;
+		return this.tryGenericWaitFor(
+				() -> this.getTheExistingElement()).getSize();
 	}
 
 	/**
 	 * Click the lazy element 
 	 */
 	public void click() {
-		try {
-			GenericWait.waitFor(() -> {
-				WebElement element = this.getElement(() -> this.getTheClickableElement());
-
-				try {
-					this.executeEvent(() -> element.click(), "Click");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				return true;
-			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Send keys to the lazy element
-	 * @param text The text to send to the component
-	 */
-	public void sendKeys(String text)
-	{
-		try {
-			GenericWait.waitFor(() -> {
-				WebElement element = this.getElement(() -> this.getTheVisibleElement());
-				
-				try {
-					this.executeEvent(() -> element.sendKeys(text), "SendKeys");
-				} 
-				catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				return true;
-			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.tryGenericWaitFor(() -> {
+			WebElement element = this.getTheClickableElement();
+			this.executeEvent(() -> element.click(), "Click");
+			
+			return true;
+		});
 	}
 
 	/**
@@ -311,48 +209,24 @@ public class LazyElement implements WebElement
 	 * Clear the lazy element 
 	 */
 	public void clear() {
-		try {
-			GenericWait.waitFor(() ->
-			{
-				WebElement element = this.getElement(() -> this.getTheVisibleElement());
-				
-				try {
-					this.executeEvent(() -> element.clear(), "Clear");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		this.tryGenericWaitFor(() -> {
+				WebElement element = this.getTheVisibleElement();
+				this.executeEvent(() -> element.clear(), "Clear");
 				
 				return true;
 			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
 	 * Submit the lazy element
 	 */
 	public void submit() {
-		try {
-			GenericWait.waitFor(() ->
-			{
-				WebElement element = this.getElement(() -> this.getTheExistingElement());
-				
-				try {
-					this.executeEvent(() -> element.submit(), "Submit");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		this.tryGenericWaitFor(() -> {
+				WebElement element = this.getTheExistingElement();
+				this.executeEvent(() -> element.submit(), "Submit");
 				
 				return true;
 			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -361,18 +235,8 @@ public class LazyElement implements WebElement
 	 * @return The attribute
 	 */
 	public String getAttribute(String attributeName) {
-		String attribute = "";
-		
-		try {
-			attribute = GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheExistingElement()).getAttribute(attributeName);
-			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return attribute;
+		return this.tryGenericWaitFor(
+				() -> this.getTheExistingElement().getAttribute(attributeName));
 	}
 
 	/**
@@ -380,18 +244,8 @@ public class LazyElement implements WebElement
 	 * @return The current value of the element
 	 */
 	public String getValue() {
-		String value = "";
-		
-		try {
-			value = GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheVisibleElement()).getAttribute("value");
-			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return value;
+		return this.tryGenericWaitFor(
+				() -> this.getTheVisibleElement().getAttribute("value"));
 	}
 
 	/**
@@ -401,18 +255,8 @@ public class LazyElement implements WebElement
 	 */
 	@Override
 	public String getCssValue(String propertyName) {
-		String cssValue = "";
-		
-		try {
-			cssValue =  GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheExistingElement()).getCssValue(propertyName);
-			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return cssValue;
+		return this.tryGenericWaitFor(
+				() -> this.getTheExistingElement()).getCssValue(propertyName);
 	}
 
 	/**
@@ -454,14 +298,17 @@ public class LazyElement implements WebElement
 		return this.getCachedElement();
 	}
 
-	/**
-	 * Gets the value of a JavaScript property of this element
-	 * @param propertyName the property name
-	 * @return the JavaScript property of the element
-	 */
-	public String getProperty(String propertyName) {
-		return this.getTheExistingElement().getProperty(propertyName);
-	}
+//  This method doesn't seem to exist in Java. There is a C# equivalent but it looks like an extension
+//  method. Investigate further before removing
+//
+//	/**
+//	 * Gets the value of a JavaScript property of this element
+//	 * @param propertyName the property name
+//	 * @return the JavaScript property of the element
+//	 */
+//	public String getProperty(String propertyName) {
+//		return this.getTheExistingElement().getProperty(propertyName);
+//	}
 
 	/**
 	 * Finds the first {@link org.openqa.selenium.WebElement WebElement} using the given method.
@@ -500,13 +347,13 @@ public class LazyElement implements WebElement
 		return temp + this.by.toString() + this.userFriendlyName;
 	}
 
-	/// <summary>
-	/// Get a web element
-	/// </summary>
-	/// <param name="getElement">The get web element function</param>
-	/// <returns>The web element</returns>
-	private WebElement getElement(Supplier<WebElement> getElement) throws Exception
-	{
+	/**
+	 * Get a web element
+	 * @param getElement The function that gets the element
+	 * @return The web element
+	 * @throws Exception If the element can not be found
+	 */
+	private WebElement getElement(Supplier<WebElement> getElement) throws Exception {
 		// Try to use cached element
 		if (this.getCachedElement() != null) {
 			try {
@@ -533,11 +380,12 @@ public class LazyElement implements WebElement
 		}
 	}
 
-	/// <summary>
-	/// Execute an element action
-	/// </summary>
-	/// <param name="elementAction">The element action</param>
-	/// <param name="caller">Name of the action, for logging purposes</param>
+	/**
+	 * Execute an element action
+	 * @param elementAction the element action
+	 * @param caller Text to identify the caller function
+	 * @throws Exception If the elementAction fails to execute
+	 */
 	private void executeEvent(Action elementAction, String caller) throws Exception
 	{
 		try {
@@ -561,63 +409,66 @@ public class LazyElement implements WebElement
 		return null;
 	}
 
+	/**
+	 * Sends the keys to the element
+	 * @param keysToSend The keys being sent to the element
+	 */
 	@Override
 	public void sendKeys(CharSequence... keysToSend) {
-		// TODO Auto-generated method stub
-
+		this.tryGenericWaitFor(() -> {
+				WebElement element = this.getTheVisibleElement();
+				this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
+				
+				return true;
+			});
 	}
 
+	/**
+	 * If the Element is selected
+	 * @return If the element is selected
+	 */
 	@Override
 	public boolean isSelected() {
-		boolean isSelected = false;
-
-		try {
-			isSelected =  GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheExistingElement()).isSelected();
-			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return isSelected;
+		return this.tryGenericWaitFor(
+				() -> this.getTheExistingElement()).isSelected();
 	}
 
+	/**
+	 * If the element is enabled
+	 * @return If the element is enabled
+	 */
 	@Override
 	public boolean isEnabled() {
-		boolean isEnabled = false;
-
-		try {
-			isEnabled = GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheExistingElement()).isEnabled();
-			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return isEnabled;
+		return this.tryGenericWaitFor(
+				() -> this.getTheExistingElement()).isEnabled();
 	}
 
+	/**
+	 * If the element is displayed
+	 * @return If the element is displayed
+	 */
 	@Override
 	public boolean isDisplayed() {
-		boolean isDisplayed = false;
-
-		try {
-			isDisplayed = GenericWait.waitFor(() -> {
-				return this.getElement(() -> this.getTheExistingElement()).isDisplayed();
-			});
-		} catch (InterruptedException | TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return isDisplayed;
+		return this.tryGenericWaitFor(
+				() -> this.getTheExistingElement()).isDisplayed();
 	}
 
 	@Override
 	public Rectangle getRect() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Rectangle(this.getLocation(), this.getSize());
+	}
+	
+	private <T> T tryGenericWaitFor(Supplier<T> func) {
+		T value = null;
+		
+		try {
+			value = GenericWait.waitFor(func);
+		} 
+		catch (InterruptedException | TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return value;
 	}
 }
