@@ -1,4 +1,4 @@
-package com.magenic.jmaqs.selenium.functionalinterfaces;
+package com.magenic.jmaqs.utilities.helper.functionalinterfaces;
 
 @FunctionalInterface
 public interface Action {
