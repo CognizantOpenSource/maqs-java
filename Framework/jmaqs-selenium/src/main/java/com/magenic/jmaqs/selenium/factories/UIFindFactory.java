@@ -13,11 +13,11 @@ public class UIFindFactory {
 	
 	/**
 	 * Initializes a new instance of {@link UIFind}
-	 * @param searchItem the search item that is used for
-	 *        finding elements
+	 * @param searchItem The search item that is used for
+	 *                   finding elements
 	 * @return The UIFind instance
 	 */
-	public UIFind getFind(SearchContext searchItem) {
+	public static UIFind getFind(SearchContext searchItem) {
 		return new UIFind(searchItem);
 	}
 }
