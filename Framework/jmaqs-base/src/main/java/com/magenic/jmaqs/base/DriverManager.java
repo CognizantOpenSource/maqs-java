@@ -26,14 +26,14 @@ public abstract class DriverManager implements AutoCloseable {
   /**
    * The Get driver.
    */
-  protected Supplier<Object> getDriver;
+  protected Supplier getDriver;
 
   /**
    * Instantiates a new Driver manager.
    *
    * @param baseTestObject the base test object
    */
-  public DriverManager(Supplier<Object> getDriverFunction, BaseTestObject baseTestObject) {
+  public <T> DriverManager(Supplier<T> getDriverFunction, BaseTestObject baseTestObject) {
     this.baseTestObject = baseTestObject;
     this.getDriver = getDriverFunction;
   }
