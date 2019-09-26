@@ -1,4 +1,12 @@
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.appium;
+
+import static io.appium.java_client.remote.MobileCapabilityType.DEVICE_NAME;
+import static io.appium.java_client.remote.MobileCapabilityType.PLATFORM_NAME;
+import static io.appium.java_client.remote.MobileCapabilityType.PLATFORM_VERSION;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import io.appium.java_client.AppiumDriver;
@@ -10,6 +18,7 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -25,10 +34,21 @@ public class AppiumDriverFactory {
   private AppiumDriverFactory() {
   }
 
+  /**
+   * Gets default mobile driver.
+   *
+   * @return the default mobile driver
+   */
   public static AppiumDriver<WebElement> getDefaultMobileDriver() {
     return getDefaultMobileDriver(AppiumConfig.getDeviceType());
   }
 
+  /**
+   * Gets default mobile driver.
+   *
+   * @param deviceType the device type
+   * @return the default mobile driver
+   */
   public static AppiumDriver<WebElement> getDefaultMobileDriver(PlatformType deviceType) {
     AppiumDriver<WebElement> appiumDriver;
     URL mobileHubUrl = AppiumConfig.getMobileHubUrl();
@@ -57,12 +77,106 @@ public class AppiumDriverFactory {
     return appiumDriver;
   }
 
+  /**
+   * Gets default mobile options.
+   *
+   * @return the default mobile options
+   */
+  public static DesiredCapabilities getDefaultMobileOptions() {
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    capabilities.setCapability(DEVICE_NAME, AppiumConfig.getDeviceName());
+    capabilities.setCapability(PLATFORM_NAME, AppiumConfig.getPlatformName());
+    capabilities.setCapability(PLATFORM_VERSION, AppiumConfig.getPlatformVersion());
+    capabilities = mergeCapabilities(capabilities, AppiumConfig.getCapabilitiesAsObjects());
+    return capabilities;
+  }
+
+  /**
+   * Gets default mobile options.
+   *
+   * @param capabilities the capabilities
+   * @return the default mobile options
+   */
+  public static DesiredCapabilities getDefaultMobileOptions(Map<String, Object> capabilities) {
+    return new DesiredCapabilities(capabilities);
+  }
+
+  /**
+   * Gets android driver.
+   *
+   * @param mobileHub the mobile hub
+   * @param options   the options
+   * @param timeout   the timeout
+   * @return the android driver
+   */
+  public static AppiumDriver<WebElement> getAndroidDriver(URL mobileHub,
+      DesiredCapabilities options, Duration timeout) {
+
+    return createDriver(() -> {
+      AppiumDriver<WebElement> driver = new AndroidDriver<>(mobileHub, options);
+      driver.manage().timeouts().implicitlyWait(timeout.toMillis(), TimeUnit.MILLISECONDS);
+      return driver;
+    });
+  }
+
+  /**
+   * Gets ios driver.
+   *
+   * @param mobileHub the mobile hub
+   * @param options   the options
+   * @param timeout   the timeout
+   * @return the ios driver
+   */
+  public static AppiumDriver<WebElement> getIOSDriver(URL mobileHub, DesiredCapabilities options,
+      Duration timeout) {
+    return createDriver(() -> {
+      AppiumDriver<WebElement> driver = new IOSDriver<>(mobileHub, options);
+      driver.manage().timeouts().implicitlyWait(timeout.toMillis(), TimeUnit.MILLISECONDS);
+      return driver;
+    });
+  }
+
+  /**
+   * Gets windows driver.
+   *
+   * @param mobileHub the mobile hub
+   * @param options   the options
+   * @param timeout   the timeout
+   * @return the windows driver
+   */
+  public static AppiumDriver<WebElement> getWindowsDriver(URL mobileHub,
+      DesiredCapabilities options, Duration timeout) {
+    return createDriver(() -> {
+      AppiumDriver<WebElement> driver = new WindowsDriver<>(mobileHub, options);
+      driver.manage().timeouts().implicitlyWait(timeout.toMillis(), TimeUnit.MILLISECONDS);
+      return driver;
+    });
+
+  }
+
+  /**
+   * @param capabilities original capabilities object
+   * @param capabilitiesAsObjects Map of String, Object
+   * @return merged capabilities object
+   */
+  private static DesiredCapabilities mergeCapabilities(DesiredCapabilities capabilities,
+      Map<String, Object> capabilitiesAsObjects) {
+    return capabilities.merge((Capabilities) capabilitiesAsObjects);
+  }
+
+  /**
+   * Create driver appium driver.
+   *
+   * @param createFunction the create function
+   * @return the appium driver
+   */
   public static AppiumDriver<WebElement> createDriver(
       Supplier<AppiumDriver<WebElement>> createFunction) {
     AppiumDriver<WebElement> appiumDriver = null;
 
     try {
       appiumDriver = createFunction.get();
+      return appiumDriver;
     } catch (Exception e) {
       if (e.getClass().isInstance(IllegalArgumentException.class)) {
         throw e;
@@ -79,43 +193,8 @@ public class AppiumDriverFactory {
               quitException);
         }
       }
+
+      throw new WebDriverException("Your driver may be out of date or unsupported.", e);
     }
-  }
-
-  public static AppiumDriver<WebElement> getAndroidDriver(URL mobileHub,
-      DesiredCapabilities options, Duration timeout) {
-
-      return createDriver(() -> {
-        AppiumDriver<WebElement> driver = new AndroidDriver<>(mobileHub, options);
-        driver.manage().timeouts().implicitlyWait(timeout.toMillis(), TimeUnit.MILLISECONDS);
-        return driver;
-      });
-  }
-
-  public static AppiumDriver<WebElement> getIOSDriver(URL mobileHub, DesiredCapabilities options,
-      Duration timeout) {
-    return createDriver(() -> {
-      AppiumDriver<WebElement> driver = new IOSDriver<>(mobileHub, options);
-      driver.manage().timeouts().implicitlyWait(timeout.toMillis(), TimeUnit.MILLISECONDS);
-      return driver;
-    });
-  }
-
-  public static DesiredCapabilities getDefaultMobileOptions() {
-
-  }
-
-  public static DesiredCapabilities getDefaultMobileOptions(Map<String, Object> capabilities) {
-
-  }
-
-  public static AppiumDriver<WebElement> getWindowsDriver(URL mobileHub,
-      DesiredCapabilities options, Duration timeout) {
-    return createDriver(() -> {
-      AppiumDriver<WebElement> driver = new WindowsDriver<>(mobileHub, options);
-      driver.manage().timeouts().implicitlyWait(timeout.toMillis(), TimeUnit.MILLISECONDS);
-      return driver;
-    });
-
   }
 }
