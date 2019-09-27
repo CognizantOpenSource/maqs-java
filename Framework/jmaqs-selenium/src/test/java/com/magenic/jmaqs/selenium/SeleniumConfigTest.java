@@ -5,7 +5,6 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import java.rmi.Remote;
 import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;

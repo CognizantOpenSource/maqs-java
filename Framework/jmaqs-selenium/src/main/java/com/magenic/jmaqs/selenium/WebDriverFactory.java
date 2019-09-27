@@ -55,7 +55,7 @@ public class WebDriverFactory {
   /**
    * Constant for the maximizing browser size.
    */
-  private static final String MAXIMIZE = "MAXIMIZE";
+  private static final String WINDOW_MAX = "MAXIMIZE";
 
   /**
    * Private constructor.
@@ -137,7 +137,7 @@ public class WebDriverFactory {
    * @return The default headless Chrome options
    */
   public static ChromeOptions getDefaultHeadlessChromeOptions() {
-    return getDefaultHeadlessChromeOptions(MAXIMIZE);
+    return getDefaultHeadlessChromeOptions(WINDOW_MAX);
   }
 
   /**
@@ -202,7 +202,7 @@ public class WebDriverFactory {
    * @return A new Chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions) {
-    return getChromeDriver(chromeOptions, MAXIMIZE);
+    return getChromeDriver(chromeOptions, WINDOW_MAX);
   }
 
   /**
@@ -258,7 +258,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
     String driverLocation = getDriverLocation(EDGE_DRIVER_FILE,
-        getProgramFilesFolder("Microsoft Web Driver", EDGE_DRIVER_FILE));
+        getWindowsEdgeDriverLocation(EDGE_DRIVER_FILE));
 
     // If we can't find an installed edge driver, look in the normal places
     if (driverLocation.isEmpty()) {
@@ -413,7 +413,7 @@ public class WebDriverFactory {
   public static void setBrowserSize(WebDriver webDriver, String size) {
     size = size.toUpperCase();
 
-    if (size.equals(MAXIMIZE)) {
+    if (size.equals(WINDOW_MAX)) {
       webDriver.manage().window().maximize();
     } else if (!size.equals("DEFAULT")) {
       webDriver.manage().window().setSize(extractDimensionFromString(size));
@@ -427,7 +427,7 @@ public class WebDriverFactory {
    * @return The browser size as a string - Specifically for headless Chrome options
    */
   public static String getHeadlessWindowSizeString(String size) {
-    if (size.equals(MAXIMIZE) || size.equals("DEFAULT")) {
+    if (size.equals(WINDOW_MAX) || size.equals("DEFAULT")) {
       // If we need a string default to 1920 by 1080
       return "window-size=1920,1080";
     } else {
@@ -526,24 +526,25 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the programs file folder which contains given file (for finding the Edge driver).
+   * Get the file path for the Edge driver pre-installed on the system.
    *
-   * @param folderName The programs file sub folder
    * @param file       The file we are looking for
    * @return The parent folder of the given file or the empty string if the file is not found
    */
-  static String getProgramFilesFolder(String folderName, String file) {
-    Path path = Paths.get(System.getenv("ProgramW6432"), folderName, file);
+  static String getWindowsEdgeDriverLocation(String file) {
+    String edgeDriverFolder = "Microsoft Web Driver";
+
+    Path path = Paths.get(System.getenv("ProgramW6432"), edgeDriverFolder, file);
     if (path.toFile().isFile()) {
       return path.getParent().toString();
     }
 
-    path = Paths.get(System.getenv("ProgramFiles(x86)"), folderName, file);
+    path = Paths.get(System.getenv("ProgramFiles(x86)"), edgeDriverFolder, file);
     if (path.toFile().isFile()) {
       return path.getParent().toString();
     }
 
-    path = Paths.get(System.getenv("ProgramFiles"), folderName, file);
+    path = Paths.get(System.getenv("ProgramFiles"), edgeDriverFolder, file);
     if (path.toFile().isFile()) {
       return path.getParent().toString();
     }
