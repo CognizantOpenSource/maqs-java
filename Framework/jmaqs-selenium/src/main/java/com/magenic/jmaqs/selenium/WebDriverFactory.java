@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.File;
 import java.net.URL;
@@ -31,26 +32,6 @@ import org.openqa.selenium.safari.SafariOptions;
  * Static web driver factory.
  */
 public class WebDriverFactory {
-
-  /**
-   * Constant for the Chrome web driver file.
-   */
-  private static final String CHROME_DRIVER_FILE = "chromedriver.exe";
-
-  /**
-   * Constant for the Firefox web driver file.
-   */
-  private static final String FIREFOX_DRIVER_FILE = "geckodriver.exe";
-
-  /**
-   * Constant for the Internet Explorer web driver file.
-   */
-  private static final String IE_DRIVER_FILE = "IEDriverServer.exe";
-
-  /**
-   * Constant for the Edge web driver file.
-   */
-  private static final String EDGE_DRIVER_FILE = "MicrosoftWebDriver.exe";
 
   /**
    * Constant for the maximizing browser size.
@@ -214,7 +195,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
     System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(CHROME_DRIVER_FILE) + File.separator + CHROME_DRIVER_FILE);
+        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME.getFile());
     WebDriver driver = new ChromeDriver(chromeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -228,7 +209,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
     System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(CHROME_DRIVER_FILE) + File.separator + CHROME_DRIVER_FILE);
+        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME.getFile());
     return new ChromeDriver(headlessChromeOptions);
   }
 
@@ -241,7 +222,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
     System.setProperty("webdriver.gecko.driver",
-        getDriverLocation(FIREFOX_DRIVER_FILE) + File.separator + FIREFOX_DRIVER_FILE);
+        getDriverLocation(WebDriverFile.FIREFOX.getFile()) + File.separator + WebDriverFile.FIREFOX.getFile());
 
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
@@ -257,15 +238,15 @@ public class WebDriverFactory {
    * @return A new Edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
-    String driverLocation = getDriverLocation(EDGE_DRIVER_FILE,
-        getWindowsEdgeDriverLocation(EDGE_DRIVER_FILE));
+    String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFile(),
+        getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFile()));
 
     // If we can't find an installed edge driver, look in the normal places
     if (driverLocation.isEmpty()) {
-      driverLocation = getDriverLocation(EDGE_DRIVER_FILE);
+      driverLocation = getDriverLocation(WebDriverFile.EDGE.getFile());
     }
 
-    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + EDGE_DRIVER_FILE);
+    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + WebDriverFile.EDGE.getFile());
     EdgeDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -279,7 +260,8 @@ public class WebDriverFactory {
    * @return A new IE driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
-    System.setProperty("webdriver.ie.driver", getDriverLocation(IE_DRIVER_FILE) + File.separator + IE_DRIVER_FILE);
+    System.setProperty("webdriver.ie.driver",
+        getDriverLocation(WebDriverFile.IE.getFile()) + File.separator + WebDriverFile.IE.getFile());
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
 
@@ -528,7 +510,7 @@ public class WebDriverFactory {
   /**
    * Get the file path for the Edge driver pre-installed on the system.
    *
-   * @param file       The file we are looking for
+   * @param file The file we are looking for
    * @return The parent folder of the given file or the empty string if the file is not found
    */
   static String getWindowsEdgeDriverLocation(String file) {
