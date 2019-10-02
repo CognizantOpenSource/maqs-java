@@ -52,7 +52,7 @@ public class AppiumConfig {
    * Gets the mobile device UDID.
    *
    * @return the mobile device UDID
-   * @deprecated
+   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
    */
   @Deprecated
   public static String getMobileDeviceUdid() {
@@ -63,7 +63,7 @@ public class AppiumConfig {
    * Gets the bundle ID.
    *
    * @return the bundle ID
-   * @deprecated
+   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
    */
   @Deprecated
   public static String getBundleId() {
@@ -92,7 +92,7 @@ public class AppiumConfig {
    * Is using mobile browser boolean.
    *
    * @return the boolean
-   * @deprecated
+   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
    */
   @Deprecated
   public static boolean isUsingMobileBrowser() {
@@ -129,7 +129,7 @@ public class AppiumConfig {
    * Gets the mobile hub url string.
    *
    * @return the mobile hub url string
-   * @deprecated
+   * @deprecated use {@link AppiumConfig.getMobileHubUrl()} instead.
    */
   @Deprecated
   public static String getMobileHubUrlString() {
@@ -157,7 +157,7 @@ public class AppiumConfig {
    *
    * @param urlString the url string
    * @return the mobile hub url
-   * @deprecated
+   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
    */
   @Deprecated
   public static URL getMobileHubUrl(String urlString) {
@@ -203,7 +203,7 @@ public class AppiumConfig {
    * Mobile device.
    *
    * @return the appium driver
-   * @deprecated
+   * @deprecated use {@link AppiumDriverFactory} instead.
    */
   @Deprecated
   public static AppiumDriver mobileDevice() {
@@ -215,7 +215,7 @@ public class AppiumConfig {
    *
    * @param mobileDeviceOs the mobile device OS
    * @return the appium driver
-   * @deprecated
+   * @deprecated use {@link AppiumDriverFactory} instead.
    */
   @Deprecated
   public static AppiumDriver mobileDevice(String mobileDeviceOs) {
@@ -245,7 +245,7 @@ public class AppiumConfig {
    * Gets the mobile capabilities.
    *
    * @return the mobile capabilities
-   * @deprecated
+   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
    */
   @Deprecated
   private static DesiredCapabilities getMobileCapabilities() {
@@ -292,7 +292,7 @@ public class AppiumConfig {
    * Sets the timeouts.
    *
    * @param driver the new timeouts
-   * @deprecated
+   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
    */
   @Deprecated
   public static void setTimeouts(AppiumDriver driver) {
