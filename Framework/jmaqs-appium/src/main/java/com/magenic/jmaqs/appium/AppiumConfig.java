@@ -129,7 +129,7 @@ public class AppiumConfig {
    * Gets the mobile hub url string.
    *
    * @return the mobile hub url string
-   * @deprecated use {@link AppiumConfig.getMobileHubUrl()} instead.
+   * @deprecated use AppiumConfig.getMobileHubUrl() instead.
    */
   @Deprecated
   public static String getMobileHubUrlString() {
@@ -203,7 +203,7 @@ public class AppiumConfig {
    * Mobile device.
    *
    * @return the appium driver
-   * @deprecated use {@link AppiumDriverFactory} instead.
+   * @deprecated use {@link com.magenic.jmaqs.appium.AppiumDriverFactory} instead.
    */
   @Deprecated
   public static AppiumDriver mobileDevice() {
@@ -215,7 +215,7 @@ public class AppiumConfig {
    *
    * @param mobileDeviceOs the mobile device OS
    * @return the appium driver
-   * @deprecated use {@link AppiumDriverFactory} instead.
+   * @deprecated use {@link com.magenic.jmaqs.appium.AppiumDriverFactory} instead.
    */
   @Deprecated
   public static AppiumDriver mobileDevice(String mobileDeviceOs) {
