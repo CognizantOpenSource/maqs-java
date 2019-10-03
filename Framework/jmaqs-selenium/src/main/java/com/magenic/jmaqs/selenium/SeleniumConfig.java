@@ -147,23 +147,6 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the initialize Selenium timeout.
-   *
-   * @return The initialize timeout
-   * @deprecated Deprecated because specifying command timeout does not exist when creating web drivers in java.
-   */
-  @Deprecated
-  public static int getCommandTimeout() {
-    String value = Config.getValueForSection(SELENIUM_SECTION, "SeleniumCommandTimeout", "60000");
-    try {
-      Integer.parseInt(value);
-      return Integer.parseInt(value);
-    } catch (NumberFormatException e) {
-      throw new NumberFormatException("SeleniumCommandTimeout should be a number, but the current value is: " + value);
-    }
-  }
-
-  /**
    * Get the hint path for the web driver.
    *
    * @return The hint path for the web driver
@@ -276,7 +259,7 @@ public final class SeleniumConfig {
   /**
    * Get wait from config.
    *
-   * @return The wait time
+   * @return The wait time (in milliseconds)
    */
   public static int getWaitTime() {
     return Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0"));
@@ -285,7 +268,7 @@ public final class SeleniumConfig {
   /**
    * Get the timeout from config.
    *
-   * @return The timeout time
+   * @return The timeout time (in milliseconds)
    */
   public static int getTimeoutTime() {
     return Integer.parseInt(Config.getGeneralValue("BrowserTimeout", "0"));

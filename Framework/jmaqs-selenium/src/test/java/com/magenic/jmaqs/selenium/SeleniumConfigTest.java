@@ -72,17 +72,6 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Command timeout.
-   */
-  @Test(groups = TestCategories.Selenium)
-  public void getCommandTimeout() {
-
-    int timeout = SeleniumConfig.getCommandTimeout();
-
-    Assert.assertEquals(timeout, 61000);
-  }
-
-  /**
    * Driver hint path.
    */
   @Test(groups = TestCategories.Selenium)
