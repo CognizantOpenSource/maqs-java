@@ -39,7 +39,7 @@
         <Browser>Firefox</Browser>
         <Browser>Edge</Browser>
         <Browser>HEADLESSCHROME</Browser>-->
-        <Browser>Chrome</Browser>
+        <Browser>HEADLESSCHROME</Browser>
 
         <!--Remote browser settings-->
         <!--<Browser>REMOTE</Browser>-->
