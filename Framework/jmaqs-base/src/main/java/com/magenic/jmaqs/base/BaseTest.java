@@ -27,7 +27,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 /**
@@ -220,7 +219,7 @@ public abstract class BaseTest {
    * @param testContext The initial executing Test Context object
    * @throws Exception Throws exception if get logger fails
    */
-  @BeforeClass
+  @BeforeMethod
   public void setup(Method method, ITestContext testContext) throws Exception {
     this.testContextInstance = testContext;
 
