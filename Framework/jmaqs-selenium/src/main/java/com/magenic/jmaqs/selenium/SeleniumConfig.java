@@ -162,7 +162,7 @@ public final class SeleniumConfig {
    * @return The browser type being used on grid
    */
   public static String getRemoteBrowserName() {
-    return Config.getValueForSection(SELENIUM_CAPS_SECTION, "browserName", "Chrome");
+    return Config.getValueForSection(SELENIUM_SECTION, "RemoteBrowserName", "Chrome");
   }
 
   /**
@@ -171,7 +171,7 @@ public final class SeleniumConfig {
    * @return The browser version to run against on grid
    */
   public static String getRemoteBrowserVersion() {
-    return Config.getValueForSection(SELENIUM_CAPS_SECTION, "version");
+    return Config.getValueForSection(SELENIUM_SECTION, "RemoteVersion");
   }
 
   /**
@@ -180,7 +180,7 @@ public final class SeleniumConfig {
    * @return The platform (or OS) to run remote tests against
    */
   public static String getRemotePlatform() {
-    return Config.getValueForSection(SELENIUM_CAPS_SECTION, "platform");
+    return Config.getValueForSection(SELENIUM_SECTION, "RemotePlatform");
   }
 
   /**
