@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.selenium;
 
 import static org.testng.Assert.assertNotNull;
