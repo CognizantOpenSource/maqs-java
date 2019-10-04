@@ -1,6 +1,8 @@
 package com.magenic.jmaqs.selenium.factories;
 
 import java.util.concurrent.ConcurrentHashMap;
+
+import com.magenic.jmaqs.selenium.UIWait;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

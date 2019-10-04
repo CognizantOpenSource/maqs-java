@@ -5,7 +5,6 @@ import static org.testng.Assert.assertNotNull;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.magenic.jmaqs.selenium.factories.UIFind;
 import com.magenic.jmaqs.selenium.factories.UIFindFactory;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;

@@ -17,7 +17,7 @@ import org.openqa.selenium.WebElement;
  * Web element find helper class.
  * 
  * @deprecated {@link WebElementFind} is no longer supported. Use {@link com.magenic.jmaqs.selenium.factories.UIFindFactory UIFindFactory}
- *             to create {@link com.magenic.jmaqs.selenium.factories.UIFind UIFind} objects instead.
+ *             to create {@link UIFind UIFind} objects instead.
  */
 @Deprecated
 public class WebElementFind {

@@ -1,5 +1,6 @@
 package com.magenic.jmaqs.selenium.factories;
 
+import com.magenic.jmaqs.selenium.UIFind;
 import org.openqa.selenium.SearchContext;
 
 /**
