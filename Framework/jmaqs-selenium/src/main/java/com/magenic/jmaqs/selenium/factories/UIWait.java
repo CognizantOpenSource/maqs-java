@@ -355,7 +355,7 @@ public class UIWait {
 		boolean isAbsent = this.waitUntilAbsentElement(by, timeOutInMillis, sleepInMillis);
 
 		if (!isAbsent) {
-			throw new TimeoutException(MessageFormat.format("Element with selector {0} is not absent", by.toString()));
+			throw new TimeoutException(MessageFormat.format("Element with selector {0} is not absent", by));
 		}
 	}
 
@@ -1050,19 +1050,7 @@ public class UIWait {
 		}
 	}
 
-	/**
-	 * Fluent wait for an element to be removed.
-	 *
-	 * @param element WebElement to be removed
-	 * @return true if removed
-	 */
-	private boolean fluentWaitStale(WebElement element) {
-		try {
-			return this.getNewWaitDriver().until(ExpectedConditions.stalenessOf(element));
-		} catch (Exception e) {
-			return false;
-		}
-	}
+
 
 	/**
 	 * Check the text value of an attribute.

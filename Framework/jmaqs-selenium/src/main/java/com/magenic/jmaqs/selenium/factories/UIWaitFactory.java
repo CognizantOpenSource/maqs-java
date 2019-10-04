@@ -23,7 +23,7 @@ public class UIWaitFactory {
 	 * Gets the {@link UIWait} object from the wait collection. If none exists,
 	 * one is created and cached using the driver provided.
 	 * 
-	 * @param driver The web driver to associate with the wait
+	 * @param searchContext The web driver to associate with the wait
 	 * @return the Wait object
 	 */
 	public static UIWait getWaitDriver(SearchContext searchContext) {
@@ -38,6 +38,30 @@ public class UIWaitFactory {
 			setWaitDriver(baseDriver, waitDriver);
 		}
 		
+		return waitDriver;
+	}
+
+	/**
+	 * Gets the {@link UIWait} object from the wait collection. If none exists,
+	 * one is created and cached using the driver provided.
+	 *
+	 * @param searchContext The web driver to associate with the wait
+	 * @param timeOutInSeconds The timeout for the UIWait
+	 * @param fluentRetryTime The fluent retry time for the UIWait
+	 * @return the Wait object
+	 */
+	public static UIWait getWaitDriver(SearchContext searchContext, final int timeOutInSeconds, final int fluentRetryTime) {
+		WebDriver baseDriver = getLowLevelDriver(searchContext);
+
+		UIWait waitDriver;
+		if (waitCollection.containsKey(baseDriver)) {
+			waitDriver = waitCollection.get(baseDriver);
+		}
+		else {
+			waitDriver = new UIWait(baseDriver, timeOutInSeconds, fluentRetryTime);
+			setWaitDriver(baseDriver, waitDriver);
+		}
+
 		return waitDriver;
 	}
 	
