@@ -18,35 +18,35 @@
     </properties>
     
     <build>   
-        	<plugins>
-        		<plugin>
-                	<groupId>org.apache.maven.plugins</groupId>
-                	<artifactId>maven-compiler-plugin</artifactId>
-                	<version>${compiler.plugin.version}</version>
-                	<configuration>
-                    	<compilerVersion>1.8</compilerVersion>
-                    	<source>1.8</source>
-                    	<target>1.8</target>
-                    	<encoding>UTF-8</encoding>
-                	</configuration>
-            	</plugin>
-            	<plugin>
-                	<groupId>com.github.webdriverextensions</groupId>
-                	<artifactId>webdriverextensions-maven-plugin</artifactId>
-                	<version>${webdriverextensions.version}</version>
-                	<configuration>
-                    	<installationDirectory>${basedir}/src/test/resources</installationDirectory>
-                    	<keepDownloadedWebdrivers>true</keepDownloadedWebdrivers>
-                	</configuration>
-                	<executions>
-                    	<execution>
-                        	<goals>
-                            	<goal>install-drivers</goal>
-                        	</goals>
-                    	</execution>
-                	</executions>
-            	</plugin>
-        	</plugins>
+        <plugins>
+        	<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler.plugin.version}</version>
+                <configuration>
+                	<compilerVersion>1.8</compilerVersion>
+                	<source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.webdriverextensions</groupId>
+                <artifactId>webdriverextensions-maven-plugin</artifactId>
+                <version>${webdriverextensions.version}</version>
+                <configuration>
+                    <installationDirectory>${basedir}/src/test/resources</installationDirectory>
+                    <keepDownloadedWebdrivers>true</keepDownloadedWebdrivers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-drivers</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
     <dependencies>
