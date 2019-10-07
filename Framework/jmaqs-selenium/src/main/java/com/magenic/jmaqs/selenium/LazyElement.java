@@ -178,7 +178,7 @@ public class LazyElement {
 	 * @param keys the secret keys
 	 * @throws Exception If error occurs while sending keys
 	 */
-	public void sendSecretKeys(String keys) throws Exception {
+	public void sendSecretKeys(String keys) throws ExecutionFailedException {
 		WebElement element = this.getElement(this::getTheVisibleElement);
 
 		try {
@@ -186,7 +186,7 @@ public class LazyElement {
 			this.executeEvent(() -> element.sendKeys(keys), "SendKeys");
 			this.getTestObject().getLog().continueLogging();
 		}
-		catch (Exception e) {
+		catch (ExecutionFailedException e) {
 			this.getTestObject().getLog().continueLogging();
 			this.getTestObject().getLog().logMessage(
 					MessageType.ERROR, 
@@ -201,7 +201,7 @@ public class LazyElement {
 	 */
 	public void clear() throws TimeoutException, InterruptedException, ExecutionFailedException {
 		WebElement element = GenericWait.waitFor(this::getTheVisibleElement);
-		this.executeEvent(element::clear, "Clear");;
+		this.executeEvent(element::clear, "Clear");
 	}
 
 	/**
