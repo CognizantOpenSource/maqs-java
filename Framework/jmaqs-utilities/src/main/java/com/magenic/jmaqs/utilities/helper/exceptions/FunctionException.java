@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities.helper;
+package com.magenic.jmaqs.utilities.helper.exceptions;
 
 /**
  * Custom FunctionException, as you can't throw a generic exception.
