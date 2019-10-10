@@ -88,8 +88,7 @@ public class AppiumDriverFactory {
     capabilities.setCapability(DEVICE_NAME, AppiumConfig.getDeviceName());
     capabilities.setCapability(PLATFORM_NAME, AppiumConfig.getPlatformName());
     capabilities.setCapability(PLATFORM_VERSION, AppiumConfig.getPlatformVersion());
-    capabilities = mergeCapabilities(capabilities, AppiumConfig.getCapabilitiesAsObjects());
-    return capabilities;
+    return mergeCapabilities(capabilities, AppiumConfig.getCapabilitiesAsObjects());
   }
 
   /**
@@ -156,16 +155,15 @@ public class AppiumDriverFactory {
   }
 
   /**
-   * @param capabilities original capabilities object
+   * @param capabilities          original capabilities object
    * @param capabilitiesAsObjects Map of String, Object
    * @return merged capabilities object
    */
   private static DesiredCapabilities mergeCapabilities(DesiredCapabilities capabilities,
       Map<String, Object> capabilitiesAsObjects) {
 
-    Consumer<String> mergeConsumer = (String s) -> {
-      capabilities.setCapability(s, capabilitiesAsObjects.get(s));
-    };
+    Consumer<String> mergeConsumer = (String s) -> capabilities
+        .setCapability(s, capabilitiesAsObjects.get(s));
     capabilitiesAsObjects.keySet().iterator().forEachRemaining(mergeConsumer);
     return capabilities;
   }
