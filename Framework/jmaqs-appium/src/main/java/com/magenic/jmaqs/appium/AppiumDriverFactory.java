@@ -17,6 +17,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriverException;
@@ -161,7 +162,12 @@ public class AppiumDriverFactory {
    */
   private static DesiredCapabilities mergeCapabilities(DesiredCapabilities capabilities,
       Map<String, Object> capabilitiesAsObjects) {
-    return capabilities.merge((Capabilities) capabilitiesAsObjects);
+
+    Consumer<String> mergeConsumer = (String s) -> {
+      capabilities.setCapability(s, capabilitiesAsObjects.get(s));
+    };
+    capabilitiesAsObjects.keySet().iterator().forEachRemaining(mergeConsumer);
+    return capabilities;
   }
 
   /**
