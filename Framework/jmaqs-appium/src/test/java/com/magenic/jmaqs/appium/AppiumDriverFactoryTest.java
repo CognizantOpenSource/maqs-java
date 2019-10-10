@@ -4,6 +4,9 @@
 
 package com.magenic.jmaqs.appium;
 
+import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AppiumDriverFactoryTest {
@@ -12,7 +15,8 @@ public class AppiumDriverFactoryTest {
 
   @Test
   public void testGetDefaultMobileDriver() {
-    throw new UnsupportedOperationException(MESSAGE);
+    AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+    Assert.assertNotNull(defaultMobileDriver, "Checking if default driver is null");
   }
 
   @Test
