@@ -4,6 +4,12 @@
 
 package com.magenic.jmaqs.appium;
 
+import io.appium.java_client.AppiumDriver;
+import java.util.Map;
+import java.util.function.Consumer;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AppiumDriverFactoryTest {
@@ -12,7 +18,8 @@ public class AppiumDriverFactoryTest {
 
   @Test
   public void testGetDefaultMobileDriver() {
-    throw new UnsupportedOperationException(MESSAGE);
+    AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+    Assert.assertNotNull(defaultMobileDriver, "Checking if default driver is null");
   }
 
   @Test
@@ -23,12 +30,26 @@ public class AppiumDriverFactoryTest {
 
   @Test
   public void testGetDefaultMobileOptions() {
-    throw new UnsupportedOperationException(MESSAGE);
+    final DesiredCapabilities defaultMobileOptions = AppiumDriverFactory.getDefaultMobileOptions();
+    Consumer<String> assertionConsumer = (String s) -> {
+      Assert.assertNotNull(defaultMobileOptions.is(s),
+          String.format("Checking if capability key %s is not null", s));
+    };
+    defaultMobileOptions.getCapabilityNames().forEach(assertionConsumer);
   }
 
   @Test
   public void testTestGetDefaultMobileOptions() {
-    throw new UnsupportedOperationException(MESSAGE);
+    final Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
+    DesiredCapabilities capabilities = AppiumDriverFactory
+        .getDefaultMobileOptions(capabilitiesAsObjects);
+    Consumer<String> assertionConsumer = (String s) -> {
+      Assert.assertNotNull(capabilities.is(s),
+          String.format("Checking if capability key %s is not null", s));
+      Assert.assertEquals(capabilities.getCapability(s), capabilitiesAsObjects.get(s),
+          String.format("Checking if capability value for key %s matches", s));
+    };
+    capabilities.getCapabilityNames().forEach(assertionConsumer);
   }
 
   @Test

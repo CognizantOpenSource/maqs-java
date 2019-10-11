@@ -17,6 +17,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriverException;
@@ -87,8 +88,7 @@ public class AppiumDriverFactory {
     capabilities.setCapability(DEVICE_NAME, AppiumConfig.getDeviceName());
     capabilities.setCapability(PLATFORM_NAME, AppiumConfig.getPlatformName());
     capabilities.setCapability(PLATFORM_VERSION, AppiumConfig.getPlatformVersion());
-    capabilities = mergeCapabilities(capabilities, AppiumConfig.getCapabilitiesAsObjects());
-    return capabilities;
+    return mergeCapabilities(capabilities, AppiumConfig.getCapabilitiesAsObjects());
   }
 
   /**
@@ -155,13 +155,17 @@ public class AppiumDriverFactory {
   }
 
   /**
-   * @param capabilities original capabilities object
+   * @param capabilities          original capabilities object
    * @param capabilitiesAsObjects Map of String, Object
    * @return merged capabilities object
    */
   private static DesiredCapabilities mergeCapabilities(DesiredCapabilities capabilities,
       Map<String, Object> capabilitiesAsObjects) {
-    return capabilities.merge((Capabilities) capabilitiesAsObjects);
+
+    Consumer<String> mergeConsumer = (String s) -> capabilities
+        .setCapability(s, capabilitiesAsObjects.get(s));
+    capabilitiesAsObjects.keySet().iterator().forEachRemaining(mergeConsumer);
+    return capabilities;
   }
 
   /**
