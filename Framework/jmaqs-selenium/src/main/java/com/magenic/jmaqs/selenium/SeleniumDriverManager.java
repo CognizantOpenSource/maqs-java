@@ -13,11 +13,13 @@ import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import jdk.internal.jline.internal.Log;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.*;
 import org.openqa.selenium.support.events.*;
 
 import java.sql.Driver;
+import java.util.function.Supplier;
 
 public class SeleniumDriverManager extends DriverManager {
   /// <summary>
@@ -25,10 +27,8 @@ public class SeleniumDriverManager extends DriverManager {
   /// </summary>
   /// <param name="getDriver">Function for getting an Selenium web driver</param>
   /// <param name="testObject">The associated test object</param>
-  // public SeleniumDriverManager(Func<WebDriver> getDriver, BaseTestObject testObject) : base(getDriver, testObject)
-  public SeleniumDriverManager(WebDriver webDriver, BaseTestObject testObject) {
-    this.webDriver = webDriver;
-    this.testObject = testObject;
+  public SeleniumDriverManager(Supplier<Object> getDriver, BaseTestObject testObject) {
+    super(getDriver, testObject);
   }
 
   public void close() {
@@ -81,13 +81,15 @@ public class SeleniumDriverManager extends DriverManager {
   /// </summary>
   /// <param name="message">The message text</param>
   /// <param name="args">String format arguments</param>
-  protected void LogVerbose(String message, Object[] args)
+  /*protected void LogVerbose(String message, Object[] args)
   {
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args));
 
-    var methodInfo = MethodBase.GetCurrentMethod();
-    var fullName = methodInfo.DeclaringType.FullName + "." + methodInfo.Name;
+    //var methodInfo = MethodBase.GetCurrentMethod();
+    String methodInfo = new Throwable().getStackTrace()[0].getMethodName();
+    //var fullName = methodInfo.DeclaringType.FullName + "." + methodInfo.Name;
+
 
     for (String stackLevel ; Environment.StackTrace.Split(new String[] { Environment.NewLine }, StringSplitOptions.None))
     {
@@ -99,7 +101,7 @@ public class SeleniumDriverManager extends DriverManager {
     }
 
     Logger.logMessage(MessageType.VERBOSE, messages.toString());
-  }
+  } */
 
   /// <summary>
   /// Have the driver cleanup after itself
@@ -118,7 +120,7 @@ public class SeleniumDriverManager extends DriverManager {
     try
     {
       WebDriver driver = this.GetWebDriver();
-      driver?.KillDriver();
+      driver.close();
     }
     catch (Exception e)
     {
@@ -149,7 +151,7 @@ public class SeleniumDriverManager extends DriverManager {
       }
       else
       {
-        browserType = driver.GetType().ToString();
+        browserType = driver.getClass().toString();
       }
 
       //if (SeleniumConfig.getBrowserName().equals("Remote", StringComparison.CurrentCultureIgnoreCase))
