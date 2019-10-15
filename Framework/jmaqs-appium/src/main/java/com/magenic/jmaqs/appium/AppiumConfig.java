@@ -95,6 +95,21 @@ public class AppiumConfig {
   }
 
   /**
+   * Gets save page source on fail.
+   *
+   * @return the save page source on fail
+   */
+  public static boolean getSavePageSourceOnFail()
+  {
+    return Config.getValueForSection(APPIUM_SECTION, "SavePageSourceOnFail").equalsIgnoreCase("Yes");
+  }
+
+  public static boolean getSoftAssertScreenShot()
+  {
+    return Config.getValueForSection(APPIUM_SECTION, "SoftAssertScreenShot").equalsIgnoreCase("Yes");
+  }
+
+  /**
    * Gets the mobile hub url string.
    *
    * @return the mobile hub url string
@@ -115,8 +130,7 @@ public class AppiumConfig {
   /**
    * Gets the mobile hub url.
    *
-   * @param urlString
-   *          the url string
+   * @param urlString the url string
    * @return the mobile hub url
    */
   public static URL getMobileHubUrl(String urlString) {
@@ -142,8 +156,7 @@ public class AppiumConfig {
   /**
    * Mobile device.
    *
-   * @param mobileDeviceOs
-   *          the mobile device OS
+   * @param mobileDeviceOs the mobile device OS
    * @return the appium driver
    */
   public static AppiumDriver mobileDevice(String mobileDeviceOs) {
@@ -217,8 +230,7 @@ public class AppiumConfig {
   /**
    * Sets the timeouts.
    *
-   * @param driver
-   *          the new timeouts
+   * @param driver the new timeouts
    */
   public static void setTimeouts(AppiumDriver driver) {
     int timeoutTime = Integer.parseInt(Config.getValue("Timeout", "0"));

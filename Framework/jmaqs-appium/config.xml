@@ -28,8 +28,8 @@
         <LogType>HTML</LogType>-->
         <LogType>TXT</LogType>
 
-        <!-- Log file path - Defaults to build location if no value is defined
-        <FileLoggerPath>C:\\Frameworks\\</FileLoggerPath> -->
+        <!-- Log file path - Defaults to build location if no value is defined -->
+        <FileLoggerPath>./target/logs</FileLoggerPath>
     </MagenicMaqs>
     <AppiumMaqs>
         <!-- Device settings -->
@@ -63,9 +63,9 @@
         <ImageFormat>Png</ImageFormat>
 
         <!-- Do you want to save page source when a Soft Assert fails
-        <SavePagesourceOnFail>YES</SavePagesourceOnFail>
-        <SavePagesourceOnFail>NO</SavePagesourceOnFail> -->
-        <SavePagesourceOnFail>NO</SavePagesourceOnFail>
+        <SavePageSourceOnFail>YES</SavePageSourceOnFail>
+        <SavePageSourceOnFail>NO</SavePageSourceOnFail>-->
+        <SavePageSourceOnFail>NO</SavePageSourceOnFail>
 
         <!-- settings in JMAQS, not in MAQS> -->
         <BundleID>com.magenic.maqs.appium.tester</BundleID>

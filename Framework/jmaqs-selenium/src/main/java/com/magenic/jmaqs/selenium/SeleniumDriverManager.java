@@ -13,7 +13,6 @@ import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import jdk.internal.jline.internal.Log;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.*;
 import org.openqa.selenium.support.events.*;
@@ -22,17 +21,16 @@ import java.sql.Driver;
 import java.util.function.Supplier;
 
 public class SeleniumDriverManager extends DriverManager {
-  /// <summary>
-  /// Initializes a new instance of the <see cref="SeleniumDriverManager"/> class
-  /// </summary>
-  /// <param name="getDriver">Function for getting an Selenium web driver</param>
-  /// <param name="testObject">The associated test object</param>
+  /**
+   * Initializes a new instance of the <see cref="SeleniumDriverManager"/> class
+   * @param getDriver Function for getting an Selenium web driver
+   * @param testObject The associated test object
+   */
   public SeleniumDriverManager(Supplier<Object> getDriver, BaseTestObject testObject) {
     super(getDriver, testObject);
   }
 
   public void close() {
-
   }
 
   private WebDriver webDriver;
@@ -42,12 +40,11 @@ public class SeleniumDriverManager extends DriverManager {
    */
   private BaseTestObject testObject;
 
-  /// <summary>
-  /// Get the web driver
-  /// </summary>
-  /// <returns>The web driver</returns>
-  public WebDriver GetWebDriver()
-  {
+  /**
+   * Get the web driver
+   * @return The web driver
+   */
+  public WebDriver getWebDriver() {
     WebDriver tempDriver;
 
     if (!this.isDriverInitialized() &&
@@ -76,6 +73,12 @@ public class SeleniumDriverManager extends DriverManager {
     return this.GetWebDriver();
   }
 
+  /**
+   * Log a verbose message and include the automation specific call stack data
+   * @param message The message text
+   * @param args String format arguments
+   */
+  protected void logVerbose(String message, Object[] args) {
   /// <summary>
   /// Log a verbose message and include the automation specific call stack data
   /// </summary>
@@ -86,10 +89,8 @@ public class SeleniumDriverManager extends DriverManager {
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args));
 
-    //var methodInfo = MethodBase.GetCurrentMethod();
-    String methodInfo = new Throwable().getStackTrace()[0].getMethodName();
-    //var fullName = methodInfo.DeclaringType.FullName + "." + methodInfo.Name;
-
+    Object methodInfo = Object[].class.getEnclosingMethod();
+    String fullName = methodInfo.getClass().getTypeName() + "." + methodInfo.getClass().getName();
 
     for (String stackLevel ; Environment.StackTrace.Split(new String[] { Environment.NewLine }, StringSplitOptions.None))
     {
@@ -101,14 +102,12 @@ public class SeleniumDriverManager extends DriverManager {
     }
 
     Logger.logMessage(MessageType.VERBOSE, messages.toString());
-  } */
-
-  /// <summary>
-  /// Have the driver cleanup after itself
-  /// </summary>
-  // @Override
-  protected void DriverDispose()
-  {
+  }
+*/
+  /**
+   * Have the driver cleanup after itself
+   */
+  protected void driverDispose() {
     Logger.logMessage(MessageType.VERBOSE, "Start dispose driver");
 
     // If we never created the driver we don't have any cleanup to do
@@ -117,13 +116,10 @@ public class SeleniumDriverManager extends DriverManager {
       return;
     }
 
-    try
-    {
-      WebDriver driver = this.GetWebDriver();
-      driver.close();
-    }
-    catch (Exception e)
-    {
+    try {
+      WebDriver driver = this.getWebDriver();
+      driver.quit();
+    } catch (Exception e) {
       Logger.logMessage(MessageType.ERROR, StringProcessor.safeFormatter("Failed to close web driver because: {0}", e.getMessage()));
     }
 
@@ -148,6 +144,8 @@ public class SeleniumDriverManager extends DriverManager {
       if (asRemoteDrive != null)
       {
         browserType = asRemoteDrive.getCapabilities().toString();
+      } else {
+        browserType = ((RemoteWebDriver) driver).getCapabilities().getBrowserName();
       }
       else
       {
