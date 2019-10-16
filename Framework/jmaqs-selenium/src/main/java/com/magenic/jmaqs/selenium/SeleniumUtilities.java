@@ -106,9 +106,7 @@ public class SeleniumUtilities {
    * @return The web driver
    */
   public static WebDriver webElementToWebDriver(WebElement webElement) {
-
     WebDriver driver;
-
     driver = ((WrapsDriver) webElement).getWrappedDriver();
 
     // If this an even firing wrapper get the base wrapper
