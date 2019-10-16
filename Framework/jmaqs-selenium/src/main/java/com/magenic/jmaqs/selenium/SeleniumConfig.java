@@ -7,6 +7,8 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
+
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import org.openqa.selenium.WebDriver;
@@ -197,9 +199,11 @@ public final class SeleniumConfig {
    *
    * @param driver The Web Driver
    * @return A WebDriverWait
+   * @deprecated use UIWait instead
    */
+  @Deprecated
   public static WebDriverWait getWaitDriver(WebDriver driver) {
-    return new WebDriverWait(driver, getTimeoutTime(), getWaitTime());
+    return null;
   }
 
   /**
@@ -261,8 +265,8 @@ public final class SeleniumConfig {
    *
    * @return The wait time (in milliseconds)
    */
-  public static int getWaitTime() {
-    return Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0"));
+  public static Duration getWaitTime() {
+    return Duration.ofMillis(Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0")));
   }
 
   /**
@@ -270,8 +274,8 @@ public final class SeleniumConfig {
    *
    * @return The timeout time (in milliseconds)
    */
-  public static int getTimeoutTime() {
-    return Integer.parseInt(Config.getGeneralValue("BrowserTimeout", "0"));
+  public static Duration getTimeoutTime() {
+    return Duration.ofMillis(Integer.parseInt(Config.getGeneralValue("BrowserTimeout", "0")));
   }
 
   /**

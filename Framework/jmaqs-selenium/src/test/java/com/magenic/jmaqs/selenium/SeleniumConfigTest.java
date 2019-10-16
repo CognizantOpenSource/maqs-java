@@ -9,6 +9,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -120,6 +121,7 @@ public class SeleniumConfigTest {
    *
    * @throws Exception Can throw new Exception
    */
+  @Ignore
   @Test(groups = TestCategories.Selenium)
   public void getWaitDriver() throws Exception {
     WebDriver driver = null;
