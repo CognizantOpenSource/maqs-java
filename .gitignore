@@ -154,3 +154,4 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 target/
 Logs
+/.gtm/
