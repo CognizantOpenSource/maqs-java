@@ -39,13 +39,24 @@ public class UIFind {
 	 */
 	public WebElement findElement(By by, boolean throwException) {
 		// returns the 1st element in the collection if it is not null or empty
-		List<WebElement> elementList = elemList(by, throwException);
+		List<WebElement> elementList = getElementList(by, throwException);
 		
 		if (elementList.isEmpty()) {
 			return null;
 		}
 
 		return elementList.get(0);
+	}
+
+	/**
+	 * Finds all elements using the by provided
+	 *
+	 * @param by Css Selector
+	 * @param throwException optional assert parameter - throws an assert exception if no element is found
+	 * @return The Web Element
+	 */
+	public List<WebElement> findElements(By by, boolean throwException) {
+		return this.getElementList(by, throwException);
 	}
 
 	/**
@@ -68,7 +79,7 @@ public class UIFind {
 	 */
 	public WebElement findElementWithText(By by, String text,
 			boolean throwException) {
-		List<WebElement> elementList = elemList(by, throwException);
+		List<WebElement> elementList = getElementList(by, throwException);
 
 		if (elementList.isEmpty()) {
 			return null;
@@ -92,7 +103,6 @@ public class UIFind {
 	 */
 	public WebElement findElementWithText(By by, String text) {
 		return findElementWithText(by, text, true);
-
 	}
 
 	/**
@@ -106,7 +116,7 @@ public class UIFind {
 	public int findIndexOfElementWithText(By by, String text,
 			boolean throwException) {
 		// return -1 if index not found.. assert a fail if true
-		List<WebElement> elementList = elemList(by, throwException);
+		List<WebElement> elementList = getElementList(by, throwException);
 		int index = -1;
 
 		if (elementList.isEmpty()) {
@@ -187,7 +197,7 @@ public class UIFind {
 	 * @param throwException optional assert parameter - throws an exception if no element is found
 	 * @return The Web Element Collection
 	 */
-	private  List<WebElement> elemList(By by, boolean throwException) {
+	private  List<WebElement> getElementList(By by, boolean throwException) {
 		List<WebElement> elems = this.searchItem.findElements(by);
 
 		if (elems.isEmpty() || !throwException) {
