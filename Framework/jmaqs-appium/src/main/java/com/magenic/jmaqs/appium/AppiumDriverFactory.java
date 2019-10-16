@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -61,18 +60,19 @@ public class AppiumDriverFactory {
         appiumDriver = getAndroidDriver(mobileHubUrl, capabilities, duration);
         break;
       case IOS:
-        appiumDriver = getIOSDriver(mobileHubUrl, capabilities, duration);
+        appiumDriver = getIosDriver(mobileHubUrl, capabilities, duration);
         break;
       case WINDOWS:
         appiumDriver = getWindowsDriver(mobileHubUrl, capabilities, duration);
         break;
       default:
         throw new IllegalStateException(
-            StringProcessor.safeFormatter("Mobile OS type '%s' is not supported" + deviceType));
+            StringProcessor.safeFormatter("Mobile OS type '%s' is not supported " + deviceType));
     }
 
     if (deviceType != PlatformType.WINDOWS) {
-      AppiumConfig.setTimeouts(appiumDriver);
+      appiumDriver.manage().timeouts()
+          .implicitlyWait(AppiumConfig.getMobileTimeout().toMillis(), TimeUnit.MILLISECONDS);
     }
 
     return appiumDriver;
@@ -127,7 +127,7 @@ public class AppiumDriverFactory {
    * @param timeout   the timeout
    * @return the ios driver
    */
-  public static AppiumDriver<WebElement> getIOSDriver(URL mobileHub, DesiredCapabilities options,
+  public static AppiumDriver<WebElement> getIosDriver(URL mobileHub, DesiredCapabilities options,
       Duration timeout) {
     return createDriver(() -> {
       AppiumDriver<WebElement> driver = new IOSDriver<>(mobileHub, options);
@@ -155,11 +155,13 @@ public class AppiumDriverFactory {
   }
 
   /**
+   * Merge capabilities desired capabilities.
+   *
    * @param capabilities          original capabilities object
    * @param capabilitiesAsObjects Map of String, Object
    * @return merged capabilities object
    */
-  private static DesiredCapabilities mergeCapabilities(DesiredCapabilities capabilities,
+  public static DesiredCapabilities mergeCapabilities(DesiredCapabilities capabilities,
       Map<String, Object> capabilitiesAsObjects) {
 
     Consumer<String> mergeConsumer = (String s) -> capabilities
