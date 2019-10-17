@@ -5,6 +5,8 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+
+import java.time.Duration;
 import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -196,6 +198,26 @@ public class SeleniumConfigTest {
     boolean value = SeleniumConfig.getSoftAssertScreenshot();
 
     Assert.assertTrue(value);
+  }
+
+  /**
+   * Get wait time.
+   */
+  @Test(groups = TestCategories.Selenium)
+  public void getWaitTime() {
+    Duration value = SeleniumConfig.getWaitTime();
+
+    Assert.assertNotNull(value);
+  }
+
+  /**
+   * Get timeout time.
+   */
+  @Test(groups = TestCategories.Selenium)
+  public void getTimeoutTime() {
+    Duration value = SeleniumConfig.getTimeoutTime();
+
+    Assert.assertNotNull(value);
   }
 
   /**
