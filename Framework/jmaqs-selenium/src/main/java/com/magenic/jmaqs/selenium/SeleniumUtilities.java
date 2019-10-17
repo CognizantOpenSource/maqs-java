@@ -89,7 +89,7 @@ public class SeleniumUtilities {
     checkDirectory(directory);
 
     // Calculate the file name
-    String filePath = MessageFormat.format("{0}.{1}",fileNameWithoutExtension, SeleniumConfig.getScreenShotExtension());
+    String filePath = MessageFormat.format("{0}.{1}",fileNameWithoutExtension, SeleniumConfig.getImageFormat());
     String fullPath = Paths.get(directory, filePath).toString();
 
     // Save the screenshot
