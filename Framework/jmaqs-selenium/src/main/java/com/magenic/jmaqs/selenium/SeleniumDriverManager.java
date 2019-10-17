@@ -30,6 +30,7 @@ public class SeleniumDriverManager extends DriverManager {
     super(getDriver, testObject);
   }
 
+  @Override
   public void close() {
     getLogger().logMessage(MessageType.VERBOSE, "Start dispose driver");
 
@@ -63,7 +64,7 @@ public class SeleniumDriverManager extends DriverManager {
 
     if (!this.isDriverInitialized()
         && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-      WebDriver tempDriver = (WebDriver) getDriver;
+      WebDriver tempDriver = (WebDriver) this.getBase();
       tempDriver = new EventFiringWebDriver(tempDriver);
       this.baseDriver = tempDriver;
 
@@ -80,13 +81,13 @@ public class SeleniumDriverManager extends DriverManager {
    * @param message The message text
    * @param args    String format arguments
    */
-  protected void logVerbose(String message, Object[] args) {
+  protected void logVerbose(String message, Object... args) {
 
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args));
 
     Object methodInfo = Object[].class.getEnclosingMethod();
-    String fullName = methodInfo.getClass().getTypeName() + "." + methodInfo.getClass().getName();
+    //String fullName = methodInfo.getClass().getTypeName() + "." + methodInfo.getClass().getName();
 
     Thread thread = Thread.currentThread();
     for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
@@ -96,6 +97,7 @@ public class SeleniumDriverManager extends DriverManager {
       messages.append(stackTraceElement.toString());
     }
     getLogger().logMessage(MessageType.VERBOSE, messages.toString());
+    System.out.println(messages);
   }
 
   /**
@@ -105,14 +107,14 @@ public class SeleniumDriverManager extends DriverManager {
    */
   private void loggingStartup(WebDriver webDriver) {
     try {
-      WebDriver driver = (WebDriver) getBaseDriver();
+      WebDriver driver = ((EventFiringWebDriver) webDriver).getWrappedDriver();
       String browserType;
 
       // Get info on what type of browser we are using
-      RemoteWebDriver asRemoteDrive = (RemoteWebDriver) driver;
+      RemoteWebDriver remoteWebDriver = (RemoteWebDriver) driver;
 
-      if (asRemoteDrive != null) {
-        browserType = asRemoteDrive.getCapabilities().toString();
+      if (remoteWebDriver != null) {
+        browserType = remoteWebDriver.getCapabilities().toString();
       } else {
         browserType = driver.getClass().toString();
       }
@@ -129,7 +131,7 @@ public class SeleniumDriverManager extends DriverManager {
       getLogger().logMessage(MessageType.ERROR,
           StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
       System.out.println(
-          StringProcessor.safeFormatter("Failed to start driver because: {0}", e.getMessage()));
+          StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
     }
   }
 
