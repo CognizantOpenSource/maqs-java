@@ -8,6 +8,7 @@ import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.selenium.SeleniumWait;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Class AppiumTestObject.
@@ -30,11 +31,18 @@ public class AppiumTestObject extends BaseTestObject {
    * @param logger
    *          the logger
    */
+  @Deprecated
   public AppiumTestObject(AppiumDriver appiumDriver, AppiumWait wait, String fullyQualifiedTestName,
       Logger logger) {
     super(logger, fullyQualifiedTestName);
     this.appiumDriver = appiumDriver;
     this.appiumWait = wait;
+  }
+
+  public AppiumTestObject(AppiumDriver<WebElement> appiumDriver, Logger logger,
+      String fullyQualifiedTestName) {
+    super(logger, fullyQualifiedTestName);
+    this.getManagerStore().put(Class < >)
   }
 
   /**
