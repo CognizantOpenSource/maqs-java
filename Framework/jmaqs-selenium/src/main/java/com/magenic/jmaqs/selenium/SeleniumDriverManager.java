@@ -51,10 +51,6 @@ public class SeleniumDriverManager extends DriverManager {
     getLogger().logMessage(MessageType.VERBOSE, "End dispose driver");
   }
 
-  private WebDriver webDriver;
-
-  private BaseTestObject testObject;
-
   /**
    * Get the web driver
    *
