@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 /**
  * The type Driver manager.
  */
-public abstract class DriverManager implements AutoCloseable {
+public abstract class DriverManager<T> implements AutoCloseable {
 
   /**
    * Base Test Object.
@@ -26,14 +26,14 @@ public abstract class DriverManager implements AutoCloseable {
   /**
    * The Get driver.
    */
-  protected Supplier<Object> getDriverSupplier;
+  protected Supplier<T> getDriverSupplier;
 
   /**
    * Instantiates a new Driver manager.
    *
    * @param baseTestObject the base test object
    */
-  public DriverManager(Supplier<Object> getDriverFunction, BaseTestObject baseTestObject) {
+  public DriverManager(Supplier<T> getDriverFunction, BaseTestObject baseTestObject) {
     this.baseTestObject = baseTestObject;
     this.getDriverSupplier = getDriverFunction;
   }

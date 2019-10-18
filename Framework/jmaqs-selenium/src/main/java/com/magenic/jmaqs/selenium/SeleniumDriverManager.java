@@ -26,7 +26,7 @@ public class SeleniumDriverManager extends DriverManager {
    * @param getDriver  Function for getting an Selenium web driver
    * @param testObject The associated test object
    */
-  public SeleniumDriverManager(Supplier<Object> getDriver, BaseTestObject testObject) {
+  public <T> SeleniumDriverManager(Supplier<T> getDriver, BaseTestObject testObject) {
     super(getDriver, testObject);
   }
 
