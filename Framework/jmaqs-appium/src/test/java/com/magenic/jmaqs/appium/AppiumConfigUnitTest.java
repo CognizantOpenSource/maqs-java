@@ -20,14 +20,14 @@ public class AppiumConfigUnitTest {
   private String deviceOrientation = "deviceOrientation";
 
   @Test
-  @Ignore
+  @Ignore("Test ignored because method is deprecated.")
   public void testGetMobileDeviceUDID() throws Exception {
     String mobileDeviceUDID = AppiumConfig.getMobileDeviceUdid();
     Assert.assertTrue(mobileDeviceUDID.equalsIgnoreCase("1234567890ACDEF1234687890ABCDEF"));
   }
 
   @Test
-  @Ignore
+  @Ignore("Test ignored because method is deprecated.")
   public void testGetBundleID() throws Exception {
     String bundleID = AppiumConfig.getBundleId();
     Assert.assertTrue(bundleID.equalsIgnoreCase("com.magenic.maqs.appium.tester"));
@@ -52,7 +52,7 @@ public class AppiumConfigUnitTest {
   }
 
   @Test
-  @Ignore
+  @Ignore("Test ignored because method is deprecated.")
   public void testSetTimeouts() throws Exception {
   }
 
