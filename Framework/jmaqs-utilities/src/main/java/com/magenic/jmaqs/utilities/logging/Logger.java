@@ -89,13 +89,6 @@ public abstract class Logger {
 
   /**
    * Write the formatted message (one line) to the console as a generic message.
-   * @param messageType The type of message
-   * @param message The message text
-   */
-  public abstract void logMessage(MessageType messageType, String message);
-
-  /**
-   * Write the formatted message (one line) to the console as a generic message.
    * 
    * @param message
    *          The message text
