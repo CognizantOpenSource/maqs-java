@@ -17,27 +17,35 @@ import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
 
 public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
 
-	/** Url for the site. */
-	private static String siteUrl = SeleniumConfig.getWebSiteBase();
+  /**
+   * Url for the site.
+   */
+  private static String siteUrl = SeleniumConfig.getWebSiteBase();
 
-	/** Automation site url. */
-	private static String siteAutomationUrl = siteUrl + "Automation/";
+  /**
+   * Automation site url.
+   */
+  private static String siteAutomationUrl = siteUrl + "Automation/";
 
-  /** Error string templates for assertion failures */
-	private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
+  /**
+   * Error string templates for assertion failures
+   */
+  private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
 
   @Test
-	public void testGetFluentWaitObject() {
-		int timeout = 1000;
-		int polling = 500;
+  public void testGetFluentWaitObject() {
+    int timeout = 1000;
+    int polling = 500;
 
     PageElementsPageModel pageModel = new PageElementsPageModel(this.getSeleniumTestObject());
-		pageModel.open(siteAutomationUrl);
-		WebElement elementDriver = UIWaitFactory.getWaitDriver(pageModel.getSeleniumTestObject().getWebDriver())
-				.waitForClickableElement(pageModel.showDialog1ButtonLocator);
+    pageModel.open(siteAutomationUrl);
+    WebElement elementDriver = UIWaitFactory
+        .getWaitDriver(pageModel.getSeleniumTestObject().getWebDriver())
+        .waitForClickableElement(pageModel.showDialog1ButtonLocator);
 
-    FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(elementDriver, timeout, polling);
+    FluentWait<WebElement> fluentWait = FluentWaitFactory
+        .getNewElementFluentWait(elementDriver, timeout, polling);
 
     assertNotNull(fluentWait, String.format(assertNotNullErrorTemplate, "fluentWait"));
-	}
+  }
 }
