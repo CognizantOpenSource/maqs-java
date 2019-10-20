@@ -480,7 +480,7 @@ public class WebDriverFactory {
     String hintPath = SeleniumConfig.getDriverHintPath();
 
     // Try the hintpath first
-    if (!defaultHintPath.isEmpty() && Paths.get(hintPath, driverFile).toFile().exists()) {
+    if (!hintPath.isEmpty() && Paths.get(hintPath, driverFile).toFile().exists()) {
       return hintPath;
     }
 
