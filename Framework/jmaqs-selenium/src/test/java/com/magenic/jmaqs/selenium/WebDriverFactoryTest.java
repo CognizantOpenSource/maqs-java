@@ -236,13 +236,13 @@ public class WebDriverFactoryTest {
 
   @Test(groups = TestCategories.Selenium)
   public void getDriverLocationTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile());
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getDriverLocationConfigHintPathTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile());
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
     Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
         "Checking that driver location and config hint path are the same.");
@@ -251,7 +251,8 @@ public class WebDriverFactoryTest {
   @Test(groups = TestCategories.Selenium)
   @Ignore("Not able to be tested yet")
   public void getDriverLocationDefaultHintPathTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile(), "");
+    String driverLocation = WebDriverFactory
+        .getDriverLocation(WebDriverFile.CHROME.getFileName(), "");
     Assert.assertFalse(driverLocation.isEmpty());
     Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
         "Checking that driver location and default hint path are the same.");
@@ -260,7 +261,7 @@ public class WebDriverFactoryTest {
   @Test(groups = TestCategories.Selenium)
   @Ignore("Not able to be tested yet")
   public void getDriverLocationTestLocationTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile());
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
     Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
         "Checking that driver location and config hint path are the same.");
@@ -269,7 +270,7 @@ public class WebDriverFactoryTest {
   @Test(groups = TestCategories.Selenium)
   @Ignore("Not able to be tested yet")
   public void getDriverLocationTestResourcesLocationTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile());
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
     Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
         "Checking that driver location and config hint path are the same.");
