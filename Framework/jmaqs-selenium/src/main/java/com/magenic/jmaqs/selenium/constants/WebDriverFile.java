@@ -12,30 +12,41 @@ public enum WebDriverFile {
   /**
    * The Chrome driver file.
    */
-  CHROME("chromedriver.exe"),
+  CHROME("chromedriver"),
   /**
    * The Firefox driver file.
    */
-  FIREFOX("geckodriver.exe"),
+  FIREFOX("geckodriver"),
   /**
    * The Internet Explorer driver file.
    */
-  IE("IEDriverServer.exe"),
+  IE("IEDriverServer"),
   /**
    * The Edge driver file.
    */
-  EDGE("MicrosoftWebDriver.exe");
+  EDGE("MicrosoftWebDriver");
 
   /**
    * This driver file.
    */
-  private String file;
+  private String fileName;
 
   WebDriverFile(String file) {
-    this.file = file;
+    this.fileName = file;
   }
 
-  public String getFile() {
-    return file;
+  /**
+   * Gets file name.
+   *
+   * @return the file name
+   */
+  public String getFileName() {
+    String windowsFileExtension = ".exe";
+    if (OperatingSystem.getOperatingSystem() == OperatingSystem.WINDOWS) {
+      return fileName + windowsFileExtension;
+    } else {
+      return fileName;
+    }
+
   }
 }
