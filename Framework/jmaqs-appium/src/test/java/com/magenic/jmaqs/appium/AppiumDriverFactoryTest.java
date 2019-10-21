@@ -16,14 +16,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
  * The type Appium driver factory test.
  */
 public class AppiumDriverFactoryTest {
-
-  private static final String MESSAGE = "Test method not implemented yet.";
 
   private static DesiredCapabilities sauceLabsConfig;
 
@@ -63,6 +62,7 @@ public class AppiumDriverFactoryTest {
   @Test
   public void testGetDefaultMobileOptions() {
     final DesiredCapabilities defaultMobileOptions = AppiumDriverFactory.getDefaultMobileOptions();
+    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.  More elegant solution oppose to a for each.
     Consumer<String> assertionConsumer = (String s) -> {
       Assert.assertNotNull(defaultMobileOptions.is(s),
           String.format("Checking if capability key %s is not null", s));
@@ -78,6 +78,7 @@ public class AppiumDriverFactoryTest {
     final Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
     DesiredCapabilities capabilities = AppiumDriverFactory
         .getDefaultMobileOptions(capabilitiesAsObjects);
+    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.  More elegant solution oppose to a for each.
     Consumer<String> assertionConsumer = (String s) -> {
       Assert.assertNotNull(capabilities.is(s),
           String.format("Checking if capability key %s is not null", s));
@@ -125,8 +126,8 @@ public class AppiumDriverFactoryTest {
    * Test get windows driver.
    */
   @Test
+  @Ignore("Work on Windows implementation")
   public void testGetWindowsDriver() {
-
     DesiredCapabilities appCapabilities = new DesiredCapabilities();
     appCapabilities.setCapability("app", "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
     appCapabilities
