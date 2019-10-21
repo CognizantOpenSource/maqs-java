@@ -12,6 +12,11 @@ import java.util.Collections;
  * The enum Operating system.
  */
 public enum OperatingSystem {
+
+  /**
+   * None.  Can be used as a default state
+   */
+  NONE("None", new ArrayList<>(Collections.singletonList("None"))),
   /**
    * Linux Operating System.
    */
@@ -54,11 +59,22 @@ public enum OperatingSystem {
     return operatingSystemName;
   }
 
+  /**
+   * Gets operating system.
+   *
+   * @return the operating system
+   */
   public static OperatingSystem getOperatingSystem() {
     String systemProperty = System.getProperty("os.name").toLowerCase();
     return getOperatingSystemWithAbbreviation(systemProperty);
   }
 
+  /**
+   * Gets operating system with abbreviation.
+   *
+   * @param operatingSystemAbbr the operating system abbr
+   * @return the operating system with abbreviation
+   */
   public static OperatingSystem getOperatingSystemWithAbbreviation(String operatingSystemAbbr) {
 
     if (LINUX.operatingSystemAbbreviations.contains(operatingSystemAbbr)) {
@@ -68,8 +84,7 @@ public enum OperatingSystem {
     } else if (WINDOWS.operatingSystemAbbreviations.contains((operatingSystemAbbr))) {
       return OperatingSystem.WINDOWS;
     } else {
-      throw new IllegalArgumentException(
-          String.format("Unknown Operating System detected: %s", operatingSystemAbbr));
+      throw new IllegalArgumentException(String.format("Unknown Operating System detected: %s", operatingSystemAbbr));
     }
   }
 }

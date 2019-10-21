@@ -10,9 +10,16 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * The interface Platform specific.
+ */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target({ ElementType.METHOD, ElementType.TYPE })
 public @interface PlatformSpecific {
-  OperatingSystem[] operatingSystem() default { OperatingSystem.WINDOWS, OperatingSystem.MACOS,
-      OperatingSystem.LINUX };
+  /**
+   * Operating system.
+   *
+   * @return the operating system
+   */
+  OperatingSystem value() default OperatingSystem.NONE;
 }

@@ -4,7 +4,10 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.annotations.PlatformSpecific;
+import com.magenic.jmaqs.selenium.constants.OperatingSystem;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
+import com.magenic.jmaqs.selenium.listeners.PlatformSpecificListener;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import org.openqa.selenium.Dimension;
@@ -19,6 +22,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 /**
@@ -109,6 +113,7 @@ public class WebDriverFactoryTest {
   }
 
   @Test(groups = TestCategories.Selenium)
+  @PlatformSpecific(OperatingSystem.WINDOWS)
   public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
     try {
@@ -287,7 +292,9 @@ public class WebDriverFactoryTest {
     String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", true);
   }
 
+
   @Test(groups = TestCategories.Selenium)
+  @PlatformSpecific(OperatingSystem.WINDOWS)
   public void getWindowsEdgeDriverLocationTest() {
     String driverLocation = WebDriverFactory.getWindowsEdgeDriverLocation("testFile");
     Assert.assertEquals(driverLocation, "");
