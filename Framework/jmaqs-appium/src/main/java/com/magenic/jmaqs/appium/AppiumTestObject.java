@@ -18,7 +18,9 @@ public class AppiumTestObject extends BaseTestObject {
 
   /**
    * The appium driver.
+   * @deprecated driver managers are the preferred approach now.
    */
+  @Deprecated
   protected AppiumDriver appiumDriver;
 
   /**
@@ -121,9 +123,8 @@ public class AppiumTestObject extends BaseTestObject {
    * @param appiumDriver the appium driver
    */
   public void setAppiumDriver(AppiumDriver<WebElement> appiumDriver) {
-    this.getManagerStore().put(this.getManagerStore()
-        .put(MobileDriverManager.class.getCanonicalName(),
-            new MobileDriverManager((() -> appiumDriver), this)));
+    this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),
+        new MobileDriverManager((() -> appiumDriver), this));
   }
 
   /**
