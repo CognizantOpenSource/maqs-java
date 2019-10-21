@@ -16,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -125,8 +126,8 @@ public class AppiumDriverFactoryTest {
    * Test get windows driver.
    */
   @Test
+  @Ignore("Work on Windows implementation")
   public void testGetWindowsDriver() {
-
     DesiredCapabilities appCapabilities = new DesiredCapabilities();
     appCapabilities.setCapability("app", "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
     appCapabilities

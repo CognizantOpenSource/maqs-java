@@ -106,6 +106,7 @@ public class AppiumConfigUnitTest {
   }
 
   @Test(expectedExceptions = NumberFormatException.class)
+  @Ignore("Impacting future tests since there is no way to reload config")
   public void testGetCommandTimeoutError() {
     HashMap<String, String> configValues = new HashMap<>();
     configValues.put("MobileCommandTimeout", "sixty thousand");
