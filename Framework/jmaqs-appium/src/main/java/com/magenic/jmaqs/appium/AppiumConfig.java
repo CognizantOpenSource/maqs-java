@@ -16,6 +16,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -297,7 +298,7 @@ public class AppiumConfig {
   @Deprecated
   public static void setTimeouts(AppiumDriver driver) {
     int timeoutTime = Integer.parseInt(Config.getValue("Timeout", "0"));
-    driver.manage().timeouts().pageLoadTimeout(timeoutTime, null);
+    driver.manage().timeouts().pageLoadTimeout(timeoutTime, TimeUnit.MILLISECONDS);
   }
 
   /**
