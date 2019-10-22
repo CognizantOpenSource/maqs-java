@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.base.BaseExtendableTest;
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.selenium.SeleniumWait;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
@@ -11,15 +12,20 @@ import com.magenic.jmaqs.utilities.logging.MessageType;
 
 import io.appium.java_client.AppiumDriver;
 
+import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
-
 
 /**
  * Base Appium Test Class.
  */
-public abstract class BaseAppiumTest extends BaseTest {
+public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
 
-  /** Thread local storage of AppiumTestObject. */
+  /**
+   * Thread local storage of AppiumTestObject.
+   *
+   * @deprecated methodology no longer used
+   */
+  @Deprecated
   private ThreadLocal<AppiumTestObject> appiumTestObject = new ThreadLocal<AppiumTestObject>();
 
   /**
@@ -35,14 +41,20 @@ public abstract class BaseAppiumTest extends BaseTest {
    * @return the appium driver
    */
   public AppiumDriver getAppiumDriver() {
-    return this.appiumTestObject.get().getAppiumDriver();
+    return this.getTestObject().getAppiumDriver();
+  }
+
+  public void setAppiumDriver() {
+
   }
 
   /**
    * Gets the appium wait.
    *
    * @return the appium wait
+   * @deprecated {@link com.magenic.jmaqs.appium.AppiumWait} has been deprecated
    */
+  @Deprecated
   public SeleniumWait getAppiumWait() {
     return this.appiumTestObject.get().getAppiumWait();
   }
@@ -51,14 +63,22 @@ public abstract class BaseAppiumTest extends BaseTest {
    * Gets the appium test object.
    *
    * @return the appium test object
+   * @deprecated methodology no longer used
    */
+  @Deprecated
   public AppiumTestObject getAppiumTestObject() {
     return this.appiumTestObject.get();
   }
 
+  protected AppiumDriver<WebElement> getMobileDriver() {
+    return AppiumDriverFactory.getDefaultMobileDriver();
+  }
+
   /**
    * Overload function for doing post setup logging.
+   * @deprecated methodology no longer used.
    */
+  @Deprecated
   protected void postSetupLogging() {
     try {
 
@@ -67,12 +87,12 @@ public abstract class BaseAppiumTest extends BaseTest {
 
       appiumTestObject.set(new AppiumTestObject(driver, wait, this.getFullyQualifiedTestClassName(),
           this.getLogger()));
-      this.getLogger().logMessage(MessageType.INFORMATION, "Loaded driver: %s",
-          AppiumConfig.getPlatformName());
+      this.getLogger()
+          .logMessage(MessageType.INFORMATION, "Loaded driver: %s", AppiumConfig.getPlatformName());
       // }
     } catch (Exception e) {
-      this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s",
-          e.getMessage());
+      this.getLogger()
+          .logMessage(MessageType.ERROR, "Failed to start driver because: %s", e.getMessage());
       System.out.println(
           StringProcessor.safeFormatter("Browser type %s is not supported", e.getMessage()));
     }
@@ -81,8 +101,7 @@ public abstract class BaseAppiumTest extends BaseTest {
   /**
    * Steps to do before logging teardown results.
    *
-   * @param resultType
-   *          The test result
+   * @param resultType The test result
    */
   protected void beforeLoggingTeardown(ITestResult resultType) {
     try {
