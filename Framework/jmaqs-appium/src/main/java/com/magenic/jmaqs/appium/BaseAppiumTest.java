@@ -125,8 +125,7 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
 
   @Override
   protected void createNewTestObject() {
-    //TODO: Need AppiumTestObject details before can complete
-    this.setTestObject(new AppiumTestObject(() -> getMobileDriver(), this.createLogger(),
+    this.setTestObject(new AppiumTestObject(this::getMobileDriver, this.createLogger(),
         this.getFullyQualifiedTestClassName()));
   }
 }
