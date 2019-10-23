@@ -4,34 +4,54 @@
 
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.utilities.helper.TestCategories;
+import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class BaseAppiumTestTest {
+/**
+ * The type Base appium test test.
+ */
+public class BaseAppiumTestTest extends BaseAppiumTest {
 
-  @Test
+  /**
+   * Test get appium driver.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetAppiumDriver() {
-    throw new UnsupportedOperationException("Test method not implemented yet.");
+    Assert.assertNotNull(this.getAppiumDriver(),
+        "Checking that Appium Driver is not null through BaseAppiumTest");
   }
 
-  @Test
+  /**
+   * Test set appium driver.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testSetAppiumDriver() {
-    throw new UnsupportedOperationException("Test method not implemented yet.");
+    int hashCode = this.getAppiumDriver().hashCode();
+    this.setAppiumDriver(this.getMobileDriver());
+    int hashCode1 = this.getAppiumDriver().hashCode();
+    Assert.assertNotEquals(hashCode, hashCode1);
   }
 
-  @Test
+  /**
+   * Test get appium test object.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetAppiumTestObject() {
-    throw new UnsupportedOperationException("Test method not implemented yet.");
+    Assert.assertNotNull(this.getTestObject(),
+        "Checking that Appium Test Object is not null through BaseAppiumTest");
   }
 
-  @Test
+  /**
+   * Test get mobile driver.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetMobileDriver() {
-    throw new UnsupportedOperationException("Test method not implemented yet.");
+    Assert.assertNotNull(this.getMobileDriver(),
+        "Checking that Appium Driver is not null through BaseAppiumTest");
   }
 
-  @Test
-  public void testBeforeLoggingTeardown() {
-    throw new UnsupportedOperationException("Test method not implemented yet.");
-  }
 }
