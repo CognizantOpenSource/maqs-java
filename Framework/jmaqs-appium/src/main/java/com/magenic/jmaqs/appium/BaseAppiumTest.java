@@ -122,4 +122,11 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
       this.tryToLog(MessageType.WARNING, "Failed to quit because: %s", e.getMessage());
     }
   }
+
+  @Override
+  protected void createNewTestObject() {
+    //TODO: Need AppiumTestObject details before can complete
+    this.setTestObject(new AppiumTestObject(() -> getMobileDriver(), this.createLogger(),
+        this.getFullyQualifiedTestClassName()));
+  }
 }
