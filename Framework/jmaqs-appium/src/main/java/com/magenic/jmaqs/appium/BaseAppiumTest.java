@@ -5,16 +5,12 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.selenium.SeleniumWait;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-
-import com.magenic.jmaqs.utilities.logging.TestResultType;
 import io.appium.java_client.AppiumDriver;
-
 import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
 
@@ -122,12 +118,6 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
 
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
-    }
-    this.tryToLog(MessageType.INFORMATION, "Close");
-
-    try {
-    } catch (Exception e) {
-      this.tryToLog(MessageType.WARNING, "Failed to quit because: %s", e.getMessage());
     }
   }
 
