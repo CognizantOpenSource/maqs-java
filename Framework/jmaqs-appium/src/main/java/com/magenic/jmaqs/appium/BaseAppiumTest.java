@@ -8,8 +8,11 @@ import com.magenic.jmaqs.base.BaseExtendableTest;
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.selenium.SeleniumWait;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 
+import com.magenic.jmaqs.utilities.logging.TestResultType;
 import io.appium.java_client.AppiumDriver;
 
 import org.openqa.selenium.WebElement;
@@ -76,6 +79,7 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
 
   /**
    * Overload function for doing post setup logging.
+   *
    * @deprecated methodology no longer used.
    */
   @Deprecated
@@ -106,18 +110,22 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
   protected void beforeLoggingTeardown(ITestResult resultType) {
     try {
       // TODO add screen capture once AppiumUtilities has been created
-      /*if ((this.getLogger() instanceof FileLogger) && (resultType != TestResultType.PASS) && (
-          this.loggingEnabledSetting != LoggingEnabled.NO))
-      {
-        AppiumUtilities.CaptureScreenshot(this.getAppiumDriver(), this.getLogger());
-      }*/
+      if (this.getTestObject().getAppiumManager().isDriverInitialized() && this
+          .getLogger() instanceof FileLogger && resultType.getStatus() != ITestResult.SUCCESS
+          && this.loggingEnabledSetting != LoggingEnabled.NO) {
+        AppiumUtilities.captureScreenshot(this.getAppiumDriver(), this.getTestObject(), "Final");
+        if (AppiumConfig.getSavePageSourceOnFail()) {
+          AppiumUtilities
+              .savePageSource(this.getAppiumDriver(), this.getTestObject(), "FinalPageSource");
+        }
+      }
+
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
     }
     this.tryToLog(MessageType.INFORMATION, "Close");
 
     try {
-      this.appiumTestObject.get().appiumDriver.quit();
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to quit because: %s", e.getMessage());
     }
