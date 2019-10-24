@@ -43,8 +43,8 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
     return this.getTestObject().getAppiumDriver();
   }
 
-  public void setAppiumDriver() {
-
+  public void setAppiumDriver(AppiumDriver<WebElement> mobileDriver) {
+    this.getTestObject().setAppiumDriver(mobileDriver);
   }
 
   /**
@@ -103,10 +103,11 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
    *
    * @param resultType The test result
    */
+  @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
     try {
       // TODO add screen capture once AppiumUtilities has been created
-      if (this.getTestObject().getAppiumManager().isDriverInitialized() && this
+      /*if (this.getTestObject().getAppiumManager().isDriverInitialized() && this
           .getLogger() instanceof FileLogger && resultType.getStatus() != ITestResult.SUCCESS
           && this.loggingEnabledSetting != LoggingEnabled.NO) {
         AppiumUtilities.captureScreenshot(this.getAppiumDriver(), this.getTestObject(), "Final");
@@ -114,7 +115,7 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
           AppiumUtilities
               .savePageSource(this.getAppiumDriver(), this.getTestObject(), "FinalPageSource");
         }
-      }
+      }*/
 
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
