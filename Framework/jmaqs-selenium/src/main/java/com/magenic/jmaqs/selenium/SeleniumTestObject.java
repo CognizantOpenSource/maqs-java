@@ -17,7 +17,9 @@ public class SeleniumTestObject extends BaseTestObject {
 
   /**
    * The WebDriver Object.
+   * @deprecated methodology no longer being used.
    */
+  @Deprecated
   protected WebDriver webDriver;
 
   /**
@@ -35,7 +37,9 @@ public class SeleniumTestObject extends BaseTestObject {
    * @param wait                   The SeleniumWait Object
    * @param logger                 The Logger Object
    * @param fullyQualifiedTestName The fully qualified test name
+   * @deprecated {@link com.magenic.jmaqs.selenium.SeleniumWait} has been deprecated.
    */
+  @Deprecated
   public SeleniumTestObject(WebDriver driver, SeleniumWait wait, Logger logger,
       String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
@@ -55,6 +59,19 @@ public class SeleniumTestObject extends BaseTestObject {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((SeleniumDriverManager.class).getCanonicalName(),
         new SeleniumDriverManager(getDriverSupplier, this));
+  }
+
+  /**
+   * Instantiates a new Selenium test object.
+   *
+   * @param webDriver              the web driver
+   * @param logger                 the logger
+   * @param fullyQualifiedTestName the fully qualified test name
+   */
+  public SeleniumTestObject(WebDriver webDriver, Logger logger, String fullyQualifiedTestName) {
+    super(logger, fullyQualifiedTestName);
+    this.getManagerStore().put((SeleniumDriverManager.class).getCanonicalName(),
+        new SeleniumDriverManager((() -> webDriver), this));
   }
 
   /**
@@ -85,47 +102,37 @@ public class SeleniumTestObject extends BaseTestObject {
    * @return A WebDriver Object
    */
   public WebDriver getWebDriver() {
-    return this.webDriver;
+    return this.getWebManager().getWebDriver();
   }
 
   /**
-   * Gets the Selenium driver manager
-   */
-  public SeleniumDriverManager getWebManager
-
-  {
-    return this.ManagerStore[typeof(
-        SeleniumDriverManager).FullName] instanceof SeleniumDriverManager;
-  }
-
-  /**
-   * Set the WebDriver for the SeleniumTestObject.
+   * Gets the Selenium driver manager.
    *
-   * @param driver The WebDriver Object
+   * @return the web manager
+   */
+  public SeleniumDriverManager getWebManager() {
+    return (SeleniumDriverManager) this.getManagerStore()
+        .get(SeleniumDriverManager.class.getCanonicalName());
+  }
+
+  /**
+   * Sets web driver.
+   *
+   * @param driver the driver
    */
   public void setWebDriver(WebDriver driver) {
-    this.webDriver = driver;
+    this.getManagerStore().put(SeleniumDriverManager.class.getCanonicalName(),
+        new SeleniumDriverManager((() -> driver), this));
   }
 
   /**
-   * Override the Selenium web driver
+   * Sets web driver using Supplier.
    *
-   * @param webDriver New web driver
+   * @param webDriverSupplier the web driver supplier
    */
-  public void OverrideWebDriver(WebDriver webDriver) {
-    this.OverrideDriverManager(typeof(SeleniumDriverManager).FullName,
-        new SeleniumDriverManager(() = > webDriver, this));
-  }
-
-  /**
-   * Override the function for creating a Selenium web driver
-   *
-   * @param getDriver Function for creating a web driver
-   */
-  // public void OverrideWebDriver(Func<WebDriver> getDriver)
-  public void OverrideWebDriver(WebDriver getDriver) {
-    this.OverrideDriverManager(typeof(SeleniumDriverManager).FullName,
-        new SeleniumDriverManager(getDriver, this));
+  public void setWebDriver(Supplier<WebDriver> webDriverSupplier) {
+    this.getManagerStore().put(SeleniumDriverManager.class.getCanonicalName(),
+        new SeleniumDriverManager(webDriverSupplier, this));
   }
 
 }
