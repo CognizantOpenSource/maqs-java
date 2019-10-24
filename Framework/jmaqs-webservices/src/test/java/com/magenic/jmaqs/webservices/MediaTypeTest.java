@@ -7,8 +7,6 @@ package com.magenic.jmaqs.webservices;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
 public class MediaTypeTest {
 
   @Test
