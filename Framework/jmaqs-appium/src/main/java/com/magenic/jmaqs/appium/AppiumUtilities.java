@@ -57,8 +57,7 @@ public class AppiumUtilities {
       }
 
       // Calculate the file name
-      String fullPath = ((FileLogger) testObject.getLog()).getFilePath();
-      String directory = Paths.get(fullPath).normalize().toString();
+      String directory = ((FileLogger) testObject.getLog()).getDirectory();
       String fileNameWithoutExtension = testObject.getFullyQualifiedTestName() + appendName;
       captureScreenshot(appiumDriver, testObject, directory, fileNameWithoutExtension);
 
