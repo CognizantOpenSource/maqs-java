@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.MessageType;
@@ -15,6 +16,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 
@@ -56,9 +62,13 @@ public class AppiumUtilities {
         return false;
       }
 
-      // Calculate the file name
+      // Calculate the file name with Date Time Stamp
       String directory = ((FileLogger) testObject.getLog()).getDirectory();
-      String fileNameWithoutExtension = testObject.getFullyQualifiedTestName() + appendName;
+      String fileNameWithoutExtension = StringProcessor.safeFormatter(
+            "%s - %s%s", testObject.getFullyQualifiedTestName(),
+                    DateTimeFormatter.ofPattern(
+                  "uuuu-MM-dd-HH-mm-ss-SSSS",
+                          Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC())), appendName);
       captureScreenshot(appiumDriver, testObject, directory, fileNameWithoutExtension);
 
       testObject.getLog().logMessage(MessageType.INFORMATION, "Screenshot saved.");
