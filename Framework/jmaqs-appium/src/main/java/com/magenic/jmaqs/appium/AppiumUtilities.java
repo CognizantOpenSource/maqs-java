@@ -20,7 +20,6 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 
@@ -28,6 +27,11 @@ import org.openqa.selenium.WebElement;
  * Appium Utilities class.
  */
 public class AppiumUtilities {
+
+  /**
+   * Default Date Time Format for appending to files.
+   */
+  private static final String DEFAULT_DATE_TIME_FORMAT = "uuuu-MM-dd-HH-mm-ss-SSSS";
 
   private AppiumUtilities() {
 
@@ -67,8 +71,9 @@ public class AppiumUtilities {
       String fileNameWithoutExtension = StringProcessor.safeFormatter(
             "%s - %s%s", testObject.getFullyQualifiedTestName(),
                     DateTimeFormatter.ofPattern(
-                  "uuuu-MM-dd-HH-mm-ss-SSSS",
-                          Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC())), appendName);
+                        DEFAULT_DATE_TIME_FORMAT,
+                          Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC())),
+                    appendName);
       captureScreenshot(appiumDriver, testObject, directory, fileNameWithoutExtension);
 
       testObject.getLog().logMessage(MessageType.INFORMATION, "Screenshot saved.");
@@ -113,6 +118,7 @@ public class AppiumUtilities {
           String.format("Screenshot error: %s", exception.getMessage()));
     }
 
+    testObject.addAssociatedFile(path);
     return path;
   }
 
@@ -146,12 +152,21 @@ public class AppiumUtilities {
       if (!(testObject.getLog() instanceof FileLogger)) {
         // Since this is not a file logger we will need to use a generic file name
         path = savePageSource(appiumDriver, testObject, LoggingConfig.getLogDirectory(),
-            "PageSource" + appendName);
+            StringProcessor.safeFormatter(
+               "%s - %s%s", "PageSource",
+                DateTimeFormatter.ofPattern(
+                    DEFAULT_DATE_TIME_FORMAT,
+                    Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC())),
+                appendName));
       } else {
         // Calculate the file name
         String directory = ((FileLogger) testObject.getLog()).getDirectory();
-        String fileNameWithoutExtension =
-            testObject.getFullyQualifiedTestName() + "_PS" + appendName;
+        String fileNameWithoutExtension = StringProcessor.safeFormatter(
+            "%s - %s%s", testObject.getFullyQualifiedTestName() + "_PS",
+            DateTimeFormatter.ofPattern(
+                DEFAULT_DATE_TIME_FORMAT,
+                Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC())),
+            appendName);
 
         path = savePageSource(appiumDriver, testObject, directory, fileNameWithoutExtension);
       }
@@ -213,9 +228,9 @@ public class AppiumUtilities {
    */
   public static void killDriver(AppiumDriver<WebElement> appiumDriver) {
     try {
-      appiumDriver.quit();
-    } finally {
       appiumDriver.close();
+    } finally {
+      appiumDriver.quit();
     }
   }
 }
