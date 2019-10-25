@@ -290,7 +290,9 @@ public abstract class BaseTest {
 
   /**
    * Overload function for doing post setup logging.
+   * @deprecated methodology no longer used.
    */
+  @Deprecated
   protected abstract void postSetupLogging() throws Exception;
 
   /**
