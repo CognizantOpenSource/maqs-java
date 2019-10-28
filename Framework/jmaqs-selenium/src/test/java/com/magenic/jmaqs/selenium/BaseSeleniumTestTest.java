@@ -40,14 +40,10 @@ public class BaseSeleniumTestTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void testGetBrowser() {
     try {
-      Assert.assertNotNull(this.getBrowser());
+      Assert.assertNotNull(this.getBrowser(),
+          "Checking that Selenium Driver is not null through BaseSeleniumTest");
     } catch (Exception e) {
       e.printStackTrace();
     }
-  }
-
-  @Test(groups = TestCategories.Selenium)
-  public void testCreateNewTestObject() {
-    throw new UnsupportedOperationException("Test method not implemented yet.");
   }
 }
