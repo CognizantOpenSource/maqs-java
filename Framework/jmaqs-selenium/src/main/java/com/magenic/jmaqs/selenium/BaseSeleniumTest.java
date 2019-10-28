@@ -147,7 +147,11 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
 
   @Override
   protected void createNewTestObject() {
-    this.setTestObject(new SeleniumTestObject(this::getBrowser, this.createLogger(),
-        this.getFullyQualifiedTestClassName()));
+    try {
+      this.setTestObject(new SeleniumTestObject(this.getBrowser(), this.createLogger(),
+          this.getFullyQualifiedTestClassName()));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
