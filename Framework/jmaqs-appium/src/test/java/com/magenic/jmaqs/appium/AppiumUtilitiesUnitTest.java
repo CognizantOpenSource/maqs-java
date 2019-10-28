@@ -6,6 +6,7 @@ package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import io.appium.java_client.AppiumDriver;
@@ -23,7 +24,7 @@ import org.testng.annotations.Test;
  * Appium Utilities Unit Test class.
  */
 public class AppiumUtilitiesUnitTest extends BaseTest {
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testCaptureScreenshotNoAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
@@ -41,7 +42,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
   }
 
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testCaptureScreenshotAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
@@ -59,7 +60,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
   }
 
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testCaptureScreenshotConsoleLogger() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -77,7 +78,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
     Assert.assertFalse(isSuccess, "Expected Screenshot to NOT be successful.");
   }
 
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testCaptureScreenshotCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
@@ -105,7 +106,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
             "%s%s - %s%s",fileLogger.getDirectory(), "\\TestCustomName", dateTime, ".png")).normalize().toString());
   }
 
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testSavePageSourceNoAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
@@ -123,7 +124,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
   }
 
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testSavePageSourceAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
@@ -141,7 +142,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
   }
 
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testSavePageSourceCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
@@ -169,7 +170,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
             "%s%s - %s%s",fileLogger.getDirectory(), "\\TestCustomName", dateTime, ".txt")).normalize().toString());
   }
 
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testSavePageSourceConsoleLogger() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -187,7 +188,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
   }
 
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testKillDriver() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
