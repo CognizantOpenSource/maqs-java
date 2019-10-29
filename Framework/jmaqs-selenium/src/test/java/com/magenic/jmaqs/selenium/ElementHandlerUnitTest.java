@@ -110,8 +110,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void setTextBoxAndVerifyValueTest() {
     String expectedValue = "Tester";
     navigateToUrl();
-    ElementHandler.setTextBox(getSeleniumWait(), firstNameTextBox, expectedValue);
-    String actualValue = ElementHandler.getElementAttribute(getSeleniumWait(), firstNameTextBox);
+    ElementHandler.setTextBox(getWebDriver(), firstNameTextBox, expectedValue);
+    String actualValue = ElementHandler.getElementAttribute(getWebDriver(), firstNameTextBox);
     verifyText(actualValue, expectedValue);
   }
 
@@ -121,7 +121,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void checkRadioButtonTest() {
     navigateToUrl();
-    ElementHandler.clickButton(getSeleniumWait(), femaleRadioButton, false);
+    ElementHandler.clickButton(getWebDriver(), femaleRadioButton, false);
     Assert.assertTrue(getSeleniumWait().waitForClickableElement(femaleRadioButton).isSelected(),
         "Radio button was not selected");
   }
@@ -132,7 +132,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void checkCheckBoxTest() {
     navigateToUrl();
-    ElementHandler.checkCheckBox(getSeleniumWait(), checkbox, true);
+    ElementHandler.checkCheckBox(getWebDriver(), checkbox, true);
     Assert.assertTrue(getSeleniumWait().waitForClickableElement(checkbox).isSelected(), "Checkbox was not enabled");
   }
 
@@ -143,7 +143,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void getElementAttributeTest() {
     String expectedText = "http://magenicautomation.azurewebsites.net/Swagger";
     navigateToUrl();
-    String actualText = ElementHandler.getElementAttribute(getSeleniumWait(), swaggerLinkBy, "href");
+    String actualText = ElementHandler.getElementAttribute(getWebDriver(), swaggerLinkBy, "href");
     verifyText(actualText, expectedText);
   }
 
@@ -155,8 +155,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void selectItemFromDropDownTest() {
     String expectedSelection = "Emily";
     navigateToUrl();
-    ElementHandler.selectDropDownOption(getSeleniumWait(), nameDropdown, expectedSelection);
-    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getSeleniumWait(), nameDropdown);
+    ElementHandler.selectDropDownOption(getWebDriver(), nameDropdown, expectedSelection);
+    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), nameDropdown);
     verifyText(actualSelection, expectedSelection);
   }
 
@@ -168,8 +168,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void selectItemFromDropDownByValueTest() {
     String expectedSelection = "Jack";
     navigateToUrl();
-    ElementHandler.selectDropDownOptionByValue(getSeleniumWait(), nameDropdown, "two");
-    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getSeleniumWait(), nameDropdown);
+    ElementHandler.selectDropDownOptionByValue(getWebDriver(), nameDropdown, "two");
+    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), nameDropdown);
     verifyText(actualSelection, expectedSelection);
   }
 
@@ -185,9 +185,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("Hard Drive");
     itemsToSelect.add("Keyboard");
     navigateToUrl();
-    ElementHandler.selectMultipleElementsFromListBox(getSeleniumWait(), computerPartsList, itemsToSelect);
+    ElementHandler.selectMultipleElementsFromListBox(getWebDriver(), computerPartsList, itemsToSelect);
     ArrayList<String> selectedItems = (ArrayList) ElementHandler
-        .getSelectedOptionsFromDropdown(getSeleniumWait(), computerPartsList);
+        .getSelectedOptionsFromDropdown(getWebDriver(), computerPartsList);
     ListProcessor.listOfStringsComparer(itemsToSelect, selectedItems, results, false);
     if (results.length() > 0) {
       Assert.fail(results.toString());
@@ -205,9 +205,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("four");
     itemsToSelect.add("five");
     navigateToUrl();
-    ElementHandler.selectMultipleElementsFromListBoxByValue(getSeleniumWait(), computerPartsList, itemsToSelect);
+    ElementHandler.selectMultipleElementsFromListBoxByValue(getWebDriver(), computerPartsList, itemsToSelect);
     ArrayList<String> selectedItems = (ArrayList) ElementHandler
-        .getSelectedOptionsFromDropdown(getSeleniumWait(), computerPartsList);
+        .getSelectedOptionsFromDropdown(getWebDriver(), computerPartsList);
 
     if (selectedItems.size() != 3) {
       Assert.fail("Does not contain 3 elements: " + selectedItems.toString());
@@ -287,7 +287,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void slowTypeTest() {
     navigateToUrl();
-    ElementHandler.slowType(getSeleniumWait(), firstNameTextBox, "Test input slowtype");
+    ElementHandler.slowType(getWebDriver(), firstNameTextBox, "Test input slowtype");
     Assert.assertEquals(getSeleniumWait().waitForClickableElement(firstNameTextBox).getAttribute("value"),
         "Test input slowtype");
   }
@@ -302,7 +302,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     this.navigateToUrl();
     this.getWebDriver().findElement(firstNameTextBox).sendKeys("somethingTest");
     this.getWebDriver().findElement(firstNameTextBox).clear();
-    ElementHandler.sendSecretKeys(this.getSeleniumWait(), firstNameTextBox, "secretKeys", this.getLogger());
+    ElementHandler.sendSecretKeys(getWebDriver(), firstNameTextBox, "secretKeys", this.getLogger());
 
     FileLogger logger = (FileLogger) this.getTestObject().getLog();
     File file = new File(logger.getFilePath());
@@ -321,7 +321,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void sendSecretTextContinueLoggingTest() throws IOException {
     this.navigateToUrl();
-    ElementHandler.sendSecretKeys(this.getSeleniumWait(), firstNameTextBox, "secretKeys", this.getLogger());
+    ElementHandler.sendSecretKeys(getWebDriver(), firstNameTextBox, "secretKeys", this.getLogger());
     this.getWebDriver().findElement(firstNameTextBox).clear();
     this.getWebDriver().findElement(firstNameTextBox).sendKeys("somethingTest");
 

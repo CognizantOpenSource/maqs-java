@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.ListProcessor;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
@@ -28,33 +29,34 @@ public class ElementHandler {
   /**
    * Private constructor.
    */
-  private ElementHandler() { }
+  private ElementHandler() {
+  }
 
   /**
    * Get selected option from drop down.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
+   * @param webDriver The web driver
+   * @param by        By selector for the element
    * @return Text of the selected option in drop down
    */
-  public static String getSelectedOptionFromDropdown(SeleniumWait seleniumWait, By by) {
+  public static String getSelectedOptionFromDropdown(WebDriver webDriver, By by) {
 
-    Select select = new Select(seleniumWait.waitForClickableElement(by));
+    Select select = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
     return select.getFirstSelectedOption().getText();
   }
 
   /**
    * Get a ArrayList of the items selected in a drop down.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
+   * @param webDriver The web driver
+   * @param by        By selector for the element
    * @return String array list of selected items in drop down
    */
-  public static List<String> getSelectedOptionsFromDropdown(SeleniumWait seleniumWait, By by) {
+  public static List<String> getSelectedOptionsFromDropdown(WebDriver webDriver, By by) {
 
     ArrayList<WebElement> elements;
     ArrayList<String> selectedItems = new ArrayList<>();
-    Select select = new Select(seleniumWait.waitForClickableElement(by));
+    Select select = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
 
     // Get a ArrayList of WebElement objects for all selected options from
     // the dropdown
@@ -74,37 +76,37 @@ public class ElementHandler {
   /**
    * Get the value of a specific attribute for an element.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
+   * @param webDriver The web driver
+   * @param by        By selector for the element
    * @return The text in the textbox
    */
-  public static String getElementAttribute(SeleniumWait seleniumWait, By by) {
-    return getElementAttribute(seleniumWait, by, "value");
+  public static String getElementAttribute(WebDriver webDriver, By by) {
+    return getElementAttribute(webDriver, by, "value");
   }
 
   /**
    * Get the value of a specific attribute for an element.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
-   * @param attribute    The attribute to get the value for
+   * @param webDriver The web driver
+   * @param by        By selector for the element
+   * @param attribute The attribute to get the value for
    * @return The text in the textbox
    */
-  public static String getElementAttribute(SeleniumWait seleniumWait, By by, String attribute) {
+  public static String getElementAttribute(WebDriver webDriver, By by, String attribute) {
 
-    return seleniumWait.waitForVisibleElement(by).getAttribute(attribute);
+    return UIWaitFactory.getWaitDriver(webDriver).waitForVisibleElement(by).getAttribute(attribute);
   }
 
   /**
    * Check or Uncheck a checkbox NOTE: If checkbox is already in desired state, this method takes no
    * action.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
-   * @param check        True to check the checkbox. False to uncheck the checkbox
+   * @param webDriver The web driver
+   * @param by        By selector for the element
+   * @param check     True to check the checkbox. False to uncheck the checkbox
    */
-  public static void checkCheckBox(SeleniumWait seleniumWait, By by, boolean check) {
-    WebElement element = seleniumWait.waitForClickableElement(by);
+  public static void checkCheckBox(WebDriver webDriver, By by, boolean check) {
+    WebElement element = UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by);
 
     if ((check && !element.isSelected()) || (!check && element.isSelected())) {
       element.click();
@@ -144,30 +146,29 @@ public class ElementHandler {
   /**
    * Clicks an element.
    *
-   * @param seleniumWait             SeleniumWait Object
+   * @param webDriver                The web driver
    * @param by                       By selector for the element
    * @param waitForButtonToDisappear If True, wait for element to disappear. If False, Do not wait
    */
-  public static void clickButton(SeleniumWait seleniumWait, By by, boolean waitForButtonToDisappear) {
-    seleniumWait.waitForClickableElement(by).click();
+  public static void clickButton(WebDriver webDriver, By by, boolean waitForButtonToDisappear) {
+    UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by).click();
 
     if (waitForButtonToDisappear) {
-      seleniumWait.waitForAbsentElement(by);
+      UIWaitFactory.getWaitDriver(webDriver).waitForAbsentElement(by);
     }
   }
 
   /**
    * Select multiple items from a List box.
    *
-   * @param seleniumWait         SeleniumWait Object
+   * @param webDriver            The web driver
    * @param by                   By selector for the element
    * @param elementsTextToSelect ArrayList items as Strings to select from List box
    */
-  public static void selectMultipleElementsFromListBox(SeleniumWait seleniumWait, By by,
-      List<String> elementsTextToSelect) {
-    Select selectItem = new Select(seleniumWait.waitForClickableElement(by));
+  public static void selectMultipleElementsFromListBox(WebDriver webDriver, By by, List<String> elementsTextToSelect) {
+    Select selectItem = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
 
-    // Select all desired items in the ArrayListbox
+    // Select all desired items in the Listbox
     for (String text : elementsTextToSelect) {
       selectItem.selectByVisibleText(text);
     }
@@ -176,13 +177,12 @@ public class ElementHandler {
   /**
    * Select multiple items from a List box.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
-   * @param values       ArrayList items as Strings to select from List box
+   * @param webDriver The web driver
+   * @param by        By selector for the element
+   * @param values    ArrayList items as Strings to select from List box
    */
-  public static void selectMultipleElementsFromListBoxByValue(SeleniumWait seleniumWait, By by,
-      List<String> values) {
-    Select selectItem = new Select(seleniumWait.waitForClickableElement(by));
+  public static void selectMultipleElementsFromListBoxByValue(WebDriver webDriver, By by, List<String> values) {
+    Select selectItem = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
 
     // Select all desired items in the Listbox
     for (String value : values) {
@@ -193,42 +193,42 @@ public class ElementHandler {
   /**
    * Select an option from a drop down using displayed text.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
-   * @param option       The option to select in drop down
+   * @param webDriver The web driver
+   * @param by        By selector for the element
+   * @param option    The option to select in drop down
    */
-  public static void selectDropDownOption(SeleniumWait seleniumWait, By by, String option) {
-    Select select = new Select(seleniumWait.waitForClickableElement(by));
+  public static void selectDropDownOption(WebDriver webDriver, By by, String option) {
+    Select select = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
     select.selectByVisibleText(option);
   }
 
   /**
    * Select an option from a drop down using the value attribute.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
-   * @param value        The value attribute for the option to select
+   * @param webDriver The web driver
+   * @param by        By selector for the element
+   * @param value     The value attribute for the option to select
    */
-  public static void selectDropDownOptionByValue(SeleniumWait seleniumWait, By by, String value) {
-    Select select = new Select(seleniumWait.waitForClickableElement(by));
+  public static void selectDropDownOptionByValue(WebDriver webDriver, By by, String value) {
+    Select select = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
     select.selectByValue(value);
   }
 
   /**
    * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
-   * @param textToEnter  Text to enter into the textbox
-   * @param tabOff       true to press the Tab key after entering text
+   * @param webDriver   The web driver
+   * @param by          By selector for the element
+   * @param textToEnter Text to enter into the textbox
+   * @param tabOff      true to press the Tab key after entering text
    */
-  public static void setTextBox(SeleniumWait seleniumWait, By by, String textToEnter, boolean tabOff) {
+  public static void setTextBox(WebDriver webDriver, By by, String textToEnter, boolean tabOff) {
     if (!textToEnter.isEmpty()) {
       if (tabOff) {
         textToEnter += Keys.TAB;
       }
 
-      WebElement element = seleniumWait.waitForVisibleElement(by);
+      WebElement element = UIWaitFactory.getWaitDriver(webDriver).waitForVisibleElement(by);
       element.clear();
       element.sendKeys(textToEnter);
     } else {
@@ -239,13 +239,13 @@ public class ElementHandler {
   /**
    * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           By selector for the element
-   * @param textToEnter  Text to enter into the textbox
+   * @param webDriver   The web driver
+   * @param by          By selector for the element
+   * @param textToEnter Text to enter into the textbox
    */
-  public static void setTextBox(SeleniumWait seleniumWait, By by, String textToEnter) {
+  public static void setTextBox(WebDriver webDriver, By by, String textToEnter) {
 
-    setTextBox(seleniumWait, by, textToEnter, true);
+    setTextBox(webDriver, by, textToEnter, true);
   }
 
   /**
@@ -339,13 +339,13 @@ public class ElementHandler {
    * Method to slowly type a String Used for scenarios where normal SendKeys types too quickly and
    * causes issues with a website.
    *
-   * @param seleniumWait SeleniumWait Object
-   * @param by           The By element to use
-   * @param textToEnter  The String being entered into the text input field
+   * @param webDriver   The web driver
+   * @param by          The By element to use
+   * @param textToEnter The String being entered into the text input field
    */
-  public static void slowType(SeleniumWait seleniumWait, By by, String textToEnter) {
+  public static void slowType(WebDriver webDriver, By by, String textToEnter) {
     for (char singleLetter : textToEnter.toCharArray()) {
-      seleniumWait.waitForClickableElement(by).sendKeys(Character.toString(singleLetter));
+      UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by).sendKeys(Character.toString(singleLetter));
 
       try {
         Thread.sleep(500);
@@ -359,14 +359,14 @@ public class ElementHandler {
   /**
    * Method used to send secret keys without logging.
    *
-   * @param seleniumWait The SeleniumWait Object
-   * @param by           The By element to send keys
-   * @param textToEnter  The text to send
-   * @param logger       The logging object
+   * @param webDriver   The web driver
+   * @param by          The By element to send keys
+   * @param textToEnter The text to send
+   * @param logger      The logging object
    */
-  public static void sendSecretKeys(SeleniumWait seleniumWait, By by, String textToEnter, Logger logger) {
+  public static void sendSecretKeys(WebDriver webDriver, By by, String textToEnter, Logger logger) {
     try {
-      WebElement secretElement = seleniumWait.waitForClickableElement(by);
+      WebElement secretElement = UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by);
       logger.suspendLogging();
       secretElement.sendKeys(textToEnter);
       logger.continueLogging();

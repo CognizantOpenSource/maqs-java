@@ -5,7 +5,7 @@ This class provides additional helper methods on top of Selenium's base interact
 Gets the selected option's displayed text from a select element and returns it.
 ### Written as
 ```java
-String getSelectedOptionFromDropdown(SeleniumWait seleniumWait, By by)
+String getSelectedOptionFromDropdown(WebDriver webDriver, By by)
 ```
 ### Example
 ```java
@@ -13,29 +13,29 @@ String getSelectedOptionFromDropdown(SeleniumWait seleniumWait, By by)
 private static By nameDropdown = By.cssSelector("#namesDropdown");
 
 // Gets the text of the current selected option
-String nameSelected = ElementHandler.getSelectedOptionFromDropdown(this.getSeleniumWait(), nameDropdown);
+String nameSelected = ElementHandler.getSelectedOptionFromDropdown(this.getWebDriver(), nameDropdown);
 ```
 
 ## Get List of Text From Selected Dropdown Items
 Gets all the selected options' displayed text from a select element and returns them in a list.
 ### Written as
 ```java
-ArrayList<String> getSelectedOptionsFromDropdown(SeleniumWait seleniumWait, By by)
+ArrayList<String> getSelectedOptionsFromDropdown(WebDriver webDriver, By by)
 ```
 ### Example
 ```java
 // A by selector for a list of names from a dropdown
 private static By nameDropdown = By.cssSelector("#namesDropdown");
 
-ArrayList<String> listOfNamesSelected = ElementHandler.getSelectedOptionsFromDropdown(this.getSeleniumWait(), nameDropdown);
+ArrayList<String> listOfNamesSelected = ElementHandler.getSelectedOptionsFromDropdown(this.getWebDriver(), nameDropdown);
 ```
 
 ## Return an Element's Attribute's Value
 Gets the value of an attribute for an element. By default, it gets the value of the "value" attribute.
 ### Written as
 ```java
-String getElementAttribute(SeleniumWait seleniumWait, By by)
-String getElementAttribute(SeleniumWait seleniumWait, By by, String attribute)
+String getElementAttribute(WebDriver webDriver, By by)
+String getElementAttribute(WebDriver webDriver, By by, String attribute)
 ```
 ### Examples
 ```java
@@ -43,21 +43,21 @@ String getElementAttribute(SeleniumWait seleniumWait, By by, String attribute)
 private static By pageTitle = By.cssSelector(".title");
 
 // Returns the value of the element's value
-String pageTitleValue = ElementHandler.getElementAttribute(this.getSeleniumWait(), pageTitle);
+String pageTitleValue = ElementHandler.getElementAttribute(this.getWebDriver(), pageTitle);
 ```
 ```java
 // By selector for the page title
 private static By pageTitle = By.cssSelector(".title");
 
 // Returns the value of the elements href
-String pageTitleHrefValue =  ElementHandler.getElementAttribute(this.getSeleniumWait(), pageTitle, "href");
+String pageTitleHrefValue =  ElementHandler.getElementAttribute(this.getWebDriver(), pageTitle, "href");
 ```
 
 ## Check a Checkbox
 Checks or unchecks an element. It will check the element if the bool argument is true. It will uncheck the element if the bool argument is false.  If the box is already in state the action wants it to be in upon completing that action, then the action will not do any checking or unchecking.
 ### Written as
 ```java
-void checkCheckBox(SeleniumWait seleniumWait, By by, boolean check)
+void checkCheckBox(WebDriver webDriver, By by, boolean check)
 ```
 
 ### Example
@@ -66,13 +66,13 @@ void checkCheckBox(SeleniumWait seleniumWait, By by, boolean check)
 private static By checkBox = By.id("CheckBox");
 
 // Checkbox is initially unchecked, waits for the element to become clickable
-this.getSeleniumWait().waitUntilClickableElement(checkbox);
+UIWaitFactory.getWaitDriver(this.getWebDriver()).waitUntilClickableElement(checkbox);
 
 // If the checkbox is unchecked, then the driver will check the checkbox
-ElementHandler.checkCheckBox(this.getSeleniumWait(), checkbox, true);
+ElementHandler.checkCheckBox(this.getWebDriver(), checkbox, true);
 
 // If the checkbox is checked, then the driver will uncheckcheck the checkbox
-ElementHandler.checkCheckBox(this.getSeleniumWait(), checkbox, false);
+ElementHandler.checkCheckBox(this.getWebDriver(), checkbox, false);
 ```
 In applications a checkbox will either be checked or unchecked.  Stating "click this checkbox" does not take into consideration the state of that checkbox.  
 
@@ -104,14 +104,14 @@ String computerOptions =  ElementHandler.createCommaDelimitedString(this.getWebD
 Clicks an element. If the bool argument is true, it will wait until the button disappears after clicking it, else it will immediately return.  If it waits for the button to disappear, it will throw an exception if it does not.  If it does not wait for the button to disappear, it will continue.
 ### Written as
 ```java
-void clickButton(SeleniumWait seleniumWait, By by, boolean waitForButtonToDisappear)
+void clickButton(WebDriver webDriver, By by, boolean waitForButtonToDisappear)
 ```
 ### Example
 ```java
 // By selector for a checkbox
 private static By button = By.id("LargeButton");
 
-ElementHandler.clickButton(this.getSeleniumWait(), button, true);
+ElementHandler.clickButton(this.getWebDriver(), button, true);
 ```
 
 ## Select Multiple Dropdown Options by Options Text
@@ -119,7 +119,7 @@ Selects multiple option elements from a list box using a list of strings of the 
 
 ### Written as
 ```java
-void selectMultipleElementsFromListBox(SeleniumWait seleniumWait, By by,
+void selectMultipleElementsFromListBox(WebDriver webDriver, By by,
       ArrayList<String> elementsTextToSelect)
 ```
 
@@ -133,14 +133,14 @@ ArrayList<String> itemsToSelect = new ArrayList<String>();
     itemsToSelect.add("Hard Drive");
     itemsToSelect.add("Keyboard");
 
-ElementHandler.selectMultipleElementsFromListBox(this.getSeleniumWait(), computerParts, itemsToSelect);
+ElementHandler.selectMultipleElementsFromListBox(this.getWebDriver(), computerParts, itemsToSelect);
 ```
 
 ## Select Multiple Dropdown Options by Options Value
 Selects multiple option elements from a list box using a list of strings of the option elements' value attribute texts.
 ### Written as
 ```java
-void selectMultipleElementsFromListBoxByValue(SeleniumWait seleniumWait, By by, ArrayList<String> values)
+void selectMultipleElementsFromListBoxByValue(WebDriver webDriver, By by, ArrayList<String> values)
 ```
 ### Example
 ```java
@@ -151,14 +151,14 @@ ArrayList<String> itemsToSelect = new ArrayList<String>();
     itemsToSelect.add("1");
     itemsToSelect.add("2");
 
-ElementHandler.selectMultipleElementsFromListBoxByValue(this.getSeleniumWait(), computerParts, itemsToSelect);
+ElementHandler.selectMultipleElementsFromListBoxByValue(this.getWebDriver(), computerParts, itemsToSelect);
 ```
 
 ## Select Dropdown Option by Option's Text
 Selects an option element from a select element using the option's displayed text.
 ### Written as
 ```java
-void selectDropDownOption(SeleniumWait seleniumWait, By by, String option)
+void selectDropDownOption(WebDriver webDriver, By by, String option)
 ```
 ### Example
 ```java
@@ -166,7 +166,7 @@ void selectDropDownOption(SeleniumWait seleniumWait, By by, String option)
 private static By computerParts = By.cssSelector("ul>#options");
 
 // Selects the element inside the computer parts options where the text matches "Motherboard"
-ElementHandler.selectDropDownOption(this.getSeleniumWait(), computerParts, "Motherboard");
+ElementHandler.selectDropDownOption(this.getWebDriver(), computerParts, "Motherboard");
 ```
 
 ## Select Dropdown Option by Value
@@ -174,7 +174,7 @@ Selects an option element from a select element using the option's value attribu
 
 ### Written as
 ```java
-void selectDropDownOptionByValue(SeleniumWait seleniumWait, By by, String value)
+void selectDropDownOptionByValue(WebDriver webDriver, By by, String value)
 ```
 ### Example
 ```java
@@ -189,8 +189,8 @@ ElementHandler.selectDropDownOptionByValue(computerParts , "1");
 Enters text into an element. It also clears the element before entering anything. If the tabOff  is not set or is set to true, then the last key sent will be a tab, else it won't send a tab key at the end of typing the string argument.
 ### Written as
 ```java
-void setTextBox(SeleniumWait seleniumWait, By by, String textToEnter)
-void setTextBox(SeleniumWait seleniumWait, By by, String textToEnter, boolean tabOff)
+void setTextBox(WebDriver webDriver, By by, String textToEnter)
+void setTextBox(WebDriver webDriver, By by, String textToEnter, boolean tabOff)
 ```
 ### Example
 ```java
@@ -198,10 +198,10 @@ void setTextBox(SeleniumWait seleniumWait, By by, String textToEnter, boolean ta
 private static By textField = By.id("textBox");
 
 // Sends the words "hello, world" to the text box, and then sends tab
-ElementHandler.setTextBox(this.getSeleniumWait, textField , "hello, world");
+ElementHandler.setTextBox(this.getWebDriver(), textField , "hello, world");
 
 // Sends the words "hello, world" to the text box, and does not send tab
-ElementHandler.setTextBox(this.getSeleniumWait, textField , "hello, world", false);
+ElementHandler.setTextBox(this.getWebDriver(), textField , "hello, world", false);
 ```
 
 ## Click Element With JavaScript
@@ -267,7 +267,7 @@ ElementHandler.executeScrolling(this.getWebDriver(), 50, -100);
 Slowly types a string. Useful in scenarios where the normal Selenium SendKeys method types too quickly and causes issues. It sends key presses every 500 milliseconds.
 ### Written as
 ```java
-void slowType(SeleniumWait seleniumWait, By by, String textToEnter)
+void slowType(WebDriver webDriver, By by, String textToEnter)
 ```
 
 ### Example
@@ -275,21 +275,21 @@ void slowType(SeleniumWait seleniumWait, By by, String textToEnter)
 // By selector for a textField
 private static By textField = By.id("textBox");
 
-ElementHandler.slowType(this.getSeleneiumWait(), textField, "hello, world");
+ElementHandler.slowType(this.getWebDriver(), textField, "hello, world");
 ```
 
 ## Send Secret Keys Without Logging
 Sends keys to an element without logging. Useful to prevent secret fields (passwords) from being logged.
 ### Written as
 ```java
-void sendSecretKeys(SeleniumWait seleniumWait, By by, String textToEnter, Logger logger)
+void sendSecretKeys(WebDriver webDriver, By by, String textToEnter, Logger logger)
 ```
 
 ### Example
 ```java
  private static By passwordField = By.id("passwordField");
 
- ElementHandler.sendSecretKeys(this.getSeleniumWait(), passwordField, "superSecretPassword", this.getLogger());
+ ElementHandler.sendSecretKeys(this.getWebDriver(), passwordField, "superSecretPassword", this.getLogger());
  ```
 
 
