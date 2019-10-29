@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.ListProcessor;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -122,8 +123,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void checkRadioButtonTest() {
     navigateToUrl();
     ElementHandler.clickButton(getWebDriver(), femaleRadioButton, false);
-    Assert.assertTrue(getSeleniumWait().waitForClickableElement(femaleRadioButton).isSelected(),
-        "Radio button was not selected");
+    Assert
+        .assertTrue(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(femaleRadioButton).isSelected(),
+            "Radio button was not selected");
   }
 
   /**
@@ -133,7 +135,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void checkCheckBoxTest() {
     navigateToUrl();
     ElementHandler.checkCheckBox(getWebDriver(), checkbox, true);
-    Assert.assertTrue(getSeleniumWait().waitForClickableElement(checkbox).isSelected(), "Checkbox was not enabled");
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(checkbox).isSelected(),
+        "Checkbox was not enabled");
   }
 
   /**
@@ -221,8 +224,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void clickElementByJavascriptFromHoverDropdown() {
     navigateToUrl();
     ElementHandler.clickElementByJavaScript(getWebDriver(), employeeButton);
-    getSeleniumWait().waitForPageLoad();
-    getSeleniumWait().waitForExactText(employeePageTitle, "Index");
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForExactText(employeePageTitle, "Index");
   }
 
   /**
@@ -288,7 +291,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void slowTypeTest() {
     navigateToUrl();
     ElementHandler.slowType(getWebDriver(), firstNameTextBox, "Test input slowtype");
-    Assert.assertEquals(getSeleniumWait().waitForClickableElement(firstNameTextBox).getAttribute("value"),
+    Assert.assertEquals(
+        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(firstNameTextBox).getAttribute("value"),
         "Test input slowtype");
   }
 
@@ -349,6 +353,6 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   private void navigateToUrl() {
     getWebDriver().navigate().to(siteAutomationUrl);
-    getSeleniumWait().waitForPageLoad();
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
   }
 }
