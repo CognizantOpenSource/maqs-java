@@ -22,7 +22,7 @@ public final class WebServiceConfig {
    * Grabs the URI for the Web Service.
    * @return A String containing the URI for the WebService to test
    */
-  static String getWebServiceUri() {
+  public static String getWebServiceUri() {
     return Config.getValueForSection(WEBSERVICE_SECTION, "WebServiceUri");
   }
 
