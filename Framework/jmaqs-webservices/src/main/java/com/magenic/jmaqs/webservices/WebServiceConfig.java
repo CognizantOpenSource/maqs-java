@@ -31,7 +31,7 @@ public final class WebServiceConfig {
    * @return an Integer containing the Time Out value for
    * the web service test, or -1 if none are configured
    */
-  static int getWebServiceTimeOut() {
+  public static int getWebServiceTimeOut() {
     return Integer.parseInt(Config.getValueForSection(WEBSERVICE_SECTION,
             "WebServiceTimeout",
             "-1"));
@@ -41,7 +41,7 @@ public final class WebServiceConfig {
    * Get if we want to use a proxy for the web driver traffic.
    * @return True if we want to use the proxy
    */
-  static boolean getUseProxy() {
+  public static boolean getUseProxy() {
     return Config.getValueForSection(ConfigSection.WebServiceMaqs,
             "UseProxy",
             "No").equals("Yes");
@@ -51,7 +51,7 @@ public final class WebServiceConfig {
    * Get the proxy address to use.
    * @return The proxy address
    */
-  static String getProxyAddress() {
+  public static String getProxyAddress() {
     return Config.getValueForSection(ConfigSection.WebServiceMaqs,
             "ProxyAddress");
   }
