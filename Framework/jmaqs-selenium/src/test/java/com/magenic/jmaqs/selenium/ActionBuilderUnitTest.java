@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -69,20 +70,20 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   public void hoverOverTest() {
     this.navigateToUrl(siteAutomationUrl);
     ActionBuilder.hoverOver(this.getWebDriver(), manageDropdown);
-    this.getSeleniumWait().waitForClickableElement(employeeButton).click();
-    this.getSeleniumWait().waitForExactText(employeePageTitle, "Index");
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(employeeButton).click();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForExactText(employeePageTitle, "Index");
   }
 
   @Test(groups = TestCategories.Selenium)
   public void pressModifierKeyTest() {
     this.navigateToUrl(siteAutomationUrl);
 
-    this.getSeleniumWait().waitForClickableElement(listBoxOption1).click();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1).click();
     ActionBuilder.pressModifierKey(this.getWebDriver(), Keys.CONTROL);
-    this.getSeleniumWait().waitForClickableElement(listBoxOption2).click();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2).click();
 
-    Assert.assertTrue(this.getSeleniumWait().waitForClickableElement(listBoxOption1).isSelected());
-    Assert.assertTrue(this.getSeleniumWait().waitForClickableElement(listBoxOption2).isSelected());
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1).isSelected());
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2).isSelected());
   }
 
   @Test(groups = TestCategories.Selenium)
@@ -101,6 +102,6 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
 
   private void navigateToUrl(String url) {
     this.getWebDriver().navigate().to(url);
-    this.getSeleniumWait().waitForPageLoad();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
 }
