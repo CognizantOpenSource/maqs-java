@@ -8,8 +8,9 @@ import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
-
+@Ignore
 public class SeleniumWaitTest extends BaseSeleniumTest {
   /**
    * Url for the site.
