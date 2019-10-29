@@ -82,8 +82,10 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
     ActionBuilder.pressModifierKey(this.getWebDriver(), Keys.CONTROL);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2).click();
 
-    Assert.assertTrue(UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1).isSelected());
-    Assert.assertTrue(UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2).isSelected());
+    Assert.assertTrue(
+        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1).isSelected());
+    Assert.assertTrue(
+        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2).isSelected());
   }
 
   @Test(groups = TestCategories.Selenium)
