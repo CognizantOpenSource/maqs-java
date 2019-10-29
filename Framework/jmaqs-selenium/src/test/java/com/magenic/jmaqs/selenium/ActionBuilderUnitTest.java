@@ -61,14 +61,14 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   private static By rightClickableElementWithContextMenu = By.cssSelector("#rightclickspace");
 
   /**
-   *  Text within context menu triggered by right click on specific element.
+   * Text within context menu triggered by right click on specific element.
    */
   private static By rightClickContextSaveText = By.cssSelector("#RightClickSaveText");
 
   @Test(groups = TestCategories.Selenium)
   public void hoverOverTest() {
     this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.hoverOver(this.getSeleniumWait(), manageDropdown);
+    ActionBuilder.hoverOver(this.getWebDriver(), manageDropdown);
     this.getSeleniumWait().waitForClickableElement(employeeButton).click();
     this.getSeleniumWait().waitForExactText(employeePageTitle, "Index");
   }
@@ -78,7 +78,7 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
     this.navigateToUrl(siteAutomationUrl);
 
     this.getSeleniumWait().waitForClickableElement(listBoxOption1).click();
-    ActionBuilder.pressModifierKey(this.getSeleniumWait(), Keys.CONTROL);
+    ActionBuilder.pressModifierKey(this.getWebDriver(), Keys.CONTROL);
     this.getSeleniumWait().waitForClickableElement(listBoxOption2).click();
 
     Assert.assertTrue(this.getSeleniumWait().waitForClickableElement(listBoxOption1).isSelected());
@@ -88,14 +88,14 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void moveSliderTest() {
     this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.slideElement(this.getSeleniumWait(), slider, 50);
+    ActionBuilder.slideElement(this.getWebDriver(), slider, 50);
     Assert.assertEquals(this.getWebDriver().findElement(sliderLabelNumber).getAttribute("value"), "4");
   }
 
   @Test(groups = TestCategories.Selenium)
   public void rightClickToTriggerContextMenu() {
     this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.rightClick(this.getSeleniumWait(), rightClickableElementWithContextMenu);
+    ActionBuilder.rightClick(this.getWebDriver(), rightClickableElementWithContextMenu);
     Assert.assertTrue(this.getWebDriver().findElement(rightClickContextSaveText).isDisplayed());
   }
 
