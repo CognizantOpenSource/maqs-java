@@ -230,7 +230,7 @@ public class SeleniumUtilities {
    */
   public static WebDriver webElementToWebDriver(WebElement webElement) {
     WebDriver driver;
-    driver = ((RemoteWebElement) webElement).getWrappedDriver();
+    driver = ((WrapsDriver) webElement).getWrappedDriver();
 
     // If this an even firing wrapper get the base wrapper
     if (driver instanceof EventFiringWebDriver) {

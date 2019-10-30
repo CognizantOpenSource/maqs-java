@@ -20,6 +20,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
@@ -246,14 +247,15 @@ public class SeleniumUtilitiesTest extends BaseTest {
     } catch (Exception e) {
       e.printStackTrace();
     }
+    EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(webDriver);
     ConsoleLogger consoleLogger = new ConsoleLogger();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
+    SeleniumTestObject testObject = new SeleniumTestObject(eventFiringWebDriver, consoleLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
 
     // Open Google and take a screenshot
-    webDriver.navigate().to("http://www.google.com");
-    WebElement input = UIWaitFactory.getWaitDriver(webDriver)
+    eventFiringWebDriver.navigate().to("http://www.google.com");
+    WebElement input = UIWaitFactory.getWaitDriver(eventFiringWebDriver)
         .waitForVisibleElement(By.tagName("div"));
     WebDriver webElementToWebDriver = SeleniumUtilities.webElementToWebDriver(input);
     Assert.assertNotNull(webElementToWebDriver, "Expected extracted webdriver to not be null");
