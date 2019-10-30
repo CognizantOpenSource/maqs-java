@@ -39,6 +39,7 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
    *
    * @return the appium driver
    */
+
   public AppiumDriver<WebElement> getAppiumDriver() {
     return this.getTestObject().getAppiumDriver();
   }
@@ -115,6 +116,7 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
               .savePageSource(this.getAppiumDriver(), this.getTestObject(), "FinalPageSource");
         }
       }
+
 
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());

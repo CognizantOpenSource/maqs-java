@@ -7,6 +7,7 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
 
+import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -16,67 +17,122 @@ public class SeleniumTestObject extends BaseTestObject {
 
   /**
    * The WebDriver Object.
+   * @deprecated methodology no longer being used.
    */
+  @Deprecated
   protected WebDriver webDriver;
 
   /**
    * The SeleniumWait Object.
+   *
+   * @deprecated {@link com.magenic.jmaqs.selenium.SeleniumWait} has been deprecated.
    */
+  @Deprecated
   protected SeleniumWait seleniumWait;
 
   /**
-   * Initializes a new instance of the SeleniunTestObject.
-   * 
-   * @param driver
-   *          The WebDriver Object
-   * @param wait
-   *          The SeleniumWait Object
-   * @param logger
-   *          The Logger Object
-   * @param fullyQualifiedTestName
-   *          The fully qualified test name
+   * Initializes a new instance of the SeleniumTestObject.
+   *
+   * @param driver                 The WebDriver Object
+   * @param wait                   The SeleniumWait Object
+   * @param logger                 The Logger Object
+   * @param fullyQualifiedTestName The fully qualified test name
+   * @deprecated {@link com.magenic.jmaqs.selenium.SeleniumWait} has been deprecated.
    */
-  public SeleniumTestObject(WebDriver driver, SeleniumWait wait, Logger logger, String fullyQualifiedTestName) {
+  @Deprecated
+  public SeleniumTestObject(WebDriver driver, SeleniumWait wait, Logger logger,
+      String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.webDriver = driver;
     this.seleniumWait = wait;
   }
 
   /**
-   * Get the SeleniumWait Object.
-   * 
-   * @return A SeleniumWait Object
+   * Instantiates a new Selenium test object.
+   *
+   * @param getDriverSupplier      the get driver supplier
+   * @param logger                 the logger
+   * @param fullyQualifiedTestName the fully qualified test name
    */
+  public SeleniumTestObject(Supplier<WebDriver> getDriverSupplier, Logger logger,
+      String fullyQualifiedTestName) {
+    super(logger, fullyQualifiedTestName);
+    this.getManagerStore().put((SeleniumDriverManager.class).getCanonicalName(),
+        new SeleniumDriverManager(getDriverSupplier, this));
+  }
+
+  /**
+   * Instantiates a new Selenium test object.
+   *
+   * @param webDriver              the web driver
+   * @param logger                 the logger
+   * @param fullyQualifiedTestName the fully qualified test name
+   */
+  public SeleniumTestObject(WebDriver webDriver, Logger logger, String fullyQualifiedTestName) {
+    super(logger, fullyQualifiedTestName);
+    this.getManagerStore().put((SeleniumDriverManager.class).getCanonicalName(),
+        new SeleniumDriverManager((() -> webDriver), this));
+  }
+
+  /**
+   * Get the SeleniumWait Object.
+   *
+   * @return A SeleniumWait Object
+   * @deprecated {@link com.magenic.jmaqs.selenium.SeleniumWait} has been deprecated.
+   */
+  @Deprecated
   public SeleniumWait getSeleniumWait() {
     return this.seleniumWait;
   }
 
   /**
    * Set the SeleniumWait for the SeleniumTestObject.
-   * 
-   * @param wait
-   *          The SeleniumWait Object
+   *
+   * @param wait The SeleniumWait Object
+   * @deprecated {@link com.magenic.jmaqs.selenium.SeleniumWait} has been deprecated.
    */
+  @Deprecated
   public void setSeleniumWait(SeleniumWait wait) {
     this.seleniumWait = wait;
   }
 
   /**
    * Get the WebDriver Object.
-   * 
+   *
    * @return A WebDriver Object
    */
   public WebDriver getWebDriver() {
-    return this.webDriver;
+    return this.getWebManager().getWebDriver();
   }
 
   /**
-   * Set the WebDriver for the SeleniumTestObject.
-   * 
-   * @param driver
-   *          The WebDriver Object
+   * Gets the Selenium driver manager.
+   *
+   * @return the web manager
+   */
+  public SeleniumDriverManager getWebManager() {
+    return (SeleniumDriverManager) this.getManagerStore()
+        .get(SeleniumDriverManager.class.getCanonicalName());
+  }
+
+  /**
+   * Sets web driver.
+   *
+   * @param driver the driver
    */
   public void setWebDriver(WebDriver driver) {
-    this.webDriver = driver;
+    this.getManagerStore().put(SeleniumDriverManager.class.getCanonicalName(),
+        new SeleniumDriverManager((() -> driver), this));
   }
+
+  /**
+   * Sets web driver using Supplier.
+   *
+   * @param webDriverSupplier the web driver supplier
+   */
+  public void setWebDriver(Supplier<WebDriver> webDriverSupplier) {
+    this.getManagerStore().put(SeleniumDriverManager.class.getCanonicalName(),
+        new SeleniumDriverManager(webDriverSupplier, this));
+  }
+
 }
