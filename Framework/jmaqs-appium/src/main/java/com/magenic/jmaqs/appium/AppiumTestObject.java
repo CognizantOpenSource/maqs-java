@@ -102,7 +102,7 @@ public class AppiumTestObject extends BaseTestObject {
    *
    * @return the appium driver
    */
-  public AppiumDriver getAppiumDriver() {
+  public AppiumDriver<WebElement> getAppiumDriver() {
 
     return this.getAppiumManager().getMobileDriver();
   }
