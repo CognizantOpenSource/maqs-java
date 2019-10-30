@@ -151,7 +151,8 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
       this.setTestObject(new SeleniumTestObject(this.getBrowser(), this.createLogger(),
           this.getFullyQualifiedTestClassName()));
     } catch (Exception e) {
-      e.printStackTrace();
+      getLogger().logMessage(
+          StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }
   }
 }
