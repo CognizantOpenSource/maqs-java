@@ -31,6 +31,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
@@ -229,7 +230,7 @@ public class SeleniumUtilities {
    */
   public static WebDriver webElementToWebDriver(WebElement webElement) {
     WebDriver driver;
-    driver = ((WrapsDriver) webElement).getWrappedDriver();
+    driver = ((RemoteWebElement) webElement).getWrappedDriver();
 
     // If this an even firing wrapper get the base wrapper
     if (driver instanceof EventFiringWebDriver) {
