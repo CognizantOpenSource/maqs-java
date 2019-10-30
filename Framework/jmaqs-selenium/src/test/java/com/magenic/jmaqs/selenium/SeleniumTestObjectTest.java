@@ -4,38 +4,17 @@
 
 package com.magenic.jmaqs.selenium;
 
-import javax.xml.ws.WebFault;
-
+import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import java.lang.reflect.Method;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * The type Selenium test object test.
  */
-public class SeleniumTestObjectTest {
-
-  private String testName;
-  private ConsoleLogger consoleLogger;
-
-  /**
-   * Sets up.
-   *
-   * @param method the method
-   */
-  @BeforeMethod
-  public void setUp(Method method) {
-    testName = method.getName();
-    consoleLogger = new ConsoleLogger();
-
-  }
+public class SeleniumTestObjectTest extends BaseTest {
 
   /**
    * Test appium test object creation with driver.
@@ -50,7 +29,8 @@ public class SeleniumTestObjectTest {
       e.printStackTrace();
       Assert.fail("Driver creation failed. ");
     }
-    SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, consoleLogger, testName);
+    SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
+        this.getFullyQualifiedTestClassName());
     Assert.assertNotNull(testObject, "Checking that selenium test object via driver is not null");
   }
 
@@ -67,7 +47,7 @@ public class SeleniumTestObjectTest {
         Assert.fail("Driver creation failed.");
       }
       return null;
-    }, consoleLogger, testName)) {
+    }, this.getLogger(), this.getFullyQualifiedTestClassName())) {
       Assert
           .assertNotNull(testObject, "Checking that selenium test object via supplier is not null");
     }
@@ -82,7 +62,8 @@ public class SeleniumTestObjectTest {
       e.printStackTrace();
       Assert.fail("Driver creation failed. ");
     }
-    SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, consoleLogger, testName);
+    SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
+        this.getFullyQualifiedTestClassName());
     WebDriver webDriver = testObject.getWebDriver();
     Assert.assertNotNull(webDriver,
         "Checking that selenium driver can be retrieved from test object");
@@ -98,7 +79,8 @@ public class SeleniumTestObjectTest {
       e.printStackTrace();
       Assert.fail("Driver creation failed. ");
     }
-    SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, consoleLogger, testName);
+    SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
+        this.getFullyQualifiedTestClassName());
     SeleniumDriverManager webManager = testObject.getWebManager();
     Assert.assertNotNull(webManager,
         "Checking that selenium driver manager can be retrieved from test object");
@@ -113,7 +95,8 @@ public class SeleniumTestObjectTest {
       e.printStackTrace();
       Assert.fail("Driver creation failed. ");
     }
-    SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, consoleLogger, testName);
+    SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
+        this.getFullyQualifiedTestClassName());
     int hashCode = testObject.getWebDriver().hashCode();
     try {
       testObject.setWebDriver(WebDriverFactory.getDefaultBrowser());
@@ -140,7 +123,7 @@ public class SeleniumTestObjectTest {
     }
     WebDriver finalDefaultBrowser = defaultBrowser;
     SeleniumTestObject testObject = new SeleniumTestObject((() -> finalDefaultBrowser),
-        consoleLogger, testName);
+        this.getLogger(), this.getFullyQualifiedTestClassName());
     int hashCode = testObject.getWebDriver().hashCode();
     try {
       testObject.setWebDriver(() -> {
@@ -162,5 +145,13 @@ public class SeleniumTestObjectTest {
     Assert.assertNotEquals(hashCode, hashCode1, String.format(
         "Checking that the selenium driver is not the same as previous version.  First: %d, Second: %d",
         hashCode, hashCode1));
+  }
+
+  @Override
+  protected void postSetupLogging() throws Exception {
+  }
+
+  @Override
+  protected void beforeLoggingTeardown(ITestResult resultType) {
   }
 }
