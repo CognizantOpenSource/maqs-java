@@ -39,7 +39,7 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
    *
    * @return the appium driver
    */
-  public AppiumDriver getAppiumDriver() {
+  public AppiumDriver<WebElement> getAppiumDriver() {
     return this.getTestObject().getAppiumDriver();
   }
 
@@ -89,7 +89,6 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
           this.getLogger()));
       this.getLogger()
           .logMessage(MessageType.INFORMATION, "Loaded driver: %s", AppiumConfig.getPlatformName());
-      // }
     } catch (Exception e) {
       this.getLogger()
           .logMessage(MessageType.ERROR, "Failed to start driver because: %s", e.getMessage());
@@ -106,8 +105,8 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
     try {
-      // TODO add screen capture once AppiumUtilities has been created
-      /*if (this.getTestObject().getAppiumManager().isDriverInitialized() && this
+
+      if (this.getTestObject().getAppiumManager().isDriverInitialized() && this
           .getLogger() instanceof FileLogger && resultType.getStatus() != ITestResult.SUCCESS
           && this.loggingEnabledSetting != LoggingEnabled.NO) {
         AppiumUtilities.captureScreenshot(this.getAppiumDriver(), this.getTestObject(), "Final");
@@ -115,7 +114,7 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
           AppiumUtilities
               .savePageSource(this.getAppiumDriver(), this.getTestObject(), "FinalPageSource");
         }
-      }*/
+      }
 
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
