@@ -6,7 +6,6 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 
@@ -17,21 +16,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.text.MessageFormat;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
@@ -43,6 +37,11 @@ public class SeleniumUtilities {
    * Default Date Time Format for appending to files.
    */
   private static final String DEFAULT_DATE_TIME_FORMAT = "uuuu-MM-dd-HH-mm-ss-SSSS";
+
+  /**
+   * The constant LOG_MESSAGE_PREFIX.
+   */
+  private static final String LOG_MESSAGE_PREFIX = "%s - %s%s";
 
   private SeleniumUtilities() {
   }
@@ -77,7 +76,7 @@ public class SeleniumUtilities {
       // Calculate the file name with Date Time Stamp
       String directory = ((FileLogger) testObject.getLog()).getDirectory();
       String fileNameWithoutExtension = StringProcessor
-          .safeFormatter("%s - %s%s", testObject.getFullyQualifiedTestName(),
+          .safeFormatter(LOG_MESSAGE_PREFIX, testObject.getFullyQualifiedTestName(),
               DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
                   .format(LocalDateTime.now(Clock.systemUTC())), appendName);
       captureScreenshot(webDriver, testObject, directory, fileNameWithoutExtension);
@@ -158,14 +157,14 @@ public class SeleniumUtilities {
       if (!(testObject.getLog() instanceof FileLogger)) {
         // Since this is not a file logger we will need to use a generic file name
         path = savePageSource(webDriver, testObject, LoggingConfig.getLogDirectory(),
-            StringProcessor.safeFormatter("%s - %s%s", "PageSource",
+            StringProcessor.safeFormatter(LOG_MESSAGE_PREFIX, "PageSource",
                 DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
                     .format(LocalDateTime.now(Clock.systemUTC())), appendName));
       } else {
         // Calculate the file name
         String directory = ((FileLogger) testObject.getLog()).getDirectory();
         String fileNameWithoutExtension = StringProcessor
-            .safeFormatter("%s - %s%s", testObject.getFullyQualifiedTestName() + "_PS",
+            .safeFormatter(LOG_MESSAGE_PREFIX, testObject.getFullyQualifiedTestName() + "_PS",
                 DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
                     .format(LocalDateTime.now(Clock.systemUTC())), appendName);
 
@@ -238,19 +237,6 @@ public class SeleniumUtilities {
     }
 
     return driver;
-  }
-
-  /**
-   * Checks if directory exists, creating one if not.
-   *
-   * @param directory The directory path
-   */
-  private static void checkDirectory(String directory) {
-    // Make sure the directory exists
-    File folder = new File(directory);
-    if (!folder.isDirectory()) {
-      folder.mkdir();
-    }
   }
 
   /**

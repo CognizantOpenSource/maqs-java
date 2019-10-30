@@ -4,7 +4,6 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
@@ -24,8 +23,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * The type Selenium utilities test.
