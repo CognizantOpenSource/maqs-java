@@ -131,7 +131,8 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
    */
   @Deprecated
   protected String captureScreenShot(WebDriver driver, Logger log, String fileName) {
-    return SeleniumUtilities.captureScreenshot(driver, log, fileName);
+    //return SeleniumUtilities.captureScreenshot(driver, log, fileName);
+    return null;
   }
 
   /**
