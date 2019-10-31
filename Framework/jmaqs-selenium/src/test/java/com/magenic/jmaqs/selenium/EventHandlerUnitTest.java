@@ -23,13 +23,16 @@ import org.testng.asserts.SoftAssert;
 
 /*
 FIXME:  Commenting out tests until repaired.  All failing for same general casting issue.
-FIXME: java.lang.ClassCastException: com.magenic.jmaqs.utilities.logging.ConsoleLogger cannot be cast to com.magenic.jmaqs.utilities.logging.FileLogger at com.magenic.jmaqs.selenium.EventHandlerUnitTest.eventHandlerSwitchWindow(EventHandlerUnitTest.java:253)
+FIXME: java.lang.ClassCastException: com.magenic.jmaqs.utilities.logging.ConsoleLogger
+ cannot be cast to com.magenic.jmaqs.utilities.logging.FileLogger at
+ com.magenic.jmaqs.selenium.EventHandlerUnitTest.eventHandlerSwitchWindow
+ (EventHandlerUnitTest.java:253)
 */
 
 /**
  * Unit tests for EventHandler class.
  */
-
+@Test(groups = TestCategories.Selenium)
 @Ignore
 public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
@@ -372,8 +375,10 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(logText.contains("Before getting text from element"), "Expected message to be logged before getting text from an element.");
-    softAssert.assertTrue(logText.contains("Got element text"), "Expected message to be logged after getting text from an element.");
+    softAssert.assertTrue(logText.contains("Before getting text from element"),
+    "Expected message to be logged before getting text from an element.");
+    softAssert.assertTrue(logText.contains("Got element text"),
+    "Expected message to be logged after getting text from an element.");
     softAssert.assertAll();
   }
 
@@ -431,7 +436,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Read a file and return it as a string
+   * Read a file and return it as a string.
    *
    * @param filePath The file path to read
    * @return The contents of the file

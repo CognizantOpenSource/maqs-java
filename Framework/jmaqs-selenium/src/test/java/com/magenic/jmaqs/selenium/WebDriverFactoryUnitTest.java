@@ -117,7 +117,8 @@ public class WebDriverFactoryUnitTest {
   public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
     try {
-      driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.IE);
+      driver = (InternetExplorerDriver) WebDriverFactory
+          .getBrowserWithDefaultConfiguration(BrowserType.IE);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {

@@ -7,12 +7,10 @@ package com.magenic.jmaqs.selenium;
 import com.google.common.base.Function;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
-
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -33,9 +31,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Selenium waiter This is the tool-class used for waiting. It can be used to wait for many
- * circumstances (element exist, not exist, be visible, to equal a desired value, etc..
- * @deprecated {@link SeleniumWait} is no longer supported. Use {@link com.magenic.jmaqs.selenium.factories.UIWaitFactory UIWaitFactory} 
- *             to create {@link UIWait UIWait} objects instead.
+ * circumstances (element exist, not exist, be visible, to equal a desired value, etc.
+ */
+
+/**
+ * @deprecated {@link SeleniumWait} is no longer supported.
+ * Use {@link com.magenic.jmaqs.selenium.factories.UIWaitFactory UIWaitFactory}
+ * to create {@link UIWait UIWait} objects instead.
  */
 @Deprecated
 public class SeleniumWait {
@@ -76,15 +78,16 @@ public class SeleniumWait {
    * @param driver WebDriver
    */
   public SeleniumWait(WebDriver driver) {
-    this(driver,
-        Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserTimeout", "30000")),
-        Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserWaitTime", "1000")));
+    this(driver, Integer
+            .parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserTimeout", "30000")),
+        Integer.parseInt(
+            Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserWaitTime", "1000")));
   }
 
   /**
    * Constructor for SeleniumWait object.
    *
-   * @param driver          The WebDriver
+   * @param driver           The WebDriver
    * @param timeOutInSeconds int value of the total time to wait until timing out
    * @param fluentRetryTime  int value of seconds to use for fluent retry
    */
@@ -134,7 +137,7 @@ public class SeleniumWait {
     setWaitDriver(this.driver, wait);
     return wait;
   }
-  
+
   /**
    * Waits until the element is present.
    *
@@ -148,14 +151,13 @@ public class SeleniumWait {
   /**
    * Waits until the element is present.
    *
-   * @param by  The by selector
+   * @param by              The by selector
    * @param timeOutInMillis The timeout in milliseconds
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return Returns the element if present
    */
-  public WebElement waitForPresentElement(By by, 
-                                          final int timeOutInMillis, 
-                                          final int sleepInMillis) {
+  public WebElement waitForPresentElement(By by, final int timeOutInMillis,
+      final int sleepInMillis) {
 
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -164,14 +166,14 @@ public class SeleniumWait {
   /**
    * Waits For the element to be present.
    *
-   * @param by  The by selector
+   * @param by   The by selector
    * @param wait The wait driver
    * @return Returns the element if present
    */
   public WebElement waitForPresentElement(By by, WebDriverWait wait) {
     return wait.until(ExpectedConditions.presenceOfElementLocated(by));
   }
-  
+
   /**
    * Wait for the specified element to be visible on the pages DOM. The first element located with
    * the specified By value is returned.
@@ -187,14 +189,13 @@ public class SeleniumWait {
    * Wait for the specified element to be visible on the pages DOM. The first element located with
    * the specified By value is returned.
    *
-   * @param by Selector to wait for, and return
+   * @param by              Selector to wait for, and return
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return WebElement - first one found with by. Null
    */
-  public WebElement waitForVisibleElement(final By by,
-                                          final int timeOutInMillis,
-                                          final int sleepInMillis) {
+  public WebElement waitForVisibleElement(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return this.waitForVisibleElement(by, wait);
   }
@@ -203,16 +204,15 @@ public class SeleniumWait {
    * Wait for the specified element to be visible on the pages DOM. The first element located with
    * the specified By value is returned.
    *
-   * @param by Selector to wait for, and return
+   * @param by   Selector to wait for, and return
    * @param wait The wait driver
    * @return WebElement - first one found with by. Null
    */
-  public WebElement waitForVisibleElement(final By by,
-                                          WebDriverWait wait) {
+  public WebElement waitForVisibleElement(final By by, WebDriverWait wait) {
     try {
       return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     } catch (Exception e) {
-      this.printSelectorNotFoundError(by.toString(), e);  
+      this.printSelectorNotFoundError(by.toString(), e);
       throw e;
     }
   }
@@ -230,14 +230,13 @@ public class SeleniumWait {
   /**
    * Wait until the element exists and is visible.
    *
-   * @param by Selector to wait for
+   * @param by              Selector to wait for
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return boolean true if element is found
    */
-  public boolean waitUntilVisibleElement(final By by,
-                                         final int timeOutInMillis,
-                                         final int sleepInMillis) {
+  public boolean waitUntilVisibleElement(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(this.driver, timeOutInMillis, sleepInMillis);
     return waitUntilVisibleElement(by, wait);
   }
@@ -245,7 +244,7 @@ public class SeleniumWait {
   /**
    * Wait until the element exists and is visible.
    *
-   * @param by Selector to wait for
+   * @param by   Selector to wait for
    * @param wait The wait driver
    * @return boolean true if element is found
    */
@@ -256,7 +255,7 @@ public class SeleniumWait {
       return false;
     }
   }
-  
+
   /**
    * Wait for the specified element to be present and enabled. The first element located with
    * the specified By value is returned.
@@ -272,21 +271,20 @@ public class SeleniumWait {
    * Wait for the specified element to be present and enabled. The first element located with
    * the specified By value is returned.
    *
-   * @param by Selector to wait for, and return
-   * @param timeOutInMillis       - the number of milliseconds to wait before failing
-   * @param sleepInMillis         - the number of milliseconds to wait before a recheck
+   * @param by              Selector to wait for, and return
+   * @param timeOutInMillis - the number of milliseconds to wait before failing
+   * @param sleepInMillis   - the number of milliseconds to wait before a recheck
    * @return WebElement - first one found with by. Null
    */
-  public WebElement waitForEnabledElement(final By by,
-                                          final int timeOutInMillis,
-                                          final int sleepInMillis) {
+  public WebElement waitForEnabledElement(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
     if (waitUntilEnabledElement(by, timeOutInMillis, sleepInMillis)) {
       return this.driver.findElement(by);
     }
 
     throw new ElementNotInteractableException("Element is not enabled");
   }
-  
+
   /**
    * Wait until the specified element to be present and enabled.
    *
@@ -300,17 +298,17 @@ public class SeleniumWait {
   /**
    * Wait for the specified element to be present and enabled.
    *
-   * @param by Selector to wait for, and return
+   * @param by              Selector to wait for, and return
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return boolean true if element is found, else false
    */
-  public boolean waitUntilEnabledElement(final By by,
-                                         final int timeOutInMillis,
-                                         final int sleepInMillis) {
+  public boolean waitUntilEnabledElement(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
 
     WebElement element = this.waitForVisibleElement(by);
-    FluentWait<WebElement> fluentWait = this.getNewElementFluentWait(element, timeOutInMillis, sleepInMillis);
+    FluentWait<WebElement> fluentWait = this
+        .getNewElementFluentWait(element, timeOutInMillis, sleepInMillis);
 
     Function<WebElement, Boolean> function = obj -> {
       try {
@@ -321,14 +319,14 @@ public class SeleniumWait {
         return false;
       }
     };
-    
+
     try {
       return fluentWait.until(function);
     } catch (TimeoutException e) {
       return false;
     }
-  }  
-  
+  }
+
   /**
    * Waits until the element is disabled.
    *
@@ -337,22 +335,22 @@ public class SeleniumWait {
    */
   public boolean waitUntilDisabledElement(By by) {
     return waitUntilDisabledElement(by, this.timeout, this.fluentRetryTime);
-  }  
+  }
 
   /**
    * Waits until the element is disabled.
    *
-   * @param by the web element
+   * @param by              the web element
    * @param timeOutInMillis he number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return returns true if the element is disabled, else false
    */
-  public boolean waitUntilDisabledElement(By by,
-                                          final int timeOutInMillis,
-                                          final int sleepInMillis) {
+  public boolean waitUntilDisabledElement(By by, final int timeOutInMillis,
+      final int sleepInMillis) {
     try {
       WebElement element = this.waitForVisibleElement(by, timeOutInMillis, sleepInMillis);
-      FluentWait<WebElement> fluentWait = this.getNewElementFluentWait(element, timeOutInMillis, sleepInMillis);
+      FluentWait<WebElement> fluentWait = this
+          .getNewElementFluentWait(element, timeOutInMillis, sleepInMillis);
       return fluentWait.until(obj -> !obj.isEnabled());
     } catch (NoSuchElementException | StaleElementReferenceException e) {
       return true;
@@ -369,19 +367,19 @@ public class SeleniumWait {
   public void waitForAbsentElement(final By by) {
     this.waitForAbsentElement(by, this.timeout, this.fluentRetryTime);
   }
-  
+
   /**
    * Wait until the element is not displayed or visible.
    *
    * @param by Selector to not be displayed or visible
    */
-  public void waitForAbsentElement(final By by,
-                                   final int timeOutInMillis,
-                                   final int sleepInMillis) {
+  public void waitForAbsentElement(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
     boolean isAbsent = this.waitUntilAbsentElement(by, timeOutInMillis, sleepInMillis);
 
     if (!isAbsent) {
-      throw new TimeoutException(MessageFormat.format("Element with selector {0} is not absent", by.toString()));
+      throw new TimeoutException(
+          MessageFormat.format("Element with selector {0} is not absent", by.toString()));
     }
   }
 
@@ -393,22 +391,21 @@ public class SeleniumWait {
   public boolean waitUntilAbsentElement(final By by) {
     return this.waitUntilAbsentElement(by, this.timeout, this.fluentRetryTime);
   }
-  
+
   /**
    * Wait until the element is not displayed or visible.
    *
-   * @param by element to not be displayed or visible
+   * @param by              element to not be displayed or visible
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return boolean - true if not displayed
    */
-  public boolean waitUntilAbsentElement(By by, 
-                                        final int timeOutInMillis, 
-                                        final int sleepInMillis) {
-    
+  public boolean waitUntilAbsentElement(By by, final int timeOutInMillis, final int sleepInMillis) {
+
     try {
       WebElement element = this.driver.findElement(by);
-      FluentWait<WebElement> fluentWait = this.getNewElementFluentWait(element, timeOutInMillis, sleepInMillis);
+      FluentWait<WebElement> fluentWait = this
+          .getNewElementFluentWait(element, timeOutInMillis, sleepInMillis);
       Function<WebElement, Boolean> function = obj -> {
         try {
           return !obj.isDisplayed();
@@ -440,15 +437,14 @@ public class SeleniumWait {
    * Wait for a selector to present, and then return a list of all WebElements that are located by
    * that selector.
    *
-   * @param by Selector value to wait for
+   * @param by              Selector value to wait for
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return List of WebElements - all web elements found by the specified selector
    * @throws Exception if encountered
    */
-  public List<WebElement> waitForElements(final By by, 
-                                          final int timeOutInMillis, 
-                                          final int sleepInMillis) {
+  public List<WebElement> waitForElements(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitForElements(by, wait);
   }
@@ -457,7 +453,7 @@ public class SeleniumWait {
    * Wait for a selector to present, and then return a list of all WebElements that are located by
    * that selector.
    *
-   * @param by  Selector value to wait for
+   * @param by   Selector value to wait for
    * @param wait The wait driver
    * @return List of WebElements - all web elements found by the specified selector
    * @throws Exception if encountered
@@ -476,7 +472,7 @@ public class SeleniumWait {
   /**
    * Wait for the specified element to have the Exact text.
    *
-   * @param by By selector to examine
+   * @param by   By selector to examine
    * @param text String to search for in the text
    * @return WebElement - element, null if not found and assert == false
    */
@@ -488,7 +484,7 @@ public class SeleniumWait {
   /**
    * Wait until the exact text is present in the specified element.
    *
-   * @param by  Selector to examine for the specified text
+   * @param by   Selector to examine for the specified text
    * @param text String value to verify the specified selector contains
    * @return boolean - true if the text was found in the element - else false
    */
@@ -499,16 +495,14 @@ public class SeleniumWait {
   /**
    * Wait until the exact text is present in the specified element.
    *
-   * @param by Selector to examine for the specified text
-   * @param text String value to verify the specified selector contains
+   * @param by              Selector to examine for the specified text
+   * @param text            String value to verify the specified selector contains
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return boolean - true if the text was found in the element - else false
    */
-  public boolean waitUntilExactText(final By by, 
-                                    final String text, 
-                                    final int timeOutInMillis, 
-                                    final int sleepInMillis) {
+  public boolean waitUntilExactText(final By by, final String text, final int timeOutInMillis,
+      final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitUntilExactText(by, text, wait);
   }
@@ -516,14 +510,12 @@ public class SeleniumWait {
   /**
    * Wait until the exact text is present in the specified element.
    *
-   * @param by Selector to examine for the specified text
+   * @param by   Selector to examine for the specified text
    * @param text String value to verify the specified selector contains
    * @param wait The wait driver
    * @return boolean - true if the text was found in the element - else false
    */
-  public boolean waitUntilExactText(final By by, 
-                                    final String text, 
-                                    WebDriverWait wait) {
+  public boolean waitUntilExactText(final By by, final String text, WebDriverWait wait) {
     try {
       return wait.until((ExpectedCondition<Boolean>) function -> doesTextMatch(by, text));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
@@ -535,7 +527,7 @@ public class SeleniumWait {
   /**
    * Wait for an element to contain a specified text.
    *
-   * @param by  Selector to check the containing text
+   * @param by   Selector to check the containing text
    * @param text String that should be contained within the selector
    * @return WebElement containing the text
    */
@@ -550,7 +542,7 @@ public class SeleniumWait {
   /**
    * Wait until an element contains the specified text.
    *
-   * @param by  Selector to check the containing text
+   * @param by   Selector to check the containing text
    * @param text String that should be contained within the selector
    * @return boolean - true if the text is contained in the selector, else false
    */
@@ -561,16 +553,14 @@ public class SeleniumWait {
   /**
    * Wait until an element contains the specified text.
    *
-   * @param by Selector to check the containing text
-   * @param text  String that should be contained within the selector
+   * @param by              Selector to check the containing text
+   * @param text            String that should be contained within the selector
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return boolean - true if the text is contained in the selector, else false
    */
-  public boolean waitUntilContainsText(final By by, 
-                                       final String text, 
-                                       final int timeOutInMillis, 
-                                       final int sleepInMillis) {
+  public boolean waitUntilContainsText(final By by, final String text, final int timeOutInMillis,
+      final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitUntilContainsText(by, text, wait);
   }
@@ -578,21 +568,19 @@ public class SeleniumWait {
   /**
    * Wait until the element contains the specified text.
    *
-   * @param by      Selector to check the containing text
-   * @param text    String that should be contained within the selector
+   * @param by   Selector to check the containing text
+   * @param text String that should be contained within the selector
    * @param wait int value of seconds to wait before timing out
    * @return boolean - true if the text is contained in the selector, else false
    */
-  public boolean waitUntilContainsText(final By by, 
-                                       final String text, 
-                                       WebDriverWait wait) {
+  public boolean waitUntilContainsText(final By by, final String text, WebDriverWait wait) {
     try {
       return wait.until((ExpectedCondition<Boolean>) function -> doesContainsText(by, text));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       this.printSelectorNotFoundError(by.toString(), e);
       return false;
     }
-  } 
+  }
 
   /**
    * Wait until an attribute of the specified selector to be present and equal the desired value.
@@ -602,9 +590,8 @@ public class SeleniumWait {
    * @param text      String value of the text to look for in the attribute
    * @return true if the attribute with the specified text value is found, else false
    */
-  public boolean waitUntilAttributeTextEquals(final By by,
-                                              final String attribute,
-                                              final String text) {
+  public boolean waitUntilAttributeTextEquals(final By by, final String attribute,
+      final String text) {
     return this.waitUntilAttribute(by, attribute, text, getWaitDriver(this.getWebDriver()), false);
   }
 
@@ -614,15 +601,12 @@ public class SeleniumWait {
    * @param by              Selector to look for
    * @param attribute       String value of the attribute to look at on the specified selector
    * @param text            String value of the text to look for in the attribute
-   * @param timeOutInMillis       - the number of milliseconds to wait before failing
-   * @param sleepInMillis         - the number of milliseconds to wait before a recheck
+   * @param timeOutInMillis - the number of milliseconds to wait before failing
+   * @param sleepInMillis   - the number of milliseconds to wait before a recheck
    * @return true if the attribute with the specified text value is found, else false
    */
-  public boolean waitUntilAttributeTextEquals(final By by,
-                                              final String attribute,
-                                              final String text,
-                                              final int timeOutInMillis,
-                                              final int sleepInMillis) {
+  public boolean waitUntilAttributeTextEquals(final By by, final String attribute,
+      final String text, final int timeOutInMillis, final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitUntilAttribute(by, attribute, text, wait, false);
   }
@@ -635,27 +619,23 @@ public class SeleniumWait {
    * @param text      String value of the text to look for in the attribute
    * @return Webelement of the selector that is found
    */
-  public WebElement waitForAttributeTextEquals(final By by,
-                                               final String attribute,
-                                               final String text) {
+  public WebElement waitForAttributeTextEquals(final By by, final String attribute,
+      final String text) {
     return this.waitForAttributeTextEquals(by, attribute, text, getWaitDriver(this.getWebDriver()));
   }
 
   /**
    * Wait for an attribute of the specified selector to be present and equal the desired value.
    *
-   * @param by Selector to look for
-   * @param attribute String value of the attribute to look at on the specified selector
-   * @param text String value of the text to look for in the attribute
+   * @param by              Selector to look for
+   * @param attribute       String value of the attribute to look at on the specified selector
+   * @param text            String value of the text to look for in the attribute
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return WebElement of the selector that is found
    */
-  public WebElement waitForAttributeTextEquals(final By by,
-                                               final String attribute,
-                                               final String text,
-                                               final int timeOutInMillis,
-                                               final int sleepInMillis) {
+  public WebElement waitForAttributeTextEquals(final By by, final String attribute,
+      final String text, final int timeOutInMillis, final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitForAttributeTextEquals(by, attribute, text, wait);
   }
@@ -663,55 +643,49 @@ public class SeleniumWait {
   /**
    * Wait for an attribute of the specified selector to be present and equal the desired value.
    *
-   * @param by Selector to look for
+   * @param by        Selector to look for
    * @param attribute String value of the attribute to look at on the specified selector
-   * @param text String value of the text to look for in the attribute
-   * @param wait int version of the timeout in seconds
+   * @param text      String value of the text to look for in the attribute
+   * @param wait      int version of the timeout in seconds
    * @return WebElement of the selector that is found
    */
-  public WebElement waitForAttributeTextEquals(final By by,
-                                               final String attribute,
-                                               final String text,
-                                               WebDriverWait wait) {
+  public WebElement waitForAttributeTextEquals(final By by, final String attribute,
+      final String text, WebDriverWait wait) {
     if (this.waitUntilAttribute(by, attribute, text, wait, false)) {
       return this.driver.findElement(by);
     }
     String error = String.format("Selector [%s] couldn't be found.%n", by.toString());
-    throw new NotFoundException(error);    
+    throw new NotFoundException(error);
   }
-  
+
   /**
    * Wait for an attribute of the specified selector to be present, and contain the specified text.
    *
-   * @param by Selector to look for
+   * @param by        Selector to look for
    * @param attribute String value of the attribute to look at on the specified selector
-   * @param text String value of the text to look for in the attribute
+   * @param text      String value of the text to look for in the attribute
    * @return true if the attribute with the specified text value is found, else false
    */
-  public boolean waitUntilAttributeTextContains(final By by,
-                                                final String attribute,
-                                                final String text) {
+  public boolean waitUntilAttributeTextContains(final By by, final String attribute,
+      final String text) {
     return waitUntilAttribute(by, attribute, text, getWaitDriver(this.getWebDriver()), true);
   }
 
   /**
    * Wait for an attribute of the specified selector to be present, and contain the specified text.
    *
-   * @param by Selector to look for
-   * @param attribute String value of the attribute to look at on the specified selector
-   * @param text String value of the text to look for in the attribute
+   * @param by              Selector to look for
+   * @param attribute       String value of the attribute to look at on the specified selector
+   * @param text            String value of the text to look for in the attribute
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return true if the attribute with the specified text value is found, else false
    */
-  public boolean waitUntilAttributeTextContains(final By by,
-                                                final String attribute,
-                                                final String text,
-                                                final int timeOutInMillis,
-                                                final int sleepInMillis) {
+  public boolean waitUntilAttributeTextContains(final By by, final String attribute,
+      final String text, final int timeOutInMillis, final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitUntilAttribute(by, attribute, text, wait, true);
-  } 
+  }
 
   /**
    * Wait for an attribute of the specified selector to be present, and contain the specified text.
@@ -723,19 +697,17 @@ public class SeleniumWait {
    * @param contains  boolean true if checking if contains, false if exact match
    * @return true if the attribute with the specified text value is found, else false
    */
-  public boolean waitUntilAttribute(final By by, 
-                                    final String attribute, 
-                                    final String text,
-                                    WebDriverWait wait, 
-                                    final boolean contains) {
+  public boolean waitUntilAttribute(final By by, final String attribute, final String text,
+      WebDriverWait wait, final boolean contains) {
     try {
-      return wait.until((ExpectedCondition<Boolean>) f -> attributeMatches(f, by, attribute, text, contains));
+      return wait.until(
+          (ExpectedCondition<Boolean>) f -> attributeMatches(f, by, attribute, text, contains));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       this.printSelectorNotFoundError(by.toString(), e);
       return false;
     }
   }
-  
+
   /**
    * Scroll an element into view, and wait for it to be clickable.
    *
@@ -749,14 +721,13 @@ public class SeleniumWait {
   /**
    * Scroll an element into view, and wait for it to be clickable.
    *
-   * @param by Selector to wait for and focus on
+   * @param by              Selector to wait for and focus on
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return WebElement
    */
-  public WebElement waitForClickableElementAndScrollIntoView(final By by,
-                                                             final int timeOutInMillis,
-                                                             final int sleepInMillis) {
+  public WebElement waitForClickableElementAndScrollIntoView(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitForClickableElementAndScrollIntoView(by, wait);
   }
@@ -764,7 +735,7 @@ public class SeleniumWait {
   /**
    * Scroll an element into view, and wait for it to be clickable.
    *
-   * @param by Selector to wait for and focus on
+   * @param by   Selector to wait for and focus on
    * @param wait int value of seconds to wait for before timing out
    * @return WebElement
    */
@@ -773,7 +744,7 @@ public class SeleniumWait {
     waitUntilPageLoad();
     return waitForClickableElement(by, wait);
   }
-  
+
   /**
    * Scroll an element into view, and wait for it to be clickable.
    *
@@ -787,14 +758,13 @@ public class SeleniumWait {
   /**
    * Scroll an element into view, and wait for it to be clickable.
    *
-   * @param by Selector to wait for and focus on
+   * @param by              Selector to wait for and focus on
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return boolean - true if the element is found and clickable
    */
-  public boolean waitUntilClickableElementAndScrollIntoView(final By by,
-                                                            final int timeOutInMillis,
-                                                            final int sleepInMillis) {
+  public boolean waitUntilClickableElementAndScrollIntoView(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitUntilClickableElementAndScrollIntoView(by, wait);
   }
@@ -802,7 +772,7 @@ public class SeleniumWait {
   /**
    * Scroll an element into view, and wait for it to be clickable.
    *
-   * @param by Selector to wait for and focus on
+   * @param by   Selector to wait for and focus on
    * @param wait The wait driver
    * @return boolean - true if the element is found and clickable
    */
@@ -811,7 +781,7 @@ public class SeleniumWait {
     waitUntilPageLoad();
     return waitUntilClickableElement(by, wait);
   }
-  
+
   /**
    * Wait for the specified selector to be clickable.
    *
@@ -825,12 +795,13 @@ public class SeleniumWait {
   /**
    * Wait for the specified selector to be clickable.
    *
-   * @param by Selector to wait for
+   * @param by              Selector to wait for
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return boolean - true if found and clickable, else false
    */
-  public boolean waitUntilClickableElement(final By by, final int timeOutInMillis, final int sleepInMillis) {
+  public boolean waitUntilClickableElement(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitUntilClickableElement(by, wait);
   }
@@ -838,8 +809,8 @@ public class SeleniumWait {
   /**
    * Wait for the specified selector to be clickable.
    *
-   * @param by              Selector to wait for
-   * @param wait            The wait driver
+   * @param by   Selector to wait for
+   * @param wait The wait driver
    * @return boolean - true if found and clickable, else false
    */
   public boolean waitUntilClickableElement(final By by, WebDriverWait wait) {
@@ -852,7 +823,7 @@ public class SeleniumWait {
     }
     return true;
   }
-  
+
   /**
    * Wait for the element specified by the provided selector to be clickable.
    *
@@ -866,14 +837,13 @@ public class SeleniumWait {
   /**
    * Wait for the element specified by the provided selector to be clickable.
    *
-   * @param by Selector to wait for to be clickable
+   * @param by              Selector to wait for to be clickable
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return WebElement that is located, or null if none is found
    */
-  public WebElement waitForClickableElement(final By by, 
-                                            final int timeOutInMillis, 
-                                            final int sleepInMillis) {
+  public WebElement waitForClickableElement(final By by, final int timeOutInMillis,
+      final int sleepInMillis) {
 
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitForClickableElement(by, wait);
@@ -882,7 +852,7 @@ public class SeleniumWait {
   /**
    * Wait for the element specified by the provided selector to be clickable.
    *
-   * @param by Selector to wait for to be clickable
+   * @param by   Selector to wait for to be clickable
    * @param wait The wait driver
    * @return WebElement that is located, or null if none is found
    */
@@ -890,9 +860,7 @@ public class SeleniumWait {
 
     try {
       return wait.until(ExpectedConditions.elementToBeClickable(by));
-    } catch (NoSuchElementException
-      | StaleElementReferenceException
-      | TimeoutException e) {
+    } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       throw e;
     }
   }
@@ -943,13 +911,11 @@ public class SeleniumWait {
   /**
    * Waits for the Frame to be available.
    *
-   * @param by The frame locator
+   * @param by              The frame locator
    * @param timeOutInMillis he number of milliseconds to wait before failing
-   * @param sleepInMillis the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    */
-  public boolean waitUntilIframeToLoad(By by,
-                                       final int timeOutInMillis,
-                                       final int sleepInMillis) {
+  public boolean waitUntilIframeToLoad(By by, final int timeOutInMillis, final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     return waitUntilIframeToLoad(by, wait);
   }
@@ -960,13 +926,11 @@ public class SeleniumWait {
    * @param by The frame locator
    */
   public boolean waitUntilIframeToLoad(By by, WebDriverWait wait) {
-    
+
     try {
       waitForIframeToLoad(by, wait);
       return true;
-    } catch (NoSuchElementException
-      | StaleElementReferenceException
-      | TimeoutException e) {
+    } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }
   }
@@ -983,13 +947,11 @@ public class SeleniumWait {
   /**
    * Waits for the Frame to be available.
    *
-   * @param by The frame locator
+   * @param by              The frame locator
    * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis  the number of milliseconds to wait before a recheck
+   * @param sleepInMillis   the number of milliseconds to wait before a recheck
    */
-  public void waitForIframeToLoad(By by,
-                                       final int timeOutInMillis,
-                                       final int sleepInMillis) {
+  public void waitForIframeToLoad(By by, final int timeOutInMillis, final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
     waitForIframeToLoad(by, wait);
   }
@@ -1000,7 +962,7 @@ public class SeleniumWait {
    * @param by The frame locator
    */
   public void waitForIframeToLoad(By by, WebDriverWait wait) {
-    wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));    
+    wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
   }
 
   /**
@@ -1020,7 +982,7 @@ public class SeleniumWait {
   protected WebDriverWait getNewWaitDriver(WebDriver driver) {
     return getNewWaitDriver(driver, this.timeout, this.fluentRetryTime);
   }
-  
+
   /**
    * Gets a new WaitDriver using the default timeout.
    *
@@ -1058,13 +1020,14 @@ public class SeleniumWait {
    * @param sleepInMillis   the time to wait before a recheck
    * @return new WaitDriver
    */
-  protected WebDriverWait getNewWaitDriver(WebDriver driver, int timeOutInMillis, int sleepInMillis) {
+  protected WebDriverWait getNewWaitDriver(WebDriver driver, int timeOutInMillis,
+      int sleepInMillis) {
     int timeoutInSeconds = timeOutInMillis / 1000;
     WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds, sleepInMillis);
     setWaitDriver(this.driver, wait);
     return wait;
   }
-  
+
   /**
    * Returns a new Fluent wait element bject.
    *
@@ -1093,15 +1056,12 @@ public class SeleniumWait {
    * @param sleepInMillis   the polling milliseconds before retry
    * @return new fluent wait
    */
-  protected FluentWait getNewElementFluentWait(WebElement element,
-                                               int timeOutInMillis,
-                                               int sleepInMillis) {
-    return new FluentWait(element)
-      .withTimeout(Duration.ofMillis(timeOutInMillis))
-      .pollingEvery(Duration.ofMillis(sleepInMillis))
-      .ignoring(NotFoundException.class);
+  protected FluentWait getNewElementFluentWait(WebElement element, int timeOutInMillis,
+      int sleepInMillis) {
+    return new FluentWait(element).withTimeout(Duration.ofMillis(timeOutInMillis))
+        .pollingEvery(Duration.ofMillis(sleepInMillis)).ignoring(NotFoundException.class);
   }
-  
+
   /**
    * Scroll the webpage so the selector is visible.
    *
@@ -1113,8 +1073,8 @@ public class SeleniumWait {
     final int max = 5;
 
     try {
-      ((JavascriptExecutor) this.driver).executeScript("arguments[0].scrollIntoView(true);",
-          element);
+      ((JavascriptExecutor) this.driver)
+          .executeScript("arguments[0].scrollIntoView(true);", element);
     } catch (Exception e) {
       String error = String.format("Failed JavaScript scroll into view...%s%n", e.getStackTrace());
       System.out.println(error);
@@ -1144,7 +1104,7 @@ public class SeleniumWait {
   /**
    * Check the text value of an attribute.
    *
-   * @param driver   - web driver
+   * @param driver    - web driver
    * @param by        Selector to get the attribute from
    * @param attribute String value of the attribute to examine
    * @param text      String to check against the attribute
@@ -1152,7 +1112,7 @@ public class SeleniumWait {
    * @return boolean - true if they match, else false
    */
   private static boolean attributeMatches(WebDriver driver, By by, String attribute, String text,
-                                          boolean contains) {
+      boolean contains) {
     try {
       if (contains) {
         return driver.findElement(by).getAttribute(attribute).contains(text);
@@ -1214,7 +1174,7 @@ public class SeleniumWait {
       return false;
     }
     return false;
-  } 
+  }
 
   /**
    * Get the underlying web driver.
@@ -1223,7 +1183,7 @@ public class SeleniumWait {
    * @return the underlying web driver
    */
   private static WebDriver getLowLevelDriver(WebDriver driver) {
-    return driver instanceof EventFiringWebDriver
-      ? ((EventFiringWebDriver) driver).getWrappedDriver() : driver;
+    return driver instanceof EventFiringWebDriver ? ((EventFiringWebDriver) driver)
+        .getWrappedDriver() : driver;
   }
 }

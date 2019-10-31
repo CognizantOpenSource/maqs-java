@@ -53,8 +53,8 @@ public class ActionBuilder {
    */
   public static void slideElement(WebDriver webDriver, By by, int pixelsOffset) {
     Actions builder = new Actions(webDriver);
-    builder.dragAndDropBy(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by), pixelsOffset, 0).build()
-        .perform();
+    builder.dragAndDropBy(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by),
+        pixelsOffset, 0).build().perform();
   }
 
   /**
