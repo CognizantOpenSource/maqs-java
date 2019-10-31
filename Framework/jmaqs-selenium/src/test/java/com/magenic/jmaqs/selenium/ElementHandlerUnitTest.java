@@ -278,7 +278,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit test for ClickElementByJavaScript where the element is not present.
    */
-  @Test(expectedExceptions = NoSuchElementException.class, groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.Selenium)(expectedExceptions =NoSuchElementException .class,groups =TestCategories.Selenium)
   public void clickElementByJavascriptFromHoverDropdownNotFound() {
     navigateToUrl();
     ElementHandler.clickElementByJavaScript(getWebDriver(), By.cssSelector(".NotPresent"));

@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * Unit tests for EventHandler class.
  */
 
-@Test
+@Test(groups = TestCategories.Selenium)
 @Ignore
 public class EventHandlerUnitTest extends BaseSeleniumTest {
 /**
@@ -95,7 +95,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when clicking an element.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerClickElement() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -116,7 +116,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when changing the value of an element.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerChangeValueOf() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -137,7 +137,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when finding an element.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerFindBy() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -158,7 +158,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when navigating back to the previous page.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerNavigateBack() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -180,7 +180,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when navigating forward to a page.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerNavigateForward() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -203,7 +203,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when refreshing a page.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerRefresh() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -224,7 +224,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when navigating to a page.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerNavigateTo() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -245,7 +245,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when running a script.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerScript() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -267,7 +267,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when switching windows.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerSwitchWindow() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -290,7 +290,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when accepting an alert.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerAcceptAlert() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -313,7 +313,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when dismissing an alert.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerAcceptDismiss() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -336,7 +336,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when getting the text from an element.
    *//*
 
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void eventHandlerGetText() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
@@ -358,7 +358,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when taking a screenshot.
    */
 
-  @Test
+@Test(groups = TestCategories.Selenium)
   public void eventHandlerScreenshot() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();

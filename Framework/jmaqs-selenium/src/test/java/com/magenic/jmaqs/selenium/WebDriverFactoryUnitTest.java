@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 /**
  * The WebDriverFactory test class.
  */
-public class WebDriverFactoryTest {
+public class WebDriverFactoryUnitTest {
 
   @Test(groups = TestCategories.Selenium)
   public void getDefaultBrowserTest() throws Exception {
@@ -229,12 +229,12 @@ public class WebDriverFactoryTest {
     Assert.assertEquals(dimension.height, 456);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.Selenium)(expectedExceptions =IllegalArgumentException .class,groups =TestCategories.Selenium)
   public void extractDimensionFromInvalidStringTest() {
     WebDriverFactory.extractDimensionFromString("invalidSize");
   }
 
-  @Test(expectedExceptions = NumberFormatException.class, groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.Selenium)(expectedExceptions =NumberFormatException .class,groups =TestCategories.Selenium)
   public void extractDimensionFromInvalidFormatTest() {
     WebDriverFactory.extractDimensionFromString("notXValid");
   }
@@ -286,7 +286,7 @@ public class WebDriverFactoryTest {
     Assert.assertEquals(driverLocation, "");
   }
 
-  @Test(expectedExceptions = RuntimeException.class, groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.Selenium)(expectedExceptions =RuntimeException .class,groups =TestCategories.Selenium)
   public void getDriverLocationMustExistTest() {
     String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", true);
   }

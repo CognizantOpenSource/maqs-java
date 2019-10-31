@@ -32,7 +32,7 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
    */
   private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
 
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void testGetFluentWaitObject() {
     int timeout = 1000;
     int polling = 500;

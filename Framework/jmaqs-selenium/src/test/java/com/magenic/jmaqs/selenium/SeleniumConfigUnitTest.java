@@ -20,7 +20,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * Selenium configuration tests.
  */
-public class SeleniumConfigTest {
+public class SeleniumConfigUnitTest {
 
   /**
    * Remote capabilities username identifier.
@@ -268,12 +268,12 @@ public class SeleniumConfigTest {
     Assert.assertEquals(browserType, BrowserType.REMOTE);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.Selenium)(expectedExceptions =IllegalArgumentException .class,groups =TestCategories.Selenium)
   public void getBrowserTypePhantomJsTest() {
     SeleniumConfig.getBrowserType("phantomjs");
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.Selenium)(expectedExceptions =IllegalArgumentException .class,groups =TestCategories.Selenium)
   public void getBrowserTypeInvalidTest() {
     SeleniumConfig.getBrowserType("invalid");
   }
@@ -308,7 +308,7 @@ public class SeleniumConfigTest {
     Assert.assertEquals(remoteType, RemoteBrowserType.EDGE);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.Selenium)(expectedExceptions =IllegalArgumentException .class,groups =TestCategories.Selenium)
   public void getRemoteBrowserTypeInvalidTest() {
     SeleniumConfig.getRemoteBrowserType("invalid");
   }

@@ -23,8 +23,8 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
 	
 	/** Error string templates for assertion failures */
 	private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
-	
-	@Test
+
+  @Test(groups = TestCategories.Selenium)
 	public void testGetUIFindWithElement() {
 		PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
 		pageModel.open(siteAutomationUrl);
@@ -35,8 +35,8 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
 		
 		assertNotNull(findWithElement, String.format(assertNotNullErrorTemplate, "findWithElement"));
 	}
-	
-	@Test
+
+  @Test(groups = TestCategories.Selenium)
 	public void testGetUIFindWithDriver() {
 		UIFind findWithWebDriver = UIFindFactory.getFind(this.getWebDriver());
 		
