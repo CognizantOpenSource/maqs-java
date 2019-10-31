@@ -229,12 +229,12 @@ public class WebDriverFactoryUnitTest {
     Assert.assertEquals(dimension.height, 456);
   }
 
-  @Test(groups = TestCategories.Selenium)(expectedExceptions =IllegalArgumentException .class,groups =TestCategories.Selenium)
+  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)
   public void extractDimensionFromInvalidStringTest() {
     WebDriverFactory.extractDimensionFromString("invalidSize");
   }
 
-  @Test(groups = TestCategories.Selenium)(expectedExceptions =NumberFormatException .class,groups =TestCategories.Selenium)
+  @Test(expectedExceptions = NumberFormatException.class, groups = TestCategories.Selenium)
   public void extractDimensionFromInvalidFormatTest() {
     WebDriverFactory.extractDimensionFromString("notXValid");
   }
@@ -286,7 +286,7 @@ public class WebDriverFactoryUnitTest {
     Assert.assertEquals(driverLocation, "");
   }
 
-  @Test(groups = TestCategories.Selenium)(expectedExceptions =RuntimeException .class,groups =TestCategories.Selenium)
+  @Test(expectedExceptions = RuntimeException.class, groups = TestCategories.Selenium)
   public void getDriverLocationMustExistTest() {
     String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", true);
   }

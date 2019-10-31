@@ -4,14 +4,14 @@
 
 package com.magenic.jmaqs.selenium;
 
-import static org.testng.Assert.assertNotNull;
-
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Test;
-
 import com.magenic.jmaqs.selenium.factories.UIFindFactory;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 
 public class UIFindFactoryUnitTest extends BaseSeleniumTest {
 
@@ -41,5 +41,10 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
 		UIFind findWithWebDriver = UIFindFactory.getFind(this.getWebDriver());
 		
 		assertNotNull(findWithWebDriver, String.format(assertNotNullErrorTemplate, "findWithWebDriver"));
+	}
+
+	@Override
+	protected void postSetupLogging() throws Exception {
+
 	}
 }

@@ -4,13 +4,12 @@
 
 package com.magenic.jmaqs.selenium;
 
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 	
@@ -25,14 +24,14 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 	private static String assertEqualErrorTemplate = "%s was not equal to %s when they were expected to be.";
 	private static String assertNotEqualErrorTemplate = "%s was equal to %s when they were expected not to be.";
 
-  @Test(groups = TestCategories.Selenium)(groups=TestCategories.Selenium)
+	@Test(groups = TestCategories.Selenium)
 	public void getWaitDriverTest() {
 		UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 		
 		Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
 	}
 
-  @Test(groups = TestCategories.Selenium)(groups=TestCategories.Selenium)
+	@Test(groups = TestCategories.Selenium)
 	public void getWaitDriverWhenOneExists() {
 		UIWait firstWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 		UIWait secondWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -43,7 +42,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 				String.format(assertEqualErrorTemplate, "firstWaitDriver", "secondWaitDriver"));
 	}
 
-  @Test(groups = TestCategories.Selenium)(groups=TestCategories.Selenium)
+	@Test(groups = TestCategories.Selenium)
 	public void setWaitDriverWhenDriverKeyDoesNotExist() {
 		UIWait waitDriver = new UIWait(this.getWebDriver());
 		UIWaitFactory.setWaitDriver(this.getWebDriver(), waitDriver);
@@ -56,7 +55,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 				String.format(assertEqualErrorTemplate, "waitDriver", "existingDriver"));
 	}
 
-  @Test(groups = TestCategories.Selenium)(groups=TestCategories.Selenium)
+	@Test(groups = TestCategories.Selenium)
 	public void setWaitDriverWhenDriverKeyDoesExist() {
 		UIWait oldWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 		UIWait newWaitDriver = new UIWait(this.getWebDriver());
@@ -68,7 +67,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 		Assert.assertNotEquals(oldWaitDriver, overridenWaitDriver, String.format(assertNotEqualErrorTemplate, "oldWaitDriver", "overridentWaitDriver"));
 	}
 
-  @Test(groups = TestCategories.Selenium)(groups=TestCategories.Selenium)
+	@Test(groups = TestCategories.Selenium)
 	public void getWaitDriverWithWebElement() {
 		PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
 		pageModel.open(siteAutomationUrl);
@@ -80,7 +79,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 		Assert.assertNotNull(waitDriver);
 	}
 
-  @Test(groups = TestCategories.Selenium)(groups=TestCategories.Selenium)
+	@Test(groups = TestCategories.Selenium)
 	public void removeWaitDriver() {
 		UIWait waitDriverToBeRemoved = UIWaitFactory.getWaitDriver(this.getWebDriver());
 		UIWaitFactory.removeWaitDriver(this.getWebDriver());
@@ -91,5 +90,10 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 				waitDriverToBeRemoved, 
 				newWaitDriver, 
 				String.format(assertNotEqualErrorTemplate, "waitDriverToBeRemoved", "newWaitDriver"));
+	}
+
+	@Override
+	protected void postSetupLogging() throws Exception {
+
 	}
 }

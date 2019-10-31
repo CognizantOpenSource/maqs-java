@@ -4,16 +4,15 @@
 
 package com.magenic.jmaqs.selenium;
 
-import static org.testng.Assert.assertNotNull;
-
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.magenic.jmaqs.selenium.factories.FluentWaitFactory;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 
 public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
 
@@ -47,5 +46,10 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
         .getNewElementFluentWait(elementDriver, timeout, polling);
 
     assertNotNull(fluentWait, String.format(assertNotNullErrorTemplate, "fluentWait"));
+  }
+
+  @Override
+  protected void postSetupLogging() throws Exception {
+
   }
 }

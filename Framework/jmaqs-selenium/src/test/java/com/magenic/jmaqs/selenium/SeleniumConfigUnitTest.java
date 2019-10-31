@@ -7,13 +7,9 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-
 import java.time.Duration;
 import java.util.Map;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -118,26 +114,6 @@ public class SeleniumConfigUnitTest {
     String version = SeleniumConfig.getRemoteBrowserVersion();
 
     Assert.assertEquals(version, "54.0");
-  }
-
-  /**
-   * Get Web Wait Driver.
-   *
-   * @throws Exception Can throw new Exception
-   */
-  @Ignore
-  @Test(groups = TestCategories.Selenium)
-  public void getWaitDriver() throws Exception {
-    WebDriver driver = null;
-    try {
-      driver = WebDriverFactory.getDefaultBrowser();
-      WebDriverWait driverWait = SeleniumConfig.getWaitDriver(driver);
-      Assert.assertNotNull(driverWait);
-    } finally {
-      if (driver != null) {
-        driver.quit();
-      }
-    }
   }
 
   /**
@@ -268,12 +244,12 @@ public class SeleniumConfigUnitTest {
     Assert.assertEquals(browserType, BrowserType.REMOTE);
   }
 
-  @Test(groups = TestCategories.Selenium)(expectedExceptions =IllegalArgumentException .class,groups =TestCategories.Selenium)
+  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)
   public void getBrowserTypePhantomJsTest() {
     SeleniumConfig.getBrowserType("phantomjs");
   }
 
-  @Test(groups = TestCategories.Selenium)(expectedExceptions =IllegalArgumentException .class,groups =TestCategories.Selenium)
+  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)
   public void getBrowserTypeInvalidTest() {
     SeleniumConfig.getBrowserType("invalid");
   }
@@ -308,7 +284,7 @@ public class SeleniumConfigUnitTest {
     Assert.assertEquals(remoteType, RemoteBrowserType.EDGE);
   }
 
-  @Test(groups = TestCategories.Selenium)(expectedExceptions =IllegalArgumentException .class,groups =TestCategories.Selenium)
+  @Test(groups = TestCategories.Selenium, expectedExceptions = IllegalArgumentException.class)
   public void getRemoteBrowserTypeInvalidTest() {
     SeleniumConfig.getRemoteBrowserType("invalid");
   }

@@ -6,13 +6,11 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.ListProcessor;
-
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -278,7 +276,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit test for ClickElementByJavaScript where the element is not present.
    */
-  @Test(groups = TestCategories.Selenium)(expectedExceptions =NoSuchElementException .class,groups =TestCategories.Selenium)
+  @Test(expectedExceptions = NoSuchElementException.class, groups = TestCategories.Selenium)
   public void clickElementByJavascriptFromHoverDropdownNotFound() {
     navigateToUrl();
     ElementHandler.clickElementByJavaScript(getWebDriver(), By.cssSelector(".NotPresent"));
@@ -354,5 +352,10 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   private void navigateToUrl() {
     getWebDriver().navigate().to(siteAutomationUrl);
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+  }
+
+  @Override
+  protected void postSetupLogging() throws Exception {
+
   }
 }
