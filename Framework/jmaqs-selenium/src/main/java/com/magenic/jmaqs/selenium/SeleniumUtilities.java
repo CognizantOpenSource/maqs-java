@@ -103,22 +103,14 @@ public class SeleniumUtilities {
   public static String captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
       String directory, String fileNameWithoutExtension) {
     File tempFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
-    String path = Paths.get(directory, fileNameWithoutExtension + ".png").normalize().toString();
+    String path = calculateFileName(directory, fileNameWithoutExtension, ".png");
 
     // Make sure the directory exists
-    try {
-      Path tempPath = new File(directory).toPath();
-      if (!tempPath.toFile().isDirectory()) {
-        Files.createDirectories(tempPath);
-      }
-    } catch (IOException exception) {
-      testObject.getLog()
-          .logMessage(MessageType.ERROR, "Failed to create directories: " + exception.getMessage());
-    }
+    validateDirectoryStructure(testObject, directory);
 
     // Try to copy the temporary file to desired file path
     try {
-      Files.copy(tempFile.toPath(), new File(path).toPath(), StandardCopyOption.COPY_ATTRIBUTES);
+      copyFileToPath(tempFile, path);
     } catch (IOException exception) {
       testObject.getLog().logMessage(MessageType.ERROR,
           String.format("Screenshot error: %s", exception.getMessage()));
@@ -126,6 +118,17 @@ public class SeleniumUtilities {
 
     testObject.addAssociatedFile(path);
     return path;
+  }
+
+  /**
+   * Copy file.
+   *
+   * @param tempFile the temp file
+   * @param path     the path
+   * @throws IOException the io exception
+   */
+  private static void copyFileToPath(File tempFile, String path) throws IOException {
+    Files.copy(tempFile.toPath(), new File(path).toPath(), StandardCopyOption.COPY_ATTRIBUTES);
   }
 
   /**
@@ -189,24 +192,15 @@ public class SeleniumUtilities {
    * @param fileNameWithoutExtension File Name Without Extension
    * @return Path to the log file
    */
-  public static String savePageSource(WebDriver webDriver, SeleniumTestObject testObject,
-      String directory, String fileNameWithoutExtension) {
+  public static String savePageSource(WebDriver webDriver, SeleniumTestObject testObject, String directory, String fileNameWithoutExtension) {
     // Save the current page source into a string
     String pageSource = webDriver.getPageSource();
 
     // Make sure the directory exists
-    try {
-      Path path = new File(directory).toPath();
-      if (!path.toFile().isDirectory()) {
-        Files.createDirectories(path);
-      }
-    } catch (IOException exception) {
-      testObject.getLog()
-          .logMessage(MessageType.ERROR, "Failed to create directories: " + exception.getMessage());
-    }
+    validateDirectoryStructure(testObject, directory);
 
     // Calculate the file name
-    String path = Paths.get(directory, fileNameWithoutExtension + ".txt").normalize().toString();
+    String path = calculateFileName(directory, fileNameWithoutExtension, ".txt");
 
     try (FileWriter writer = new FileWriter(path, false)) {
       writer.write(pageSource);
@@ -219,6 +213,37 @@ public class SeleniumUtilities {
 
     testObject.addAssociatedFile(path);
     return path;
+  }
+
+  /**
+   * Calculate file name string.
+   *
+   * @param directory                the directory
+   * @param fileNameWithoutExtension the file name without extension
+   * @param fileExtension            the file extension
+   * @return the string
+   */
+  private static String calculateFileName(String directory, String fileNameWithoutExtension,
+      String fileExtension) {
+    return Paths.get(directory, fileNameWithoutExtension + fileExtension).normalize().toString();
+  }
+
+  /**
+   * Validate directory structure and create if it does not exist.
+   *
+   * @param testObject the test object
+   * @param directory  the directory
+   */
+  private static void validateDirectoryStructure(SeleniumTestObject testObject, String directory) {
+    try {
+      Path path = new File(directory).toPath();
+      if (!path.toFile().isDirectory()) {
+        Files.createDirectories(path);
+      }
+    } catch (IOException exception) {
+      testObject.getLog()
+          .logMessage(MessageType.ERROR, "Failed to create directories: " + exception.getMessage());
+    }
   }
 
   /**
