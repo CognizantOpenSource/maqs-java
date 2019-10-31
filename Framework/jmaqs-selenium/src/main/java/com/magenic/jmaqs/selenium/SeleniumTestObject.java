@@ -6,7 +6,6 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
-
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 
@@ -14,38 +13,6 @@ import org.openqa.selenium.WebDriver;
  * The SeleniumTestObject Class.
  */
 public class SeleniumTestObject extends BaseTestObject {
-
-  /**
-   * The WebDriver Object.
-   * @deprecated methodology no longer being used.
-   */
-  @Deprecated
-  protected WebDriver webDriver;
-
-  /**
-   * The SeleniumWait Object.
-   *
-   * @deprecated {@link com.magenic.jmaqs.selenium.SeleniumWait} has been deprecated.
-   */
-  @Deprecated
-  protected SeleniumWait seleniumWait;
-
-  /**
-   * Initializes a new instance of the SeleniumTestObject.
-   *
-   * @param driver                 The WebDriver Object
-   * @param wait                   The SeleniumWait Object
-   * @param logger                 The Logger Object
-   * @param fullyQualifiedTestName The fully qualified test name
-   * @deprecated {@link com.magenic.jmaqs.selenium.SeleniumWait} has been deprecated.
-   */
-  @Deprecated
-  public SeleniumTestObject(WebDriver driver, SeleniumWait wait, Logger logger,
-      String fullyQualifiedTestName) {
-    super(logger, fullyQualifiedTestName);
-    this.webDriver = driver;
-    this.seleniumWait = wait;
-  }
 
   /**
    * Instantiates a new Selenium test object.
@@ -72,28 +39,6 @@ public class SeleniumTestObject extends BaseTestObject {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((SeleniumDriverManager.class).getCanonicalName(),
         new SeleniumDriverManager((() -> webDriver), this));
-  }
-
-  /**
-   * Get the SeleniumWait Object.
-   *
-   * @return A SeleniumWait Object
-   * @deprecated {@link com.magenic.jmaqs.selenium.SeleniumWait} has been deprecated.
-   */
-  @Deprecated
-  public SeleniumWait getSeleniumWait() {
-    return this.seleniumWait;
-  }
-
-  /**
-   * Set the SeleniumWait for the SeleniumTestObject.
-   *
-   * @param wait The SeleniumWait Object
-   * @deprecated {@link com.magenic.jmaqs.selenium.SeleniumWait} has been deprecated.
-   */
-  @Deprecated
-  public void setSeleniumWait(SeleniumWait wait) {
-    this.seleniumWait = wait;
   }
 
   /**
