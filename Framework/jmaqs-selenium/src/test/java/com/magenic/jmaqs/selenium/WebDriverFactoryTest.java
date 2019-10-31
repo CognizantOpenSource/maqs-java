@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.constants.BrowserType;
+import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.HashMap;
@@ -134,7 +135,7 @@ public class WebDriverFactoryTest {
   @Test(groups = TestCategories.Selenium)
   public void getRemoteOptionsChromeTest() {
     MutableCapabilities options = WebDriverFactory
-        .getRemoteOptions(RemoteBrowserType.Chrome, "testPlatform", "testVersion", null);
+        .getRemoteOptions(RemoteBrowserType.CHROME, "testPlatform", "testVersion", null);
     Assert.assertNotNull(options);
   }
 
@@ -146,19 +147,19 @@ public class WebDriverFactoryTest {
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteOptionsFirefoxTest() {
-    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.Firefox);
+    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.FIREFOX);
     Assert.assertNotNull(options);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteOptionsEdgeTest() {
-    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.Edge);
+    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.EDGE);
     Assert.assertNotNull(options);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteOptionsSafariTest() {
-    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.Safari);
+    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.SAFARI);
     Assert.assertNotNull(options);
   }
 

@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.constants.BrowserType;
+import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.File;
@@ -322,19 +323,19 @@ public class WebDriverFactory {
         options = new InternetExplorerOptions();
         break;
 
-      case Firefox:
+      case FIREFOX:
         options = new FirefoxOptions();
         break;
 
-      case Chrome:
+      case CHROME:
         options = new ChromeOptions();
         break;
 
-      case Edge:
+      case EDGE:
         options = new EdgeOptions();
         break;
 
-      case Safari:
+      case SAFARI:
         options = new SafariOptions();
         break;
 

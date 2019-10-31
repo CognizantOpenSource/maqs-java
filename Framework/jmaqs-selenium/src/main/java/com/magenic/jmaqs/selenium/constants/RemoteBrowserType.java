@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium;
+package com.magenic.jmaqs.selenium.constants;
 
 /**
  * Known remote browser types.
@@ -11,17 +11,17 @@ public enum RemoteBrowserType {
   /**
    * Remote Chrome web browser.
    */
-  Chrome,
+  CHROME,
 
   /**
    * Remote Edge web browser.
    */
-  Edge,
+  EDGE,
 
   /**
    * Remote Firefox web browser.
    */
-  Firefox,
+  FIREFOX,
 
   /**
    * Remote IE web browser.
@@ -31,5 +31,5 @@ public enum RemoteBrowserType {
   /**
    * Remote Safari web browser.
    */
-  Safari
+  SAFARI
 }

@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.constants.BrowserType;
+import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
@@ -127,13 +128,13 @@ public final class SeleniumConfig {
       case "IE":
         return RemoteBrowserType.IE;
       case "FIREFOX":
-        return RemoteBrowserType.Firefox;
+        return RemoteBrowserType.FIREFOX;
       case "CHROME":
-        return RemoteBrowserType.Chrome;
+        return RemoteBrowserType.CHROME;
       case "SAFARI":
-        return RemoteBrowserType.Safari;
+        return RemoteBrowserType.SAFARI;
       case "EDGE":
-        return RemoteBrowserType.Edge;
+        return RemoteBrowserType.EDGE;
       default:
         throw new IllegalArgumentException(
             StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
