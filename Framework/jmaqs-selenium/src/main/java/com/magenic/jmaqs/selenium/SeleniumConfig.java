@@ -9,14 +9,9 @@ import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-
 
 /**
  * Selenium specific configuration class.
@@ -39,31 +34,6 @@ public final class SeleniumConfig {
    * The remote selenium configuration section.
    */
   private static final ConfigSection SELENIUM_CAPS_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
-
-  /**
-   * Get the browser. If no browser is provided in the project configuration file, we default to
-   * Chrome. Browsers are maximized by default
-   *
-   * @return The web driver
-   * @deprecated use {@link WebDriverFactory#getDefaultBrowser()} instead.
-   */
-  @Deprecated
-  public static WebDriver browser() throws Exception {
-    return WebDriverFactory.getDefaultBrowser();
-  }
-
-  /**
-   * Get the webdriver for the provided browser. Browsers are maximized by default.
-   *
-   * @param browser The browser type we want to use
-   * @return A WebDriver
-   * @deprecated use {@link WebDriverFactory#getBrowserWithDefaultConfiguration(BrowserType)} ()} instead.
-   */
-  @Deprecated
-  public static WebDriver browser(String browser) throws Exception {
-
-      return WebDriverFactory.getBrowserWithDefaultConfiguration(getBrowserType(browser));
-  }
 
   /**
    * Get the browser type.
@@ -136,8 +106,8 @@ public final class SeleniumConfig {
       case "EDGE":
         return RemoteBrowserType.EDGE;
       default:
-        throw new IllegalArgumentException(
-            StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
+        throw new IllegalArgumentException(StringProcessor
+            .safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
     }
   }
 
@@ -197,18 +167,6 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the default wait driver.
-   *
-   * @param driver The Web Driver
-   * @return A WebDriverWait
-   * @deprecated use UIWait instead
-   */
-  @Deprecated
-  public static WebDriverWait getWaitDriver(WebDriver driver) {
-    return null;
-  }
-
-  /**
    * Get the web site base url.
    *
    * @return The web site base url
@@ -223,7 +181,8 @@ public final class SeleniumConfig {
    * @return True if the flag is set to "Yes"
    */
   public static boolean getSavePagesourceOnFail() {
-    return Config.getValueForSection(SELENIUM_SECTION, "SavePagesourceOnFail").equalsIgnoreCase("Yes");
+    return Config.getValueForSection(SELENIUM_SECTION, "SavePagesourceOnFail")
+        .equalsIgnoreCase("Yes");
   }
 
   /**
@@ -232,7 +191,8 @@ public final class SeleniumConfig {
    * @return True if the flag is set to "Yes"
    */
   public static boolean getSoftAssertScreenshot() {
-    return Config.getValueForSection(SELENIUM_SECTION, "SoftAssertScreenshot").equalsIgnoreCase("Yes");
+    return Config.getValueForSection(SELENIUM_SECTION, "SoftAssertScreenshot")
+        .equalsIgnoreCase("Yes");
   }
 
   /**
