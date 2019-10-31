@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 
 import java.time.Duration;
@@ -239,31 +240,31 @@ public class SeleniumConfigTest {
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeFirefoxTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("firefox");
-    Assert.assertEquals(browserType, BrowserType.Firefox);
+    Assert.assertEquals(browserType, BrowserType.FIREFOX);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeChromeTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("chrome");
-    Assert.assertEquals(browserType, BrowserType.Chrome);
+    Assert.assertEquals(browserType, BrowserType.CHROME);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeHeadlessChromeTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("headlesschrome");
-    Assert.assertEquals(browserType, BrowserType.HeadlessChrome);
+    Assert.assertEquals(browserType, BrowserType.HEADLESS_CHROME);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeEdgeTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("edge");
-    Assert.assertEquals(browserType, BrowserType.Edge);
+    Assert.assertEquals(browserType, BrowserType.EDGE);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeRemoteTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("remote");
-    Assert.assertEquals(browserType, BrowserType.Remote);
+    Assert.assertEquals(browserType, BrowserType.REMOTE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)

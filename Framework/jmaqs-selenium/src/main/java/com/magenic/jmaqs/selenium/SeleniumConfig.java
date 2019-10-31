@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
@@ -85,15 +86,15 @@ public final class SeleniumConfig {
       case "IE":
         return BrowserType.IE;
       case "FIREFOX":
-        return BrowserType.Firefox;
+        return BrowserType.FIREFOX;
       case "CHROME":
-        return BrowserType.Chrome;
+        return BrowserType.CHROME;
       case "HEADLESSCHROME":
-        return BrowserType.HeadlessChrome;
+        return BrowserType.HEADLESS_CHROME;
       case "EDGE":
-        return BrowserType.Edge;
+        return BrowserType.EDGE;
       case "REMOTE":
-        return BrowserType.Remote;
+        return BrowserType.REMOTE;
       case "PHANTOMJS":
       case "PHANTOM JS":
       case "PHANTOM":

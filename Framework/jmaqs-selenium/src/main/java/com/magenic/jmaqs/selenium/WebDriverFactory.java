@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.File;
@@ -69,19 +70,19 @@ public class WebDriverFactory {
         case IE:
           webDriver = getInternetExplorerDriver(getDefaultInternetExplorerOptions(), size);
           break;
-        case Firefox:
+        case FIREFOX:
           webDriver = getFirefoxDriver(getDefaultFirefoxOptions(), size);
           break;
-        case Chrome:
+        case CHROME:
           webDriver = getChromeDriver(getDefaultChromeOptions(), size);
           break;
-        case HeadlessChrome:
+        case HEADLESS_CHROME:
           webDriver = getHeadlessChromeDriver(getDefaultHeadlessChromeOptions(size));
           break;
-        case Edge:
+        case EDGE:
           webDriver = getEdgeDriver(getDefaultEdgeOptions(), size);
           break;
-        case Remote:
+        case REMOTE:
           webDriver = new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()), getDefaultRemoteOptions());
           break;
         default:
