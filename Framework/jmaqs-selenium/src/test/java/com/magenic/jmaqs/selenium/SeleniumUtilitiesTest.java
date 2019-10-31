@@ -68,7 +68,8 @@ public class SeleniumUtilitiesTest extends BaseTest {
 
     // Open Google and take a screenshot
     webDriver.navigate().to("http://www.google.com");
-    boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject, "testAppend");
+    final String testAppend = "testAppend";
+    boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject, testAppend);
 
     // Assert screenshot was successful
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
@@ -76,6 +77,9 @@ public class SeleniumUtilitiesTest extends BaseTest {
     Assert
         .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
             "Checking that expected file path exists");
+    Assert.assertTrue(
+        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
+            .contains(testAppend), "Checking that appended value was added to file");
   }
 
   /**
@@ -160,10 +164,19 @@ public class SeleniumUtilitiesTest extends BaseTest {
 
     // Open Google and take a screenshot
     webDriver.navigate().to("http://www.google.com");
-    boolean isSuccess = SeleniumUtilities.savePageSource(webDriver, testObject, "testAppend");
+    final String testAppend = "testAppend";
+    boolean isSuccess = SeleniumUtilities.savePageSource(webDriver, testObject, testAppend);
 
     // Assert screenshot was successful
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+    Assert
+        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+            "Checking that expected file path exists");
+    Assert.assertTrue(
+        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
+            .contains(testAppend), "Checking that appended value was added to file");
+
   }
 
   /**
