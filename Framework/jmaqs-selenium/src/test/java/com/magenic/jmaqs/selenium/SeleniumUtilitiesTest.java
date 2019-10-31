@@ -10,6 +10,7 @@ import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
+import java.io.File;
 import java.nio.file.Paths;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -47,6 +48,10 @@ public class SeleniumUtilitiesTest extends BaseTest {
 
     // Assert screenshot was successful
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+    Assert
+        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+            "Checking that expected file path exists");
   }
 
   /**
@@ -67,6 +72,10 @@ public class SeleniumUtilitiesTest extends BaseTest {
 
     // Assert screenshot was successful
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+    Assert
+        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+            "Checking that expected file path exists");
   }
 
   /**
@@ -110,6 +119,9 @@ public class SeleniumUtilitiesTest extends BaseTest {
     Assert.assertEquals(filePath, Paths.get(StringProcessor
         .safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime,
             ".png")).normalize().toString());
+    Assert.assertTrue(new File(filePath).exists(),
+        "Checking that screenshot file exists at expected path.");
+
   }
 
   /**
@@ -129,6 +141,10 @@ public class SeleniumUtilitiesTest extends BaseTest {
 
     // Assert screenshot was successful
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+    Assert
+        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+            "Checking that expected file path exists");
   }
 
   /**
@@ -173,6 +189,12 @@ public class SeleniumUtilitiesTest extends BaseTest {
     Assert.assertEquals(filePath, Paths.get(StringProcessor
         .safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime,
             ".txt")).normalize().toString());
+    Assert.assertTrue(new File(filePath).exists(),
+        "Checking that page source file exists at expected path.");
+    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+    Assert
+        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+            "Checking that expected file path exists");
 
   }
 
@@ -193,6 +215,10 @@ public class SeleniumUtilitiesTest extends BaseTest {
 
     // Assert screenshot was successful
     Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+    Assert
+        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+            "Checking that expected file path exists");
   }
 
   /**
@@ -230,9 +256,9 @@ public class SeleniumUtilitiesTest extends BaseTest {
     webDriver.navigate().to("http://www.google.com");
     SeleniumUtilities.killDriver(webDriver);
 
-    // Assert that the Session ID is null in the Appium Driver
+    // Assert that the Session ID is null in the Selenium Driver
     Assert.assertNull(((RemoteWebDriver) webDriver).getSessionId(),
-        "Expected Appium Driver Session ID to be null.");
+        "Expected Selenium Driver Session ID to be null.");
   }
 
   @Override
