@@ -80,9 +80,9 @@
 				<version>${compiler.plugin.version}</version>
 				<configuration>
 					<showDeprecation>false</showDeprecation>
-					<compilerVersion>1.8</compilerVersion>
-					<source>1.8</source>
-					<target>1.8</target>
+					<compilerVersion>${java.version}</compilerVersion>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 					<encoding>UTF-8</encoding>
 					<workingDirectory>target/</workingDirectory>
 				</configuration>
