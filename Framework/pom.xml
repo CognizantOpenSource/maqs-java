@@ -37,7 +37,7 @@
 		<surefire.plugin.version>2.19.1</surefire.plugin.version>
 		<mvncheckstyle.plugin.version>2.17</mvncheckstyle.plugin.version>
 		<puppycheckstyle.plugin.version>7.6.1</puppycheckstyle.plugin.version>
-		<java.version>1.8<java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<!--<reporting>
 		<plugins>
