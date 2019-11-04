@@ -32,6 +32,10 @@ public class AppiumUtilities {
    * Default Date Time Format for appending to files.
    */
   private static final String DEFAULT_DATE_TIME_FORMAT = "uuuu-MM-dd-HH-mm-ss-SSSS";
+
+  /**
+   * The Message format.
+   */
   private static final String MESSAGE_FORMAT = "%s - %s%s";
 
   private AppiumUtilities() {
