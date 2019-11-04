@@ -83,7 +83,7 @@ public class SeleniumDriverManager extends DriverManager {
     messages.append(StringProcessor.safeFormatter(message, args));
 
     //FIXME: Need to figure out what the approach is for java in this form of logging
-    Object methodInfo = Object[].class.getEnclosingMethod();
+    //Object methodInfo = Object[].class.getEnclosingMethod();
     //String fullName = methodInfo.getClass().getTypeName() + "." + methodInfo.getClass().getName();
 
     Thread thread = Thread.currentThread();
