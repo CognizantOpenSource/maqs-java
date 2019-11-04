@@ -8,19 +8,11 @@ import com.magenic.jmaqs.appium.constants.PlatformType;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
  * Class AppiumConfig.
@@ -51,28 +43,6 @@ public class AppiumConfig {
   }
 
   /**
-   * Gets the mobile device UDID.
-   *
-   * @return the mobile device UDID
-   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
-   */
-  @Deprecated
-  public static String getMobileDeviceUdid() {
-    return Config.getValueForSection(APPIUM_SECTION, "DeviceUDID");
-  }
-
-  /**
-   * Gets the bundle ID.
-   *
-   * @return the bundle ID
-   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
-   */
-  @Deprecated
-  public static String getBundleId() {
-    return Config.getValueForSection(APPIUM_SECTION, "BundleID");
-  }
-
-  /**
    * Gets the OS version.
    *
    * @return the OS version
@@ -88,23 +58,6 @@ public class AppiumConfig {
    */
   public static String getDeviceName() {
     return Config.getValueForSection(APPIUM_SECTION, "DeviceName");
-  }
-
-  /**
-   * Is using mobile browser boolean.
-   *
-   * @return the boolean
-   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
-   */
-  @Deprecated
-  public static boolean isUsingMobileBrowser() {
-    String value = Config.getValueForSection(APPIUM_SECTION, "MobileBrowser", "NO");
-
-    if (value.equalsIgnoreCase("YES")) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   /**
@@ -131,9 +84,7 @@ public class AppiumConfig {
    * Gets the mobile hub url string.
    *
    * @return the mobile hub url string
-   * @deprecated use AppiumConfig.getMobileHubUrl() instead.
    */
-  @Deprecated
   public static String getMobileHubUrlString() {
     return Config.getValueForSection(APPIUM_SECTION, "MobileHubUrl");
   }
@@ -146,30 +97,10 @@ public class AppiumConfig {
   public static URL getMobileHubUrl() {
     URL url = null;
     try {
-      url = new URL(Config.getValueForSection(APPIUM_SECTION, "MobileHubUrl"));
+      url = new URL(getMobileHubUrlString());
     } catch (MalformedURLException e) {
-      e.getStackTrace();
+      e.printStackTrace();
     }
-
-    return url;
-  }
-
-  /**
-   * Gets the mobile hub url.
-   *
-   * @param urlString the url string
-   * @return the mobile hub url
-   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
-   */
-  @Deprecated
-  public static URL getMobileHubUrl(String urlString) {
-    URL url = null;
-    try {
-      url = new URL(urlString);
-    } catch (MalformedURLException e) {
-      e.getStackTrace();
-    }
-
     return url;
   }
 
@@ -201,106 +132,6 @@ public class AppiumConfig {
         Integer.parseInt(Config.getValueForSection(APPIUM_SECTION, "MobileTimeout", "0")));
   }
 
-  /**
-   * Mobile device.
-   *
-   * @return the appium driver
-   * @deprecated use {@link com.magenic.jmaqs.appium.AppiumDriverFactory} instead.
-   */
-  @Deprecated
-  public static AppiumDriver mobileDevice() {
-    return mobileDevice(getPlatformName());
-  }
-
-  /**
-   * Mobile device.
-   *
-   * @param mobileDeviceOs the mobile device OS
-   * @return the appium driver
-   * @deprecated use {@link com.magenic.jmaqs.appium.AppiumDriverFactory} instead.
-   */
-  @Deprecated
-  public static AppiumDriver mobileDevice(String mobileDeviceOs) {
-    AppiumDriver appiumDriver = null;
-    switch (mobileDeviceOs.toUpperCase()) {
-      case "ANDROID":
-
-        appiumDriver = new AndroidDriver(getMobileHubUrl(), getMobileCapabilities());
-        break;
-
-      case "IOS":
-
-        appiumDriver = new IOSDriver(getMobileHubUrl(), getMobileCapabilities());
-        break;
-
-      default:
-
-        throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Remote browser type %s is not supported", mobileDeviceOs));
-
-    }
-
-    return appiumDriver;
-  }
-
-  /**
-   * Gets the mobile capabilities.
-   *
-   * @return the mobile capabilities
-   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
-   */
-  @Deprecated
-  private static DesiredCapabilities getMobileCapabilities() {
-
-    DesiredCapabilities capabilities = null;
-
-    String mobileDeviceOs = getPlatformName();
-    capabilities = new DesiredCapabilities();
-
-    switch (mobileDeviceOs.toUpperCase()) {
-      case "ANDROID":
-
-        capabilities.setCapability(CapabilityType.PLATFORM, Platform.ANDROID);
-        capabilities.setCapability("appPackage", getBundleId());
-        if (Config.getValue("AppActivity", null) != null) {
-          capabilities.setCapability("appActivity", Config.getValue("AppActivity"));
-        }
-        break;
-
-      case "IOS":
-
-        capabilities.setCapability("bundleId", getBundleId());
-        capabilities.setCapability("udid", getMobileDeviceUdid());
-        break;
-
-      default:
-        throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Mobile Device OS type %s is not supported", mobileDeviceOs));
-
-    }
-
-    capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, getPlatformVersion());
-    capabilities.setCapability("platformName", getPlatformName());
-
-    capabilities.setCapability(CapabilityType.BROWSER_NAME, getDeviceName());
-    capabilities.setCapability(CapabilityType.VERSION, getPlatformVersion());
-    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, getDeviceName());
-
-    return capabilities;
-  }
-
-  /**
-   * Sets the timeouts.
-   *
-   * @param driver the new timeouts
-   * @deprecated use flexible capabilities in config.xml instead.  Not longer needed.
-   */
-  @Deprecated
-  public static void setTimeouts(AppiumDriver driver) {
-    int timeoutTime = Integer.parseInt(Config.getValue("Timeout", "0"));
-    driver.manage().timeouts().pageLoadTimeout(timeoutTime, TimeUnit.MILLISECONDS);
-  }
 
   /**
    * Gets capabilities as strings.
