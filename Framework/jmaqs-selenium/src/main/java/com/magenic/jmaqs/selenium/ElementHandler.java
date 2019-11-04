@@ -116,18 +116,6 @@ public class ElementHandler {
    *
    * @param webDriver The WebDriver
    * @param by        By selector for the elements
-   * @return Returns a comma delimited String
-   */
-  public static String createCommaDelimitedString(WebDriver webDriver, By by) {
-
-    return createCommaDelimitedString(webDriver, by, false);
-  }
-
-  /**
-   * Create a comma delimited String from a ArrayList of WebElement objects.
-   *
-   * @param webDriver The WebDriver
-   * @param by        By selector for the elements
    * @param sort      True to create an alphabetically sorted comma delimited String
    * @return Returns a comma delimited String
    */
@@ -139,6 +127,18 @@ public class ElementHandler {
     }
 
     return ListProcessor.createCommaDelimitedString(unsortedList, sort);
+  }
+
+  /**
+   * Create a comma delimited String from a ArrayList of WebElement objects.
+   *
+   * @param webDriver The WebDriver
+   * @param by        By selector for the elements
+   * @return Returns a comma delimited String
+   */
+  public static String createCommaDelimitedString(WebDriver webDriver, By by) {
+
+    return createCommaDelimitedString(webDriver, by, false);
   }
 
   /**
@@ -222,18 +222,6 @@ public class ElementHandler {
    * @param webDriver   The web driver
    * @param by          By selector for the element
    * @param textToEnter Text to enter into the textbox
-   */
-  public static void setTextBox(WebDriver webDriver, By by, String textToEnter) {
-
-    setTextBox(webDriver, by, textToEnter, true);
-  }
-
-  /**
-   * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
-   *
-   * @param webDriver   The web driver
-   * @param by          By selector for the element
-   * @param textToEnter Text to enter into the textbox
    * @param tabOff      true to press the Tab key after entering text
    */
   public static void setTextBox(WebDriver webDriver, By by, String textToEnter, boolean tabOff) {
@@ -248,6 +236,18 @@ public class ElementHandler {
     } else {
       throw new RuntimeException("String is either null or empty");
     }
+  }
+
+  /**
+   * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
+   *
+   * @param webDriver   The web driver
+   * @param by          By selector for the element
+   * @param textToEnter Text to enter into the textbox
+   */
+  public static void setTextBox(WebDriver webDriver, By by, String textToEnter) {
+
+    setTextBox(webDriver, by, textToEnter, true);
   }
 
   /**
@@ -266,19 +266,6 @@ public class ElementHandler {
   /**
    * JavaScript method to scroll an element into the view.
    *
-   * @param webDriver The web driver
-   * @param by        By element
-   * @param x         Horizontal direction
-   * @param y         Vertical direction
-   */
-  public static void scrollIntoView(WebDriver webDriver, By by, int x, int y) {
-    scrollIntoView(webDriver, by);
-    executeScrolling(webDriver, x, y);
-  }
-
-  /**
-   * JavaScript method to scroll an element into the view.
-   *
    * @param webDriver The WebDriver
    * @param by        By selector for the element
    */
@@ -290,13 +277,27 @@ public class ElementHandler {
   /**
    * JavaScript method to scroll an element into the view.
    *
+   * @param webElement The parent web element
+   * @param by         By element
+   */
+  public static void scrollIntoView(WebElement webElement, By by) {
+    WebElement element = webElement.findElement(by);
+    WebDriver webDriver = SeleniumUtilities.webElementToWebDriver(element);
+
+    ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", element);
+  }
+
+  /**
+   * JavaScript method to scroll an element into the view.
+   *
    * @param webDriver The web driver
+   * @param by        By element
    * @param x         Horizontal direction
    * @param y         Vertical direction
    */
-  public static void executeScrolling(WebDriver webDriver, int x, int y) {
-    String scrollCommand = String.format("scroll(%s, %s);", x, y);
-    ((JavascriptExecutor) webDriver).executeScript(scrollCommand);
+  public static void scrollIntoView(WebDriver webDriver, By by, int x, int y) {
+    scrollIntoView(webDriver, by);
+    executeScrolling(webDriver, x, y);
   }
 
   /**
@@ -315,14 +316,13 @@ public class ElementHandler {
   /**
    * JavaScript method to scroll an element into the view.
    *
-   * @param webElement The parent web element
-   * @param by         By element
+   * @param webDriver The web driver
+   * @param x         Horizontal direction
+   * @param y         Vertical direction
    */
-  public static void scrollIntoView(WebElement webElement, By by) {
-    WebElement element = webElement.findElement(by);
-    WebDriver webDriver = SeleniumUtilities.webElementToWebDriver(element);
-
-    ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", element);
+  public static void executeScrolling(WebDriver webDriver, int x, int y) {
+    String scrollCommand = String.format("scroll(%s, %s);", x, y);
+    ((JavascriptExecutor) webDriver).executeScript(scrollCommand);
   }
 
   /**
@@ -386,5 +386,4 @@ public class ElementHandler {
       throw e;
     }
   }
-
 }

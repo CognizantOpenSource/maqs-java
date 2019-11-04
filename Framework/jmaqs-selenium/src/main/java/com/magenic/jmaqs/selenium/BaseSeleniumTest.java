@@ -23,6 +23,24 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
   }
 
   /**
+   * Get WebDriver.
+   *
+   * @return WebDriver web driver
+   */
+  public WebDriver getWebDriver() {
+    return this.getTestObject().getWebDriver();
+  }
+
+  /**
+   * Sets web driver.
+   *
+   * @param webDriver the web driver
+   */
+  public void setWebDriver(WebDriver webDriver) {
+    this.getTestObject().setWebDriver(webDriver);
+  }
+
+  /**
    * Take a screen shot if needed and tear down the web driver.
    *
    * @param resultType The test result type
@@ -41,21 +59,14 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
   }
 
   /**
-   * Get WebDriver.
+   * Get the current browser.
    *
-   * @return WebDriver web driver
+   * @return Current browser Web Driver
+   * @throws Exception Throws exception
    */
-  public WebDriver getWebDriver() {
-    return this.getTestObject().getWebDriver();
-  }
-
-  /**
-   * Sets web driver.
-   *
-   * @param webDriver the web driver
-   */
-  public void setWebDriver(WebDriver webDriver) {
-    this.getTestObject().setWebDriver(webDriver);
+  protected WebDriver getBrowser() throws Exception {
+    // Returns the web driver
+    return WebDriverFactory.getDefaultBrowser();
   }
 
   @Override
@@ -68,16 +79,4 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
           StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }
   }
-
-  /**
-   * Get the current browser.
-   *
-   * @return Current browser Web Driver
-   * @throws Exception Throws exception
-   */
-  protected WebDriver getBrowser() throws Exception {
-    // Returns the web driver
-    return WebDriverFactory.getDefaultBrowser();
-  }
-
 }

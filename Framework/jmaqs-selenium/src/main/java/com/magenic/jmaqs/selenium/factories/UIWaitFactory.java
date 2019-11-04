@@ -50,30 +50,6 @@ public class UIWaitFactory {
   }
 
   /**
-   * Gets low level driver.
-   *
-   * @param searchContext the search context
-   * @return the low level driver
-   */
-  private static WebDriver getLowLevelDriver(SearchContext searchContext) {
-    return (searchContext instanceof WebDriver)
-           ? (WebDriver) searchContext
-           : SeleniumUtilities.webElementToWebDriver((WebElement) searchContext);
-  }
-
-  /**
-   * Adds the waitDriver to the collection.
-   *
-   * @param driver     The web driver
-   * @param waitDriver the Wait object
-   */
-  public static void setWaitDriver(SearchContext driver, UIWait waitDriver) {
-    WebDriver baseDriver = getLowLevelDriver(driver);
-
-    waitCollection.put(baseDriver, waitDriver);
-  }
-
-  /**
    * Gets the {@link UIWait} object from the wait collection. If none exists,
    * one is created and cached using the driver provided.
    *
@@ -98,6 +74,18 @@ public class UIWaitFactory {
   }
 
   /**
+   * Adds the waitDriver to the collection.
+   *
+   * @param driver     The web driver
+   * @param waitDriver the Wait object
+   */
+  public static void setWaitDriver(SearchContext driver, UIWait waitDriver) {
+    WebDriver baseDriver = getLowLevelDriver(driver);
+
+    waitCollection.put(baseDriver, waitDriver);
+  }
+
+  /**
    * Removes the waitDriver from the collection.
    *
    * @param driver the web driver
@@ -108,4 +96,15 @@ public class UIWaitFactory {
     waitCollection.remove(baseDriver);
   }
 
+  /**
+   * Gets low level driver.
+   *
+   * @param searchContext the search context
+   * @return the low level driver
+   */
+  private static WebDriver getLowLevelDriver(SearchContext searchContext) {
+    return (searchContext instanceof WebDriver)
+           ? (WebDriver) searchContext
+           : SeleniumUtilities.webElementToWebDriver((WebElement) searchContext);
+  }
 }

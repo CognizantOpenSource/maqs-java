@@ -119,37 +119,6 @@ public class SeleniumUtilities {
   }
 
   /**
-   * Calculate file name string.
-   *
-   * @param directory                the directory
-   * @param fileNameWithoutExtension the file name without extension
-   * @param fileExtension            the file extension
-   * @return the string
-   */
-  private static String calculateFileName(String directory, String fileNameWithoutExtension,
-      String fileExtension) {
-    return Paths.get(directory, fileNameWithoutExtension + fileExtension).normalize().toString();
-  }
-
-  /**
-   * Validate directory structure and create if it does not exist.
-   *
-   * @param testObject the test object
-   * @param directory  the directory
-   */
-  private static void validateDirectoryStructure(SeleniumTestObject testObject, String directory) {
-    try {
-      Path path = new File(directory).toPath();
-      if (!path.toFile().isDirectory()) {
-        Files.createDirectories(path);
-      }
-    } catch (IOException exception) {
-      testObject.getLog()
-          .logMessage(MessageType.ERROR, "Failed to create directories: " + exception.getMessage());
-    }
-  }
-
-  /**
    * Copy file.
    *
    * @param tempFile the temp file
@@ -243,6 +212,37 @@ public class SeleniumUtilities {
 
     testObject.addAssociatedFile(path);
     return path;
+  }
+
+  /**
+   * Calculate file name string.
+   *
+   * @param directory                the directory
+   * @param fileNameWithoutExtension the file name without extension
+   * @param fileExtension            the file extension
+   * @return the string
+   */
+  private static String calculateFileName(String directory, String fileNameWithoutExtension,
+      String fileExtension) {
+    return Paths.get(directory, fileNameWithoutExtension + fileExtension).normalize().toString();
+  }
+
+  /**
+   * Validate directory structure and create if it does not exist.
+   *
+   * @param testObject the test object
+   * @param directory  the directory
+   */
+  private static void validateDirectoryStructure(SeleniumTestObject testObject, String directory) {
+    try {
+      Path path = new File(directory).toPath();
+      if (!path.toFile().isDirectory()) {
+        Files.createDirectories(path);
+      }
+    } catch (IOException exception) {
+      testObject.getLog()
+          .logMessage(MessageType.ERROR, "Failed to create directories: " + exception.getMessage());
+    }
   }
 
   /**
