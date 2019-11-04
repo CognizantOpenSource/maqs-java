@@ -4,6 +4,8 @@
 
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.appium.constants.PlatformType;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import java.net.MalformedURLException;
@@ -22,8 +24,11 @@ import org.testng.annotations.Test;
 /**
  * The type Appium driver factory test.
  */
-public class AppiumDriverFactoryTest {
+public class AppiumDriverFactoryUnitTest {
 
+  /**
+   * The Sauce labs config.
+   */
   private static DesiredCapabilities sauceLabsConfig;
 
   /**
@@ -40,7 +45,7 @@ public class AppiumDriverFactoryTest {
   /**
    * Test get default mobile driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetDefaultMobileDriver() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     Assert.assertNotNull(defaultMobileDriver, "Checking if default driver is null");
@@ -49,7 +54,7 @@ public class AppiumDriverFactoryTest {
   /**
    * Test test get default mobile driver android.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testTestGetDefaultMobileDriverAndroid() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory
         .getDefaultMobileDriver(PlatformType.ANDROID);
@@ -59,10 +64,11 @@ public class AppiumDriverFactoryTest {
   /**
    * Test get default mobile options.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetDefaultMobileOptions() {
     final DesiredCapabilities defaultMobileOptions = AppiumDriverFactory.getDefaultMobileOptions();
-    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.  More elegant solution oppose to a for each.
+    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.
+    // More elegant solution oppose to a for each.
     Consumer<String> assertionConsumer = (String s) -> {
       Assert.assertNotNull(defaultMobileOptions.is(s),
           String.format("Checking if capability key %s is not null", s));
@@ -73,12 +79,13 @@ public class AppiumDriverFactoryTest {
   /**
    * Test test get default mobile options.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testTestGetDefaultMobileOptions() {
     final Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
     DesiredCapabilities capabilities = AppiumDriverFactory
         .getDefaultMobileOptions(capabilitiesAsObjects);
-    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.  More elegant solution oppose to a for each.
+    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.
+    // More elegant solution oppose to a for each.
     Consumer<String> assertionConsumer = (String s) -> {
       Assert.assertNotNull(capabilities.is(s),
           String.format("Checking if capability key %s is not null", s));
@@ -91,7 +98,7 @@ public class AppiumDriverFactoryTest {
   /**
    * Test get android driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetAndroidDriver() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
     capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
@@ -108,7 +115,7 @@ public class AppiumDriverFactoryTest {
   /**
    * Test get ios driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetIOSDriver() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
     capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
@@ -125,7 +132,7 @@ public class AppiumDriverFactoryTest {
   /**
    * Test get windows driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   @Ignore("Work on Windows implementation")
   public void testGetWindowsDriver() {
     DesiredCapabilities appCapabilities = new DesiredCapabilities();
@@ -146,7 +153,7 @@ public class AppiumDriverFactoryTest {
   /**
    * Test create driver.
    */
-  @Test(expectedExceptions = WebDriverException.class)
+  @Test(groups = TestCategories.Appium, expectedExceptions = WebDriverException.class)
   public void testCreateDriverException() {
     Supplier<AppiumDriver<WebElement>> appiumDriverSupplier = () -> {
       try {

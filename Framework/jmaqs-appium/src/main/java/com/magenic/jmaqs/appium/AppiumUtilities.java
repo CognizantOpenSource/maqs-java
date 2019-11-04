@@ -33,6 +33,11 @@ public class AppiumUtilities {
    */
   private static final String DEFAULT_DATE_TIME_FORMAT = "uuuu-MM-dd-HH-mm-ss-SSSS";
 
+  /**
+   * The Message format.
+   */
+  private static final String MESSAGE_FORMAT = "%s - %s%s";
+
   private AppiumUtilities() {
 
   }
@@ -68,12 +73,10 @@ public class AppiumUtilities {
 
       // Calculate the file name with Date Time Stamp
       String directory = ((FileLogger) testObject.getLog()).getDirectory();
-      String fileNameWithoutExtension = StringProcessor.safeFormatter(
-            "%s - %s%s", testObject.getFullyQualifiedTestName(),
-                    DateTimeFormatter.ofPattern(
-                        DEFAULT_DATE_TIME_FORMAT,
-                          Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC())),
-                    appendName);
+      String fileNameWithoutExtension = StringProcessor
+          .safeFormatter(MESSAGE_FORMAT, testObject.getFullyQualifiedTestName(),
+              DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
+                  .format(LocalDateTime.now(Clock.systemUTC())), appendName);
       captureScreenshot(appiumDriver, testObject, directory, fileNameWithoutExtension);
 
       testObject.getLog().logMessage(MessageType.INFORMATION, "Screenshot saved.");
@@ -152,21 +155,16 @@ public class AppiumUtilities {
       if (!(testObject.getLog() instanceof FileLogger)) {
         // Since this is not a file logger we will need to use a generic file name
         path = savePageSource(appiumDriver, testObject, LoggingConfig.getLogDirectory(),
-            StringProcessor.safeFormatter(
-               "%s - %s%s", "PageSource",
-                DateTimeFormatter.ofPattern(
-                    DEFAULT_DATE_TIME_FORMAT,
-                    Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC())),
-                appendName));
+            StringProcessor.safeFormatter(MESSAGE_FORMAT, "PageSource",
+                DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
+                    .format(LocalDateTime.now(Clock.systemUTC())), appendName));
       } else {
         // Calculate the file name
         String directory = ((FileLogger) testObject.getLog()).getDirectory();
-        String fileNameWithoutExtension = StringProcessor.safeFormatter(
-            "%s - %s%s", testObject.getFullyQualifiedTestName() + "_PS",
-            DateTimeFormatter.ofPattern(
-                DEFAULT_DATE_TIME_FORMAT,
-                Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC())),
-            appendName);
+        String fileNameWithoutExtension = StringProcessor
+            .safeFormatter(MESSAGE_FORMAT, testObject.getFullyQualifiedTestName() + "_PS",
+                DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
+                    .format(LocalDateTime.now(Clock.systemUTC())), appendName);
 
         path = savePageSource(appiumDriver, testObject, directory, fileNameWithoutExtension);
       }
