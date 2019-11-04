@@ -5,21 +5,17 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.Logger;
 import io.appium.java_client.AppiumDriver;
 import java.lang.reflect.Method;
 import org.openqa.selenium.WebElement;
-
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
 /**
  * The type Appium test object test.
  */
-public class AppiumTestObjectTest {
+public class AppiumTestObjectUnitTest {
 
   private String testName;
   private ConsoleLogger consoleLogger;

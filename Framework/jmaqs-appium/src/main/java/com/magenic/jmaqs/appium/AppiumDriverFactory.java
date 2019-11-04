@@ -4,10 +4,7 @@
 
 package com.magenic.jmaqs.appium;
 
-import static io.appium.java_client.remote.MobileCapabilityType.DEVICE_NAME;
-import static io.appium.java_client.remote.MobileCapabilityType.PLATFORM_NAME;
-import static io.appium.java_client.remote.MobileCapabilityType.PLATFORM_VERSION;
-
+import com.magenic.jmaqs.appium.constants.PlatformType;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -22,6 +19,10 @@ import java.util.function.Supplier;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import static io.appium.java_client.remote.MobileCapabilityType.DEVICE_NAME;
+import static io.appium.java_client.remote.MobileCapabilityType.PLATFORM_NAME;
+import static io.appium.java_client.remote.MobileCapabilityType.PLATFORM_VERSION;
 
 /**
  * The type Appium driver factory.

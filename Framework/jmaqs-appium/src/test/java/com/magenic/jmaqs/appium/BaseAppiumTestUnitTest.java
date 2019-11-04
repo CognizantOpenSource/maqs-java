@@ -6,15 +6,12 @@ package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * The type Base appium test test.
  */
-public class BaseAppiumTestTest extends BaseAppiumTest {
+public class BaseAppiumTestUnitTest extends BaseAppiumTest {
 
   /**
    * Test get appium driver.
@@ -54,4 +51,8 @@ public class BaseAppiumTestTest extends BaseAppiumTest {
         "Checking that Appium Driver is not null through BaseAppiumTest");
   }
 
+  @Override
+  protected void postSetupLogging() throws Exception {
+
+  }
 }

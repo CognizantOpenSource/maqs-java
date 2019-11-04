@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.appium;
+package com.magenic.jmaqs.appium.constants;
 
 /**
  * The enum Platform type.

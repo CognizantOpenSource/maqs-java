@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.appium.constants.PlatformType;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import java.net.MalformedURLException;
@@ -22,7 +23,7 @@ import org.testng.annotations.Test;
 /**
  * The type Appium driver factory test.
  */
-public class AppiumDriverFactoryTest {
+public class AppiumDriverFactoryUnitTest {
 
   private static DesiredCapabilities sauceLabsConfig;
 

@@ -3,6 +3,7 @@
  */
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.appium.constants.PlatformType;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import java.util.HashMap;
@@ -12,6 +13,9 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+/**
+ * The type Appium config unit test.
+ */
 public class AppiumConfigUnitTest {
 
   private String username = "username";
@@ -19,43 +23,42 @@ public class AppiumConfigUnitTest {
   private String accessKey = "accessKey";
   private String deviceOrientation = "deviceOrientation";
 
-  @Test
-  @Ignore("Test ignored because method is deprecated.")
-  public void testGetMobileDeviceUDID() throws Exception {
-    String mobileDeviceUDID = AppiumConfig.getMobileDeviceUdid();
-    Assert.assertTrue(mobileDeviceUDID.equalsIgnoreCase("1234567890ACDEF1234687890ABCDEF"));
-  }
-
-  @Test
-  @Ignore("Test ignored because method is deprecated.")
-  public void testGetBundleID() throws Exception {
-    String bundleID = AppiumConfig.getBundleId();
-    Assert.assertTrue(bundleID.equalsIgnoreCase("com.magenic.maqs.appium.tester"));
-  }
-
+  /**
+   * Test get os version.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testGetOSVersion() throws Exception {
     String osVersion = AppiumConfig.getPlatformVersion();
     Assert.assertTrue(osVersion.equalsIgnoreCase("6.0"));
   }
 
+  /**
+   * Test get device name.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testGetDeviceName() throws Exception {
     String deviceName = AppiumConfig.getDeviceName();
     Assert.assertTrue(deviceName.equalsIgnoreCase("Android GoogleAPI Emulator"));
   }
 
+  /**
+   * Test get mobile hub url string.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testGetMobileHubUrlString() throws Exception {
     String mobileHubUrl = AppiumConfig.getMobileHubUrlString();
     Assert.assertTrue(mobileHubUrl.equalsIgnoreCase("http://ondemand.saucelabs.com:80/wd/hub"));
   }
 
-  @Test
-  @Ignore("Test ignored because method is deprecated.")
-  public void testSetTimeouts() throws Exception {
-  }
-
+  /**
+   * Test get capabilities as strings.
+   */
   @Test
   public void testGetCapabilitiesAsStrings() {
     Map<String, String> capabilitiesAsStrings = AppiumConfig.getCapabilitiesAsStrings();
@@ -73,6 +76,9 @@ public class AppiumConfigUnitTest {
     softAssert.assertAll();
   }
 
+  /**
+   * Test get capabilities as objects.
+   */
   @Test
   public void testGetCapabilitiesAsObjects() {
     Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
@@ -90,21 +96,33 @@ public class AppiumConfigUnitTest {
     softAssert.assertAll();
   }
 
+  /**
+   * Test get save page source on fail.
+   */
   @Test
   public void testGetSavePageSourceOnFail() {
     Assert.assertFalse(AppiumConfig.getSavePageSourceOnFail());
   }
 
+  /**
+   * Test get soft assert screen shot.
+   */
   @Test
   public void testGetSoftAssertScreenShot() {
     Assert.assertFalse(AppiumConfig.getSoftAssertScreenShot());
   }
 
+  /**
+   * Test get command timeout.
+   */
   @Test
   public void testGetCommandTimeout() {
     Assert.assertEquals(AppiumConfig.getCommandTimeout().toMillis(), 122000);
   }
 
+  /**
+   * Test get command timeout error.
+   */
   @Test(expectedExceptions = NumberFormatException.class)
   @Ignore("Impacting future tests since there is no way to reload config")
   public void testGetCommandTimeoutError() {
@@ -114,31 +132,49 @@ public class AppiumConfigUnitTest {
     AppiumConfig.getCommandTimeout();
   }
 
+  /**
+   * Test get mobile timeout.
+   */
   @Test
   public void testGetMobileTimeout() {
     Assert.assertEquals(AppiumConfig.getMobileTimeout().toMillis(), 10000);
   }
 
+  /**
+   * Test get device type.
+   */
   @Test
   public void testGetDeviceType() {
     Assert.assertEquals(AppiumConfig.getDeviceType(), PlatformType.ANDROID);
   }
 
+  /**
+   * Test get device type android.
+   */
   @Test
   public void testGetDeviceTypeAndroid() {
     Assert.assertEquals(AppiumConfig.getDeviceType("android"), PlatformType.ANDROID);
   }
 
+  /**
+   * Test get device type ios.
+   */
   @Test
   public void testGetDeviceTypeIOS() {
     Assert.assertEquals(AppiumConfig.getDeviceType("ios"), PlatformType.IOS);
   }
 
+  /**
+   * Test get device type windows.
+   */
   @Test
   public void testGetDeviceTypeWindows() {
     Assert.assertEquals(AppiumConfig.getDeviceType("windows"), PlatformType.WINDOWS);
   }
 
+  /**
+   * Test get device type error.
+   */
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetDeviceTypeError() {
     AppiumConfig.getDeviceType("linux");

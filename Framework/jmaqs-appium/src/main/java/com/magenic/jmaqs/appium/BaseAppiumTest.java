@@ -5,8 +5,6 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.selenium.SeleniumWait;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
@@ -20,14 +18,6 @@ import org.testng.ITestResult;
 public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
 
   /**
-   * Thread local storage of AppiumTestObject.
-   *
-   * @deprecated methodology no longer used
-   */
-  @Deprecated
-  private ThreadLocal<AppiumTestObject> appiumTestObject = new ThreadLocal<AppiumTestObject>();
-
-  /**
    * Initialize a new instance of the BaseAppiumTest class.
    */
   public BaseAppiumTest() {
@@ -39,63 +29,26 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
    *
    * @return the appium driver
    */
-
   public AppiumDriver<WebElement> getAppiumDriver() {
     return this.getTestObject().getAppiumDriver();
   }
 
+  /**
+   * Sets appium driver.
+   *
+   * @param mobileDriver the mobile driver
+   */
   public void setAppiumDriver(AppiumDriver<WebElement> mobileDriver) {
     this.getTestObject().setAppiumDriver(mobileDriver);
   }
 
   /**
-   * Gets the appium wait.
+   * Gets new mobile driver.
    *
-   * @return the appium wait
-   * @deprecated {@link com.magenic.jmaqs.appium.AppiumWait} has been deprecated
+   * @return the mobile driver
    */
-  @Deprecated
-  public SeleniumWait getAppiumWait() {
-    return this.appiumTestObject.get().getAppiumWait();
-  }
-
-  /**
-   * Gets the appium test object.
-   *
-   * @return the appium test object
-   * @deprecated methodology no longer used
-   */
-  @Deprecated
-  public AppiumTestObject getAppiumTestObject() {
-    return this.appiumTestObject.get();
-  }
-
   protected AppiumDriver<WebElement> getMobileDriver() {
     return AppiumDriverFactory.getDefaultMobileDriver();
-  }
-
-  /**
-   * Overload function for doing post setup logging.
-   *
-   * @deprecated methodology no longer used.
-   */
-  @Deprecated
-  protected void postSetupLogging() {
-    try {
-
-      AppiumDriver driver = AppiumConfig.mobileDevice();
-      AppiumWait wait = new AppiumWait(driver);
-
-      appiumTestObject.set(new AppiumTestObject(driver, wait, this.getFullyQualifiedTestClassName(),
-          this.getLogger()));
-      this.getLogger()
-          .logMessage(MessageType.INFORMATION, "Loaded driver: %s", AppiumConfig.getPlatformName());
-    } catch (Exception e) {
-      this.getLogger()
-          .logMessage(MessageType.ERROR, "Failed to start driver because: %s", e.getMessage());
-      System.out.println(
-          StringProcessor.safeFormatter("Browser type %s is not supported", e.getMessage()));
-    }
   }
 
   /**
@@ -116,7 +69,6 @@ public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject
               .savePageSource(this.getAppiumDriver(), this.getTestObject(), "FinalPageSource");
         }
       }
-
 
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
