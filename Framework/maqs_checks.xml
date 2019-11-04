@@ -125,7 +125,7 @@
       <property name="arrayInitIndent" value="2"/>
     </module>
     <module name="AbbreviationAsWordInName">
-      <property name="allowedAbbreviationLength" value="1"/>
+      <property name="allowedAbbreviationLength" value="2"/>
       <property name="ignoreFinal" value="false"/>
     </module>
     <module name="OverloadMethodsDeclarationOrder"/>

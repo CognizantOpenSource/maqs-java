@@ -32,6 +32,45 @@ public class UIFind {
   }
 
   /**
+   * Finds all elements using the by provided.
+   *
+   * @param by             Css Selector
+   * @param throwException optional assert parameter - throws an assert exception if no element is found
+   * @return The Web Element
+   */
+  public List<WebElement> findElements(By by, boolean throwException) {
+    return this.getElementList(by, throwException);
+  }
+
+  /**
+   * Function to get the Web Collection.
+   *
+   * @param by             Css Selector
+   * @param throwException optional assert parameter - throws an exception if no element is found
+   * @return The Web Element Collection
+   */
+  private List<WebElement> getElementList(By by, boolean throwException) {
+    List<WebElement> elems = this.searchItem.findElements(by);
+
+    if (elems.isEmpty() || !throwException) {
+      return elems;
+    }
+
+    throw new NotFoundException(
+        StringProcessor.safeFormatter("No result found for By %s", by.toString()));
+  }
+
+  /**
+   * General Find Element.
+   *
+   * @param by Css Selector
+   * @return The Web Element
+   */
+  public WebElement findElement(By by) {
+    return findElement(by, true);
+  }
+
+  /**
    * General Find Element.
    *
    * @param by             Css Selector
@@ -50,24 +89,14 @@ public class UIFind {
   }
 
   /**
-   * Finds all elements using the by provided.
+   * Find a specified Web Element by text.
    *
-   * @param by             Css Selector
-   * @param throwException optional assert parameter - throws an assert exception if no element is found
+   * @param by   Css Selector
+   * @param text Text to search the Web Element Collection
    * @return The Web Element
    */
-  public List<WebElement> findElements(By by, boolean throwException) {
-    return this.getElementList(by, throwException);
-  }
-
-  /**
-   * General Find Element.
-   *
-   * @param by Css Selector
-   * @return The Web Element
-   */
-  public WebElement findElement(By by) {
-    return findElement(by, true);
+  public WebElement findElementWithText(By by, String text) {
+    return findElementWithText(by, text, true);
   }
 
   /**
@@ -95,14 +124,14 @@ public class UIFind {
   }
 
   /**
-   * Find a specified Web Element by text.
+   * Finds the index of the specified Web Element.
    *
    * @param by   Css Selector
    * @param text Text to search the Web Element Collection
-   * @return The Web Element
+   * @return The index of a Web Element
    */
-  public WebElement findElementWithText(By by, String text) {
-    return findElementWithText(by, text, true);
+  public int findIndexOfElementWithText(By by, String text) {
+    return findIndexOfElementWithText(by, text, true);
   }
 
   /**
@@ -132,14 +161,15 @@ public class UIFind {
   }
 
   /**
-   * Finds the index of the specified Web Element.
+   * Find the Index of the Specified Web Element Collection.
    *
-   * @param by   Css Selector
+   * @param list ICollection of Web Elements
    * @param text Text to search the Web Element Collection
-   * @return The index of a Web Element
+   * @return The index of the Web Element in the inputed WebElement Collection
    */
-  public int findIndexOfElementWithText(By by, String text) {
-    return findIndexOfElementWithText(by, text, true);
+  public int findIndexOfElementWithText(List<WebElement> list, String text) {
+    return findIndexOfElementWithText(list, text, true);
+
   }
 
   /**
@@ -176,33 +206,4 @@ public class UIFind {
         .safeFormatter("Text did not match any element in collection %s", list.toString()));
   }
 
-  /**
-   * Find the Index of the Specified Web Element Collection.
-   *
-   * @param list ICollection of Web Elements
-   * @param text Text to search the Web Element Collection
-   * @return The index of the Web Element in the inputed WebElement Collection
-   */
-  public int findIndexOfElementWithText(List<WebElement> list, String text) {
-    return findIndexOfElementWithText(list, text, true);
-
-  }
-
-  /**
-   * Function to get the Web Collection.
-   *
-   * @param by             Css Selector
-   * @param throwException optional assert parameter - throws an exception if no element is found
-   * @return The Web Element Collection
-   */
-  private List<WebElement> getElementList(By by, boolean throwException) {
-    List<WebElement> elems = this.searchItem.findElements(by);
-
-    if (elems.isEmpty() || !throwException) {
-      return elems;
-    }
-
-    throw new NotFoundException(
-        StringProcessor.safeFormatter("No result found for By %s", by.toString()));
-  }
 }

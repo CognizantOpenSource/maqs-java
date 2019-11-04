@@ -50,6 +50,7 @@ public class WebDriverFactory {
    * Get the default web driver based on the test run configuration.
    *
    * @return A web driver
+   * @throws Exception the exception
    */
   public static WebDriver getDefaultBrowser() throws Exception {
     return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
@@ -101,6 +102,183 @@ public class WebDriverFactory {
   }
 
   /**
+   * Get a new IE driver.
+   *
+   * @param internetExplorerOptions Browser options
+   * @param size                    Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
+   * @return A new IE driver
+   */
+  public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions,
+      String size) {
+    System.setProperty("webdriver.ie.driver",
+        getDriverLocation(WebDriverFile.IE.getFile()) + File.separator + WebDriverFile.IE
+            .getFile());
+    InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
+    setBrowserSize(driver, size);
+
+    return driver;
+  }
+
+  /**
+   * Get the web driver location.
+   *
+   * @param driverFile The web driver file, including extension
+   * @return The path to the web driver
+   */
+  public static String getDriverLocation(String driverFile) {
+    return getDriverLocation(driverFile, "", true);
+  }
+
+  /**
+   * Get the web driver location.
+   *
+   * @param driverFile      The web driver file, including extension
+   * @param defaultHintPath The default location for the specific driver
+   * @param mustExist       Do we need to know where this drive is located,                        if this is true and the file is not found an error will be thrown
+   * @return The path to the web driver
+   */
+  public static String getDriverLocation(String driverFile, String defaultHintPath,
+      boolean mustExist) {
+    // Get the hint path from the config
+    String hintPath = SeleniumConfig.getDriverHintPath();
+
+    // Try the hintpath first
+    if (!hintPath.isEmpty() && Paths.get(hintPath, driverFile).toFile().exists()) {
+      return hintPath;
+    }
+
+    // Try the default hint path next
+    if (!defaultHintPath.isEmpty() && Paths.get(defaultHintPath, driverFile).toFile().exists()) {
+      return Paths.get(defaultHintPath).toString();
+    }
+
+    // Try the test location
+    Path path = Paths.get(new File("").getAbsolutePath());
+    String testLocation = path.getParent().toString();
+    if (Paths.get(testLocation, driverFile).toFile().exists()) {
+      return testLocation;
+    }
+
+    // Try resources
+    ClassLoader classLoader = WebDriverFactory.class.getClassLoader();
+    URL url = classLoader.getResource(driverFile);
+    if (url != null) {
+      File file = new File(url.getPath());
+      return file.getParent();
+    }
+
+    // We didn't find the web driver so throw an error if we need to know where it is
+    if (mustExist) {
+      throw new RuntimeException(
+          StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
+    }
+
+    return "";
+  }
+
+  /**
+   * Sets the browser size based on the provide string value.
+   * Browser size is expected to be: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080).
+   * MAXIMIZE just maximizes the browser.
+   * DEFAULT does not change the current size.
+   * #x# sets a custom size.
+   *
+   * @param webDriver the webDriver from the Browser method
+   * @param size      Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
+   */
+  public static void setBrowserSize(WebDriver webDriver, String size) {
+    size = size.toUpperCase();
+
+    if (size.equals(WINDOW_MAX)) {
+      webDriver.manage().window().maximize();
+    } else if (!size.equals("DEFAULT")) {
+      webDriver.manage().window().setSize(extractDimensionFromString(size));
+    }
+  }
+
+  /**
+   * Get the window size as a Dimension object.
+   *
+   * @param size The size in a #X# format
+   * @return The dimension object with width and height defined
+   */
+  public static Dimension extractDimensionFromString(String size) {
+    String[] sizes = size.split("[xX]");
+
+    if (!size.toUpperCase().contains("X") || sizes.length != 2) {
+      throw new IllegalArgumentException(
+          "Browser size is expected to be in an expected format: 1920x1080");
+    }
+
+    try {
+      int width = Integer.parseInt(sizes[0]);
+      int height = Integer.parseInt(sizes[1]);
+      return new Dimension(width, height);
+    } catch (NumberFormatException e) {
+      throw new NumberFormatException(
+          "Length and Width must be a string that is an integer value: 400x400");
+    }
+  }
+
+  /**
+   * Get the default IE options.
+   *
+   * @return The default IE options
+   */
+  public static InternetExplorerOptions getDefaultInternetExplorerOptions() {
+    InternetExplorerOptions options = new InternetExplorerOptions();
+    options.ignoreZoomSettings();
+
+    return options;
+  }
+
+  /**
+   * Initialize a new Firefox driver.
+   *
+   * @param firefoxOptions Browser options
+   * @param size           Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
+   * @return A new Firefox driver
+   */
+  public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
+    System.setProperty("webdriver.gecko.driver",
+        getDriverLocation(WebDriverFile.FIREFOX.getFile()) + File.separator + WebDriverFile.FIREFOX
+            .getFile());
+
+    WebDriver driver = new FirefoxDriver(firefoxOptions);
+    setBrowserSize(driver, size);
+
+    return driver;
+  }
+
+  /**
+   * Get the default Firefox options.
+   *
+   * @return The default Firefox options
+   */
+  public static FirefoxOptions getDefaultFirefoxOptions() {
+    FirefoxOptions firefoxOptions = new FirefoxOptions();
+    firefoxOptions.setProfile(new FirefoxProfile());
+
+    return firefoxOptions;
+  }
+
+  /**
+   * Initialize a new Chrome driver.
+   *
+   * @param chromeOptions Browser options
+   * @param size          Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
+   * @return A new Chrome driver
+   */
+  public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
+    System.setProperty("webdriver.chrome.driver",
+        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME
+            .getFile());
+    WebDriver driver = new ChromeDriver(chromeOptions);
+    setBrowserSize(driver, size);
+    return driver;
+  }
+
+  /**
    * Get the default Chrome options.
    *
    * @return The default Chrome options
@@ -116,12 +294,16 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the default headless Chrome options.
+   * Initialize a new headless Chrome driver.
    *
-   * @return The default headless Chrome options
+   * @param headlessChromeOptions Browser options
+   * @return A new headless Chrome driver
    */
-  public static ChromeOptions getDefaultHeadlessChromeOptions() {
-    return getDefaultHeadlessChromeOptions(WINDOW_MAX);
+  public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
+    System.setProperty("webdriver.chrome.driver",
+        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME
+            .getFile());
+    return new ChromeDriver(headlessChromeOptions);
   }
 
   /**
@@ -144,96 +326,19 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the default IE options.
+   * Get the browser/browser size as a string.
    *
-   * @return The default IE options
+   * @param size Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
+   * @return The browser size as a string - Specifically for headless Chrome options
    */
-  public static InternetExplorerOptions getDefaultInternetExplorerOptions() {
-    InternetExplorerOptions options = new InternetExplorerOptions();
-    options.ignoreZoomSettings();
-
-    return options;
-  }
-
-  /**
-   * Get the default Firefox options.
-   *
-   * @return The default Firefox options
-   */
-  public static FirefoxOptions getDefaultFirefoxOptions() {
-    FirefoxOptions firefoxOptions = new FirefoxOptions();
-    firefoxOptions.setProfile(new FirefoxProfile());
-
-    return firefoxOptions;
-  }
-
-  /**
-   * Get the default Edge options.
-   *
-   * @return The default Edge options
-   */
-  public static EdgeOptions getDefaultEdgeOptions() {
-    EdgeOptions edgeOptions = new EdgeOptions();
-    edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL.toString());
-
-    return edgeOptions;
-  }
-
-  /**
-   * Initialize a new Chrome driver.
-   *
-   * @param chromeOptions Browser options
-   * @return A new Chrome driver
-   */
-  public static WebDriver getChromeDriver(ChromeOptions chromeOptions) {
-    return getChromeDriver(chromeOptions, WINDOW_MAX);
-  }
-
-  /**
-   * Initialize a new Chrome driver.
-   *
-   * @param chromeOptions Browser options
-   * @param size          Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return A new Chrome driver
-   */
-  public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
-    System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME
-            .getFile());
-    WebDriver driver = new ChromeDriver(chromeOptions);
-    setBrowserSize(driver, size);
-    return driver;
-  }
-
-  /**
-   * Initialize a new headless Chrome driver.
-   *
-   * @param headlessChromeOptions Browser options
-   * @return A new headless Chrome driver
-   */
-  public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
-    System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME
-            .getFile());
-    return new ChromeDriver(headlessChromeOptions);
-  }
-
-  /**
-   * Initialize a new Firefox driver.
-   *
-   * @param firefoxOptions Browser options
-   * @param size           Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return A new Firefox driver
-   */
-  public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
-    System.setProperty("webdriver.gecko.driver",
-        getDriverLocation(WebDriverFile.FIREFOX.getFile()) + File.separator + WebDriverFile.FIREFOX
-            .getFile());
-
-    WebDriver driver = new FirefoxDriver(firefoxOptions);
-    setBrowserSize(driver, size);
-
-    return driver;
+  public static String getHeadlessWindowSizeString(String size) {
+    if (size.equals(WINDOW_MAX) || size.equals("DEFAULT")) {
+      // If we need a string default to 1920 by 1080
+      return "window-size=1920,1080";
+    } else {
+      Dimension dimension = extractDimensionFromString(size);
+      return String.format("window-size=%s,%s", dimension.width, dimension.height);
+    }
   }
 
   /**
@@ -260,21 +365,53 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get a new IE driver.
+   * Get the web driver location.
    *
-   * @param internetExplorerOptions Browser options
-   * @param size                    Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return A new IE driver
+   * @param driverFile      The web driver file, including extension
+   * @param defaultHintPath The default location for the specific driver
+   * @return The path to the web driver
    */
-  public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions,
-      String size) {
-    System.setProperty("webdriver.ie.driver",
-        getDriverLocation(WebDriverFile.IE.getFile()) + File.separator + WebDriverFile.IE
-            .getFile());
-    InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
-    setBrowserSize(driver, size);
+  public static String getDriverLocation(String driverFile, String defaultHintPath) {
+    return getDriverLocation(driverFile, defaultHintPath, true);
+  }
 
-    return driver;
+  /**
+   * Get the file path for the Edge driver pre-installed on the system.
+   *
+   * @param file The file we are looking for
+   * @return The parent folder of the given file or the empty string if the file is not found
+   */
+  static String getWindowsEdgeDriverLocation(String file) {
+    String edgeDriverFolder = "Microsoft Web Driver";
+
+    Path path = Paths.get(System.getenv("ProgramW6432"), edgeDriverFolder, file);
+    if (path.toFile().isFile()) {
+      return path.getParent().toString();
+    }
+
+    path = Paths.get(System.getenv("ProgramFiles(x86)"), edgeDriverFolder, file);
+    if (path.toFile().isFile()) {
+      return path.getParent().toString();
+    }
+
+    path = Paths.get(System.getenv("ProgramFiles"), edgeDriverFolder, file);
+    if (path.toFile().isFile()) {
+      return path.getParent().toString();
+    }
+
+    return "";
+  }
+
+  /**
+   * Get the default Edge options.
+   *
+   * @return The default Edge options
+   */
+  public static EdgeOptions getDefaultEdgeOptions() {
+    EdgeOptions edgeOptions = new EdgeOptions();
+    edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL.toString());
+
+    return edgeOptions;
   }
 
   /**
@@ -290,28 +427,6 @@ public class WebDriverFactory {
         .getRemoteCapabilitiesAsObjects();
 
     return getRemoteOptions(remoteBrowser, remotePlatform, remoteBrowserVersion, capabilities);
-  }
-
-  /**
-   * Get the remote driver options.
-   *
-   * @param remoteBrowser The remote browser type
-   * @return The remote driver options
-   */
-  public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser) {
-    return getRemoteOptions(remoteBrowser, "", "", null);
-  }
-
-  /**
-   * Get the remote driver options.
-   *
-   * @param remoteBrowser      The remote browser type
-   * @param remoteCapabilities Additional remote capabilities
-   * @return The remote driver options
-   */
-  public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
-      Map<String, Object> remoteCapabilities) {
-    return getRemoteOptions(remoteBrowser, "", "", remoteCapabilities);
   }
 
   /**
@@ -394,159 +509,44 @@ public class WebDriverFactory {
   }
 
   /**
-   * Sets the browser size based on the provide string value.
-   * Browser size is expected to be: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080).
-   * MAXIMIZE just maximizes the browser.
-   * DEFAULT does not change the current size.
-   * #x# sets a custom size.
+   * Get the default headless Chrome options.
    *
-   * @param webDriver the webDriver from the Browser method
-   * @param size      Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
+   * @return The default headless Chrome options
    */
-  public static void setBrowserSize(WebDriver webDriver, String size) {
-    size = size.toUpperCase();
-
-    if (size.equals(WINDOW_MAX)) {
-      webDriver.manage().window().maximize();
-    } else if (!size.equals("DEFAULT")) {
-      webDriver.manage().window().setSize(extractDimensionFromString(size));
-    }
+  public static ChromeOptions getDefaultHeadlessChromeOptions() {
+    return getDefaultHeadlessChromeOptions(WINDOW_MAX);
   }
 
   /**
-   * Get the browser/browser size as a string.
+   * Initialize a new Chrome driver.
    *
-   * @param size Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return The browser size as a string - Specifically for headless Chrome options
+   * @param chromeOptions Browser options
+   * @return A new Chrome driver
    */
-  public static String getHeadlessWindowSizeString(String size) {
-    if (size.equals(WINDOW_MAX) || size.equals("DEFAULT")) {
-      // If we need a string default to 1920 by 1080
-      return "window-size=1920,1080";
-    } else {
-      Dimension dimension = extractDimensionFromString(size);
-      return String.format("window-size=%s,%s", dimension.width, dimension.height);
-    }
+  public static WebDriver getChromeDriver(ChromeOptions chromeOptions) {
+    return getChromeDriver(chromeOptions, WINDOW_MAX);
   }
 
   /**
-   * Get the window size as a Dimension object.
+   * Get the remote driver options.
    *
-   * @param size The size in a #X# format
-   * @return The dimension object with width and height defined
+   * @param remoteBrowser The remote browser type
+   * @return The remote driver options
    */
-  public static Dimension extractDimensionFromString(String size) {
-    String[] sizes = size.split("[xX]");
-
-    if (!size.toUpperCase().contains("X") || sizes.length != 2) {
-      throw new IllegalArgumentException(
-          "Browser size is expected to be in an expected format: 1920x1080");
-    }
-
-    try {
-      int width = Integer.parseInt(sizes[0]);
-      int height = Integer.parseInt(sizes[1]);
-      return new Dimension(width, height);
-    } catch (NumberFormatException e) {
-      throw new NumberFormatException(
-          "Length and Width must be a string that is an integer value: 400x400");
-    }
+  public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser) {
+    return getRemoteOptions(remoteBrowser, "", "", null);
   }
 
   /**
-   * Get the web driver location.
+   * Get the remote driver options.
    *
-   * @param driverFile The web driver file, including extension
-   * @return The path to the web driver
+   * @param remoteBrowser      The remote browser type
+   * @param remoteCapabilities Additional remote capabilities
+   * @return The remote driver options
    */
-  public static String getDriverLocation(String driverFile) {
-    return getDriverLocation(driverFile, "", true);
-  }
-
-  /**
-   * Get the web driver location.
-   *
-   * @param driverFile      The web driver file, including extension
-   * @param defaultHintPath The default location for the specific driver
-   * @return The path to the web driver
-   */
-  public static String getDriverLocation(String driverFile, String defaultHintPath) {
-    return getDriverLocation(driverFile, defaultHintPath, true);
-  }
-
-  /**
-   * Get the web driver location.
-   *
-   * @param driverFile      The web driver file, including extension
-   * @param defaultHintPath The default location for the specific driver
-   * @param mustExist       Do we need to know where this drive is located,
-   *                        if this is true and the file is not found an error will be thrown
-   * @return The path to the web driver
-   */
-  public static String getDriverLocation(String driverFile, String defaultHintPath,
-      boolean mustExist) {
-    // Get the hint path from the config
-    String hintPath = SeleniumConfig.getDriverHintPath();
-
-    // Try the hintpath first
-    if (!hintPath.isEmpty() && Paths.get(hintPath, driverFile).toFile().exists()) {
-      return hintPath;
-    }
-
-    // Try the default hint path next
-    if (!defaultHintPath.isEmpty() && Paths.get(defaultHintPath, driverFile).toFile().exists()) {
-      return Paths.get(defaultHintPath).toString();
-    }
-
-    // Try the test location
-    Path path = Paths.get(new File("").getAbsolutePath());
-    String testLocation = path.getParent().toString();
-    if (Paths.get(testLocation, driverFile).toFile().exists()) {
-      return testLocation;
-    }
-
-    // Try resources
-    ClassLoader classLoader = WebDriverFactory.class.getClassLoader();
-    URL url = classLoader.getResource(driverFile);
-    if (url != null) {
-      File file = new File(url.getPath());
-      return file.getParent();
-    }
-
-    // We didn't find the web driver so throw an error if we need to know where it is
-    if (mustExist) {
-      throw new RuntimeException(
-          StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
-    }
-
-    return "";
-  }
-
-  /**
-   * Get the file path for the Edge driver pre-installed on the system.
-   *
-   * @param file The file we are looking for
-   * @return The parent folder of the given file or the empty string if the file is not found
-   */
-  static String getWindowsEdgeDriverLocation(String file) {
-    String edgeDriverFolder = "Microsoft Web Driver";
-
-    Path path = Paths.get(System.getenv("ProgramW6432"), edgeDriverFolder, file);
-    if (path.toFile().isFile()) {
-      return path.getParent().toString();
-    }
-
-    path = Paths.get(System.getenv("ProgramFiles(x86)"), edgeDriverFolder, file);
-    if (path.toFile().isFile()) {
-      return path.getParent().toString();
-    }
-
-    path = Paths.get(System.getenv("ProgramFiles"), edgeDriverFolder, file);
-    if (path.toFile().isFile()) {
-      return path.getParent().toString();
-    }
-
-    return "";
+  public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
+      Map<String, Object> remoteCapabilities) {
+    return getRemoteOptions(remoteBrowser, "", "", remoteCapabilities);
   }
 
 }

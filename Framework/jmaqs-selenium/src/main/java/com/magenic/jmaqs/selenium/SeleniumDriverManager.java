@@ -72,32 +72,6 @@ public class SeleniumDriverManager extends DriverManager {
   }
 
   /**
-   * Log a verbose message and include the automation specific call stack data.
-   *
-   * @param message The message text
-   * @param args    String format arguments
-   */
-  protected void logVerbose(String message, Object... args) {
-
-    StringBuilder messages = new StringBuilder();
-    messages.append(StringProcessor.safeFormatter(message, args));
-
-    //FIXME: Need to figure out what the approach is for java in this form of logging
-    Object methodInfo = Object[].class.getEnclosingMethod();
-    //String fullName = methodInfo.getClass().getTypeName() + "." + methodInfo.getClass().getName();
-
-    Thread thread = Thread.currentThread();
-    for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
-      //FIXME: Need to figure out what the approach is for java in this form of logging
-      /*String trim = stackTraceElement.toString().trim();
-      if (!trim.equals(""));*/
-      messages.append(stackTraceElement.toString());
-    }
-    getLogger().logMessage(MessageType.VERBOSE, messages.toString());
-    System.out.println(messages);
-  }
-
-  /**
    * Logging startup.
    *
    * @param webDriver the web driver
@@ -132,4 +106,29 @@ public class SeleniumDriverManager extends DriverManager {
     }
   }
 
+  /**
+   * Log a verbose message and include the automation specific call stack data.
+   *
+   * @param message The message text
+   * @param args    String format arguments
+   */
+  protected void logVerbose(String message, Object... args) {
+
+    StringBuilder messages = new StringBuilder();
+    messages.append(StringProcessor.safeFormatter(message, args));
+
+    //FIXME: Need to figure out what the approach is for java in this form of logging
+    Object methodInfo = Object[].class.getEnclosingMethod();
+    //String fullName = methodInfo.getClass().getTypeName() + "." + methodInfo.getClass().getName();
+
+    Thread thread = Thread.currentThread();
+    for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
+      //FIXME: Need to figure out what the approach is for java in this form of logging
+      /*String trim = stackTraceElement.toString().trim();
+      if (!trim.equals(""));*/
+      messages.append(stackTraceElement.toString());
+    }
+    getLogger().logMessage(MessageType.VERBOSE, messages.toString());
+    System.out.println(messages);
+  }
 }

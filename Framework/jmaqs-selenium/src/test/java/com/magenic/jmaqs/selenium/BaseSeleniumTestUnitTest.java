@@ -20,13 +20,9 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
   }
 
   @Test(groups = TestCategories.Selenium)
-  public void testSetWebDriver() {
+  public void testSetWebDriver() throws Exception {
     int hashCode = this.getWebDriver().hashCode();
-    try {
-      this.setWebDriver(this.getBrowser());
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    this.setWebDriver(this.getBrowser());
     int hashCode1 = this.getWebDriver().hashCode();
     Assert.assertNotEquals(hashCode, hashCode1);
   }
