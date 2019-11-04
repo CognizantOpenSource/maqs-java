@@ -25,6 +25,9 @@ import org.testng.annotations.Test;
  */
 public class AppiumDriverFactoryUnitTest {
 
+  /**
+   * The Sauce labs config.
+   */
   private static DesiredCapabilities sauceLabsConfig;
 
   /**
@@ -63,7 +66,8 @@ public class AppiumDriverFactoryUnitTest {
   @Test
   public void testGetDefaultMobileOptions() {
     final DesiredCapabilities defaultMobileOptions = AppiumDriverFactory.getDefaultMobileOptions();
-    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.  More elegant solution oppose to a for each.
+    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.
+    // More elegant solution oppose to a for each.
     Consumer<String> assertionConsumer = (String s) -> {
       Assert.assertNotNull(defaultMobileOptions.is(s),
           String.format("Checking if capability key %s is not null", s));
@@ -79,7 +83,8 @@ public class AppiumDriverFactoryUnitTest {
     final Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
     DesiredCapabilities capabilities = AppiumDriverFactory
         .getDefaultMobileOptions(capabilitiesAsObjects);
-    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.  More elegant solution oppose to a for each.
+    //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.
+    // More elegant solution oppose to a for each.
     Consumer<String> assertionConsumer = (String s) -> {
       Assert.assertNotNull(capabilities.is(s),
           String.format("Checking if capability key %s is not null", s));

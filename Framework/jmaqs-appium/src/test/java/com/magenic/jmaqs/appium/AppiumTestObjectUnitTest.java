@@ -17,9 +17,20 @@ import org.testng.annotations.Test;
  */
 public class AppiumTestObjectUnitTest {
 
+  /**
+   * The Test name.
+   */
   private String testName;
+  /**
+   * The Console logger.
+   */
   private ConsoleLogger consoleLogger;
 
+  /**
+   * Sets up.
+   *
+   * @param method the method
+   */
   @BeforeMethod
   public void setUp(Method method) {
     testName = method.getName();
