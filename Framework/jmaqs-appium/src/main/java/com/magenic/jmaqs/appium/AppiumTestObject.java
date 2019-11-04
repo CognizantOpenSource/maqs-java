@@ -5,7 +5,6 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.selenium.SeleniumWait;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
@@ -17,45 +16,14 @@ import org.openqa.selenium.WebElement;
 public class AppiumTestObject extends BaseTestObject {
 
   /**
-   * The appium driver.
-   * @deprecated driver managers are the preferred approach now.
-   */
-  @Deprecated
-  protected AppiumDriver appiumDriver;
-
-  /**
-   * The appium wait.
-   *
-   * @deprecated Use static service for waits. {@link com.magenic.jmaqs.appium.AppiumWait} is Deprecated.
-   */
-  @Deprecated
-  protected AppiumWait appiumWait;
-
-  /**
-   * Instantiates a new appium test object.
-   *
-   * @param appiumDriver           the appium driver
-   * @param wait                   the wait // * @param fullyQualifiedTestName the fully qualified test name
-   * @param fullyQualifiedTestName the fully qualified test name
-   * @param logger                 the logger
-   * @deprecated {@link com.magenic.jmaqs.appium.AppiumWait} is Deprecated
-   */
-  @Deprecated
-  public AppiumTestObject(AppiumDriver appiumDriver, AppiumWait wait, String fullyQualifiedTestName,
-      Logger logger) {
-    super(logger, fullyQualifiedTestName);
-    this.appiumDriver = appiumDriver;
-    this.appiumWait = wait;
-  }
-
-  /**
    * Instantiates a new Appium test object.
    *
    * @param appiumDriver           the appium driver
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public AppiumTestObject(AppiumDriver<WebElement> appiumDriver, Logger logger, String fullyQualifiedTestName) {
+  public AppiumTestObject(AppiumDriver<WebElement> appiumDriver, Logger logger,
+      String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),
         new MobileDriverManager((() -> appiumDriver), this));
@@ -73,28 +41,6 @@ public class AppiumTestObject extends BaseTestObject {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),
         new MobileDriverManager(appiumDriverSupplier, this));
-  }
-
-  /**
-   * Gets the appium wait.
-   *
-   * @return the appium wait
-   * @deprecated {@link com.magenic.jmaqs.appium.AppiumWait} is deprecated.
-   */
-  @Deprecated
-  public SeleniumWait getAppiumWait() {
-    return this.appiumWait;
-  }
-
-  /**
-   * Sets the appium wait.
-   *
-   * @param wait the new appium wait
-   * @deprecated {@link com.magenic.jmaqs.appium.AppiumWait} is deprecated.
-   */
-  @Deprecated
-  public void setAppiumWait(AppiumWait wait) {
-    this.appiumWait = wait;
   }
 
   /**
