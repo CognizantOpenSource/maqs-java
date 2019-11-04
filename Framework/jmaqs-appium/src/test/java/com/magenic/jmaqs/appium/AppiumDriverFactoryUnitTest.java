@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.constants.PlatformType;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import java.net.MalformedURLException;
@@ -44,7 +45,7 @@ public class AppiumDriverFactoryUnitTest {
   /**
    * Test get default mobile driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetDefaultMobileDriver() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     Assert.assertNotNull(defaultMobileDriver, "Checking if default driver is null");
@@ -53,7 +54,7 @@ public class AppiumDriverFactoryUnitTest {
   /**
    * Test test get default mobile driver android.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testTestGetDefaultMobileDriverAndroid() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory
         .getDefaultMobileDriver(PlatformType.ANDROID);
@@ -63,7 +64,7 @@ public class AppiumDriverFactoryUnitTest {
   /**
    * Test get default mobile options.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetDefaultMobileOptions() {
     final DesiredCapabilities defaultMobileOptions = AppiumDriverFactory.getDefaultMobileOptions();
     //Consumer is used by the iterator for bulk processing and verification of the keys in the Map.
@@ -78,7 +79,7 @@ public class AppiumDriverFactoryUnitTest {
   /**
    * Test test get default mobile options.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testTestGetDefaultMobileOptions() {
     final Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
     DesiredCapabilities capabilities = AppiumDriverFactory
@@ -97,7 +98,7 @@ public class AppiumDriverFactoryUnitTest {
   /**
    * Test get android driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetAndroidDriver() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
     capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
@@ -114,7 +115,7 @@ public class AppiumDriverFactoryUnitTest {
   /**
    * Test get ios driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetIOSDriver() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
     capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
@@ -131,7 +132,7 @@ public class AppiumDriverFactoryUnitTest {
   /**
    * Test get windows driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   @Ignore("Work on Windows implementation")
   public void testGetWindowsDriver() {
     DesiredCapabilities appCapabilities = new DesiredCapabilities();
@@ -152,7 +153,7 @@ public class AppiumDriverFactoryUnitTest {
   /**
    * Test create driver.
    */
-  @Test(expectedExceptions = WebDriverException.class)
+  @Test(groups = TestCategories.Appium, expectedExceptions = WebDriverException.class)
   public void testCreateDriverException() {
     Supplier<AppiumDriver<WebElement>> appiumDriverSupplier = () -> {
       try {

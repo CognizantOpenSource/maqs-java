@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.base.BaseTest;
@@ -17,8 +21,7 @@ public class MobileDriverManagerUnitTest extends BaseTest {
    */
   @Test
   public void testGetMobileDriver() {
-    Supplier<AppiumDriver<WebElement>> supplier = () -> AppiumDriverFactory
-        .getDefaultMobileDriver();
+    Supplier<AppiumDriver<WebElement>> supplier = AppiumDriverFactory::getDefaultMobileDriver;
     MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier,
         this.getTestObject());
 
@@ -31,8 +34,7 @@ public class MobileDriverManagerUnitTest extends BaseTest {
    */
   @Test
   public void testClose() {
-    Supplier<AppiumDriver<WebElement>> supplier = () -> AppiumDriverFactory
-        .getDefaultMobileDriver();
+    Supplier<AppiumDriver<WebElement>> supplier = AppiumDriverFactory::getDefaultMobileDriver;
     MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier,
         this.getTestObject());
 
@@ -45,8 +47,7 @@ public class MobileDriverManagerUnitTest extends BaseTest {
    */
   @Test
   public void testCloseNullBaseDriver() {
-    Supplier<AppiumDriver<WebElement>> supplier = () -> AppiumDriverFactory
-        .getDefaultMobileDriver();
+    Supplier<AppiumDriver<WebElement>> supplier = AppiumDriverFactory::getDefaultMobileDriver;
     MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier,
         this.getTestObject());
 

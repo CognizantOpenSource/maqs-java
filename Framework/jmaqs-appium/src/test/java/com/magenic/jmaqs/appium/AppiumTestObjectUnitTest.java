@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import io.appium.java_client.AppiumDriver;
 import java.lang.reflect.Method;
@@ -41,7 +42,7 @@ public class AppiumTestObjectUnitTest {
   /**
    * Test appium test object creation with driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testAppiumTestObjectCreationWithDriver() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, consoleLogger,
@@ -53,7 +54,7 @@ public class AppiumTestObjectUnitTest {
   /**
    * Test appium test object creation with supplier.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testAppiumTestObjectCreationWithSupplier() {
     AppiumTestObject appiumTestObject = new AppiumTestObject(
         AppiumDriverFactory::getDefaultMobileDriver, consoleLogger, testName);
@@ -64,7 +65,7 @@ public class AppiumTestObjectUnitTest {
   /**
    * Test get appium driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetAppiumDriver() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, consoleLogger,
@@ -77,7 +78,7 @@ public class AppiumTestObjectUnitTest {
   /**
    * Test get appium manager.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetAppiumManager() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, consoleLogger,
@@ -90,7 +91,7 @@ public class AppiumTestObjectUnitTest {
   /**
    * Test set appium driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testSetAppiumDriverWithDriver() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, consoleLogger,
@@ -107,7 +108,7 @@ public class AppiumTestObjectUnitTest {
   /**
    * Test test set appium driver.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testSetAppiumDriverWithSupplier() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, consoleLogger,

@@ -7,6 +7,7 @@ package com.magenic.jmaqs.appium;
 import com.magenic.jmaqs.appium.constants.PlatformType;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;
@@ -41,7 +42,7 @@ public class AppiumConfigUnitTest {
    *
    * @throws Exception the exception
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetOSVersion() throws Exception {
     String osVersion = AppiumConfig.getPlatformVersion();
     Assert.assertTrue(osVersion.equalsIgnoreCase("6.0"));
@@ -52,7 +53,7 @@ public class AppiumConfigUnitTest {
    *
    * @throws Exception the exception
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceName() throws Exception {
     String deviceName = AppiumConfig.getDeviceName();
     Assert.assertTrue(deviceName.equalsIgnoreCase("Android GoogleAPI Emulator"));
@@ -63,7 +64,7 @@ public class AppiumConfigUnitTest {
    *
    * @throws Exception the exception
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetMobileHubUrlString() throws Exception {
     String mobileHubUrl = AppiumConfig.getMobileHubUrlString();
     Assert.assertTrue(mobileHubUrl.equalsIgnoreCase("http://ondemand.saucelabs.com:80/wd/hub"));
@@ -72,7 +73,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get capabilities as strings.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetCapabilitiesAsStrings() {
     Map<String, String> capabilitiesAsStrings = AppiumConfig.getCapabilitiesAsStrings();
 
@@ -92,7 +93,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get capabilities as objects.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetCapabilitiesAsObjects() {
     Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
 
@@ -112,7 +113,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get save page source on fail.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetSavePageSourceOnFail() {
     Assert.assertFalse(AppiumConfig.getSavePageSourceOnFail());
   }
@@ -120,7 +121,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get soft assert screen shot.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetSoftAssertScreenShot() {
     Assert.assertFalse(AppiumConfig.getSoftAssertScreenShot());
   }
@@ -128,7 +129,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get command timeout.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetCommandTimeout() {
     Assert.assertEquals(AppiumConfig.getCommandTimeout().toMillis(), 122000);
   }
@@ -136,7 +137,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get command timeout error.
    */
-  @Test(expectedExceptions = NumberFormatException.class)
+  @Test(groups = TestCategories.Appium, expectedExceptions = NumberFormatException.class)
   @Ignore("Impacting future tests since there is no way to reload config")
   public void testGetCommandTimeoutError() {
     HashMap<String, String> configValues = new HashMap<>();
@@ -148,7 +149,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get mobile timeout.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetMobileTimeout() {
     Assert.assertEquals(AppiumConfig.getMobileTimeout().toMillis(), 10000);
   }
@@ -156,7 +157,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get device type.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceType() {
     Assert.assertEquals(AppiumConfig.getDeviceType(), PlatformType.ANDROID);
   }
@@ -164,7 +165,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get device type android.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceTypeAndroid() {
     Assert.assertEquals(AppiumConfig.getDeviceType("android"), PlatformType.ANDROID);
   }
@@ -172,7 +173,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get device type ios.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceTypeIOS() {
     Assert.assertEquals(AppiumConfig.getDeviceType("ios"), PlatformType.IOS);
   }
@@ -180,7 +181,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get device type windows.
    */
-  @Test
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceTypeWindows() {
     Assert.assertEquals(AppiumConfig.getDeviceType("windows"), PlatformType.WINDOWS);
   }
@@ -188,7 +189,7 @@ public class AppiumConfigUnitTest {
   /**
    * Test get device type error.
    */
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(groups = TestCategories.Appium, expectedExceptions = IllegalArgumentException.class)
   public void testGetDeviceTypeError() {
     AppiumConfig.getDeviceType("linux");
   }
