@@ -1,6 +1,7 @@
 /*
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
+
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.constants.PlatformType;
@@ -18,9 +19,21 @@ import org.testng.asserts.SoftAssert;
  */
 public class AppiumConfigUnitTest {
 
+  /**
+   * The Username.
+   */
   private String username = "username";
+  /**
+   * The Browser name.
+   */
   private String browserName = "browserName";
+  /**
+   * The Access key.
+   */
   private String accessKey = "accessKey";
+  /**
+   * The Device orientation.
+   */
   private String deviceOrientation = "deviceOrientation";
 
   /**
