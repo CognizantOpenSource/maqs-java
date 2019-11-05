@@ -4,3 +4,46 @@ update_configs:
     directory: "/Framework/"
     update_schedule: "daily"
     target_branch: "master"
+    default_labels: 
+      - "framework"
+      - "dependencies"
+
+  - package_manager: "java:maven"
+    directory: "/Framework/jmaqs-base"
+    update_schedule: "daily"
+    target_branch: "master"
+    default_labels: 
+      - "base"
+      - "dependencies"
+
+  - package_manager: "java:maven"
+    directory: "/Framework/jmaqs-utilities"
+    update_schedule: "daily"
+    target_branch: "master"
+    default_labels: 
+      - "utilities"
+      - "dependencies"
+
+  - package_manager: "java:maven"
+    directory: "/Framework/jmaqs-selenium"
+    update_schedule: "daily"
+    target_branch: "master"
+    default_labels: 
+      - "selenium"
+      - "dependencies"
+  
+  - package_manager: "java:maven"
+    directory: "/Framework/jmaqs-appium"
+    update_schedule: "daily"
+    target_branch: "master"
+    default_labels: 
+      - "appium"
+      - "dependencies"
+  
+  - package_manager: "java:maven"
+    directory: "/Framework/jmaqs-webservices"
+    update_schedule: "daily"
+    target_branch: "master"
+    default_labels: 
+      - "webservices"
+      - "dependencies"
