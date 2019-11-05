@@ -4,21 +4,19 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.constants.BrowserType;
+import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-
 import java.time.Duration;
 import java.util.Map;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 /**
  * Selenium configuration tests.
  */
-public class SeleniumConfigTest {
+public class SeleniumConfigUnitTest {
 
   /**
    * Remote capabilities username identifier.
@@ -116,26 +114,6 @@ public class SeleniumConfigTest {
     String version = SeleniumConfig.getRemoteBrowserVersion();
 
     Assert.assertEquals(version, "54.0");
-  }
-
-  /**
-   * Get Web Wait Driver.
-   *
-   * @throws Exception Can throw new Exception
-   */
-  @Ignore
-  @Test(groups = TestCategories.Selenium)
-  public void getWaitDriver() throws Exception {
-    WebDriver driver = null;
-    try {
-      driver = WebDriverFactory.getDefaultBrowser();
-      WebDriverWait driverWait = SeleniumConfig.getWaitDriver(driver);
-      Assert.assertNotNull(driverWait);
-    } finally {
-      if (driver != null) {
-        driver.quit();
-      }
-    }
   }
 
   /**
@@ -239,31 +217,31 @@ public class SeleniumConfigTest {
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeFirefoxTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("firefox");
-    Assert.assertEquals(browserType, BrowserType.Firefox);
+    Assert.assertEquals(browserType, BrowserType.FIREFOX);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeChromeTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("chrome");
-    Assert.assertEquals(browserType, BrowserType.Chrome);
+    Assert.assertEquals(browserType, BrowserType.CHROME);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeHeadlessChromeTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("headlesschrome");
-    Assert.assertEquals(browserType, BrowserType.HeadlessChrome);
+    Assert.assertEquals(browserType, BrowserType.HEADLESS_CHROME);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeEdgeTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("edge");
-    Assert.assertEquals(browserType, BrowserType.Edge);
+    Assert.assertEquals(browserType, BrowserType.EDGE);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getBrowserTypeRemoteTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("remote");
-    Assert.assertEquals(browserType, BrowserType.Remote);
+    Assert.assertEquals(browserType, BrowserType.REMOTE);
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)
@@ -285,28 +263,28 @@ public class SeleniumConfigTest {
   @Test(groups = TestCategories.Selenium)
   public void getRemoteBrowserTypeFirefoxTest() {
     RemoteBrowserType remoteType = SeleniumConfig.getRemoteBrowserType("firefox");
-    Assert.assertEquals(remoteType, RemoteBrowserType.Firefox);
+    Assert.assertEquals(remoteType, RemoteBrowserType.FIREFOX);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteBrowserTypeChromeTest() {
     RemoteBrowserType remoteType = SeleniumConfig.getRemoteBrowserType("chrome");
-    Assert.assertEquals(remoteType, RemoteBrowserType.Chrome);
+    Assert.assertEquals(remoteType, RemoteBrowserType.CHROME);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteBrowserTypeSafariTest() {
     RemoteBrowserType remoteType = SeleniumConfig.getRemoteBrowserType("safari");
-    Assert.assertEquals(remoteType, RemoteBrowserType.Safari);
+    Assert.assertEquals(remoteType, RemoteBrowserType.SAFARI);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteBrowserTypeEdgeTest() {
     RemoteBrowserType remoteType = SeleniumConfig.getRemoteBrowserType("edge");
-    Assert.assertEquals(remoteType, RemoteBrowserType.Edge);
+    Assert.assertEquals(remoteType, RemoteBrowserType.EDGE);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.Selenium, expectedExceptions = IllegalArgumentException.class)
   public void getRemoteBrowserTypeInvalidTest() {
     SeleniumConfig.getRemoteBrowserType("invalid");
   }

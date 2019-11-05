@@ -28,7 +28,7 @@ import org.testng.annotations.Test;
 /**
  * The type Selenium utilities test.
  */
-public class SeleniumUtilitiesTest extends BaseTest {
+public class SeleniumUtilitiesUnitTest extends BaseTest {
 
   /**
    * Test capture screenshot no append.

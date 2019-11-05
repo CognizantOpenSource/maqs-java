@@ -4,40 +4,24 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import java.lang.reflect.Method;
+import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.List;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.ITestResult;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * The type Selenium driver manager test.
  */
-public class SeleniumDriverManagerTest {
-
-  private BaseTestObject baseTestObject;
-  private String methodName;
+public class SeleniumDriverManagerUnitTest extends BaseTest {
 
   /**
-   * Sets .
-   *
-   * @param method the method
+   * The Get driver.
    */
-  @BeforeMethod
-  public void setup(Method method) {
-    Logger logger = new ConsoleLogger();
-    methodName = method.getDeclaringClass().getName();
-    this.baseTestObject = new BaseTestObject(logger, methodName);
-  }
-
   private final Supplier<Object> getDriver = () -> {
     WebDriver driver = null;
     try {
@@ -51,10 +35,10 @@ public class SeleniumDriverManagerTest {
   /**
    * Test close not initialized.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void testCloseNotInitialized() {
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
-        baseTestObject);
+        this.getTestObject());
     Assert.assertFalse(seleniumDriverManager.isDriverInitialized(),
         "Checking that driver is not initialized - Pre Close");
     seleniumDriverManager.close();
@@ -65,11 +49,11 @@ public class SeleniumDriverManagerTest {
   /**
    * Test close initialized.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void testCloseInitialized() {
 
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
-        baseTestObject);
+        this.getTestObject());
     WebDriver webDriver = seleniumDriverManager.getWebDriver();
     webDriver.quit();
     Assert.assertTrue(seleniumDriverManager.isDriverInitialized(),
@@ -82,10 +66,10 @@ public class SeleniumDriverManagerTest {
   /**
    * Test get web driver.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   public void testGetWebDriver() {
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
-        baseTestObject);
+        this.getTestObject());
     WebDriver webDriver = seleniumDriverManager.getWebDriver();
     Assert.assertNotNull(webDriver, "Checking that driver is not null");
   }
@@ -93,13 +77,23 @@ public class SeleniumDriverManagerTest {
   /**
    * Test log verbose.
    */
-  @Test
+  @Test(groups = TestCategories.Selenium)
   @Ignore("Ignore until logger rework")
   public void testLogVerbose() {
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
-        baseTestObject);
+        this.getTestObject());
     List list;
     seleniumDriverManager.logVerbose("Logging verbose messaging");
+
+  }
+
+  @Override
+  protected void postSetupLogging() throws Exception {
+
+  }
+
+  @Override
+  protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
 }
