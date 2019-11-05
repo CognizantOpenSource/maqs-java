@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * The type Selenium test object test.
  */
-public class SeleniumTestObjectTest extends BaseGenericTest {
+public class SeleniumTestObjectUnitTest extends BaseGenericTest {
 
   /**
    * Test appium test object creation with driver.

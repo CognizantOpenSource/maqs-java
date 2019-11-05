@@ -24,7 +24,8 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   /**
    * Manage dropdown selector.
    */
-  private static By manageDropdown = By.cssSelector("body > div.navbar > div > div > ul > li:nth-child(2) > a");
+  private static By manageDropdown = By
+      .cssSelector("body > div.navbar > div > div > ul > li:nth-child(2) > a");
 
   /**
    * Employee link.
@@ -70,7 +71,8 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   public void hoverOverTest() {
     this.navigateToUrl(siteAutomationUrl);
     ActionBuilder.hoverOver(this.getWebDriver(), manageDropdown);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(employeeButton).click();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(employeeButton)
+        .click();
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForExactText(employeePageTitle, "Index");
   }
 
@@ -78,21 +80,26 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   public void pressModifierKeyTest() {
     this.navigateToUrl(siteAutomationUrl);
 
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1).click();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1)
+        .click();
     ActionBuilder.pressModifierKey(this.getWebDriver(), Keys.CONTROL);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2).click();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2)
+        .click();
 
     Assert.assertTrue(
-        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1).isSelected());
+        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1)
+            .isSelected());
     Assert.assertTrue(
-        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2).isSelected());
+        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2)
+            .isSelected());
   }
 
   @Test(groups = TestCategories.Selenium)
   public void moveSliderTest() {
     this.navigateToUrl(siteAutomationUrl);
     ActionBuilder.slideElement(this.getWebDriver(), slider, 50);
-    Assert.assertEquals(this.getWebDriver().findElement(sliderLabelNumber).getAttribute("value"), "4");
+    Assert.assertEquals(this.getWebDriver().findElement(sliderLabelNumber).getAttribute("value"),
+        "4");
   }
 
   @Test(groups = TestCategories.Selenium)
@@ -105,5 +112,10 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   private void navigateToUrl(String url) {
     this.getWebDriver().navigate().to(url);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
+  }
+
+  @Override
+  protected void postSetupLogging() throws Exception {
+
   }
 }

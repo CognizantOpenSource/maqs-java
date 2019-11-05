@@ -8,7 +8,6 @@ import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -192,7 +190,8 @@ public class SeleniumUtilities {
    * @param fileNameWithoutExtension File Name Without Extension
    * @return Path to the log file
    */
-  public static String savePageSource(WebDriver webDriver, SeleniumTestObject testObject, String directory, String fileNameWithoutExtension) {
+  public static String savePageSource(WebDriver webDriver, SeleniumTestObject testObject,
+      String directory, String fileNameWithoutExtension) {
     // Save the current page source into a string
     String pageSource = webDriver.getPageSource();
 

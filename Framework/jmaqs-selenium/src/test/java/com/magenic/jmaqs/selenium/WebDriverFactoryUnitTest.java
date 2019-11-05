@@ -4,6 +4,8 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.constants.BrowserType;
+import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.HashMap;
@@ -24,7 +26,7 @@ import org.testng.annotations.Test;
 /**
  * The WebDriverFactory test class.
  */
-public class WebDriverFactoryTest {
+public class WebDriverFactoryUnitTest {
 
   @Test(groups = TestCategories.Selenium)
   public void getDefaultBrowserTest() throws Exception {
@@ -73,7 +75,8 @@ public class WebDriverFactoryTest {
   public void getChromeDriverTest() throws Exception {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.Chrome);
+      driver = (ChromeDriver) WebDriverFactory
+          .getBrowserWithDefaultConfiguration(BrowserType.CHROME);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -86,7 +89,8 @@ public class WebDriverFactoryTest {
   public void getHeadlessChromeDriverTest() throws Exception {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.HeadlessChrome);
+      driver = (ChromeDriver) WebDriverFactory
+          .getBrowserWithDefaultConfiguration(BrowserType.HEADLESS_CHROME);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -99,7 +103,8 @@ public class WebDriverFactoryTest {
   public void getFirefoxDriverTest() throws Exception {
     FirefoxDriver driver = null;
     try {
-      driver = (FirefoxDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.Firefox);
+      driver = (FirefoxDriver) WebDriverFactory
+          .getBrowserWithDefaultConfiguration(BrowserType.FIREFOX);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -112,7 +117,8 @@ public class WebDriverFactoryTest {
   public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
     try {
-      driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.IE);
+      driver = (InternetExplorerDriver) WebDriverFactory
+          .getBrowserWithDefaultConfiguration(BrowserType.IE);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -130,7 +136,7 @@ public class WebDriverFactoryTest {
   @Test(groups = TestCategories.Selenium)
   public void getRemoteOptionsChromeTest() {
     MutableCapabilities options = WebDriverFactory
-        .getRemoteOptions(RemoteBrowserType.Chrome, "testPlatform", "testVersion", null);
+        .getRemoteOptions(RemoteBrowserType.CHROME, "testPlatform", "testVersion", null);
     Assert.assertNotNull(options);
   }
 
@@ -142,19 +148,19 @@ public class WebDriverFactoryTest {
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteOptionsFirefoxTest() {
-    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.Firefox);
+    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.FIREFOX);
     Assert.assertNotNull(options);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteOptionsEdgeTest() {
-    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.Edge);
+    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.EDGE);
     Assert.assertNotNull(options);
   }
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteOptionsSafariTest() {
-    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.Safari);
+    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.SAFARI);
     Assert.assertNotNull(options);
   }
 
