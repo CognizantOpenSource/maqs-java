@@ -17,15 +17,23 @@
 
 	<repositories>
 		<repository>
-			<id>central</id>
-			<name>Maven Repository Switchboard</name>
-			<layout>default</layout>
-			<url>https://repo1.maven.org/maven2</url>
+			<id>dev-azure-com-magenicopen-jmaqs-azure</id>
+			<url>https://pkgs.dev.azure.com/MagenicOpen/JMAQS/_packaging/JMAQS-Azure/maven/v1</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
 			<snapshots>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>dev-azure-com-magenicopen-jmaqs-azure</id>
+			<url>https://pkgs.dev.azure.com/MagenicOpen/JMAQS/_packaging/JMAQS-Azure/maven/v1</url>
+			<uniqueVersion>true</uniqueVersion>
+		</repository>
+	</distributionManagement>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
