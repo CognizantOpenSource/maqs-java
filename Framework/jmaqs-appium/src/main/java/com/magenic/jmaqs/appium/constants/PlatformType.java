@@ -2,24 +2,24 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.appium;
+package com.magenic.jmaqs.appium.constants;
 
 /**
  * The enum Platform type.
  */
 public enum PlatformType {
   /**
-   * Android application
+   * Android application.
    */
   ANDROID,
 
   /**
-   * iOS application
+   * iOS application.
    */
   IOS,
 
   /**
-   * Windows application
+   * Windows application.
    */
   WINDOWS
 

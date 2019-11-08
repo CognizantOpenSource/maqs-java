@@ -21,7 +21,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 public class SeleniumDriverManager extends DriverManager {
 
   /**
-   * Initializes a new instance of the <see cref="SeleniumDriverManager"/> class
+   * Initializes a new instance of the <see cref="SeleniumDriverManager"/> class.
    *
    * @param getDriver  Function for getting an Selenium web driver
    * @param testObject The associated test object
@@ -52,7 +52,7 @@ public class SeleniumDriverManager extends DriverManager {
   }
 
   /**
-   * Get the web driver
+   * Get the web driver.
    *
    * @return The web driver
    */
@@ -72,7 +72,7 @@ public class SeleniumDriverManager extends DriverManager {
   }
 
   /**
-   * Log a verbose message and include the automation specific call stack data
+   * Log a verbose message and include the automation specific call stack data.
    *
    * @param message The message text
    * @param args    String format arguments
@@ -83,7 +83,7 @@ public class SeleniumDriverManager extends DriverManager {
     messages.append(StringProcessor.safeFormatter(message, args));
 
     //FIXME: Need to figure out what the approach is for java in this form of logging
-    Object methodInfo = Object[].class.getEnclosingMethod();
+    //Object methodInfo = Object[].class.getEnclosingMethod();
     //String fullName = methodInfo.getClass().getTypeName() + "." + methodInfo.getClass().getName();
 
     Thread thread = Thread.currentThread();

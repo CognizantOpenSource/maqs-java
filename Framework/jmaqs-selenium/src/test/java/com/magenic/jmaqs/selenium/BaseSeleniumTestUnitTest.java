@@ -9,9 +9,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Base selenium test test.
+ * The type Base selenium test unit test.
  */
-public class BaseSeleniumTestTest extends BaseSeleniumTest {
+public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.Selenium)
   public void testGetWebDriver() {
@@ -45,5 +45,10 @@ public class BaseSeleniumTestTest extends BaseSeleniumTest {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  protected void postSetupLogging() throws Exception {
+
   }
 }
