@@ -29,7 +29,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 
 /**
- * The HTTP client wrapper.
+ * The Web Service Driver.
  */
 public class WebServiceDriver {
   /**
@@ -66,7 +66,7 @@ public class WebServiceDriver {
   }
 
   /**
-   * Constructor that sets the http Client.
+   * Class Constructor that sets the http Client.
    * @param newHttpClient the http client to be set.
    */
   public WebServiceDriver(CloseableHttpClient newHttpClient) {
@@ -108,7 +108,7 @@ public class WebServiceDriver {
   }
 
   /**
-   * Sets the base Web Service address for the HttpClientWrapper.
+   * Sets the base Web Service address for the Web Service Driver.
    * 
    * @param address
    *          The string to set the URI to
