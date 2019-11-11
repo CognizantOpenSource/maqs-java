@@ -45,8 +45,6 @@ Get a web driver for the specified browser:
 ```java
 WebDriver driver = SeleniumConfig.Browser("Chrome");
 ```
-
-
 Get a web driver type based on your configuration:
 ```java
 BrowserType type = SeleniumConfig.getBrowserType();
@@ -99,22 +97,6 @@ Get the screenshot image format:
 ```java
 String imageFormat = SeleniumConfig.getImageFormat();
 ```
-
-
-Sets the time our for a provided web driver:   
-*The wait times are pulled from your configuration*
-```java
-SeleniumConfig.SetTimeouts(driver);
-```
-Get the if webDriver should use a proxy
-```java
-boolean useProxy = SeleniumConfig.GetUseProxy();
-```
-Get the proxy address to use
-```java
-String proxyAddress = SeleniumConfig.GetProxyAddress();
-```
-
 # Sample config files
 ## config.xml
 ```xml
