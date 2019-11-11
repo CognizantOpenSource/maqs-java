@@ -4,8 +4,7 @@
 
 package com.magenic.jmaqs.webservices;
 
-import com.magenic.jmaqs.webservices.BaseWebServiceTest;
-import com.magenic.jmaqs.webservices.WebServiceUtils;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -24,7 +23,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServiceGetVerificationTest() throws Exception {
 
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/1",
@@ -41,7 +40,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServiceGetError() throws Exception {
 
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/-1",
@@ -55,7 +54,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServiceDelete() throws Exception {
 
     CloseableHttpResponse response = this.getWebServiceDriver()
@@ -69,7 +68,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServicePatchError() throws Exception {
     HttpEntity content = WebServiceUtils.createEntity("", ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver().patchContent("/api/XML_JSON/Put/1",
@@ -85,7 +84,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServicePostError() throws Exception {
     HttpEntity content = WebServiceUtils.createEntity("", ContentType.TEXT_PLAIN);
     CloseableHttpResponse response = this.getWebServiceDriver().postContent("/api/String", content,
@@ -101,7 +100,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServicePutError() throws Exception {
     HttpEntity content = WebServiceUtils.createEntity("", ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver().putContent("/api/XML_JSON/Put/1",
