@@ -16,6 +16,8 @@ import org.apache.http.protocol.HttpContext;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.net.URISyntaxException;
+
 /**
  * Test with the web service driver directly.
  */
@@ -52,38 +54,16 @@ public class WebServiceDriverUnitTest {
    * Verifies that basic GET features work with the WebServiceDriver.
    */
   @Test(groups = TestCategories.WebService)
-  public void setHttpClient() {
-    CloseableHttpClient httpClient = new CloseableHttpClient() {
-      /**
-       * @deprecated
-       */
-      @Override
-      public HttpParams getParams() {
-        return null;
-      }
-
-      /**
-       * @deprecated
-       */
-      @Override
-      public ClientConnectionManager getConnectionManager() {
-        return null;
-      }
-
-      @Override
-      public void close() { }
-
-      @Override
-      protected CloseableHttpResponse doExecute(HttpHost httpHost,
-              HttpRequest httpRequest, HttpContext httpContext) {
-        return null;
-      }
-    };
-
-    WebServiceDriver webServiceDriver = new WebServiceDriver(httpClient);
-
-    webServiceDriver.setHttpClient(httpClient);
-    Assert.assertNotNull(webServiceDriver.getHttpClient(MediaType.APP_JSON.toString()),
-           "The http Client is null");
+  public void setHttpClient() throws URISyntaxException {
+    WebServiceDriver webServiceDriver1 = new WebServiceDriver(
+            "http://magenicautomation.azurewebsites.net");
+    webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient(
+            MediaType.APP_JSON.toString()));
+    WebServiceDriver webServiceDriver2 = new WebServiceDriver(
+            webServiceDriver1.getHttpClient(
+                    MediaType.APP_XML.toString()));
+    Assert.assertNotNull(webServiceDriver1.getHttpClient(
+            MediaType.APP_JSON.toString()), "Driver 1 is null");
+    Assert.assertNotNull(webServiceDriver2, "Driver 2 is null");
   }
 }

@@ -61,7 +61,6 @@ public class WebServiceDriver {
    *          The base URI address to use
    */
   public WebServiceDriver(URI baseAddress) {
-
     this.baseAddress = baseAddress;
   }
 
