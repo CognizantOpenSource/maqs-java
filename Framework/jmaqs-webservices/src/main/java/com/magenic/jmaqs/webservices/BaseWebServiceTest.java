@@ -5,7 +5,6 @@
 package com.magenic.jmaqs.webservices;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.base.BaseTest;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
 import java.net.URISyntaxException;
@@ -22,12 +21,12 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
   private ThreadLocal<WebServiceTestObject> webServiceTestObject = new ThreadLocal<WebServiceTestObject>();
 
   /**
-   * Get HttpClientWrapper.
+   * Get the Web Service Driver.
    * 
    * @return WebDriver
    */
-  public HttpClientWrapper getHttpClientWrapper() {
-    return this.webServiceTestObject.get().webServiceWrapper;
+  public WebServiceDriver getWebServiceDriver() {
+    return this.webServiceTestObject.get().getWebServiceDriver();
   }
 
   /**
@@ -47,7 +46,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
   @Override
   protected void postSetupLogging() throws Exception {
 
-    HttpClientWrapper wrapper = new HttpClientWrapper(WebServiceConfig.getWebServiceUri());
+    WebServiceDriver wrapper = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     webServiceTestObject.set(
         new WebServiceTestObject(wrapper, this.getLogger(), this.getFullyQualifiedTestClassName()));
   }
@@ -69,7 +68,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
     //FIXME: Workaround to get module working.  Must Refactor.
     Logger logger = this.createLogger();
     try {
-      HttpClientWrapper httpClientWrapper = new HttpClientWrapper(WebServiceConfig.getWebServiceUri());
+      WebServiceDriver httpClientWrapper = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
       WebServiceTestObject webServiceTestObject = new WebServiceTestObject(httpClientWrapper, logger, this.getFullyQualifiedTestClassName());
       this.setTestObject(webServiceTestObject);
       this.webServiceTestObject.set(webServiceTestObject);

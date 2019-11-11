@@ -4,27 +4,22 @@
 
 package com.magenic.jmaqs.webservices;
 
-import com.magenic.jmaqs.webservices.HttpClientWrapper;
-import com.magenic.jmaqs.webservices.WebServiceUtils;
-
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Test with the web service wrapper directly.
+ * Test with the web service driver directly.
  */
-public class WebServiceWithWrapperTest {
+public class WebServiceDriverUnitTest {
   /**
-   * Verifies that basic GET features work with the HttpClientWrapper.
-   * 
-   * @throws Exception
-   *           Web service get failed
+   * Verifies that basic GET features work with the WebServiceDriver.
+   * @throws Exception Web service get failed
    */
   @Test
   public void webServiceGetVerificationTest() throws Exception {
-    HttpClientWrapper client = new HttpClientWrapper("http://magenicautomation.azurewebsites.net");
+    WebServiceDriver client = new WebServiceDriver("http://magenicautomation.azurewebsites.net");
     CloseableHttpResponse response = client.getContent("/api/String/1", ContentType.TEXT_PLAIN,
         true);
     String responseString = WebServiceUtils.getResponseBody(response);
