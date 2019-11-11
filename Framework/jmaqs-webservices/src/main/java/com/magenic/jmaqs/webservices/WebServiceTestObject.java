@@ -23,8 +23,8 @@ public class WebServiceTestObject extends BaseTestObject {
    * @param logger The Logger Object.
    * @param fullyQualifiedTestName The fully qualified test name.
    */
-  public WebServiceTestObject(final WebServiceDriver newWebServiceDriver,
-                    final Logger logger, final String fullyQualifiedTestName) {
+  public WebServiceTestObject(WebServiceDriver newWebServiceDriver,
+                    Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.webServiceDriver = newWebServiceDriver;
   }
@@ -41,7 +41,7 @@ public class WebServiceTestObject extends BaseTestObject {
    * Set the web service wrapper for the WebServiceTestObject.
    * @param newWebServiceDriver The web service driver
    */
-  public void setWebServiceDriver(final WebServiceDriver newWebServiceDriver) {
+  public void setWebServiceDriver(WebServiceDriver newWebServiceDriver) {
     this.webServiceDriver = newWebServiceDriver;
   }
 
