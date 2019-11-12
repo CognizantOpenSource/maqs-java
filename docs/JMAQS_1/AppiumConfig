@@ -1,0 +1,189 @@
+# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Configuration
+
+## Overview
+The SeleniumConfig class is used to get values from the AppiumMaqs section of your test run properties.
+<br>These values come from your config.xml, appsettings.json and/or test run parameters.
+
+## AppiumMaqs
+The AppiumMaqs configuration section contains the following Keys:  
+* ***PlatformName*** : The platform type being used
+* ***PlatformVersion*** : The version of the platform type being used
+* ***DeviceName*** : Name of the mobile type
+* ***MobileHubUrl*** : The grid URL
+* ***MobileCommandTimeout*** : How long wait before saying the connection to Selenium has died
+* ***MobileWaitTime*** : How long to wait before rechecking for something - Used heavily with the MAQS waits
+* ***MobileTimeout*** : How long to wait for something before timing out - Used heavily with the MAQS waits
+* ***SoftAssertScreenshot*** : Determines if a screenshot is taken when a Soft Assert Fails
+* ***ImageFormat*** : What format screenshot should be saved as
+* ***SavePageSourceOnFail*** : If page source is saved when a test fails
+
+## AppiumCapsMaqs
+These are key value pairs that get added to the remote web driver's desired capabilities.
+<br>The AppiumCapsMaqs configuration section contains the following Keys:  
+* ***Username*** : Name of the user
+* ***AccessKey*** : The key to access the testing device
+* ***DeviceOrientation*** : The screen orientation of the device (portrait or auto-rotate)
+* ***BrowserName*** : Name of the Browser being used
+
+## Available methods
+Get the platform name:
+```java
+String driverName = SeleniumConfig.getPlatformName();
+```
+Get the platform version:
+```java
+String driverName = SeleniumConfig.getPlatformVersion();
+```
+Get the device name:
+```java
+String driver = SeleniumConfig.getDeviceName());
+```
+Get save page source on fail:
+```java
+boolean save = SeleniumConfig.getSavePageSourceOnFail();
+```
+Get soft assert screen shot:
+```java
+boolean getScreenshot = SeleniumConfig.getSoftAssertScreenShot();
+```
+Gets the mobile hub url string:
+```java
+String url = SeleniumConfig.getMobileHubUrlString();
+```
+Get the mobile hub url:
+```java
+URL url = SeleniumConfig.getMobileHubUrl();
+```
+Get the command timeout:
+```java
+Duration timeout = SeleniumConfig.getCommandTimeout();
+```
+Get the mobile timeout:
+```java
+Duration timeout = SeleniumConfig.getMobileTimeout();
+```
+Gets capabilities as strings:
+```java
+Map<String, String> Capabilities = SeleniumConfig.getCapabilitiesAsStrings();
+```
+Gets capabilities as objects:
+```java
+Map<String, Object> Capabilities = SeleniumConfig.getCapabilitiesAsObjects();
+```
+Get device type:
+```java
+PlatformType platform = SeleniumConfig.getDeviceType();
+```
+
+# Sample config files
+## config.xml
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+   <AppiumMaqs>
+          <!-- Device settings -->
+          <PlatformName>Android</PlatformName>
+          <PlatformVersion>6.0</PlatformVersion>
+          <DeviceName>Android GoogleAPI Emulator</DeviceName>
+  
+          <!-- Appium or grid connection -->
+          <MobileHubUrl>http://ondemand.saucelabs.com:80/wd/hub</MobileHubUrl>
+  
+          <!-- Command time-out in milliseconds -->
+          <MobileCommandTimeout>122000</MobileCommandTimeout>
+  
+          <!-- Wait time in milliseconds - AKA how long do you wait for rechecking something -->
+          <MobileWaitTime>1000</MobileWaitTime>
+  
+          <!-- Time-out in milliseconds -->
+          <MobileTimeout>10000</MobileTimeout>
+  
+          <!-- Do you want to take screenshots upon Soft Assert Failures
+          <SoftAssertScreenshot>YES</SoftAssertScreenshot>
+          <SoftAssertScreenshot>NO</SoftAssertScreenshot> -->
+          <SoftAssertScreenshot>NO</SoftAssertScreenshot>
+  
+          <!-- Screenshot Image Formats
+          <ImageFormat>Bmp</ImageFormat>
+          <ImageFormat>Gif</ImageFormat>
+          <ImageFormat>Jpeg</ImageFormat>
+          <ImageFormat>Png</ImageFormat>
+          <ImageFormat>Tiff</ImageFormat>-->
+          <ImageFormat>Png</ImageFormat>
+  
+          <!-- Do you want to save page source when a Soft Assert fails
+          <SavePageSourceOnFail>YES</SavePageSourceOnFail>
+          <SavePageSourceOnFail>NO</SavePageSourceOnFail>-->
+          <SavePageSourceOnFail>NO</SavePageSourceOnFail>
+      </AppiumMaqs>
+  <AppiumCapsMaqs>
+          <username>Partner_Magenic</username>
+          <accessKey>0a4d7d84-f93b-43e6-9af1-1c89ac143355</accessKey>
+          <deviceOrientation>portrait</deviceOrientation>
+          <browserName>Chrome</browserName>
+  </AppiumCapsMaqs>
+  <MagenicMaqs>
+    <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
+    <add key="WaitTime" value="1000" />
+
+    <!-- Generic time-out in milliseconds -->
+    <add key="Timeout" value="10000" />
+
+    <!-- Do you want to create logs for your tests
+    <add key="Log" value="YES"/>
+    <add key="Log" value="NO"/>
+    <add key="Log" value="OnFail"/>-->
+    <add key="Log" value="OnFail" />
+
+    <!--Logging Levels
+    <add key="LogLevel" value="VERBOSE"/>
+    <add key="LogLevel" value="INFORMATION"/>
+    <add key="LogLevel" value="GENERIC"/>
+    <add key="LogLevel" value="SUCCESS"/>
+    <add key="LogLevel" value="WARNING"/>
+    <add key="LogLevel" value="ERROR"/>-->
+    <add key="LogLevel" value="INFORMATION" />
+
+    <!-- Logging Types
+    <add key="LogType" value="CONSOLE"/>
+    <add key="LogType" value="TXT"/>
+    <add key="LogType" value="HTML"/>-->
+    <add key="LogType" value="TXT" />
+
+    <!-- Log file path - Defaults to build location if no value is defined
+    <add key="FileLoggerPath" value="C:\Frameworks\"/>-->
+  </MagenicMaqs>
+</configuration>
+```
+## appsettings.json
+```json
+{
+  "SeleniumMaqs": {
+    "PlatformName": "Android",
+    "PlatformVersion": "6.0",
+    "DeviceName": "Android GoogleAPI Emulator",
+    "MobileHubUrl": "http://ondemand.saucelabs.com:80/wd/hub",
+    "MobileCommandTimeout": "122000",
+    "MobileWaitTime": "1000",
+    "MobileTimeout": "10000",
+    "BrowserSize": "MAXIMIZE",
+    "SoftAssertScreenshot": "NO",
+    "ImageFormat": "Png",
+    "SavePagesourceOnFail": "NO"
+,
+  },
+  "RemoteSeleniumCapsMaqs": {
+    "username": "Partner_Magenic",
+    "accessKey": "0a4d7d84-f93b-43e6-9af1-1c89ac143355",
+    "deviceOrientation": "portrait",
+    "browserName": "Chrome"
+  },
+  "MagenicMaqs": {
+    "WaitTime": "100",
+    "Timeout": "10000",
+    "Log": "OnFail",
+    "LogLevel": "INFORMATION",
+    "LogType": "TXT"
+  }
+}
+```
