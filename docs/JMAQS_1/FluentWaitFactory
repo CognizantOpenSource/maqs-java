@@ -1,0 +1,11 @@
+# <img src="resources/maqslogo.ico" height="32" width="32"> Fluent Wait Factory
+This factory is a handler of fluent wait objects.
+
+## Get the new element Fluent Wait
+This gets a new element as a fluent wait object by passing in a WebElement, a time out (int), and a sleep time (int).
+
+### Written as
+```java
+ FluentWait<WebElement> fluentWait = FluentWaitFactory
+        .getNewElementFluentWait(elementDriver, timeout, polling);
+```
