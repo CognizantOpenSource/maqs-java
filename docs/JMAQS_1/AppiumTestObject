@@ -1,0 +1,47 @@
+# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Test Object
+## Overview
+The Appium Test Object gets and sets the Appium Driver and Manager. 
+
+# Available methods
+[AppiumTestObject](#AppiumTestObject)  
+[GetAppiumDriver](#GetAppiumDriver)  
+[GetAppiumManager](#GetAppiumManager)  
+[SetAppiumDriver](#SearchContextToJavaScriptExecutor)  
+
+##  AppiumTestObject
+#### Instantiates the class with a Web element, a logger, and a test name (String)
+ ```java
+AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver,
+new ConsoleLogger(), method.getName());
+```
+
+#### Instantiates the class with a Web Element supplier, a logger, and a test name (String)
+```java
+AppiumTestObject appiumTestObject = new AppiumTestObject(AppiumDriverFactory::getDefaultMobileDriver,
+new ConsoleLogger(), method.getName());
+```
+
+##  GetAppiumDriver
+####Returns an Appium Driver as a web element.
+```java
+AppiumDriver appiumDriver = appiumTestObject.getAppiumDriver();
+```
+
+##  GetAppiumManager
+####Returns a Mobile Driver Manager.
+```java
+MobileDriverManager appiumManager = appiumTestObject.getAppiumManager();
+```
+
+##  SetAppiumDriver
+#### With a Web Element Parameter
+```java
+AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, consoleLogger,testName);
+appiumTestObject.setAppiumDriver(AppiumDriverFactory.getDefaultMobileDriver());
+```
+#### With a Supplier Parameter
+```java
+AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, consoleLogger,testName);
+appiumTestObject.setAppiumDriver(AppiumDriverFactory::getDefaultMobileDriver);
+```
