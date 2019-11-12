@@ -1,0 +1,18 @@
+# <img src="resources/maqslogo.ico" height="32" width="32"> UI Find Factory
+Creates UI Find Objects for searchable elements.
+
+## Get Find a search item
+This method uses a search context item type to return the found Item as a UIFind element.
+
+The SearchContext items can be a WebElement or a WebDriver. 
+
+### Written as
+```java
+UIFindFactory.getFind(elementDriver);
+```
+### Examples
+```java
+UIFind findWithElement = UIFindFactory.getFind(elementDriver);
+
+UIFind findWithWebDriver = UIFindFactory.getFind(this.getWebDriver());
+```
