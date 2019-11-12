@@ -1,0 +1,52 @@
+# <img src="resources/maqslogo.ico" height="32" width="32"> AppiumUtilities
+## Overview
+The AppiumUtilities lass is a utility class for working with Appium.
+
+## Available Methods
+[CaptureScreenshot](#CaptureScreenshot)  
+[SavePageSource](#SavePageSource)  
+[KillDriver](#KillDriver) 
+
+
+## CaptureScreenshot
+To capture a screenshot during execution.
+
+#### Written as
+```java
+boolean captureScreenshot(AppiumDriver<WebElement> appiumDriver, AppiumTestObject testObject)
+```
+#### Example
+```java
+AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
+AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
+        this.getTestObject().getFullyQualifiedTestName());
+boolean isSuccess = AppiumUtilities.captureScreenshot(appiumDriver, testObject);
+```
+
+## SavePageSource
+To capture Page Source during execution.
+
+#### Written as
+```java
+boolean savePageSource(AppiumDriver<WebElement> appiumDriver,AppiumTestObject testObject)
+```
+#### Example
+```java
+AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
+AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger, 
+            this.getTestObject().getFullyQualifiedTestName());
+boolean isSuccess = AppiumUtilities.savePageSource(appiumDriver, testObject);
+```
+
+## KillDriver
+Makes sure the driver is shut down.
+
+#### Written as
+```java
+void killDriver(AppiumDriver<WebElement> appiumDriver)
+```
+#### Example:
+```java
+AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
+AppiumUtilities.killDriver(appiumDriver);
+```

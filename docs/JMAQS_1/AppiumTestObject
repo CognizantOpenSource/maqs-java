@@ -1,41 +1,50 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Test Object
+# <img src="resources/maqslogo.ico" height="32" width="32"> AppiumTestObject
 ## Overview
 The Appium Test Object gets and sets the Appium Driver and Manager. 
 
-# Available methods
+## Available methods
 [AppiumTestObject](#AppiumTestObject)  
 [GetAppiumDriver](#GetAppiumDriver)  
 [GetAppiumManager](#GetAppiumManager)  
-[SetAppiumDriver](#SearchContextToJavaScriptExecutor)  
+[SetAppiumDriver](#SetAppiumDriver)  
 
 ##  AppiumTestObject
-#### Instantiates the class with a Web element, a logger, and a test name (String)
+
+#### Written as
  ```java
+public AppiumTestObject(AppiumDriver<WebElement> appiumDriver, Logger logger, String fullyQualifiedTestName)
+```
+#### Example
+```java
 AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
 AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver,
 new ConsoleLogger(), method.getName());
 ```
 
-#### Instantiates the class with a Web Element supplier, a logger, and a test name (String)
-```java
-AppiumTestObject appiumTestObject = new AppiumTestObject(AppiumDriverFactory::getDefaultMobileDriver,
-new ConsoleLogger(), method.getName());
-```
-
 ##  GetAppiumDriver
-####Returns an Appium Driver as a web element.
+Gets the Appium Driver
+#### Written as
 ```java
+AppiumDriver<WebElement> getAppiumDriver()
+```
+#### Example
+ ```java
 AppiumDriver appiumDriver = appiumTestObject.getAppiumDriver();
 ```
 
 ##  GetAppiumManager
-####Returns a Mobile Driver Manager.
+Returns a Mobile Driver Manager.
+#### Written as
+```java
+MobileDriverManager getAppiumManager()
+```
+#### Example
 ```java
 MobileDriverManager appiumManager = appiumTestObject.getAppiumManager();
 ```
 
 ##  SetAppiumDriver
-#### With a Web Element Parameter
+##### With a Web Element Parameter
 ```java
 AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, consoleLogger,testName);
 appiumTestObject.setAppiumDriver(AppiumDriverFactory.getDefaultMobileDriver());

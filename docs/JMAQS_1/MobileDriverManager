@@ -1,0 +1,42 @@
+# <img src="resources/maqslogo.ico" height="32" width="32"> MobileDriverManager
+
+## Overview
+The MobileDriverManager class interacts with the Appium Driver.
+
+## Available methods
+[MobileDriverManager](#MobileDriverManager)  
+[GetMobileDriver](#GetMobileDriver)  
+[Close](#Close)
+
+## MobileDriverManager
+Instantiates a new Mobile Driver Manager.
+#### Written as
+```java
+MobileDriverManager(Supplier<AppiumDriver<WebElement>> getDriverFunction, BaseTestObject baseTestObject)
+```
+#### Example
+```java
+MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier, this.getTestObject());
+```
+
+## GetMobileDriver
+Get the Appium driver.
+#### Written as
+```java
+AppiumDriver<WebElement> getMobileDriver()
+```
+#### Example
+```java
+AppiumDriver<WebElement> driver = this.getMobileDriver();
+```
+
+## Close
+Cleanup the Appium Driver.
+#### Written as
+```java
+ void close()
+```
+#### Example
+```java
+mobileDriverManager.close();
+```

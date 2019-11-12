@@ -1,0 +1,66 @@
+# <img src="resources/maqslogo.ico" height="32" width="32"> BaseAppiumTest
+
+## Overview
+The BaseAppiumTest class has functionality for Appium and Mobile Drivers including getters and setters.
+
+## Available methods
+[GetAppiumDriver](#GetAppiumDriver)  
+[SetAppiumDriver](#SetAppiumDriver)  
+[GetMobileDriver](#GetMobileDriver)  
+[BeforeLoggingTeardown](#BeforeLoggingTeardown)  
+[CreateNewTestObject](#CreateNewTestObject)  
+
+## GetAppiumDriver
+Gets the appium driver.
+#### Written as
+```java
+AppiumDriver<WebElement> getAppiumDriver()
+```
+#### Example
+```java
+this.getAppiumDriver()
+```
+
+## SetAppiumDriver
+Sets appium driver.
+#### Written as
+```java
+void setAppiumDriver(AppiumDriver<WebElement> mobileDriver)
+```
+#### Example
+```java
+this.setAppiumDriver(this.getMobileDriver());
+```
+
+## GetMobileDriver
+Gets new mobile driver.
+#### Written as
+```java
+AppiumDriver<WebElement> getMobileDriver()
+```
+#### Example
+```java
+this.setAppiumDriver(this.getMobileDriver());
+```
+
+## BeforeLoggingTeardown
+Steps to do before logging teardown results.
+#### Written as
+```java
+void beforeLoggingTeardown(ITestResult resultType) 
+```
+#### Example
+```java
+this.beforeLoggingTeardown(testResult);
+```
+
+## CreateNewTestObject
+Creates a new Appium Test object
+#### Written as
+```java
+void createNewTestObject()
+```
+#### Example
+```java
+ this.createNewTestObject();
+```
