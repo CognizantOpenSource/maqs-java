@@ -1,0 +1,72 @@
+# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Driver Factory
+
+## Overview
+The Appium Driver Factory class is a utility class for working with Selenium
+
+## Available methods
+[GetDefaultMobileDriver](#GetDefaultMobileDriver)  
+[GetDefaultMobileOptions](#GetDefaultMobileOptions)  
+[GetAndroidDriver](#GetAndroidDriver)  
+[GetIosDriver](#GetIosDriver)  
+[GetWindowsDriver](#GetWindowsDriver)  
+[MergeCapabilities](#MergeCapabilities)  
+[CreateDriver](#CreateDriver)  
+
+##  Get Default Mobile Driver
+#### With No Parameters
+```java
+AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+```
+#### With a PlatformType Parameter
+```java
+AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver(PlatformType.ANDROID);
+```
+
+##  Get Default Mobile Options
+#### With no parameters
+```java
+final DesiredCapabilities defaultMobileOptions = AppiumDriverFactory.getDefaultMobileOptions();
+```
+#### With a PlatformType Parameter
+This takes in the mobile options as a Map<String, Object> 
+<br>It returns a WebElement.
+```java
+final Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
+DesiredCapabilities capabilities = AppiumDriverFactory.getDefaultMobileOptions(capabilitiesAsObjects);
+```
+
+##  Get Android Driver
+This takes in a URL, Desired Capabilities Options, and a Timeout Duration. 
+<br>It returns a WebElement.
+```java
+AppiumDriver<WebElement> androidDriver = AppiumDriverFactory.getAndroidDriver(
+AppiumConfig.getMobileHubUrl(), capabilities, AppiumConfig.getMobileTimeout());
+```
+
+##  Get IOS Driver
+This takes in a URL, Desired Capabilities Options, and a Timeout Duration. 
+<br>It returns a WebElement.
+```java
+AppiumDriver<WebElement> iosDriver = AppiumDriverFactory.getIosDriver(
+AppiumConfig.getMobileHubUrl(), capabilities,AppiumConfig.getMobileTimeout());
+```
+
+##  Get Windows Driver
+This takes in a URL, Desired Capabilities Options, and a Timeout Duration. 
+<br>It returns a WebElement.
+```java
+AppiumDriver<WebElement> windowsDriver = AppiumDriverFactory.getWindowsDriver(
+new URL("http://127.0.0.1:4723"), appCapabilities,AppiumConfig.getMobileTimeout());
+```
+
+##  Merge Capabilities
+Merge the desired capabilities into one object.
+```java
+DesiredCapabilities capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
+```
+
+##  Create Appium Driver
+This takes in a Supplier Appium driver Web Element.
+```java
+AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.createDriver(appiumDriverSupplier);
+```
