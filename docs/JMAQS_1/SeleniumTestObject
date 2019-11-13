@@ -1,0 +1,48 @@
+# <img src="resources/maqslogo.ico" height="32" width="32"> SeleniumTestObject
+Manages the interactions of the web driver and web manager.
+
+## SeleniumTestObject
+Instantiates a new Selenium test object.
+#### Written as
+```java
+SeleniumTestObject(WebDriver webDriver, Logger logger, String fullyQualifiedTestName) 
+```
+#### Example
+```java
+SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
+this.getFullyQualifiedTestClassName());
+```
+
+## GetWebDriver
+Get the WebDriver Object.
+#### Written as
+```java
+WebDriver getWebDriver()
+```
+#### Example
+```java
+WebElement elementDriver = UIWaitFactory.getWaitDriver(
+pageModel.getSeleniumTestObject().getWebDriver())
+```
+
+## GetWebManager
+Gets the Selenium driver manager.
+#### Written as
+```java
+SeleniumDriverManager getWebManager()
+```
+#### Example
+```java
+return this.getWebManager().getWebDriver();
+```
+
+## SetWebDriver
+Sets the web driver.
+#### Written as
+```java
+void setWebDriver(WebDriver driver)
+```
+#### Example
+```java
+this.getTestObject().setWebDriver(webDriver);
+```

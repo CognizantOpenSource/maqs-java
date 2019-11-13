@@ -1,6 +1,5 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> Selenium Utilities
 
-## Overview
 The SeleniumUtilities class is a utility class for working with Selenium
 
 # Available methods
@@ -9,7 +8,7 @@ The SeleniumUtilities class is a utility class for working with Selenium
 [WebElementToWebDriver](#WebElementToWebDriver)  
 [KillDriver](#KillDriver)  
 
-##  CaptureScreenshot
+## CaptureScreenshot
 Capture a screenshot.  
 *By default screenshots ends up in the log folder, but one of the 'CaptureScreenshot' functions allows you to choose a different directory.*
 ```java
@@ -20,7 +19,7 @@ page.OpenLoginPage();
 
 SeleniumUtilities.CaptureScreenshot(this.WebDriver, this.TestObject, "LoginPage");
 ```
-##  SavePageSource
+## SavePageSource
 Capture the page DOM.  
 *By default page source ends up in the log folder, but one of the 'SavePageSource' functions allows you to choose a different directory.*
 ```java
@@ -31,7 +30,7 @@ page.OpenLoginPage();
 
 SeleniumUtilities.SavePageSource(this.WebDriver, this.TestObject);
 ```
-##  WebElementToWebDriver
+## WebElementToWebDriver
 Get the web driver from a web element
 ```java
 EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(webDriver);
@@ -43,7 +42,7 @@ WebElement input = UIWaitFactory.getWaitDriver(eventFiringWebDriver)
 
 WebDriver webElementToWebDriver = SeleniumUtilities.webElementToWebDriver(input);
 ```
-##  KillDriver
+## KillDriver
 Make sure a web driver gets closed
 ```java
 WebDriver webDriver = WebDriverFactory.GetBrowserWithDefaultConfiguration(BrowserType.HeadlessChrome);
