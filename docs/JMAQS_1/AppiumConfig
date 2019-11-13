@@ -1,8 +1,10 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> AppiumConfig
 
 ## Overview
-The SeleniumConfig class is used to get values from the AppiumMaqs section of your test run properties.
-<br>These values come from your config.xml, appsettings.json and/or test run parameters.
+The SeleniumConfig class is used to get values from the AppiumMaqs 
+<br> section of your test run properties.
+
+These values come from your config.xml, appsettings.json and/or test run parameters.
 
 ## Available methods
 Get the platform name:

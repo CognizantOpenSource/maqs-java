@@ -7,7 +7,6 @@ The AppiumUtilities lass is a utility class for working with Appium.
 [SavePageSource](#SavePageSource)  
 [KillDriver](#KillDriver) 
 
-
 ## CaptureScreenshot
 To capture a screenshot during execution.
 
