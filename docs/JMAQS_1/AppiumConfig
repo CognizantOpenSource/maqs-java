@@ -1,57 +1,164 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> AppiumConfig
+Appium Configuration class
 
-## Overview
-The SeleniumConfig class is used to get values from the AppiumMaqs 
-<br> section of your test run properties.
+## Inheritance Hierarchy
+```java
+com.magenic.jmaqs.appium.AppiumConfig
+```
+Package: com.magenic.jmaqs.appium;  
+Assembly: import com.magenic.jmaqs.appium.AppiumConfig
 
-These values come from your config.xml, appsettings.json and/or test run parameters.
+## Syntax
+Java
+```java
+public class AppiumTestObject
+```
+The AppiumTestObject type exposes the following members.
 
-## Available methods
-Get the platform name:
+## Methods
+These values come from your config.xml, appsettings.json and/or test run parameters.  
+
+[GetPlatformName](#GetPlatformName) - Gets the platform name  
+[GetPlatformVersion](#GetPlatformVersion) - Gets the Appium platform version    
+[GetDeviceName](#GetDeviceName) - Get the Device Name  
+[GetSavePageSourceOnFail](#GetSavePageSourceOnFail) - Get if we should save page source on fail  
+[GetSoftAssertScreenShot](#GetSoftAssertScreenShot) - Get if we should save screenshots on soft alert fails    
+[GetMobileHubUrlString](#GetMobileHubUrlString) - Get the mobile hub url as a string  
+[GetMobileHubUrl](#GetMobileHubUrl)  - Get the mobile hub url   
+[GetCommandTimeout](#GetCommandTimeout)  - Get the initialize Appium timeout timespan    
+[GetMobileTimeout](#GetMobileTimeout)  - Get the mobile timeout  
+[GetCapabilitiesAsStrings](#GetCapabilitiesAsStrings)  - Gets capabilities as strings   
+[GetCapabilitiesAsObjects](#GetCapabilitiesAsObjects)  - Gets capabilities as objects   
+[GetDeviceType](#GetDeviceType)  - Gets the Device Type  
+
+## GetPlatformName
+Get the platform name
+#### Written as
+```java
+static String getPlatformName()
+```
+#### Example
 ```java
 String driverName = SeleniumConfig.getPlatformName();
 ```
-Get the platform version:
+
+## GetPlatformVersion
+Get the platform version
+#### Written as
+```java
+static String getPlatformVersion()
+```
+#### Example
 ```java
 String driverName = SeleniumConfig.getPlatformVersion();
 ```
-Get the device name:
+
+## GetDeviceName
+Get the device name
+#### Written as
+```java
+static String getDeviceName()
+```
+#### Example
 ```java
 String driver = SeleniumConfig.getDeviceName());
 ```
-Get save page source on fail:
+
+## GetSavePageSourceOnFail
+Get save page source on fail
+#### Written as
+```java
+static boolean getSavePageSourceOnFail()
+```
+#### Example
 ```java
 boolean save = SeleniumConfig.getSavePageSourceOnFail();
 ```
-Get soft assert screen shot:
+
+## GetSoftAssertScreenShot
+Get soft assert screen shot
+#### Written as
+```java
+static boolean getSoftAssertScreenShot()
+```
+#### Example
 ```java
 boolean getScreenshot = SeleniumConfig.getSoftAssertScreenShot();
 ```
-Gets the mobile hub url string:
+
+## GetMobileHubUrlString
+Gets the mobile hub url string
+#### Written as
+```java
+static String getMobileHubUrlString()
+```
+#### Example
 ```java
 String url = SeleniumConfig.getMobileHubUrlString();
 ```
-Get the mobile hub url:
+
+## GetMobileHubUrl
+Get the mobile hub url
+#### Written as
+```java
+static URL getMobileHubUrl()
+```
+#### Example
 ```java
 URL url = SeleniumConfig.getMobileHubUrl();
 ```
+
+## GetCommandTimeout
 Get the command timeout:
+#### Written as
+```java
+static Duration getCommandTimeout()
+```
+#### Example
 ```java
 Duration timeout = SeleniumConfig.getCommandTimeout();
 ```
-Get the mobile timeout:
+
+## GetMobileTimeout
+Get the mobile timeout
+#### Written as
+```java
+static Duration getMobileTimeout()
+```
+#### Example
 ```java
 Duration timeout = SeleniumConfig.getMobileTimeout();
 ```
-Gets capabilities as strings:
+
+## GetCapabilitiesAsStrings
+Gets capabilities as strings
+## Written as
+```java
+static Map<String, String> getCapabilitiesAsStrings()
+```
+#### Example
 ```java
 Map<String, String> Capabilities = SeleniumConfig.getCapabilitiesAsStrings();
 ```
-Gets capabilities as objects:
+
+## GetCapabilitiesAsObjects
+Gets capabilities as objects
+#### Written as
+```java
+static Map<String, Object> getCapabilitiesAsObjects()
+```
+#### Example
 ```java
 Map<String, Object> Capabilities = SeleniumConfig.getCapabilitiesAsObjects();
 ```
-Get device type:
+
+## GetDeviceType
+Get the device type
+#### Written as
+```java
+static PlatformType getDeviceType()
+```
+#### Example
 ```java
 PlatformType platform = SeleniumConfig.getDeviceType();
 ```

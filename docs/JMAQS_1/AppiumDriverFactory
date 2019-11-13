@@ -1,16 +1,37 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> AppiumDriverFactory
+The Appium Driver Factory class is a utility class for working with Selenium.
 
-## Overview
-The Appium Driver Factory class is a utility class for working with Selenium
+## Inheritance Hierarchy
+```java
+com.magenic.jmaqs.appium.AppiumDriverFactory
+```
+Package: com.magenic.jmaqs.appium;
+Assembly: import com.magenic.jmaqs.appium.AppiumDriverFactory
 
-## Available methods
-[GetDefaultMobileDriver](#GetDefaultMobileDriver)  
-[GetDefaultMobileOptions](#GetDefaultMobileOptions)  
-[GetAndroidDriver](#GetAndroidDriver)  
-[GetIosDriver](#GetIosDriver)  
-[GetWindowsDriver](#GetWindowsDriver)  
-[MergeCapabilities](#MergeCapabilities)  
-[CreateDriver](#CreateDriver)  
+## Syntax
+Java
+```java
+public class AppiumDriverFactory
+```
+
+The AppiumDriverFactory type exposes the following members.
+
+## Constructors
+### MobileDriverManager
+Initializes a new instance of the MobileDriverManager class
+#### Written as
+```java
+private AppiumDriverFactory()
+```
+
+## Methods
+[GetDefaultMobileDriver](#GetDefaultMobileDriver) - Gets the default mobile driver  
+[GetDefaultMobileOptions](#GetDefaultMobileOptions) - Gets the default mobile Options  
+[GetAndroidDriver](#GetAndroidDriver) - Get the android driver  
+[GetIosDriver](#GetIosDriver) - get the IOS driver  
+[GetWindowsDriver](#GetWindowsDriver) - Get the windows driver  
+[MergeCapabilities](#MergeCapabilities) - Merge the capabilities    
+[CreateDriver](#CreateDriver) - creates a new driver
 
 ##  GetDefaultMobileDriver
 Gets the default mobile driver.

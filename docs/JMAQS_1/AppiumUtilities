@@ -1,11 +1,24 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> AppiumUtilities
-## Overview
-The AppiumUtilities lass is a utility class for working with Appium.
+Class for the appium utilities
 
-## Available Methods
-[CaptureScreenshot](#CaptureScreenshot)  
-[SavePageSource](#SavePageSource)  
-[KillDriver](#KillDriver) 
+## Inheritance Hierarchy
+
+```java
+com.magenic.jmaqs.appium.AppiumUtilities
+```
+Package: com.magenic.jmaqs.appium;
+Assembly: import com.magenic.jmaqs.appium.AppiumUtilities
+
+## Syntax
+Java
+```java
+public class AppiumUtilities
+```
+
+## Methods
+[CaptureScreenshot](#CaptureScreenshot)  -  To capture a screenshot during execution  
+[SavePageSource](#SavePageSource)        -  To capture a page source during execution  
+[KillDriver](#KillDriver)                -  Kills the appium driver.  
 
 ## CaptureScreenshot
 To capture a screenshot during execution.
