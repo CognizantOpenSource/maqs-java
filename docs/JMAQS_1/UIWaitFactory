@@ -1,6 +1,29 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> UIWaitFactory
 Factory class that is used for creating and maintaining a thread-safe collection of wait drivers.
 
+## Inheritance Hierarchy
+```java
+com.magenic.jmaqs.selenium.UIWaitFactory
+```
+Package: com.magenic.jmaqs.selenium;
+<br> Assembly: import com.magenic.jmaqs.selenium.UIWaitFactory;
+
+## Syntax
+Java
+```java
+public class UIWaitFactory
+```
+The UIWait type exposes the following members.
+
+## Constructors
+Instantiates a new UIWait object.
+#### Written as
+```java
+private UIWaitFactory() 
+```
+
+# Methods
+
 ## GetWaitDriver
 Gets the UIWait object from the wait collection.
 <br> If none exists, one is created and cached using the driver provided.

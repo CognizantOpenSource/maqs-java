@@ -1,12 +1,35 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> EventHandler
 Implements the WebDriverEventListener
 
-## EventHandler
-Initializes a new instance of the EventHandler class.
+## Inheritance Hierarchy
+```java
+WebDriverEventListener
+    com.magenic.jmaqs.selenium.EventHandler
+```
+Package: com.magenic.jmaqs.selenium;
+<br> Assembly: import com.magenic.jmaqs.selenium.EventHandler;
+
+## Syntax
+Java
+
+```java
+public class EventHandler implements WebDriverEventListener
+```
+
+The EventHandler type exposes the following members.
+
+## Constructors
+Instantiates a new EventHandler object.
 #### Written as
 ```java
-EventHandler(Logger logger)
+public EventHandler(Logger logger)
 ```
+#### Example
+```java
+this.eventHandler = new EventHandler(this.getLogger());
+```
+
+# Methods
 
 ## BeforeClickOn
 Log message before clicking element.

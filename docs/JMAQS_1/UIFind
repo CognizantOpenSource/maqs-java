@@ -1,16 +1,33 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> UIFind
 This is the tool-class used for finding elements with the provided search item.
 
-## UIFind
-Initializes a new instance of the UIFind class.
+## Inheritance Hierarchy
+```java
+com.magenic.jmaqs.selenium.UIFind
+```
+Package: com.magenic.jmaqs.selenium;
+<br> Assembly: import com.magenic.jmaqs.selenium.UIFind;
+
+## Syntax
+Java
+
+```java
+public class UIFind
+```
+
+The UIFind type exposes the following members.
+
+## Constructors
+Instantiates a new UIFind object.
 #### Written as
 ```java
-UIFind(SearchContext searchItem)
+public UIFind(SearchContext searchItem)
 ```
 #### Example
 ```java
 return new UIFind(searchItem);
 ```
+# Methods 
 
 ## FindElement
 General Find Element.

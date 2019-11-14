@@ -1,17 +1,33 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> UIWait
+# <img src="resources/maqslogo.ico" height="32" width="32"> Wait Methods
 UI Wait has functions to wait for an element to exist, to not exist, 
 <br> to be visible, to equal a desired value, and many others.
 
-## UIWait
-Constructor for a UIWait object.
+## Inheritance Hierarchy
+```java
+com.magenic.jmaqs.selenium.UIWait
+```
+Package: com.magenic.jmaqs.selenium;
+<br> Assembly: import com.magenic.jmaqs.selenium.UIWait;
+
+## Syntax
+Java
+```java
+public class UIWait
+```
+The UIWait type exposes the following members.
+
+## Constructors
+Instantiates a new UIWait object.
 #### Written as
 ```java
-UIWait(WebDriver driver)
+public UIWait(WebDriver driver)
 ```
 #### Example
 ```java
 waitDriver = new UIWait(baseDriver);
 ```
+
+# Methods
 
 ## GetWaitDriver
 Get the WebDriverWait for use outside of this instance class.

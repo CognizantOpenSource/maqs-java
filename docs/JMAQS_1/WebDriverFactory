@@ -1,6 +1,29 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> WebDriverFactory
 Factory class that is used for Web driver configuration.
 
+## Inheritance Hierarchy
+```java
+com.magenic.jmaqs.selenium.WebDriverFactory
+```
+Package: com.magenic.jmaqs.selenium;
+<br> Assembly: import com.magenic.jmaqs.selenium.WebDriverFactory;
+
+## Syntax
+Java
+```java
+public class WebDriverFactory
+```
+The UIWait type exposes the following members.
+
+## Constructors
+Instantiates a new UIWait object.
+#### Written as
+```java
+private WebDriverFactory() 
+```
+
+# Methods
+
 ## GetDefaultBrowser
 Get the default web driver based on the test run configuration.
 #### Written as

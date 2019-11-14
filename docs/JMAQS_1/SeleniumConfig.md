@@ -32,7 +32,7 @@ The SeleniumMaqs configuration section contains the following Keys:
 Remote Selenium capabilities are used when only when you use a REMOTE browser.  
 These are key value pairs that get added to the remote web driver's desired capabilities.
 
-## Available methods
+## Methods
 Get the browser name:
 ```java
 String driverName = SeleniumConfig.getBrowserName();
