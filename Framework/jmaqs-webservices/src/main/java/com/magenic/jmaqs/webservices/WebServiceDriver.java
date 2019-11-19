@@ -29,10 +29,9 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 
 /**
- * The HTTP client wrapper.
+ * The Web Service Driver.
  */
-public class HttpClientWrapper {
-
+public class WebServiceDriver {
   /**
    * The base HTTP client control.
    */
@@ -51,7 +50,7 @@ public class HttpClientWrapper {
    * @throws URISyntaxException
    *           URI syntax is invalid
    */
-  public HttpClientWrapper(String baseAddress) throws URISyntaxException {
+  public WebServiceDriver(String baseAddress) throws URISyntaxException {
     this(new URI(baseAddress));
   }
 
@@ -61,9 +60,16 @@ public class HttpClientWrapper {
    * @param baseAddress
    *          The base URI address to use
    */
-  public HttpClientWrapper(URI baseAddress) {
-
+  public WebServiceDriver(URI baseAddress) {
     this.baseAddress = baseAddress;
+  }
+
+  /**
+   * Class Constructor that sets the http Client.
+   * @param newHttpClient the http client to be set.
+   */
+  public WebServiceDriver(CloseableHttpClient newHttpClient) {
+    this.baseHttpClient = newHttpClient;
   }
 
   /**
@@ -101,7 +107,7 @@ public class HttpClientWrapper {
   }
 
   /**
-   * Sets the base Web Service address for the HttpClientWrapper.
+   * Sets the base Web Service address for the Web Service Driver.
    * 
    * @param address
    *          The string to set the URI to
@@ -344,13 +350,13 @@ public class HttpClientWrapper {
 
   /**
    * Ensure the response returned a success code.
-   * 
+   *
    * @param response
    *          And HTTP response
-   * @throws Exception
-   *           If the response was null or returned with an error code
+   * @throws Exception If the response was null or returned with an error code
    */
-  private static void ensureSuccessStatusCode(HttpResponse response) throws Exception {
+  private static void ensureSuccessStatusCode(final HttpResponse response)
+          throws Exception {
     // Make sure a response was returned
     if (response == null) {
       throw new NullPointerException("Response was null");
