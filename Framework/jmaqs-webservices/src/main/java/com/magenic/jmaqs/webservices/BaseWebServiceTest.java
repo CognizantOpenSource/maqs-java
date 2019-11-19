@@ -18,6 +18,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
   /**
    * Thread local storage of web service test object.
    */
+  @Deprecated
   private ThreadLocal<WebServiceTestObject> webServiceTestObject = new ThreadLocal<WebServiceTestObject>();
 
   /**
@@ -44,6 +45,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
    * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#postSetupLogging()
    */
   @Override
+  @Deprecated
   protected void postSetupLogging() throws Exception {
 
     WebServiceDriver wrapper = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
