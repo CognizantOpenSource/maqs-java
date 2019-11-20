@@ -6,7 +6,6 @@ package com.magenic.jmaqs.webservices;
 
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.base.DriverManager;
-import java.net.URISyntaxException;
 import java.util.function.Supplier;
 import org.apache.http.impl.client.CloseableHttpClient;
 
@@ -47,11 +46,16 @@ public class WebServiceDriverManager extends DriverManager {
    *
    * @return  The Web Service Driver.
    */
-  public WebServiceDriver getWebServiceDriver() throws URISyntaxException {
-    // Create default Web Service Driver and instantiate Base HTTP Client.
+  public WebServiceDriver getWebServiceDriver() {
+    // Create default Web Service Driver if null.
     if (this.webServiceDriver == null) {
-      this.webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-      this.webServiceDriver.setHttpClient(this.webServiceDriver.getHttpClient(MediaType.APP_JSON.getMediaTypeString()));
+      // If Base Driver Supplier returns Web Service Driver, use that Web Service Driver.
+      if (getBase() instanceof WebServiceDriver) {
+        this.webServiceDriver = (WebServiceDriver) getBase();
+      } else {
+        // If Base Driver Supplier returns CloseableHttpClient, use that to instantiate Web Service Driver.
+        this.webServiceDriver = new WebServiceDriver((CloseableHttpClient) getBase());
+      }
     }
 
     return this.webServiceDriver;

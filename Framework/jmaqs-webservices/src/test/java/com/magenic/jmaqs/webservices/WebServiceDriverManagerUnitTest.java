@@ -53,9 +53,7 @@ public class WebServiceDriverManagerUnitTest extends BaseTest {
   @Test(groups = TestCategories.WebService)
   public void getWebServiceDriverNullDriver() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    WebServiceDriverManager driverManager = new WebServiceDriverManager(
-        () -> webServiceDriver.getHttpClient(MediaType.APP_JSON.getMediaTypeString()),
-        this.getTestObject());
+    WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver, this.getTestObject());
 
     // Set the Driver to be null then check Get Web Service Driver creates default Driver.
     driverManager.overrideDriver(null);
