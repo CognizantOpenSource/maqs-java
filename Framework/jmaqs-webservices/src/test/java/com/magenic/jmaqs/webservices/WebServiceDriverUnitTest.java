@@ -5,18 +5,11 @@
 package com.magenic.jmaqs.webservices;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpRequest;
+import java.net.URISyntaxException;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.entity.ContentType;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HttpContext;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.net.URISyntaxException;
 
 /**
  * Test with the web service driver directly.
