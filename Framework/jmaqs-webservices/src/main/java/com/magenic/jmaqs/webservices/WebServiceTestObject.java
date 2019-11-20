@@ -13,42 +13,36 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 public class WebServiceTestObject extends BaseTestObject {
 
   /**
-   * The HTTP client wrapper.
+   * The Web Service Driver.
    */
-  protected HttpClientWrapper webServiceWrapper;
+  private WebServiceDriver webServiceDriver;
   
   /**
    * Initializes a new instance of the WebServiceTestObject.
-   * 
-   * @param webServiceWrapper
-   *          The web service wrapper
-   * @param logger
-   *          The Logger Object
-   * @param fullyQualifiedTestName
-   *          The fully qualified test name
+   * @param newWebServiceDriver The web service driver.
+   * @param logger The Logger Object.
+   * @param fullyQualifiedTestName The fully qualified test name.
    */
-  public WebServiceTestObject(HttpClientWrapper webServiceWrapper, Logger logger, String fullyQualifiedTestName) {
+  public WebServiceTestObject(WebServiceDriver newWebServiceDriver,
+                    Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
-    this.webServiceWrapper = webServiceWrapper;
+    this.webServiceDriver = newWebServiceDriver;
   }
   
   /**
    * Get the web service wrapper for the WebServiceTestObject.
-   * 
-   * @return A web service wrapper object
+   * @return A web service driver
    */
-  public HttpClientWrapper getWebServiceWrapper() {
-    return this.webServiceWrapper;
+  public WebServiceDriver getWebServiceDriver() {
+    return this.webServiceDriver;
   }
 
   /**
    * Set the web service wrapper for the WebServiceTestObject.
-   * 
-   * @param webServiceWrapper
-   *          The web service wrapper object
+   * @param newWebServiceDriver The web service driver
    */
-  public void setWebServiceWrapper(HttpClientWrapper webServiceWrapper) {
-    this.webServiceWrapper = webServiceWrapper;
+  public void setWebServiceDriver(WebServiceDriver newWebServiceDriver) {
+    this.webServiceDriver = newWebServiceDriver;
   }
 
 }
