@@ -15,6 +15,11 @@ import org.testng.annotations.Test;
  * Unit Tests for Web Service Driver Manager.
  */
 public class WebServiceDriverManagerUnitTest extends BaseTest {
+  /**
+   * Test for Getting Web Service Driver using Supplier in constructor.
+   *
+   * @throws URISyntaxException URI Syntax Exception
+   */
   @Test(groups = TestCategories.WebService)
   public void getWebServiceDriverWithSupplierTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
@@ -27,6 +32,11 @@ public class WebServiceDriverManagerUnitTest extends BaseTest {
     Assert.assertNotNull(driverManager.getWebServiceDriver(), "Expected Web Service Driver to not be null");
   }
 
+  /**
+   * Test for Getting Web Service Driver using Web Service Driver in constructor.
+   *
+   * @throws URISyntaxException URI Syntax Exception
+   */
   @Test(groups = TestCategories.WebService)
   public void getWebServiceDriverTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
@@ -35,6 +45,11 @@ public class WebServiceDriverManagerUnitTest extends BaseTest {
     Assert.assertNotNull(driverManager.getWebServiceDriver(), "Expected Web Service Driver to not be null");
   }
 
+  /**
+   * Test for Getting Web Service Driver when Driver is null and instantiates default Driver.
+   *
+   * @throws URISyntaxException URI Syntax Exception
+   */
   @Test(groups = TestCategories.WebService)
   public void getWebServiceDriverNullDriver() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
@@ -47,6 +62,11 @@ public class WebServiceDriverManagerUnitTest extends BaseTest {
     Assert.assertNotNull(driverManager.getWebServiceDriver(), "Expected Default Web Service Driver to be created.");
   }
 
+  /**
+   * Test for Overriding Web Service Driver.
+   *
+   * @throws URISyntaxException URI Syntax Exception
+   */
   @Test(groups = TestCategories.WebService)
   public void overrideWebServiceDriverTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
@@ -58,6 +78,11 @@ public class WebServiceDriverManagerUnitTest extends BaseTest {
     Assert.assertEquals(driverManager.getWebServiceDriver().getBaseWebServiceAddress().toString(), "http://www.google.com/");
   }
 
+  /**
+   * Test for Closing Web Service Driver.
+   *
+   * @throws URISyntaxException URI Syntax Exception
+   */
   @Test(groups = TestCategories.WebService)
   public void closeWebServiceDriverTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
