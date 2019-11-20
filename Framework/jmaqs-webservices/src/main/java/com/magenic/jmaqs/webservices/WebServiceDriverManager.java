@@ -6,17 +6,16 @@ package com.magenic.jmaqs.webservices;
 
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.base.DriverManager;
-
 import java.net.URISyntaxException;
 import java.util.function.Supplier;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 /**
- * Web Service Driver Manager Class
+ * Web Service Driver Manager Class.
  */
 public class WebServiceDriverManager extends DriverManager {
   /**
-   * Web Service Driver variable
+   * Web Service Driver variable.
    */
   private WebServiceDriver webServiceDriver;
 
@@ -68,7 +67,7 @@ public class WebServiceDriverManager extends DriverManager {
   }
 
   /**
-   * Close Method
+   * Close Method sets Base Driver to Null.
    */
   public void close() {
     this.setBaseDriver(null);

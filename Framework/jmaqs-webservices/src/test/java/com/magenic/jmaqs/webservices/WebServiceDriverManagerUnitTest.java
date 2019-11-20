@@ -12,7 +12,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
- * Unit Tests for Web Service Driver Manager
+ * Unit Tests for Web Service Driver Manager.
  */
 public class WebServiceDriverManagerUnitTest extends BaseTest {
   @Test(groups = TestCategories.WebService)
@@ -71,7 +71,7 @@ public class WebServiceDriverManagerUnitTest extends BaseTest {
 
   }
 
-  @Override protected void beforeLoggingTeardown(ITestResult resultType) {
+  @Deprecated @Override protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
 }
