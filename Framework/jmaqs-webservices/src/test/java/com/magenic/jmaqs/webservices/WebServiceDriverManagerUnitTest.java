@@ -67,11 +67,11 @@ public class WebServiceDriverManagerUnitTest extends BaseTest {
     Assert.assertNull(driverManager.getBaseDriver(), "Expected Base Driver to be null.");
   }
 
-  @Override protected void postSetupLogging() throws Exception {
+  @Deprecated @Override protected void postSetupLogging() throws Exception {
 
   }
 
-  @Deprecated @Override protected void beforeLoggingTeardown(ITestResult resultType) {
+  @Override protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
 }
