@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium;
+package com.magenic.jmaqs.selenium.constants;
 
 /**
  * Known browser types.
@@ -11,22 +11,22 @@ public enum BrowserType {
   /**
    * Chrome web browser.
    */
-  Chrome,
+  CHROME,
 
   /**
    * Edge web browser.
    */
-  Edge,
+  EDGE,
 
   /**
    * Firefox web browser.
    */
-  Firefox,
+  FIREFOX,
 
   /**
    * Chrome web browser - run headless.
    */
-  HeadlessChrome,
+  HEADLESS_CHROME,
 
   /**
    * IE web browser.
@@ -36,5 +36,5 @@ public enum BrowserType {
   /**
    * Remote web browser - Used when executing on Grid or cloud based provides like Sauce Labs.
    */
-  Remote
+  REMOTE
 }

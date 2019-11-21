@@ -219,7 +219,7 @@ public abstract class BaseTest {
    * @param testContext The initial executing Test Context object
    * @throws Exception Throws exception if get logger fails
    */
-  @BeforeMethod
+  @BeforeMethod(alwaysRun = true)
   public void setup(Method method, ITestContext testContext) throws Exception {
     this.testContextInstance = testContext;
 
@@ -234,7 +234,7 @@ public abstract class BaseTest {
   /**
    * Cleanup after a test.
    */
-  @AfterMethod
+  @AfterMethod(alwaysRun = true)
   public void teardown() {
     try {
       this.beforeLoggingTeardown(testResult);
@@ -282,7 +282,7 @@ public abstract class BaseTest {
    *
    * @param testResult The result object
    */
-  @AfterMethod
+  @AfterMethod(alwaysRun = true)
   public void setTestResult(ITestResult testResult) {
     this.testContextInstance = testResult.getTestContext();
     this.testResult = testResult;
@@ -290,7 +290,9 @@ public abstract class BaseTest {
 
   /**
    * Overload function for doing post setup logging.
+   * @deprecated methodology no longer used.
    */
+  @Deprecated
   protected abstract void postSetupLogging() throws Exception;
 
   /**

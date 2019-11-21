@@ -4,8 +4,7 @@
 
 package com.magenic.jmaqs.webservices;
 
-import com.magenic.jmaqs.webservices.BaseWebServiceTest;
-import com.magenic.jmaqs.webservices.WebServiceUtils;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -24,10 +23,10 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServiceGetVerificationTest() throws Exception {
 
-    CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/String/1",
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/1",
         ContentType.TEXT_PLAIN, true);
     String responseString = WebServiceUtils.getResponseBody(response);
 
@@ -41,10 +40,10 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServiceGetError() throws Exception {
 
-    CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/String/-1",
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/-1",
         ContentType.TEXT_PLAIN, false);
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 204);
   }
@@ -55,10 +54,10 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServiceDelete() throws Exception {
 
-    CloseableHttpResponse response = this.getHttpClientWrapper()
+    CloseableHttpResponse response = this.getWebServiceDriver()
         .deleteContent("/api/XML_JSON/Delete/1", ContentType.TEXT_PLAIN, false);
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
   }
@@ -69,10 +68,10 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServicePatchError() throws Exception {
     HttpEntity content = WebServiceUtils.createEntity("", ContentType.APPLICATION_XML);
-    CloseableHttpResponse response = this.getHttpClientWrapper().patchContent("/api/XML_JSON/Put/1",
+    CloseableHttpResponse response = this.getWebServiceDriver().patchContent("/api/XML_JSON/Put/1",
         content, ContentType.APPLICATION_XML, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 405);
@@ -85,10 +84,10 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServicePostError() throws Exception {
     HttpEntity content = WebServiceUtils.createEntity("", ContentType.TEXT_PLAIN);
-    CloseableHttpResponse response = this.getHttpClientWrapper().postContent("/api/String", content,
+    CloseableHttpResponse response = this.getWebServiceDriver().postContent("/api/String", content,
         ContentType.TEXT_PLAIN, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 400);
@@ -101,10 +100,10 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServicePutError() throws Exception {
     HttpEntity content = WebServiceUtils.createEntity("", ContentType.APPLICATION_XML);
-    CloseableHttpResponse response = this.getHttpClientWrapper().putContent("/api/XML_JSON/Put/1",
+    CloseableHttpResponse response = this.getWebServiceDriver().putContent("/api/XML_JSON/Put/1",
         content, ContentType.APPLICATION_XML, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 409);

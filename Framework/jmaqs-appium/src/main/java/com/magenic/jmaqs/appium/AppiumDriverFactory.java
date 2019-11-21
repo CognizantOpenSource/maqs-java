@@ -4,14 +4,12 @@
 
 package com.magenic.jmaqs.appium;
 
-import static io.appium.java_client.remote.MobileCapabilityType.DEVICE_NAME;
-import static io.appium.java_client.remote.MobileCapabilityType.PLATFORM_NAME;
-import static io.appium.java_client.remote.MobileCapabilityType.PLATFORM_VERSION;
-
+import com.magenic.jmaqs.appium.constants.PlatformType;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.windows.WindowsDriver;
 import java.net.URL;
 import java.time.Duration;
@@ -21,6 +19,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
@@ -85,9 +84,10 @@ public class AppiumDriverFactory {
    */
   public static DesiredCapabilities getDefaultMobileOptions() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
-    capabilities.setCapability(DEVICE_NAME, AppiumConfig.getDeviceName());
-    capabilities.setCapability(PLATFORM_NAME, AppiumConfig.getPlatformName());
-    capabilities.setCapability(PLATFORM_VERSION, AppiumConfig.getPlatformVersion());
+    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, AppiumConfig.getDeviceName());
+    capabilities.setCapability(CapabilityType.PLATFORM_NAME, AppiumConfig.getPlatformName());
+    capabilities
+        .setCapability(MobileCapabilityType.PLATFORM_VERSION, AppiumConfig.getPlatformVersion());
     return mergeCapabilities(capabilities, AppiumConfig.getCapabilitiesAsObjects());
   }
 
