@@ -6,6 +6,29 @@
 	<artifactId>jmaqs-framework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<url>https://github.com/Magenic/JMAQS</url>
+	<inceptionYear>2017</inceptionYear>
+	<organization>
+		<name>Magenic Technologies</name>
+		<url>https://www.magenic.com</url>
+	</organization>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/Magenic/JMAQS/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Azure Pipelines</system>
+		<url>https://dev.azure.com/magenicOpen/JMAQS/_build</url>
+	</ciManagement>
+
+	<licenses>
+		<license>
+			<name>MIT</name>
+			<url>https://github.com/Magenic/JMAQS/blob/master/LICENSE</url>
+		</license>
+	</licenses>
+
 
 	<modules>
 		<module>jmaqs-utilities</module>
@@ -15,7 +38,7 @@
 		<module>jmaqs-appium</module>
 	</modules>
 
-	<repositories>
+	<!--<repositories>
 		<repository>
 			<id>dev-azure-com-magenicopen-jmaqs-azure</id>
 			<url>https://pkgs.dev.azure.com/MagenicOpen/JMAQS/_packaging/JMAQS-Azure/maven/v1</url>
@@ -33,18 +56,18 @@
 			<url>https://pkgs.dev.azure.com/MagenicOpen/JMAQS/_packaging/JMAQS-Azure/maven/v1</url>
 			<uniqueVersion>true</uniqueVersion>
 		</repository>
-	</distributionManagement>
+	</distributionManagement>-->
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
-		<deploy.plugin.version>2.8.2</deploy.plugin.version>
-		<nexusstaging.plugin.version>1.6.8</nexusstaging.plugin.version>
-		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
 		<compiler.plugin.version>3.6.1</compiler.plugin.version>
-		<surefire.plugin.version>2.19.1</surefire.plugin.version>
+		<deploy.plugin.version>2.8.2</deploy.plugin.version>
+		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
 		<mvncheckstyle.plugin.version>2.17</mvncheckstyle.plugin.version>
+		<nexusstaging.plugin.version>1.6.8</nexusstaging.plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<puppycheckstyle.plugin.version>7.6.1</puppycheckstyle.plugin.version>
+		<surefire.plugin.version>2.19.1</surefire.plugin.version>
 	</properties>
 	<!--<reporting>
 		<plugins>
@@ -86,11 +109,11 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${compiler.plugin.version}</version>
 				<configuration>
-					<showDeprecation>false</showDeprecation>
 					<compilerVersion>1.8</compilerVersion>
+					<encoding>UTF-8</encoding>
+					<showDeprecation>false</showDeprecation>
 					<source>1.8</source>
 					<target>1.8</target>
-					<encoding>UTF-8</encoding>
 					<workingDirectory>target/</workingDirectory>
 				</configuration>
 			</plugin>
@@ -98,13 +121,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${surefire.plugin.version}</version>
-				<!-- Temporary disabling concurrency until bug is fixed.
-				Bug #10229:
-				<configuration>
-					<parallel>methods</parallel>
-					<threadCount>6</threadCount>
-				</configuration>-->
-
 			</plugin>
 			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
