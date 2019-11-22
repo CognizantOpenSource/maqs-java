@@ -21,7 +21,7 @@
 		<reportng.version>1.1.4</reportng.version>
 		<guice.version>4.2.2</guice.version>
 		<commonsconfiguration2.version>2.6</commonsconfiguration2.version>
-		<commonsbeanutils.version>1.9.3</commonsbeanutils.version>
+		<commonsbeanutils.version>1.9.4</commonsbeanutils.version>
 		<commonsio.version>2.6</commonsio.version>
 		<httpcore.version>4.4.12</httpcore.version>
 	</properties>
