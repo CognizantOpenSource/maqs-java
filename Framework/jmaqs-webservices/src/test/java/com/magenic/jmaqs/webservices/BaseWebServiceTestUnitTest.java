@@ -1,5 +1,6 @@
 package com.magenic.jmaqs.webservices;
 
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,15 +10,18 @@ import static org.testng.Assert.*;
 
 public class BaseWebServiceTestUnitTest extends BaseWebServiceTest {
 
-  @Test public void testGetWebServiceDriver() {
+  @Test(groups = TestCategories.WebService)
+  public void testGetWebServiceDriver() {
     Assert.assertNotNull(this.getWebServiceDriver());
   }
 
-  @Test public void testGetWebServiceTestObject() {
+  @Test(groups = TestCategories.WebService)
+  public void testGetWebServiceTestObject() {
     Assert.assertNotNull(this.getTestObject());
   }
 
-  @Test public void testSetWebServiceDriver() {
+  @Test(groups = TestCategories.WebService)
+  public void testSetWebServiceDriver() {
     int hashCode = this.getWebServiceDriver().hashCode();
     try {
       this.setWebServiceDriver(this.getWebServiceClient());
@@ -28,7 +32,8 @@ public class BaseWebServiceTestUnitTest extends BaseWebServiceTest {
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
-  @Test public void testGetWebServiceClient() throws URISyntaxException {
+  @Test(groups = TestCategories.WebService)
+  public void testGetWebServiceClient() throws URISyntaxException {
     Assert.assertNotNull(this.getWebServiceClient());
   }
 }
