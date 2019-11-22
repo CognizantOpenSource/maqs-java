@@ -13,7 +13,7 @@ import org.testng.ITestResult;
 /**
  * Base web service test class.
  */
-public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject> {
+public abstract class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject> {
 
   /**
    * Thread local storage of web service test object.
@@ -27,7 +27,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
    * @return WebDriver
    */
   public WebServiceDriver getWebServiceDriver() {
-    return this.webServiceTestObject.get().getWebServiceDriver();
+    return this.getTestObject().getWebServiceDriver();
   }
 
   /**
@@ -35,8 +35,17 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
    * 
    * @return The seleniumTestObject
    */
+  @Deprecated
   public WebServiceTestObject getWebServiceTestObject() {
     return this.webServiceTestObject.get();
+  }
+
+  /**
+   * Set the webServiceDriver
+   * @param webServiceDriver
+   */
+  public void setWebServiceDriver(WebServiceDriver webServiceDriver) {
+    this.getTestObject().setWebServiceDriver(webServiceDriver);
   }
 
   /*
@@ -66,17 +75,16 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
 
   @Override
   protected void createNewTestObject() {
-
-    //FIXME: Workaround to get module working.  Must Refactor.
     Logger logger = this.createLogger();
     try {
       WebServiceDriver httpClientWrapper = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
       WebServiceTestObject webServiceTestObject = new WebServiceTestObject(httpClientWrapper, logger, this.getFullyQualifiedTestClassName());
       this.setTestObject(webServiceTestObject);
-      this.webServiceTestObject.set(webServiceTestObject);
     } catch (URISyntaxException e) {
       e.printStackTrace();
     }
 
   }
+
+
 }
