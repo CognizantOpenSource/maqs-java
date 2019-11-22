@@ -32,11 +32,11 @@ public class WebServiceTestObject extends BaseTestObject {
    * @param logger The Logger Object.
    * @param fullyQualifiedTestName The fully qualified test name.
    */
-  public WebServiceTestObject(WebServiceDriver newWebServiceDriver,
+  public WebServiceTestObject(WebServiceDriver driver,
       Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((WebServiceDriverManager.class).getCanonicalName(),
-        new WebServiceDriverManager(newWebServiceDriver, this));
+        new WebServiceDriverManager(driver, this));
   }
   
   /**
