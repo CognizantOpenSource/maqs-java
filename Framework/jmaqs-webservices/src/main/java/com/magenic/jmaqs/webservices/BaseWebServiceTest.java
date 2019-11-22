@@ -6,6 +6,7 @@ package com.magenic.jmaqs.webservices;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
 
+import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 
 import java.net.URISyntaxException;
@@ -25,7 +26,7 @@ public abstract class BaseWebServiceTest extends BaseExtendableTest<WebServiceTe
   /**
    * Get the Web Service Driver.
    *
-   * @return WebDriver
+   * @return WebServiceDriver
    */
   public WebServiceDriver getWebServiceDriver() {
     return this.getTestObject().getWebServiceDriver();
@@ -38,6 +39,7 @@ public abstract class BaseWebServiceTest extends BaseExtendableTest<WebServiceTe
    */
   @Deprecated public WebServiceTestObject getWebServiceTestObject() {
     return this.webServiceTestObject.get();
+
   }
 
   /**
@@ -71,16 +73,28 @@ public abstract class BaseWebServiceTest extends BaseExtendableTest<WebServiceTe
     // There is no before logging tear-down required
   }
 
+  /**
+   * Gets new WebServiceDriver
+   * @return WebServiceDriver
+   * @throws URISyntaxException
+   */
+  protected WebServiceDriver getWebServiceClient() throws URISyntaxException {
+    return new WebServiceDriver(WebServiceConfig.getWebServiceUri());
+  }
+
+  /**
+   * Creates a new test object
+   */
   @Override protected void createNewTestObject() {
     Logger logger = this.createLogger();
     try {
-      WebServiceDriver httpClientWrapper = new WebServiceDriver(
-          WebServiceConfig.getWebServiceUri());
-      WebServiceTestObject webServiceTestObject = new WebServiceTestObject(httpClientWrapper,
-          logger, this.getFullyQualifiedTestClassName());
+
+      WebServiceTestObject webServiceTestObject = new WebServiceTestObject(
+          this.getWebServiceClient(), logger, this.getFullyQualifiedTestClassName());
       this.setTestObject(webServiceTestObject);
     } catch (URISyntaxException e) {
-      e.printStackTrace();
+      getLogger().logMessage(
+          StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }
   }
 }
