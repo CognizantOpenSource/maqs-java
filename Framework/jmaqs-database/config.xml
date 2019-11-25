@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright 2019 (C) Magenic, All rights Reserved
-  -->
 
 <configuration>
     <MagenicMaqs>
@@ -35,8 +32,13 @@
         <!-- Log file path - Defaults to build location if no value is defined -->
         <FileLoggerPath>./target/logs</FileLoggerPath>
     </MagenicMaqs>
-    <DatabaseMaqs>
+    <DatabaseMaqs >
+        <!--<DatabaseProviderType>SQLSERVER</DatabaseProviderType>
+        <DatabaseProviderType>MYSQL</DatabaseProviderType>-->
         <DatabaseProviderType>SQLITE</DatabaseProviderType>
-        <DatabaseConnectionString></DatabaseConnectionString>
+        <DatabaseConnectionString>jdbc:sqlite:./src/test/resources/MyDatabase.sqlite</DatabaseConnectionString>
     </DatabaseMaqs>
+    <DatabaseCaps>
+
+    </DatabaseCaps>
 </configuration>

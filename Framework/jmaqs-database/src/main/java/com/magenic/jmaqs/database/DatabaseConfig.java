@@ -12,6 +12,9 @@ import com.magenic.jmaqs.utilities.helper.ConfigSection;
  */
 public class DatabaseConfig {
 
+  private DatabaseConfig() {
+  }
+
   /**
    * The Database section.
    */

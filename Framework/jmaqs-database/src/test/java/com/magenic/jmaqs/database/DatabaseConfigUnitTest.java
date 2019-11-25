@@ -4,7 +4,8 @@
 
 package com.magenic.jmaqs.database;
 
-
+import com.magenic.jmaqs.utilities.helper.TestCategories;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -15,17 +16,16 @@ public class DatabaseConfigUnitTest {
   /**
    * Test get connection string.
    */
-  @Test
+  @Test(groups = TestCategories.Database)
   public void testGetConnectionString() {
-
-    throw new UnsupportedOperationException("Test method not implemented yet.");
+    Assert.assertEquals(DatabaseConfig.getConnectionString(), "jdbc:sqlite:./src/test/resources/MyDatabase.sqlite");
   }
 
   /**
    * Test get provider type string.
    */
-  @Test
+  @Test(groups = TestCategories.Database)
   public void testGetProviderTypeString() {
-    throw new UnsupportedOperationException("Test method not implemented yet.");
+    Assert.assertEquals(DatabaseConfig.getProviderTypeString(), "SQLITE");
   }
 }
