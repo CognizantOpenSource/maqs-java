@@ -38,4 +38,8 @@ public class DatabaseConfig {
     return Config.getValueForSection(DATABASE_SECTION, "DatabaseProviderType");
   }
 
+  public static String getEntityDirectoryString() {
+    return Config.getValueForSection(DATABASE_SECTION, "EntityDirectory");
+  }
+
 }

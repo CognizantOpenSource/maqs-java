@@ -37,6 +37,7 @@
         <DatabaseProviderType>MYSQL</DatabaseProviderType>-->
         <DatabaseProviderType>SQLITE</DatabaseProviderType>
         <DatabaseConnectionString>jdbc:sqlite:./src/test/resources/MyDatabase.sqlite</DatabaseConnectionString>
+        <EntityDirectory>./src/test/java/entities</EntityDirectory>
     </DatabaseMaqs>
     <DatabaseCaps>
 
