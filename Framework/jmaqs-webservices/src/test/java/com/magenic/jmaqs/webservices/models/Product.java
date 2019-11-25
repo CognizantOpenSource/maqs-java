@@ -48,4 +48,14 @@ public class Product {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder(20);
+        sb.append(String.format("%s:%d\n", "Id", this.getId()));
+        sb.append(String.format("%s:%s\n", "Name", this.getName()));
+        sb.append(String.format("%s:%s\n", "Category", this.getCategory()));
+        sb.append(String.format("%s:%d\n", "Price", this.getPrice()));
+
+        return sb.toString();
+    }
 }

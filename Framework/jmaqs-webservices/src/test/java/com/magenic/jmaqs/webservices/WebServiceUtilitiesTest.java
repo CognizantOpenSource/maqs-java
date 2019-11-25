@@ -71,9 +71,9 @@ public class WebServiceUtilitiesTest extends BaseWebServiceTest {
     }
 
     @Test
-    public void testCreateStringEntityCustomContentType() {
+    public void testCreateStringEntityCustomContentType() throws JsonProcessingException {
         Product product = new Product();
-        HttpEntity entity = WebServiceUtilities.createStringEntity(product.toString(), Charset.defaultCharset(), "application/json");
+        HttpEntity entity = WebServiceUtilities.createStringEntity(product, Charset.defaultCharset(), "application/json");
 
         Assert.assertNotNull(entity, "Entity was not set correctly with custom charset and mime-type");
     }

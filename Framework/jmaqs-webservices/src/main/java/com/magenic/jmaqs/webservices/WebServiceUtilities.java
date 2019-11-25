@@ -65,21 +65,11 @@ public final class WebServiceUtilities {
   /**
    * Create the string entity
    * @param body The body being set in the entity
-   * @param contentType  The content type of the message
-   * @return The string entity
-   */
-  public static StringEntity createStringEntity(String body, ContentType contentType) {
-    return new StringEntity(body, contentType);
-  }
-
-  /**
-   * Create the string entity
-   * @param body The body being set in the entity
    * @param encoding The charset encoding of the message
    * @param mediaType The mime type of the message
    * @return The string entity
    */
-  public static StringEntity createStringEntity(String body, Charset encoding, String mediaType) {
+  public static <T> StringEntity createStringEntity(T body, Charset encoding, String mediaType) throws JsonProcessingException {
     ContentType contentType = ContentType.create(mediaType, encoding);
     return createStringEntity(body, contentType);
   }
