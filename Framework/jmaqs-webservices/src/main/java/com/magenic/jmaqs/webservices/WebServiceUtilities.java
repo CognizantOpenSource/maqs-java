@@ -9,8 +9,6 @@ import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
