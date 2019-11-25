@@ -4,9 +4,6 @@
 
 package com.magenic.jmaqs.webservices;
 
-import com.magenic.jmaqs.webservices.BaseWebServiceTest;
-import com.magenic.jmaqs.webservices.WebServiceUtils;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;
@@ -29,7 +26,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
 
     CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/String/1",
         ContentType.TEXT_PLAIN, true);
-    String responseString = WebServiceUtils.getResponseBody(response);
+    String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertTrue(responseString.contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + response.toString());
@@ -71,7 +68,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test
   public void webServicePatchError() throws Exception {
-    HttpEntity content = WebServiceUtils.createEntity("", ContentType.APPLICATION_XML);
+    HttpEntity content = WebServiceUtilities.createEntity("", ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getHttpClientWrapper().patchContent("/api/XML_JSON/Put/1",
         content, ContentType.APPLICATION_XML, false);
 
@@ -87,7 +84,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test
   public void webServicePostError() throws Exception {
-    HttpEntity content = WebServiceUtils.createEntity("", ContentType.TEXT_PLAIN);
+    HttpEntity content = WebServiceUtilities.createEntity("", ContentType.TEXT_PLAIN);
     CloseableHttpResponse response = this.getHttpClientWrapper().postContent("/api/String", content,
         ContentType.TEXT_PLAIN, false);
 
@@ -103,7 +100,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test
   public void webServicePutError() throws Exception {
-    HttpEntity content = WebServiceUtils.createEntity("", ContentType.APPLICATION_XML);
+    HttpEntity content = WebServiceUtilities.createEntity("", ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getHttpClientWrapper().putContent("/api/XML_JSON/Put/1",
         content, ContentType.APPLICATION_XML, false);
 
