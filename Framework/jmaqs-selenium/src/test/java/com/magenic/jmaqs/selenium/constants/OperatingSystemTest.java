@@ -34,6 +34,15 @@ public class OperatingSystemTest {
   }
 
   /**
+   * Test get operating system with abbreviation linux.
+   */
+  @Test
+  public void testGetOperatingSystemWithAbbreviationWindowsServer() {
+    Assert.assertEquals(OperatingSystem.getOperatingSystemWithAbbreviation("windows server 2016"),
+        OperatingSystem.WINDOWS);
+  }
+
+  /**
    * Test get operating system with abbreviation windows.
    */
   @Test
@@ -65,6 +74,6 @@ public class OperatingSystemTest {
   @Test
   public void testGetOperatingSystem() {
     OperatingSystem operatingSystem = OperatingSystem.getOperatingSystem();
-    Assert.assertEquals(operatingSystem, OperatingSystem.MACOS);
+    Assert.assertEquals(operatingSystem, OperatingSystem.WINDOWS);
   }
 }
