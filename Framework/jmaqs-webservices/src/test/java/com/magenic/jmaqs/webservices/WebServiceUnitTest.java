@@ -4,6 +4,8 @@
 
 package com.magenic.jmaqs.webservices;
 
+import com.magenic.jmaqs.utilities.helper.TestCategories;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;
@@ -24,7 +26,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
   @Test
   public void webServiceGetVerificationTest() throws Exception {
 
-    CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/String/1",
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/1",
         ContentType.TEXT_PLAIN, true);
     String responseString = WebServiceUtilities.getResponseBody(response);
 
@@ -66,10 +68,10 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServicePatchError() throws Exception {
     HttpEntity content = WebServiceUtilities.createEntity("", ContentType.APPLICATION_XML);
-    CloseableHttpResponse response = this.getHttpClientWrapper().patchContent("/api/XML_JSON/Put/1",
+    CloseableHttpResponse response = this.getWebServiceDriver().patchContent("/api/XML_JSON/Put/1",
         content, ContentType.APPLICATION_XML, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 405);
@@ -98,10 +100,10 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServicePutError() throws Exception {
     HttpEntity content = WebServiceUtilities.createEntity("", ContentType.APPLICATION_XML);
-    CloseableHttpResponse response = this.getHttpClientWrapper().putContent("/api/XML_JSON/Put/1",
+    CloseableHttpResponse response = this.getWebServiceDriver().putContent("/api/XML_JSON/Put/1",
         content, ContentType.APPLICATION_XML, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 409);
