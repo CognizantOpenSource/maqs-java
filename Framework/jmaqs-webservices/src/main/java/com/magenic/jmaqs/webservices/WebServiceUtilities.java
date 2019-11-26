@@ -57,7 +57,7 @@ public final class WebServiceUtilities {
     HttpEntity entity = response.getEntity();
     return EntityUtils.toString(entity);
   }
-f
+
   /**
    * Create the string entity
    * @param body The body being set in the entity
