@@ -17,6 +17,15 @@ public class Product {
     @JsonProperty("Price")
     private BigDecimal price;
 
+    public Product(int id, String name, String category, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+    }
+
+    public Product() { }
+
     public int getId() {
         return id;
     }
