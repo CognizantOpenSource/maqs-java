@@ -77,11 +77,11 @@ public enum OperatingSystem {
    */
   public static OperatingSystem getOperatingSystemWithAbbreviation(String operatingSystemAbbr) {
 
-    if (LINUX.operatingSystemAbbreviations.stream().anyMatch(s -> s.equals(operatingSystemAbbr))) {
+    if (LINUX.operatingSystemAbbreviations.stream().anyMatch(s -> s.contains(operatingSystemAbbr))) {
       return OperatingSystem.LINUX;
-    } else if (MACOS.operatingSystemAbbreviations.stream().anyMatch(s -> s.equals(operatingSystemAbbr))) {
+    } else if (MACOS.operatingSystemAbbreviations.stream().anyMatch(s -> s.contains(operatingSystemAbbr))) {
       return OperatingSystem.MACOS;
-    } else if (WINDOWS.operatingSystemAbbreviations.stream().anyMatch(s -> s.equals(operatingSystemAbbr))) {
+    } else if (WINDOWS.operatingSystemAbbreviations.stream().anyMatch(s -> s.contains(operatingSystemAbbr))) {
       return OperatingSystem.WINDOWS;
     } else {
       throw new IllegalArgumentException(String.format("Unknown Operating System detected: %s", operatingSystemAbbr));
