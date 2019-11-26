@@ -75,8 +75,7 @@ public class WebDriverFactoryUnitTest {
   public void getChromeDriverTest() throws Exception {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.CHROME);
+      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.CHROME);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -89,8 +88,7 @@ public class WebDriverFactoryUnitTest {
   public void getHeadlessChromeDriverTest() throws Exception {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.HEADLESS_CHROME);
+      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.HEADLESS_CHROME);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -103,8 +101,7 @@ public class WebDriverFactoryUnitTest {
   public void getFirefoxDriverTest() throws Exception {
     FirefoxDriver driver = null;
     try {
-      driver = (FirefoxDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.FIREFOX);
+      driver = (FirefoxDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.FIREFOX);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -117,8 +114,7 @@ public class WebDriverFactoryUnitTest {
   public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
     try {
-      driver = (InternetExplorerDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.IE);
+      driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.IE);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -257,8 +253,7 @@ public class WebDriverFactoryUnitTest {
   @Test(groups = TestCategories.Selenium)
   @Ignore("Not able to be tested yet")
   public void getDriverLocationDefaultHintPathTest() {
-    String driverLocation = WebDriverFactory
-        .getDriverLocation(WebDriverFile.CHROME.getFileName(), "");
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName(), "");
     Assert.assertFalse(driverLocation.isEmpty());
     Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
         "Checking that driver location and default hint path are the same.");
@@ -292,7 +287,6 @@ public class WebDriverFactoryUnitTest {
   public void getDriverLocationMustExistTest() {
     String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", true);
   }
-
 
   @Test(groups = TestCategories.Selenium)
   public void getWindowsEdgeDriverLocationTest() {
