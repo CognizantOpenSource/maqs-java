@@ -59,6 +59,33 @@ public final class WebServiceUtilities {
   }
 
   /**
+   * Get the body from a HTTP response.
+   * @param response The response
+   * @return The response body
+   * @throws ParseException There was an error parsing the response as a string
+   * @throws IOException There was a problem reading the response
+   */
+  public static <T> T getResponseBody(CloseableHttpResponse response, Type type)
+          throws ParseException, IOException {
+    HttpEntity entity = response.getEntity();
+    String contentType = entity.getContentType().getValue();
+    T responseBody;
+
+    if (contentType.toUpperCase().contains("JSON")) {
+      responseBody = deserializeJson(response, type);
+    }
+    else if (contentType.toUpperCase().contains("XML")) {
+      responseBody = deserializeXml(response, type);
+    }
+    else {
+      throw new IllegalArgumentException(
+              StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+    }
+
+    return responseBody;
+  }
+
+  /**
    * Create the string entity
    * @param body The body being set in the entity
    * @param encoding The charset encoding of the message
