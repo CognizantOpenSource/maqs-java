@@ -22,13 +22,6 @@ public class WebServiceUtilitiesTest extends BaseWebServiceTest {
     }
 
     @Test
-    public void testCreateEntity() throws Exception {
-        HttpEntity content = WebServiceUtilities.createEntity("", ContentType.TEXT_PLAIN);
-        CloseableHttpResponse response = this.getHttpClientWrapper().postContent("/api/String", content,
-                ContentType.TEXT_PLAIN, false);
-    }
-
-    @Test
     public void testDeserializeJson() throws Exception {
         CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/XML_JSON/GetProduct/1",
                 ContentType.APPLICATION_JSON, true);
