@@ -20,15 +20,15 @@ public enum OperatingSystem {
   /**
    * Linux Operating System.
    */
-  LINUX("Linux", new ArrayList<>(Arrays.asList("nix", "nux", "aix"))),
+  LINUX("Linux", new ArrayList<>(Arrays.asList("nix", "nux", "aix", "ubuntu"))),
   /**
    * Mac Operating System.
    */
-  MACOS("Mac OS", new ArrayList<>(Collections.singletonList("mac os x"))),
+  MACOS("Mac OS", new ArrayList<>(Arrays.asList("mac os x", "mac"))),
   /**
    * Windows Operating System.
    */
-  WINDOWS("Windows", new ArrayList<>(Collections.singletonList("win")));
+  WINDOWS("Windows", new ArrayList<>(Arrays.asList("win", "windows")));
 
   /**
    * The Operating system name.
