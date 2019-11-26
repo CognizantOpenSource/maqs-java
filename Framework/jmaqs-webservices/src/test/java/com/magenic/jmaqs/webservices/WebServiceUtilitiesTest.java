@@ -27,7 +27,7 @@ public class WebServiceUtilitiesTest extends BaseWebServiceTest {
     public void testGetResponseBodyAsObjectFromJson() throws Exception {
         CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/XML_JSON/GetProduct/1",
                 ContentType.APPLICATION_JSON, true);
-        Product jsonProduct = WebServiceUtilities.getResponseBody(response, Product.class);
+        Product jsonProduct = WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_JSON, Product.class);
 
         Assert.assertNotNull(jsonProduct, "Response body did not deserialize object from json correctly");
     }
@@ -36,9 +36,18 @@ public class WebServiceUtilitiesTest extends BaseWebServiceTest {
     public void testGetResponseBodyAsObjectFromXml() throws Exception {
         CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/XML_JSON/GetProduct/1",
                 ContentType.APPLICATION_XML, true);
-        Product xmlProduct = WebServiceUtilities.getResponseBody(response, Product.class);
+        Product xmlProduct = WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_XML, Product.class);
 
         Assert.assertNotNull(xmlProduct, "Response body did not deserialize object from xml correctly");
+    }
+
+    @Test( expectedExceptions = IllegalArgumentException.class)
+    public void testGetResponseBodyAsObjectFromNeitherXmlOrJson() throws Exception {
+        CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/XML_JSON/GetProduct/1",
+                ContentType.APPLICATION_OCTET_STREAM, true);
+        Product xmlProduct = WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_OCTET_STREAM, Product.class);
+
+        Assert.fail("Exception was not thrown for attempting to deserialize json to an object");
     }
 
     @Test

@@ -65,16 +65,14 @@ public final class WebServiceUtilities {
    * @throws ParseException There was an error parsing the response as a string
    * @throws IOException There was a problem reading the response
    */
-  public static <T> T getResponseBody(CloseableHttpResponse response, Type type)
+  public static <T> T getResponseBody(CloseableHttpResponse response, ContentType contentType, Type type)
           throws ParseException, IOException {
-    HttpEntity entity = response.getEntity();
-    String contentType = entity.getContentType().getValue();
     T responseBody;
 
-    if (contentType.toUpperCase().contains("JSON")) {
+    if (contentType.toString().toUpperCase().contains("JSON")) {
       responseBody = deserializeJson(response, type);
     }
-    else if (contentType.toUpperCase().contains("XML")) {
+    else if (contentType.toString().toUpperCase().contains("XML")) {
       responseBody = deserializeXml(response, type);
     }
     else {
