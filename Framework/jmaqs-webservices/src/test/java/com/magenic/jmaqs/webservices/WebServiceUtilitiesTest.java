@@ -41,15 +41,6 @@ public class WebServiceUtilitiesTest extends BaseWebServiceTest {
         Assert.assertNotNull(xmlProduct, "Response body did not deserialize object from xml correctly");
     }
 
-    @Test( expectedExceptions = IllegalArgumentException.class)
-    public void testGetResponseBodyAsObjectFromNeitherXmlOrJson() throws Exception {
-        CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/XML_JSON/GetProduct/1",
-                ContentType.APPLICATION_FORM_URLENCODED, true);
-        Product xmlProduct = WebServiceUtilities.getResponseBody(response, Product.class);
-
-        Assert.fail("Exception was not thrown for attempting to deserialize json to an object");
-    }
-
     @Test
     public void testDeserializeJson() throws Exception {
         CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/XML_JSON/GetProduct/1",
