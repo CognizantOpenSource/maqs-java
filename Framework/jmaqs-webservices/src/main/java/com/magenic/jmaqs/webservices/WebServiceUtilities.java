@@ -23,15 +23,17 @@ import org.apache.http.util.EntityUtils;
  * Web service utilities.
  */
 public final class WebServiceUtilities {
-  private static ObjectMapper objectMapper = new ObjectMapper();
-  private static ObjectMapper xmlMapper = new XmlMapper();
+  /** ObjecMapper for serializing and deserializing json */
+  private final static ObjectMapper objectMapper = new ObjectMapper();
+
+  /** XmlMapper used for serializing and deserializing xml */
+  private final static ObjectMapper xmlMapper = new XmlMapper();
 
   // private constructor
   private WebServiceUtilities() { }
 
   /**
    * Create a HTTP entity.
-   * 
    * @param contentMessage The entity content as text
    * @param contentType The type of content
    * @return An HTTP entity
@@ -45,21 +47,17 @@ public final class WebServiceUtilities {
 
   /**
    * Get the body from a HTTP response.
-   * 
-   * @param response
-   *          The response
+   * @param response The response
    * @return The response body
-   * @throws ParseException
-   *           There was an error parsing the response as a string
-   * @throws IOException
-   *           There was a problem reading the response
+   * @throws ParseException There was an error parsing the response as a string
+   * @throws IOException There was a problem reading the response
    */
   public static String getResponseBody(CloseableHttpResponse response)
       throws ParseException, IOException {
     HttpEntity entity = response.getEntity();
     return EntityUtils.toString(entity);
   }
-
+f
   /**
    * Create the string entity
    * @param body The body being set in the entity
@@ -82,10 +80,10 @@ public final class WebServiceUtilities {
    */
   public static <T> StringEntity createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
     if (contentType.toString().toUpperCase().contains("XML")) {
-      return new StringEntity(getXmlObjectAsString(body), contentType);
+      return new StringEntity(serializeXml(body), contentType);
     }
     else if (contentType.toString().toUpperCase().contains("JSON")) {
-      return new StringEntity(getJsonObjectAsString(body), contentType);
+      return new StringEntity(serializeJson(body), contentType);
     }
     else {
       throw new IllegalArgumentException(
@@ -100,7 +98,7 @@ public final class WebServiceUtilities {
    * @return The body as a json string
    * @throws JsonProcessingException If the json serialization fails
    */
-  public static <T> String getJsonObjectAsString(T body) throws JsonProcessingException {
+  public static <T> String serializeJson(T body) throws JsonProcessingException {
     String json = objectMapper.writeValueAsString(body);
     return json;
   }
@@ -112,7 +110,7 @@ public final class WebServiceUtilities {
    * @return The body as an xml string
    * @throws JsonProcessingException If the xml serialization fails
    */
-  public static <T> String getXmlObjectAsString(T body) throws JsonProcessingException {
+  public static <T> String serializeXml(T body) throws JsonProcessingException {
     String xml = xmlMapper.writeValueAsString(body);
     return xml;
   }
