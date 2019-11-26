@@ -43,7 +43,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
   @Test
   public void webServiceGetError() throws Exception {
 
-    CloseableHttpResponse response = this.getHttpClientWrapper().getContent("/api/String/-1",
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/-1",
         ContentType.TEXT_PLAIN, false);
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 204);
   }
@@ -57,7 +57,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
   @Test
   public void webServiceDelete() throws Exception {
 
-    CloseableHttpResponse response = this.getHttpClientWrapper()
+    CloseableHttpResponse response = this.getWebServiceDriver()
         .deleteContent("/api/XML_JSON/Delete/1", ContentType.TEXT_PLAIN, false);
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
   }
@@ -87,7 +87,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
   @Test
   public void webServicePostError() throws Exception {
     HttpEntity content = WebServiceUtilities.createEntity("", ContentType.TEXT_PLAIN);
-    CloseableHttpResponse response = this.getHttpClientWrapper().postContent("/api/String", content,
+    CloseableHttpResponse response = this.getWebServiceDriver().postContent("/api/String", content,
         ContentType.TEXT_PLAIN, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 400);
