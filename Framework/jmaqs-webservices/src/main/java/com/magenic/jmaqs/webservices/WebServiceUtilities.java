@@ -24,16 +24,17 @@ import org.apache.http.util.EntityUtils;
  */
 public final class WebServiceUtilities {
   /** ObjecMapper for serializing and deserializing json */
-  private final static ObjectMapper objectMapper = new ObjectMapper();
+  private static final ObjectMapper objectMapper = new ObjectMapper();
 
   /** XmlMapper used for serializing and deserializing xml */
-  private final static ObjectMapper xmlMapper = new XmlMapper();
+  private static final ObjectMapper xmlMapper = new XmlMapper();
 
   // private constructor
   private WebServiceUtilities() { }
 
   /**
    * Create a HTTP entity.
+   * @deprecated Use createStringEntity instead
    * @param contentMessage The entity content as text
    * @param contentType The type of content
    * @return An HTTP entity
@@ -52,8 +53,7 @@ public final class WebServiceUtilities {
    * @throws ParseException There was an error parsing the response as a string
    * @throws IOException There was a problem reading the response
    */
-  public static String getResponseBody(CloseableHttpResponse response)
-      throws ParseException, IOException {
+  public static String getResponseBody(CloseableHttpResponse response) throws IOException {
     HttpEntity entity = response.getEntity();
     return EntityUtils.toString(entity);
   }
@@ -61,12 +61,13 @@ public final class WebServiceUtilities {
   /**
    * Get the body from a HTTP response.
    * @param response The response
+   * @param contentType The content type of the request
+   * @param type The type the response is being deserialized to
    * @return The response body
    * @throws ParseException There was an error parsing the response as a string
    * @throws IOException There was a problem reading the response
    */
-  public static <T> T getResponseBody(CloseableHttpResponse response, ContentType contentType, Type type)
-          throws ParseException, IOException {
+  public static <T> T getResponseBody(CloseableHttpResponse response, ContentType contentType, Type type) throws IOException {
     T responseBody;
 
     if (contentType.toString().toUpperCase().contains("JSON")) {
@@ -124,8 +125,7 @@ public final class WebServiceUtilities {
    * @throws JsonProcessingException If the json serialization fails
    */
   public static <T> String serializeJson(T body) throws JsonProcessingException {
-    String json = objectMapper.writeValueAsString(body);
-    return json;
+    return objectMapper.writeValueAsString(body);
   }
 
   /**
@@ -136,8 +136,7 @@ public final class WebServiceUtilities {
    * @throws JsonProcessingException If the xml serialization fails
    */
   public static <T> String serializeXml(T body) throws JsonProcessingException {
-    String xml = xmlMapper.writeValueAsString(body);
-    return xml;
+    return xmlMapper.writeValueAsString(body);
   }
 
   /**
@@ -149,8 +148,7 @@ public final class WebServiceUtilities {
    */
   public static <T> T deserializeJson(CloseableHttpResponse message, Type type) throws IOException {
     String responseEntity = getResponseBody(message);
-    T jsonObject = objectMapper.readValue(responseEntity, objectMapper.getTypeFactory().constructType(type));
-    return jsonObject;
+    return objectMapper.readValue(responseEntity, objectMapper.getTypeFactory().constructType(type));
   }
 
   /**
@@ -162,7 +160,6 @@ public final class WebServiceUtilities {
    */
   public static <T> T deserializeXml(CloseableHttpResponse message, Type type) throws IOException {
     String responseEntity = getResponseBody(message);
-    T xmlObject = xmlMapper.readValue(responseEntity, xmlMapper.getTypeFactory().constructType(type));
-    return xmlObject;
+    return xmlMapper.readValue(responseEntity, xmlMapper.getTypeFactory().constructType(type));
   }
 }
