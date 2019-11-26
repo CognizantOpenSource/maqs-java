@@ -23,7 +23,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServiceGetVerificationTest() throws Exception {
 
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/1",
@@ -40,7 +40,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServiceGetError() throws Exception {
 
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/-1",
@@ -54,7 +54,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServiceDelete() throws Exception {
 
     CloseableHttpResponse response = this.getWebServiceDriver()
@@ -84,7 +84,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test
+  @Test(groups = TestCategories.WebService)
   public void webServicePostError() throws Exception {
     HttpEntity content = WebServiceUtilities.createEntity("", ContentType.TEXT_PLAIN);
     CloseableHttpResponse response = this.getWebServiceDriver().postContent("/api/String", content,
