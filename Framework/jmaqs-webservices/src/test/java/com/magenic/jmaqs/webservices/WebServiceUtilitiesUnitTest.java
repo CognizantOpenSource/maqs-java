@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
 
-public class WebServiceUtilitiesTest extends BaseWebServiceTest {
+public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
     private final Product product = new Product(1, "Milk", "Dairy", BigDecimal.TEN);
 
     @Test(groups = TestCategories.WebService)
