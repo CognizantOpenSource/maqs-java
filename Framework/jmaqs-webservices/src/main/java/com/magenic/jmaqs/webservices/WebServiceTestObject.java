@@ -28,7 +28,7 @@ public class WebServiceTestObject extends BaseTestObject {
 
   /**
    * Initializes a new instance of the WebServiceTestObject.
-   * @param newWebServiceDriver The web service driver.
+   * @param driver The web service driver.
    * @param logger The Logger Object.
    * @param fullyQualifiedTestName The fully qualified test name.
    */
