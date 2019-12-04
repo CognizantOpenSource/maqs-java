@@ -24,7 +24,7 @@ public class WebServiceDriverUnitTest {
     WebServiceDriver client = new WebServiceDriver("http://magenicautomation.azurewebsites.net");
     CloseableHttpResponse response = client.getContent("/api/String/1", ContentType.TEXT_PLAIN,
         true);
-    String responseString = WebServiceUtils.getResponseBody(response);
+    String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertTrue(responseString.contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + response.toString());
