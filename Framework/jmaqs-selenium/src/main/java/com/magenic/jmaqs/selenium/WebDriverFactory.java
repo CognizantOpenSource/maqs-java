@@ -198,8 +198,8 @@ public class WebDriverFactory {
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
     System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME
-            .getFile());
+        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator
+            + WebDriverFile.CHROME.getFileName());
     WebDriver driver = new ChromeDriver(chromeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -213,8 +213,8 @@ public class WebDriverFactory {
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
     System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME
-            .getFile());
+        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator
+            + WebDriverFile.CHROME.getFileName());
     return new ChromeDriver(headlessChromeOptions);
   }
 
@@ -227,8 +227,8 @@ public class WebDriverFactory {
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
     System.setProperty("webdriver.gecko.driver",
-        getDriverLocation(WebDriverFile.FIREFOX.getFile()) + File.separator + WebDriverFile.FIREFOX
-            .getFile());
+        getDriverLocation(WebDriverFile.FIREFOX.getFileName()) + File.separator
+            + WebDriverFile.FIREFOX.getFileName());
 
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
@@ -244,16 +244,16 @@ public class WebDriverFactory {
    * @return A new Edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
-    String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFile(),
-        getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFile()));
+    String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName(),
+        getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFileName()));
 
     // If we can't find an installed edge driver, look in the normal places
     if (driverLocation.isEmpty()) {
-      driverLocation = getDriverLocation(WebDriverFile.EDGE.getFile());
+      driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName());
     }
 
     System.setProperty("webdriver.edge.driver",
-        driverLocation + File.separator + WebDriverFile.EDGE.getFile());
+        driverLocation + File.separator + WebDriverFile.EDGE.getFileName());
     EdgeDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -269,8 +269,8 @@ public class WebDriverFactory {
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions,
       String size) {
     System.setProperty("webdriver.ie.driver",
-        getDriverLocation(WebDriverFile.IE.getFile()) + File.separator + WebDriverFile.IE
-            .getFile());
+        getDriverLocation(WebDriverFile.IE.getFileName()) + File.separator + WebDriverFile.IE
+            .getFileName());
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
 
