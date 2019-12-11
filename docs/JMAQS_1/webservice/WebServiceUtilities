@@ -7,8 +7,8 @@ The WebServiceUtils class is a utility class for working with HTTP content and s
 [CreateEntity](#CreateEntity)  
 [GetResponseBody](#GetResponseBody)  
 [CreateStringEntity](#CreateStringEntity)  
-[SerializeJSON](#SerializeJSON)  
-[SerializeXML](#SerializeXML)  
+[SerializeJSON](#SerializeJson)  
+[SerializeXML](#SerializeXml)  
 [DeserializeXmlDocument](#DeserializeXmlDocument)  
 [DeserializeJson](#DeserializeJson)  
 
