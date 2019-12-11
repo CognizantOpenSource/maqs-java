@@ -28,7 +28,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
 
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/1",
         ContentType.TEXT_PLAIN, true);
-    String responseString = WebServiceUtils.getResponseBody(response);
+    String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertTrue(responseString.contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + response.toString());
@@ -70,7 +70,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WebService)
   public void webServicePatchError() throws Exception {
-    HttpEntity content = WebServiceUtils.createEntity("", ContentType.APPLICATION_XML);
+    HttpEntity content = WebServiceUtilities.createEntity("", ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver().patchContent("/api/XML_JSON/Put/1",
         content, ContentType.APPLICATION_XML, false);
 
@@ -86,7 +86,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WebService)
   public void webServicePostError() throws Exception {
-    HttpEntity content = WebServiceUtils.createEntity("", ContentType.TEXT_PLAIN);
+    HttpEntity content = WebServiceUtilities.createEntity("", ContentType.TEXT_PLAIN);
     CloseableHttpResponse response = this.getWebServiceDriver().postContent("/api/String", content,
         ContentType.TEXT_PLAIN, false);
 
@@ -102,7 +102,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WebService)
   public void webServicePutError() throws Exception {
-    HttpEntity content = WebServiceUtils.createEntity("", ContentType.APPLICATION_XML);
+    HttpEntity content = WebServiceUtilities.createEntity("", ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver().putContent("/api/XML_JSON/Put/1",
         content, ContentType.APPLICATION_XML, false);
 
