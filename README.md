@@ -2,7 +2,7 @@
 
 | Check | Status |
 |-------|--------|
-|**Build**|[![Build status](https://dev.azure.com/magenicOpen/JMAQS/_apis/build/status/JMAQS-Pull-Request)](https://dev.azure.com/magenicOpen/JMAQS/_build/latest?definitionId=7)|
+|**SnapShot Build**|[![Build status](https://dev.azure.com/MagenicOpen/JMAQS/_apis/build/status/JMAQS-SnapShot-CI)](https://dev.azure.com/MagenicOpen/JMAQS/_build/latest?definitionId=13)|
 |**Code Quality**|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.magenic.jmaqs%3Ajmaqs-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.magenic.jmaqs%3Ajmaqs-framework)|
 |**Dependencies**|[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=Magenic/JMAQS)](https://dependabot.com)|
 |**License**|[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://raw.githubusercontent.com/Magenic/JMAQS/master/LICENSE)| 
