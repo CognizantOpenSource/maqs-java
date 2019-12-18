@@ -50,11 +50,6 @@ public abstract class BaseTest {
   private ITestResult testResult;
 
   /**
-   * The Test Object.
-   */
-  private BaseTestObject testObject;
-
-  /**
    * The Collection of Base Test Objects to use.
    */
   ConcurrentHashMap<String, BaseTestObject> baseTestObjects;
