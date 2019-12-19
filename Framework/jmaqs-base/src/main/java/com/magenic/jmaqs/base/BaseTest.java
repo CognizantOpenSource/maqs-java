@@ -50,11 +50,6 @@ public abstract class BaseTest {
   private ITestResult testResult;
 
   /**
-   * The Test Object.
-   */
-  private BaseTestObject testObject;
-
-  /**
    * The Collection of Base Test Objects to use.
    */
   ConcurrentHashMap<String, BaseTestObject> baseTestObjects;
@@ -106,7 +101,7 @@ public abstract class BaseTest {
    * @return Logger object
    */
   public Logger getLogger() {
-    return this.testObject.getLog();
+    return this.getTestObject().getLog();
   }
 
   /**
@@ -115,7 +110,7 @@ public abstract class BaseTest {
    * @param log The Logger object
    */
   public void setLogger(Logger log) {
-    this.testObject.setLog(log);
+    this.getTestObject().setLog(log);
   }
 
   /**
@@ -164,7 +159,7 @@ public abstract class BaseTest {
    * @return The Driver Store
    */
   public ManagerDictionary getManagerStore() {
-    return this.testObject.getManagerStore();
+    return this.getTestObject().getManagerStore();
   }
 
   /**
@@ -247,7 +242,7 @@ public abstract class BaseTest {
     if (testResult.getStatus() == ITestResult.SUCCESS) {
       this.tryToLog(MessageType.SUCCESS, "Test Passed");
     } else if (testResult.getStatus() == ITestResult.FAILURE) {
-      this.tryToLog(MessageType.ERROR, "Test Passed");
+      this.tryToLog(MessageType.ERROR, "Test Failed");
     } else if (testResult.getStatus() == ITestResult.SKIP) {
       this.tryToLog(MessageType.INFORMATION, "Test was skipped");
     } else {
@@ -271,10 +266,10 @@ public abstract class BaseTest {
     this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
 
     // Release the Base Test Object
-    this.baseTestObjects.remove(fullyQualifiedTestName, this.testObject);
+    this.baseTestObjects.remove(fullyQualifiedTestName, this.getTestObject());
 
     // Create console logger to log subsequent messages
-    this.testObject = new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName);
+    this.setTestObject(new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName));
   }
 
   /**
