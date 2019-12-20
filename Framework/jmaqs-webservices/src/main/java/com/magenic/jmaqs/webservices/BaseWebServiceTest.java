@@ -54,18 +54,6 @@ public abstract class BaseWebServiceTest extends BaseExtendableTest<WebServiceTe
   /*
    * (non-Javadoc)
    *
-   * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#postSetupLogging()
-   */
-  @Override @Deprecated protected void postSetupLogging() throws Exception {
-
-    WebServiceDriver wrapper = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    webServiceTestObject.set(
-        new WebServiceTestObject(wrapper, this.getLogger(), this.getFullyQualifiedTestClassName()));
-  }
-
-  /*
-   * (non-Javadoc)
-   *
    * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest# beforeLoggingTeardown
    * (org.testng.ITestResult)
    */

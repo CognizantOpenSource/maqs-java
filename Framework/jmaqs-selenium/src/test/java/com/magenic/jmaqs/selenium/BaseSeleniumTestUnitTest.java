@@ -47,8 +47,4 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
     }
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
 }

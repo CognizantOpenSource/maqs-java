@@ -52,8 +52,4 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
     Assert.assertNotNull(fluentWait, String.format(assertNotNullErrorTemplate, "fluentWait"));
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
 }

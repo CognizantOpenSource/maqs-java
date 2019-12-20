@@ -51,8 +51,4 @@ public class BaseAppiumTestUnitTest extends BaseAppiumTest {
         "Checking that Appium Driver is not null through BaseAppiumTest");
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
 }
