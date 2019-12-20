@@ -19,27 +19,12 @@ import org.testng.ITestResult;
 public abstract class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject> {
 
   /**
-   * Thread local storage of web service test object.
-   */
-  @Deprecated private ThreadLocal<WebServiceTestObject> webServiceTestObject = new ThreadLocal<WebServiceTestObject>();
-
-  /**
    * Get the Web Service Driver.
    *
    * @return WebServiceDriver
    */
   public WebServiceDriver getWebServiceDriver() {
     return this.getTestObject().getWebServiceDriver();
-  }
-
-  /**
-   * Get the webServiceTestObject for this test.
-   *
-   * @return The seleniumTestObject
-   */
-  @Deprecated public WebServiceTestObject getWebServiceTestObject() {
-    return this.webServiceTestObject.get();
-
   }
 
   /**
