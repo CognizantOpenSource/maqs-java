@@ -4,7 +4,6 @@
 
 package com.magenic.jmaqs.database;
 
-import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
@@ -38,11 +37,6 @@ public class DatabaseConfigUnitTest extends BaseTest {
   @Test
   public void testGetEntityDirectoryString() {
     Assert.assertEquals(DatabaseConfig.getEntityDirectoryString(), "./src/test/java/entities");
-  }
-
-  @Override
-  protected void postSetupLogging() throws Exception {
-
   }
 
   @Override

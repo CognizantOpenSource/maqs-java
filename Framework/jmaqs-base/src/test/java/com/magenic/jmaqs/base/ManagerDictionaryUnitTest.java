@@ -6,10 +6,6 @@ package com.magenic.jmaqs.base;
 
 import static org.testng.Assert.assertNotNull;
 
-import com.magenic.jmaqs.base.BaseTest;
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
-import com.magenic.jmaqs.base.ManagerDictionary;
 import java.util.function.Supplier;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -96,11 +92,6 @@ public class ManagerDictionaryUnitTest extends BaseTest {
     Assert.assertTrue(managerDictionary.remove(dm2),"Checking if remove reported as successful");
     Assert.assertTrue(managerDictionary.containsKey(dm1));
     Assert.assertFalse(managerDictionary.containsKey(dm2));
-  }
-
-  @Override
-  protected void postSetupLogging() throws Exception {
-
   }
 
   @Override

@@ -4,9 +4,6 @@
 
 package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.base.BaseTest;
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
@@ -329,14 +326,6 @@ public class BaseTestObjectTest extends BaseTest {
       }
     };
   }*/
-
-  /**
-   * Overload function for doing post setup logging.
-   */
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
 
   /**
    * Steps to do before logging teardown results.
