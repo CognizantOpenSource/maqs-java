@@ -44,25 +44,25 @@ public class DatabaseConfigUnitTest extends BaseTest {
         "./src/test/java/com/magenic/jmaqs/database/entities/");
   }
 
-  @Test
+  @Test(groups = TestCategories.Database)
   public void testGetProviderType() {
     final DataProviderType providerType = DatabaseConfig.getProviderType();
     Assert.assertEquals(providerType, DataProviderType.SQL);
   }
 
-  @Test
+  @Test(groups = TestCategories.Database)
   public void testGetProvider() {
     final IDataSourceProvider provider = DatabaseConfig.getProvider();
     Assert.assertTrue(provider instanceof SQLProvider);
   }
 
-  @Test
+  @Test(groups = TestCategories.Database)
   public void testGetEntityPackageString() {
     Assert.assertEquals(DatabaseConfig.getEntityPackageString(),
         "com.magenic.jmaqs.database.entities");
   }
 
-  @Test
+  @Test(groups = TestCategories.Database)
   public void testGetName() {
     Assert.assertEquals(DatabaseConfig.getName(), "JMAQS");
   }
