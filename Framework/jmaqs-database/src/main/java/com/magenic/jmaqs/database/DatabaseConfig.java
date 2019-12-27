@@ -132,6 +132,11 @@ public class DatabaseConfig {
     return Config.getValueForSection(DATABASE_SECTION, "EntityPackage");
   }
 
+  /**
+   * Method getName returns the name of this DatabaseConfig object.
+   *
+   * @return the name (type String) of this DatabaseConfig object.
+   */
   public static String getName() {
     return Config.getValueForSection(DATABASE_SECTION, "Name", "JMAQS");
   }
