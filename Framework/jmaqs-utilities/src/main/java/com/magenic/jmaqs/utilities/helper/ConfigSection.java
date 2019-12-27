@@ -30,6 +30,11 @@ public enum ConfigSection {
   DatabaseMaqs,
 
   /**
+   * Database Caps Section
+   */
+  DatabaseCapsMaqs,
+
+  /**
    * The default email maqs section.
    */
   EmailMaqs,
@@ -47,5 +52,6 @@ public enum ConfigSection {
   /**
    * The default web service section.
    */
-  WebServiceMaqs
+  WebServiceMaqs;
+
 }
