@@ -33,7 +33,6 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
   public void testGetEntityManager() {
     final DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     Assert.assertNotNull(openConnection.getEntityManager());
-
   }
 
   @Test(groups = TestCategories.Database)
@@ -91,6 +90,12 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
     Assert.assertEquals(queryResults.size(), 49);
   }
 
+  @Test(groups = TestCategories.Database)
+  public void testIsOpen() {
+    DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
+    Assert.assertTrue(openConnection.isOpen());
+  }
+
   @Override
   protected void postSetupLogging() throws Exception {
 
@@ -99,11 +104,5 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
 
-  }
-
-  @Test(groups = TestCategories.Database)
-  public void testIsOpen() {
-    DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
-    Assert.assertTrue(openConnection.isOpen());
   }
 }

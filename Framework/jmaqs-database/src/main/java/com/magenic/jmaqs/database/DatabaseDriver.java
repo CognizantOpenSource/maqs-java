@@ -62,6 +62,11 @@ public class DatabaseDriver implements AutoCloseable {
     this.entityManagerFactory.close();
   }
 
+  /**
+   * Check is EntityManager and EntityManagerFactory are open.
+   *
+   * @return boolean of whether entityManager and entityManagerFactory are open
+   */
   public boolean isOpen() {
     return this.entityManager.isOpen() || this.entityManagerFactory.isOpen();
   }

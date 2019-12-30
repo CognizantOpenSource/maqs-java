@@ -49,7 +49,6 @@ public class ConnectionFactoryUnitTest extends BaseGenericTest {
       }
     }
     softAssert.assertAll();
-
   }
 
   @Test(groups = TestCategories.Database)
