@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.database.providers;
 
+import com.magenic.jmaqs.database.DatabaseConfig;
 import com.magenic.jmaqs.database.constants.DataProviderType;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 
@@ -20,8 +21,11 @@ public class SQLProvider implements IDataSourceProvider {
   @Override
   public DataSource getDataSource() {
     SQLServerDataSource dataSource = new SQLServerDataSource();
-    //dataSource.
-    return null;
+    dataSource.setPassword(DatabaseConfig.getDatabasePassword());
+    dataSource.setURL(DatabaseConfig.getConnectionString());
+    dataSource.setUser(DatabaseConfig.getDatabaseUser());
+    dataSource.setDatabaseName(DatabaseConfig.getDatabaseName());
+    return dataSource;
   }
 
   @Override
