@@ -49,10 +49,12 @@
     </DatabaseCaps>-->
 
     <DatabaseMaqs>
-        <Name>JMAQS</Name>
+        <DatabaseName>MagenicAutomation</DatabaseName>
         <!--<DatabaseProviderType>SQL</DatabaseProviderType>
         <DatabaseProviderType>MYSQL</DatabaseProviderType>-->
         <DatabaseProviderType>SQL</DatabaseProviderType>
+        <DatabaseUser>MagenicQA</DatabaseUser>
+        <DatabasePassword>1magenicMARQ</DatabasePassword>
         <DatabaseConnectionString>jdbc:sqlserver://qasqlserver.database.windows.net</DatabaseConnectionString>
         <EntityDirectory>./src/test/java/com/magenic/jmaqs/database/entities/</EntityDirectory>
         <EntityPackage>com.magenic.jmaqs.database.entities</EntityPackage>

@@ -137,7 +137,25 @@ public class DatabaseConfig {
    *
    * @return the name (type String) of this DatabaseConfig object.
    */
-  public static String getName() {
-    return Config.getValueForSection(DATABASE_SECTION, "Name", "JMAQS");
+  public static String getDatabaseName() {
+    return Config.getValueForSection(DATABASE_SECTION, "DatabaseName", "JMAQS");
+  }
+
+  /**
+   * Method getDatabaseUser returns the databaseUser of this DatabaseConfig object.
+   *
+   * @return the databaseUser (type String) of this DatabaseConfig object.
+   */
+  public static String getDatabaseUser() {
+    return Config.getValueForSection(DATABASE_SECTION, "DatabaseUser");
+  }
+
+  /**
+   * Method getDatabasePassword returns the databasePassword of this DatabaseConfig object.
+   *
+   * @return the databasePassword (type String) of this DatabaseConfig object.
+   */
+  public static String getDatabasePassword() {
+    return Config.getValueForSection(DATABASE_SECTION, "DatabasePassword");
   }
 }
