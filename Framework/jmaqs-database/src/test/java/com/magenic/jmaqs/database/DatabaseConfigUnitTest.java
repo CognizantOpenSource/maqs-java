@@ -63,12 +63,22 @@ public class DatabaseConfigUnitTest extends BaseTest {
   }
 
   @Test(groups = TestCategories.Database)
-  public void testGetName() {
-    Assert.assertEquals(DatabaseConfig.getName(), "JMAQS");
+  public void testGetDatabaseName() {
+    Assert.assertEquals(DatabaseConfig.getDatabaseName(), "MagenicAutomation");
   }
 
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
 
+  }
+
+  @Test(groups = TestCategories.Database)
+  public void testGetDatabaseUser() {
+    Assert.assertEquals(DatabaseConfig.getDatabaseUser(), "MagenicQA");
+  }
+
+  @Test(groups = TestCategories.Database)
+  public void testGetDatabasePassword() {
+    Assert.assertEquals(DatabaseConfig.getDatabasePassword(), "1magenicMARQ");
   }
 }

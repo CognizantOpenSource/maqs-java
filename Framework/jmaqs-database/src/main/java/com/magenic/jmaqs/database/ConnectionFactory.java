@@ -108,7 +108,7 @@ public class ConnectionFactory {
    * @return the persistenceUnitInfo (type DatabasePersistenceUnitInfo) of this ConnectionFactory object.
    */
   public static DatabasePersistenceUnitInfo getPersistenceUnitInfo() {
-    return getPersistenceUnitInfo(DatabaseConfig.getName());
+    return getPersistenceUnitInfo(DatabaseConfig.getDatabaseName());
   }
 
   /**
