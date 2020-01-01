@@ -114,8 +114,4 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
 }

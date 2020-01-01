@@ -359,8 +359,4 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
 }

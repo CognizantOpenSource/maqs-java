@@ -88,11 +88,6 @@ public class SeleniumDriverManagerUnitTest extends BaseTest {
   }
 
   @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
-
-  @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
