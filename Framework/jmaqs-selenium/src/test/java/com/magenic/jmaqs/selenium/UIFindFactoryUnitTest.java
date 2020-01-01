@@ -60,8 +60,4 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
         String.format(assertNotNullErrorTemplate, "findWithWebDriver"));
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
 }

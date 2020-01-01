@@ -122,8 +122,4 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
         String.format(assertNotEqualErrorTemplate, "waitDriverToBeRemoved", "newWaitDriver"));
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
 }

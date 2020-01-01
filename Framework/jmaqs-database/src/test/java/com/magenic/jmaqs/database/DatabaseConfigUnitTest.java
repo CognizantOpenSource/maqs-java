@@ -4,8 +4,10 @@
 
 package com.magenic.jmaqs.database;
 
-import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.database.constants.DataProviderType;
+import com.magenic.jmaqs.database.providers.IDataSourceProvider;
+import com.magenic.jmaqs.database.providers.SQLProvider;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -21,7 +23,8 @@ public class DatabaseConfigUnitTest extends BaseTest {
    */
   @Test(groups = TestCategories.Database)
   public void testGetConnectionString() {
-    Assert.assertEquals(DatabaseConfig.getConnectionString(), "jdbc:sqlite:./src/test/resources/MyDatabase.sqlite");
+    Assert.assertEquals(DatabaseConfig.getConnectionString(),
+        "jdbc:sqlserver://qasqlserver.database.windows.net");
   }
 
   /**
@@ -29,24 +32,53 @@ public class DatabaseConfigUnitTest extends BaseTest {
    */
   @Test(groups = TestCategories.Database)
   public void testGetProviderTypeString() {
-    Assert.assertEquals(DatabaseConfig.getProviderTypeString(), "SQLITE");
+    Assert.assertEquals(DatabaseConfig.getProviderTypeString(), "SQL");
   }
 
   /**
    * Test get entity directory string.
    */
-  @Test
+  @Test(groups = TestCategories.Database)
   public void testGetEntityDirectoryString() {
-    Assert.assertEquals(DatabaseConfig.getEntityDirectoryString(), "./src/test/java/entities");
+    Assert.assertEquals(DatabaseConfig.getEntityDirectoryString(),
+        "./src/test/java/com/magenic/jmaqs/database/entities/");
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
+  @Test(groups = TestCategories.Database)
+  public void testGetProviderType() {
+    final DataProviderType providerType = DatabaseConfig.getProviderType();
+    Assert.assertEquals(providerType, DataProviderType.SQL);
+  }
 
+  @Test(groups = TestCategories.Database)
+  public void testGetProvider() {
+    final IDataSourceProvider provider = DatabaseConfig.getProvider();
+    Assert.assertTrue(provider instanceof SQLProvider);
+  }
+
+  @Test(groups = TestCategories.Database)
+  public void testGetEntityPackageString() {
+    Assert.assertEquals(DatabaseConfig.getEntityPackageString(),
+        "com.magenic.jmaqs.database.entities");
+  }
+
+  @Test(groups = TestCategories.Database)
+  public void testGetDatabaseName() {
+    Assert.assertEquals(DatabaseConfig.getDatabaseName(), "MagenicAutomation");
   }
 
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
 
+  }
+
+  @Test(groups = TestCategories.Database)
+  public void testGetDatabaseUser() {
+    Assert.assertEquals(DatabaseConfig.getDatabaseUser(), "MagenicQA");
+  }
+
+  @Test(groups = TestCategories.Database)
+  public void testGetDatabasePassword() {
+    Assert.assertEquals(DatabaseConfig.getDatabasePassword(), "1magenicMARQ");
   }
 }
