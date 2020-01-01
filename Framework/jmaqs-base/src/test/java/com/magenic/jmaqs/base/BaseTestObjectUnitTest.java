@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 /**
  * The type Base test object test.
  */
-public class BaseTestObjectTest extends BaseGenericTest {
+public class BaseTestObjectUnitTest extends BaseGenericTest {
 
   /**
    * Test Constructor with Log and Method.
