@@ -56,16 +56,6 @@ public class DatabaseTestObjectUnitTest extends BaseGenericTest {
         hashCode, hashCode1));
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
-  }
-
   @Test
   public void testSetDatabaseManager() {
     DatabaseDriver databaseDriver = ConnectionFactory.getOpenConnection();
