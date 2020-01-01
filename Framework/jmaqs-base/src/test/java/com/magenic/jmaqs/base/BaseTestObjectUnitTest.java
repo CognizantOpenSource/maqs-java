@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 /**
  * The type Base test object test.
  */
-public class BaseTestObjectTest extends BaseTest {
+public class BaseTestObjectUnitTest extends BaseGenericTest {
 
   /**
    * Test Constructor with Log and Method.
@@ -327,15 +327,6 @@ public class BaseTestObjectTest extends BaseTest {
     };
   }*/
 
-  /**
-   * Steps to do before logging teardown results.
-   *
-   * @param resultType The test result
-   */
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
-  }
 
   private DriverManager getDriverManager(BaseTestObject testObject, Supplier supplier) {
     return new DriverManager(supplier, testObject) {

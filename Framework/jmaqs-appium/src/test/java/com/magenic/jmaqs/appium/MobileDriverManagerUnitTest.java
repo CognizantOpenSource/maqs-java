@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.base.BaseTest;
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 /**
  * The type Mobile driver manager unit test.
  */
-public class MobileDriverManagerUnitTest extends BaseTest {
+public class MobileDriverManagerUnitTest extends BaseGenericTest {
   /**
    * Test get mobile driver.
    */
@@ -58,11 +59,6 @@ public class MobileDriverManagerUnitTest extends BaseTest {
     mobileDriverManager.close();
 
     Assert.assertNull(mobileDriverManager.getBaseDriver(), "Expected Base Driver to be null.");
-
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
 }
