@@ -148,10 +148,13 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void HtmlFileLoggerCatchThrownException() {
-    HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerCatchThrownException", MessageType.GENERIC);
+    HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerCatchThrownException",
+        MessageType.GENERIC);
     logger.setFilePath("<>");
 
     logger.logMessage(MessageType.GENERIC, "Test throws error as expected.");
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -263,18 +266,18 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void FileLoggerAppendLogFolder() {
-    HtmlFileLogger logger = new HtmlFileLogger("Append File Directory", true);
+    final String append_file_directory_path =
+        LoggingConfig.getLogDirectory() + "/" + "Append File Directory";
+    HtmlFileLogger logger = new HtmlFileLogger(append_file_directory_path, true);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Append File Directory", logger.getDirectory(),
-            "Expected Directory 'Append File Directory'.");
+    softAssert.assertEquals(append_file_directory_path, logger.getDirectory(),
+        "Expected Directory 'Append File Directory'.");
     softAssert.assertEquals("FileLog.html", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(),
+        "Expected Information Message Type.");
 
     softAssert.assertAll();
-
-    File file = new File(logger.getFilePath());
-    file.delete();
   }
 
   /**
@@ -282,18 +285,20 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void FileLoggerLogFolderFileName() {
-    HtmlFileLogger logger = new HtmlFileLogger("Log Folder File Name Directory", "LogFolderFileName.html");
+    final String log_folder_file_name_directory =
+        LoggingConfig.getLogDirectory() + "/" + "Log Folder File Name Directory";
+    HtmlFileLogger logger = new HtmlFileLogger(log_folder_file_name_directory,
+        "LogFolderFileName.html");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Log Folder File Name Directory", logger.getDirectory(),
-            "Expected Directory 'Log Folder File Name Directory'.");
-    softAssert.assertEquals("LogFolderFileName.html", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals(log_folder_file_name_directory, logger.getDirectory(),
+        "Expected Directory 'Log Folder File Name Directory'.");
+    softAssert.assertEquals("LogFolderFileName.html", logger.getFileName(),
+        "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(),
+        "Expected Information Message Type.");
 
     softAssert.assertAll();
-
-    File file = new File(logger.getFilePath());
-    file.delete();
   }
 
   /**
@@ -301,18 +306,19 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void FileLoggerLogFolderMessagingLevel() {
-    HtmlFileLogger logger = new HtmlFileLogger("Log Folder Messaging Level Directory", MessageType.WARNING);
+    final String log_folder_messaging_level_directory_path =
+        LoggingConfig.getLogDirectory() + "/" + "Log Folder Messaging Level Directory";
+    HtmlFileLogger logger = new HtmlFileLogger(log_folder_messaging_level_directory_path,
+        MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Log Folder Messaging Level Directory", logger.getDirectory(),
-            "Expected Directory 'Log Folder Messaging Level Directory'.");
+    softAssert.assertEquals(log_folder_messaging_level_directory_path, logger.getDirectory(),
+        "Expected Directory 'Log Folder Messaging Level Directory'.");
     softAssert.assertEquals("FileLog.html", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(),
+        "Expected Warning Message Type.");
 
     softAssert.assertAll();
-
-    File file = new File(logger.getFilePath());
-    file.delete();
   }
 
   /**
@@ -358,19 +364,18 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void FileLoggerAppendLogFolderFileName() {
-    HtmlFileLogger logger = new HtmlFileLogger(
-            true, "AppendLogFolderFileNameDirectory", "AppendLogFolderFileName.html");
+    final String appendLogFolderFileNameDirectoryPath =
+        LoggingConfig.getLogDirectory() + "/" + "AppendLogFolderFileNameDirectory";
+    HtmlFileLogger logger = new HtmlFileLogger(true, appendLogFolderFileNameDirectoryPath,
+        "AppendLogFolderFileName.html");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("AppendLogFolderFileNameDirectory", logger.getDirectory(),
-            " Expected Directory AppendLogFolderFileNameDirectory");
+    softAssert.assertEquals(appendLogFolderFileNameDirectoryPath, logger.getDirectory(),
+        " Expected Directory AppendLogFolderFileNameDirectory");
     softAssert.assertEquals("AppendLogFolderFileName.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
     softAssert.assertAll();
-
-    File file = new File(logger.getFilePath());
-    file.delete();
   }
 
   /**
@@ -378,12 +383,14 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void FileLoggerAppendLogFolderMessagingLevel() {
-    HtmlFileLogger logger = new HtmlFileLogger(
-            true, "AppendLogFolderFileNameDirectory", MessageType.WARNING);
+    final String appendLogFolderFileNameDirectory =
+        LoggingConfig.getLogDirectory() + "/" + "AppendLogFolderFileNameDirectory";
+    HtmlFileLogger logger = new HtmlFileLogger(true, appendLogFolderFileNameDirectory,
+        MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("AppendLogFolderFileNameDirectory", logger.getDirectory(),
-            " Expected Directory AppendLogFolderFileNameDirectory");
+    softAssert.assertEquals(appendLogFolderFileNameDirectory, logger.getDirectory(),
+        " Expected Directory AppendLogFolderFileNameDirectory");
     softAssert.assertEquals("FileLog.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
@@ -418,15 +425,18 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void FileLoggerLogFolderFileNameMessagingLevel() {
-    HtmlFileLogger logger = new HtmlFileLogger(
-            "LogFolderFileNameMessagingLevelDirectory", "LogFolderFileNameMessagingLevel.html", MessageType.WARNING);
+    final String logFolderFileNameMessagingLevelDirectoryPath =
+        LoggingConfig.getLogDirectory() + "/" + "LogFolderFileNameMessagingLevelDirectory";
+    HtmlFileLogger logger = new HtmlFileLogger(logFolderFileNameMessagingLevelDirectoryPath,
+        "LogFolderFileNameMessagingLevel.html", MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("LogFolderFileNameMessagingLevelDirectory", logger.getDirectory(),
-            "Expected Directory 'LogFolderFileNameMessagingLevelDirectory'");
+    softAssert.assertEquals(logFolderFileNameMessagingLevelDirectoryPath, logger.getDirectory(),
+        "Expected Directory 'LogFolderFileNameMessagingLevelDirectory'");
     softAssert.assertEquals("LogFolderFileNameMessagingLevel.html", logger.getFileName(),
-            "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+        "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(),
+        "Expected Warning Message Type.");
 
     softAssert.assertAll();
 

@@ -453,9 +453,5 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     return text;
   }
 
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
 }
 
