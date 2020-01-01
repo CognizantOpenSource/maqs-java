@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.appium;
 
-import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
@@ -17,20 +17,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
  * Appium Utilities Unit Test class.
  */
-public class AppiumUtilitiesUnitTest extends BaseTest {
+public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot no append.
    */
   @Test(groups = TestCategories.Appium)
   public void testCaptureScreenshotNoAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -49,7 +48,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
   @Test(groups = TestCategories.Appium)
   public void testCaptureScreenshotAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -87,7 +86,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
   @Test(groups = TestCategories.Appium)
   public void testCaptureScreenshotCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -112,7 +111,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
   @Test(groups = TestCategories.Appium)
   public void testSavePageSourceNoAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -131,7 +130,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
   @Test(groups = TestCategories.Appium)
   public void testSavePageSourceAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -150,7 +149,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
   @Test(groups = TestCategories.Appium)
   public void testSavePageSourceCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -161,7 +160,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
         .format(LocalDateTime.now(Clock.systemUTC()));
     String filePath = AppiumUtilities
         .savePageSource(appiumDriver, testObject, fileLogger.getDirectory(),
-            StringProcessor.safeFormatter("%s - %s","TestCustomName", dateTime));
+            StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
 
     // Assert File Path returned from Screenshot is the same as expected file path.
     Assert.assertEquals(filePath, Paths.get(StringProcessor
@@ -194,7 +193,7 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
   @Test(groups = TestCategories.Appium)
   public void testKillDriver() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger)this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -205,9 +204,5 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
 
     // Assert that the Session ID is null in the Appium Driver
     Assert.assertNull(appiumDriver.getSessionId(), "Expected Appium Driver Session ID to be null.");
-  }
-
-  @Override protected void beforeLoggingTeardown(ITestResult resultType) {
-
   }
 }

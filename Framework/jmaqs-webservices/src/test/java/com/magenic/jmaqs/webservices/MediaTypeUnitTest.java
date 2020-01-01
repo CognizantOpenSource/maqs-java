@@ -4,10 +4,11 @@
 
 package com.magenic.jmaqs.webservices;
 
+import com.magenic.jmaqs.base.BaseGenericTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class MediaTypeTest {
+public class MediaTypeUnitTest extends BaseGenericTest {
 
   @Test
   public void testTestToStringAppJson() {
