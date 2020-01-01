@@ -8,7 +8,6 @@ import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
@@ -145,13 +144,5 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
     Assert.assertNotEquals(hashCode, hashCode1, String.format(
         "Checking that the selenium driver is not the same as previous version.  First: %d, Second: %d",
         hashCode, hashCode1));
-  }
-
-  @Override
-  protected void postSetupLogging() throws Exception {
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
   }
 }

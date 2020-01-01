@@ -7,7 +7,6 @@ package com.magenic.jmaqs.database.providers;
 import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.Iterator;
-import org.testng.ITestResult;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -42,15 +41,5 @@ public class IDataSourceProviderUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.Database, dataProvider = "dataProvider")
   public void testGetDialect() {
     throw new UnsupportedOperationException("Test method not implemented yet.");
-  }
-
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
   }
 }

@@ -7,10 +7,7 @@ package com.magenic.jmaqs.database.constants;
 import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 public class DataProviderTypeUnitTest extends BaseGenericTest {
 
@@ -34,15 +31,5 @@ public class DataProviderTypeUnitTest extends BaseGenericTest {
   public void testGetDialectString() {
     DataProviderType type = DataProviderType.SQL;
     Assert.assertEquals(type.getDialectString(), "org.hibernate.dialect.SQLServerDialect");
-  }
-
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
   }
 }

@@ -4,19 +4,18 @@
 
 package com.magenic.jmaqs.database;
 
-import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.database.constants.DataProviderType;
 import com.magenic.jmaqs.database.providers.IDataSourceProvider;
 import com.magenic.jmaqs.database.providers.SQLProvider;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
  * The type Database config unit test.
  */
-public class DatabaseConfigUnitTest extends BaseTest {
+public class DatabaseConfigUnitTest extends BaseGenericTest {
 
   /**
    * Test get connection string.
@@ -65,11 +64,6 @@ public class DatabaseConfigUnitTest extends BaseTest {
   @Test(groups = TestCategories.Database)
   public void testGetDatabaseName() {
     Assert.assertEquals(DatabaseConfig.getDatabaseName(), "MagenicAutomation");
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
   }
 
   @Test(groups = TestCategories.Database)

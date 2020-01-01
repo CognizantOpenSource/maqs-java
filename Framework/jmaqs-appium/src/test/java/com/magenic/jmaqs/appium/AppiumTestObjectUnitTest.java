@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import io.appium.java_client.AppiumDriver;
@@ -16,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  * The type Appium test object test.
  */
-public class AppiumTestObjectUnitTest {
+public class AppiumTestObjectUnitTest extends BaseGenericTest {
 
   /**
    * The Test name.

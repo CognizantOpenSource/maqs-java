@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -61,15 +60,5 @@ public class ConnectionFactoryUnitTest extends BaseGenericTest {
       softAssert.assertTrue(entityFile.isFile(), "Checking that file is indeed a file");
     }
     softAssert.assertAll();
-  }
-
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
   }
 }
