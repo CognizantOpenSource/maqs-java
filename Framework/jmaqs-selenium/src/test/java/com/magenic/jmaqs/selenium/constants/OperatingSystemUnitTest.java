@@ -4,16 +4,14 @@
 
 package com.magenic.jmaqs.selenium.constants;
 
+import com.magenic.jmaqs.base.BaseGenericTest;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * The type Operating system test.
  */
-public class OperatingSystemTest {
+public class OperatingSystemUnitTest extends BaseGenericTest {
 
   /**
    * Test get operating system name.
