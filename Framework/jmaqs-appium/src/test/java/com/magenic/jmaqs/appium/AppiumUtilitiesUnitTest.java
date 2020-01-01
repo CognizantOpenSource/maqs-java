@@ -207,10 +207,6 @@ public class AppiumUtilitiesUnitTest extends BaseTest {
     Assert.assertNull(appiumDriver.getSessionId(), "Expected Appium Driver Session ID to be null.");
   }
 
-  @Override protected void postSetupLogging() throws Exception {
-
-  }
-
   @Override protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }

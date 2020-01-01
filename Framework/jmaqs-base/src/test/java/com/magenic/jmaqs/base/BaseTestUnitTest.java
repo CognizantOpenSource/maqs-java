@@ -100,16 +100,6 @@ public class BaseTestUnitTest extends BaseTest {
   /*
    * (non-Javadoc)
    *
-   * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#postSetupLogging()
-   */
-  @Override
-  protected void postSetupLogging() {
-
-  }
-
-  /*
-   * (non-Javadoc)
-   *
    * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#beforeLoggingTeardown(org.testng.
    * ITestResult)
    */
