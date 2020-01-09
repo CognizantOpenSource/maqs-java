@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Manager Dictionary Unit Tests.
  */
-public class ManagerDictionaryUnitTest extends BaseTest {
+public class ManagerDictionaryUnitTest extends BaseGenericTest {
 
   @Test
   public void testClose() {
@@ -92,11 +92,6 @@ public class ManagerDictionaryUnitTest extends BaseTest {
     Assert.assertTrue(managerDictionary.remove(dm2),"Checking if remove reported as successful");
     Assert.assertTrue(managerDictionary.containsKey(dm1));
     Assert.assertFalse(managerDictionary.containsKey(dm2));
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
   }
 
   /**

@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.constants.PlatformType;
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -18,7 +19,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * The type Appium config unit test.
  */
-public class AppiumConfigUnitTest {
+public class AppiumConfigUnitTest extends BaseGenericTest {
 
   /**
    * The Username.
