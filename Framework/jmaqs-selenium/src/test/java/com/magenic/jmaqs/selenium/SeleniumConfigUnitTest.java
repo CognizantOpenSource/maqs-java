@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -16,7 +17,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * Selenium configuration tests.
  */
-public class SeleniumConfigUnitTest {
+public class SeleniumConfigUnitTest extends BaseGenericTest {
 
   /**
    * Remote capabilities username identifier.
