@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -22,13 +22,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
  * The type Selenium utilities test.
  */
-public class SeleniumUtilitiesUnitTest extends BaseTest {
+public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
   /**
    * Test capture screenshot no append.
@@ -272,10 +271,5 @@ public class SeleniumUtilitiesUnitTest extends BaseTest {
     // Assert that the Session ID is null in the Selenium Driver
     Assert.assertNull(((RemoteWebDriver) webDriver).getSessionId(),
         "Expected Selenium Driver Session ID to be null.");
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
   }
 }

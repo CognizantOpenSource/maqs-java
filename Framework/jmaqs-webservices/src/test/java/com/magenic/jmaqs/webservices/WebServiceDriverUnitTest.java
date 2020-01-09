@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.webservices;
 
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.net.URISyntaxException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -14,16 +15,17 @@ import org.testng.annotations.Test;
 /**
  * Test with the web service driver directly.
  */
-public class WebServiceDriverUnitTest {
+public class WebServiceDriverUnitTest extends BaseGenericTest {
   /**
    * Verifies that basic GET features work with the WebServiceDriver.
+   *
    * @throws Exception Web service get failed
    */
   @Test(groups = TestCategories.WebService)
   public void webServiceGetVerificationTest() throws Exception {
     WebServiceDriver client = new WebServiceDriver("http://magenicautomation.azurewebsites.net");
-    CloseableHttpResponse response = client.getContent("/api/String/1", ContentType.TEXT_PLAIN,
-        true);
+    CloseableHttpResponse response = client
+        .getContent("/api/String/1", ContentType.TEXT_PLAIN, true);
     String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertTrue(responseString.contains("Tomato Soup"),
@@ -32,15 +34,17 @@ public class WebServiceDriverUnitTest {
 
   /**
    * Verifies that basic GET features work with the WebServiceDriver.
+   *
    * @throws Exception Web service get failed
    */
   @Test(groups = TestCategories.WebService)
   public void setWebServiceAddress() throws Exception {
-    WebServiceDriver webServiceDriver = new WebServiceDriver("http://magenicautomation.azurewebsites.net");
+    WebServiceDriver webServiceDriver = new WebServiceDriver(
+        "http://magenicautomation.azurewebsites.net");
 
     webServiceDriver.setBaseWebServiceAddress("http://magenicautomation.azurewebsites.net");
     Assert.assertEquals(webServiceDriver.getBaseWebServiceAddress().toString(),
-            "http://magenicautomation.azurewebsites.net", "Addresses don't match");
+        "http://magenicautomation.azurewebsites.net", "Addresses don't match");
   }
 
   /**
@@ -49,14 +53,12 @@ public class WebServiceDriverUnitTest {
   @Test(groups = TestCategories.WebService)
   public void setHttpClient() throws URISyntaxException {
     WebServiceDriver webServiceDriver1 = new WebServiceDriver(
-            "http://magenicautomation.azurewebsites.net");
-    webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient(
-            MediaType.APP_JSON.toString()));
+        "http://magenicautomation.azurewebsites.net");
+    webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient(MediaType.APP_JSON.toString()));
     WebServiceDriver webServiceDriver2 = new WebServiceDriver(
-            webServiceDriver1.getHttpClient(
-                    MediaType.APP_XML.toString()));
-    Assert.assertNotNull(webServiceDriver1.getHttpClient(
-            MediaType.APP_JSON.toString()), "Driver 1 is null");
+        webServiceDriver1.getHttpClient(MediaType.APP_XML.toString()));
+    Assert.assertNotNull(webServiceDriver1.getHttpClient(MediaType.APP_JSON.toString()),
+        "Driver 1 is null");
     Assert.assertNotNull(webServiceDriver2, "Driver 2 is null");
   }
 }

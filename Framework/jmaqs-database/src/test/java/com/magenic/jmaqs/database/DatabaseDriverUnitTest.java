@@ -9,7 +9,6 @@ import com.magenic.jmaqs.database.entities.StatesEntity;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.List;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 public class DatabaseDriverUnitTest extends BaseGenericTest {
@@ -94,15 +93,5 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
   public void testIsOpen() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     Assert.assertTrue(openConnection.isOpen());
-  }
-
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
   }
 }
