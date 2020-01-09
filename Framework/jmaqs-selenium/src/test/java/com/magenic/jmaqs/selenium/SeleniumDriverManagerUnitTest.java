@@ -4,20 +4,19 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.List;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
  * The type Selenium driver manager test.
  */
-public class SeleniumDriverManagerUnitTest extends BaseTest {
+public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
 
   /**
    * The Get driver.
@@ -84,11 +83,6 @@ public class SeleniumDriverManagerUnitTest extends BaseTest {
         this.getTestObject());
     List list;
     seleniumDriverManager.logVerbose("Logging verbose messaging");
-
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
 }
