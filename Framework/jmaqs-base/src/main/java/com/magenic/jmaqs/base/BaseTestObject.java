@@ -52,6 +52,19 @@ public class BaseTestObject implements AutoCloseable {
   private String fullyQualifiedTestName;
 
   /**
+   * Was the object closed
+   */
+  private boolean isClosed = false;
+
+  /**
+   * Check if the object has been closed.
+   * @return True if the object is closed
+   */
+  public boolean getClosed() {
+    return this.isClosed;
+  }
+
+  /**
    * Initializes a new instance of the BaseTestObject class.
    *
    * @param logger                 The test's logger
@@ -307,6 +320,7 @@ public class BaseTestObject implements AutoCloseable {
       this.log.logMessage(MessageType.VERBOSE, "End dispose");
     }
 
+    isClosed = true;
   }
 
   /**
