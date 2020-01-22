@@ -52,7 +52,7 @@ public abstract class BaseTest {
   /**
    * The Collection of Base Test Objects to use.
    */
-  ConcurrentHashMap<String, BaseTestObject> baseTestObjects;
+  ConcurrentManagerHashMap baseTestObjects;
 
   /**
    * The Performance Timer Collection.
@@ -74,7 +74,7 @@ public abstract class BaseTest {
    */
   public BaseTest() {
     this.loggedExceptions = new ConcurrentHashMap<String, ArrayList<String>>();
-    this.baseTestObjects = new ConcurrentHashMap<String, BaseTestObject>();
+    this.baseTestObjects = new ConcurrentManagerHashMap();
   }
 
   /**
