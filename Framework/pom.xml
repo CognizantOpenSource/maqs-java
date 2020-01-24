@@ -86,6 +86,17 @@
 			</plugin>
 		</plugins>
 	</reporting>-->
+
+	<pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.4</version>
+			</plugin>
+		</plugins>
+	</pluginManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -128,6 +139,39 @@
 					<parallel>methods</parallel>
 					<threadCount>6</threadCount>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.4</version>
+				<configuration>
+					<destFile>./target/jacoco.exec</destFile>
+					<outputDirectory>./target</outputDirectory>
+					<dataFile>./target/jacoco.exec</dataFile>
+					<append>true</append>
+					<includes/>
+					<excludes/>
+				</configuration>
+				<executions>
+					<execution>
+						<configuration>
+							<includes>
+								<include>**/*</include>
+							</includes>
+						</configuration>
+						<id>default-prepare-agent-vsts</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report-vsts</id>
+						<goals>
+							<goal>report-aggregate</goal>
+						</goals>
+						<phase>test</phase>
+					</execution>
+				</executions>
 			</plugin>
 			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
