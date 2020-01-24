@@ -5,6 +5,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import java.nio.file.Files;
@@ -17,7 +18,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -33,7 +33,6 @@ FIXME: java.lang.ClassCastException: com.magenic.jmaqs.utilities.logging.Console
  * Unit tests for EventHandler class.
  */
 @Test(groups = TestCategories.Selenium)
-@Ignore
 public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Url for the site.
@@ -320,7 +319,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     setupEventHandler();
 
     // Use the Event Firing Web Driver to accept an alert, then get the log text
-    this.eventFiringWebDriver.findElement(this.alertWithConfirm).click();
+    UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    waitDriver.waitForClickableElement(alertWithConfirm).click();
     Alert alert = this.eventFiringWebDriver.switchTo().alert();
     alert.accept();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
@@ -345,7 +345,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     setupEventHandler();
 
     // Use the Event Firing Web Driver to dismiss an alert, then get the log text
-    this.eventFiringWebDriver.findElement(this.alertWithConfirm).click();
+    UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    waitDriver.waitForClickableElement(alertWithConfirm).click();
     Alert alert = this.eventFiringWebDriver.switchTo().alert();
     alert.dismiss();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
