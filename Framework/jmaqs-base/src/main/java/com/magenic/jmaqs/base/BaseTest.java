@@ -67,7 +67,7 @@ public abstract class BaseTest {
   /**
    * The Fully Qualified Test Class Name.
    */
-  private String fullyQualifiedTestClassName;
+  private ThreadLocal<String> fullyQualifiedTestClassName = new ThreadLocal<>();
 
   /**
    * Initializes a new instance of the BaseTest class.
@@ -221,7 +221,7 @@ public abstract class BaseTest {
     // Get the Fully Qualified Test Class Name and set it in the object
     String testName = method.getDeclaringClass() + "." + method.getName();
     testName = testName.replaceFirst("class ", "");
-    this.fullyQualifiedTestClassName = testName;
+    this.fullyQualifiedTestClassName.set(testName);
 
     this.createNewTestObject();
   }
@@ -355,7 +355,7 @@ public abstract class BaseTest {
    * @return The test name including class
    */
   protected String getFullyQualifiedTestClassName() {
-    return this.fullyQualifiedTestClassName;
+    return this.fullyQualifiedTestClassName.get();
   }
 
   /**
