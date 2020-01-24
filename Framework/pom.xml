@@ -159,13 +159,13 @@
 								<include>**/*</include>
 							</includes>
 						</configuration>
-						<id>default-prepare-agent-vsts</id>
+						<id>prepare-jacoco-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>default-report-vsts</id>
+						<id>report-jacoco-results</id>
 						<goals>
 							<goal>report-aggregate</goal>
 						</goals>
