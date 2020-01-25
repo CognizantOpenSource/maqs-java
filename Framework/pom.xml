@@ -146,7 +146,7 @@
 				<version>0.8.4</version>
 				<configuration>
 					<destFile>./target/jacoco.exec</destFile>
-					<outputDirectory>./target</outputDirectory>
+					<outputDirectory>./../jacoco-code-coverage/</outputDirectory>
 					<dataFile>./target/jacoco.exec</dataFile>
 					<append>true</append>
 					<includes/>
