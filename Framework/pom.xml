@@ -170,6 +170,9 @@
 							<goal>report-aggregate</goal>
 						</goals>
 						<phase>test</phase>
+						<configuration>
+							<outputDirectory>./../jacoco-code-coverage/full-report/</outputDirectory>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
