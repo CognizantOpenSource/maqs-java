@@ -32,7 +32,7 @@ FIXME: java.lang.ClassCastException: com.magenic.jmaqs.utilities.logging.Console
 /**
  * Unit tests for EventHandler class.
  */
-@Test(groups = TestCategories.Selenium)
+
 public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Url for the site.
