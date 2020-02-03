@@ -69,7 +69,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs</groupId>
+            <groupId>com.magenic.jmaqs.database</groupId>
             <artifactId>jmaqs-database</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
