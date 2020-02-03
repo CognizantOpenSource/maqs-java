@@ -41,18 +41,18 @@ update_configs:
       - "appium"
       - "dependencies"
   
-#  - package_manager: "java:maven"
-#    directory: "/Framework/jmaqs-webservices"
-#    update_schedule: "daily"
-#    target_branch: "master"
-#    default_labels:
-#      - "webservices"
-#      - "dependencies"
+  - package_manager: "java:maven"
+    directory: "/Framework/jmaqs-webservices"
+    update_schedule: "daily"
+    target_branch: "master"
+    default_labels:
+      - "webservices"
+      - "dependencies"
 
-#  - package_manager: "java:maven"
-#      directory: "/Framework/jmaqs-database"
-#      update_schedule: "daily"
-#      target_branch: "master"
-#      default_labels:
-#        - "database"
-#        - "dependencies"
+  - package_manager: "java:maven"
+    directory: "/Framework/jmaqs-database"
+    update_schedule: "daily"
+    target_branch: "master"
+    default_labels:
+      - "database"
+      - "dependencies"
