@@ -37,7 +37,33 @@
 		<module>jmaqs-webservices</module>
 		<module>jmaqs-appium</module>
         <module>jmaqs-database</module>
-    </modules>
+		<module>jmaqs-jacoco-reporting</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>jacoco</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>${jacoco.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<!--<repositories>
 		<repository>
@@ -69,6 +95,7 @@
 		<nexusstaging.plugin.version>1.6.8</nexusstaging.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<puppycheckstyle.plugin.version>7.6.1</puppycheckstyle.plugin.version>
+		<jacoco.version>0.8.5</jacoco.version>
 	</properties>
 	<!--<reporting>
 		<plugins>
@@ -139,42 +166,6 @@
 					<threadCount>6</threadCount>
 					<argLine>${argLine}</argLine>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.4</version>
-				<configuration>
-					<destFile>./target/jacoco.exec</destFile>
-					<outputDirectory>./../jacoco-code-coverage/</outputDirectory>
-					<dataFile>./target/jacoco.exec</dataFile>
-					<append>true</append>
-					<includes/>
-					<excludes/>
-				</configuration>
-				<executions>
-					<execution>
-						<configuration>
-							<includes>
-								<include>**/*</include>
-							</includes>
-						</configuration>
-						<id>prepare-jacoco-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report-jacoco-results</id>
-						<goals>
-							<goal>report-aggregate</goal>
-						</goals>
-						<phase>test</phase>
-						<configuration>
-							<outputDirectory>./../jacoco-code-coverage/full-report/</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
