@@ -50,9 +50,9 @@ update_configs:
 #      - "dependencies"
 
   - package_manager: "java:maven"
-      directory: "/Framework/jmaqs-database"
-      update_schedule: "daily"
-      target_branch: "master"
-      default_labels:
-        - "database"
-        - "dependencies"
+    directory: "/Framework/jmaqs-database"
+    update_schedule: "daily"
+    target_branch: "master"
+    default_labels:
+      - "database"
+      - "dependencies"
