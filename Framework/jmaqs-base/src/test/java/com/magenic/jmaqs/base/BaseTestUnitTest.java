@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.base;
 
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.Logger;
@@ -19,12 +20,12 @@ import org.testng.annotations.Test;
 /**
  * Unit test class for BaseTest class.
  */
-@Test
+@Test(groups = TestCategories.Framework)
 public class BaseTestUnitTest extends BaseTest {
   /**
    * Verify fully qualified test name.
    */
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void fullyQualifiedTestNameTest() {
     String testName = this.getFullyQualifiedTestClassName();
 
@@ -35,7 +36,7 @@ public class BaseTestUnitTest extends BaseTest {
   /**
    * Validate setting a new logger.
    */
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void fileLoggerTest() {
     this.setLogger(new FileLogger());
 
@@ -47,7 +48,7 @@ public class BaseTestUnitTest extends BaseTest {
   /**
    * Validate Logging Verbose works.
    */
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void logVerboseTest() {
     this.logVerbose("This is a test to log verbose.");
   }
@@ -55,7 +56,7 @@ public class BaseTestUnitTest extends BaseTest {
   /**
    * Validate that Try To Log is working.
    */
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void tryToLogTest() {
     this.tryToLog(MessageType.INFORMATION, "Try to log message.");
   }
@@ -63,7 +64,7 @@ public class BaseTestUnitTest extends BaseTest {
   /**
    * Validate adding exceptions to the Logged Exception list adds the exceptions correctly.
    */
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void addLoggedExceptionsTest() {
     ArrayList<String> exceptions = new ArrayList<String>();
     exceptions.add("First Exception.");
@@ -78,7 +79,7 @@ public class BaseTestUnitTest extends BaseTest {
   /**
    * Validate the Logging Enabled Setting is YES (set in Config).
    */
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void loggingEnabledSettingTest() {
     Assert.assertEquals(this.getLoggingEnabledSetting(), LoggingConfig.getLoggingEnabledSetting());
   }
@@ -86,7 +87,7 @@ public class BaseTestUnitTest extends BaseTest {
   /**
    * Validate Setting the Test Object to a new Test Object (Console Logger instead of File Logger).
    */
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void setTestObjectTest() {
     Logger logger = new ConsoleLogger();
     BaseTestObject baseTestObject = new BaseTestObject(logger,
