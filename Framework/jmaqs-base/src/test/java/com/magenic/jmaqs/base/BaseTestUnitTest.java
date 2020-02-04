@@ -10,9 +10,8 @@ import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-
+import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.util.ArrayList;
-
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
@@ -96,6 +95,21 @@ public class BaseTestUnitTest extends BaseTest {
 
     Assert.assertTrue(this.getTestObject().getLog() instanceof ConsoleLogger,
         "Expected Test Object to be set to have a Console Logger.");
+  }
+
+  @Test(groups = TestCategories.Framework)
+  public void testSetPerformanceCollection() {
+    PerfTimerCollection perfTimerCollection = new PerfTimerCollection(this.getLogger(),
+        this.getFullyQualifiedTestClassName());
+    this.setPerfTimerCollection(perfTimerCollection);
+  }
+
+  @Test(groups = TestCategories.Framework)
+  public void testGetPerformanceCollection() {
+    PerfTimerCollection perfTimerCollection = new PerfTimerCollection(this.getLogger(),
+        this.getFullyQualifiedTestClassName());
+    this.setPerfTimerCollection(perfTimerCollection);
+    Assert.assertNotNull(this.getPerfTimerCollection());
   }
 
   /*
