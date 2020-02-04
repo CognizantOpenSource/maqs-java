@@ -17,6 +17,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -413,7 +414,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Unregister the Event Firing Web Driver after each test.
    */
 
-  @AfterTest
+  @AfterMethod
   private void cleanupEventHandler() {
     this.eventFiringWebDriver.unregister(this.eventHandler);
   }
