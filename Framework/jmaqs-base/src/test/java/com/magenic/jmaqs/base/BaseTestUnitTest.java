@@ -127,6 +127,11 @@ public class BaseTestUnitTest extends BaseTest {
     Assert.assertEquals(this.getTestContext().getAttribute("testName"), "SetTestContext");
   }
 
+  @Test(groups = TestCategories.Framework)
+  public void testGetManagerStore() {
+    Assert.assertNotNull(this.getManagerStore());
+  }
+
   /*
    * (non-Javadoc)
    *
