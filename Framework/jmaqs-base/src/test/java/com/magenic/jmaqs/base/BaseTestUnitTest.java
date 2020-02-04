@@ -13,6 +13,7 @@ import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.util.ArrayList;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
@@ -110,6 +111,20 @@ public class BaseTestUnitTest extends BaseTest {
         this.getFullyQualifiedTestClassName());
     this.setPerfTimerCollection(perfTimerCollection);
     Assert.assertNotNull(this.getPerfTimerCollection());
+  }
+
+  @Test(groups = TestCategories.Framework)
+  public void testGetTestContext() {
+    Assert.assertNotNull(this.getTestContext());
+  }
+
+  @Test(groups = TestCategories.Framework)
+  public void testSetTestContext() {
+    final ITestContext testContext = this.getTestContext();
+    testContext.setAttribute("testName", "SetTestContext");
+    this.setTestContext(testContext);
+    Assert.assertNotNull(this.getTestContext());
+    Assert.assertEquals(this.getTestContext().getAttribute("testName"), "SetTestContext");
   }
 
   /*
