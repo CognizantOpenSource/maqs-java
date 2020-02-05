@@ -50,6 +50,16 @@ public class UIFind {
   }
 
   /**
+   * General Find Element.
+   *
+   * @param by Css Selector
+   * @return The Web Element
+   */
+  public WebElement findElement(By by) {
+    return findElement(by, true);
+  }
+
+  /**
    * Finds all elements using the by provided.
    *
    * @param by             Css Selector
@@ -58,16 +68,6 @@ public class UIFind {
    */
   public List<WebElement> findElements(By by, boolean throwException) {
     return this.getElementList(by, throwException);
-  }
-
-  /**
-   * General Find Element.
-   *
-   * @param by Css Selector
-   * @return The Web Element
-   */
-  public WebElement findElement(By by) {
-    return findElement(by, true);
   }
 
   /**
