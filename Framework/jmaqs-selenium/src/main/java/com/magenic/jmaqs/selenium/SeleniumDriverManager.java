@@ -41,10 +41,11 @@ public class SeleniumDriverManager extends DriverManager {
 
     try {
       WebDriver driver = this.getWebDriver();
+      //driver.close();
       driver.quit();
     } catch (Exception e) {
       getLogger().logMessage(MessageType.ERROR,
-          StringProcessor.safeFormatter("Failed to close web driver because: {0}", e.getMessage()));
+          StringProcessor.safeFormatter("Failed to close web driver because: %s", e.getMessage()));
     }
 
     this.baseDriver = null;

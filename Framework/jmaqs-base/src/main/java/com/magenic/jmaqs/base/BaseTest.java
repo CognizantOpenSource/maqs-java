@@ -261,11 +261,14 @@ public abstract class BaseTest {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.getFullyQualifiedTestClassName();
 
-    // Release logged messages
-    this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
+    try (BaseTestObject baseTestObject = this.getTestObject()) {
+      // Release logged messages
+      this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
 
-    // Release the Base Test Object
-    this.baseTestObjects.remove(fullyQualifiedTestName, this.getTestObject());
+      // Release the Base Test Object
+      this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
+    }
+
 
     // Create console logger to log subsequent messages
     this.setTestObject(new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName));
