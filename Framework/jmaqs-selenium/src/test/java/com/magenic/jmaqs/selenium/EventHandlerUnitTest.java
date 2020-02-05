@@ -362,7 +362,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   /**
    * Test that checks if the correct messages are logged when getting the text from an element.
-   *//*
+   */
 
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerGetText() {
@@ -383,7 +383,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 
   /**
    * Test that checks if the correct messages are logged when taking a screenshot.
@@ -410,23 +409,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unregister the Event Firing Web Driver after each test.
-   */
-
-  //  @AfterMethod
-  //  private void cleanupEventHandler() {
-  //    webDriverWithHandler.unregister(this.eventHandler);
-  //  }
-
-  /**
    * Setup the Event Handler and register the Event Firing Web Driver before each test.
    */
-
-  //  private void setupEventHandler() {
-  //    this.eventHandler = new EventHandler(this.getLogger());
-  //    webDriverWithHandler = new EventFiringWebDriver(this.getWebDriver());
-  //    webDriverWithHandler.register(this.eventHandler);
-  //  }
   private EventFiringWebDriver getEventWebDriver() {
     return new EventFiringWebDriver(this.getWebDriver());
   }
