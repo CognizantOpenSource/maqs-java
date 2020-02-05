@@ -10,6 +10,7 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -112,11 +113,12 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   private int timeOut = 5000;
 
   /**
-   * goes to the Magenic test page.
+   * Setup before a test.
    */
-  private void goToTestPage() {
-    PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
-    pageModel.open(testSiteUrl);
+  @BeforeMethod
+  public void navigateToTestPage() {
+    this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
 
   /**
@@ -156,8 +158,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void waitUntilExactText() {
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertTrue(wait.waitUntilExactText(flowerTable, "Flower Table", timeOut, sleep));
-    Assert.assertTrue(wait.waitUntilExactText(flowerTable, "Flower Table"));
+    Assert.assertTrue(wait.waitUntilExactText(automationShowDialog1, "Show dialog", timeOut, sleep));
+    Assert.assertTrue(wait.waitUntilExactText(automationShowDialog1, "Show dialog"));
   }
 
   /**
@@ -166,8 +168,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void waitUntilContainsText() {
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertTrue(wait.waitUntilContainsText(flowerTable, "Flower Table", timeOut, sleep));
-    Assert.assertTrue(wait.waitUntilContainsText(flowerTable, "Flower Table"));
+    Assert.assertTrue(wait.waitUntilContainsText(automationShowDialog1, "dialog", timeOut, sleep));
+    Assert.assertTrue(wait.waitUntilContainsText(automationShowDialog1, "dialog"));
   }
 
   /**
@@ -175,9 +177,10 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.Selenium)
   public void waitUntilAttributeTextEquals() {
+    this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertTrue(wait.waitUntilAttributeTextEquals(flowerTable, "class", "Flower Table"));
-    Assert.assertTrue(wait.waitUntilAttributeTextEquals(flowerTable, "class", "Flower Table", timeOut, sleep));
+    Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "display: none;", "style"));
+    Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "display: none;", "style", timeOut, sleep));
   }
 
   /**
@@ -185,9 +188,12 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.Selenium)
   public void waitForAttributeTextEquals() {
+    this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertNotNull(wait.waitForAttributeTextEquals(flowerTableTitle, "class", "Flower Table"));
-    Assert.assertNotNull(wait.waitForAttributeTextEquals(flowerTableTitle, "class", "Flower Table", timeOut, sleep));
+    WebElement element = wait.waitForAttributeTextEquals(asyncLoadingTextDiv, "display: block;", "style");
+    Assert.assertEquals(element.getText(), "Flower Table");
+    element = wait.waitForAttributeTextEquals(asyncLoadingTextDiv, "display: block;", "style", timeOut, sleep);
+    Assert.assertNotNull(element.getText(), "Flower Table");
   }
 
   /**
@@ -195,9 +201,11 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.Selenium)
   public void waitUntilAttributeTextContains() {
+    this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertTrue(wait.waitUntilAttributeTextContains(flowerTableTitle, "class", "Flower Table"));
-    Assert.assertTrue(wait.waitUntilAttributeTextContains(flowerTableTitle, "class", "Flower Table", timeOut, sleep));
+    Assert.assertTrue(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "nottherightid", "id"));
+    Assert.assertTrue(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector,
+        "nottherightid", "id", timeOut, sleep));
   }
 
   /**
@@ -256,8 +264,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void waitForElements() {
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertEquals(wait.waitForElements(flowerTable).size(), 5);
-    Assert.assertEquals(wait.waitForElements(flowerTable, timeOut, sleep).size(), 5);
+    Assert.assertEquals(wait.waitForElements(flowerTable).size(), 20);
+    Assert.assertEquals(wait.waitForElements(flowerTable, timeOut, sleep).size(), 20);
   }
 
   /**
@@ -303,7 +311,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   public void waitForExactText() {
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     WebElement element = wait.waitForExactText(flowerTableTitle, "Flower Table");
-    Assert.assertEquals(element.getText(), "FlowerTable");
+    Assert.assertEquals(element.getText(), "Flower Table");
   }
 
   /**
