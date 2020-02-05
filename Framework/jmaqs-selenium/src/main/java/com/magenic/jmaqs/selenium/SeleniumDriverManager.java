@@ -41,7 +41,6 @@ public class SeleniumDriverManager extends DriverManager {
 
     try {
       WebDriver driver = this.getWebDriver();
-      //driver.close();
       driver.quit();
     } catch (Exception e) {
       getLogger().logMessage(MessageType.ERROR,

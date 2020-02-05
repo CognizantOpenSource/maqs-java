@@ -8,7 +8,7 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DriverManagerTest extends BaseGenericTest {
+public class DriverManagerUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.Framework)
   public void testGetBaseDriver() throws Exception {
