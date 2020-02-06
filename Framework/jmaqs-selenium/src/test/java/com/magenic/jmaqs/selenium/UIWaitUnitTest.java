@@ -103,7 +103,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * the IFrame element with the source.
    */
-  private By magenicIFrameLocator = By.cssSelector("#mageniciFrame");
+  private By magenicIFrameLocator = By.className("#mageniciFrame");
 
   /**
    * the sleep duration in milliseconds.
