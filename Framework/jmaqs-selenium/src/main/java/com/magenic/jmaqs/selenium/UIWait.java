@@ -44,7 +44,7 @@ public class UIWait {
   private static final By BODY_BY = By.cssSelector("BODY");
 
   /**
-   * The Webdriver that the test is currently running on.
+   * The Web driver that the test is currently running on.
    */
   private WebDriver driver;
 
@@ -293,7 +293,7 @@ public class UIWait {
         return obj.isEnabled();
       } catch (NoSuchElementException | StaleElementReferenceException e) {
         // Do not throw these exceptions here.
-        // Instead return false and let the fluentwait try again.
+        // Instead return false and let the fluent wait try again.
         return false;
       }
     };
@@ -412,14 +412,13 @@ public class UIWait {
   }
 
   /**
-   * Wait for a selector to present, and then return a list of all WebElements that are located by
-   * that selector.
+   * Wait for a selector to be present and then return a list
+   * of all WebElements that are located by that selector.
    *
    * @param by              Selector value to wait for
    * @param timeOutInMillis the number of milliseconds to wait before failing
    * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return List of WebElements - all web elements found by the specified selector
-   * @throws Exception if encountered
    */
   public List<WebElement> waitForElements(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -434,7 +433,6 @@ public class UIWait {
    * @param by   Selector value to wait for
    * @param wait The wait driver
    * @return List of WebElements - all web elements found by the specified selector
-   * @throws Exception if encountered
    */
   public List<WebElement> waitForElements(final By by, WebDriverWait wait) {
     return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
