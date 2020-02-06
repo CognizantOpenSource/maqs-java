@@ -22,7 +22,6 @@
         <system>Azure Pipelines</system>
         <url>https://dev.azure.com/magenicOpen/JMAQS/_build</url>
     </ciManagement>
-
     <licenses>
         <license>
             <name>MIT</name>
@@ -99,7 +98,6 @@
         <jacoco.version>0.8.5</jacoco.version>
         <testng.version>7.1.0</testng.version>
         <selenium.version>3.141.59</selenium.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <!--<reporting>
 		<plugins>
