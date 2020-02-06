@@ -63,7 +63,7 @@ public class WebDriverFactory {
    * @throws Exception An exception
    */
   public static WebDriver getBrowserWithDefaultConfiguration(BrowserType browser) throws Exception {
-    WebDriver webDriver = null;
+    WebDriver webDriver;
     String size = SeleniumConfig.getBrowserSize();
 
     try {
@@ -325,7 +325,7 @@ public class WebDriverFactory {
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
       String remotePlatform, String remoteBrowserVersion, Map<String, Object> remoteCapabilities) {
-    MutableCapabilities options = null;
+    MutableCapabilities options;
     switch (remoteBrowser) {
       case IE:
         options = new InternetExplorerOptions();

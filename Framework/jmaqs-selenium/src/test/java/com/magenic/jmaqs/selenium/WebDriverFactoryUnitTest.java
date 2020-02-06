@@ -75,9 +75,12 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.Selenium)
   public void getChromeDriverTest() throws Exception {
     ChromeDriver driver = null;
+
     try {
-      driver = (ChromeDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.CHROME);
+      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.CHROME);
+      Assert.assertNotNull(driver);
+
+      driver = (ChromeDriver) WebDriverFactory.getChromeDriver(WebDriverFactory.getDefaultChromeOptions());
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -90,8 +93,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getHeadlessChromeDriverTest() throws Exception {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.HEADLESS_CHROME);
+      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.HEADLESS_CHROME);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -104,8 +106,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getFirefoxDriverTest() throws Exception {
     FirefoxDriver driver = null;
     try {
-      driver = (FirefoxDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.FIREFOX);
+      driver = (FirefoxDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.FIREFOX);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -118,8 +119,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
     try {
-      driver = (InternetExplorerDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.IE);
+      driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.IE);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -136,8 +136,11 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.Selenium)
   public void getRemoteOptionsChromeTest() {
-    MutableCapabilities options = WebDriverFactory
-        .getRemoteOptions(RemoteBrowserType.CHROME, "testPlatform", "testVersion", null);
+    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.CHROME,
+        "testPlatform", "testVersion", null);
+    Assert.assertNotNull(options);
+
+    options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.CHROME, null);
     Assert.assertNotNull(options);
   }
 
@@ -168,7 +171,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.Selenium)
   public void setDriverOptionsTest() {
     MutableCapabilities options = new ChromeOptions();
-    HashMap additionalCapabilities = new HashMap<String, Object>();
+    HashMap<String, Object> additionalCapabilities = new HashMap<>();
     additionalCapabilities.put("testKey", "testValue");
     WebDriverFactory.setDriverOptions(options, additionalCapabilities);
 
@@ -180,7 +183,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void setDriverOptionsHandlesNullTest() {
     MutableCapabilities options = new ChromeOptions();
     WebDriverFactory.setDriverOptions(options, null);
-
     Assert.assertNotNull(options);
   }
 
@@ -285,13 +287,16 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.Selenium)
   public void getDriverLocationDoesNotExistTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", false);
+    String driverLocation = WebDriverFactory.getDriverLocation(
+        "doesNotExist.exe", "", false);
     Assert.assertEquals(driverLocation, "");
   }
 
   @Test(expectedExceptions = RuntimeException.class, groups = TestCategories.Selenium)
   public void getDriverLocationMustExistTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", true);
+    String driverLocation = WebDriverFactory.getDriverLocation(
+        "doesNotExist.exe", "", true);
+    Assert.assertEquals(driverLocation, "");
   }
 
   @Test(groups = TestCategories.Selenium)
