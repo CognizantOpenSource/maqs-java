@@ -101,9 +101,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
     try {
       driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.CHROME);
       Assert.assertNotNull(driver);
-
-      driver = (ChromeDriver) WebDriverFactory.getChromeDriver(WebDriverFactory.getDefaultChromeOptions());
-      Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
         driver.quit();
