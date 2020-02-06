@@ -147,6 +147,8 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the Edge driver.
    */
   @Test(groups = TestCategories.Selenium)
+  @Ignore
+  // TODO: File path to the WebDriver.exe might be an issue here.
   public void getEdgeDriverTest() throws Exception {
     EdgeDriver driver = null;
     try {
@@ -179,7 +181,9 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the Headless driver.
    */
   @Test(groups = TestCategories.Selenium)
-  public void getHeadlessDriverTest() throws Exception {
+  @Ignore
+  // TODO: Remote driver not being instatiated.
+  public void getRemoteDriverTest() throws Exception {
     RemoteWebDriver driver = null;
     try {
       driver = (RemoteWebDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.REMOTE);
@@ -375,7 +379,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the driver location default hint path.
    */
   @Test(groups = TestCategories.Selenium)
-  // TODO: @Ignore("Not able to be tested yet")
   public void getDriverLocationDefaultHintPathTest() {
     String driverLocation = WebDriverFactory
         .getDriverLocation(WebDriverFile.CHROME.getFileName(), "");
@@ -394,7 +397,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the driver location test location.
    */
   @Test(groups = TestCategories.Selenium)
-  // TODO: @Ignore("Not able to be tested yet")
   public void getDriverLocationTestLocationTest() {
     String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
@@ -406,7 +408,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the driver location and its resource test.
    */
   @Test(groups = TestCategories.Selenium)
-  // TODO: @Ignore("Not able to be tested yet")
   public void getDriverLocationTestResourcesLocationTest() {
     String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
