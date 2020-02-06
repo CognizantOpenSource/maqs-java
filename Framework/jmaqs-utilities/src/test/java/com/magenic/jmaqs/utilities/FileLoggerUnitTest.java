@@ -4,17 +4,21 @@
 
 package com.magenic.jmaqs.utilities;
 
-import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
+import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
+import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.magenic.jmaqs.utilities.logging.HtmlFileLogger;
+import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.logging.LoggingConfig;
+import com.magenic.jmaqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
 
-import com.magenic.jmaqs.utilities.logging.*;
-import org.apache.commons.io.FileUtils;
+import java.util.HashMap;
+import java.util.UUID;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

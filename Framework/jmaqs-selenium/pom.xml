@@ -17,24 +17,25 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<testng.version>7.1.0</testng.version>
 		<commonsio.version>2.4</commonsio.version>
 		<selenium.version>3.141.59</selenium.version>
-		<reportng.version>1.1.4</reportng.version>
-		<guice.version>4.2.2</guice.version>
-		<jetbrainsannotations.version>18.0.0</jetbrainsannotations.version>
 	</properties>
 
 	<dependencies>
         <dependency>
-            <groupId>org.apache.directory.studio</groupId>
-            <artifactId>org.apache.commons.io</artifactId>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
             <version>${commonsio.version}</version>
         </dependency>
 		<dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>${selenium.version}</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>3.141.59</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-remote-driver</artifactId>
+			<version>3.141.59</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -57,23 +58,6 @@
 			<version>${testng.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.uncommons</groupId>
-			<artifactId>reportng</artifactId>
-			<version>${reportng.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.testng</groupId>
-					<artifactId>testng</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>${guice.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.magenic.jmaqs.utilities</groupId>
 			<artifactId>jmaqs-utilities</artifactId>
 			<version>${project.version}</version>
@@ -83,12 +67,21 @@
 			<artifactId>jmaqs-base</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>${jetbrainsannotations.version}</version>
-            <scope>compile</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-edge-driver</artifactId>
+			<version>3.141.59</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-safari-driver</artifactId>
+			<version>3.141.59</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>3.141.59</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
