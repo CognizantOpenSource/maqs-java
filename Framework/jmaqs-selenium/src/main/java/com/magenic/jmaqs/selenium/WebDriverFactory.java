@@ -84,8 +84,7 @@ public class WebDriverFactory {
           webDriver = getEdgeDriver(getDefaultEdgeOptions(), size);
           break;
         case REMOTE:
-          webDriver = new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()),
-              getDefaultRemoteOptions());
+          webDriver = new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()), getDefaultRemoteOptions());
           break;
         default:
           throw new IllegalArgumentException(
@@ -484,11 +483,11 @@ public class WebDriverFactory {
    * @return The path to the web driver
    */
   public static String getDriverLocation(String driverFile, String defaultHintPath,
-      boolean mustExist) {
+      boolean mustExist) throws RuntimeException {
     // Get the hint path from the config
     String hintPath = SeleniumConfig.getDriverHintPath();
 
-    // Try the hintpath first
+    // Try the hint path first
     if (!hintPath.isEmpty() && Paths.get(hintPath, driverFile).toFile().exists()) {
       return hintPath;
     }
@@ -548,5 +547,4 @@ public class WebDriverFactory {
 
     return "";
   }
-
 }
