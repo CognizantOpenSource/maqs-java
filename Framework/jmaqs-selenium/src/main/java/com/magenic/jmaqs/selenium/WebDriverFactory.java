@@ -63,34 +63,26 @@ public class WebDriverFactory {
    * @throws Exception An exception
    */
   public static WebDriver getBrowserWithDefaultConfiguration(BrowserType browser) throws Exception {
-    WebDriver webDriver;
     String size = SeleniumConfig.getBrowserSize();
 
     try {
       switch (browser) {
         case IE:
-          webDriver = getInternetExplorerDriver(getDefaultInternetExplorerOptions(), size);
-          break;
+          return getInternetExplorerDriver(getDefaultInternetExplorerOptions(), size);
         case FIREFOX:
-          webDriver = getFirefoxDriver(getDefaultFirefoxOptions(), size);
-          break;
+          return getFirefoxDriver(getDefaultFirefoxOptions(), size);
         case CHROME:
-          webDriver = getChromeDriver(getDefaultChromeOptions(), size);
-          break;
+          return getChromeDriver(getDefaultChromeOptions(), size);
         case HEADLESS_CHROME:
-          webDriver = getHeadlessChromeDriver(getDefaultHeadlessChromeOptions(size));
-          break;
+          return getHeadlessChromeDriver(getDefaultHeadlessChromeOptions(size));
         case EDGE:
-          webDriver = getEdgeDriver(getDefaultEdgeOptions(), size);
-          break;
+          return getEdgeDriver(getDefaultEdgeOptions(), size);
         case REMOTE:
-          webDriver = new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()), getDefaultRemoteOptions());
-          break;
+          return new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()), getDefaultRemoteOptions());
         default:
           throw new IllegalArgumentException(
               StringProcessor.safeFormatter("Browser type '%s' is not supported", browser));
       }
-      return webDriver;
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
