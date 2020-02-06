@@ -128,6 +128,7 @@
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -151,7 +152,7 @@
                 <version>${compiler.plugin.version}</version>
                 <configuration>
                     <compilerVersion>1.8</compilerVersion>
-                    <encoding>UTF-8</encoding>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                     <showDeprecation>false</showDeprecation>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -162,8 +163,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.plugin.version}</version>
-                <!-- Temporary disabling concurrency until bug is fixed.
-				Bug #10229:-->
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>6</threadCount>
