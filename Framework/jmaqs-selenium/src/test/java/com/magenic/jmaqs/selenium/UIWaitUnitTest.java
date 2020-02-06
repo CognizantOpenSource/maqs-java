@@ -6,7 +6,9 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helper.TimeoutException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -338,15 +340,13 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    *  Verify WaitForAbsentElement wait fails.
    */
-  @Test(groups = TestCategories.Selenium)
-  //[ExpectedException(typeof(TimeoutException))]
+  @Test(groups = TestCategories.Selenium, expectedExceptions = TimeoutException.class)
   public void waitForAbsentElementFail() {
     this.getWebDriver().navigate().to(testSiteUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     wait.waitForPageLoad();
-    // this.getWebDriver().SetWaitDriver(new WebDriverWait(new SystemClock(), WebDriver, TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(10)));
     wait.waitForAbsentElement(homeButtonCssSelector);
   }
 
@@ -445,9 +445,10 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify that WaitForAttributeTextEquals throws an exception
    * for instances where the attribute is not found.
+   * An attribute check that should have failed to
+   * find the given string equal to an elements attribute passed
    */
-  @Test(groups = TestCategories.Selenium)
-  // [ExpectedException(typeof(NotFoundException), "An attribute check that should have failed to find the given string equal to an elements attribute passed.")]
+  @Test(groups = TestCategories.Selenium, expectedExceptions = NotFoundException.class)
   public void waitForAttributeEqualsDoesNotFind() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
