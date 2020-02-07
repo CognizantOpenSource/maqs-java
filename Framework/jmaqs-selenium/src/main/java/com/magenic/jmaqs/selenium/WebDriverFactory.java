@@ -78,7 +78,8 @@ public class WebDriverFactory {
         case EDGE:
           return getEdgeDriver(getDefaultEdgeOptions(), size);
         case REMOTE:
-          return new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()), getDefaultRemoteOptions());
+          return new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()),
+              getDefaultRemoteOptions());
         default:
           throw new IllegalArgumentException(
               StringProcessor.safeFormatter("Browser type '%s' is not supported", browser));
@@ -475,7 +476,7 @@ public class WebDriverFactory {
    * @return The path to the web driver
    */
   public static String getDriverLocation(String driverFile, String defaultHintPath,
-      boolean mustExist) throws RuntimeException {
+      boolean mustExist) {
     // Get the hint path from the config
     String hintPath = SeleniumConfig.getDriverHintPath();
 
