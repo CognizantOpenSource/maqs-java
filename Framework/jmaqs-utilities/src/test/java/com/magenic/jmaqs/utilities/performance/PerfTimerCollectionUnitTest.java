@@ -5,7 +5,6 @@
 package com.magenic.jmaqs.utilities.performance;
 
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import java.nio.channels.AsynchronousServerSocketChannel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
