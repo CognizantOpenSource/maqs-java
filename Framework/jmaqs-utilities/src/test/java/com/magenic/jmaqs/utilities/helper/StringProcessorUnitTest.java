@@ -4,7 +4,6 @@
 
 package com.magenic.jmaqs.utilities.helper;
 
-import javafx.beans.property.StringProperty;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
