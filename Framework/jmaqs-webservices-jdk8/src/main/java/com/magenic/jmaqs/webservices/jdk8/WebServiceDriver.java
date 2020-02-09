@@ -6,6 +6,7 @@ package com.magenic.jmaqs.webservices.jdk8;
 
 import com.beust.jcommander.internal.Lists;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -14,6 +15,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -132,7 +134,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse getContent(String requestUri, ContentType returnMediaType,
-      boolean expectSuccess) throws Exception {
+      boolean expectSuccess) throws IOException, URISyntaxException {
     return getContent(requestUri, returnMediaType.toString(), expectSuccess);
   }
 
@@ -150,7 +152,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse getContent(String requestUri, String returnMediaType,
-      boolean expectSuccess) throws Exception {
+      boolean expectSuccess) throws IOException, URISyntaxException {
     HttpGet newGet = new HttpGet(new URIBuilder(this.baseAddress).setPath(requestUri).build());
 
     return executeRequest(newGet, returnMediaType, expectSuccess);
@@ -172,7 +174,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse putContent(String requestUri, HttpEntity content,
-      ContentType returnMediaType, boolean expectSuccess) throws Exception {
+      ContentType returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
     return this.putContent(requestUri, content, returnMediaType.toString(), expectSuccess);
   }
 
@@ -192,7 +194,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse putContent(String requestUri, HttpEntity content,
-      String returnMediaType, boolean expectSuccess) throws Exception {
+      String returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
     HttpPut newPut = new HttpPut(new URIBuilder(this.baseAddress).setPath(requestUri).build());
     newPut.setEntity(content);
     return executeRequest(newPut, returnMediaType, expectSuccess);
@@ -214,7 +216,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse patchContent(String requestUri, HttpEntity content,
-      ContentType returnMediaType, boolean expectSuccess) throws Exception {
+      ContentType returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
     return this.patchContent(requestUri, content, returnMediaType.toString(), expectSuccess);
   }
 
@@ -234,7 +236,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse patchContent(String requestUri, HttpEntity content,
-      String returnMediaType, boolean expectSuccess) throws Exception {
+      String returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
     HttpPatch newPut = new HttpPatch(new URIBuilder(this.baseAddress).setPath(requestUri).build());
     newPut.setEntity(content);
     return executeRequest(newPut, returnMediaType, expectSuccess);
@@ -256,7 +258,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse postContent(String requestUri, HttpEntity content,
-      ContentType returnMediaType, boolean expectSuccess) throws Exception {
+      ContentType returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
     return this.postContent(requestUri, content, returnMediaType.toString(), expectSuccess);
   }
 
@@ -276,7 +278,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse postContent(String requestUri, HttpEntity content,
-      String returnMediaType, boolean expectSuccess) throws Exception {
+      String returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
     HttpPost newPost = new HttpPost(new URIBuilder(this.baseAddress).setPath(requestUri).build());
     newPost.setEntity(content);
 
@@ -297,7 +299,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse deleteContent(String requestUri, ContentType returnMediaType,
-      boolean expectSuccess) throws Exception {
+      boolean expectSuccess) throws IOException, URISyntaxException {
     return this.deleteContent(requestUri, returnMediaType.toString(), expectSuccess);
   }
 
@@ -315,7 +317,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   public CloseableHttpResponse deleteContent(String requestUri, String returnMediaType,
-      boolean expectSuccess) throws Exception {
+      boolean expectSuccess) throws IOException, URISyntaxException {
     HttpDelete newDelete = new HttpDelete(
         new URIBuilder(this.baseAddress).setPath(requestUri).build());
 
@@ -336,7 +338,7 @@ public class WebServiceDriver {
    *           A web service call exception
    */
   private CloseableHttpResponse executeRequest(HttpUriRequest request, String returnMediaType,
-      boolean expectSuccess) throws Exception {
+      boolean expectSuccess) throws IOException {
 
     CloseableHttpResponse response = this.getHttpClient(returnMediaType).execute(request);
 
@@ -351,12 +353,11 @@ public class WebServiceDriver {
   /**
    * Ensure the response returned a success code.
    *
-   * @param response
-   *          And HTTP response
+   * @param response And HTTP response
    * @throws Exception If the response was null or returned with an error code
    */
   private static void ensureSuccessStatusCode(final HttpResponse response)
-          throws Exception {
+      throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
       throw new NullPointerException("Response was null");
@@ -367,8 +368,8 @@ public class WebServiceDriver {
     if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
       String body = response.getStatusLine().toString();
 
-      throw new Exception(
-          String.format("Response did not indicate a success. %s Response code was: %s ",
+      throw new HttpResponseException(response.getStatusLine().getStatusCode(), String
+          .format("Response did not indicate a success. %s Response code was: %s ",
               System.lineSeparator(), body));
     }
 

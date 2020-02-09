@@ -33,20 +33,6 @@ public final class WebServiceUtilities {
   private WebServiceUtilities() { }
 
   /**
-   * Create a HTTP entity.
-   * @deprecated Use createStringEntity instead
-   * @param contentMessage The entity content as text
-   * @param contentType The type of content
-   * @return An HTTP entity
-   */
-  @Deprecated
-  public static HttpEntity createEntity(String contentMessage, ContentType contentType) {
-    HttpEntity newEntity = new StringEntity(contentMessage, contentType);
-
-    return newEntity;
-  }
-
-  /**
    * Get the body from a HTTP response.
    * @param response The response
    * @return The response body

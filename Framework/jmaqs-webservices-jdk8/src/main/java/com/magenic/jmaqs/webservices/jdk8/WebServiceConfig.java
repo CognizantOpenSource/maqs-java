@@ -12,11 +12,14 @@ import com.magenic.jmaqs.utilities.helper.ConfigSection;
  * Web service specific configuration settings.
  */
 public final class WebServiceConfig {
+
+  private WebServiceConfig() {
+  }
+
   /**
    * The web service configuration section.
    */
-  private static final ConfigSection WEBSERVICE_SECTION =
-          ConfigSection.WebServiceMaqs;
+  private static final ConfigSection WEBSERVICE_SECTION = ConfigSection.WebServiceMaqs;
 
   /**
    * Grabs the URI for the Web Service.
