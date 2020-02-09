@@ -34,7 +34,7 @@
 		<module>jmaqs-utilities</module>
 		<module>jmaqs-base</module>
 		<module>jmaqs-selenium</module>
-		<module>jmaqs-webservices</module>
+		<module>jmaqs-webservices-jdk8</module>
 		<module>jmaqs-appium</module>
         <module>jmaqs-database</module>
 		<module>jmaqs-jacoco-reporting</module>
