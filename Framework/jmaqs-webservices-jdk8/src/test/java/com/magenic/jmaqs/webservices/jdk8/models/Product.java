@@ -2,7 +2,7 @@
  * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.jdk8.models;
+package com.magenic.jmaqs.webservices.jdk8.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

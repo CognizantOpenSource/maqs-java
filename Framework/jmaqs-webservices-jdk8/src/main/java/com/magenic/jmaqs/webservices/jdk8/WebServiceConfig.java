@@ -3,7 +3,7 @@
  * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.jdk8;
+package com.magenic.jmaqs.webservices.jdk8;
 
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;

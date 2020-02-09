@@ -2,10 +2,10 @@
  * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.jdk8;
+package com.magenic.jmaqs.webservices.jdk8;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.magenic.jmaqs.jdk8.models.Product;
+import com.magenic.jmaqs.webservices.jdk8.models.Product;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.math.BigDecimal;
 import java.nio.charset.Charset;

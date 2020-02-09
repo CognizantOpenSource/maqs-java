@@ -2,10 +2,9 @@
  * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.jdk8;
+package com.magenic.jmaqs.webservices.jdk8;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
-import com.magenic.jmaqs.jdk8.MediaType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

@@ -2,12 +2,9 @@
  * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.jdk8;
+package com.magenic.jmaqs.webservices.jdk8;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
-import com.magenic.jmaqs.jdk8.WebServiceConfig;
-import com.magenic.jmaqs.jdk8.WebServiceDriver;
-import com.magenic.jmaqs.jdk8.WebServiceTestObject;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.net.URISyntaxException;
 import java.util.function.Supplier;
