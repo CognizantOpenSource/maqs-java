@@ -58,26 +58,41 @@ public final class WebServiceUtilities {
 
     if (contentType.toString().toUpperCase().contains("JSON")) {
       responseBody = deserializeJson(response, type);
-    }
-    else if (contentType.toString().toUpperCase().contains("XML")) {
+    } else if (contentType.toString().toUpperCase().contains("XML")) {
       responseBody = deserializeXml(response, type);
-    }
-    else {
+    } else {
       throw new IllegalArgumentException(
-              StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
     }
 
     return responseBody;
   }
 
   /**
+   * Create a HTTP entity.
+   *
+   * @param contentMessage The entity content as text
+   * @param contentType    The type of content
+   * @return An HTTP entity
+   * @deprecated Use createStringEntity instead
+   */
+  @Deprecated
+  public static HttpEntity createEntity(String contentMessage, ContentType contentType) {
+    HttpEntity newEntity = new StringEntity(contentMessage, contentType);
+
+    return newEntity;
+  }
+
+  /**
    * Create the string entity
-   * @param body The body being set in the entity
-   * @param encoding The charset encoding of the message
+   *
+   * @param body      The body being set in the entity
+   * @param encoding  The charset encoding of the message
    * @param mediaType The mime type of the message
    * @return The string entity
    */
-  public static <T> StringEntity createStringEntity(T body, Charset encoding, String mediaType) throws JsonProcessingException {
+  public static <T> StringEntity createStringEntity(T body, Charset encoding, String mediaType)
+      throws JsonProcessingException {
     ContentType contentType = ContentType.create(mediaType, encoding);
     return createStringEntity(body, contentType);
   }
