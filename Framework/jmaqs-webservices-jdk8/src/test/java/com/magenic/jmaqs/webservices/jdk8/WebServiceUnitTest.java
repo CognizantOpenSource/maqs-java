@@ -70,9 +70,9 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WebService)
   public void webServicePatchError() throws Exception {
-    HttpEntity content = WebServiceUtilities.createEntity("", ContentType.APPLICATION_XML);
-    CloseableHttpResponse response = this.getWebServiceDriver().patchContent("/api/XML_JSON/Put/1",
-        content, ContentType.APPLICATION_XML, false);
+    HttpEntity content = WebServiceUtilities.createStringEntity("", ContentType.APPLICATION_XML);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .patchContent("/api/XML_JSON/Put/1", content, ContentType.APPLICATION_XML, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 405);
     Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Method Not Allowed");
@@ -86,9 +86,9 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WebService)
   public void webServicePostError() throws Exception {
-    HttpEntity content = WebServiceUtilities.createEntity("", ContentType.TEXT_PLAIN);
-    CloseableHttpResponse response = this.getWebServiceDriver().postContent("/api/String", content,
-        ContentType.TEXT_PLAIN, false);
+    HttpEntity content = WebServiceUtilities.createStringEntity("", ContentType.TEXT_PLAIN);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .postContent("/api/String", content, ContentType.TEXT_PLAIN, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 400);
     Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Bad Request");
@@ -102,9 +102,9 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WebService)
   public void webServicePutError() throws Exception {
-    HttpEntity content = WebServiceUtilities.createEntity("", ContentType.APPLICATION_XML);
-    CloseableHttpResponse response = this.getWebServiceDriver().putContent("/api/XML_JSON/Put/1",
-        content, ContentType.APPLICATION_XML, false);
+    HttpEntity content = WebServiceUtilities.createStringEntity("", ContentType.APPLICATION_XML);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .putContent("/api/XML_JSON/Put/1", content, ContentType.APPLICATION_XML, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 409);
     Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Conflict");
