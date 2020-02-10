@@ -86,9 +86,8 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WebService)
   public void webServicePostError() throws Exception {
-    HttpEntity content = WebServiceUtilities.createStringEntity("", ContentType.TEXT_PLAIN);
     CloseableHttpResponse response = this.getWebServiceDriver()
-        .postContent("/api/String", content, ContentType.TEXT_PLAIN, false);
+        .postContent("/api/String", null, ContentType.TEXT_PLAIN, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 400);
     Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Bad Request");
