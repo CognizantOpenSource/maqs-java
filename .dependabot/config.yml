@@ -42,7 +42,7 @@ update_configs:
       - "dependencies"
   
   - package_manager: "java:maven"
-    directory: "/Framework/jmaqs-webservices"
+    directory: "/Framework/jmaqs-webservices-jdk8"
     update_schedule: "daily"
     target_branch: "master"
     default_labels:
