@@ -10,11 +10,11 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-	<groupId>com.magenic.jmaqs.webservices</groupId>
-	<artifactId>jmaqs-webservices-jdk8</artifactId>
+    <groupId>com.magenic.jmaqs.webservices</groupId>
+    <artifactId>jmaqs-webservices-jdk8</artifactId>
     <name>jmaqs-webservices-jdk8</name>
-	<packaging>jar</packaging>
-	<url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
+    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
