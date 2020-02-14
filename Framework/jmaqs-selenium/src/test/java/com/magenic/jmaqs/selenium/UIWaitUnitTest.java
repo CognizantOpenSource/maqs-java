@@ -105,17 +105,17 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * the IFrame element with the source.
    */
-  private By magenicIFrameLocator = By.className("#mageniciFrame");
+  private By magenicIFrameLocator = By.cssSelector("#mageniciFrame");
 
   /**
    * Tests the functionality that waits until the IFrame to load.
    */
   @Test(groups = TestCategories.Selenium)
-  // TODO: iFrame on test page is out of date and will need to be updated.
   public void waitUntilIFrameToLoad() {
     this.getWebDriver().navigate().to(testSiteIFrameUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    this.getWebDriver().switchTo().frame(0);
+    wait.waitForPageLoad();
+    WebDriverFactory.setBrowserSize(this.getWebDriver(), "Maximize");
     Assert.assertTrue(wait.waitUntilIframeToLoad(magenicIFrameLocator));
   }
 
@@ -123,10 +123,11 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
    * Tests the functionality that waits for the IFrame to load.
    */
   @Test(groups = TestCategories.Selenium)
-  // TODO: iFrame on test page is out of date and will need to be updated.
   public void waitForIFrameToLoad() {
     this.getWebDriver().navigate().to(testSiteIFrameUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    wait.waitForPageLoad();
+    WebDriverFactory.setBrowserSize(this.getWebDriver(), "Maximize");
     wait.waitForIframeToLoad(magenicIFrameLocator);
   }
 
@@ -138,6 +139,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "style", "display: none;"));
+    Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "style",
+        "display: none;", 10000, 2000));
   }
 
   /**
@@ -160,6 +163,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "id", ""));
+    Assert.assertTrue(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "id",
+        "", 10000, 1000));
   }
 
   /**
@@ -173,6 +178,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertFalse(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "nottherightid", "id"));
+    Assert.assertFalse(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector,
+        "nottherightid", "id", 10000, 1000));
   }
 
   /**
@@ -186,6 +193,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertFalse(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "display:", "style"));
+    Assert.assertFalse(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "display:",
+        "style", 10000, 1000));
   }
 
   /**
@@ -196,6 +205,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertNotNull(wait.waitForClickableElementAndScrollIntoView(automationShowDialog1));
+    Assert.assertNotNull(wait.waitForClickableElementAndScrollIntoView(automationShowDialog1,
+        10000, 1000));
   }
 
   /**
@@ -206,6 +217,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilClickableElementAndScrollIntoView(automationShowDialog1));
+    Assert.assertTrue(wait.waitUntilClickableElementAndScrollIntoView(automationShowDialog1,
+        10000, 1000));
   }
 
   /**
@@ -216,6 +229,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertNotNull(wait.waitForPresentElement(flowerTableTitle));
+    Assert.assertNotNull(wait.waitForPresentElement(flowerTableTitle, 10000, 1000));
   }
 
   /**
@@ -226,6 +240,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertEquals(wait.waitForElements(flowerTable).size(), 20);
+    Assert.assertEquals(wait.waitForElements(flowerTable, 10000, 1000).size(), 20);
   }
 
   /**
@@ -236,6 +251,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertNotNull(wait.waitForEnabledElement(flowerTableTitle));
+    Assert.assertNotNull(wait.waitForEnabledElement(flowerTableTitle, 10000, 1000));
   }
 
   /**
@@ -246,6 +262,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilEnabledElement(flowerTableTitle));
+    Assert.assertTrue(wait.waitUntilEnabledElement(flowerTableTitle, 10000, 1000));
   }
 
   /**
@@ -256,6 +273,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilDisabledElement(disabledField));
+    Assert.assertTrue(wait.waitUntilDisabledElement(disabledField, 10000, 1000));
   }
 
   /**
@@ -275,7 +293,9 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertNotNull(wait.getNewWaitDriver());
+    Assert.assertNotNull(wait.getNewWaitDriver(10000));
     Assert.assertNotNull(wait.getNewWaitDriver(this.getTestObject().getWebDriver()));
+    Assert.assertNotNull(wait.getNewWaitDriver(this.getTestObject().getWebDriver(), 10000, 1000));
   }
 
   /**
@@ -287,6 +307,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     WebElement element = wait.waitForClickableElement(homeButtonCssSelector);
+    Assert.assertNotNull(element, "Null element was returned");
+    element = wait.waitForClickableElement(homeButtonCssSelector, 10000, 1000);
     Assert.assertNotNull(element, "Null element was returned");
   }
 
@@ -300,6 +322,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     WebElement element = wait.waitForVisibleElement(asyncDropdownCssSelector);
+    Assert.assertNotNull(element, "Null element was returned");
+    element = wait.waitForVisibleElement(asyncDropdownCssSelector, 10000, 1000);
     Assert.assertNotNull(element, "Null element was returned");
   }
 
@@ -388,6 +412,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilClickableElement(automationShowDialog1), "Failed to find element");
+    Assert.assertTrue(wait.waitUntilClickableElement(automationShowDialog1,
+        10000, 1000), "Failed to find element");
   }
 
   /**
@@ -400,6 +426,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilVisibleElement(automationShowDialog1), "Failed to find element");
+    Assert.assertTrue(wait.waitUntilVisibleElement(automationShowDialog1,
+        10000, 1000), "Failed to find element");
   }
 
   /**
@@ -412,6 +440,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilExactText(automationShowDialog1, "Show dialog"), "Failed to find element");
+    Assert.assertTrue(wait.waitUntilExactText(automationShowDialog1, "Show dialog",
+        10000, 1000), "Failed to find element");
   }
 
   /**
@@ -425,6 +455,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilContainsText(automationShowDialog1, "dialog"),
         "Failed to find element");
+    Assert.assertTrue(wait.waitUntilContainsText(automationShowDialog1, "dialog",
+        10000, 1000), "Failed to find element");
   }
 
   /**
@@ -437,6 +469,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilAbsentElement(notInPage));
+    Assert.assertTrue(wait.waitUntilAbsentElement(notInPage, 10000, 1000));
   }
 
   /**
@@ -451,7 +484,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    wait.waitForAttributeTextEquals(foodTable, "Flower Table", "Summary");
+    WebElement element = wait.waitForAttributeTextEquals(foodTable, "Flower Table", "Summary");
+    Assert.assertEquals(element.getAttribute("Text"), "Flower Table");
   }
 
   /**
@@ -464,6 +498,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertNotNull(wait.waitForAttributeTextEquals(asyncLoadingTextDiv, "style", "display: block;"));
+    Assert.assertNotNull(wait.waitForAttributeTextEquals(asyncLoadingTextDiv, "style",
+        "display: block;", 10000, 1000));
   }
 
   /**

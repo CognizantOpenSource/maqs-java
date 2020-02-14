@@ -1008,8 +1008,8 @@ public class UIWait {
       System.err.print(error);
     }
 
-    Coordinates coord = ((Locatable) element).getCoordinates();
-    while (coord.inViewPort().getY() < HEADER_SIZE && counter < max) {
+    Coordinates coordinates = ((Locatable) element).getCoordinates();
+    while (coordinates.inViewPort().getY() < HEADER_SIZE && counter < max) {
       waitForVisibleElement(BODY_BY).sendKeys(Keys.ARROW_UP);
       counter++;
     }
@@ -1039,17 +1039,18 @@ public class UIWait {
   }
 
   /**
-   * Checks if the text of the elements are equal TODO - should have fuzzy validation incorporated.
+   * Checks if the text of the elements are equal.
    *
    * @param by   Selector to examine
    * @param text Text that is being compared to the selector
    * @return boolean - true if equal
    */
+  // TODO: should have fuzzy validation incorporated.
   private boolean doesTextMatch(By by, String text) {
     try {
       WebElement element = this.waitForVisibleElement(by);
 
-      // TODO we probably should include an option to use fuzzy validation here, so it isn't a
+      // TODO: we probably should include an option to use fuzzy validation here, so it isn't a
       // hard-compare.
       if (element != null && element.getText().equals(text)) {
         return true;
