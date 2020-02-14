@@ -30,12 +30,12 @@
     </licenses>
 
 
-    <modules>
-        <module>jmaqs-utilities</module>
-        <module>jmaqs-base</module>
-        <module>jmaqs-selenium</module>
-        <module>jmaqs-webservices</module>
-        <module>jmaqs-appium</module>
+	<modules>
+		<module>jmaqs-utilities</module>
+		<module>jmaqs-base</module>
+		<module>jmaqs-selenium</module>
+		<module>jmaqs-webservices-jdk8</module>
+		<module>jmaqs-appium</module>
         <module>jmaqs-database</module>
         <module>jmaqs-jacoco-reporting</module>
     </modules>
@@ -96,8 +96,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <puppycheckstyle.plugin.version>7.6.1</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.5</jacoco.version>
-        <testng.version>7.1.0</testng.version>
-        <selenium.version>3.141.59</selenium.version>
     </properties>
     <!--<reporting>
 		<plugins>
