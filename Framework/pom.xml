@@ -96,6 +96,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <puppycheckstyle.plugin.version>7.6.1</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.5</jacoco.version>
+        <testng.version>7.1.0</testng.version>
+        <selenium.version>3.141.59</selenium.version>
     </properties>
     <!--<reporting>
 		<plugins>
