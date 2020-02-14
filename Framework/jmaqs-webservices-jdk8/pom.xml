@@ -17,7 +17,6 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jcommander.version>1.78</jcommander.version>
         <httpcore.version>4.4.11</httpcore.version>
         <jackson-annotations.version>2.9.10</jackson-annotations.version>
