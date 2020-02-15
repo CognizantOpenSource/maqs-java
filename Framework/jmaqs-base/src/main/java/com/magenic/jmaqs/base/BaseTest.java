@@ -13,7 +13,6 @@ import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.logging.TestResultType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
-
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -130,7 +128,7 @@ public abstract class BaseTest {
    *
    * @param setting The LoggingEnabled enum
    */
-  private void setLoggingEnabled(LoggingEnabled setting) {
+  protected void setLoggingEnabled(LoggingEnabled setting) {
     this.loggingEnabledSetting = setting;
   }
 
@@ -276,7 +274,6 @@ public abstract class BaseTest {
       this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
     }
 
-
     // Create console logger to log subsequent messages
     this.setTestObject(new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName));
   }
@@ -340,7 +337,9 @@ public abstract class BaseTest {
     }
   }
 
-  /* *//**
+  /* */
+
+  /**
    * Get the test result type as text.
    *
    * @return The test result type as text

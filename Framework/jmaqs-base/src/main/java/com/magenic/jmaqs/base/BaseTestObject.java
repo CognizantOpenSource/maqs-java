@@ -7,7 +7,6 @@ package com.magenic.jmaqs.base;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
@@ -59,6 +58,7 @@ public class BaseTestObject implements AutoCloseable {
 
   /**
    * Check if the object has been closed.
+   *
    * @return True if the object is closed
    */
   public boolean getClosed() {
@@ -154,7 +154,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param values Concurrent Hash Map of string key value pairs to use
    */
-  private void setValues(ConcurrentHashMap<String, String> values) {
+  protected void setValues(ConcurrentHashMap<String, String> values) {
     this.values = values;
   }
 
@@ -172,7 +172,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param objects Concurrent Hash Map of string key and object value pairs to use
    */
-  private void setObjects(ConcurrentHashMap<String, Object> objects) {
+  protected void setObjects(ConcurrentHashMap<String, Object> objects) {
     this.objects = objects;
   }
 
@@ -190,7 +190,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param managerStore Concurrent Hash Map of string key and driver value pairs to use.
    */
-  private void setManagerStore(ManagerDictionary managerStore) {
+  protected void setManagerStore(ManagerDictionary managerStore) {
     this.managerStore = managerStore;
   }
 

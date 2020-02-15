@@ -5,7 +5,6 @@
 package com.magenic.jmaqs.base;
 
 import java.lang.reflect.Method;
-
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 
