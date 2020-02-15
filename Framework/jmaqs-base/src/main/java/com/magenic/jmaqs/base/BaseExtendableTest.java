@@ -22,6 +22,7 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
   protected BaseExtendableTest() {
   }
 
+  @Override
   public T getTestObject() {
     return (T) super.getTestObject();
   }
@@ -37,10 +38,11 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
 
   @BeforeMethod
   @Override
-  public void setup(Method method, ITestContext testContext) throws Exception {
+  public void setup(Method method, ITestContext testContext) {
     super.setup(method, testContext);
   }
 
+  @Override
   protected abstract void createNewTestObject();
 }
 

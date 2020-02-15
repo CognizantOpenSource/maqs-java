@@ -11,6 +11,7 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.logging.TestResultType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.lang.reflect.Method;
@@ -20,6 +21,7 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,6 +29,8 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import static java.lang.System.out;
 
 /**
  * Base test class.
@@ -72,7 +76,7 @@ public abstract class BaseTest {
    * Initializes a new instance of the BaseTest class.
    */
   public BaseTest() {
-    this.loggedExceptions = new ConcurrentHashMap<String, ArrayList<String>>();
+    this.loggedExceptions = new ConcurrentHashMap<>();
     this.baseTestObjects = new ConcurrentManagerHashMap();
   }
 
@@ -135,12 +139,14 @@ public abstract class BaseTest {
    *
    * @return ArrayList of logged exceptions for this test
    */
-  public ArrayList<String> getLoggedExceptions() {
+  public List<String> getLoggedExceptions() {
+    ArrayList<String> result;
     if (!this.loggedExceptions.containsKey(this.getFullyQualifiedTestClassName())) {
-      return new ArrayList<String>();
+      result = new ArrayList<>();
     } else {
-      return this.loggedExceptions.get(this.getFullyQualifiedTestClassName());
+      result = this.loggedExceptions.get(this.getFullyQualifiedTestClassName());
     }
+    return result;
   }
 
   /**
@@ -148,8 +154,9 @@ public abstract class BaseTest {
    *
    * @param loggedExceptionList ArrayList of logged exceptions to use.
    */
-  public void setLoggedExceptions(ArrayList<String> loggedExceptionList) {
-    this.loggedExceptions.put(this.getFullyQualifiedTestClassName(), loggedExceptionList);
+  public void setLoggedExceptions(List<String> loggedExceptionList) {
+    this.loggedExceptions
+        .put(this.getFullyQualifiedTestClassName(), (ArrayList<String>) loggedExceptionList);
   }
 
   /**
@@ -214,7 +221,7 @@ public abstract class BaseTest {
    * @throws Exception Throws exception if get logger fails
    */
   @BeforeMethod(alwaysRun = true)
-  public void setup(Method method, ITestContext testContext) throws Exception {
+  public void setup(Method method, ITestContext testContext) {
     this.testContextInstance = testContext;
 
     // Get the Fully Qualified Test Class Name and set it in the object
@@ -260,7 +267,7 @@ public abstract class BaseTest {
 
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.getFullyQualifiedTestClassName();
-
+    this.fullyQualifiedTestClassName.remove();
     try (BaseTestObject baseTestObject = this.getTestObject()) {
       // Release logged messages
       this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
@@ -319,7 +326,7 @@ public abstract class BaseTest {
    * Get the type of test result.
    *
    * @return The type of test result
-   *//*
+   */
   protected TestResultType getResultType() {
     switch (this.testResult.getStatus()) {
       case ITestResult.SUCCESS:
@@ -331,13 +338,13 @@ public abstract class BaseTest {
       default:
         return TestResultType.OTHER;
     }
-  }*/
+  }
 
   /* *//**
    * Get the test result type as text.
    *
    * @return The test result type as text
-   *//*
+   */
   protected String getResultText() {
     switch (this.testResult.getStatus()) {
       case ITestResult.SUCCESS:
@@ -349,7 +356,7 @@ public abstract class BaseTest {
       default:
         return "OTHER";
     }
-  }*/
+  }
 
   /**
    * Get the fully qualified test name.
@@ -378,11 +385,11 @@ public abstract class BaseTest {
       // If this was an error and written to a file, add it to the console
       // output as well
       if (messageType == MessageType.ERROR && !(this.getLogger() instanceof ConsoleLogger)) {
-        System.out.println(formattedMessage);
+        out.println(formattedMessage);
       }
     } catch (Exception e) {
-      System.out.println(formattedMessage);
-      System.out.println("Logging failed because: " + e.getMessage());
+      out.println(formattedMessage);
+      out.println("Logging failed because: " + e.getMessage());
     }
   }
 

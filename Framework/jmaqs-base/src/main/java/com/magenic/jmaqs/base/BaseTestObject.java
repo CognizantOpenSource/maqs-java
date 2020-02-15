@@ -11,6 +11,7 @@ import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * The BaseTestObject class.
@@ -90,8 +91,8 @@ public class BaseTestObject implements AutoCloseable {
   public BaseTestObject(BaseTestObject baseTestObject) {
     this.log = baseTestObject.getLog();
     this.perfTimerCollection = baseTestObject.getPerfTimerCollection();
-    this.values = baseTestObject.getValues();
-    this.objects = baseTestObject.getObjects();
+    this.values = (ConcurrentHashMap) baseTestObject.getValues();
+    this.objects = (ConcurrentHashMap) baseTestObject.getObjects();
     this.managerStore = baseTestObject.getManagerStore();
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = baseTestObject.getFullyQualifiedTestName();
@@ -144,7 +145,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @return Concurrent Hash Map of string key value pairs
    */
-  public ConcurrentHashMap<String, String> getValues() {
+  public ConcurrentMap<String, String> getValues() {
     return this.values;
   }
 
@@ -162,7 +163,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @return Concurrent Hash Map of string key and object value pairs
    */
-  public ConcurrentHashMap<String, Object> getObjects() {
+  public ConcurrentMap<String, Object> getObjects() {
     return this.objects;
   }
 
