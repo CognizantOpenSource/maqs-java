@@ -44,7 +44,7 @@ public class UIWait {
   private static final By BODY_BY = By.cssSelector("BODY");
 
   /**
-   * The Webdriver that the test is currently running on.
+   * The Web driver that the test is currently running on.
    */
   private WebDriver driver;
 
@@ -293,7 +293,7 @@ public class UIWait {
         return obj.isEnabled();
       } catch (NoSuchElementException | StaleElementReferenceException e) {
         // Do not throw these exceptions here.
-        // Instead return false and let the fluentwait try again.
+        // Instead return false and let the fluent wait try again.
         return false;
       }
     };
@@ -412,14 +412,13 @@ public class UIWait {
   }
 
   /**
-   * Wait for a selector to present, and then return a list of all WebElements that are located by
-   * that selector.
+   * Wait for a selector to be present and then return a list
+   * of all WebElements that are located by that selector.
    *
    * @param by              Selector value to wait for
    * @param timeOutInMillis the number of milliseconds to wait before failing
    * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return List of WebElements - all web elements found by the specified selector
-   * @throws Exception if encountered
    */
   public List<WebElement> waitForElements(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -434,7 +433,6 @@ public class UIWait {
    * @param by   Selector value to wait for
    * @param wait The wait driver
    * @return List of WebElements - all web elements found by the specified selector
-   * @throws Exception if encountered
    */
   public List<WebElement> waitForElements(final By by, WebDriverWait wait) {
     return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
@@ -1010,8 +1008,8 @@ public class UIWait {
       System.err.print(error);
     }
 
-    Coordinates coord = ((Locatable) element).getCoordinates();
-    while (coord.inViewPort().getY() < HEADER_SIZE && counter < max) {
+    Coordinates coordinates = ((Locatable) element).getCoordinates();
+    while (coordinates.inViewPort().getY() < HEADER_SIZE && counter < max) {
       waitForVisibleElement(BODY_BY).sendKeys(Keys.ARROW_UP);
       counter++;
     }
@@ -1041,17 +1039,18 @@ public class UIWait {
   }
 
   /**
-   * Checks if the text of the elements are equal TODO - should have fuzzy validation incorporated.
+   * Checks if the text of the elements are equal.
    *
    * @param by   Selector to examine
    * @param text Text that is being compared to the selector
    * @return boolean - true if equal
    */
+  // TODO: should have fuzzy validation incorporated.
   private boolean doesTextMatch(By by, String text) {
     try {
       WebElement element = this.waitForVisibleElement(by);
 
-      // TODO we probably should include an option to use fuzzy validation here, so it isn't a
+      // TODO: we probably should include an option to use fuzzy validation here, so it isn't a
       // hard-compare.
       if (element != null && element.getText().equals(text)) {
         return true;
