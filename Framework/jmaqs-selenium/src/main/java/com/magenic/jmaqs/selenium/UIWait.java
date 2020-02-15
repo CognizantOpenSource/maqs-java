@@ -287,7 +287,6 @@ public class UIWait {
     WebElement element = this.waitForVisibleElement(by);
     FluentWait<WebElement> fluentWait = FluentWaitFactory
         .getNewElementFluentWait(element, timeOutInMillis, sleepInMillis);
-
     Function<WebElement, Boolean> function = obj -> {
       try {
         return obj.isEnabled();
@@ -486,7 +485,7 @@ public class UIWait {
    */
   public boolean waitUntilExactText(final By by, final String text, WebDriverWait wait) {
     try {
-      return wait.until((ExpectedCondition<Boolean>) function -> doesTextMatch(by, text));
+      return wait.until(function -> doesTextMatch(by, text));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }
@@ -543,7 +542,7 @@ public class UIWait {
    */
   public boolean waitUntilContainsText(final By by, final String text, WebDriverWait wait) {
     try {
-      return wait.until((ExpectedCondition<Boolean>) function -> doesContainsText(by, text));
+      return wait.until(function -> doesContainsText(by, text));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }
@@ -668,8 +667,7 @@ public class UIWait {
   public boolean waitUntilAttribute(final By by, final String attribute, final String text,
       WebDriverWait wait, final boolean contains) {
     try {
-      return wait.until(
-          (ExpectedCondition<Boolean>) f -> attributeMatches(f, by, attribute, text, contains));
+      return wait.until(f -> attributeMatches(f, by, attribute, text, contains));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }
