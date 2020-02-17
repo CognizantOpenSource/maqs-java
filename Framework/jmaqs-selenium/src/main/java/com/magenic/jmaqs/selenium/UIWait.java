@@ -1094,7 +1094,7 @@ public class UIWait {
 	}
 
 	/**
-	 * Checks if the text of the elements are equal TODO - should have fuzzy validation incorporated.
+	 * Checks if the text of the elements are equal
 	 *
 	 * @param by   Selector to examine
 	 * @param text Text that is being compared to the selector
@@ -1104,8 +1104,6 @@ public class UIWait {
 		try {
 			WebElement element = this.waitForVisibleElement(by);
 
-			// TODO we probably should include an option to use fuzzy validation here, so it isn't a
-			// hard-compare.
 			if (element != null && element.getText().equals(text)) {
 				return true;
 			}
