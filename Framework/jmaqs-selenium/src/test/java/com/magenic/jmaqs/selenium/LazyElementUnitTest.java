@@ -3,6 +3,7 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
 import org.openqa.selenium.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,12 +23,20 @@ import static org.testng.Assert.*;
  */
 public class LazyElementUnitTest extends BaseSeleniumTest {
 
+	/**  String contstants used for the tests */
+	private static final String DISABLED = "Disabled";
+	private static final String FLOWER_TABLE_BY = "#Flower table";
+	private static final String FLOWER_TABLE = "Flower table";
+	private static final String FLOWER_TABLE_CAPTION = "Flower table caption";
+	private static final String FOOTER_PARAGRAPH_BY = "FOOTER P";
+	private static final String FOOTER = "Footer";
+
 	/**
 	 * Gets the disabled item
 	 * @return The disabled item
 	 */
 	private LazyElement getDisabledItem() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("#disabledField INPUT"), "Disabled");
+		return new LazyElement(this.getTestObject(), By.cssSelector("#disabledField INPUT"), DISABLED);
 	}
 
 	/**
@@ -83,7 +92,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 * @return The parent element
 	 */
 	private LazyElement getFlowerTableLazyElement() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("#FlowerTable"), "Flower table");
+		return new LazyElement(this.getTestObject(), By.cssSelector(FLOWER_TABLE_BY), FLOWER_TABLE);
 	}
 
 	/**
@@ -91,7 +100,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 * @return The second table caption
 	 */
 	private LazyElement getFlowerTableCaptionWithParent() {
-		return new LazyElement(this.getFlowerTableLazyElement(), By.cssSelector("CAPTION > Strong"), "Flower table caption");
+		return new LazyElement(this.getFlowerTableLazyElement(), By.cssSelector("CAPTION > Strong"), FLOWER_TABLE_CAPTION);
 	}
 
 	/**
@@ -115,7 +124,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 * @return The disabled input
 	 */
 	private LazyElement getDisabledInput() {
-		return new LazyElement(this.getDisabledDiv(), By.cssSelector("input"), "Flower table caption");
+		return new LazyElement(this.getDisabledDiv(), By.cssSelector("input"), FLOWER_TABLE_CAPTION);
 	}
 
 	/**
@@ -133,7 +142,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.Selenium)
 	public void lazyWithParentAndWithoutDontMatch() throws TimeoutException, InterruptedException {
 		// Make sure we got the table caption we are looking for
-		assertEquals("Flower Table", this.getFlowerTableCaptionWithParent().getText());
+		assertEquals(FLOWER_TABLE, this.getFlowerTableCaptionWithParent().getText());
 
 		// Make sure the the first found was not the the flower table
 		assertNotEquals(this.getFlowerTableCaptionWithParent().getText(), this.getFirstTableCaption().getText());
@@ -148,10 +157,10 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 		LazyElement flowerTableCaptionWithoutParent = new LazyElement(
 				this.getTestObject(), 
 				By.cssSelector("#FlowerTable CAPTION > Strong"),
-				"Flower table");
+				FLOWER_TABLE);
 
 		// Make sure we are finding the correct table
-		assertEquals("Flower Table", this.getFlowerTableCaptionWithParent().getText());
+		assertEquals(FLOWER_TABLE, this.getFlowerTableCaptionWithParent().getText());
 
 		// Make sure we got the table caption we are looking for
 		assertEquals(this.getFlowerTableCaptionWithParent().getText(), flowerTableCaptionWithoutParent.getText());
@@ -162,7 +171,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.Selenium)
 	public void lazyPreCaching() {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector("FOOTER P"), "Footer");
+		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Make sure we are getting back the same cached element
 		assertNull(footer.getCachedElement(), "The cached element should be null as we never triggered a find");
@@ -174,7 +183,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.Selenium)
 	public void newFindDifferentThanCached() throws TimeoutException, InterruptedException {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector("FOOTER P"), "Footer");
+		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Trigger a find and save off the element
 		footer.getValue();
@@ -193,7 +202,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementCached() throws TimeoutException, InterruptedException {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector("FOOTER P"), "Footer");
+		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Trigger a find and save off the element
 		footer.getValue();
@@ -218,7 +227,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 		UIWaitFactory.getWaitDriver(this.getWebDriver(), 1, 1);
 
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector("FOOTER P"), "Footer");
+		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Trigger a find and save off the element
 		footer.getValue();
@@ -242,7 +251,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	public void lazyGetsTriggerFind()
 	{
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector("FOOTER P"), "Footer");
+		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		WebElement cacheFooter = footer.getTheVisibleElement();
 
@@ -256,11 +265,11 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.Selenium)
 	public void lazyGetClickableTriggerFind() {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector("FOOTER P"), "Footer");
-		LazyElement footer2 = new LazyElement(this.getTestObject(), By.cssSelector("FOOTER P"), "Footer");
+		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
+		LazyElement footer2 = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
-		WebElement elem = footer.getTheVisibleElement();
-		WebElement elem2 = footer2.getTheClickableElement();
+		footer.getTheVisibleElement();
+		footer2.getTheClickableElement();
 
 		// Make sure get click-able triggers a new find
 		assertNotSame(footer.getCachedElement(), footer.getTheClickableElement());
@@ -272,7 +281,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.Selenium)
 	public void lazyGetExistTriggerFind() {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector("FOOTER P"), "Footer");
+		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		footer.getTheVisibleElement();
 
@@ -286,7 +295,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.Selenium)
 	public void lazyGetVisibleTriggerFind() {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector("FOOTER P"), "Footer");
+		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		footer.getTheVisibleElement();
 
@@ -332,7 +341,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 * Verify Lazy Element get of the test object
 	 */
 	@Test(groups=TestCategories.Selenium)
-	public void LazyElementGetTestObject() {
+	public void lazyElementGetTestObject() {
 		LazyElement testLazyElement = new LazyElement(this.getTestObject(), By.cssSelector("#ItemsToAutomate"), "TEST");
 		assertEquals(this.getTestObject(), testLazyElement.getTestObject());
 	}
@@ -342,7 +351,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementGetAttribute() throws TimeoutException, InterruptedException {
-		assertEquals("Disabled", this.getDisabledItem().getAttribute("value"));
+		assertEquals(DISABLED, this.getDisabledItem().getAttribute("value"));
 	}
 
 	/**
@@ -350,14 +359,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementGetAttributeWithParent() throws TimeoutException, InterruptedException {
-		// not respecting the parent when searching. The selector gets the first instance fo the INPUT on the page
-
-		LazyElement parent = new LazyElement(this.getSeleniumTestObject(), By.cssSelector("#UploadFile"), "parent");
-		LazyElement child = new LazyElement(parent, By.cssSelector("INPUT"), "child");
-
-		String value = child.getText();
-
-		assertEquals(this.getDisabledInput().getValue(),"Disabled");
+		assertEquals(this.getDisabledInput().getValue(), DISABLED);
 	}
 
 	/**
@@ -398,7 +400,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 * @throws IOException, Exception 
 	 */
 	@Test(groups=TestCategories.Selenium)
-	public void lazyElementSendSecretKeys() throws IOException, Exception {
+	public void lazyElementSendSecretKeys() throws IOException, ExecutionFailedException, InterruptedException, TimeoutException {
 		this.getInputBox().sendKeys("beforeSuspendTest");
 		this.getInputBox().clear();
 		this.getInputBox().sendSecretKeys("secretKeys");
@@ -407,7 +409,8 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 
 		FileLogger logger = (FileLogger)this.getTestObject().getLog();
 		String filepath = logger.getFilePath();
-		String logFile = Files.readAllLines(Paths.get(filepath)).stream().reduce((x, y) -> x + y + System.lineSeparator()).get();
+		String logFile = Files.readAllLines(Paths.get(filepath)).stream().reduce((x, y) -> x + y + System.lineSeparator())
+				.orElseThrow(() -> new FileNotFoundException(String.format("The log file %s was not found at path %s", logger.getFileName(), filepath)));
 		
 		assertTrue(logFile.contains("beforeSuspendTest"));
 		assertFalse(logFile.contains("secretKeys"));
@@ -479,8 +482,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementSelected() throws TimeoutException, InterruptedException {
-		// TODO: update test when ElementHandler is updated to use UIWait
-		ElementHandler.selectDropDownOptionByValue(new SeleniumWait(this.getWebDriver()), By.cssSelector("#computerParts"), "two");
+		ElementHandler.selectDropDownOptionByValue(this.getWebDriver(), By.cssSelector("#computerParts"), "two");
 
 		assertTrue(this.getSelected().getIsSelected());
 		assertFalse(this.getNotSelected().getIsSelected());
@@ -499,7 +501,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementTextWithParent() throws TimeoutException, InterruptedException {
-		assertEquals("Flower Table", this.getFlowerTableCaptionWithParent().getText());
+		assertEquals(FLOWER_TABLE, this.getFlowerTableCaptionWithParent().getText());
 	}
 
 	/**
@@ -588,7 +590,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementToString() {
 		// Hard-coded userFriendlyName due to private access on LazyElement
 		String stringValue = 
-				this.getFlowerTableLazyElement().getBy().toString() + "Flower table";
+				this.getFlowerTableLazyElement().getBy().toString() + FLOWER_TABLE;
 
 		assertEquals(stringValue, this.getFlowerTableLazyElement().toString());
 	}
@@ -600,8 +602,8 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementWithParentToString() {
 		// Hard-coded userFriendlyName due to private access on LazyElement
 		String stringValue =
-				this.getFlowerTableLazyElement().getBy().toString() + "Flower table" +
-						this.getFlowerTableCaptionWithParent().getBy().toString() + "Flower table caption";
+				this.getFlowerTableLazyElement().getBy().toString() + FLOWER_TABLE +
+						this.getFlowerTableCaptionWithParent().getBy().toString() + FLOWER_TABLE_CAPTION;
 
 		assertEquals(stringValue, this.getFlowerTableCaptionWithParent().toString());
 	}

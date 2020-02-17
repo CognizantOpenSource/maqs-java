@@ -45,11 +45,10 @@ public class UIWaitFactory {
 		WebDriver unwrappedDriver = getLowLevelDriver(searchContext);
 
 		if (waitCollection.containsKey(unwrappedDriver)) {
-			WebDriverWait waitDriver = waitCollection.get(unwrappedDriver);
-			return waitDriver;
+			return waitCollection.get(unwrappedDriver);
 		}
 		else {
-			WebDriverWait waitDriver = SeleniumConfig.getWaitDriver(unwrappedDriver);
+			WebDriverWait waitDriver = new WebDriverWait(unwrappedDriver, SeleniumConfig.getTimeoutTime().getSeconds());
 			setWaitDriver(unwrappedDriver, waitDriver);
 			return waitDriver;
 		}

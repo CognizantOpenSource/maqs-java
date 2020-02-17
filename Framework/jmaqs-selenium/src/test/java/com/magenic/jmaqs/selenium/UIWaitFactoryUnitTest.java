@@ -67,7 +67,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.Selenium)
   public void setWaitDriverWhenDriverKeyDoesNotExist() {
     UIWait waitDriver = new UIWait(this.getWebDriver());
-    UIWaitFactory.setWaitDriver(this.getWebDriver(), waitDriver);
+    UIWaitFactory.setWaitDriver(this.getWebDriver(), waitDriver.getWaitDriver());
 
     UIWait existingDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
@@ -83,7 +83,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
     UIWait oldWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWait newWaitDriver = new UIWait(this.getWebDriver());
 
-    UIWaitFactory.setWaitDriver(this.getWebDriver(), newWaitDriver);
+    UIWaitFactory.setWaitDriver(this.getWebDriver(), newWaitDriver.getWaitDriver());
     UIWait overridenWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
     Assert.assertEquals(newWaitDriver, overridenWaitDriver,
