@@ -6,15 +6,19 @@ package com.magenic.jmaqs.utilities;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
-
+import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
+import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.magenic.jmaqs.utilities.logging.HtmlFileLogger;
+import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.logging.LoggingConfig;
+import com.magenic.jmaqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
 
-import com.magenic.jmaqs.utilities.logging.*;
-import org.apache.commons.io.FileUtils;
+import java.util.HashMap;
+import java.util.UUID;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -25,15 +29,20 @@ import org.testng.asserts.SoftAssert;
  */
 @Test(singleThreaded = true)
 public class FileLoggerUnitTest {
+
+  public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY =
+      LoggingConfig.getLogDirectory() + "/" + "Log Folder Messaging Level Directory";
+
   @DataProvider(name = "logLevels")
   public static Object[][] data() {
-    return new Object[][] {
-      { "VERBOSE", new HashMap<String, Boolean>() {{
-          put("VERBOSE", true); put("INFORMATION", true); put("GENERIC", true);
-          put("SUCCESS", true); put("WARNING", true); put("ERROR", true);
-        }}
-      },
-      { "INFORMATION", new HashMap<String, Boolean>() {{
+    return new Object[][] { { "VERBOSE", new HashMap<String, Boolean>() {{
+      put("VERBOSE", true);
+      put("INFORMATION", true);
+      put("GENERIC", true);
+      put("SUCCESS", true);
+      put("WARNING", true);
+      put("ERROR", true);
+    }} }, { "INFORMATION", new HashMap<String, Boolean>() {{
           put("VERBOSE", false); put("INFORMATION", true); put("GENERIC", true);
           put("SUCCESS", true); put("WARNING", true); put("ERROR", true);
         }}
@@ -284,10 +293,13 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerCatchThrownException() {
-    FileLogger logger = new FileLogger(true, "", "FileLoggerCatchThrownException", MessageType.GENERIC);
+    FileLogger logger = new FileLogger(true, "", "FileLoggerCatchThrownException",
+        MessageType.GENERIC);
     logger.setFilePath("<>");
 
     logger.logMessage(MessageType.GENERIC, "test throws error");
+    File file = new File(logger.getFilePath());
+    file.delete();
   }
 
   /**
@@ -399,13 +411,16 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerAppendLogFolder() {
-    FileLogger logger = new FileLogger("Append File Directory", true);
+    final String append_file_directory =
+        LoggingConfig.getLogDirectory() + "/" + "Append File Directory";
+    FileLogger logger = new FileLogger(append_file_directory, true);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Append File Directory", logger.getDirectory(),
-            "Expected Directory 'Append File Directory'.");
+    softAssert.assertEquals(append_file_directory, logger.getDirectory(),
+        "Expected Directory 'Append File Directory'.");
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(),
+        "Expected Information Message Type.");
 
     softAssert.assertAll();
 
@@ -418,13 +433,17 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerLogFolderFileName() {
-    FileLogger logger = new FileLogger("Log Folder File Name Directory", "LogFolderFileName.txt");
+    final String log_folder_file_name_directory =
+        LoggingConfig.getLogDirectory() + "/" + "Log Folder File Name Directory";
+    FileLogger logger = new FileLogger(log_folder_file_name_directory, "LogFolderFileName.txt");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Log Folder File Name Directory", logger.getDirectory(),
-            "Expected Directory 'Log Folder File Name Directory'.");
-    softAssert.assertEquals("LogFolderFileName.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals(log_folder_file_name_directory, logger.getDirectory(),
+        "Expected Directory 'Log Folder File Name Directory'.");
+    softAssert
+        .assertEquals("LogFolderFileName.txt", logger.getFileName(), "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(),
+        "Expected Information Message Type.");
 
     softAssert.assertAll();
 
@@ -437,11 +456,11 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerLogFolderMessagingLevel() {
-    FileLogger logger = new FileLogger("Log Folder Messaging Level Directory", MessageType.WARNING);
+    FileLogger logger = new FileLogger(LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY, MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Log Folder Messaging Level Directory", logger.getDirectory(),
-            "Expected Directory 'Log Folder Messaging Level Directory'.");
+    softAssert.assertEquals(LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY, logger.getDirectory(),
+        "Expected Directory 'Log Folder Messaging Level Directory'.");
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
@@ -494,12 +513,14 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerAppendLogFolderFileName() {
-    FileLogger logger = new FileLogger(
-            true, "AppendLogFolderFileNameDirectory", "AppendLogFolderFileName.txt");
+    final String appendLogFolderFileNameDirectory =
+        LoggingConfig.getLogDirectory() + "/" + "AppendLogFolderFileNameDirectory";
+    FileLogger logger = new FileLogger(true, appendLogFolderFileNameDirectory,
+        "AppendLogFolderFileName.txt");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("AppendLogFolderFileNameDirectory", logger.getDirectory(),
-            " Expected Directory AppendLogFolderFileNameDirectory");
+    softAssert.assertEquals(appendLogFolderFileNameDirectory, logger.getDirectory(),
+        " Expected Directory AppendLogFolderFileNameDirectory");
     softAssert.assertEquals("AppendLogFolderFileName.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
@@ -514,12 +535,13 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerAppendLogFolderMessagingLevel() {
-    FileLogger logger = new FileLogger(
-            true, "AppendLogFolderFileNameDirectory", MessageType.WARNING);
+    final String appendLogFolderFileNameDirectory =
+        LoggingConfig.getLogDirectory() + "/" + "AppendLogFolderFileNameDirectory";
+    FileLogger logger = new FileLogger(true, appendLogFolderFileNameDirectory, MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("AppendLogFolderFileNameDirectory", logger.getDirectory(),
-            " Expected Directory AppendLogFolderFileNameDirectory");
+    softAssert.assertEquals(appendLogFolderFileNameDirectory, logger.getDirectory(),
+        " Expected Directory AppendLogFolderFileNameDirectory");
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
@@ -555,15 +577,18 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerLogFolderFileNameMessagingLevel() {
-    FileLogger logger = new FileLogger(
-            "LogFolderFileNameMessagingLevelDirectory", "LogFolderFileNameMessagingLevel.txt", MessageType.WARNING);
+    final String logFolderFileNameMessagingLevelDirectory =
+        LoggingConfig.getLogDirectory() + "/" + "LogFolderFileNameMessagingLevelDirectory";
+    FileLogger logger = new FileLogger(logFolderFileNameMessagingLevelDirectory,
+        "LogFolderFileNameMessagingLevel.txt", MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("LogFolderFileNameMessagingLevelDirectory", logger.getDirectory(),
-            "Expected Directory 'LogFolderFileNameMessagingLevelDirectory'");
+    softAssert.assertEquals(logFolderFileNameMessagingLevelDirectory, logger.getDirectory(),
+        "Expected Directory 'LogFolderFileNameMessagingLevelDirectory'");
     softAssert.assertEquals("LogFolderFileNameMessagingLevel.txt", logger.getFileName(),
-            "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+        "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(),
+        "Expected Warning Message Type.");
 
     softAssert.assertAll();
 

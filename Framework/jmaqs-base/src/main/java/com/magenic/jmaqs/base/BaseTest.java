@@ -11,7 +11,6 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.logging.TestResultType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.lang.reflect.Method;
@@ -50,14 +49,9 @@ public abstract class BaseTest {
   private ITestResult testResult;
 
   /**
-   * The Test Object.
-   */
-  private BaseTestObject testObject;
-
-  /**
    * The Collection of Base Test Objects to use.
    */
-  ConcurrentHashMap<String, BaseTestObject> baseTestObjects;
+  ConcurrentManagerHashMap baseTestObjects;
 
   /**
    * The Performance Timer Collection.
@@ -72,14 +66,14 @@ public abstract class BaseTest {
   /**
    * The Fully Qualified Test Class Name.
    */
-  private String fullyQualifiedTestClassName;
+  private ThreadLocal<String> fullyQualifiedTestClassName = new ThreadLocal<>();
 
   /**
    * Initializes a new instance of the BaseTest class.
    */
   public BaseTest() {
     this.loggedExceptions = new ConcurrentHashMap<String, ArrayList<String>>();
-    this.baseTestObjects = new ConcurrentHashMap<String, BaseTestObject>();
+    this.baseTestObjects = new ConcurrentManagerHashMap();
   }
 
   /**
@@ -106,7 +100,7 @@ public abstract class BaseTest {
    * @return Logger object
    */
   public Logger getLogger() {
-    return this.testObject.getLog();
+    return this.getTestObject().getLog();
   }
 
   /**
@@ -115,7 +109,7 @@ public abstract class BaseTest {
    * @param log The Logger object
    */
   public void setLogger(Logger log) {
-    this.testObject.setLog(log);
+    this.getTestObject().setLog(log);
   }
 
   /**
@@ -164,7 +158,7 @@ public abstract class BaseTest {
    * @return The Driver Store
    */
   public ManagerDictionary getManagerStore() {
-    return this.testObject.getManagerStore();
+    return this.getTestObject().getManagerStore();
   }
 
   /**
@@ -219,14 +213,14 @@ public abstract class BaseTest {
    * @param testContext The initial executing Test Context object
    * @throws Exception Throws exception if get logger fails
    */
-  @BeforeMethod
+  @BeforeMethod(alwaysRun = true)
   public void setup(Method method, ITestContext testContext) throws Exception {
     this.testContextInstance = testContext;
 
     // Get the Fully Qualified Test Class Name and set it in the object
     String testName = method.getDeclaringClass() + "." + method.getName();
     testName = testName.replaceFirst("class ", "");
-    this.fullyQualifiedTestClassName = testName;
+    this.fullyQualifiedTestClassName.set(testName);
 
     this.createNewTestObject();
   }
@@ -234,7 +228,7 @@ public abstract class BaseTest {
   /**
    * Cleanup after a test.
    */
-  @AfterMethod
+  @AfterMethod(alwaysRun = true)
   public void teardown() {
     try {
       this.beforeLoggingTeardown(testResult);
@@ -247,7 +241,7 @@ public abstract class BaseTest {
     if (testResult.getStatus() == ITestResult.SUCCESS) {
       this.tryToLog(MessageType.SUCCESS, "Test Passed");
     } else if (testResult.getStatus() == ITestResult.FAILURE) {
-      this.tryToLog(MessageType.ERROR, "Test Passed");
+      this.tryToLog(MessageType.ERROR, "Test Failed");
     } else if (testResult.getStatus() == ITestResult.SKIP) {
       this.tryToLog(MessageType.INFORMATION, "Test was skipped");
     } else {
@@ -267,14 +261,17 @@ public abstract class BaseTest {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.getFullyQualifiedTestClassName();
 
-    // Release logged messages
-    this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
+    try (BaseTestObject baseTestObject = this.getTestObject()) {
+      // Release logged messages
+      this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
 
-    // Release the Base Test Object
-    this.baseTestObjects.remove(fullyQualifiedTestName, this.testObject);
+      // Release the Base Test Object
+      this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
+    }
+
 
     // Create console logger to log subsequent messages
-    this.testObject = new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName);
+    this.setTestObject(new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName));
   }
 
   /**
@@ -282,16 +279,11 @@ public abstract class BaseTest {
    *
    * @param testResult The result object
    */
-  @AfterMethod
+  @AfterMethod(alwaysRun = true)
   public void setTestResult(ITestResult testResult) {
     this.testContextInstance = testResult.getTestContext();
     this.testResult = testResult;
   }
-
-  /**
-   * Overload function for doing post setup logging.
-   */
-  protected abstract void postSetupLogging() throws Exception;
 
   /**
    * Steps to do before logging teardown results.
@@ -327,7 +319,7 @@ public abstract class BaseTest {
    * Get the type of test result.
    *
    * @return The type of test result
-   */
+   *//*
   protected TestResultType getResultType() {
     switch (this.testResult.getStatus()) {
       case ITestResult.SUCCESS:
@@ -339,13 +331,13 @@ public abstract class BaseTest {
       default:
         return TestResultType.OTHER;
     }
-  }
+  }*/
 
-  /**
+  /* *//**
    * Get the test result type as text.
    *
    * @return The test result type as text
-   */
+   *//*
   protected String getResultText() {
     switch (this.testResult.getStatus()) {
       case ITestResult.SUCCESS:
@@ -357,7 +349,7 @@ public abstract class BaseTest {
       default:
         return "OTHER";
     }
-  }
+  }*/
 
   /**
    * Get the fully qualified test name.
@@ -365,7 +357,7 @@ public abstract class BaseTest {
    * @return The test name including class
    */
   protected String getFullyQualifiedTestClassName() {
-    return this.fullyQualifiedTestClassName;
+    return this.fullyQualifiedTestClassName.get();
   }
 
   /**

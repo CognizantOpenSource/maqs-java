@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -23,7 +24,8 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   /**
    * Manage dropdown selector.
    */
-  private static By manageDropdown = By.cssSelector("body > div.navbar > div > div > ul > li:nth-child(2) > a");
+  private static By manageDropdown = By
+      .cssSelector("body > div.navbar > div > div > ul > li:nth-child(2) > a");
 
   /**
    * Employee link.
@@ -61,46 +63,55 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   private static By rightClickableElementWithContextMenu = By.cssSelector("#rightclickspace");
 
   /**
-   *  Text within context menu triggered by right click on specific element.
+   * Text within context menu triggered by right click on specific element.
    */
   private static By rightClickContextSaveText = By.cssSelector("#RightClickSaveText");
 
   @Test(groups = TestCategories.Selenium)
   public void hoverOverTest() {
     this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.hoverOver(this.getSeleniumWait(), manageDropdown);
-    this.getSeleniumWait().waitForClickableElement(employeeButton).click();
-    this.getSeleniumWait().waitForExactText(employeePageTitle, "Index");
+    ActionBuilder.hoverOver(this.getWebDriver(), manageDropdown);
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(employeeButton)
+        .click();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForExactText(employeePageTitle, "Index");
   }
 
   @Test(groups = TestCategories.Selenium)
   public void pressModifierKeyTest() {
     this.navigateToUrl(siteAutomationUrl);
 
-    this.getSeleniumWait().waitForClickableElement(listBoxOption1).click();
-    ActionBuilder.pressModifierKey(this.getSeleniumWait(), Keys.CONTROL);
-    this.getSeleniumWait().waitForClickableElement(listBoxOption2).click();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1)
+        .click();
+    ActionBuilder.pressModifierKey(this.getWebDriver(), Keys.CONTROL);
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2)
+        .click();
 
-    Assert.assertTrue(this.getSeleniumWait().waitForClickableElement(listBoxOption1).isSelected());
-    Assert.assertTrue(this.getSeleniumWait().waitForClickableElement(listBoxOption2).isSelected());
+    Assert.assertTrue(
+        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1)
+            .isSelected());
+    Assert.assertTrue(
+        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2)
+            .isSelected());
   }
 
   @Test(groups = TestCategories.Selenium)
   public void moveSliderTest() {
     this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.slideElement(this.getSeleniumWait(), slider, 50);
-    Assert.assertEquals(this.getWebDriver().findElement(sliderLabelNumber).getAttribute("value"), "4");
+    ActionBuilder.slideElement(this.getWebDriver(), slider, 50);
+    Assert.assertEquals(this.getWebDriver().findElement(sliderLabelNumber).getAttribute("value"),
+        "4");
   }
 
   @Test(groups = TestCategories.Selenium)
   public void rightClickToTriggerContextMenu() {
     this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.rightClick(this.getSeleniumWait(), rightClickableElementWithContextMenu);
+    ActionBuilder.rightClick(this.getWebDriver(), rightClickableElementWithContextMenu);
     Assert.assertTrue(this.getWebDriver().findElement(rightClickContextSaveText).isDisplayed());
   }
 
   private void navigateToUrl(String url) {
     this.getWebDriver().navigate().to(url);
-    this.getSeleniumWait().waitForPageLoad();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
+
 }

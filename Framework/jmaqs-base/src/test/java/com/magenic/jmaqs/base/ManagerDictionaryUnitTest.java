@@ -6,10 +6,7 @@ package com.magenic.jmaqs.base;
 
 import static org.testng.Assert.assertNotNull;
 
-import com.magenic.jmaqs.base.BaseTest;
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
-import com.magenic.jmaqs.base.ManagerDictionary;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.function.Supplier;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -18,9 +15,9 @@ import org.testng.annotations.Test;
 /**
  * Manager Dictionary Unit Tests.
  */
-public class ManagerDictionaryUnitTest extends BaseTest {
+public class ManagerDictionaryUnitTest extends BaseGenericTest {
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testClose() {
 
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -42,7 +39,7 @@ public class ManagerDictionaryUnitTest extends BaseTest {
 
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testGetDriver() {
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -51,7 +48,7 @@ public class ManagerDictionaryUnitTest extends BaseTest {
     assertNotNull(managerDictionary.getDriver(dm1));
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testPut() {
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -65,7 +62,7 @@ public class ManagerDictionaryUnitTest extends BaseTest {
     return new TestDriverManager(supplier, getTestObject());
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testPutOrOverride() {
     ManagerDictionary managerDictionary = new ManagerDictionary();
     TestDriverManager testManager = getTestDriverManager();
@@ -73,7 +70,7 @@ public class ManagerDictionaryUnitTest extends BaseTest {
     Assert.assertTrue(managerDictionary.containsValue(testManager));
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testPutOrOverride1() {
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -83,7 +80,7 @@ public class ManagerDictionaryUnitTest extends BaseTest {
     assertNotNull(managerDictionary.get(dm1));
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testRemove() {
     final String dm1 = "DM1";
     final String dm2 = "DM2";
@@ -96,16 +93,6 @@ public class ManagerDictionaryUnitTest extends BaseTest {
     Assert.assertTrue(managerDictionary.remove(dm2),"Checking if remove reported as successful");
     Assert.assertTrue(managerDictionary.containsKey(dm1));
     Assert.assertFalse(managerDictionary.containsKey(dm2));
-  }
-
-  @Override
-  protected void postSetupLogging() throws Exception {
-
-  }
-
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
   }
 
   /**

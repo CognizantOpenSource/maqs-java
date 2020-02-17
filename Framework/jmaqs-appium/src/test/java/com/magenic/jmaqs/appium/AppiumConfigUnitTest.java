@@ -1,58 +1,80 @@
 /*
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
+
 package com.magenic.jmaqs.appium;
 
+import com.magenic.jmaqs.appium.constants.PlatformType;
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class AppiumConfigUnitTest {
+/**
+ * The type Appium config unit test.
+ */
+public class AppiumConfigUnitTest extends BaseGenericTest {
 
+  /**
+   * The Username.
+   */
   private String username = "username";
-  private String app = "app";
-  private String appiumVersion = "appiumVersion";
+  /**
+   * The Browser name.
+   */
+  private String browserName = "browserName";
+  /**
+   * The Access key.
+   */
   private String accessKey = "accessKey";
+  /**
+   * The Device orientation.
+   */
+  private String deviceOrientation = "deviceOrientation";
 
-  @Test
-  public void testGetMobileDeviceUDID() throws Exception {
-    String mobileDeviceUDID = AppiumConfig.getMobileDeviceUdid();
-    Assert.assertTrue(mobileDeviceUDID.equalsIgnoreCase("1234567890ACDEF1234687890ABCDEF"));
-  }
-
-  @Test
-  public void testGetBundleID() throws Exception {
-    String bundleID = AppiumConfig.getBundleId();
-    Assert.assertTrue(bundleID.equalsIgnoreCase("com.magenic.maqs.appium.tester"));
-  }
-
-  @Test
+  /**
+   * Test get os version.
+   *
+   * @throws Exception the exception
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetOSVersion() throws Exception {
     String osVersion = AppiumConfig.getPlatformVersion();
     Assert.assertTrue(osVersion.equalsIgnoreCase("6.0"));
   }
 
-  @Test
+  /**
+   * Test get device name.
+   *
+   * @throws Exception the exception
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceName() throws Exception {
     String deviceName = AppiumConfig.getDeviceName();
     Assert.assertTrue(deviceName.equalsIgnoreCase("Android GoogleAPI Emulator"));
   }
 
-  @Test
+  /**
+   * Test get mobile hub url string.
+   *
+   * @throws Exception the exception
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetMobileHubUrlString() throws Exception {
     String mobileHubUrl = AppiumConfig.getMobileHubUrlString();
     Assert.assertTrue(mobileHubUrl.equalsIgnoreCase("http://ondemand.saucelabs.com:80/wd/hub"));
   }
 
-  @Test
-  public void testSetTimeouts() throws Exception {
-  }
-
-  @Test
+  /**
+   * Test get capabilities as strings.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetCapabilitiesAsStrings() {
     Map<String, String> capabilitiesAsStrings = AppiumConfig.getCapabilitiesAsStrings();
 
@@ -61,15 +83,18 @@ public class AppiumConfigUnitTest {
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "Partner_Magenic");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsStrings.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
-    softAssert.assertTrue(capabilitiesAsStrings.containsKey(app));
-    softAssert.assertEquals(capabilitiesAsStrings.get(app), "org.openintents.shopping");
-    softAssert.assertTrue(capabilitiesAsStrings.containsKey(appiumVersion));
-    softAssert.assertEquals(capabilitiesAsStrings.get(appiumVersion), "1.7.1");
+        .assertEquals(capabilitiesAsStrings.get(accessKey), "0a4d7d84-f93b-43e6-9af1-1c89ac143355");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
+    softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(deviceOrientation));
+    softAssert.assertEquals(capabilitiesAsStrings.get(deviceOrientation), "portrait");
     softAssert.assertAll();
   }
 
-  @Test
+  /**
+   * Test get capabilities as objects.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetCapabilitiesAsObjects() {
     Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
 
@@ -78,30 +103,43 @@ public class AppiumConfigUnitTest {
     softAssert.assertEquals(capabilitiesAsObjects.get(username), "Partner_Magenic");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsObjects.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
-    softAssert.assertTrue(capabilitiesAsObjects.containsKey(app));
-    softAssert.assertEquals(capabilitiesAsObjects.get(app), "org.openintents.shopping");
-    softAssert.assertTrue(capabilitiesAsObjects.containsKey(appiumVersion));
-    softAssert.assertEquals(capabilitiesAsObjects.get(appiumVersion), "1.7.1");
+        .assertEquals(capabilitiesAsObjects.get(accessKey), "0a4d7d84-f93b-43e6-9af1-1c89ac143355");
+    softAssert.assertTrue(capabilitiesAsObjects.containsKey(browserName));
+    softAssert.assertEquals(capabilitiesAsObjects.get(browserName), "Chrome");
+    softAssert.assertTrue(capabilitiesAsObjects.containsKey(deviceOrientation));
+    softAssert.assertEquals(capabilitiesAsObjects.get(deviceOrientation), "portrait");
     softAssert.assertAll();
   }
 
-  @Test
+  /**
+   * Test get save page source on fail.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetSavePageSourceOnFail() {
     Assert.assertFalse(AppiumConfig.getSavePageSourceOnFail());
   }
 
-  @Test
+  /**
+   * Test get soft assert screen shot.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetSoftAssertScreenShot() {
     Assert.assertFalse(AppiumConfig.getSoftAssertScreenShot());
   }
 
-  @Test
+  /**
+   * Test get command timeout.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetCommandTimeout() {
     Assert.assertEquals(AppiumConfig.getCommandTimeout().toMillis(), 122000);
   }
 
-  @Test(expectedExceptions = NumberFormatException.class)
+  /**
+   * Test get command timeout error.
+   */
+  @Test(groups = TestCategories.Appium, expectedExceptions = NumberFormatException.class)
+  @Ignore("Impacting future tests since there is no way to reload config")
   public void testGetCommandTimeoutError() {
     HashMap<String, String> configValues = new HashMap<>();
     configValues.put("MobileCommandTimeout", "sixty thousand");
@@ -109,32 +147,50 @@ public class AppiumConfigUnitTest {
     AppiumConfig.getCommandTimeout();
   }
 
-  @Test
+  /**
+   * Test get mobile timeout.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetMobileTimeout() {
     Assert.assertEquals(AppiumConfig.getMobileTimeout().toMillis(), 10000);
   }
 
-  @Test
+  /**
+   * Test get device type.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceType() {
     Assert.assertEquals(AppiumConfig.getDeviceType(), PlatformType.ANDROID);
   }
 
-  @Test
+  /**
+   * Test get device type android.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceTypeAndroid() {
     Assert.assertEquals(AppiumConfig.getDeviceType("android"), PlatformType.ANDROID);
   }
 
-  @Test
+  /**
+   * Test get device type ios.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceTypeIOS() {
     Assert.assertEquals(AppiumConfig.getDeviceType("ios"), PlatformType.IOS);
   }
 
-  @Test
+  /**
+   * Test get device type windows.
+   */
+  @Test(groups = TestCategories.Appium)
   public void testGetDeviceTypeWindows() {
     Assert.assertEquals(AppiumConfig.getDeviceType("windows"), PlatformType.WINDOWS);
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  /**
+   * Test get device type error.
+   */
+  @Test(groups = TestCategories.Appium, expectedExceptions = IllegalArgumentException.class)
   public void testGetDeviceTypeError() {
     AppiumConfig.getDeviceType("linux");
   }

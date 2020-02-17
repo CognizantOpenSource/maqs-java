@@ -47,6 +47,24 @@ public class BaseTestObject implements AutoCloseable {
   private ArrayList<String> associatedFiles;
 
   /**
+   * The Fully Qualified Test Name.
+   */
+  private String fullyQualifiedTestName;
+
+  /**
+   * Was the object closed
+   */
+  private boolean isClosed = false;
+
+  /**
+   * Check if the object has been closed.
+   * @return True if the object is closed
+   */
+  public boolean getClosed() {
+    return this.isClosed;
+  }
+
+  /**
    * Initializes a new instance of the BaseTestObject class.
    *
    * @param logger                 The test's logger
@@ -59,6 +77,7 @@ public class BaseTestObject implements AutoCloseable {
     this.objects = new ConcurrentHashMap<>();
     this.managerStore = new ManagerDictionary();
     this.associatedFiles = new ArrayList<>();
+    this.fullyQualifiedTestName = fullyQualifiedTestName;
 
     logger.logMessage(MessageType.INFORMATION, "Setup test object for " + fullyQualifiedTestName);
   }
@@ -75,6 +94,7 @@ public class BaseTestObject implements AutoCloseable {
     this.objects = baseTestObject.getObjects();
     this.managerStore = baseTestObject.getManagerStore();
     this.associatedFiles = new ArrayList<>();
+    this.fullyQualifiedTestName = baseTestObject.getFullyQualifiedTestName();
 
     baseTestObject.getLog().logMessage(MessageType.INFORMATION, "Setup test object");
   }
@@ -113,6 +133,10 @@ public class BaseTestObject implements AutoCloseable {
    */
   public void setPerfTimerCollection(PerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
+  }
+
+  public String getFullyQualifiedTestName() {
+    return this.fullyQualifiedTestName;
   }
 
   /**
@@ -296,6 +320,7 @@ public class BaseTestObject implements AutoCloseable {
       this.log.logMessage(MessageType.VERBOSE, "End dispose");
     }
 
+    isClosed = true;
   }
 
   /**
