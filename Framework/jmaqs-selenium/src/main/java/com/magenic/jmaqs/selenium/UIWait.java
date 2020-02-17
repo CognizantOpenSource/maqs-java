@@ -61,7 +61,16 @@ public class UIWait {
 	public UIWait(WebDriver driver) {
 		this(driver,
 				Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserTimeout", "30000")),
-				Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserWaitTime", "1000")));
+				Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserWaitTime", "1000")),
+				null);
+	}
+
+	public UIWait(WebDriver driver, WebDriverWait waitDriver) {
+		this (
+				driver,
+				Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserTimeout", "30000")),
+				Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserWaitTime", "1000")),
+				waitDriver);
 	}
 
 	/**
@@ -71,11 +80,14 @@ public class UIWait {
 	 * @param timeOutInSeconds int value of the total time to wait until timing out
 	 * @param fluentRetryTime  int value of seconds to use for fluent retry
 	 */
-	public UIWait(WebDriver driver, final int timeOutInSeconds, final int fluentRetryTime) {
+	public UIWait(WebDriver driver, final int timeOutInSeconds, final int fluentRetryTime, WebDriverWait webDriverWait) {
 		this.driver = driver;
 		this.timeout = timeOutInSeconds;
 		this.fluentRetryTime = fluentRetryTime;
-		this.setWaitDriver(this.getNewWaitDriver());
+		this.setWaitDriver(
+				webDriverWait == null ?
+						this.getNewWaitDriver() :
+						webDriverWait);
 	}
 
 	/**
