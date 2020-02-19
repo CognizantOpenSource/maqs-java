@@ -10,13 +10,13 @@ import org.testng.annotations.Test;
 
 public class BaseDatabaseTestUnitTest extends BaseDatabaseTest {
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetDatabaseDriver() {
     final DatabaseDriver databaseDriver = getDatabaseDriver();
     Assert.assertNotNull(databaseDriver);
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testSetDatabaseDriver() {
     final DatabaseDriver connection = getConnection();
     final int hashCode = getDatabaseDriver().hashCode();
@@ -25,7 +25,7 @@ public class BaseDatabaseTestUnitTest extends BaseDatabaseTest {
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetConnection() {
     final DatabaseDriver connection = getConnection();
     Assert.assertNotNull(connection);

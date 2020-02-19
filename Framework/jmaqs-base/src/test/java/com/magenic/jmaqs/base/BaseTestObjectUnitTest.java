@@ -21,7 +21,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test Constructor with Log and Method.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testBaseTestObject1() {
     final BaseTestObject testObject = this.getTestObject();
 
@@ -33,7 +33,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test Constructor with Test Object.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testBaseTestObject2() {
     final BaseTestObject testObject = this.getTestObject();
     BaseTestObject baseTestObject = new BaseTestObject(testObject);
@@ -44,7 +44,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test set value.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testSetValue() {
     BaseTestObject testObject = this.getTestObject();
     final String key = "SetKey";
@@ -59,7 +59,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test set object.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testSetObject() {
 
     BaseTestObject testObject = this.getTestObject();
@@ -75,7 +75,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test get log.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetLog() {
     BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getLog(), "Checking that logger is not null.");
@@ -84,7 +84,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test set log.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testSetLog() {
     BaseTestObject testObject = this.getTestObject();
     final Logger logger = this.getLogger();
@@ -95,7 +95,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test Get Perf Collection Timer - Not Null.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetPerfTimerCollectionNotNull() {
     BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getPerfTimerCollection(), "Checking that logger is not null.");
@@ -104,7 +104,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test Set Perf Collection Timer - Get/Set.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testSetPerfTimerCollectionGetSet() {
     BaseTestObject testObject = this.getTestObject();
     final PerfTimerCollection perfTimerCollection = new PerfTimerCollection(testObject.getLog(),
@@ -117,7 +117,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test get values.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetValues() {
     BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getValues(), "Checking that values is not null.");
@@ -126,7 +126,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test get objects.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetObjects() {
     BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getObjects(), "Checking that objects is not null.");
@@ -135,7 +135,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test Get Manager Store - Not Null.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetManagerStoreNotNull() {
     BaseTestObject testObject = this.getTestObject();
     Assert.assertNotNull(testObject.getManagerStore(), "Checking that objects is not null.");
@@ -144,7 +144,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test add driver manager.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testAddDriverManager() {
     BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -160,7 +160,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test add driver manager - Overwrite True.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testAddDriverManagerTrue() {
     BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -179,7 +179,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test add driver manager - Overwrite False.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testAddDriverManagerFalse() {
     BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -195,7 +195,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test add driver manager 2.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testAddDriverManager2() {
     BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -213,7 +213,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test close.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testClose() {
     BaseTestObject testObject = this.getTestObject();
     final Supplier supplier = (Supplier) () -> null;
@@ -230,7 +230,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test add associated file.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testAddAssociatedFile() {
     BaseTestObject testObject = this.getTestObject();
     File temp = null;
@@ -250,7 +250,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test remove associated file.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testRemoveAssociatedFile() {
     BaseTestObject testObject = this.getTestObject();
     File temp = null;
@@ -270,7 +270,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test get array of associated files.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetArrayOfAssociatedFiles() {
     BaseTestObject testObject = this.getTestObject();
     File temp = null;
@@ -292,7 +292,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test contains associated file.
    */
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testContainsAssociatedFile() {
     BaseTestObject testObject = this.getTestObject();
     File temp = null;

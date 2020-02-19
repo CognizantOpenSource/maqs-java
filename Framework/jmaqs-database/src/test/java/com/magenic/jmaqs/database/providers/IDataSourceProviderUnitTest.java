@@ -30,7 +30,7 @@ public class IDataSourceProviderUnitTest extends BaseGenericTest {
   /**
    * Method testGetDataSource ...
    */
-  @Test(groups = TestCategories.Database, dataProvider = "dataProvider")
+  @Test(groups = TestCategories.DATABASE, dataProvider = "dataProvider")
   public void testGetDataSource() {
     throw new UnsupportedOperationException("Test method not implemented yet.");
   }
@@ -38,7 +38,7 @@ public class IDataSourceProviderUnitTest extends BaseGenericTest {
   /**
    * Method testGetDialect ...
    */
-  @Test(groups = TestCategories.Database, dataProvider = "dataProvider")
+  @Test(groups = TestCategories.DATABASE, dataProvider = "dataProvider")
   public void testGetDialect() {
     throw new UnsupportedOperationException("Test method not implemented yet.");
   }

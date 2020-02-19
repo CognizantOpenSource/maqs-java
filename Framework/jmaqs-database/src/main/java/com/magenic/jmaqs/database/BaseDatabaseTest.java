@@ -12,6 +12,9 @@ import org.testng.ITestResult;
  */
 public class BaseDatabaseTest extends BaseExtendableTest<DatabaseTestObject> {
 
+  /**
+   * Instantiates a new Base database test.
+   */
   public BaseDatabaseTest() {
   }
 

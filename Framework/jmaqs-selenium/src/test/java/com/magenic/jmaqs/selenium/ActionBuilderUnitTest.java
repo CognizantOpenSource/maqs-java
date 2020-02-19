@@ -67,7 +67,7 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
    */
   private static By rightClickContextSaveText = By.cssSelector("#RightClickSaveText");
 
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void hoverOverTest() {
     this.navigateToUrl(siteAutomationUrl);
     ActionBuilder.hoverOver(this.getWebDriver(), manageDropdown);
@@ -76,7 +76,7 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForExactText(employeePageTitle, "Index");
   }
 
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void pressModifierKeyTest() {
     this.navigateToUrl(siteAutomationUrl);
 
@@ -94,7 +94,7 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
             .isSelected());
   }
 
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void moveSliderTest() {
     this.navigateToUrl(siteAutomationUrl);
     ActionBuilder.slideElement(this.getWebDriver(), slider, 50);
@@ -102,7 +102,7 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
         "4");
   }
 
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void rightClickToTriggerContextMenu() {
     this.navigateToUrl(siteAutomationUrl);
     ActionBuilder.rightClick(this.getWebDriver(), rightClickableElementWithContextMenu);

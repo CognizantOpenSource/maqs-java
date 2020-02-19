@@ -11,23 +11,23 @@ import org.testng.annotations.Test;
 
 public class DataProviderTypeUnitTest extends BaseGenericTest {
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testFind() {
     Assert.assertEquals(DataProviderType.find("SQL"), DataProviderType.SQL);
   }
 
-  @Test(groups = TestCategories.Database, expectedExceptions = IllegalArgumentException.class)
+  @Test(groups = TestCategories.DATABASE, expectedExceptions = IllegalArgumentException.class)
   public void testFindError() {
     DataProviderType.find("Oracle");
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetName() {
     DataProviderType type = DataProviderType.SQL;
     Assert.assertEquals(type.getName(), "SQL");
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetDialectString() {
     DataProviderType type = DataProviderType.SQL;
     Assert.assertEquals(type.getDialectString(), "org.hibernate.dialect.SQLServerDialect");

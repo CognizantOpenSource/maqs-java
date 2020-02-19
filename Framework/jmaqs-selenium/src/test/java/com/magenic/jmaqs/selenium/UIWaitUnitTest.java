@@ -110,7 +110,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits until the IFrame to load.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilIFrameToLoad() {
     this.getWebDriver().navigate().to(testSiteIFrameUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -122,7 +122,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits for the IFrame to load.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForIFrameToLoad() {
     this.getWebDriver().navigate().to(testSiteIFrameUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -134,7 +134,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits until the attribute texts equals.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilAttributeTextEquals() {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -146,7 +146,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits for the attribute texts equals.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForAttributeTextEqualsFound() {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -158,7 +158,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits until an attribute contains text.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilAttributeTextContainsFound() {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -171,7 +171,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
    * Verify that the WaitUntilAttributeTextContains method returns false
    * for objects that don't have this text inside attribute value within timeout.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilAttributeTextContainsFalse() {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -186,7 +186,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
    * Verify that the WaitUntilAttributeTextContains method returns false
    * for objects that don't have this attribute value within timeout.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilAttributeTextEqualsFalse() {
     getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -200,7 +200,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits for a clickable element scrolls into view.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForClickableElementAndScrollIntoView() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -212,7 +212,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits until a clickable element scrolls into view.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilClickableElementAndScrollIntoView() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -224,7 +224,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits for the present element.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForPresentElement() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -235,7 +235,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits for elements.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForElements() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -246,7 +246,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits for an enabled element.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForEnabledElement() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -257,7 +257,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits until an enabled element.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilEnabledElement() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -268,7 +268,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Tests the functionality that waits until a disabled element.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilDisabledElement() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -279,7 +279,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Test the functionality that resets the wait driver.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void resetWaitDriver() {
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertNotNull(wait.resetWaitDriver());
@@ -288,7 +288,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Test the functionality that gets a new wait driver.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void getNewWaitDriver() {
     this.getWebDriver().navigate().to(testSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -301,7 +301,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitForClickableElement wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForClickableElement() {
     this.getWebDriver().navigate().to(testSiteUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -315,7 +315,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitForVisibleElement wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForVisibleElement() {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -330,7 +330,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitForExactText wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForExactText() {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -343,7 +343,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitForContainsText wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForContainsText() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -356,7 +356,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitForAbsentElement wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForAbsentElement() {
     this.getWebDriver().navigate().to(testSiteUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -368,7 +368,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    *  Verify WaitForAbsentElement wait fails.
    */
-  @Test(groups = TestCategories.Selenium, expectedExceptions = TimeoutException.class)
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = TimeoutException.class)
   public void waitForAbsentElementFail() {
     this.getWebDriver().navigate().to(testSiteUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -381,7 +381,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitForPageLoad wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForPageLoad() {
     getWebDriver().navigate().to(testSiteUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -393,7 +393,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitUntilPageLoad wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilPageLoad() {
     getWebDriver().navigate().to(testSiteUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -405,7 +405,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitUntilClickableElement wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilClickableElement() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -419,7 +419,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitUntilVisibleElement wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilVisibleElement() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -433,7 +433,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitUntilExactText wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilExactText() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -447,7 +447,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify WaitUntilContainsText wait works.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilContainsText() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -462,7 +462,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Test for the wait until absent.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilAbsentElement() {
     this.getWebDriver().navigate().to(testSiteUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -478,7 +478,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
    * An attribute check that should have failed to
    * find the given string equal to an elements attribute passed
    */
-  @Test(groups = TestCategories.Selenium, expectedExceptions = NotFoundException.class)
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
   public void waitForAttributeEqualsDoesNotFind() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -491,7 +491,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify that WaitForAttributeTextEquals can find an attribute value after waiting.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitForAttributeEqualsFound() {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -505,7 +505,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify that the WaitUntilAttributeTextEquals works with async objects.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilAttributeEquals() {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -517,7 +517,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   /**
    * Verify that the WaitUntilAttributeTextContains works with async objects.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void waitUntilAttributeContains() {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();

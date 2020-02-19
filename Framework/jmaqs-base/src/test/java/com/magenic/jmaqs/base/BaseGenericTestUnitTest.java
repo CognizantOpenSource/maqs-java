@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class BaseGenericTestUnitTest extends BaseGenericTest {
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testCreateTestObject() {
     Assert.assertNotNull(this.getTestObject());
   }

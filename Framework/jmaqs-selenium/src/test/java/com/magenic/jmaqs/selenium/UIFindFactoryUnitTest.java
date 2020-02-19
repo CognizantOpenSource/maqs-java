@@ -35,7 +35,7 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Test get ui find with element.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetUIFindWithElement() {
     PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
     pageModel.open(siteAutomationUrl);
@@ -52,7 +52,7 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Test get ui find with driver.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetUIFindWithDriver() {
     UIFind findWithWebDriver = UIFindFactory.getFind(this.getWebDriver());
 

@@ -36,7 +36,7 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Test get fluent wait object.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetFluentWaitObject() {
     int timeout = 1000;
     int polling = 500;

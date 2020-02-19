@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  */
 public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testClear() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
@@ -26,7 +26,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertEquals(newHash.mappingCount(), 0);
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testRemoveWithKey() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
@@ -40,7 +40,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertFalse(newHash.containsKey("2"), "Was not expecting item '2'");
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testRemoveWithKeyAndValue() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
@@ -54,7 +54,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertFalse(newHash.containsKey("2"), "Was not expecting item '2'");
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testReplace() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
@@ -69,7 +69,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertTrue(newHash.containsKey("2"), "Expected item '2'");
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testReplaceWithNewAndOld() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
