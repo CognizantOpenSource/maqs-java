@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.utilities.helper.functionalinterfaces;
 
 /**
@@ -6,6 +10,8 @@ package com.magenic.jmaqs.utilities.helper.functionalinterfaces;
 @FunctionalInterface
 public interface Action {
 
-	/** invokes the functional interface when called */
+	/**
+	 * invokes the functional interface when called
+	 */
 	void invoke();
 }
