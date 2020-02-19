@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
 /**
- * Handles the creation of {@link org.openqa.selenium.support.ui.FluentWait FluentWait} objects
+ * Handles the creation of {@link org.openqa.selenium.support.ui.FluentWait FluentWait} objects.
  */
 public class FluentWaitFactory {
 
