@@ -10,6 +10,7 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 
 import java.util.HashMap;
 
+import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,7 +23,7 @@ public class ConfigUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void getSectionWithConfigSecEnumTest() {
-    HashMap<String, String> testSection = Config.getSection(ConfigSection.SeleniumMaqs);
+    Map<String, String> testSection = Config.getSection(ConfigSection.SeleniumMaqs);
     Assert.assertEquals(testSection.get("TestKey"), "testValueTwo");
     Assert.assertEquals(testSection.get("Browser"), "Internet Explorer");
   }
