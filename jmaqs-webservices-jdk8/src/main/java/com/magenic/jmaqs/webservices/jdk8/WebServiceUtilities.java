@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -52,8 +51,8 @@ public final class WebServiceUtilities {
    * @return the response body
    * @throws IOException the io exception
    */
-  public static <T> T getResponseBody(CloseableHttpResponse response, ContentType contentType,
-      Type type) throws IOException {
+  public static <T> T getResponseBody(CloseableHttpResponse response, ContentType contentType, Type type)
+      throws IOException {
     T responseBody;
 
     if (contentType.toString().toUpperCase().contains("JSON")) {
@@ -93,8 +92,7 @@ public final class WebServiceUtilities {
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> StringEntity createStringEntity(T body, ContentType contentType)
-      throws JsonProcessingException {
+  public static <T> StringEntity createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
     if (contentType.toString().toUpperCase().contains("XML")) {
       return new StringEntity(serializeXml(body), contentType);
     } else if (contentType.toString().toUpperCase().contains("JSON")) {
@@ -140,8 +138,7 @@ public final class WebServiceUtilities {
    */
   public static <T> T deserializeJson(CloseableHttpResponse message, Type type) throws IOException {
     String responseEntity = getResponseBody(message);
-    return objectMapper
-        .readValue(responseEntity, objectMapper.getTypeFactory().constructType(type));
+    return objectMapper.readValue(responseEntity, objectMapper.getTypeFactory().constructType(type));
   }
 
   /**

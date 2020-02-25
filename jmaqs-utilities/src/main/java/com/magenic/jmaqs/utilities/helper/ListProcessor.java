@@ -6,12 +6,18 @@ package com.magenic.jmaqs.utilities.helper;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Contains methods for processing lists.
  */
 
 public class ListProcessor {
+
+  private ListProcessor() {
+    //Private Constructor
+  }
+
   /**
    * Create a comma delimited string from a ArrayList of strings.
    *
@@ -21,7 +27,7 @@ public class ListProcessor {
    * @return a comma delimited string
    */
 
-  public static String createCommaDelimitedString(ArrayList<String> stringList, boolean sort) {
+  public static String createCommaDelimitedString(List<String> stringList, boolean sort) {
     boolean firstElement = true;
     String commaDelimitedString = "";
 
@@ -52,38 +58,34 @@ public class ListProcessor {
    *                     same elements are in both lists
    * @return True if the lists are the same
    */
-  public static boolean listOfStringsComparer(ArrayList<String> expectedList,
-      ArrayList<String> actualList, StringBuilder results, boolean verifyOrder) {
+  public static boolean listOfStringsComparer(List<String> expectedList, List<String> actualList,
+      StringBuilder results, boolean verifyOrder) {
     if (expectedList.size() != actualList.size()) {
-      results.append(StringProcessor.safeFormatter(
-          "The following lists are not the same size: Expected %s [%s] %s and got %s [%s]",
-          Config.NEW_LINE, createCommaDelimitedString(expectedList, false), Config.NEW_LINE,
-          Config.NEW_LINE, createCommaDelimitedString(actualList, false)));
+      results.append(StringProcessor
+          .safeFormatter("The following lists are not the same size: Expected %s [%s] %s and got %s [%s]",
+              Config.NEW_LINE, createCommaDelimitedString(expectedList, false), Config.NEW_LINE, Config.NEW_LINE,
+              createCommaDelimitedString(actualList, false)));
     }
 
     // Clone the first ArrayList
-    ArrayList<String> clonedList = new ArrayList<String>(expectedList.size());
+    ArrayList<String> clonedList = new ArrayList<>(expectedList.size());
 
-    for (String text : expectedList) {
-      clonedList.add(text);
-    }
+    clonedList.addAll(expectedList);
 
     for (int i = 0; i < actualList.size(); i++) {
       String actualValue = actualList.get(i);
       if (!verifyOrder) {
         if (!clonedList.contains(actualValue)) {
           results.append(StringProcessor
-              .safeFormatter("[%s] was found in the ArrayList but was not expected%s",
-                  actualValue, Config.NEW_LINE));
+              .safeFormatter("[%s] was found in the ArrayList but was not expected%s", actualValue, Config.NEW_LINE));
         } else {
           // Remove these values from the ArrayList to make sure
           // duplicates are handled correctly
-          clonedList.remove(clonedList.indexOf(actualValue));
+          clonedList.remove(actualValue);
         }
       } else if (clonedList.get(i) == null || !clonedList.get(i).equals(actualValue)) {
         results.append(StringProcessor
-            .safeFormatter("Expected [%s] but found [%s]%s", clonedList.get(i), actualValue,
-                Config.NEW_LINE));
+            .safeFormatter("Expected [%s] but found [%s]%s", clonedList.get(i), actualValue, Config.NEW_LINE));
       }
     }
 

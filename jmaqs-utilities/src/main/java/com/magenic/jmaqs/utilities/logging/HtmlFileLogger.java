@@ -25,6 +25,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * Default header for the HTML file, this gives us our colored text.
    */
   private static final String DEFAULTHTMLHEADER = "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
+  private final String logErrorMessage = "Failed to write to event log because: %s";
 
   /**
    * Initializes a new instance of the FileLogger class.
@@ -180,8 +181,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
       writer.write(DEFAULTHTMLHEADER);
     } catch (IOException e) {
       ConsoleLogger console = new ConsoleLogger();
-      console.logMessage(MessageType.ERROR, StringProcessor
-          .safeFormatter("Failed to write to event log because: %s", e.getMessage()));
+      console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(logErrorMessage, e.getMessage()));
     }
   }
 
@@ -191,8 +191,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(java.lang.String,
    * java.lang.Object[])
    */
-  @Override
-  public void logMessage(String message, Object... args) {
+  @Override public void logMessage(String message, Object... args) {
     this.logMessage(MessageType.INFORMATION, message, args);
   }
 
@@ -202,8 +201,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(com.magenic.jmaqs.utilities.
    * Logging.MessageType, java.lang.String, java.lang.Object[])
    */
-  @Override
-  public void logMessage(MessageType messageType, String message, Object... args) {
+  @Override public void logMessage(MessageType messageType, String message, Object... args) {
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
       // Log the message
@@ -216,12 +214,11 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         writer.write(this.getTextWithColorFlag(messageType));
 
         // Add the content
-        writer.write(StringEscapeUtils.escapeHtml4(StringProcessor
-            .safeFormatter("%s%s%s", System.lineSeparator(), System.lineSeparator(), date)));
-        writer.write(StringEscapeUtils
-            .escapeHtml4(StringProcessor.safeFormatter("%s:\t", messageType.name())));
-        writer.write(StringEscapeUtils
-            .escapeHtml4(StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
+        writer.write(StringEscapeUtils.escapeHtml4(
+            StringProcessor.safeFormatter("%s%s%s", System.lineSeparator(), System.lineSeparator(), date)));
+        writer.write(StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter("%s:\t", messageType.name())));
+        writer.write(
+            StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
 
         // Close off the style
         writer.write("</p>");
@@ -233,8 +230,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
       } catch (Exception e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
-        console.logMessage(MessageType.ERROR, StringProcessor
-            .safeFormatter("Failed to write to event log because: %s", e.getMessage()));
+        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(logErrorMessage, e.getMessage()));
         console.logMessage(messageType, message, args);
       }
     }
@@ -245,8 +241,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    *
    * @return File Extension
    */
-  @Override
-  protected String getExtension() {
+  @Override protected String getExtension() {
     return ".html";
   }
 
@@ -260,13 +255,10 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         writer.write("</body></html>");
       } catch (IOException e) {
         ConsoleLogger console = new ConsoleLogger();
-        console.logMessage(MessageType.ERROR, StringProcessor
-            .safeFormatter("Failed to write to event log because: %s", e.getMessage()));
+        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(logErrorMessage, e.getMessage()));
       }
     }
 
-    // Suggest to JVM to run garbage collector. No guarantee that this will run.
-    System.gc();
   }
 
   /**

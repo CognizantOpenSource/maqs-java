@@ -35,7 +35,7 @@ public class PerfTimerCollection {
    *
    * @param logger The logger to set.
    */
-  private void setLog(Logger logger) {
+  public void setLog(Logger logger) {
     this.log = logger;
   }
 
