@@ -12,6 +12,11 @@ import java.io.File;
  * Get logging config data.
  */
 public class LoggingConfig {
+
+  private LoggingConfig() {
+    //Hiding implicit contructor
+  }
+
   /**
    * Get our logging state - Yes, no or on failure.
    *
@@ -26,9 +31,8 @@ public class LoggingConfig {
       case "NO":
         return LoggingEnabled.NO;
       default:
-        throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Log value %s is not a valid option",
-                Config.getGeneralValue("Log", "NO")));
+        throw new IllegalArgumentException(
+            StringProcessor.safeFormatter("Log value %s is not a valid option", Config.getGeneralValue("Log", "NO")));
     }
   }
 
@@ -55,8 +59,7 @@ public class LoggingConfig {
         return MessageType.SUSPENDED;       // All logging is suspended
       default:
         throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Logging level value '{0}' is not a valid option",
-                Config.getGeneralValue("LogLevel")));
+            .safeFormatter("Logging level value '{0}' is not a valid option", Config.getGeneralValue("LogLevel")));
     }
   }
 
@@ -84,8 +87,7 @@ public class LoggingConfig {
         return new FileLogger(false, logDirectory, fileName, loggingLevel);
       default:
         throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Log type %s is not a valid option",
-                Config.getGeneralValue("LogType", "CONSOLE")));
+            .safeFormatter("Log type %s is not a valid option", Config.getGeneralValue("LogType", "CONSOLE")));
     }
   }
 
