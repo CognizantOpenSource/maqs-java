@@ -25,7 +25,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * Default header for the HTML file, this gives us our colored text.
    */
   private static final String DEFAULTHTMLHEADER = "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
-  private final String logErrorMessage = "Failed to write to event log because: %s";
+  private static final String LOG_ERROR_MESSAGE = "Failed to write to event log because: %s";
 
   /**
    * Initializes a new instance of the FileLogger class.
@@ -181,7 +181,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
       writer.write(DEFAULTHTMLHEADER);
     } catch (IOException e) {
       ConsoleLogger console = new ConsoleLogger();
-      console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(logErrorMessage, e.getMessage()));
+      console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
     }
   }
 
@@ -230,7 +230,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
       } catch (Exception e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
-        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(logErrorMessage, e.getMessage()));
+        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
         console.logMessage(messageType, message, args);
       }
     }
@@ -255,7 +255,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         writer.write("</body></html>");
       } catch (IOException e) {
         ConsoleLogger console = new ConsoleLogger();
-        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(logErrorMessage, e.getMessage()));
+        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
       }
     }
 

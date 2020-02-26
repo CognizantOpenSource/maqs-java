@@ -29,7 +29,7 @@ public class ListProcessor {
 
   public static String createCommaDelimitedString(List<String> stringList, boolean sort) {
     boolean firstElement = true;
-    String commaDelimitedString = "";
+    StringBuilder commaDelimitedString = new StringBuilder();
 
     if (sort) {
 
@@ -38,14 +38,14 @@ public class ListProcessor {
 
     for (String text : stringList) {
       if (firstElement) {
-        commaDelimitedString = text;
+        commaDelimitedString = new StringBuilder(text);
         firstElement = false;
       } else {
-        commaDelimitedString += StringProcessor.safeFormatter(", %s", text);
+        commaDelimitedString.append(StringProcessor.safeFormatter(", %s", text));
       }
     }
 
-    return commaDelimitedString;
+    return commaDelimitedString.toString();
   }
 
   /**
