@@ -59,8 +59,7 @@ public class SeleniumDriverManager extends DriverManager {
    */
   public WebDriver getWebDriver() {
 
-    if (!this.isDriverInitialized()
-        && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
+    if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
       WebDriver tempDriver = (WebDriver) this.getBase();
       tempDriver = new EventFiringWebDriver(tempDriver);
       this.baseDriver = tempDriver;
@@ -101,30 +100,19 @@ public class SeleniumDriverManager extends DriverManager {
   private void loggingStartup(WebDriver webDriver) {
     try {
       WebDriver driver = ((EventFiringWebDriver) webDriver).getWrappedDriver();
-      String browserType;
 
-      // Get info on what type of browser we are using
-      RemoteWebDriver remoteWebDriver = (RemoteWebDriver) driver;
-
-      if (remoteWebDriver != null) {
-        browserType = remoteWebDriver.getCapabilities().toString();
-      } else {
-        browserType = driver.getClass().toString();
-      }
+      String browserType = ((RemoteWebDriver) driver).getCapabilities().toString();
 
       if (SeleniumConfig.getBrowserName().equalsIgnoreCase("Remote")) {
-        getLogger().logMessage(MessageType.INFORMATION,
-            StringProcessor.safeFormatter("Remote driver: " + browserType));
+        getLogger().logMessage(MessageType.INFORMATION, StringProcessor.safeFormatter("Remote driver: " + browserType));
       } else {
-        getLogger().logMessage(MessageType.INFORMATION,
-            StringProcessor.safeFormatter("Local driver: " + browserType));
+        getLogger().logMessage(MessageType.INFORMATION, StringProcessor.safeFormatter("Local driver: " + browserType));
       }
 
     } catch (Exception e) {
       getLogger().logMessage(MessageType.ERROR,
           StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
-      System.out.println(
-          StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
+      System.out.println(StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
     }
   }
 
