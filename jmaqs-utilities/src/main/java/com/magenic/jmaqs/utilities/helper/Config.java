@@ -18,6 +18,11 @@ import org.apache.commons.configuration2.sync.ReadWriteSynchronizer;
  * Configuration class.
  */
 public final class Config {
+
+  private Config() {
+    //Private constructor
+  }
+
   /**
    * Constant platform independent new line.
    */
@@ -64,8 +69,7 @@ public final class Config {
       overrideConfig.setSynchronizer(new ReadWriteSynchronizer());
     } catch (ConfigurationException exception) {
       throw new RuntimeException(StringProcessor
-          .safeFormatter("Exception creating the xml configuration object from the file : %s",
-              exception));
+          .safeFormatter("Exception creating the xml configuration object from the file : %s", exception));
     }
   }
 
@@ -75,7 +79,7 @@ public final class Config {
    * @param section The desired section
    * @return A HashMap of the values in the section
    */
-  public static HashMap<String, String> getSection(ConfigSection section) {
+  public static Map<String, String> getSection(ConfigSection section) {
     return getSection(section.toString());
   }
 
@@ -85,7 +89,7 @@ public final class Config {
    * @param section The desired section
    * @return A HashMap of the values in the section
    */
-  public static HashMap<String, String> getSection(String section) {
+  public static Map<String, String> getSection(String section) {
     HashMap<String, String> sectionValues = new HashMap();
 
     // first parse the override config
@@ -114,8 +118,7 @@ public final class Config {
    * @param configurations   Dictionary of configuration values
    * @param overrideExisting True to override existing values, False otherwise
    */
-  public static void addGeneralTestSettingValues(HashMap<String, String> configurations,
-      boolean overrideExisting) {
+  public static void addGeneralTestSettingValues(Map<String, String> configurations, boolean overrideExisting) {
     addTestSettingValues(configurations, DEFAULT_MAQS_SECTION, overrideExisting);
   }
 
@@ -126,8 +129,8 @@ public final class Config {
    * @param section          Section to add the value to
    * @param overrideExisting True to override existing values, False otherwise
    */
-  public static void addTestSettingValues(HashMap<String, String> configurations,
-      ConfigSection section, boolean overrideExisting) {
+  public static void addTestSettingValues(Map<String, String> configurations, ConfigSection section,
+      boolean overrideExisting) {
     addTestSettingValues(configurations, section.toString(), overrideExisting);
   }
 
@@ -138,7 +141,7 @@ public final class Config {
    * @param section          Section to add the value to
    * @param overrideExisting True to override existing values, False otherwise
    */
-  public static void addTestSettingValues(HashMap<String, String> configurations, String section,
+  public static void addTestSettingValues(Map<String, String> configurations, String section,
       boolean overrideExisting) {
     for (Map.Entry<String, String> entry : configurations.entrySet()) {
       String sectionedKey = section + "." + entry.getKey();
