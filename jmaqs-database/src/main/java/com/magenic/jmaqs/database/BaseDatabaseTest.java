@@ -16,6 +16,7 @@ public class BaseDatabaseTest extends BaseExtendableTest<DatabaseTestObject> {
    * Instantiates a new Base database test.
    */
   public BaseDatabaseTest() {
+    // Currently not populated with any logic
   }
 
   /**
@@ -47,7 +48,7 @@ public class BaseDatabaseTest extends BaseExtendableTest<DatabaseTestObject> {
 
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
-
+    // Currently not populated with any logic
   }
 
   @Override

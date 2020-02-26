@@ -9,6 +9,10 @@ package com.magenic.jmaqs.utilities.helper;
  */
 public class TestCategories {
 
+
+  private TestCategories() {
+  }
+
   /**
    * String for email unit test category.
    */
