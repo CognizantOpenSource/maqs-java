@@ -69,7 +69,7 @@ public abstract class BaseTest {
   /**
    * The Fully Qualified Test Class Name.
    */
-  private ThreadLocal<String> fullyQualifiedTestClassName = new ThreadLocal<>();
+  ThreadLocal<String> fullyQualifiedTestClassName = new ThreadLocal<>();
 
   /**
    * Initializes a new instance of the BaseTest class.
@@ -140,10 +140,10 @@ public abstract class BaseTest {
    */
   public List<String> getLoggedExceptions() {
     ArrayList<String> result;
-    if (!this.loggedExceptions.containsKey(this.getFullyQualifiedTestClassName())) {
+    if (!this.loggedExceptions.containsKey(this.fullyQualifiedTestClassName.get())) {
       result = new ArrayList<>();
     } else {
-      result = this.loggedExceptions.get(this.getFullyQualifiedTestClassName());
+      result = this.loggedExceptions.get(this.fullyQualifiedTestClassName.get());
     }
     return result;
   }
@@ -155,7 +155,7 @@ public abstract class BaseTest {
    */
   public void setLoggedExceptions(List<String> loggedExceptionList) {
     this.loggedExceptions
-        .put(this.getFullyQualifiedTestClassName(), (ArrayList<String>) loggedExceptionList);
+        .put(this.fullyQualifiedTestClassName.get(), (ArrayList<String>) loggedExceptionList);
   }
 
   /**
@@ -191,11 +191,11 @@ public abstract class BaseTest {
    * @return The BaseTestObject
    */
   public BaseTestObject getTestObject() {
-    if (!this.baseTestObjects.containsKey(this.getFullyQualifiedTestClassName())) {
+    if (!this.baseTestObjects.containsKey(this.fullyQualifiedTestClassName.get())) {
       this.createNewTestObject();
     }
 
-    return this.baseTestObjects.get(this.getFullyQualifiedTestClassName());
+    return this.baseTestObjects.get(this.fullyQualifiedTestClassName.get());
   }
 
   /**
@@ -204,7 +204,7 @@ public abstract class BaseTest {
    * @param baseTestObject The Base Test Object to use
    */
   public void setTestObject(BaseTestObject baseTestObject) {
-    String key = this.getFullyQualifiedTestClassName();
+    String key = this.fullyQualifiedTestClassName.get();
     if (this.baseTestObjects.containsKey(key)) {
       this.baseTestObjects.replace(key, baseTestObject);
     } else {
@@ -264,11 +264,11 @@ public abstract class BaseTest {
     }
 
     // Get the Fully Qualified Test Name
-    String fullyQualifiedTestName = this.getFullyQualifiedTestClassName();
+    String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
 
     try (BaseTestObject baseTestObject = this.getTestObject()) {
       // Release logged messages
-      this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
+      this.loggedExceptions.remove(fullyQualifiedTestName);
 
       // Release the Base Test Object
       this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
@@ -276,6 +276,7 @@ public abstract class BaseTest {
 
     // Create console logger to log subsequent messages
     this.setTestObject(new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName));
+    this.fullyQualifiedTestClassName.remove();
   }
 
   /**
@@ -309,7 +310,7 @@ public abstract class BaseTest {
 
     if (this.loggingEnabledSetting != LoggingEnabled.NO) {
       log = LoggingConfig.getLogger(StringProcessor
-          .safeFormatter("%s - %s", this.getFullyQualifiedTestClassName(),
+          .safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
               DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
                   .format(LocalDateTime.now(Clock.systemUTC()))));
     } else {
@@ -418,6 +419,6 @@ public abstract class BaseTest {
    */
   protected void createNewTestObject() {
     Logger newLogger = this.createLogger();
-    this.setTestObject(new BaseTestObject(newLogger, this.getFullyQualifiedTestClassName()));
+    this.setTestObject(new BaseTestObject(newLogger, this.fullyQualifiedTestClassName.get()));
   }
 }
