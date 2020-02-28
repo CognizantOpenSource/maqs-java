@@ -12,7 +12,7 @@
 
     <groupId>com.magenic.jmaqs.base</groupId>
     <artifactId>jmaqs-base</artifactId>
-    <name>jmaqs-base</name>
+    <name>JMAQS Base Testing Module</name>
     <packaging>jar</packaging>
     <url>http://maven.apache.org</url>
 

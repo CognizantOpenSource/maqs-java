@@ -12,7 +12,7 @@
 
     <groupId>com.magenic.jmaqs.selenium</groupId>
     <artifactId>jmaqs-selenium</artifactId>
-    <name>jmaqs-selenium</name>
+    <name>JMAQS Selenium Testing Module</name>
     <packaging>jar</packaging>
     <url>http://maven.apache.org</url>
 

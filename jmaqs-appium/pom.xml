@@ -6,6 +6,7 @@
 
     <groupId>com.magenic.jmaqs.appium</groupId>
     <artifactId>jmaqs-appium</artifactId>
+    <name>JMAQS Appium Testing Module</name>
 
     <parent>
         <groupId>com.magenic.jmaqs</groupId>
