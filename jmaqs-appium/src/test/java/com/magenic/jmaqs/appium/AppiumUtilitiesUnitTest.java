@@ -85,7 +85,6 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
    * Test capture screenshot custom directory file name.
    */
   @Test(groups = TestCategories.APPIUM)
-  @Ignore
   public void testCaptureScreenshotCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -149,7 +148,6 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
    * Test save page source custom directory file name.
    */
   @Test(groups = TestCategories.APPIUM)
-  @Ignore
   public void testSavePageSourceCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();

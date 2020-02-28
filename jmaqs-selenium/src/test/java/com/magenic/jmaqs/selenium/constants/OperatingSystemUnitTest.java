@@ -71,7 +71,6 @@ public class OperatingSystemUnitTest extends BaseGenericTest {
    * Test get operating system.
    */
   @Test
-  @Ignore
   public void testGetOperatingSystem() {
     OperatingSystem operatingSystem = OperatingSystem.getOperatingSystem();
     Assert.assertEquals(operatingSystem, OperatingSystem.WINDOWS);

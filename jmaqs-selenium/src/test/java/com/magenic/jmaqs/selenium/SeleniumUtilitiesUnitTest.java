@@ -105,7 +105,6 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
    * Test capture screenshot custom directory file name.
    */
   @Test(groups = TestCategories.SELENIUM)
-  @Ignore
   public void testCaptureScreenshotCustomDirectoryFileName() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -184,7 +183,6 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
    * Test save page source custom directory file name.
    */
   @Test(groups = TestCategories.SELENIUM)
-  @Ignore
   public void testSavePageSourceCustomDirectoryFileName() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
