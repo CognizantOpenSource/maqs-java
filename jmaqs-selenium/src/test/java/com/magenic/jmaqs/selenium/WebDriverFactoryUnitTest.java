@@ -165,6 +165,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the IE driver.
    */
   @Test(groups = TestCategories.SELENIUM)
+  @Ignore
   public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
     try {

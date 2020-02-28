@@ -22,6 +22,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -104,6 +105,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
    * Test capture screenshot custom directory file name.
    */
   @Test(groups = TestCategories.SELENIUM)
+  @Ignore
   public void testCaptureScreenshotCustomDirectoryFileName() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -182,6 +184,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
    * Test save page source custom directory file name.
    */
   @Test(groups = TestCategories.SELENIUM)
+  @Ignore
   public void testSavePageSourceCustomDirectoryFileName() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
