@@ -37,7 +37,6 @@
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
-        <module>jmaqs-jacoco-reporting</module>
     </modules>
 
     <distributionManagement>
@@ -61,6 +60,9 @@
                 <sonar.coverage.jacoco.xmlReportPaths>./target/site/jacoco-aggregate/jacoco.xml
                 </sonar.coverage.jacoco.xmlReportPaths>
             </properties>
+            <modules>
+                <module>jmaqs-jacoco-reporting</module>
+            </modules>
             <build>
                 <plugins>
                     <plugin>
@@ -133,6 +135,15 @@
     </dependencyManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
