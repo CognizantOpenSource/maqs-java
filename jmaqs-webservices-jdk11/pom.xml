@@ -12,6 +12,7 @@
     <groupId>com.magenic.jmaqs.webservices</groupId>
     <artifactId>jmaqs-webservices-jdk11</artifactId>
     <version>2.0.1-SNAPSHOT</version>
+    <name>JMAQS JDK11 WebServices Testing Module</name>
 
 
     <build>
@@ -25,6 +26,25 @@
                     <target>11</target>
                     <release>11</release>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <source>11</source>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                            <workingDirectory>target/</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
