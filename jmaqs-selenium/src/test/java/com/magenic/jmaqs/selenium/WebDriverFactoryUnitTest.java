@@ -146,8 +146,8 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Edge driver.
    */
-  @Test(groups = TestCategories.SELENIUM)
   @Ignore
+  @Test(groups = TestCategories.SELENIUM)
   // TODO: File path to the WebDriver.exe might be an issue here.
   public void getEdgeDriverTest() throws Exception {
     EdgeDriver driver = null;

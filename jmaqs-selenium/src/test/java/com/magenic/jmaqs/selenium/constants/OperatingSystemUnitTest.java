@@ -6,6 +6,7 @@ package com.magenic.jmaqs.selenium.constants;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
