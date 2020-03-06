@@ -5,12 +5,27 @@
     <parent>
         <artifactId>jmaqs-framework</artifactId>
         <groupId>com.magenic.jmaqs</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>2.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.magenic.jmaqs.webservices</groupId>
     <artifactId>jmaqs-webservices-jdk11</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
 
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
