@@ -16,6 +16,8 @@ selenium:
 webservices:
   - jmaqs-webservices-jdk8/*
   - jmaqs-webservices-jdk8/**/*
+  - jmaqs-webservices-jdk11/*
+  - jmaqs-webservices-jdk11/**/*
   
 utilities:
   - jmaqs-utilities/*
@@ -29,3 +31,11 @@ devops:
   - .dependabot/*
   - .github/*
   - .github/**/*
+ 
+ JDK11:
+  - jmaqs-webservices-jdk11/*
+  - jmaqs-webservices-jdk11/**/*
+  
+ JDK8:
+  - jmaqs-webservices-jdk8/*
+  - jmaqs-webservices-jdk8/**/*
