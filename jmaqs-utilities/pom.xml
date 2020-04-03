@@ -11,7 +11,7 @@
   <name>JMAQS Testing Utilities Module</name>
   <url>http://maven.apache.org</url>
   <properties>
-    <commonsconfiguration2.version>2.6</commonsconfiguration2.version>
+    <commonsconfiguration2.version>2.7</commonsconfiguration2.version>
     <commonsbeanutils.version>1.9.4</commonsbeanutils.version>
   </properties>
   <dependencies>

@@ -49,7 +49,8 @@
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-appium</module>
-        <module>jmaqs-database</module>
+      <module>jmaqs-database</module>
+        <module>jmaqs-webservices-jdk11</module>
     </modules>
 
     <distributionManagement>
@@ -124,7 +125,7 @@
 
     <properties>
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
-        <javadoc.plugin.version>3.1.1</javadoc.plugin.version>
+        <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <surefire.plugin.version>3.0.0-M4</surefire.plugin.version>
         <mvncheckstyle.plugin.version>3.1.0</mvncheckstyle.plugin.version>
@@ -192,14 +193,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-scm-plugin</artifactId>
-                <version>1.11.2</version>
-                <configuration>
-                    <connectionType>connection</connectionType>
-                </configuration>
-            </plugin>-->
+           
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
