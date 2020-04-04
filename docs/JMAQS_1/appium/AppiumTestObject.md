@@ -3,9 +3,9 @@
 ## Overview
 Takes care of the base test context data.
 
-[GetAppiumDriver](#GetAppiumDriver)
-[SetAppiumDriver](#SetAppiumDriver)
-[GetAppiumManager](#GetAppiumManager)   
+[GetAppiumDriver](#GetAppiumDriver)  
+[SetAppiumDriver](#SetAppiumDriver)  
+[GetAppiumManager](#GetAppiumManager)     
 
 ## GetAppiumDriver
 Gets the web service driver

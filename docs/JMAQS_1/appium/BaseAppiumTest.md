@@ -6,7 +6,7 @@ The Base Appium Test has methods that sets up the web driver, gets the mobile dr
 # Available calls
 [GetAppiumDriver](#GetAppiumDriver)  
 [SetAppiumDriver](#SetAppiumDriver)  
-[GetMobileDriver](#GetMobileDriver)
+[GetMobileDriver](#GetMobileDriver)  
 [BeforeLoggingTeardown](#BeforeLoggingTeardown)  
 [CreateNewTestObject](#CreateNewTestObject)  
 

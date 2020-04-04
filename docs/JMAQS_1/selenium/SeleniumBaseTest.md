@@ -3,9 +3,9 @@
 ## Overview
 The BaseSeleniumTest class provides access to the SeleniumTestObject and SeleniumDriver.
 
-# Available calls
-[GetWebDriver](#GetWebDriver)
-[SetWebDriver](#SetWebDriver)
+# Available Methods
+[GetWebDriver](#GetWebDriver)  
+[SetWebDriver](#SetWebDriver)  
 [GetBrowser](#GetBrowser)  
 [BeforeLoggingTeardown](#BeforeLoggingTeardown)  
 [CreateNewTestObject](#CreateNewTestObject)  

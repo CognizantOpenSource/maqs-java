@@ -3,11 +3,9 @@
 ## Overview
 MAQS provides support for testing web applications.  
 
-
 ## BaseSeleniumTest
 BaseSeleniumTest is an abstract test class you can extend.  Extending the class allows you to automatically use MAQS's web application testing capabilities.
 ```java
-
 public class MySeleniumTest extends BaseSeleniumTest
 ```
 
