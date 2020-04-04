@@ -3,16 +3,9 @@
 ## Overview
 The WebService Driver Manager has overreach of the Base Driver Manager.
 
-[OverrideDriver](#OverrideDriver)
-[GetWebSeriveDriver](#GetWebSeriveDriver)  
+[GetWebSeriveDriver](#GetWebServiceDriver) 
+[OverrideDriver](#OverrideDriver) 
 [Close](#Close)  
-
-
-## OverrideDriver
-Override the http driver
-```java
-this.webServiceDriver = driver;
- ```
 
 ## GetWebServiceDriver
 Get the http driver
@@ -20,10 +13,14 @@ Get the http driver
 WebServiceDriver = getWebServiceDriver();
  ```
 
+## OverrideDriver
+Overrides the Web Service Driver
+```java
+WebServiceDriver webServiceDriver = driverManager.overrideDriver(null);
+```
 
 ## Close
 Close Method sets Base Driver to Null.
 ```java
 this.setBaseDriver(null)
 ```
-

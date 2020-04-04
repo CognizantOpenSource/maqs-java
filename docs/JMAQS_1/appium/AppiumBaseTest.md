@@ -4,32 +4,31 @@
 The BaseAppiumTest has methods that sets up the webdriver, gets the mobile driver, tears down the appium driver, and creates a new test object. 
 
 # Available calls
-[GetMobileDevice](#GetMobileDevice)  
+[GetAppiumDriver](#GetAppiumDriver)  
 [BeforeLoggingTeardown](#BeforeLoggingTeardown)  
 [CreateNewTestObject](#CreateNewTestObject)  
 
-## GetMobileDevice
+## GetAppiumDriver
 This method gets the default Appium/Mobile driver. 
 ```java
-protected virtual AppiumDriver<IWebElement> GetMobileDevice()
-{
-    return AppiumDriverFactory.GetDefaultMobileDriver();
-}
+public AppiumDriver<WebElement> getAppiumDriver() {
+    return this.getTestObject().getAppiumDriver();
+  }
 ```
 
 ## BeforeLoggingTeardown
 Takes a screen shot if needed and tear down the appium driver. It is called during teardown.
 ```java
-this.BeforeLoggingTeardown(resultType);
+this.beforeLoggingTeardown(resultType);
 ```
 
 ## CreateNewTestObject
 This method creates a new Appium test object based on the mobile device.
 ```java
- protected override void CreateNewTestObject()
-{
-    this.TestObject = new AppiumTestObject(() => this.GetMobileDevice(), this.CreateLogger(), this.GetFullyQualifiedTestClassName());
-}
+ protected void createNewTestObject() {
+     this.setTestObject(new AppiumTestObject(this::getMobileDriver, this.createLogger(),
+         this.getFullyQualifiedTestClassName()));
+   }
 
 this.CreateNewTestObject();
 ```

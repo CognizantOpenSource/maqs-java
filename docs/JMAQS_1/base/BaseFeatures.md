@@ -1,12 +1,12 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> Base Basics
 
 ## Overview
-MAQS provides support for testing, base is the foundation for this support.  
+JMAQS provides support for testing, base is the foundation for this support.  
 
 ## BaseTest
  Base for tests without a defined system under test
  ```java
-  MaqsBase basetest = new MaqsBase();
+MaqsBase basetest = new BaseTest();
  ```
 
 ## ExtenableTest
@@ -21,11 +21,11 @@ BaseTestObject baseTestObject = new BaseTestObject(new ConsoleLogger(), string.E
 ## DriverManager
 Base driver manager object
 ```java
-DriverManager managerToKeep = GetManager();
+DriverManager managerToKeep = getDriverManager();
 ```
 
 ## ManagerDictionary
  Driver manager dictionary allows you to get, add, override, remove, clears, and disposes the driver. 
  ```java
- this.ManagerStore = new ManagerDictionary();
+ this.setManagerStore(ManagerDictionary());
  ```
