@@ -1,7 +1,7 @@
 # <img src="resources/maqslogo.ico" height="32" width="32"> Appium FAQ
 
 ## What Browsers can I use?
-- Any browser that has a IWebDriver.  
+- Any browser that has a WebDriver.  
 If you want to use a browser that JMAQS doesn't natively support you can just initialize the driver yourself.
 ```java
 this.setWebDriver(new OperaDriver("path_to_opera_driver.exe"));
@@ -13,7 +13,8 @@ Find the configuration of browsers within the app.config file and define one and
 
 ### My code can't find the config class  
 ```java
-// TODO: finish
+- Make sure you've imported the Full namespace such as 
+com.magenic.jmaqs.utilities.helper;
 ```
 ### Test can't find the page element for a test, errors indicate something is wrong with Selenium  
 - Kill the existing Chrome processes spawned and orphaned from the test kick off then update Browser and start fresh

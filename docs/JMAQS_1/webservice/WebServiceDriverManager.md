@@ -3,7 +3,7 @@
 ## Overview
 The WebService Driver Manager has overreach of the Base Driver Manager.
 
-[GetWebSeriveDriver](#GetWebServiceDriver) 
+[GetWebServiceDriver](#GetWebServiceDriver) 
 [OverrideDriver](#OverrideDriver)  
 [Close](#Close)  
 
