@@ -12,6 +12,8 @@ import java.net.http.HttpRequest;
 import java.time.Duration;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.print.attribute.standard.Media;
+
 public class HttpRequestFactory {
 
   /**
@@ -55,6 +57,9 @@ public class HttpRequestFactory {
     return getRequest(baseAddress, baseUri, timeout, MediaType.APP_JSON);
   }
 
+
+
+
   /**
    * Gets a HTTP Request based on configuration values.
    * @param baseAddress the base website address
@@ -65,6 +70,19 @@ public class HttpRequestFactory {
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType) {
     return setUpRequest(baseAddress, baseUri, timeout, mediaType, "", RequestMethod.GET);
+  }
+
+  /**
+   * Gets a HTTP Request based on configuration values.
+   * @param requestUri Base service uri
+   * @param mediaType media/content type to be received
+   * @param content the content to be used in a Put, Post, or Patch
+   * @param requestMethod the type of the request being placed
+   * @return A HTTP Request
+   */
+  public static HttpRequest getRequest(String requestUri, MediaType mediaType, String content, RequestMethod requestMethod) {
+    return setUpRequest(WebServiceConfig.getWebServiceUri(), requestUri, WebServiceConfig.getWebServiceTimeOut(),
+        mediaType, content, requestMethod);
   }
 
   /**
