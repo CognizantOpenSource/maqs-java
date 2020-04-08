@@ -12,8 +12,6 @@ import java.net.http.HttpRequest;
 import java.time.Duration;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.print.attribute.standard.Media;
-
 public class HttpRequestFactory {
 
   /**

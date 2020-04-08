@@ -4,8 +4,6 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.webservices.jdk11.models.Product;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
-import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
-import com.magenic.jmaqs.webservices.jdk8models.Product;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
@@ -31,7 +29,7 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringEntity(p, MediaType.APP_JSON);
+    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     HttpResponse<String> result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
         MediaType.APP_JSON, content, true);
@@ -51,7 +49,7 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringEntity(p, MediaType.APP_JSON);
+    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     HttpResponse<String> result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
         MediaType.APP_JSON, content, true);
@@ -72,7 +70,7 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringEntity(p, MediaType.APP_XML);
+    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     HttpResponse<String> result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
         MediaType.APP_XML, content, true);
@@ -92,7 +90,7 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringEntity(p, MediaType.APP_JSON);
+    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     String result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_JSON, content, true);
     Assert.assertTrue(result.isEmpty());
@@ -111,7 +109,7 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringEntity(p, MediaType.APP_XML);
+    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     String result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_XML, content, true);
     Assert.assertTrue(result.isEmpty());
@@ -131,7 +129,7 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringEntity(p, MediaType.APP_XML);
+    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     String result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_XML, content, true);
     Assert.assertEquals("", result);
@@ -174,7 +172,7 @@ public class WebServiceDriverPostUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postStringWithMakeContent()
       throws IOException, URISyntaxException, InterruptedException {
-    var content = WebServiceUtilities.makeStringEntity("Test", MediaType.PLAIN_TEXT);
+    String content = WebServiceUtilities.makeStringContent("Test", MediaType.PLAIN_TEXT);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     String result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, content, true);
     Assert.assertEquals("", result);

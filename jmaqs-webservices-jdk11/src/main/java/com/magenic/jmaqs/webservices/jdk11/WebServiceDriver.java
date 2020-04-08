@@ -6,7 +6,6 @@ package com.magenic.jmaqs.webservices.jdk11;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -14,8 +13,6 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-
-import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpResponseException;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -339,7 +336,7 @@ public class WebServiceDriver {
   private static String createContent(Object content, MediaType postMediaType,
       boolean contentAsString) throws JsonProcessingException {
     if (contentAsString) {
-      return WebServiceUtilities.createStringEntity(content, postMediaType);
+      return WebServiceUtilities.makeStringContent(content, postMediaType);
     }
     return content.toString();
   }

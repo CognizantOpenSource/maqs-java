@@ -25,7 +25,7 @@ public class WebServiceDriverManager extends DriverManager {
   }
 
   /**
-   * Initializes a new instance of the WebServiceDriverManager class
+   * Initializes a new instance of the WebServiceDriverManager class.
    * @param httpClient Function for creating an http client
    * @param baseTestObject The associated test object
    */
