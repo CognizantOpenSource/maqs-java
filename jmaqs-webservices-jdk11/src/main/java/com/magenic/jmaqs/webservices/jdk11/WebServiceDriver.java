@@ -10,6 +10,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+
+import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpResponseException;
 
@@ -98,6 +100,197 @@ public class WebServiceDriver {
    */
   public HttpRequest getHttpRequest() {
     return this.baseHttpRequest;
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <typeparam name="T">The expected response type</typeparam>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>The response deserialized as - <typeparamref name="T"/></returns>
+  public <T> T put(String requestUri, String expectedMediaType, String content, boolean expectSuccess){
+    HttpResponse<String> response = this.PutWithResponse(requestUri, expectedMediaType, content, expectSuccess);
+    return WebServiceUtilities.deserializeResponse(response, expectedMediaType);
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <typeparam name="T">The expected response type</typeparam>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="expectedStatus">Assert a specific status code was returned</param>
+  /// <returns>The response deserialized as - <typeparamref name="T"/></returns>
+  public <T> T put(String requestUri, String expectedMediaType, String content, HttpStatus expectedStatus) {
+    HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType, content, expectedStatus);
+    return WebServiceUtilities.deserializeResponse(response, expectedMediaType);
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>The response body as a string</returns>
+  public String put(String requestUri, String expectedMediaType, String content, boolean expectSuccess) {
+    HttpResponse<String> response = this.PutWithResponse(requestUri, expectedMediaType, content, expectSuccess);
+    return response.body();
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="expectedStatus">Assert a specific status code was returned</param>
+  /// <returns>The response body as a string</returns>
+  public String put(String requestUri, String expectedMediaType, String content, HttpStatus expectedStatus) {
+    HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType, content, expectedStatus);
+    return response.body();
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="contentEncoding">How to encode the put content</param>
+  /// <param name="postMediaType">The type of the media being put</param>
+  /// <param name="contentAsString">If true pass content as StringContent, else pass as StreamContent</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>The response body as a string</returns>
+  public String put(String requestUri, String expectedMediaType, String content, String postMediaType,
+      boolean contentAsString, boolean expectSuccess) {
+    HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType,
+        content, postMediaType, contentAsString, expectSuccess);
+    return response.body();
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="contentEncoding">How to encode the put content</param>
+  /// <param name="postMediaType">The type of the media being put</param>
+  /// <param name="expectedStatus">Assert a specific status code was returned</param>
+  /// <param name="contentAsString">If true pass content as StringContent, else pass as StreamContent</param>
+  /// <returns>The response body as a string</returns>
+  public String put(String requestUri, String expectedMediaType, String content, String postMediaType,
+      HttpStatus expectedStatus, boolean contentAsString) throws HttpResponseException {
+    HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType,
+        content, postMediaType, expectedStatus, contentAsString);
+    return response.body();
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="contentEncoding">How to encode the put content</param>
+  /// <param name="postMediaType">The type of the media being put</param>
+  /// <param name="contentAsString">If true pass content as StringContent, else pass as StreamContent</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>The http response message</returns>
+  public HttpResponse<String> putWithResponse(String requestUri, String expectedMediaType, String content,
+      String postMediaType, boolean contentAsString, boolean expectSuccess) {
+    String httpContent = createContent(content, postMediaType, contentAsString);
+    return this.PutWithResponse(requestUri, expectedMediaType, httpContent, expectSuccess);
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="contentEncoding">How to encode the put content</param>
+  /// <param name="postMediaType">The type of the media being put</param>
+  /// <param name="expectedStatus">Assert a specific status code was returned</param>
+  /// <param name="contentAsString">If true pass content as StringContent, else pass as StreamContent</param>
+  /// <returns>The http response message</returns>
+  public HttpResponse<String> putWithResponse(String requestUri, String expectedMediaType, String content,
+      String postMediaType, HttpStatus expectedStatus, boolean contentAsString) throws HttpResponseException {
+    String httpContent = createContent(content, postMediaType, contentAsString);
+    return this.PutWithResponse(requestUri, expectedMediaType, httpContent, expectedStatus);
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>The http response message</returns>
+  public HttpResponse<String> putWithResponse(String requestUri, String expectedMediaType,
+      String content, boolean expectSuccess) throws HttpResponseException {
+    return this.putContent(requestUri, expectedMediaType, content, expectSuccess);
+  }
+
+  /// <summary>
+  /// Execute a web service put
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media being requested</param>
+  /// <param name="content">The put content</param>
+  /// <param name="expectedStatus">Assert a specific status code was returned</param>
+  /// <returns>The http response message</returns>
+  public HttpResponse<String> PutWithResponse(String requestUri, String expectedMediaType, String content,
+      HttpStatus expectedStatus) throws HttpResponseException {
+    return this.putContent(requestUri, expectedMediaType, content, expectedStatus);
+  }
+
+  /// <summary>
+  /// Do a web service put for the given uri, content and media type
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="responseMediaType">The response media type</param>
+  /// <param name="content">The put body</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>A http response message</returns>
+  protected HttpResponse<String> putContent(String requestUri, String responseMediaType,
+      String content, boolean expectSuccess)
+      throws HttpResponseException {
+    this.checkIfMediaTypeNotPresent(responseMediaType);
+    HttpResponse<String> response = await this.HttpClient.PutAsync(requestUri, content).ConfigureAwait(false);
+
+    // Should we check for success
+    if (expectSuccess) {
+      ensureSuccessStatusCode(response);
+    }
+
+    return response;
+  }
+
+  /// <summary>
+  /// Do a web service put for the given uri, content and media type
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="responseMediaType">The response media type</param>
+  /// <param name="content">The put body</param>
+  /// <param name="expectedStatus">Assert a specific status code was returned</param>
+  /// <returns>A http response message</returns>
+  protected HttpResponse<String> putContent(String requestUri, String responseMediaType, String content, HttpStatus expectedStatus)
+      throws HttpResponseException {
+    this.checkIfMediaTypeNotPresent(responseMediaType);
+    HttpResponse<String> response = await this.HttpClient.PutAsync(requestUri, content).ConfigureAwait(false);
+
+    // We check for specific status
+    ensureStatusCodesMatch(response, expectedStatus);
+
+    return response;
   }
 
   /**
