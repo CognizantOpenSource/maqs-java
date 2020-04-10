@@ -5,6 +5,8 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
+
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -111,10 +113,10 @@ public class WebServiceDriver {
   /// <param name="content">The put content</param>
   /// <param name="expectSuccess">Assert a success code was returned</param>
   /// <returns>The response deserialized as - <typeparamref name="T"/></returns>
-  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content, boolean expectSuccess)
+  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content, Type type, boolean expectSuccess)
       throws HttpResponseException {
     HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType, content, expectSuccess);
-    return WebServiceUtilities.deserializeResponse(response, expectedMediaType);
+    return WebServiceUtilities.deserializeResponse(response, type, expectedMediaType);
   }
 
   /// <summary>
@@ -126,10 +128,10 @@ public class WebServiceDriver {
   /// <param name="content">The put content</param>
   /// <param name="expectedStatus">Assert a specific status code was returned</param>
   /// <returns>The response deserialized as - <typeparamref name="T"/></returns>
-  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content, HttpStatus expectedStatus)
+  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content, Type type,  HttpStatus expectedStatus)
       throws HttpResponseException {
     HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType, content, expectedStatus);
-    return WebServiceUtilities.deserializeResponse(response, expectedMediaType);
+    return WebServiceUtilities.deserializeResponse(response, type, expectedMediaType);
   }
 
   /// <summary>

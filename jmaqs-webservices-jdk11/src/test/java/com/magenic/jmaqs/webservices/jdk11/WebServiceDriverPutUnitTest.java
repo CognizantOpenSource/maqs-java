@@ -6,7 +6,6 @@ import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.net.URISyntaxException;
-import java.net.http.HttpResponse;
 import org.apache.http.client.HttpResponseException;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
@@ -37,7 +36,7 @@ public class WebServiceDriverPutUnitTest {
   /// Put With JSON Type
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putJSONWithType() throws URISyntaxException {
+  public void putJSONWithType() throws URISyntaxException, HttpResponseException {
     Product p = new Product();
     p.setCategory("ff");
     p.setId(4);
@@ -46,7 +45,7 @@ public class WebServiceDriverPutUnitTest {
 
     var content = WebServiceUtilities.makeStringContent(p, "application/json");
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    HttpResponse<String> result = webServiceDriver.put("/api/XML_JSON/Put/1", MediaType.APP_JSON, content, true);
+    var result = webServiceDriver.put("/api/XML_JSON/Put/1", MediaType.APP_JSON, content, true);
     Assert.assertNull(result);
   }
 
@@ -72,7 +71,7 @@ public class WebServiceDriverPutUnitTest {
   /// XML string verify status code
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putXMLSerializedVerifyStatusCode() throws URISyntaxException {
+  public void putXMLSerializedVerifyStatusCode() throws URISyntaxException, HttpResponseException {
     Product p = new Product();
     p.setCategory("ff");
     p.setId(4);
@@ -81,7 +80,7 @@ public class WebServiceDriverPutUnitTest {
 
     var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", MediaType.APP_XML, content);
+    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", MediaType.APP_XML, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -99,8 +98,8 @@ public class WebServiceDriverPutUnitTest {
 
     var content = WebServiceUtilities.makeStreamContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", MediaType.APP_XML,
-        content, true);
+    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1",
+        MediaType.APP_XML, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -108,7 +107,7 @@ public class WebServiceDriverPutUnitTest {
   /// Verify put returns an empty string
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putXMLSerializedVerifyEmptyString() throws URISyntaxException {
+  public void putXMLSerializedVerifyEmptyString() throws URISyntaxException, HttpResponseException {
     Product p = new Product();
     p.setCategory("ff");
     p.setId(4);
@@ -117,7 +116,7 @@ public class WebServiceDriverPutUnitTest {
 
     var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/XML_JSON/Put/1", MediaType.APP_XML, content, true);
+    var result = webServiceDriver.put("/api/XML_JSON/Put/1", MediaType.APP_XML, content,true);
     Assert.assertEquals(result, "");
   }
 
@@ -125,9 +124,10 @@ public class WebServiceDriverPutUnitTest {
   /// String without using the utility
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putStringWithoutMakeContent() throws URISyntaxException {
+  public void putStringWithoutMakeContent() throws URISyntaxException, HttpResponseException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT);
+    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, "Test",
+        MediaType.PLAIN_TEXT, true, true);
     Assert.assertEquals(result, "");
   }
 
@@ -135,7 +135,7 @@ public class WebServiceDriverPutUnitTest {
   /// Stream without using the utility
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putStreamWithoutMakeContent() throws URISyntaxException {
+  public void putStreamWithoutMakeContent() throws URISyntaxException, HttpResponseException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT,
         "Test", MediaType.PLAIN_TEXT, false, true);
@@ -146,7 +146,7 @@ public class WebServiceDriverPutUnitTest {
   /// String using the utility
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putStringWithMakeStringContent() throws URISyntaxException {
+  public void putStringWithMakeStringContent() throws URISyntaxException, HttpResponseException {
     var content = WebServiceUtilities.makeStringContent("Test", MediaType.PLAIN_TEXT);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, content, true);
@@ -217,7 +217,7 @@ public class WebServiceDriverPutUnitTest {
   /// Test string response
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putExpectStringError() throws URISyntaxException {
+  public void putExpectStringError() throws URISyntaxException, HttpResponseException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, "", false);
     Assert.assertEquals("{\"Message\":\"No Product found for name = 1 \"}", result);
