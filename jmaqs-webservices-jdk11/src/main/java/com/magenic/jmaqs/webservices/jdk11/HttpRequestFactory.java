@@ -73,6 +73,19 @@ public class HttpRequestFactory {
 
   /**
    * Gets a HTTP Request based on configuration values.
+   * @param baseUri Base service uri
+   * @param mediaType the media type being used
+   * @param content the content to be used in a POST/PUT/PATCH
+   * @param requestType the type of request to be done
+   * @return A HTTP Request
+   */
+  public static HttpRequest getRequest(String baseUri, MediaType mediaType, String content, RequestMethod requestType) {
+    return setUpRequest(WebServiceConfig.getWebServiceUri(), baseUri,
+        WebServiceConfig.getWebServiceTimeOut(), mediaType, content, requestType);
+  }
+
+  /**
+   * Gets a HTTP Request based on configuration values.
    * @param baseAddress the base url address
    * @param baseUri Base service uri
    * @param timeout Web service timeout
