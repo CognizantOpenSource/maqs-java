@@ -7,7 +7,7 @@ import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
-import org.apache.http.HttpStatus;
+import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -33,7 +33,7 @@ public class WebServiceDriverPostUnitTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     HttpResponse<String> result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
         MediaType.APP_JSON, content, true);
-    Assert.assertEquals(result.statusCode(), HttpStatus.SC_OK);
+    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
   /**
@@ -53,7 +53,7 @@ public class WebServiceDriverPostUnitTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     HttpResponse<String> result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
         MediaType.APP_JSON, content, true);
-    Assert.assertEquals(result.statusCode(), HttpStatus.SC_OK);
+    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
   /**
@@ -74,7 +74,7 @@ public class WebServiceDriverPostUnitTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     HttpResponse<String> result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
         MediaType.APP_XML, content, true);
-    Assert.assertEquals(result.statusCode(), HttpStatus.SC_OK);
+    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
   /**
@@ -190,7 +190,7 @@ public class WebServiceDriverPostUnitTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     HttpResponse<String> result = webServiceDriver.postWithResponse("/api/String",
         MediaType.PLAIN_TEXT, "Test", true);
-    Assert.assertEquals(result.statusCode(), HttpStatus.SC_OK);
+    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
   /**
@@ -205,7 +205,7 @@ public class WebServiceDriverPostUnitTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     HttpResponse<String> result = webServiceDriver.postWithResponse("/api/String",
         MediaType.PLAIN_TEXT, "", false);
-    Assert.assertEquals(result.statusCode(), HttpStatus.SC_BAD_REQUEST);
+    Assert.assertEquals(result.statusCode(), HttpStatus.BAD_REQUEST.value());
   }
 
   /**
