@@ -111,8 +111,9 @@ public class WebServiceDriver {
   /// <param name="content">The put content</param>
   /// <param name="expectSuccess">Assert a success code was returned</param>
   /// <returns>The response deserialized as - <typeparamref name="T"/></returns>
-  public <T> T put(String requestUri, String expectedMediaType, String content, boolean expectSuccess){
-    HttpResponse<String> response = this.PutWithResponse(requestUri, expectedMediaType, content, expectSuccess);
+  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content, boolean expectSuccess)
+      throws HttpResponseException {
+    HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType, content, expectSuccess);
     return WebServiceUtilities.deserializeResponse(response, expectedMediaType);
   }
 
@@ -125,7 +126,8 @@ public class WebServiceDriver {
   /// <param name="content">The put content</param>
   /// <param name="expectedStatus">Assert a specific status code was returned</param>
   /// <returns>The response deserialized as - <typeparamref name="T"/></returns>
-  public <T> T put(String requestUri, String expectedMediaType, String content, HttpStatus expectedStatus) {
+  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content, HttpStatus expectedStatus)
+      throws HttpResponseException {
     HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType, content, expectedStatus);
     return WebServiceUtilities.deserializeResponse(response, expectedMediaType);
   }
@@ -138,21 +140,9 @@ public class WebServiceDriver {
   /// <param name="content">The put content</param>
   /// <param name="expectSuccess">Assert a success code was returned</param>
   /// <returns>The response body as a string</returns>
-  public String put(String requestUri, String expectedMediaType, String content, boolean expectSuccess) {
-    HttpResponse<String> response = this.PutWithResponse(requestUri, expectedMediaType, content, expectSuccess);
-    return response.body();
-  }
-
-  /// <summary>
-  /// Execute a web service put
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="expectedMediaType">The type of media being requested</param>
-  /// <param name="content">The put content</param>
-  /// <param name="expectedStatus">Assert a specific status code was returned</param>
-  /// <returns>The response body as a string</returns>
-  public String put(String requestUri, String expectedMediaType, String content, HttpStatus expectedStatus) {
-    HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType, content, expectedStatus);
+  public String put(String requestUri, MediaType expectedMediaType, String content, boolean expectSuccess)
+      throws HttpResponseException {
+    HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType, content, expectSuccess);
     return response.body();
   }
 
@@ -167,8 +157,8 @@ public class WebServiceDriver {
   /// <param name="contentAsString">If true pass content as StringContent, else pass as StreamContent</param>
   /// <param name="expectSuccess">Assert a success code was returned</param>
   /// <returns>The response body as a string</returns>
-  public String put(String requestUri, String expectedMediaType, String content, String postMediaType,
-      boolean contentAsString, boolean expectSuccess) {
+  public String put(String requestUri, MediaType expectedMediaType, String content, MediaType postMediaType,
+      boolean contentAsString, boolean expectSuccess) throws HttpResponseException {
     HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType,
         content, postMediaType, contentAsString, expectSuccess);
     return response.body();
@@ -185,7 +175,7 @@ public class WebServiceDriver {
   /// <param name="expectedStatus">Assert a specific status code was returned</param>
   /// <param name="contentAsString">If true pass content as StringContent, else pass as StreamContent</param>
   /// <returns>The response body as a string</returns>
-  public String put(String requestUri, String expectedMediaType, String content, String postMediaType,
+  public String put(String requestUri, MediaType expectedMediaType, String content, MediaType postMediaType,
       HttpStatus expectedStatus, boolean contentAsString) throws HttpResponseException {
     HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType,
         content, postMediaType, expectedStatus, contentAsString);
@@ -203,10 +193,10 @@ public class WebServiceDriver {
   /// <param name="contentAsString">If true pass content as StringContent, else pass as StreamContent</param>
   /// <param name="expectSuccess">Assert a success code was returned</param>
   /// <returns>The http response message</returns>
-  public HttpResponse<String> putWithResponse(String requestUri, String expectedMediaType, String content,
-      String postMediaType, boolean contentAsString, boolean expectSuccess) {
+  public HttpResponse<String> putWithResponse(String requestUri, MediaType expectedMediaType, Object content,
+      MediaType postMediaType, boolean contentAsString, boolean expectSuccess) throws HttpResponseException {
     String httpContent = createContent(content, postMediaType, contentAsString);
-    return this.PutWithResponse(requestUri, expectedMediaType, httpContent, expectSuccess);
+    return this.putWithResponse(requestUri, expectedMediaType, httpContent, expectSuccess);
   }
 
   /// <summary>
@@ -220,10 +210,10 @@ public class WebServiceDriver {
   /// <param name="expectedStatus">Assert a specific status code was returned</param>
   /// <param name="contentAsString">If true pass content as StringContent, else pass as StreamContent</param>
   /// <returns>The http response message</returns>
-  public HttpResponse<String> putWithResponse(String requestUri, String expectedMediaType, String content,
-      String postMediaType, HttpStatus expectedStatus, boolean contentAsString) throws HttpResponseException {
+  public HttpResponse<String> putWithResponse(String requestUri, MediaType expectedMediaType, Object content,
+      MediaType postMediaType, HttpStatus expectedStatus, boolean contentAsString) throws HttpResponseException {
     String httpContent = createContent(content, postMediaType, contentAsString);
-    return this.PutWithResponse(requestUri, expectedMediaType, httpContent, expectedStatus);
+    return this.putWithResponse(requestUri, expectedMediaType, httpContent, expectedStatus);
   }
 
   /// <summary>
@@ -234,7 +224,7 @@ public class WebServiceDriver {
   /// <param name="content">The put content</param>
   /// <param name="expectSuccess">Assert a success code was returned</param>
   /// <returns>The http response message</returns>
-  public HttpResponse<String> putWithResponse(String requestUri, String expectedMediaType,
+  public HttpResponse<String> putWithResponse(String requestUri, MediaType expectedMediaType,
       String content, boolean expectSuccess) throws HttpResponseException {
     return this.putContent(requestUri, expectedMediaType, content, expectSuccess);
   }
@@ -247,7 +237,7 @@ public class WebServiceDriver {
   /// <param name="content">The put content</param>
   /// <param name="expectedStatus">Assert a specific status code was returned</param>
   /// <returns>The http response message</returns>
-  public HttpResponse<String> PutWithResponse(String requestUri, String expectedMediaType, String content,
+  public HttpResponse<String> putWithResponse(String requestUri, MediaType expectedMediaType, String content,
       HttpStatus expectedStatus) throws HttpResponseException {
     return this.putContent(requestUri, expectedMediaType, content, expectedStatus);
   }
@@ -260,10 +250,10 @@ public class WebServiceDriver {
   /// <param name="content">The put body</param>
   /// <param name="expectSuccess">Assert a success code was returned</param>
   /// <returns>A http response message</returns>
-  protected HttpResponse<String> putContent(String requestUri, String responseMediaType,
+  protected HttpResponse<String> putContent(String requestUri, MediaType responseMediaType,
       String content, boolean expectSuccess)
       throws HttpResponseException {
-    this.checkIfMediaTypeNotPresent(responseMediaType);
+    this.checkIfMediaTypeNotPresent(responseMediaType.toString());
     HttpResponse<String> response = await this.HttpClient.PutAsync(requestUri, content).ConfigureAwait(false);
 
     // Should we check for success
@@ -282,9 +272,9 @@ public class WebServiceDriver {
   /// <param name="content">The put body</param>
   /// <param name="expectedStatus">Assert a specific status code was returned</param>
   /// <returns>A http response message</returns>
-  protected HttpResponse<String> putContent(String requestUri, String responseMediaType, String content, HttpStatus expectedStatus)
+  protected HttpResponse<String> putContent(String requestUri, MediaType responseMediaType, String content, HttpStatus expectedStatus)
       throws HttpResponseException {
-    this.checkIfMediaTypeNotPresent(responseMediaType);
+    this.checkIfMediaTypeNotPresent(responseMediaType.toString());
     HttpResponse<String> response = await this.HttpClient.PutAsync(requestUri, content).ConfigureAwait(false);
 
     // We check for specific status

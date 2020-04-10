@@ -4,6 +4,7 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.webservices.jdk11.models.Product;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
+import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
 import org.apache.http.client.HttpResponseException;
@@ -26,9 +27,9 @@ public class WebServiceDriverPutUnitTest {
     p.setName("ff");
     p.setPrice(3.25);
 
-    var content = WebServiceUtilities.makeStringContent(p, MediaType "application/json");
+    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", "application/json", content, true);
+    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", MediaType.APP_JSON, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK);
   }
 
@@ -45,7 +46,7 @@ public class WebServiceDriverPutUnitTest {
 
     var content = WebServiceUtilities.makeStringContent(p, "application/json");
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    HttpResponse<String> result = webServiceDriver.put("/api/XML_JSON/Put/1", "application/json", content, true);
+    HttpResponse<String> result = webServiceDriver.put("/api/XML_JSON/Put/1", MediaType.APP_JSON, content, true);
     Assert.assertNull(result);
   }
 
@@ -61,9 +62,9 @@ public class WebServiceDriverPutUnitTest {
     p.setName("ff");
     p.setPrice(3.25);
 
-    var content = WebServiceUtilities.makeStreamContent(p, "application/json");
+    var content = WebServiceUtilities.makeStreamContent(p, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", "application/json", content, true);
+    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", MediaType.APP_JSON, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -78,9 +79,9 @@ public class WebServiceDriverPutUnitTest {
     p.setName("ff");
     p.setPrice(3.25);
 
-    var content = WebServiceUtilities.makeStringContent(p, "application/xml");
+    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", "application/xml", content);
+    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", MediaType.APP_XML, content);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -88,16 +89,18 @@ public class WebServiceDriverPutUnitTest {
   /// XML stream verify status code
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putXMLStreamSerializedVerifyStatusCode() throws URISyntaxException {
+  public void putXMLStreamSerializedVerifyStatusCode()
+      throws URISyntaxException, HttpResponseException {
     Product p = new Product();
     p.setCategory("ff");
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
 
-    var content = WebServiceUtilities.makeStreamContent(p, "application/xml");
+    var content = WebServiceUtilities.makeStreamContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.PutWithResponse("/api/XML_JSON/Put/1", "application/xml", content);
+    var result = webServiceDriver.putWithResponse("/api/XML_JSON/Put/1", MediaType.APP_XML,
+        content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -112,9 +115,9 @@ public class WebServiceDriverPutUnitTest {
     p.setName("ff");
     p.setPrice(3.25);
 
-    var content = WebServiceUtilities.makeStringContent(p, "application/xml");
+    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/XML_JSON/Put/1", "application/xml", content, true);
+    var result = webServiceDriver.put("/api/XML_JSON/Put/1", MediaType.APP_XML, content, true);
     Assert.assertEquals(result, "");
   }
 
@@ -124,7 +127,7 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithoutMakeContent() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/String/Put/1", "text/plain", "Test", "text/plain");
+    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT);
     Assert.assertEquals(result, "");
   }
 
@@ -134,8 +137,8 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStreamWithoutMakeContent() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/String/Put/1", "text/plain",
-        "Test", "text/plain", false, true);
+    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT,
+        "Test", MediaType.PLAIN_TEXT, false, true);
     Assert.assertEquals(result, "");
   }
 
@@ -144,9 +147,9 @@ public class WebServiceDriverPutUnitTest {
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithMakeStringContent() throws URISyntaxException {
-    var content = WebServiceUtilities.makeStringContent("Test", "text/plain");
+    var content = WebServiceUtilities.makeStringContent("Test", MediaType.PLAIN_TEXT);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/String/Put/1", "text/plain", content, true);
+    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, content, true);
     Assert.assertEquals(result, "");
   }
 
@@ -157,7 +160,7 @@ public class WebServiceDriverPutUnitTest {
   public void PutStringWithMakeStreamContent()
   {
     StreamContent content = WebServiceUtils.MakeStreamContent("Test", Encoding.UTF8, "text/plain");
-    var result = this.WebServiceDriver.Put("/api/String/Put/1", "text/plain", content, true);
+    var result = this.WebServiceDriver.Put("/api/String/Put/1", MediaType.PLAIN_TEXT, content, true);
     Assert.AreEqual(string.Empty, result);
   }
 
@@ -181,9 +184,10 @@ public class WebServiceDriverPutUnitTest {
   /// Put string without utility
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putStringWithoutContentStatusCode() throws URISyntaxException {
+  public void putStringWithoutContentStatusCode() throws URISyntaxException, HttpResponseException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.putWithResponse("/api/String/Put/1", "text/plain", "Test", "text/plain", true);
+    var result = webServiceDriver.putWithResponse("/api/String/Put/1", MediaType.PLAIN_TEXT,
+        "Test", MediaType.PLAIN_TEXT, true, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -192,9 +196,9 @@ public class WebServiceDriverPutUnitTest {
   /// </summary>
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringMakeContentStatusCode() throws URISyntaxException, HttpResponseException {
-    var content = WebServiceUtilities.makeStringContent("Test", "text/plain");
+    var content = WebServiceUtilities.makeStringContent("Test", MediaType.PLAIN_TEXT);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.putWithResponse("/api/String/Put/1", "text/plain", content, true);
+    var result = webServiceDriver.putWithResponse("/api/String/Put/1", MediaType.PLAIN_TEXT, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -204,7 +208,8 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putExpectContentError() throws URISyntaxException, HttpResponseException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.putWithResponse("/api/String/Put/1", "text/plain", null, false);
+    var result = webServiceDriver.putWithResponse("/api/String/Put/1", MediaType.PLAIN_TEXT,
+        null, false);
     Assert.assertEquals(result.statusCode(), HttpStatus.CONFLICT.value());
   }
 
@@ -214,7 +219,7 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putExpectStringError() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/String/Put/1", "text/plain", "", false);
+    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, "", false);
     Assert.assertEquals("{\"Message\":\"No Product found for name = 1 \"}", result);
   }
 }
