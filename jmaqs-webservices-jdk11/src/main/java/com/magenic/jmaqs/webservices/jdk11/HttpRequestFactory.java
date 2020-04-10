@@ -55,9 +55,6 @@ public class HttpRequestFactory {
     return getRequest(baseAddress, baseUri, timeout, MediaType.APP_JSON);
   }
 
-
-
-
   /**
    * Gets a HTTP Request based on configuration values.
    * @param baseAddress the base website address
