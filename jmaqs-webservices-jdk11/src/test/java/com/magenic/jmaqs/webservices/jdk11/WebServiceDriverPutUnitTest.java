@@ -32,9 +32,12 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
-  /// <summary>
-  /// Put With JSON Type
-  /// </summary>
+  /**
+   * Put With JSON Type.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putJSONWithType() throws URISyntaxException, IOException, InterruptedException {
     Product p = new Product();
@@ -49,9 +52,12 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result, "");
   }
 
-  /// <summary>
-  /// Verify the stream status code
-  /// </summary>
+  /**
+   * Verify the stream status code.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putJSONStreamSerializedVerifyStatusCode()
       throws URISyntaxException, IOException, InterruptedException {
@@ -67,9 +73,12 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
-  /// <summary>
-  /// XML string verify status code
-  /// </summary>
+  /**
+   * XML string verify status code.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putXMLSerializedVerifyStatusCode()
       throws URISyntaxException, IOException, InterruptedException {
@@ -85,9 +94,12 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
-  /// <summary>
-  /// XML stream verify status code
-  /// </summary>
+  /**
+   * XML stream verify status code.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putXMLStreamSerializedVerifyStatusCode()
       throws URISyntaxException, IOException, InterruptedException {
@@ -104,9 +116,12 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
-  /// <summary>
-  /// Verify put returns an empty string
-  /// </summary>
+  /**
+   * Verify put returns an empty string.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putXMLSerializedVerifyEmptyString()
       throws URISyntaxException, IOException, InterruptedException {
@@ -122,9 +137,12 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result, "");
   }
 
-  /// <summary>
-  /// String without using the utility
-  /// </summary>
+  /**
+   * String without using the utility.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithoutMakeContent()
       throws URISyntaxException, IOException, InterruptedException {
@@ -134,9 +152,12 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result, "");
   }
 
-  /// <summary>
-  /// Stream without using the utility
-  /// </summary>
+  /**
+   * Stream without using the utility.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStreamWithoutMakeContent()
       throws URISyntaxException, IOException, InterruptedException {
@@ -146,9 +167,12 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result, "");
   }
 
-  /// <summary>
-  /// String using the utility
-  /// </summary>
+  /**
+   * String using the utility.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithMakeStringContent()
       throws URISyntaxException, IOException, InterruptedException {
@@ -187,9 +211,12 @@ public class WebServiceDriverPutUnitTest {
   }
  */
 
-  /// <summary>
-  /// Put string without utility
-  /// </summary>
+  /**
+   * Put string without utility.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithoutContentStatusCode()
       throws URISyntaxException, IOException, InterruptedException {
@@ -199,9 +226,12 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
-  /// <summary>
-  /// Put string with utility
-  /// </summary>
+  /**
+   * Put string with utility.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringMakeContentStatusCode()
       throws URISyntaxException, IOException, InterruptedException {
@@ -211,24 +241,30 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
-  /// <summary>
-  /// Test other status codes
-  /// </summary>
+  /**
+   * Test other status codes.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putExpectContentError() throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.putWithResponse("/api/String/Put/1", MediaType.PLAIN_TEXT,
-        null, false);
+        "", false);
     Assert.assertEquals(result.statusCode(), HttpStatus.CONFLICT.value());
   }
 
-  /// <summary>
-  /// Test string response
-  /// </summary>
+  /**
+   * Test string response.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putExpectStringError() throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, "", false);
+    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, null, false);
     Assert.assertEquals(result, "{\"Message\":\"No Product found for name = 1 \"}");
   }
 }
