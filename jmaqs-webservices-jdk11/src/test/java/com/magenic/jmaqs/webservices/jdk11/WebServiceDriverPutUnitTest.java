@@ -46,7 +46,7 @@ public class WebServiceDriverPutUnitTest {
     var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.put("/api/XML_JSON/Put/1", MediaType.APP_JSON, content, true);
-    Assert.assertNull(result);
+    Assert.assertEquals(result, "");
   }
 
   /// <summary>
@@ -158,6 +158,7 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result, "");
   }
 
+  /*
   /// <summary>
   /// Stream using the utility
   /// </summary>
@@ -184,6 +185,7 @@ public class WebServiceDriverPutUnitTest {
     var result = this.WebServiceDriver.Put("/api/String/Put/1", "text/plain", content, true);
     Assert.AreEqual(string.Empty, result);
   }
+ */
 
   /// <summary>
   /// Put string without utility
@@ -227,6 +229,6 @@ public class WebServiceDriverPutUnitTest {
   public void putExpectStringError() throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, "", false);
-    Assert.assertEquals("{\"Message\":\"No Product found for name = 1 \"}", result);
+    Assert.assertEquals(result, "{\"Message\":\"No Product found for name = 1 \"}");
   }
 }
