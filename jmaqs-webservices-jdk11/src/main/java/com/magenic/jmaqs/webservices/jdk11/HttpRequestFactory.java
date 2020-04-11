@@ -49,6 +49,16 @@ public class HttpRequestFactory {
   }
 
   /**
+   * Gets a HTTP client based on configuration values.
+   * @param baseUri Base service uri
+   * @param mediaType the media type being used
+   * @return a HTTP Request
+   */
+  public static HttpRequest getRequest(String baseUri, MediaType mediaType) {
+    return getRequest(WebServiceConfig.getWebServiceUri(), baseUri, WebServiceConfig.getWebServiceTimeOut(), mediaType);
+  }
+
+  /**
    * Gets a HTTP Request based on configuration values.
    * @param baseAddress the base url address
    * @param baseUri Base service uri
