@@ -5,7 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
+
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
 
@@ -15,7 +20,7 @@ import java.net.http.HttpResponse;
 public class WebServiceUtilities {
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
-  private static final ObjectMapper xmlMapper = new XmlMapper();
+  private static final XmlMapper xmlMapper = new XmlMapper();
 
   // private constructor
   private WebServiceUtilities() {
@@ -62,7 +67,8 @@ public class WebServiceUtilities {
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String makeStringContent(T body, MediaType contentType) throws JsonProcessingException {
+  public static <T> String makeStringContent(T body, MediaType contentType)
+      throws IOException {
     if (contentType.equals(MediaType.APP_XML)) {
       return serializeXml(body);
     } else if (contentType.equals(MediaType.APP_JSON)) {
@@ -93,7 +99,7 @@ public class WebServiceUtilities {
    * @return the string
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String serializeXml(T body) throws JsonProcessingException {
+  public static <T> String serializeXml(T body) throws IOException {
     return xmlMapper.writeValueAsString(body);
   }
 

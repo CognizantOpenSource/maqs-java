@@ -334,7 +334,7 @@ public class WebServiceDriver {
    * @throws JsonProcessingException if the exception is thrown
    */
   private static String createContent(Object content, MediaType postMediaType,
-      boolean contentAsString) throws JsonProcessingException {
+      boolean contentAsString) throws IOException {
     if (contentAsString) {
       return WebServiceUtilities.makeStringContent(content, postMediaType);
     }

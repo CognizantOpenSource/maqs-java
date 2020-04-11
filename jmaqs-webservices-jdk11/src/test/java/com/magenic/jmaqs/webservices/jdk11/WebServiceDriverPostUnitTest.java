@@ -6,7 +6,6 @@ import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.http.HttpResponse;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -29,9 +28,10 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
+
+    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    HttpResponse<String> result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
+    var result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
         MediaType.APP_JSON, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
@@ -49,9 +49,10 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
+
+    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    HttpResponse<String> result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
+    var result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
         MediaType.APP_JSON, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
@@ -70,9 +71,10 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
+
+    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    HttpResponse<String> result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
+    var result = webServiceDriver.postWithResponse("/api/XML_JSON/Post",
         MediaType.APP_XML, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
@@ -90,9 +92,10 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
+
+    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    String result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_JSON, content, true);
+    var result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_JSON, content, true);
     Assert.assertTrue(result.isEmpty());
   }
 
@@ -109,9 +112,10 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
+
+    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    String result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_XML, content, true);
+    var result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_XML, content, true);
     Assert.assertTrue(result.isEmpty());
   }
 
@@ -129,9 +133,10 @@ public class WebServiceDriverPostUnitTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
-    String content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
+
+    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    String result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_XML, content, true);
+    var result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_XML, content, true);
     Assert.assertEquals("", result);
   }
 
@@ -145,7 +150,7 @@ public class WebServiceDriverPostUnitTest {
   public void postStringWithoutMakeContent()
       throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    String result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, "Test", true);
+    var result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, "Test", true);
     Assert.assertEquals("", result);
   }
 
@@ -159,7 +164,7 @@ public class WebServiceDriverPostUnitTest {
   public void postStreamWithoutMakeContent()
       throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    String result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, "Test", true);
+    var result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, "Test", true);
     Assert.assertEquals("", result);
   }
 
@@ -172,9 +177,9 @@ public class WebServiceDriverPostUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postStringWithMakeContent()
       throws IOException, URISyntaxException, InterruptedException {
-    String content = WebServiceUtilities.makeStringContent("Test", MediaType.PLAIN_TEXT);
+    var content = WebServiceUtilities.makeStringContent("Test", MediaType.PLAIN_TEXT);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    String result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, content, true);
+    var result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, content, true);
     Assert.assertEquals("", result);
   }
 
@@ -188,7 +193,7 @@ public class WebServiceDriverPostUnitTest {
   public void postStringWithoutContentStatusCode()
       throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    HttpResponse<String> result = webServiceDriver.postWithResponse("/api/String",
+    var result = webServiceDriver.postWithResponse("/api/String",
         MediaType.PLAIN_TEXT, "Test", true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
@@ -203,7 +208,7 @@ public class WebServiceDriverPostUnitTest {
   public void postExpectContentError() throws URISyntaxException, IOException,
       InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    HttpResponse<String> result = webServiceDriver.postWithResponse("/api/String",
+    var result = webServiceDriver.postWithResponse("/api/String",
         MediaType.PLAIN_TEXT, "", false);
     Assert.assertEquals(result.statusCode(), HttpStatus.BAD_REQUEST.value());
   }
@@ -217,7 +222,7 @@ public class WebServiceDriverPostUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postExpectStringError() throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    String result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, "", false);
+    var result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, "", false);
     Assert.assertEquals("{\"Message\":\"No data\"}", result);
   }
 
@@ -231,7 +236,7 @@ public class WebServiceDriverPostUnitTest {
   public void postExpectStringErrorEmptyHttpContent()
       throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    String result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, "", false);
+    var result = webServiceDriver.post("/api/String", MediaType.PLAIN_TEXT, "", false);
     Assert.assertEquals("{\"Message\":\"No data\"}", result);
   }
 }
