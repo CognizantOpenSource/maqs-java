@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -9,6 +13,7 @@ import java.net.URISyntaxException;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * Test web service gets using the base test driver.
@@ -39,7 +44,8 @@ public class WebServiceDriverPutUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putJSONWithType() throws URISyntaxException, IOException, InterruptedException {
+  public void putJSONWithType()
+      throws URISyntaxException, IOException, InterruptedException {
     Product p = new Product();
     p.setCategory("ff");
     p.setId(4);
@@ -145,7 +151,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithoutMakeContent()
-      throws URISyntaxException, IOException, InterruptedException {
+      throws URISyntaxException, IOException, InterruptedException, XMLStreamException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, "Test",
         MediaType.PLAIN_TEXT, true, true);
@@ -160,7 +166,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStreamWithoutMakeContent()
-      throws URISyntaxException, IOException, InterruptedException {
+      throws URISyntaxException, IOException, InterruptedException, XMLStreamException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT,
         "Test", MediaType.PLAIN_TEXT, false, true);
@@ -182,35 +188,6 @@ public class WebServiceDriverPutUnitTest {
     Assert.assertEquals(result, "");
   }
 
-  /*
-  /// <summary>
-  /// Stream using the utility
-  /// </summary>
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void PutStringWithMakeStreamContent()
-  {
-    StreamContent content = WebServiceUtils.MakeStreamContent("Test", Encoding.UTF8, "text/plain");
-    var result = this.WebServiceDriver.Put("/api/String/Put/1", MediaType.PLAIN_TEXT, content, true);
-    Assert.AreEqual(string.Empty, result);
-  }
-
-  /// <summary>
-  /// Make stream content with a stream
-  /// </summary>
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void PutStreamWithMakeStreamContent() {
-    MemoryStream stream = new MemoryStream();
-    StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
-    writer.Write("TestStream");
-    writer.Flush();
-    stream.Position = 0;
-
-    StreamContent content = WebServiceUtils.MakeStreamContent(stream, "text/plain");
-    var result = this.WebServiceDriver.Put("/api/String/Put/1", "text/plain", content, true);
-    Assert.AreEqual(string.Empty, result);
-  }
- */
-
   /**
    * Put string without utility.
    * @throws URISyntaxException if the exception is thrown
@@ -219,7 +196,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithoutContentStatusCode()
-      throws URISyntaxException, IOException, InterruptedException {
+      throws URISyntaxException, IOException, InterruptedException, XMLStreamException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.putWithResponse("/api/String/Put/1", MediaType.PLAIN_TEXT,
         "Test", MediaType.PLAIN_TEXT, true, true);
@@ -250,7 +227,7 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putExpectContentError() throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.putWithResponse("/api/String/Put/1", MediaType.PLAIN_TEXT,
+    var result = webServiceDriver.putWithResponse("/api/String/Put/1", MediaType.APP_JSON,
         "", false);
     Assert.assertEquals(result.statusCode(), HttpStatus.CONFLICT.value());
   }
@@ -264,7 +241,7 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putExpectStringError() throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, null, false);
+    var result = webServiceDriver.put("/api/String/Put/1", MediaType.APP_JSON, "", false);
     Assert.assertEquals(result, "{\"Message\":\"No Product found for name = 1 \"}");
   }
 }

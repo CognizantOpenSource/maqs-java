@@ -1,8 +1,14 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
@@ -15,11 +21,12 @@ import java.net.http.HttpResponse;
 public class WebServiceUtilities {
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
-  private static final ObjectMapper xmlMapper = new XmlMapper();
+  private static final XmlMapper xmlMapper = new XmlMapper();
 
-  // private constructor
-  private WebServiceUtilities() {
-  }
+  /**
+   * private class constructor.
+   */
+  private WebServiceUtilities() { }
 
   /**
    * Gets response body.
@@ -62,7 +69,8 @@ public class WebServiceUtilities {
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String makeStringContent(T body, MediaType contentType) throws JsonProcessingException {
+  public static <T> String makeStringContent(T body, MediaType contentType)
+      throws IOException {
     if (contentType.equals(MediaType.APP_XML)) {
       return serializeXml(body);
     } else if (contentType.equals(MediaType.APP_JSON)) {
@@ -93,7 +101,9 @@ public class WebServiceUtilities {
    * @return the string
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String serializeXml(T body) throws JsonProcessingException {
+  public static <T> String serializeXml(T body) throws IOException {
+    xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+    xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
     return xmlMapper.writeValueAsString(body);
   }
 
@@ -106,12 +116,13 @@ public class WebServiceUtilities {
    */
   public static <T> T deserializeResponse(HttpResponse<String> response, MediaType mediaType, Type type)
       throws IOException {
-    if (mediaType == MediaType.APP_XML) {
+    if (mediaType.equals(MediaType.APP_XML)) {
       return deserializeXml(response, type);
-    } else if (mediaType == MediaType.APP_JSON) {
+    } else if (mediaType.equals(MediaType.APP_JSON)) {
       return deserializeJson(response, type);
     } else {
-      return (T) response.toString();
+      throw new IllegalArgumentException(
+          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
     }
   }
 

@@ -5,7 +5,11 @@
 package com.magenic.jmaqs.webservices.jdk11.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+@JacksonXmlRootElement(namespace = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models", localName = "Product")
+//@JsonPropertyOrder({"Id", "Name", "Category", "Price"})
 public class Product {
     @JsonProperty("Id")
     private int id;
