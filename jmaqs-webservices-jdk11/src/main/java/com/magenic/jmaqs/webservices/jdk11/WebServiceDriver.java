@@ -13,8 +13,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpResponseException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
@@ -349,11 +349,11 @@ public class WebServiceDriver {
   private static void ensureSuccessStatusCode(HttpResponse<String> response) throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
-      throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
+      throw new HttpResponseException(HttpStatus.NO_CONTENT.value(), "Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
-    if (response.statusCode() != HttpStatus.SC_OK) {
+    if (response.statusCode() != HttpStatus.OK.value()) {
       String body = response.body();
 
       throw new HttpResponseException(response.statusCode(),
@@ -372,7 +372,7 @@ public class WebServiceDriver {
       throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
-      throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
+      throw new HttpResponseException(HttpStatus.NO_CONTENT.value(), "Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message

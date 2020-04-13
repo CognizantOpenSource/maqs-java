@@ -68,7 +68,7 @@ public class WebServiceDriverPostUnitTest {
       throws URISyntaxException, IOException, InterruptedException {
     Product p = new Product();
     p.setCategory("ff");
-    p.setId(4);
+    p.setId(5);
     p.setName("ff");
     p.setPrice(3.25);
 
@@ -130,7 +130,7 @@ public class WebServiceDriverPostUnitTest {
       throws IOException, URISyntaxException, InterruptedException {
     Product p = new Product();
     p.setCategory("ff");
-    p.setId(4);
+    p.setId(5);
     p.setName("ff");
     p.setPrice(3.25);
 

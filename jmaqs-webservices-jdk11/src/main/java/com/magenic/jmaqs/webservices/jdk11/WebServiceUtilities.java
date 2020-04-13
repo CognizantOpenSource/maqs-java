@@ -2,7 +2,9 @@ package com.magenic.jmaqs.webservices.jdk11;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 
@@ -100,6 +102,8 @@ public class WebServiceUtilities {
    * @throws JsonProcessingException the json processing exception
    */
   public static <T> String serializeXml(T body) throws IOException {
+    xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+    xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
     return xmlMapper.writeValueAsString(body);
   }
 
