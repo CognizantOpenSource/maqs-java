@@ -5,19 +5,16 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
-
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-
-import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.NotAcceptableStatusException;
-
-import javax.print.attribute.standard.Media;
 
 /**
  * The Web Service Driver.
@@ -114,10 +111,10 @@ public class WebServiceDriver {
   /// <param name="expectedMediaType">The type of media being requested</param>
   /// <param name="expectSuccess">Assert a success code was returned</param>
   /// <returns>The response by deserialized as the <typeparamref name="T"/></returns>
-  public <T> T delete(String requestUri, MediaType expectedMediaType, boolean expectSuccess, boolean getDeserializeResponse)
+  public <T> T delete(String requestUri, MediaType expectedMediaType, Type type, boolean expectSuccess)
       throws IOException, InterruptedException {
     HttpResponse<String> response = this.deleteWithResponse(requestUri, expectedMediaType, expectSuccess);
-    return WebServiceUtilities.deserializeResponse(response, this.supportedFormatters);
+    return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
   }
 
   /// <summary>
@@ -128,10 +125,10 @@ public class WebServiceDriver {
   /// <param name="expectedMediaType">The type of media being requested</param>
   /// <param name="expectedStatus">Assert a specific status code was returned</param>
   /// <returns>The response by deserialized as the <typeparamref name="T"/></returns>
-  public <T> T delete(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus, boolean getDeserializeResponse)
+  public <T> T delete(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus, Type type)
       throws IOException, InterruptedException {
     HttpResponse<String> response = this.deleteWithResponse(requestUri, expectedMediaType, expectedStatus);
-    return WebServiceUtilities.deserializeResponse(response, this.supportedFormatters);
+    return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
   }
 
   /// <summary>
@@ -193,7 +190,7 @@ public class WebServiceDriver {
   /// <returns>A http response message</returns>
   protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType, boolean expectSuccess)
       throws IOException, InterruptedException {
-    setHttpRequest(HttpRequestFactory.getRequest(requestUri, returnMediaType));
+    setHttpRequest(HttpRequestFactory.getRequest(requestUri, returnMediaType, RequestMethod.DELETE));
     HttpResponse<String> response = baseHttpClient.send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
@@ -212,7 +209,7 @@ public class WebServiceDriver {
   /// <returns>A http response message</returns>
   protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType, HttpStatus expectedStatus)
       throws IOException, InterruptedException {
-    setHttpRequest(HttpRequestFactory.getRequest(requestUri, returnMediaType));
+    setHttpRequest(HttpRequestFactory.getRequest(requestUri, returnMediaType, RequestMethod.DELETE));
     HttpResponse<String> response = baseHttpClient.send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status

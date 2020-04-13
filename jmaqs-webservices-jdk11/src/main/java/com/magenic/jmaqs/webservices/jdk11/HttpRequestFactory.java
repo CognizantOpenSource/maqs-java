@@ -69,6 +69,12 @@ public class HttpRequestFactory {
     return getRequest(baseAddress, baseUri, timeout, MediaType.APP_JSON);
   }
 
+
+  public static HttpRequest getRequest(String baseUri, MediaType returnMediaType, RequestMethod requestType) {
+    return setUpRequest(WebServiceConfig.getWebServiceUri(), baseUri,
+        WebServiceConfig.getWebServiceTimeOut(), returnMediaType, "", requestType);
+  }
+
   /**
    * Gets a HTTP Request based on configuration values.
    * @param baseAddress the base website address
@@ -98,7 +104,17 @@ public class HttpRequestFactory {
         .timeout(Duration.ofSeconds(timeout))
         .version(HttpClient.Version.HTTP_2)
         .header("Content-Type", mediaType.toString());
+   return doRequest(builder, content, requestType);
+  }
 
+  /**
+   * Runs the web service request.
+   * @param builder the Http Request builder to be built
+   * @param content the content to be used in a POST/PUT/PATCH
+   * @param requestType the type of request to be done
+   * @return A HTTP Request
+   */
+  private static HttpRequest doRequest(HttpRequest.Builder builder, String content, RequestMethod requestType) {
     if (requestType.equals(RequestMethod.POST)) {
       return builder.POST(HttpRequest.BodyPublishers.ofString(content)).build();
     } else if (requestType.equals(RequestMethod.PUT)) {
@@ -106,7 +122,7 @@ public class HttpRequestFactory {
     } else if (requestType.equals(RequestMethod.DELETE)) {
       return builder.DELETE().build();
     } else if (requestType.equals(RequestMethod.PATCH)) {
-      builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content));
+      return builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content)).build();
     }
     return builder.GET().build();
   }
