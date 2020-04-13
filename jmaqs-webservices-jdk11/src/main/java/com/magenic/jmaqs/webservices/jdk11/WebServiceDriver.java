@@ -4,7 +4,6 @@
 
 package com.magenic.jmaqs.webservices.jdk11;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -16,8 +15,6 @@ import java.net.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpResponseException;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.xml.stream.XMLStreamException;
 
 /**
  * The Web Service Driver.
@@ -170,7 +167,7 @@ public class WebServiceDriver {
    */
   public String put(String requestUri, MediaType expectedMediaType, String content, MediaType postMediaType,
       boolean contentAsString, boolean expectSuccess)
-      throws IOException, InterruptedException, XMLStreamException {
+      throws IOException, InterruptedException {
     HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType,
         content, postMediaType, contentAsString, expectSuccess);
     return response.body();
@@ -190,7 +187,7 @@ public class WebServiceDriver {
    */
   public String put(String requestUri, MediaType expectedMediaType, String content, MediaType postMediaType,
       HttpStatus expectedStatus, boolean contentAsString)
-      throws IOException, InterruptedException, XMLStreamException {
+      throws IOException, InterruptedException {
     HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType,
         content, postMediaType, expectedStatus, contentAsString);
     return response.body();
@@ -210,7 +207,7 @@ public class WebServiceDriver {
    */
   public HttpResponse<String> putWithResponse(String requestUri, MediaType expectedMediaType,
       Object content, MediaType postMediaType, boolean contentAsString, boolean expectSuccess)
-      throws IOException, InterruptedException, XMLStreamException {
+      throws IOException, InterruptedException {
     String httpContent = createContent(content, postMediaType, contentAsString);
     return this.putWithResponse(requestUri, expectedMediaType, httpContent, expectSuccess);
   }
@@ -229,7 +226,7 @@ public class WebServiceDriver {
    */
   public HttpResponse<String> putWithResponse(String requestUri, MediaType expectedMediaType,
       Object content, MediaType postMediaType, HttpStatus expectedStatus, boolean contentAsString)
-      throws IOException, InterruptedException, XMLStreamException {
+      throws IOException, InterruptedException {
     String httpContent = createContent(content, postMediaType, contentAsString);
     return this.putWithResponse(requestUri, expectedMediaType, httpContent, expectedStatus);
   }
@@ -314,10 +311,10 @@ public class WebServiceDriver {
    * @param postMediaType The type of the media being posted
    * @param contentAsString If true pass content as String
    * @return The content as String
-   * @throws JsonProcessingException if the exception is thrown
+   * @throws IOException if the exception is thrown
    */
   private static String createContent(Object content, MediaType postMediaType,
-      boolean contentAsString) throws IOException, XMLStreamException {
+      boolean contentAsString) throws IOException {
     if (contentAsString) {
       return WebServiceUtilities.makeStringContent(content, postMediaType);
     }
