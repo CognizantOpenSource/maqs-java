@@ -4,11 +4,11 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.net.URISyntaxException;
-
+import java.util.ArrayList;
+import java.util.List;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class WebServiceDriverDeleteUnitTest {
@@ -34,6 +34,25 @@ public class WebServiceDriverDeleteUnitTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.deleteWithResponse("/api/XML_JSON/Delete/2", MediaType.APP_JSON, false);
     Assert.assertEquals(result.statusCode(), HttpStatus.CONFLICT.value());
+  }
+
+  /**
+   * Delete Json request to assert status code.
+   * @throws URISyntaxException if the exception is thrown
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void deleteJSONSerializedVerifyStatusCodeWithHeaderOverride()
+      throws URISyntaxException, IOException, InterruptedException {
+    WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
+
+    List<String> header = new ArrayList<>();
+    header.add("pass");
+    header.add( "word");
+
+    var result = webServiceDriver.deleteWithResponse("/api/XML_JSON/Delete/2", MediaType.APP_JSON, header, true);
+    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value() );
   }
 
   /**

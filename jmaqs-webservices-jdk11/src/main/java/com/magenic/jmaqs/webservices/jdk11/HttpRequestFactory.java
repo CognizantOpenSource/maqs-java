@@ -10,6 +10,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.time.Duration;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
@@ -75,6 +77,11 @@ public class HttpRequestFactory {
         WebServiceConfig.getWebServiceTimeOut(), returnMediaType, "", requestType);
   }
 
+  public static HttpRequest getRequest(String baseUri, MediaType returnMediaType, RequestMethod requestType, List<String> header) {
+    return setUpRequest(WebServiceConfig.getWebServiceUri(), baseUri,
+        WebServiceConfig.getWebServiceTimeOut(), returnMediaType, "", header, requestType);
+  }
+
   /**
    * Gets a HTTP Request based on configuration values.
    * @param baseAddress the base website address
@@ -85,6 +92,18 @@ public class HttpRequestFactory {
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType) {
     return setUpRequest(baseAddress, baseUri, timeout, mediaType, "", RequestMethod.GET);
+  }
+
+  /**
+   * Gets a HTTP Request based on configuration values.
+   * @param baseAddress the base website address
+   * @param baseUri Base service uri
+   * @param timeout Web service timeout
+   * @param mediaType the media type being used
+   * @return a HTTP Request
+   */
+  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType, List<String> header) {
+    return setUpRequest(baseAddress, baseUri, timeout, mediaType, "", header, RequestMethod.GET);
   }
 
   /**
@@ -105,6 +124,27 @@ public class HttpRequestFactory {
         .version(HttpClient.Version.HTTP_2)
         .header("Content-Type", mediaType.toString());
    return doRequest(builder, content, requestType);
+  }
+
+  /**
+   * Gets a HTTP Request based on configuration values.
+   * @param baseAddress the base url address
+   * @param baseUri Base service uri
+   * @param timeout Web service timeout
+   * @param mediaType media/content type to be received
+   * @param content the content to be used in a POST/PUT/PATCH
+   * @param requestType the type of request to be done
+   * @return A HTTP Request
+   */
+  public static HttpRequest setUpRequest(String baseAddress, String baseUri, int timeout,
+      MediaType mediaType, String content, List<String> header, RequestMethod requestType) {
+    HttpRequest.Builder builder = HttpRequest.newBuilder()
+        .uri(URI.create(baseAddress + baseUri))
+        .timeout(Duration.ofSeconds(timeout))
+        .version(HttpClient.Version.HTTP_2)
+        .setHeader(header.get(0), header.get(1))
+        .header("Content-Type", mediaType.toString());
+    return doRequest(builder, content, requestType);
   }
 
   /**

@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.NotAcceptableStatusException;
@@ -169,6 +170,21 @@ public class WebServiceDriver {
     return this.deleteContent(requestUri, expectedMediaType, expectSuccess);
   }
 
+  /**
+   *
+   * @param requestUri
+   * @param expectedMediaType
+   * @param header
+   * @param expectSuccess
+   * @return
+   * @throws IOException
+   * @throws InterruptedException
+   */
+  public HttpResponse<String> deleteWithResponse(String requestUri, MediaType expectedMediaType, List<String> header, boolean expectSuccess)
+      throws IOException, InterruptedException {
+    return this.deleteContent(requestUri, expectedMediaType, header, expectSuccess);
+  }
+
   /// <summary>
   /// Execute a web service delete
   /// </summary>
@@ -179,6 +195,26 @@ public class WebServiceDriver {
   public HttpResponse<String> deleteWithResponse(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
       throws IOException, InterruptedException {
     return this.deleteContent(requestUri, expectedMediaType, expectedStatus);
+  }
+
+  /// <summary>
+  /// Do a web service delete for the given uri
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="returnMediaType">The expected response media type</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>A http response message</returns>
+  protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType, List<String> header
+      , boolean expectSuccess)
+      throws IOException, InterruptedException {
+    setHttpRequest(HttpRequestFactory.getRequest(requestUri, returnMediaType, RequestMethod.DELETE, header));
+    HttpResponse<String> response = baseHttpClient.send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
+
+    // Should we check for success
+    if (expectSuccess) {
+      ensureSuccessStatusCode(response);
+    }
+    return response;
   }
 
   /// <summary>
