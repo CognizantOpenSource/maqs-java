@@ -7,20 +7,37 @@ package com.magenic.jmaqs.webservices.jdk11.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
+/**
+ * the product class.
+ */
 public class Product {
+    /**
+     * the xml namespace.
+     */
     @JacksonXmlProperty(isAttribute = true)
     private final String xmlns = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models";
 
+    /**
+     * the id property.
+     */
     @JsonProperty("Id")
     private int id;
 
+    /**
+     * the name property.
+     */
     @JsonProperty("Name")
-
     private String name;
 
+    /**
+     * the category property.
+     */
     @JsonProperty("Category")
     private String category;
 
+    /**
+     * the price property.
+     */
     @JsonProperty("Price")
     private double price;
 
