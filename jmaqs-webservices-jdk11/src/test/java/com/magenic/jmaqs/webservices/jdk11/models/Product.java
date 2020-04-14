@@ -5,16 +5,11 @@
 package com.magenic.jmaqs.webservices.jdk11.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAttachmentRef;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import java.math.BigDecimal;
-
-@JacksonXmlRootElement(namespace = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models", localName = "Product")
 public class Product {
+    @JacksonXmlProperty(isAttribute = true)
+    private final String xmlns = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models";
 
     @JsonProperty("Id")
     private int id;

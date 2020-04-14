@@ -7,12 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
-
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
 
@@ -121,7 +116,8 @@ public class WebServiceUtilities {
     } else if (mediaType == MediaType.APP_JSON) {
       return deserializeJson(response, type);
     } else {
-      return (T) response.toString();
+      throw new IllegalArgumentException(
+          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
     }
   }
 

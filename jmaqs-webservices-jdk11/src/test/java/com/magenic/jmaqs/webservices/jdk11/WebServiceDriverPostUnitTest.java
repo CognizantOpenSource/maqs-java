@@ -67,9 +67,9 @@ public class WebServiceDriverPostUnitTest {
   public void postXMLSerializedVerifyStatusCode()
       throws URISyntaxException, IOException, InterruptedException {
     Product p = new Product();
-    p.setCategory("ff");
-    p.setId(5);
-    p.setName("ff");
+    p.setCategory("dd");
+    p.setId(22);
+    p.setName("dd");
     p.setPrice(3.25);
 
     var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
@@ -108,9 +108,9 @@ public class WebServiceDriverPostUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postWithXml() throws URISyntaxException, IOException, InterruptedException {
     Product p = new Product();
-    p.setCategory("ff");
-    p.setId(4);
-    p.setName("ff");
+    p.setCategory("ss");
+    p.setId(17);
+    p.setName("ss");
     p.setPrice(3.25);
 
     var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
@@ -126,7 +126,7 @@ public class WebServiceDriverPostUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void postXMLSerializedVerifyEmptyString()
+  public void postXMLSerializedVerifyEmptyStringError()
       throws IOException, URISyntaxException, InterruptedException {
     Product p = new Product();
     p.setCategory("ff");
@@ -134,10 +134,10 @@ public class WebServiceDriverPostUnitTest {
     p.setName("ff");
     p.setPrice(3.25);
 
-    var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
+    //var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_XML, content, true);
-    Assert.assertEquals("", result);
+    var result = webServiceDriver.post("/api/XML_JSON/Post", MediaType.APP_XML, "", false);
+    Assert.assertTrue(result.contains("value is required"));
   }
 
   /**
