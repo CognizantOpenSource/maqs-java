@@ -12,8 +12,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpResponseException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
@@ -80,10 +80,9 @@ public class WebServiceDriver {
 
   /**
    * Gets http client.
-   * @param mediaType the media type
    * @return the http client
    */
-  public HttpClient getHttpClient(MediaType mediaType) {
+  public HttpClient getHttpClient() {
     return this.baseHttpClient;
   }
 
@@ -116,8 +115,7 @@ public class WebServiceDriver {
    */
   public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content,
       Type type, boolean expectSuccess) throws IOException, InterruptedException {
-    HttpResponse<String> response = this.putWithResponse(requestUri, expectedMediaType, content, expectSuccess);
-    return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
+    return this.putWithResponse(requestUri, expectedMediaType, content, expectSuccess);
   }
 
   /**
@@ -275,7 +273,7 @@ public class WebServiceDriver {
       String content, boolean expectSuccess) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
     setHttpRequest(HttpRequestFactory.getRequest(requestUri, responseMediaType, content, RequestMethod.PUT));
-    HttpResponse<String> response = baseHttpClient.send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
+    HttpResponse<String> response = getHttpClient().send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
     if (expectSuccess) {
@@ -329,11 +327,11 @@ public class WebServiceDriver {
   private static void ensureSuccessStatusCode(HttpResponse<String> response) throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
-      throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
+      throw new HttpResponseException(HttpStatus.NO_CONTENT.value(), "Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
-    if (response.statusCode() != HttpStatus.SC_OK) {
+    if (response.statusCode() != HttpStatus.OK.value()) {
       String body = response.body();
 
       throw new HttpResponseException(response.statusCode(),
@@ -352,11 +350,11 @@ public class WebServiceDriver {
       throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
-      throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
+      throw new HttpResponseException(HttpStatus.NO_CONTENT.value(), "Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
-    if (response.statusCode() != expectedStatus.hashCode()) {
+    if (response.statusCode() != expectedStatus.value()) {
       String body = response.body();
       throw new HttpResponseException(response.statusCode(),
           String.format("Response status did not match expected. %s "
