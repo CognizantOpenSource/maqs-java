@@ -65,7 +65,7 @@ public class WebServiceDriverPutUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putJSONStreamSerializedVerifyStatusCode()
+  public void putJSONStringSerializedVerifyStatusCode()
       throws URISyntaxException, IOException, InterruptedException {
     Product p = new Product();
     p.setCategory("ff");
@@ -107,7 +107,7 @@ public class WebServiceDriverPutUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putXMLStreamSerializedVerifyStatusCode()
+  public void putXMLStringSerializedVerifyStatusCode()
       throws URISyntaxException, IOException, InterruptedException {
     Product p = new Product();
     p.setCategory("ff");
@@ -151,25 +151,10 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithoutMakeContent()
-      throws URISyntaxException, IOException, InterruptedException, XMLStreamException {
+      throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT, "Test",
-        MediaType.PLAIN_TEXT, true, true);
-    Assert.assertEquals(result, "");
-  }
-
-  /**
-   * Stream without using the utility.
-   * @throws URISyntaxException if the exception is thrown
-   * @throws IOException if the exception is thrown
-   * @throws InterruptedException if the exception is thrown
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void putStreamWithoutMakeContent()
-      throws URISyntaxException, IOException, InterruptedException, XMLStreamException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.put("/api/String/Put/1", MediaType.PLAIN_TEXT,
-        "Test", MediaType.PLAIN_TEXT, false, true);
+        MediaType.PLAIN_TEXT, HttpStatus.OK, true);
     Assert.assertEquals(result, "");
   }
 
@@ -196,7 +181,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithoutContentStatusCode()
-      throws URISyntaxException, IOException, InterruptedException, XMLStreamException {
+      throws URISyntaxException, IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.putWithResponse("/api/String/Put/1", MediaType.PLAIN_TEXT,
         "Test", MediaType.PLAIN_TEXT, true, true);
