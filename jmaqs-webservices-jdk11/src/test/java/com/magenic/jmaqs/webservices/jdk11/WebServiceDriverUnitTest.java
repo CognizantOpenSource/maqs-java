@@ -23,10 +23,10 @@ public class WebServiceDriverUnitTest {
   public void setHttpClient() throws URISyntaxException {
     WebServiceDriver webServiceDriver1 = new WebServiceDriver(
         "http://magenicautomation.azurewebsites.net");
-    webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient(MediaType.APP_JSON));
+    webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient());
     WebServiceDriver webServiceDriver2 = new WebServiceDriver(
-        webServiceDriver1.getHttpClient(MediaType.APP_XML));
-    Assert.assertNotNull(webServiceDriver1.getHttpClient(MediaType.APP_JSON),
+        webServiceDriver1.getHttpClient());
+    Assert.assertNotNull(webServiceDriver1.getHttpClient(),
         "Driver 1 is null");
     Assert.assertNotNull(webServiceDriver2, "Driver 2 is null");
   }
@@ -38,10 +38,10 @@ public class WebServiceDriverUnitTest {
   public void setDefaultHttpClient() throws URISyntaxException {
     HttpRequest request = HttpRequest.newBuilder(new URI(WebServiceConfig.getWebServiceUri())).build();
     WebServiceDriver webServiceDriver1 = new WebServiceDriver(request);
-    webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient(MediaType.APP_JSON));
+    webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient());
     WebServiceDriver webServiceDriver2 = new WebServiceDriver(
-        webServiceDriver1.getHttpClient(MediaType.APP_XML));
-    Assert.assertNotNull(webServiceDriver1.getHttpClient(MediaType.APP_JSON),"Driver 1 is null");
+        webServiceDriver1.getHttpClient());
+    Assert.assertNotNull(webServiceDriver1.getHttpClient(),"Driver 1 is null");
     Assert.assertNotNull(webServiceDriver2, "Driver 2 is null");
   }
 }
