@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -23,10 +24,10 @@ import static org.testng.Assert.*;
  */
 public class LazyElementUnitTest extends BaseSeleniumTest {
 
-	/**  String contstants used for the tests */
+	/**  String constants used for the tests */
 	private static final String DISABLED = "Disabled";
-	private static final String FLOWER_TABLE_BY = "#Flower table";
-	private static final String FLOWER_TABLE = "Flower table";
+	private static final String FLOWER_TABLE_BY = "#FlowerTable";
+	private static final String FLOWER_TABLE = "Flower Table";
 	private static final String FLOWER_TABLE_CAPTION = "Flower table caption";
 	private static final String FOOTER_PARAGRAPH_BY = "FOOTER P";
 	private static final String FOOTER = "Footer";
@@ -159,6 +160,8 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 				By.cssSelector("#FlowerTable CAPTION > Strong"),
 				FLOWER_TABLE);
 
+		String elem = this.getFlowerTableCaptionWithParent().getText();
+
 		// Make sure we are finding the correct table
 		assertEquals(FLOWER_TABLE, this.getFlowerTableCaptionWithParent().getText());
 
@@ -186,14 +189,14 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Trigger a find and save off the element
-		footer.getValue();
+		footer.getText();
 		WebElement footerElementBefore = footer.getCachedElement();
 
 		// Do the event again and save off the changed element 
-		footer.getValue();
+		footer.getText();
 
 		// Make sure doing a new find returns an element that is not the same as the cached element
-		assertNotEquals(this.getWebDriver().findElement(footer.getBy()), footerElementBefore);
+		assertNotSame(this.getWebDriver().findElement(footer.getBy()), footerElementBefore);
 	}
 
 	/**
@@ -205,11 +208,11 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Trigger a find and save off the element
-		footer.getValue();
+		footer.getText();
 		WebElement footerElementBefore = footer.getCachedElement();
 
 		// Do the event again and save off the changed element 
-		footer.getValue();
+		footer.getText();
 		WebElement footerElementAfter = footer.getCachedElement();
 
 		// Make sure the second event didn't trigger a new find
@@ -222,25 +225,21 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.Selenium)
 	public void lazyCaching() throws TimeoutException, InterruptedException {
 
-		// setting the wait driver since the caching isn't actually waiting for element actions
-		// just setting the element
-		UIWaitFactory.getWaitDriver(this.getWebDriver(), 1, 1);
-
 		// Create the lazy element and use it
 		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Trigger a find and save off the element
-		footer.getValue();
+		footer.getText();
 		WebElement footerElementBefore = footer.getCachedElement();
 
 		// Do the event again and save off the changed element 
-		footer.getValue();
+		footer.getText();
 
 		// Go to another page so the old element will be stale, this will force us to get a new one
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation/AsyncPage");
 
 		// Trigger a new find, this should be new because the cached element is stale
-		footer.getValue();
+		footer.getText();
 		assertNotEquals(footerElementBefore, footer.getCachedElement());
 	}
 
@@ -266,10 +265,9 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	public void lazyGetClickableTriggerFind() {
 		// Create the lazy element and use it
 		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
-		LazyElement footer2 = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
-		footer.getTheVisibleElement();
-		footer2.getTheClickableElement();
+		// set the cache
+		footer.getTheClickableElement();
 
 		// Make sure get click-able triggers a new find
 		assertNotSame(footer.getCachedElement(), footer.getTheClickableElement());
@@ -283,10 +281,11 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 		// Create the lazy element and use it
 		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
-		footer.getTheVisibleElement();
+		// set the cache
+		footer.getTheExistingElement();
 
 		// Make sure get exists triggers a new find
-		assertNotEquals(footer.getCachedElement(), footer.getTheExistingElement());
+		assertNotSame(footer.getCachedElement(), footer.getTheExistingElement());
 	}
 
 	/**
@@ -297,10 +296,11 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 		// Create the lazy element and use it
 		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
+		// set the cache
 		footer.getTheVisibleElement();
 
 		// Make sure get visible triggers a new find
-		assertNotEquals(footer.getCachedElement(), footer.getTheVisibleElement());
+		assertNotSame(footer.getCachedElement(), footer.getTheVisibleElement());
 	}
 
 	/**
@@ -323,7 +323,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementClick() throws TimeoutException, InterruptedException, ExecutionFailedException {
 		this.getDialogOneButton().click();
-		assertTrue(this.getDialogOne().getIsDisplayed());
+		assertTrue(this.getDialogOne().isDisplayed());
 	}
 
 	/**
@@ -412,9 +412,9 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 		String logFile = Files.readAllLines(Paths.get(filepath)).stream().reduce((x, y) -> x + y + System.lineSeparator())
 				.orElseThrow(() -> new FileNotFoundException(String.format("The log file %s was not found at path %s", logger.getFileName(), filepath)));
 		
-		assertTrue(logFile.contains("beforeSuspendTest"));
-		assertFalse(logFile.contains("secretKeys"));
-		assertTrue(logFile.contains("continueTest"));
+		assertTrue(logFile.contains("beforeSuspendTest"), "log file did not contain text 'beforeSuspendTest'.");
+		assertFalse(logFile.contains("secretKeys"), "log file did contain text 'secretKeys' when it shouldn't have.");
+		assertTrue(logFile.contains("continueTest"), "log file did not contain text 'continueTest'.");
 
 		Files.delete(Paths.get(filepath));
 	}
@@ -447,8 +447,8 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementDisplayed() throws TimeoutException, InterruptedException {
-		assertTrue(this.getDialogOneButton().getIsDisplayed());
-		assertFalse(this.getDialogOne().getIsDisplayed());
+		assertTrue(this.getDialogOneButton().isDisplayed());
+		assertFalse(this.getDialogOne().isDisplayed());
 	}
 
 	/**
@@ -456,7 +456,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementDisplayedWithParent() throws TimeoutException, InterruptedException {
-		assertTrue(this.getDisabledInput().getIsDisplayed());
+		assertTrue(this.getDisabledInput().isDisplayed());
 	}
 
 	/**
@@ -464,8 +464,8 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementEnabled() throws TimeoutException, InterruptedException {
-		assertFalse(this.getDisabledItem().getIsEnabled());
-		assertTrue(this.getInputBox().getIsEnabled());
+		assertFalse(this.getDisabledItem().isEnabled());
+		assertTrue(this.getInputBox().isEnabled());
 	}
 
 	/**
@@ -473,8 +473,8 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementEnabledWithParent() throws TimeoutException, InterruptedException {
-		assertFalse(this.getDisabledInput().getIsEnabled());
-		assertTrue(this.getFlowerTableCaptionWithParent().getIsEnabled());
+		assertFalse(this.getDisabledInput().isEnabled());
+		assertTrue(this.getFlowerTableCaptionWithParent().isEnabled());
 	}
 
 	/**
@@ -484,8 +484,8 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementSelected() throws TimeoutException, InterruptedException {
 		ElementHandler.selectDropDownOptionByValue(this.getWebDriver(), By.cssSelector("#computerParts"), "two");
 
-		assertTrue(this.getSelected().getIsSelected());
-		assertFalse(this.getNotSelected().getIsSelected());
+		assertTrue(this.getSelected().isSelected());
+		assertFalse(this.getNotSelected().isSelected());
 	}
 
 	/**
@@ -501,7 +501,10 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.Selenium)
 	public void lazyElementTextWithParent() throws TimeoutException, InterruptedException {
-		assertEquals(FLOWER_TABLE, this.getFlowerTableCaptionWithParent().getText());
+		LazyElement elem = this.getFlowerTableCaptionWithParent().getParent();
+		elem.getText();
+
+		assertEquals(this.getFlowerTableCaptionWithParent().getText(), FLOWER_TABLE);
 	}
 
 	/**

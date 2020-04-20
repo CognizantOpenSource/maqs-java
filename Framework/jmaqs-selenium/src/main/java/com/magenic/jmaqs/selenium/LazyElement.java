@@ -3,20 +3,16 @@ package com.magenic.jmaqs.selenium;
 import java.util.List;
 import java.util.function.Supplier;
 
+import com.magenic.jmaqs.selenium.factories.FluentWaitFactory;
 import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.Rectangle;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.GenericWait;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import com.magenic.jmaqs.utilities.helper.functionalinterfaces.Action;
 import com.magenic.jmaqs.utilities.logging.MessageType;
+import org.openqa.selenium.support.ui.FluentWait;
 
 /**
  * Driver for dynamically finding and interacting with elements
@@ -103,14 +99,6 @@ public class LazyElement {
 	}
 
 	/**
-	 * Gets the enabled value of the lazy element
-	 * @return the enabled value
-	 */
-	public boolean getIsEnabled()throws TimeoutException, InterruptedException {
-		return this.isEnabled();
-	}
-
-	/**
 	 * Gets the test object
 	 * @return the test object
 	 */
@@ -119,26 +107,10 @@ public class LazyElement {
 	}
 
 	/**
-	 * Gets the is selected value
-	 * @return The is selected value
-	 */
-	public boolean getIsSelected()throws TimeoutException, InterruptedException {
-		return this.isSelected();
-	}
-
-	/**
-	 * Gets the is displayed value
-	 * @return The is displayed value
-	 */
-	public boolean getIsDisplayed() throws TimeoutException, InterruptedException {
-		return this.isDisplayed();
-	}
-
-	/**
 	 * Gets the tag name of the lazy element
 	 */
 	public String getTagName() throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheExistingElement().getTagName());
+		return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::getTagName);
 	}
 
 	/**
@@ -146,7 +118,7 @@ public class LazyElement {
 	 * @return The element text
 	 */
 	public String getText() throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheExistingElement().getText());
+		return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::getText);
 	}
 
 	/**
@@ -154,32 +126,32 @@ public class LazyElement {
 	 * @return the location as a Point
 	 */
 	public Point getLocation() throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheExistingElement().getLocation());
+		return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::getLocation);
 	}
 
 	/**
 	 * Gets the lazy element's size
 	 */
 	public Dimension getSize() throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheExistingElement().getSize());
+		return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::getSize);
 	}
 
 	/**
 	 * Click the lazy element 
 	 */
 	public void click() throws TimeoutException, InterruptedException, ExecutionFailedException {
-		WebElement element = GenericWait.waitFor(this::getTheClickableElement);
-
+		WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheClickableElement));
         this.executeEvent(element::click, "Click");
 	}
 
 	/**
 	 * Send Secret keys with no logging
 	 * @param keys the secret keys
-	 * @throws Exception If error occurs while sending keys
+	 * @throws ExecutionFailedException If error occurs while sending keys
 	 */
-	public void sendSecretKeys(String keys) throws ExecutionFailedException {
-		WebElement element = this.getElement(this::getTheVisibleElement);
+	public void sendSecretKeys(String keys) throws ExecutionFailedException, TimeoutException, InterruptedException {
+	    this.getTestObject().getLog().logMessage(MessageType.VERBOSE, "Send secret keys to '%s'", this.getUserFriendlyName());
+		WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement));
 
 		try {
 			this.getTestObject().getLog().suspendLogging();
@@ -189,7 +161,7 @@ public class LazyElement {
 		catch (ExecutionFailedException e) {
 			this.getTestObject().getLog().continueLogging();
 			this.getTestObject().getLog().logMessage(
-					MessageType.ERROR, 
+					MessageType.ERROR,
 					"Exception during sending secret keys: " + e + System.lineSeparator());
 
 			throw e;
@@ -200,7 +172,7 @@ public class LazyElement {
 	 * Clear the lazy element 
 	 */
 	public void clear() throws TimeoutException, InterruptedException, ExecutionFailedException {
-		WebElement element = GenericWait.waitFor(this::getTheVisibleElement);
+		WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement));
 		this.executeEvent(element::clear, "Clear");
 	}
 
@@ -208,8 +180,7 @@ public class LazyElement {
 	 * Submit the lazy element
 	 */
 	public void submit() throws TimeoutException, InterruptedException, ExecutionFailedException {
-		WebElement element = GenericWait.waitFor(this::getTheExistingElement);
-
+		WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement));
         this.executeEvent(element::submit, "Submit");
 	}
 
@@ -219,7 +190,7 @@ public class LazyElement {
 	 * @return The attribute
 	 */
 	public String getAttribute(String attributeName) throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheExistingElement().getAttribute(attributeName));
+		return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).getAttribute(attributeName));
 	}
 
 	/**
@@ -227,7 +198,7 @@ public class LazyElement {
 	 * @return The current value of the element
 	 */
 	public String getValue() throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheVisibleElement().getAttribute("value"));
+		return GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement).getAttribute("value"));
 	}
 
 	/**
@@ -236,7 +207,7 @@ public class LazyElement {
 	 * @return the css value for the property
 	 */
 	public String getCssValue(String propertyName) throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheExistingElement().getCssValue(propertyName));
+		return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).getCssValue(propertyName));
 	}
 
 	/**
@@ -244,10 +215,23 @@ public class LazyElement {
 	 * @return The visible web element
 	 */
 	public WebElement getTheVisibleElement() {
-		this.setCachedElement((this.parent == null) ? 
-				() -> UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver()).waitForVisibleElement(this.getBy()) :
-				() -> UIWaitFactory.getWaitDriver(this.parent.getTheExistingElement()).waitForVisibleElement(this.getBy()));
+	    Supplier<WebElement> elementSupplier;
 
+		if (this.parent == null) {
+            elementSupplier = () -> {
+                UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver());
+                return waitDriver.waitForVisibleElement(this.getBy());
+            };
+        }
+		else {
+            elementSupplier = () -> {
+                WebElement parentElement = this.parent.getTheExistingElement();
+                FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
+                return fluentWait.until(e -> e.findElement(this.getBy()));
+            };
+        }
+
+		this.setCachedElement(elementSupplier);
 		return this.getCachedElement();
 	}
 
@@ -256,10 +240,24 @@ public class LazyElement {
 	 * @return The click-able web element
 	 */
 	public WebElement getTheClickableElement() {
-		this.setCachedElement((this.parent == null) ? 
-				() -> UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver()).waitForClickableElement(this.getBy()) :
-				() -> UIWaitFactory.getWaitDriver(this.parent.getTheExistingElement()).waitForClickableElement(this.getBy()));
 
+        Supplier<WebElement> elementSupplier;
+
+        if (this.parent == null) {
+            elementSupplier = () -> {
+                UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver());
+                return waitDriver.waitForClickableElement(this.getBy());
+            };
+        }
+        else {
+            elementSupplier = () -> {
+                WebElement parentElement = this.getParent().getTheExistingElement();
+                FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
+                return fluentWait.until(e -> e.findElement(this.getBy()));
+            };
+        }
+
+		this.setCachedElement(elementSupplier);
 		return this.getCachedElement();
 	}
 
@@ -268,10 +266,24 @@ public class LazyElement {
 	 * @return The existing web element
 	 */
 	public WebElement getTheExistingElement() {
-		this.setCachedElement((this.parent == null) ? 
-				() -> UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver()).waitForPresentElement(this.getBy()) :
-				() -> UIWaitFactory.getWaitDriver(this.parent.getTheExistingElement()).waitForPresentElement(this.getBy()));
 
+		Supplier<WebElement> elementSupplier;
+
+		if (this.parent == null) {
+			elementSupplier = () -> {
+				UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver());
+				return waitDriver.waitForPresentElement(this.getBy());
+			};
+		}
+		else {
+			elementSupplier = () -> {
+			    WebElement parentElement = this.getParent().getTheExistingElement();
+                FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
+			    return fluentWait.until(e -> e.findElement(this.getBy()));
+			};
+		}
+
+		this.setCachedElement(elementSupplier);
 		return this.getCachedElement();
 	}
 
@@ -281,7 +293,7 @@ public class LazyElement {
 	 * @return the {@link org.openqa.selenium.WebElement WebElement} being found
 	 */
 	public WebElement findElement(By by) throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheExistingElement().findElement(by));
+		return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).findElement(by));
 	}
 
 	/**
@@ -291,7 +303,7 @@ public class LazyElement {
 	 * @return the List of {@link org.openqa.selenium.WebElement WebElement} being found
 	 */
 	public List<WebElement> findElements(By by) throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheExistingElement().findElements(by));
+		return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).findElements(by));
 	}
 
 	/**
@@ -300,7 +312,7 @@ public class LazyElement {
 	 * @return The type to get the screenshot as
 	 */
 	public <X> X getScreenshotAs(OutputType<X> target) throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getTheExistingElement().getScreenshotAs(target));
+		return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).getScreenshotAs(target));
 	}
 
 	/**
@@ -308,8 +320,15 @@ public class LazyElement {
 	 * @param keysToSend The keys being sent to the element
 	 */
 	public void sendKeys(CharSequence... keysToSend) throws TimeoutException, InterruptedException, ExecutionFailedException {
-		WebElement element = GenericWait.waitFor(this::getTheVisibleElement);
+	    StringBuilder keyBuilder = new StringBuilder(keysToSend.length);
 
+	    for (CharSequence cs : keysToSend) {
+	        keyBuilder.append(cs);
+        }
+
+        this.getTestObject().getLog().logMessage(MessageType.VERBOSE, "Send keys '%s' to '%s'", keyBuilder.toString(), this.getUserFriendlyName());
+
+        WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement));
         this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
 	}
 
@@ -318,7 +337,7 @@ public class LazyElement {
 	 * @return If the element is selected
 	 */
 	public boolean isSelected() throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(this.getTheExistingElement()::isSelected);
+		return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::isSelected);
 	}
 
 	/**
@@ -326,7 +345,7 @@ public class LazyElement {
 	 * @return If the element is enabled
 	 */
 	public boolean isEnabled() throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(this.getTheExistingElement()::isEnabled);
+		return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::isEnabled);
 	}
 
 	/**
@@ -334,7 +353,7 @@ public class LazyElement {
 	 * @return If the element is displayed
 	 */
 	public boolean isDisplayed() throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(this.getTheExistingElement()::isDisplayed);
+		return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::isDisplayed);
 	}
 
 	/**
@@ -362,7 +381,8 @@ public class LazyElement {
 	}
 
 	/**
-	 * Get a web element
+	 * Gets a web element using the provided factory if the cached element is
+     * null or if the cached element is stale
 	 * @param getElement The function that gets the element
 	 * @return The web element
 	 * @throws NoSuchElementException If the element can not be found

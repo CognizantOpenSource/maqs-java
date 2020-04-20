@@ -5,6 +5,8 @@
 package com.magenic.jmaqs.selenium.factories;
 
 import java.time.Duration;
+
+import com.magenic.jmaqs.selenium.SeleniumConfig;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -29,7 +31,22 @@ public class FluentWaitFactory {
    */
   public static FluentWait<WebElement> getNewElementFluentWait(WebElement element,
       int timeOutInMillis, int sleepInMillis) {
-    return new FluentWait<WebElement>(element).withTimeout(Duration.ofMillis(timeOutInMillis))
-        .pollingEvery(Duration.ofMillis(sleepInMillis)).ignoring(NotFoundException.class);
+    return new FluentWait<>(element)
+            .withTimeout(Duration.ofMillis(timeOutInMillis))
+            .pollingEvery(Duration.ofMillis(sleepInMillis))
+            .ignoring(NotFoundException.class);
+  }
+
+  /**
+   * Returns a new {@link org.openqa.selenium.support.ui.FluentWait FluentWait} object.
+   *
+   * @param element         the element
+   * @return new fluent wait
+   */
+  public static FluentWait<WebElement> getNewElementFluentWait(WebElement element) {
+    return getNewElementFluentWait(
+            element,
+            (int)SeleniumConfig.getTimeoutTime().toMillis(),
+            (int)SeleniumConfig.getWaitTime().toMillis());
   }
 }
