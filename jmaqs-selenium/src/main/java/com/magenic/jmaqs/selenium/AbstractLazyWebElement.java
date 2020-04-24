@@ -16,31 +16,66 @@ import java.util.function.Supplier;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
-public class AbstractLazyWebElement {
-  /** A user friendly name, for logging purposes */
+public abstract class AbstractLazyWebElement implements WebElement {
+
+  /**
+   * The index in cases where the selector finds multiple elements
+   */
+  private final Integer elementIndex;
+
+  /**
+   * A user friendly name, for logging purposes
+   */
   protected final String userFriendlyName;
-  /** The parent lazy element */
+  /**
+   * The parent lazy element
+   */
   protected LazyWebElement parent;
-  /** The 'by' selector for the element */
+  /**
+   * The 'by' selector for the element
+   */
   protected By by;
-  /** The test object for the element */
+  /**
+   * The test object for the element
+   */
   protected SeleniumTestObject testObject;
-  /** Cached copy of the element or null if we haven't already found the element */
+  /**
+   * Cached copy of the element or null if we haven't already found the element
+   */
   private WebElement cachedElement;
 
   public AbstractLazyWebElement(String userFriendlyName, By locator, SeleniumTestObject testObject) {
     this.userFriendlyName = userFriendlyName;
     this.by = locator;
     this.testObject = testObject;
+    this.elementIndex = null;
+  }
+
+  public AbstractLazyWebElement(String userFriendlyName, LazyWebElement parent, By by) {
+    this.userFriendlyName = userFriendlyName;
+    this.parent = parent;
+    this.by = by;
+    this.elementIndex = null;
+  }
+
+  public AbstractLazyWebElement(int elementIndex, String userFriendlyName, LazyWebElement parent, By by,
+      WebElement cachedElement) {
+    this.elementIndex = elementIndex;
+    this.userFriendlyName = userFriendlyName;
+    this.parent = parent;
+    this.by = by;
+    this.cachedElement = cachedElement;
   }
 
   /**
    * Gets the by selector
+   *
    * @return the by
    */
   public By getBy() {
@@ -49,6 +84,7 @@ public class AbstractLazyWebElement {
 
   /**
    * Gets the cached element
+   *
    * @return the cachedElement
    */
   public WebElement getCachedElement() {
@@ -57,8 +93,9 @@ public class AbstractLazyWebElement {
 
   /**
    * Sets the cached Element
+   *
    * @param cachedElementFactory the cachedElement function to set
-   * the cached element
+   *                             the cached element
    */
   private void setCachedElement(Supplier<WebElement> cachedElementFactory) {
     this.cachedElement = cachedElementFactory.get();
@@ -66,6 +103,7 @@ public class AbstractLazyWebElement {
 
   /**
    * Gets the user friendly name
+   *
    * @return the userFriendlyName
    */
   public String getUserFriendlyName() {
@@ -74,6 +112,7 @@ public class AbstractLazyWebElement {
 
   /**
    * Gets the parent of the lazy element
+   *
    * @return the parent
    */
   public LazyWebElement getParent() {
@@ -82,6 +121,7 @@ public class AbstractLazyWebElement {
 
   /**
    * Gets the test object
+   *
    * @return the test object
    */
   public SeleniumTestObject getTestObject() {
@@ -97,6 +137,7 @@ public class AbstractLazyWebElement {
 
   /**
    * Gets the lazy element's text
+   *
    * @return The element text
    */
   public String getText() throws TimeoutException, InterruptedException {
@@ -105,6 +146,7 @@ public class AbstractLazyWebElement {
 
   /**
    * Gets the lazy element's location
+   *
    * @return the location as a Point
    */
   public Point getLocation() throws TimeoutException, InterruptedException {
@@ -123,28 +165,28 @@ public class AbstractLazyWebElement {
    */
   public void click() throws TimeoutException, InterruptedException, ExecutionFailedException {
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheClickableElement));
-this.executeEvent(element::click, "Click");
+    this.executeEvent(element::click, "Click");
   }
 
   /**
    * Send Secret keys with no logging
+   *
    * @param keys the secret keys
    * @throws ExecutionFailedException If error occurs while sending keys
    */
   public void sendSecretKeys(String keys) throws ExecutionFailedException, TimeoutException, InterruptedException {
-      this.getTestObject().getLog().logMessage(MessageType.VERBOSE, "Send secret keys to '%s'", this.getUserFriendlyName());
+    this.getTestObject().getLog()
+        .logMessage(MessageType.VERBOSE, "Send secret keys to '%s'", this.getUserFriendlyName());
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement));
 
     try {
       this.getTestObject().getLog().suspendLogging();
       this.executeEvent(() -> element.sendKeys(keys), "SendKeys");
       this.getTestObject().getLog().continueLogging();
-    }
-    catch (ExecutionFailedException e) {
+    } catch (ExecutionFailedException e) {
       this.getTestObject().getLog().continueLogging();
-      this.getTestObject().getLog().logMessage(
-          MessageType.ERROR,
-          "Exception during sending secret keys: " + e + System.lineSeparator());
+      this.getTestObject().getLog()
+          .logMessage(MessageType.ERROR, "Exception during sending secret keys: " + e + System.lineSeparator());
 
       throw e;
     }
@@ -163,11 +205,12 @@ this.executeEvent(element::click, "Click");
    */
   public void submit() throws TimeoutException, InterruptedException, ExecutionFailedException {
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement));
-this.executeEvent(element::submit, "Submit");
+    this.executeEvent(element::submit, "Submit");
   }
 
   /**
    * Gets the value for the given attribute
+   *
    * @param attributeName The name of the attribute
    * @return The attribute
    */
@@ -177,6 +220,7 @@ this.executeEvent(element::submit, "Submit");
 
   /**
    * Gets the current value of an element - Useful for get input box text
+   *
    * @return The current value of the element
    */
   public String getValue() throws TimeoutException, InterruptedException {
@@ -185,6 +229,7 @@ this.executeEvent(element::submit, "Submit");
 
   /**
    * Gets the CSS value for the given attribute
+   *
    * @param propertyName The property name
    * @return the css value for the property
    */
@@ -194,24 +239,24 @@ this.executeEvent(element::submit, "Submit");
 
   /**
    * Wait for and get the visible web element
+   *
    * @return The visible web element
    */
   public WebElement getTheVisibleElement() {
-      Supplier<WebElement> elementSupplier;
+    Supplier<WebElement> elementSupplier;
 
     if (this.parent == null) {
-elementSupplier = () -> {
-UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver());
-return waitDriver.waitForVisibleElement(this.getBy());
-};
-}
-    else {
-elementSupplier = () -> {
-WebElement parentElement = this.parent.getTheExistingElement();
-FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
-return fluentWait.until(e -> e.findElement(this.getBy()));
-};
-}
+      elementSupplier = () -> {
+        UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver());
+        return waitDriver.waitForVisibleElement(this.getBy());
+      };
+    } else {
+      elementSupplier = () -> {
+        WebElement parentElement = this.parent.getTheExistingElement();
+        FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
+        return fluentWait.until(e -> e.findElement(this.getBy()));
+      };
+    }
 
     this.setCachedElement(elementSupplier);
     return this.getCachedElement();
@@ -219,25 +264,25 @@ return fluentWait.until(e -> e.findElement(this.getBy()));
 
   /**
    * Wait for and get the click-able web element
+   *
    * @return The click-able web element
    */
   public WebElement getTheClickableElement() {
 
-Supplier<WebElement> elementSupplier;
+    Supplier<WebElement> elementSupplier;
 
-if (this.parent == null) {
-elementSupplier = () -> {
-UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver());
-return waitDriver.waitForClickableElement(this.getBy());
-};
-}
-else {
-elementSupplier = () -> {
-WebElement parentElement = this.getParent().getTheExistingElement();
-FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
-return fluentWait.until(e -> e.findElement(this.getBy()));
-};
-}
+    if (this.parent == null) {
+      elementSupplier = () -> {
+        UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver());
+        return waitDriver.waitForClickableElement(this.getBy());
+      };
+    } else {
+      elementSupplier = () -> {
+        WebElement parentElement = this.getParent().getTheExistingElement();
+        FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
+        return fluentWait.until(e -> e.findElement(this.getBy()));
+      };
+    }
 
     this.setCachedElement(elementSupplier);
     return this.getCachedElement();
@@ -245,6 +290,7 @@ return fluentWait.until(e -> e.findElement(this.getBy()));
 
   /**
    * Waits for and gets the existing web element
+   *
    * @return The existing web element
    */
   public WebElement getTheExistingElement() {
@@ -256,12 +302,11 @@ return fluentWait.until(e -> e.findElement(this.getBy()));
         UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getTestObject().getWebDriver());
         return waitDriver.waitForPresentElement(this.getBy());
       };
-    }
-    else {
+    } else {
       elementSupplier = () -> {
-          WebElement parentElement = this.getParent().getTheExistingElement();
-FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
-          return fluentWait.until(e -> e.findElement(this.getBy()));
+        WebElement parentElement = this.getParent().getTheExistingElement();
+        FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
+        return fluentWait.until(e -> e.findElement(this.getBy()));
       };
     }
 
@@ -271,6 +316,7 @@ FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(pa
 
   /**
    * Finds the first {@link WebElement WebElement} using the given method.
+   *
    * @param by The locating mechanism to use
    * @return the {@link WebElement WebElement} being found
    */
@@ -281,6 +327,7 @@ FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(pa
   /**
    * Finds all {@link WebElement WebElement} within
    * the current context using the given mechanism.
+   *
    * @param by the locating mechanism to use
    * @return the List of {@link WebElement WebElement} being found
    */
@@ -290,23 +337,27 @@ FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(pa
 
   /**
    * Sends the keys to the element
+   *
    * @param keysToSend The keys being sent to the element
    */
-  public void sendKeys(CharSequence... keysToSend) throws TimeoutException, InterruptedException, ExecutionFailedException {
-      StringBuilder keyBuilder = new StringBuilder(keysToSend.length);
+  public void sendKeys(CharSequence... keysToSend)
+      throws TimeoutException, InterruptedException, ExecutionFailedException {
+    StringBuilder keyBuilder = new StringBuilder(keysToSend.length);
 
-      for (CharSequence cs : keysToSend) {
-          keyBuilder.append(cs);
-}
+    for (CharSequence cs : keysToSend) {
+      keyBuilder.append(cs);
+    }
 
-this.getTestObject().getLog().logMessage(MessageType.VERBOSE, "Send keys '%s' to '%s'", keyBuilder.toString(), this.getUserFriendlyName());
+    this.getTestObject().getLog()
+        .logMessage(MessageType.VERBOSE, "Send keys '%s' to '%s'", keyBuilder.toString(), this.getUserFriendlyName());
 
-WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement));
-this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
+    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement));
+    this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
   }
 
   /**
    * If the Element is selected
+   *
    * @return If the element is selected
    */
   public boolean isSelected() throws TimeoutException, InterruptedException {
@@ -315,6 +366,7 @@ this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
 
   /**
    * If the element is enabled
+   *
    * @return If the element is enabled
    */
   public boolean isEnabled() throws TimeoutException, InterruptedException {
@@ -323,6 +375,7 @@ this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
 
   /**
    * If the element is displayed
+   *
    * @return If the element is displayed
    */
   public boolean isDisplayed() throws TimeoutException, InterruptedException {
@@ -337,7 +390,17 @@ this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
   }
 
   /**
+   * Gets the screenshot as the target type
+   * @param target The target output type
+   * @return The type to get the screenshot as
+   */
+  public <X> X getScreenshotAs(OutputType<X> target) throws TimeoutException, InterruptedException {
+    return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).getScreenshotAs(target));
+  }
+
+  /**
    * Returns a string that represents the current object
+   *
    * @return the lazy element string
    */
   @Override
@@ -355,7 +418,8 @@ this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
 
   /**
    * Gets a web element using the provided factory if the cached element is
-* null or if the cached element is stale
+   * null or if the cached element is stale
+   *
    * @param getElement The function that gets the element
    * @return The web element
    * @throws NoSuchElementException If the element can not be found
@@ -365,8 +429,7 @@ this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
       try {
         this.getCachedElement().isDisplayed();
         return this.getCachedElement();
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         this.getTestObject().getLog().logMessage(MessageType.VERBOSE, "Refinding element because: " + e.getMessage());
       }
     }
@@ -375,8 +438,7 @@ this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
       this.getTestObject().getLog().logMessage(MessageType.VERBOSE, "Performing lazy driver find on: " + this.getBy());
       this.setCachedElement(getElement);
       return this.getCachedElement();
-    }
-    catch (NoSuchElementException nsee) {
+    } catch (NoSuchElementException nsee) {
       StringBuilder messageBuilder = new StringBuilder();
 
       messageBuilder.append("Failed to find: " + this.userFriendlyName + System.lineSeparator());
@@ -389,16 +451,16 @@ this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
 
   /**
    * Execute an element action
+   *
    * @param elementAction the element action
-   * @param caller Text to identify the caller function
+   * @param caller        Text to identify the caller function
    * @throws Exception If the elementAction fails to execute
    */
   private void executeEvent(Action elementAction, String caller) throws ExecutionFailedException {
     try {
       this.getTestObject().getLog().logMessage(MessageType.VERBOSE, "Performing lazy driver action: " + caller);
       elementAction.invoke();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       StringBuilder messageBuilder = new StringBuilder();
 
       messageBuilder.append("Failed to " + caller + ": " + this.userFriendlyName + System.lineSeparator());

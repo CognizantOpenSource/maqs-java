@@ -1,5 +1,7 @@
 package com.magenic.jmaqs.selenium;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.openqa.selenium.*;
 
 import com.magenic.jmaqs.utilities.helper.GenericWait;
@@ -31,13 +33,19 @@ public class LazyWebElement extends AbstractLazyWebElement {
 		this.parent = parent;
 	}
 
-	/**
-	 * Gets the screenshot as the target type
-	 * @param target The target output type
-	 * @return The type to get the screenshot as
-	 */
-	public <X> X getScreenshotAs(OutputType<X> target) throws TimeoutException, InterruptedException {
-		return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).getScreenshotAs(target));
+	@Override
+	public WebElement findElement(By by) throws TimeoutException, InterruptedException {
+		return new LazyWebElement(this, by, userFriendlyName);
 	}
 
+	@Override
+	public List<WebElement> findElements(By by) throws TimeoutException, InterruptedException {
+		int index = 0;
+		List<WebElement> elements = new ArrayList<>();
+		for (WebElement element : this.getTheExistingElement().findElements(by)) {
+			elements.add(new LazyWebElement(this, by, element, index, String.format("%s - %d", userFriendlyName, index++)));
+		}
+
+		return super.findElements(by);
+	}
 }
