@@ -21,7 +21,7 @@ import static org.testng.Assert.*;
 /**
  * Unit test class for LazyElement
  */
-public class LazyElementUnitTest extends BaseSeleniumTest {
+public class LazyWebElementUnitTest extends BaseSeleniumTest {
 
 	/**  String constants used for the tests */
 	private static final String DISABLED = "Disabled";
@@ -35,96 +35,96 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 * Gets the disabled item
 	 * @return The disabled item
 	 */
-	private LazyElement getDisabledItem() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("#disabledField INPUT"), DISABLED);
+	private LazyWebElement getDisabledItem() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#disabledField INPUT"), DISABLED);
 	}
 
 	/**
 	 * Gets the input box 
 	 * @return The input box
 	 */
-	private LazyElement getInputBox() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("#TextFields [name='firstname']"), "Input box");
+	private LazyWebElement getInputBox() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#TextFields [name='firstname']"), "Input box");
 	}
 
 	/**
 	 * Gets the dialog one
 	 * @return The dialog one
 	 */
-	private LazyElement getDialogOne() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("#CloseButtonShowDialog"), "Dialog");
+	private LazyWebElement getDialogOne() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#CloseButtonShowDialog"), "Dialog");
 	}
 
 	/**
 	 * Gets the dialog one button
 	 * @return The dialog one button 
 	 */
-	private LazyElement getDialogOneButton() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("#showDialog1"), "Dialog");
+	private LazyWebElement getDialogOneButton() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#showDialog1"), "Dialog");
 	}
 
 	/**
 	 * Gets the submit button
 	 * @return The submit button
 	 */
-	private LazyElement getSubmitButton() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("[class='btn btn-default'][type='submit']"), "Submit button");
+	private LazyWebElement getSubmitButton() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("[class='btn btn-default'][type='submit']"), "Submit button");
 	}
 
 	/**
 	 * Gets the not selected element
 	 * @return The not selected element
 	 */
-	private LazyElement getNotSelected() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("#computerParts [value='one']"), "Not selected");
+	private LazyWebElement getNotSelected() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#computerParts [value='one']"), "Not selected");
 	}
 
 	/**
 	 * Gets an item that is going to be selected
 	 * @return The selected element
 	 */
-	private LazyElement getSelected() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("#computerParts [value='two']"), "Selected");
+	private LazyWebElement getSelected() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#computerParts [value='two']"), "Selected");
 	}
 
 	/**
 	 * Gets a parent element
 	 * @return The parent element
 	 */
-	private LazyElement getFlowerTableLazyElement() {
-		return new LazyElement(this.getTestObject(), By.cssSelector(FLOWER_TABLE_BY), FLOWER_TABLE);
+	private LazyWebElement getFlowerTableLazyElement() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector(FLOWER_TABLE_BY), FLOWER_TABLE);
 	}
 
 	/**
 	 * Gets a child element, the second table caption
 	 * @return The second table caption
 	 */
-	private LazyElement getFlowerTableCaptionWithParent() {
-		return new LazyElement(this.getFlowerTableLazyElement(), By.cssSelector("CAPTION > Strong"), FLOWER_TABLE_CAPTION);
+	private LazyWebElement getFlowerTableCaptionWithParent() {
+		return new LazyWebElement(this.getFlowerTableLazyElement(), By.cssSelector("CAPTION > Strong"), FLOWER_TABLE_CAPTION);
 	}
 
 	/**
 	 * Gets the first table caption
 	 * @return The first table caption
 	 */
-	private LazyElement getFirstTableCaption() {
-		return new LazyElement(this.getTestObject(), By.cssSelector("CAPTION > Strong"), "Clothing table caption");
+	private LazyWebElement getFirstTableCaption() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("CAPTION > Strong"), "Clothing table caption");
 	}
 
 	/**
 	 * Gets the disabled DIV
 	 * @return The disabled div
 	 */
-	private LazyElement getDisabledDiv()  {
-		return new LazyElement(this.getTestObject(), By.cssSelector("#disabledField"), "Parent disabled div");
+	private LazyWebElement getDisabledDiv()  {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#disabledField"), "Parent disabled div");
 	}
 
 	/**
 	 * Gets the disabled input
 	 * @return The disabled input
 	 */
-	private LazyElement getDisabledInput() {
-		return new LazyElement(this.getDisabledDiv(), By.cssSelector("input"), FLOWER_TABLE_CAPTION);
+	private LazyWebElement getDisabledInput() {
+		return new LazyWebElement(this.getDisabledDiv(), By.cssSelector("input"), FLOWER_TABLE_CAPTION);
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyWithParentAndWithoutMatch() throws TimeoutException, InterruptedException {
 		// Get the lazy element without a parent
-		LazyElement flowerTableCaptionWithoutParent = new LazyElement(
+		LazyWebElement flowerTableCaptionWithoutParent = new LazyWebElement(
 				this.getTestObject(), 
 				By.cssSelector("#FlowerTable CAPTION > Strong"),
 				FLOWER_TABLE);
@@ -173,7 +173,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyPreCaching() {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
+		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Make sure we are getting back the same cached element
 		assertNull(footer.getCachedElement(), "The cached element should be null as we never triggered a find");
@@ -185,7 +185,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.SELENIUM)
 	public void newFindDifferentThanCached() throws TimeoutException, InterruptedException {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
+		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Trigger a find and save off the element
 		footer.getText();
@@ -204,7 +204,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyElementCached() throws TimeoutException, InterruptedException {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
+		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Trigger a find and save off the element
 		footer.getText();
@@ -225,7 +225,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	public void lazyCaching() throws TimeoutException, InterruptedException {
 
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
+		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// Trigger a find and save off the element
 		footer.getText();
@@ -249,7 +249,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	public void lazyGetsTriggerFind()
 	{
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
+		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		WebElement cacheFooter = footer.getTheVisibleElement();
 
@@ -263,7 +263,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyGetClickableTriggerFind() {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
+		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// set the cache
 		footer.getTheClickableElement();
@@ -278,7 +278,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyGetExistTriggerFind() {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
+		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// set the cache
 		footer.getTheExistingElement();
@@ -293,7 +293,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyGetVisibleTriggerFind() {
 		// Create the lazy element and use it
-		LazyElement footer = new LazyElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
+		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// set the cache
 		footer.getTheVisibleElement();
@@ -331,9 +331,9 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyElementGetBy() {
 		By testBy = By.cssSelector("#ItemsToAutomate");
-		LazyElement testLazyElement = new LazyElement(this.getTestObject(), testBy, "TEST");
+		LazyWebElement testLazyWebElement = new LazyWebElement(this.getTestObject(), testBy, "TEST");
 
-		assertEquals(testBy, testLazyElement.getBy());
+		assertEquals(testBy, testLazyWebElement.getBy());
 	}
 
 	/**
@@ -341,8 +341,8 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyElementGetTestObject() {
-		LazyElement testLazyElement = new LazyElement(this.getTestObject(), By.cssSelector("#ItemsToAutomate"), "TEST");
-		assertEquals(this.getTestObject(), testLazyElement.getTestObject());
+		LazyWebElement testLazyWebElement = new LazyWebElement(this.getTestObject(), By.cssSelector("#ItemsToAutomate"), "TEST");
+		assertEquals(this.getTestObject(), testLazyWebElement.getTestObject());
 	}
 
 	/**
@@ -500,7 +500,7 @@ public class LazyElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyElementTextWithParent() throws TimeoutException, InterruptedException {
-		LazyElement elem = this.getFlowerTableCaptionWithParent().getParent();
+		LazyWebElement elem = this.getFlowerTableCaptionWithParent().getParent();
 		elem.getText();
 
 		assertEquals(this.getFlowerTableCaptionWithParent().getText(), FLOWER_TABLE);
