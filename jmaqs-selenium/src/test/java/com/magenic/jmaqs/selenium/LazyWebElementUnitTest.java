@@ -251,7 +251,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
-		WebElement cacheFooter = footer.getTheVisibleElement();
+		WebElement cacheFooter = footer.getRawVisibleElement();
 
 		// Make sure the second event didn't trigger a new find
 		assertEquals(cacheFooter, footer.getCachedElement());
@@ -266,10 +266,10 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// set the cache
-		footer.getTheClickableElement();
+		footer.getRawClickableElement();
 
 		// Make sure get click-able triggers a new find
-		assertNotSame(footer.getCachedElement(), footer.getTheClickableElement());
+		assertNotSame(footer.getCachedElement(), footer.getRawClickableElement());
 	}
 
 	/**
@@ -281,10 +281,10 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// set the cache
-		footer.getTheExistingElement();
+		footer.getRawExistingElement();
 
 		// Make sure get exists triggers a new find
-		assertNotSame(footer.getCachedElement(), footer.getTheExistingElement());
+		assertNotSame(footer.getCachedElement(), footer.getRawExistingElement());
 	}
 
 	/**
@@ -296,10 +296,10 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
 		// set the cache
-		footer.getTheVisibleElement();
+		footer.getRawVisibleElement();
 
 		// Make sure get visible triggers a new find
-		assertNotSame(footer.getCachedElement(), footer.getTheVisibleElement());
+		assertNotSame(footer.getCachedElement(), footer.getRawVisibleElement());
 	}
 
 	/**
@@ -566,7 +566,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyElementGetVisibleElement() {
-		assertNotEquals(null, this.getInputBox().getTheVisibleElement());
+		assertNotEquals(null, this.getInputBox().getRawVisibleElement());
 	}
 
 	/**
@@ -574,7 +574,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyElementGetClickableElement() {
-		assertNotNull(this.getInputBox().getTheClickableElement());
+		assertNotNull(this.getInputBox().getRawClickableElement());
 	}
 
 	/**
@@ -582,7 +582,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups=TestCategories.SELENIUM)
 	public void lazyElementGetExistingElement() {
-		assertNotNull(this.getInputBox().getTheExistingElement());
+		assertNotNull(this.getInputBox().getRawExistingElement());
 	}
 
 	/**

@@ -22,7 +22,7 @@ import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
-public abstract class AbstractLazyWebElement implements WebElement {
+public abstract class AbstractLazyWebElement {
 
   /**
    * The index in cases where the selector finds multiple elements
@@ -132,7 +132,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * Gets the tag name of the lazy element
    */
   public String getTagName() throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::getTagName);
+    return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::getTagName);
   }
 
   /**
@@ -141,7 +141,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @return The element text
    */
   public String getText() throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::getText);
+    return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::getText);
   }
 
   /**
@@ -150,21 +150,21 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @return the location as a Point
    */
   public Point getLocation() throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::getLocation);
+    return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::getLocation);
   }
 
   /**
    * Gets the lazy element's size
    */
   public Dimension getSize() throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::getSize);
+    return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::getSize);
   }
 
   /**
    * Click the lazy element
    */
   public void click() throws TimeoutException, InterruptedException, ExecutionFailedException {
-    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheClickableElement));
+    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawClickableElement));
     this.executeEvent(element::click, "Click");
   }
 
@@ -177,7 +177,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
   public void sendSecretKeys(String keys) throws ExecutionFailedException, TimeoutException, InterruptedException {
     this.getTestObject().getLog()
         .logMessage(MessageType.VERBOSE, "Send secret keys to '%s'", this.getUserFriendlyName());
-    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement));
+    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawVisibleElement));
 
     try {
       this.getTestObject().getLog().suspendLogging();
@@ -196,7 +196,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * Clear the lazy element
    */
   public void clear() throws TimeoutException, InterruptedException, ExecutionFailedException {
-    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement));
+    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawVisibleElement));
     this.executeEvent(element::clear, "Clear");
   }
 
@@ -204,7 +204,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * Submit the lazy element
    */
   public void submit() throws TimeoutException, InterruptedException, ExecutionFailedException {
-    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement));
+    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement));
     this.executeEvent(element::submit, "Submit");
   }
 
@@ -215,7 +215,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @return The attribute
    */
   public String getAttribute(String attributeName) throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).getAttribute(attributeName));
+    return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getAttribute(attributeName));
   }
 
   /**
@@ -224,7 +224,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @return The current value of the element
    */
   public String getValue() throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement).getAttribute("value"));
+    return GenericWait.waitFor(() -> this.getElement(this::getRawVisibleElement).getAttribute("value"));
   }
 
   /**
@@ -234,7 +234,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @return the css value for the property
    */
   public String getCssValue(String propertyName) throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).getCssValue(propertyName));
+    return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getCssValue(propertyName));
   }
 
   /**
@@ -242,7 +242,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    *
    * @return The visible web element
    */
-  public WebElement getTheVisibleElement() {
+  public WebElement getRawVisibleElement() {
     Supplier<WebElement> elementSupplier;
 
     if (this.parent == null) {
@@ -252,7 +252,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
       };
     } else {
       elementSupplier = () -> {
-        WebElement parentElement = this.parent.getTheExistingElement();
+        WebElement parentElement = this.parent.getRawExistingElement();
         FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
         return fluentWait.until(e -> e.findElement(this.getBy()));
       };
@@ -267,7 +267,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    *
    * @return The click-able web element
    */
-  public WebElement getTheClickableElement() {
+  public WebElement getRawClickableElement() {
 
     Supplier<WebElement> elementSupplier;
 
@@ -278,7 +278,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
       };
     } else {
       elementSupplier = () -> {
-        WebElement parentElement = this.getParent().getTheExistingElement();
+        WebElement parentElement = this.getParent().getRawExistingElement();
         FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
         return fluentWait.until(e -> e.findElement(this.getBy()));
       };
@@ -293,7 +293,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    *
    * @return The existing web element
    */
-  public WebElement getTheExistingElement() {
+  public WebElement getRawExistingElement() {
 
     Supplier<WebElement> elementSupplier;
 
@@ -304,7 +304,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
       };
     } else {
       elementSupplier = () -> {
-        WebElement parentElement = this.getParent().getTheExistingElement();
+        WebElement parentElement = this.getParent().getRawExistingElement();
         FluentWait<WebElement> fluentWait = FluentWaitFactory.getNewElementFluentWait(parentElement);
         return fluentWait.until(e -> e.findElement(this.getBy()));
       };
@@ -320,8 +320,8 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @param by The locating mechanism to use
    * @return the {@link WebElement WebElement} being found
    */
-  public WebElement findElement(By by) throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).findElement(by));
+  public WebElement findRawElement(By by) throws TimeoutException, InterruptedException {
+    return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).findElement(by));
   }
 
   /**
@@ -331,8 +331,8 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @param by the locating mechanism to use
    * @return the List of {@link WebElement WebElement} being found
    */
-  public List<WebElement> findElements(By by) throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).findElements(by));
+  public List<WebElement> findRawElements(By by) throws TimeoutException, InterruptedException {
+    return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).findElements(by));
   }
 
   /**
@@ -351,7 +351,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
     this.getTestObject().getLog()
         .logMessage(MessageType.VERBOSE, "Send keys '%s' to '%s'", keyBuilder.toString(), this.getUserFriendlyName());
 
-    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getTheVisibleElement));
+    WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawVisibleElement));
     this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
   }
 
@@ -361,7 +361,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @return If the element is selected
    */
   public boolean isSelected() throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::isSelected);
+    return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::isSelected);
   }
 
   /**
@@ -370,7 +370,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @return If the element is enabled
    */
   public boolean isEnabled() throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::isEnabled);
+    return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::isEnabled);
   }
 
   /**
@@ -379,7 +379,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @return If the element is displayed
    */
   public boolean isDisplayed() throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(this.getElement(this::getTheExistingElement)::isDisplayed);
+    return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::isDisplayed);
   }
 
   /**
@@ -395,7 +395,7 @@ public abstract class AbstractLazyWebElement implements WebElement {
    * @return The type to get the screenshot as
    */
   public <X> X getScreenshotAs(OutputType<X> target) throws TimeoutException, InterruptedException {
-    return GenericWait.waitFor(() -> this.getElement(this::getTheExistingElement).getScreenshotAs(target));
+    return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getScreenshotAs(target));
   }
 
   /**

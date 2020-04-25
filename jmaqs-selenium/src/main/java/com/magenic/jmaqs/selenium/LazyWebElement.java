@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.*;
 
-import com.magenic.jmaqs.utilities.helper.GenericWait;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 
 /**
@@ -34,18 +33,18 @@ public class LazyWebElement extends AbstractLazyWebElement {
 	}
 
 	@Override
-	public WebElement findElement(By by) throws TimeoutException, InterruptedException {
+	public WebElement findRawElement(By by) throws TimeoutException, InterruptedException {
 		return new LazyWebElement(this, by, userFriendlyName);
 	}
 
 	@Override
-	public List<WebElement> findElements(By by) throws TimeoutException, InterruptedException {
+	public List<WebElement> findRawElements(By by) throws TimeoutException, InterruptedException {
 		int index = 0;
 		List<WebElement> elements = new ArrayList<>();
-		for (WebElement element : this.getTheExistingElement().findElements(by)) {
-			elements.add(new LazyWebElement(this, by, element, index, String.format("%s - %d", userFriendlyName, index++)));
+		for (WebElement element : this.getRawExistingElement().findElements(by)) {
+			//elements.add(new LazyWebElement(this, by, element, index, String.format("%s - %d", userFriendlyName, index++)));
 		}
 
-		return super.findElements(by);
+		return super.findRawElements(by);
 	}
 }
