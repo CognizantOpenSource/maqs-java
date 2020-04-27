@@ -11,6 +11,7 @@ import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import com.magenic.jmaqs.utilities.helper.functionalinterfaces.Action;
 import com.magenic.jmaqs.utilities.logging.MessageType;
+
 import java.util.List;
 import java.util.function.Supplier;
 import org.openqa.selenium.By;
@@ -22,7 +23,10 @@ import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
-public abstract class AbstractLazyWebElement {
+/**
+ * Abstract structure for dynamically finding and interacting with elements
+ */
+public abstract class AbstractLazyElement {
 
   /**
    * The index in cases where the selector finds multiple elements
@@ -45,31 +49,58 @@ public abstract class AbstractLazyWebElement {
    * The test object for the element
    */
   protected SeleniumTestObject testObject;
+
   /**
    * Cached copy of the element or null if we haven't already found the element
    */
   private WebElement cachedElement;
 
-  public AbstractLazyWebElement(String userFriendlyName, By locator, SeleniumTestObject testObject) {
-    this.userFriendlyName = userFriendlyName;
-    this.by = locator;
+  /**
+   * Initializes a new instance of the {@link #AbstractLazyElement} class
+   * @param testObject The selenium test object
+   * @param locator The by locator to search on
+   * @param userFriendlyName The user friendly name of the lazy element
+   */
+  protected AbstractLazyElement(SeleniumTestObject testObject, By locator, String userFriendlyName) {
     this.testObject = testObject;
+    this.by = locator;
+    this.userFriendlyName = userFriendlyName;
     this.elementIndex = null;
   }
 
-  public AbstractLazyWebElement(String userFriendlyName, LazyWebElement parent, By by) {
+  /**
+   * Initializes a new instance of the {@link #AbstractLazyElement} class
+   * @param parent The parent lazy element
+   * @param locator The by locator to search on
+   * @param userFriendlyName The user friendly name of the lazy element
+   */
+  protected AbstractLazyElement(LazyWebElement parent, By locator, String userFriendlyName) {
+    this.testObject = parent.getTestObject();
+    this.parent = parent;
+    this.by = locator;
+    this.userFriendlyName = userFriendlyName;
+    this.elementIndex = null;
+  }
+
+  /**
+   * Initializes a new instance of the {@link #AbstractLazyElement} class
+   * @param parent The parent lazy element
+   * @param locator THe by locator to search on
+   * @param userFriendlyName The user friendly name of the lazy element
+   * @param elementIndex The index of the cached element
+   * @param cachedElement The cached element
+   */
+  protected AbstractLazyElement(
+          LazyWebElement parent,
+          By locator,
+          String userFriendlyName,
+          int elementIndex,
+          WebElement cachedElement) {
+    this.testObject = parent.getTestObject();
+    this.by = locator;
     this.userFriendlyName = userFriendlyName;
     this.parent = parent;
-    this.by = by;
-    this.elementIndex = null;
-  }
-
-  public AbstractLazyWebElement(int elementIndex, String userFriendlyName, LazyWebElement parent, By by,
-      WebElement cachedElement) {
     this.elementIndex = elementIndex;
-    this.userFriendlyName = userFriendlyName;
-    this.parent = parent;
-    this.by = by;
     this.cachedElement = cachedElement;
   }
 
@@ -130,6 +161,10 @@ public abstract class AbstractLazyWebElement {
 
   /**
    * Gets the tag name of the lazy element
+   *
+   * @return The tag name
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public String getTagName() throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::getTagName);
@@ -139,6 +174,8 @@ public abstract class AbstractLazyWebElement {
    * Gets the lazy element's text
    *
    * @return The element text
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public String getText() throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::getText);
@@ -148,6 +185,8 @@ public abstract class AbstractLazyWebElement {
    * Gets the lazy element's location
    *
    * @return the location as a Point
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public Point getLocation() throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::getLocation);
@@ -155,6 +194,10 @@ public abstract class AbstractLazyWebElement {
 
   /**
    * Gets the lazy element's size
+   *
+   * @return The lazy element's size
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public Dimension getSize() throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::getSize);
@@ -162,6 +205,10 @@ public abstract class AbstractLazyWebElement {
 
   /**
    * Click the lazy element
+   *
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
+   * @throws ExecutionFailedException If error occurs while sending keys
    */
   public void click() throws TimeoutException, InterruptedException, ExecutionFailedException {
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawClickableElement));
@@ -173,6 +220,8 @@ public abstract class AbstractLazyWebElement {
    *
    * @param keys the secret keys
    * @throws ExecutionFailedException If error occurs while sending keys
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public void sendSecretKeys(String keys) throws ExecutionFailedException, TimeoutException, InterruptedException {
     this.getTestObject().getLog()
@@ -194,6 +243,10 @@ public abstract class AbstractLazyWebElement {
 
   /**
    * Clear the lazy element
+   *
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
+   * @throws ExecutionFailedException If the clear action fails to execute
    */
   public void clear() throws TimeoutException, InterruptedException, ExecutionFailedException {
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawVisibleElement));
@@ -202,6 +255,10 @@ public abstract class AbstractLazyWebElement {
 
   /**
    * Submit the lazy element
+   *
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
+   * @throws ExecutionFailedException If the submit action fails to execute
    */
   public void submit() throws TimeoutException, InterruptedException, ExecutionFailedException {
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement));
@@ -213,6 +270,8 @@ public abstract class AbstractLazyWebElement {
    *
    * @param attributeName The name of the attribute
    * @return The attribute
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public String getAttribute(String attributeName) throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getAttribute(attributeName));
@@ -220,8 +279,9 @@ public abstract class AbstractLazyWebElement {
 
   /**
    * Gets the current value of an element - Useful for get input box text
-   *
-   * @return The current value of the element
+   * @return The value attribute
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public String getValue() throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(() -> this.getElement(this::getRawVisibleElement).getAttribute("value"));
@@ -232,6 +292,8 @@ public abstract class AbstractLazyWebElement {
    *
    * @param propertyName The property name
    * @return the css value for the property
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public String getCssValue(String propertyName) throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getCssValue(propertyName));
@@ -319,6 +381,8 @@ public abstract class AbstractLazyWebElement {
    *
    * @param by The locating mechanism to use
    * @return the {@link WebElement WebElement} being found
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public WebElement findRawElement(By by) throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).findElement(by));
@@ -330,6 +394,8 @@ public abstract class AbstractLazyWebElement {
    *
    * @param by the locating mechanism to use
    * @return the List of {@link WebElement WebElement} being found
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public List<WebElement> findRawElements(By by) throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).findElements(by));
@@ -339,11 +405,15 @@ public abstract class AbstractLazyWebElement {
    * Sends the keys to the element
    *
    * @param keysToSend The keys being sent to the element
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
+   * @throws ExecutionFailedException If the send keys action fails to execute
    */
   public void sendKeys(CharSequence... keysToSend)
       throws TimeoutException, InterruptedException, ExecutionFailedException {
     StringBuilder keyBuilder = new StringBuilder(keysToSend.length);
 
+    // building char sequence to String so that it can be logged
     for (CharSequence cs : keysToSend) {
       keyBuilder.append(cs);
     }
@@ -359,6 +429,8 @@ public abstract class AbstractLazyWebElement {
    * If the Element is selected
    *
    * @return If the element is selected
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public boolean isSelected() throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::isSelected);
@@ -368,6 +440,8 @@ public abstract class AbstractLazyWebElement {
    * If the element is enabled
    *
    * @return If the element is enabled
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public boolean isEnabled() throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::isEnabled);
@@ -377,6 +451,8 @@ public abstract class AbstractLazyWebElement {
    * If the element is displayed
    *
    * @return If the element is displayed
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public boolean isDisplayed() throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::isDisplayed);
@@ -384,6 +460,10 @@ public abstract class AbstractLazyWebElement {
 
   /**
    * Gets the rectangle value that highlights the lazy element location
+   *
+   * @return The location and size of the element
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public Rectangle getRect() throws TimeoutException, InterruptedException {
     return new Rectangle(this.getLocation(), this.getSize());
@@ -391,8 +471,11 @@ public abstract class AbstractLazyWebElement {
 
   /**
    * Gets the screenshot as the target type
+   *
    * @param target The target output type
    * @return The type to get the screenshot as
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public <X> X getScreenshotAs(OutputType<X> target) throws TimeoutException, InterruptedException {
     return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getScreenshotAs(target));
@@ -453,8 +536,8 @@ public abstract class AbstractLazyWebElement {
    * Execute an element action
    *
    * @param elementAction the element action
-   * @param caller        Text to identify the caller function
-   * @throws Exception If the elementAction fails to execute
+   * @param caller Text to identify the caller function
+   * @throws ExecutionFailedException If the elementAction fails to execute
    */
   private void executeEvent(Action elementAction, String caller) throws ExecutionFailedException {
     try {
