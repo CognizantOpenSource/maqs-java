@@ -13,9 +13,12 @@ import com.magenic.jmaqs.utilities.helper.functionalinterfaces.Action;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
@@ -552,5 +555,30 @@ public abstract class AbstractLazyElement {
 
       throw new ExecutionFailedException(messageBuilder.toString(), e);
     }
+  }
+
+  /**
+   * Gets the element at the indexed value
+   *
+   * @param matchesState The predicate to see that the element found at the index matches the state
+   *                     we expect
+   * @param expectedState The expected state to be logged if the matchesState function returns false
+   * @return The WebElement at the indexed value
+   * @throws TimeoutException If a timeout occurred while waiting for the element to be found
+   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
+   */
+  private WebElement getRawIndexed(Predicate<WebElement> matchesState, String expectedState) throws TimeoutException, InterruptedException {
+     return GenericWait.waitFor(() -> {
+       List<WebElement> elements = (this.parent == null) ?
+               this.getTestObject().getWebDriver().findElements(this.by) :
+               this.parent.getRawExistingElement().findElements(by);
+       WebElement indexedElement = elements.get(this.elementIndex == null ? 0 : this.elementIndex);
+
+       if (!matchesState.test(indexedElement)) {
+         throw new InvalidElementStateException(String.format("Expected element to %s", expectedState));
+       }
+
+       return indexedElement;
+     });
   }
 }
