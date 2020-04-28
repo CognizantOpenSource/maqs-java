@@ -1,5 +1,6 @@
 package com.magenic.jmaqs.selenium;
 
+import com.google.common.base.Predicate;
 import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
 import org.openqa.selenium.*;
 
@@ -7,7 +8,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.util.List;
 
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -15,6 +20,7 @@ import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.*;
 
@@ -30,6 +36,10 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	private static final String FLOWER_TABLE_CAPTION = "Flower table caption";
 	private static final String FOOTER_PARAGRAPH_BY = "FOOTER P";
 	private static final String FOOTER = "Footer";
+
+    private LazyWebElement getDivRoot() {
+        return new LazyWebElement(this.getTestObject(), By.cssSelector("#ItemsToAutomate"), "Div Root");
+    }
 
 	/**
 	 * Gets the disabled item
@@ -609,4 +619,106 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 
 		assertEquals(stringValue, this.getFlowerTableCaptionWithParent().toString());
 	}
+
+
+    /**
+     * Verify find element
+     */
+    @Test(groups = TestCategories.SELENIUM)
+    public void lazyElementFindElement() throws TimeoutException, InterruptedException {
+        WebElement firstElement = this.getFlowerTableLazyElement().findRawElement(By.cssSelector("THEAD TH"));
+        assertEquals("Flowers", firstElement.getText());
+    }
+
+    /**
+     * Verify find elements
+     */
+    @Test(groups = TestCategories.SELENIUM)
+    public void lazyElementFindElements() throws TimeoutException, InterruptedException {
+        List<WebElement> elements = this.getFlowerTableLazyElement().findRawElements(By.cssSelector("THEAD TH"));
+        assertEquals("Color", elements.get(4).getText());
+    }
+
+    /**
+     * Stacked lazy elements handle staleness
+     */
+    @Test(groups = TestCategories.SELENIUM)
+    public void lazyElementFindElementsStackedWithStale() throws TimeoutException, InterruptedException {
+        LazyWebElement lazyRoot = this.getDivRoot();
+        LazyWebElement secondTable = lazyRoot.findElements(By.cssSelector("TABLE")).get(1);
+        LazyWebElement lastTableHeader = secondTable.findElements(By.cssSelector("THEAD TH")).get(4);
+
+        this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
+        this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
+
+        assertEquals("Color", lastTableHeader.getText());
+    }
+
+    /**
+     * Find elements are all lazy
+     */
+    @Test(groups = TestCategories.SELENIUM)
+    public void lazyElementFindElementsAreLazy() throws TimeoutException, InterruptedException {
+        SoftAssert softAssertion = new SoftAssert();
+        for (LazyWebElement element : this.getFlowerTableLazyElement().findElements(By.cssSelector("THEAD TH"))) {
+            Predicate<LazyWebElement> predicate = e -> {
+                assertTrue(e instanceof LazyWebElement);
+                return true;
+            };
+
+            softAssertion.assertTrue(predicate.test(element));
+        }
+
+        softAssertion.assertAll();
+    }
+
+    /**
+     * Find elements respects action waits
+     */
+    @Test(groups = TestCategories.SELENIUM, expectedExceptions = {TimeoutException.class})
+    public void lazyElementFindElementsRespectAction() throws InterruptedException, TimeoutException, ExecutionFailedException {
+        LazyWebElement firstElement = this.getDivRoot().findElements(this.getDisabledItem().getBy()).get(0);
+
+        this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
+        this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
+
+        UIWaitFactory.setWaitDriver(this.getWebDriver(), new WebDriverWait(this.getWebDriver(), 1));
+        firstElement.click();
+    }
+
+    /**
+     * Stacked get visible
+     */
+    @Test(groups = TestCategories.SELENIUM)
+    public void lazyElementFindElementsGetVisible() throws TimeoutException, InterruptedException {
+        LazyWebElement lazyRoot = this.getDivRoot();
+        LazyWebElement secondTable = lazyRoot.findElements(By.cssSelector("TABLE")).get(1);
+        WebElement getSecondTable = secondTable.getRawVisibleElement();
+
+        assertEquals(secondTable.getText(), getSecondTable.getText());
+    }
+
+    /**
+     * Find Element the run Actions that cast to ILocatable
+     */
+    @Test(groups = TestCategories.SELENIUM)
+    public void lazyElementFindRawElementWorksWithActions() throws TimeoutException, InterruptedException {
+        WebElement rawElement = this.getDivRoot().findRawElement(this.getDisabledItem().getBy());
+
+        Actions a1 = new Actions(this.getWebDriver());
+        a1.keyDown(rawElement, Keys.SHIFT).build().perform();
+        a1.keyUp(rawElement, Keys.SHIFT).build().perform();
+        a1.sendKeys(rawElement, "Hello").build().perform();
+        a1.moveToElement(rawElement).build().perform();
+        a1.moveToElement(rawElement, 0, 0).build().perform();
+    }
+
+    /**
+     * Verify the element does exist function behaves correctly
+     */
+    @Test(groups = TestCategories.SELENIUM)
+    public void lazyElementDoesExist() throws TimeoutException, InterruptedException {
+        LazyWebElement element = this.getFlowerTableLazyElement();
+        assertTrue(element.doesExist(), "element didn't exist when it was expected to");
+    }
 }

@@ -2,6 +2,8 @@ package com.magenic.jmaqs.selenium;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.magenic.jmaqs.utilities.helper.GenericWait;
 import org.openqa.selenium.*;
 
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
@@ -52,7 +54,7 @@ public class LazyWebElement extends AbstractLazyElement {
 	 * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
 	 */
 	public LazyWebElement findElement(By locator) throws TimeoutException, InterruptedException {
-		WebElement elementFound = super.findRawElement(locator);
+        WebElement elementFound = this.findRawElement(locator);
 		return new LazyWebElement(this, locator, this.userFriendlyName, null, elementFound);
 	}
 
@@ -63,16 +65,24 @@ public class LazyWebElement extends AbstractLazyElement {
 	 * @throws TimeoutException If a timeout occurred while waiting for the element to be found
 	 * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
 	 */
-	public List<LazyWebElement> findElements(By locator) throws TimeoutException, InterruptedException {
-		int index = 0;
-		List<LazyWebElement> elements = new ArrayList<>();
+    public List<LazyWebElement> findElements(By locator) throws TimeoutException, InterruptedException {
+        int index = 0;
+        List<LazyWebElement> elements = new ArrayList<>();
 
-		for (WebElement element : this.getRawExistingElement().findElements(locator)) {
-			elements.add(new LazyWebElement(
-					this, locator, String.format("%s - %d", this.userFriendlyName, index), index, element));
-			index++;
-		}
+        for (WebElement element : this.findRawElements(locator)) {
+            elements.add(new LazyWebElement(
+                    this, locator, String.format("%s - %d", this.userFriendlyName, index), index, element));
+            index++;
+        }
 
-		return elements;
-	}
+        return elements;
+    }
+
+    @Override
+    public boolean doesExist() throws TimeoutException, InterruptedException {
+        return GenericWait.waitFor(() -> {
+            this.getElement(this::getRawExistingElement);
+            return true;
+        });
+    }
 }
