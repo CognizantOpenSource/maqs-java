@@ -3,10 +3,10 @@ package com.magenic.jmaqs.selenium;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.magenic.jmaqs.utilities.helper.GenericWait;
-import org.openqa.selenium.*;
-
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * Driver for dynamically finding and interacting with elements
@@ -76,13 +76,5 @@ public class LazyWebElement extends AbstractLazyElement {
         }
 
         return elements;
-    }
-
-    @Override
-    public boolean doesExist() throws TimeoutException, InterruptedException {
-        return GenericWait.waitFor(() -> {
-            this.getElement(this::getRawExistingElement);
-            return true;
-        });
     }
 }

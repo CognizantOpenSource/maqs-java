@@ -608,5 +608,10 @@ public abstract class AbstractLazyElement {
      * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
      * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
      */
-    public abstract boolean doesExist() throws TimeoutException, InterruptedException;
+    public boolean doesExist() throws TimeoutException, InterruptedException {
+        return GenericWait.waitFor(() -> {
+            this.getElement(this::getRawExistingElement);
+            return true;
+        });
+    }
 }
