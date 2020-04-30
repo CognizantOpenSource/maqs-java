@@ -50,16 +50,7 @@ public class PageElementsPageModel extends BaseSeleniumPageModel {
    * @param url the url
    */
   public void open(String url) {
-    this.getTestObject().getWebDriver().get(url);
-  }
-
-  /**
-   * Gets selenium test object.
-   *
-   * @return the selenium test object
-   */
-  public SeleniumTestObject getSeleniumTestObject() {
-    return this.getTestObject();
+    this.getWebDriver().get(url);
   }
 
 }
