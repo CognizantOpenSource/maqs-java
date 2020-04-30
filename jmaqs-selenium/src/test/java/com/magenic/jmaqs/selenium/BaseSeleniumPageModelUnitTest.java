@@ -4,23 +4,28 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
 
   @Test
   public void testGetLogger() {
-    throw new UnsupportedOperationException("Test not implemented yet");
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    Assert.assertNotNull(pageElementsPageModel.getLogger());
   }
 
   @Test
   public void testGetTestObject() {
-    throw new UnsupportedOperationException("Test not implemented yet");
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    Assert.assertNotNull(pageElementsPageModel.getTestObject());
   }
 
   @Test
   public void testGetWebDriver() {
-    throw new UnsupportedOperationException("Test not implemented yet");
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    Assert.assertNotNull(pageElementsPageModel.getWebDriver());
   }
 
   @Test
