@@ -4,18 +4,14 @@
 
 package com.magenic.jmaqs.selenium.unittestpagemodel;
 
+import com.magenic.jmaqs.selenium.BaseSeleniumPageModel;
 import com.magenic.jmaqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.By;
 
 /**
  * The type Page elements page model.
  */
-public class PageElementsPageModel {
-
-  /**
-   * The Test object.
-   */
-  private SeleniumTestObject testObject;
+public class PageElementsPageModel extends BaseSeleniumPageModel {
 
   /**
    * The Show dialog 1 button locator.
@@ -40,7 +36,12 @@ public class PageElementsPageModel {
    * @param testObject the test object
    */
   public PageElementsPageModel(SeleniumTestObject testObject) {
-    this.testObject = testObject;
+    super(testObject);
+  }
+
+  @Override
+  public boolean isPageLoaded() {
+    return false;
   }
 
   /**
@@ -49,7 +50,7 @@ public class PageElementsPageModel {
    * @param url the url
    */
   public void open(String url) {
-    this.testObject.getWebDriver().get(url);
+    this.getTestObject().getWebDriver().get(url);
   }
 
   /**
@@ -58,7 +59,7 @@ public class PageElementsPageModel {
    * @return the selenium test object
    */
   public SeleniumTestObject getSeleniumTestObject() {
-    return this.testObject;
+    return this.getTestObject();
   }
 
 }
