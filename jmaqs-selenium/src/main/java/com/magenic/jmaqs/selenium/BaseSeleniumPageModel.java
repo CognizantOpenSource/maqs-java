@@ -87,9 +87,14 @@ public abstract class BaseSeleniumPageModel {
     this.webDriver = webDriver;
   }
 
-  public PerfTimerCollection getPerfTimerCollection() {
-    return this.testObject.getPerfTimerCollection();
-  }
+    /**
+     * Gets the per timer collection
+     *
+     * @return The perf timer colection
+     */
+    public PerfTimerCollection getPerfTimerCollection() {
+        return this.testObject.getPerfTimerCollection();
+    }
 
   /**
    * Is page loaded boolean.
