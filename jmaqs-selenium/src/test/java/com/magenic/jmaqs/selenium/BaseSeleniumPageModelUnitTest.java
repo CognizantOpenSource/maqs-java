@@ -41,6 +41,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     int hashCode = pageElementsPageModel.getWebDriver().hashCode();
     pageElementsPageModel.setWebDriver(this.getBrowser());
     int hashCode1 = pageElementsPageModel.getWebDriver().hashCode();
+
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
@@ -48,7 +49,20 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   public void testIsPageLoaded() {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     pageElementsPageModel.open();
+
     Assert.assertTrue(pageElementsPageModel.isPageLoaded());
+  }
+
+  @Test
+  public void testGetElementCalledTwiceReturnsTheSameElement() {
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    pageElementsPageModel.open();
+    pageElementsPageModel.waitForPageLoad();
+
+    LazyWebElement initElem = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator);
+    LazyWebElement cachedElem = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator);
+
+    Assert.assertEquals(initElem, cachedElem);
   }
 
   @Test
@@ -57,9 +71,14 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     pageElementsPageModel.open();
     pageElementsPageModel.waitForPageLoad();
     LazyWebElement lazyElement = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator);
-    Assert.assertNotNull(lazyElement);
-    Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
+    LazyWebElement storedElement = pageElementsPageModel
+            .getLazyElementStore()
+            .get(pageElementsPageModel.pageTitleLocator.toString());
 
+    Assert.assertNotNull(lazyElement);
+    Assert.assertNotNull(storedElement);
+    Assert.assertEquals(lazyElement, storedElement);
+    Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
   }
 
   @Test
@@ -69,7 +88,13 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     pageElementsPageModel.waitForPageLoad();
     LazyWebElement lazyElement = pageElementsPageModel
         .getLazyElement(pageElementsPageModel.pageTitleLocator, "Page Title");
+    LazyWebElement storedElement = pageElementsPageModel
+            .getLazyElementStore()
+            .get(pageElementsPageModel.pageTitleLocator.toString() + "Page Title");
+
     Assert.assertNotNull(lazyElement);
+    Assert.assertNotNull(storedElement);
+    Assert.assertEquals(lazyElement, storedElement);
     Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
     Assert.assertEquals(lazyElement.getUserFriendlyName(), "Page Title");
   }
@@ -81,7 +106,13 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     pageElementsPageModel.waitForPageLoad();
     LazyWebElement lazyElement = pageElementsPageModel
         .getLazyElement(pageElementsPageModel.body, pageElementsPageModel.pageTitleLocator);
+    LazyWebElement storedElement = pageElementsPageModel
+            .getLazyElementStore()
+            .get(pageElementsPageModel.pageTitleLocator.toString());
+
     Assert.assertNotNull(lazyElement);
+    Assert.assertNotNull(storedElement);
+    Assert.assertEquals(storedElement, lazyElement);
     Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
   }
 
@@ -92,7 +123,13 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     pageElementsPageModel.waitForPageLoad();
     LazyWebElement lazyElement = pageElementsPageModel
         .getLazyElement(pageElementsPageModel.body, pageElementsPageModel.pageTitleLocator, "Page Title");
+    LazyWebElement storedElement = pageElementsPageModel
+            .getLazyElementStore()
+            .get(pageElementsPageModel.pageTitleLocator.toString() + "Page Title");
+
     Assert.assertNotNull(lazyElement);
+    Assert.assertNotNull(storedElement);
+    Assert.assertEquals(storedElement, lazyElement);
     Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
     Assert.assertEquals(lazyElement.getUserFriendlyName(), "Page Title");
   }
