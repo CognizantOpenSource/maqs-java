@@ -90,7 +90,7 @@ public abstract class BaseSeleniumPageModel {
    * @return the lazy element
    */
   protected LazyWebElement getLazyElement(LazyWebElement parent, By by) {
-    return getLazyElement(parent, by, null);
+    return getLazyElement(parent, by, "");
   }
 
   /**
@@ -114,7 +114,7 @@ public abstract class BaseSeleniumPageModel {
    * @return the lazy element
    */
   protected LazyWebElement getLazyElement(By by) {
-    return getLazyElement(by, null);
+    return getLazyElement(by, "");
   }
 
   /**
