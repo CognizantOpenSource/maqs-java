@@ -52,7 +52,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   @Test
-  public void testGetLazyElement() throws TimeoutException, InterruptedException {
+  public void testGetLazyElementWithBy() throws TimeoutException, InterruptedException {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     pageElementsPageModel.open();
     pageElementsPageModel.waitForPageLoad();
@@ -63,7 +63,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   @Test
-  public void testGetLazyElement1() throws TimeoutException, InterruptedException {
+  public void testGetLazyElementWithByAndName() throws TimeoutException, InterruptedException {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     pageElementsPageModel.open();
     pageElementsPageModel.waitForPageLoad();
@@ -75,7 +75,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   @Test
-  public void testGetLazyElement2() throws TimeoutException, InterruptedException {
+  public void testGetLazyElementWithParentElementAndBy() throws TimeoutException, InterruptedException {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     pageElementsPageModel.open();
     pageElementsPageModel.waitForPageLoad();
@@ -86,7 +86,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   @Test
-  public void testGetLazyElement3() throws TimeoutException, InterruptedException {
+  public void testGetLazyElementWithParentElementByAndName() throws TimeoutException, InterruptedException {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     pageElementsPageModel.open();
     pageElementsPageModel.waitForPageLoad();

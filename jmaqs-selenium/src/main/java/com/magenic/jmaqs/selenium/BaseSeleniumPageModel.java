@@ -16,9 +16,20 @@ import org.openqa.selenium.WebDriver;
  */
 public abstract class BaseSeleniumPageModel {
 
-  private final HashMap<String, LazyWebElement> lazyElementStore;
-  private final SeleniumTestObject testObject;
-  private WebDriver webDriver;
+    /**
+     * The lazy Element store
+     */
+    private final HashMap<String, LazyWebElement> lazyElementStore;
+
+    /**
+     * The selenium test object
+     */
+    private final SeleniumTestObject testObject;
+
+    /**
+     * The web driver
+     */
+    private WebDriver webDriver;
 
   /**
    * Instantiates a new Base selenium page model.
@@ -39,6 +50,15 @@ public abstract class BaseSeleniumPageModel {
   protected Logger getLogger() {
     return this.testObject.getLog();
   }
+
+    /**
+     * Gets the lazy element store
+     *
+     * @return The lazy element store
+     */
+    protected HashMap<String, LazyWebElement> getLazyElementStore() {
+        return this.lazyElementStore;
+    }
 
   /**
    * Gets test object.
@@ -78,9 +98,12 @@ public abstract class BaseSeleniumPageModel {
    */
   public abstract boolean isPageLoaded();
 
-  public void waitForPageLoad() {
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-  }
+    /**
+     * Waits for the page to load
+     */
+    public void waitForPageLoad() {
+        UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+    }
 
   /**
    * Gets lazy element.
