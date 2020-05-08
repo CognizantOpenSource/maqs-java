@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import org.openqa.selenium.WebDriver;
 public abstract class BaseSeleniumPageModel {
 
   private final HashMap<String, LazyWebElement> lazyElementStore;
-  private SeleniumTestObject testObject;
+  private final SeleniumTestObject testObject;
   private WebDriver webDriver;
 
   /**
@@ -66,7 +67,7 @@ public abstract class BaseSeleniumPageModel {
     this.webDriver = webDriver;
   }
 
-  public PerfTimerCollection getPerfTimerCollection(){
+  public PerfTimerCollection getPerfTimerCollection() {
     return this.testObject.getPerfTimerCollection();
   }
 
@@ -76,6 +77,10 @@ public abstract class BaseSeleniumPageModel {
    * @return the boolean
    */
   public abstract boolean isPageLoaded();
+
+  public void waitForPageLoad() {
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+  }
 
   /**
    * Gets lazy element.

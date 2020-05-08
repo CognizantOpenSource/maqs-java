@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
+import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -29,32 +30,70 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   @Test
-  public void testSetWebDriver() {
-    throw new UnsupportedOperationException("Test not implemented yet");
+  public void testGetPerfTimerCollection() {
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    Assert.assertNotNull(pageElementsPageModel.getPerfTimerCollection());
+  }
+
+  @Test
+  public void testSetWebDriver() throws Exception {
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    int hashCode = pageElementsPageModel.getWebDriver().hashCode();
+    pageElementsPageModel.setWebDriver(this.getBrowser());
+    int hashCode1 = pageElementsPageModel.getWebDriver().hashCode();
+    Assert.assertNotEquals(hashCode, hashCode1);
   }
 
   @Test
   public void testIsPageLoaded() {
-    throw new UnsupportedOperationException("Test not implemented yet");
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    pageElementsPageModel.open();
+    Assert.assertTrue(pageElementsPageModel.isPageLoaded());
   }
 
   @Test
-  public void testGetLazyElement() {
-    throw new UnsupportedOperationException("Test not implemented yet");
+  public void testGetLazyElement() throws TimeoutException, InterruptedException {
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    pageElementsPageModel.open();
+    pageElementsPageModel.waitForPageLoad();
+    LazyWebElement lazyElement = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator);
+    Assert.assertNotNull(lazyElement);
+    Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
+
   }
 
   @Test
-  public void testGetLazyElement1() {
-    throw new UnsupportedOperationException("Test not implemented yet");
+  public void testGetLazyElement1() throws TimeoutException, InterruptedException {
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    pageElementsPageModel.open();
+    pageElementsPageModel.waitForPageLoad();
+    LazyWebElement lazyElement = pageElementsPageModel
+        .getLazyElement(pageElementsPageModel.pageTitleLocator, "Page Title");
+    Assert.assertNotNull(lazyElement);
+    Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
+    Assert.assertEquals(lazyElement.getUserFriendlyName(), "Page Title");
   }
 
   @Test
-  public void testGetLazyElement2() {
-    throw new UnsupportedOperationException("Test not implemented yet");
+  public void testGetLazyElement2() throws TimeoutException, InterruptedException {
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    pageElementsPageModel.open();
+    pageElementsPageModel.waitForPageLoad();
+    LazyWebElement lazyElement = pageElementsPageModel
+        .getLazyElement(pageElementsPageModel.body, pageElementsPageModel.pageTitleLocator);
+    Assert.assertNotNull(lazyElement);
+    Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
   }
 
   @Test
-  public void testGetLazyElement3() {
-    throw new UnsupportedOperationException("Test not implemented yet");
+  public void testGetLazyElement3() throws TimeoutException, InterruptedException {
+    PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
+    pageElementsPageModel.open();
+    pageElementsPageModel.waitForPageLoad();
+    LazyWebElement lazyElement = pageElementsPageModel
+        .getLazyElement(pageElementsPageModel.body, pageElementsPageModel.pageTitleLocator, "Page Title");
+    Assert.assertNotNull(lazyElement);
+    Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
+    Assert.assertEquals(lazyElement.getUserFriendlyName(), "Page Title");
   }
 }
