@@ -62,7 +62,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     LazyWebElement initElem = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator);
     LazyWebElement cachedElem = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator);
 
-    Assert.assertEquals(initElem, cachedElem);
+      Assert.assertSame(initElem, cachedElem);
   }
 
   @Test
