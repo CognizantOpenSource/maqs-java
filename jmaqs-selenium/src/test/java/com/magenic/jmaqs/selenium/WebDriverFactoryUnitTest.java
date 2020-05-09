@@ -129,6 +129,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Fire Fox driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getFirefoxDriverTest() throws Exception {
     FirefoxDriver driver = null;
@@ -164,6 +165,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the IE driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
