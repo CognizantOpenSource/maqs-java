@@ -54,7 +54,6 @@
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
-        <module>jmaqs-webservices-jdk11</module>
     </modules>
 
     <distributionManagement>
@@ -69,6 +68,15 @@
     </distributionManagement>
 
     <profiles>
+        <profile>
+            <id>WIP</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>jmaqs-webservices-jdk11</module>
+            </modules>
+        </profile>
         <profile>
             <id>jacoco</id>
             <activation>
