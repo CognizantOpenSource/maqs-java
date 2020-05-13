@@ -11,6 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTestObject> {
 
+  private static final long serialVersionUID = 1;
+
   /**
    * Removes the entry for a key only if currently mapped to a given value.
    *
@@ -66,7 +68,8 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
    *
    * @param key   key with which the specified value is associated
    * @param value value expected to be associated with the specified key
-   * @return the previous value associated with the specified key, or null if there was no mapping for the key
+   * @return the previous value associated with the specified key, or null if
+   *         there was no mapping for the key
    */
   @Override
   public BaseTestObject replace(String key, BaseTestObject value) {

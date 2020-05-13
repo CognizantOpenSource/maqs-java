@@ -22,6 +22,7 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public T getTestObject() {
     return (T) super.getTestObject();
   }
@@ -29,8 +30,7 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
   @Override
   public void setTestObject(BaseTestObject baseTestObject) {
 
-    if (this.baseTestObjects.putIfAbsent(this.getFullyQualifiedTestClassName(), baseTestObject)
-        == null) {
+    if (this.baseTestObjects.putIfAbsent(this.getFullyQualifiedTestClassName(), baseTestObject) == null) {
       this.baseTestObjects.replace(this.getFullyQualifiedTestClassName(), baseTestObject);
     }
   }
@@ -44,4 +44,3 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
   @Override
   protected abstract void createNewTestObject();
 }
-

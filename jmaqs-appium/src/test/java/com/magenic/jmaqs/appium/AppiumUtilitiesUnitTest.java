@@ -17,7 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -96,14 +95,13 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
     appiumDriver.navigate().to("http://www.google.com");
     String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
         .format(LocalDateTime.now(Clock.systemUTC()));
-    String filePath = AppiumUtilities
-        .captureScreenshot(appiumDriver, testObject, fileLogger.getDirectory(),
-            StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
+    String filePath = AppiumUtilities.captureScreenshot(appiumDriver, testObject, fileLogger.getDirectory(),
+        StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
 
     // Assert File Path returned from Screenshot is the same as expected file path.
-    Assert.assertEquals(filePath, Paths.get(StringProcessor
-        .safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime,
-            ".png")).normalize().toString());
+    Assert.assertEquals(filePath, Paths.get(
+        StringProcessor.safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime, ".png"))
+        .normalize().toString());
   }
 
   /**
@@ -159,14 +157,13 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
     appiumDriver.navigate().to("http://www.google.com");
     String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
         .format(LocalDateTime.now(Clock.systemUTC()));
-    String filePath = AppiumUtilities
-        .savePageSource(appiumDriver, testObject, fileLogger.getDirectory(),
-            StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
+    String filePath = AppiumUtilities.savePageSource(appiumDriver, testObject, fileLogger.getDirectory(),
+        StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
 
     // Assert File Path returned from Screenshot is the same as expected file path.
-    Assert.assertEquals(filePath, Paths.get(StringProcessor
-        .safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime,
-            ".txt")).normalize().toString());
+    Assert.assertEquals(filePath, Paths.get(
+        StringProcessor.safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime, ".txt"))
+        .normalize().toString());
   }
 
   /**
