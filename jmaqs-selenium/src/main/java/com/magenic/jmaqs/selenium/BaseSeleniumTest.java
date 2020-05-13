@@ -35,8 +35,9 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
    * Sets web driver.
    *
    * @param webDriver the web driver
+   * @throws Exception
    */
-  public void setWebDriver(WebDriver webDriver) {
+  public void setWebDriver(WebDriver webDriver) throws Exception {
     this.getTestObject().setWebDriver(webDriver);
   }
 
