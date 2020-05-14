@@ -11,8 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTestObject> {
 
-  private static final long serialVersionUID = 1;
-
   /**
    * Removes the entry for a key only if currently mapped to a given value.
    *
