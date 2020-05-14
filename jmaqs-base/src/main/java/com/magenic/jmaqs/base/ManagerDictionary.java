@@ -12,8 +12,6 @@ import java.util.Map;
  */
 public class ManagerDictionary extends HashMap<String, DriverManager<?>> implements AutoCloseable {
 
-  private static final long serialVersionUID = 1;
-
   @Override
   public void close() {
     this.clear();
