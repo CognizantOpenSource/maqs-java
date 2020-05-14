@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.utilities.helper;
 
+import com.magenic.jmaqs.utilities.helper.exceptions.FrameworkConfigurationException;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -68,7 +69,7 @@ public final class Config {
       overrideConfig = new XMLConfiguration();
       overrideConfig.setSynchronizer(new ReadWriteSynchronizer());
     } catch (ConfigurationException exception) {
-      throw new RuntimeException(StringProcessor
+      throw new FrameworkConfigurationException(StringProcessor
           .safeFormatter("Exception creating the xml configuration object from the file : %s", exception));
     }
   }
