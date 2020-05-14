@@ -31,7 +31,7 @@ public final class Config {
   /**
    * The default section MagenicMaqs.
    */
-  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MagenicMaqs;
+  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MAGENIC_MAQS;
 
   /**
    * The default config.xml file name.

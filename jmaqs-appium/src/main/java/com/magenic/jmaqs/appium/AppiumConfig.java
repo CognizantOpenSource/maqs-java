@@ -22,12 +22,12 @@ public class AppiumConfig {
   /**
    * The appium configuration section.
    */
-  private static final ConfigSection APPIUM_SECTION = ConfigSection.AppiumMaqs;
+  private static final ConfigSection APPIUM_SECTION = ConfigSection.APPIUM_MAQS;
 
   /**
    * The appium capabilities configuration section.
    */
-  private static final ConfigSection APPIUM_CAPS_SECTION = ConfigSection.AppiumCapsMaqs;
+  private static final ConfigSection APPIUM_CAPS_SECTION = ConfigSection.APPIUM_CAPS_MAQS;
 
   private AppiumConfig() {
 

@@ -69,13 +69,13 @@ public class UIWait {
    * @param driver WebDriver
    */
   public UIWait(WebDriver driver) {
-    this(driver, Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserTimeout", "30000")),
-        Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserWaitTime", "1000")), null);
+    this(driver, Integer.parseInt(Config.getValueForSection(ConfigSection.SELENIUM_MAQS, "BrowserTimeout", "30000")),
+        Integer.parseInt(Config.getValueForSection(ConfigSection.SELENIUM_MAQS, "BrowserWaitTime", "1000")), null);
   }
 
   public UIWait(WebDriver driver, WebDriverWait waitDriver) {
-    this(driver, Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserTimeout", "30000")),
-        Integer.parseInt(Config.getValueForSection(ConfigSection.SeleniumMaqs, "BrowserWaitTime", "1000")), waitDriver);
+    this(driver, Integer.parseInt(Config.getValueForSection(ConfigSection.SELENIUM_MAQS, "BrowserTimeout", "30000")),
+        Integer.parseInt(Config.getValueForSection(ConfigSection.SELENIUM_MAQS, "BrowserWaitTime", "1000")), waitDriver);
   }
 
   /**
