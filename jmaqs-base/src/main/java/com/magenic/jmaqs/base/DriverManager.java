@@ -86,4 +86,13 @@ public abstract class DriverManager<T> implements AutoCloseable {
 
     return this.baseDriver;
   }
+
+  /**
+   * Gets test object.
+   *
+   * @return the test object
+   */
+  public BaseTestObject getTestObject() {
+    return baseTestObject;
+  }
 }
