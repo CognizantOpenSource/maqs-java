@@ -35,7 +35,7 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
    * Sets web driver.
    *
    * @param webDriver the web driver
-   * @throws Exception
+   * @throws Exception exception
    */
   public void setWebDriver(WebDriver webDriver) throws Exception {
     this.getTestObject().setWebDriver(webDriver);
@@ -73,11 +73,10 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
   @Override
   protected void createNewTestObject() {
     try {
-      this.setTestObject(new SeleniumTestObject(this.getBrowser(), this.createLogger(),
-          this.getFullyQualifiedTestClassName()));
+      this.setTestObject(
+          new SeleniumTestObject(this.getBrowser(), this.createLogger(), this.getFullyQualifiedTestClassName()));
     } catch (Exception e) {
-      getLogger().logMessage(
-          StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }
   }
 }

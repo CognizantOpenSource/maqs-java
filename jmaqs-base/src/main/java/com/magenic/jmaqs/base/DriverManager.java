@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 
 /**
  * The type Driver manager.
+ * @param <T>  Manager of type T
  */
 public abstract class DriverManager<T> implements AutoCloseable {
 
