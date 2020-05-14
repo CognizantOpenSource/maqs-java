@@ -138,6 +138,8 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
+    // the body of the response is given back in JSON
+    // therefore deserialize it to JSON then convert into XML
     String responseEntity = xmlMapper.writeValueAsString(deserializeJson(message, type));
     return xmlMapper.readValue(responseEntity, xmlMapper.getTypeFactory().constructType(type));
   }
