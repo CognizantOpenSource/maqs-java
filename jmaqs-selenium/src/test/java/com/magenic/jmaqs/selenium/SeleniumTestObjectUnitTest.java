@@ -30,6 +30,8 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
     }
     SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
         this.getFullyQualifiedTestClassName());
+
+    defaultBrowser.quit();
     Assert.assertNotNull(testObject, "Checking that selenium test object via driver is not null");
   }
 
@@ -65,6 +67,8 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
         this.getFullyQualifiedTestClassName())) {
       WebDriver webDriver = testObject.getWebDriver();
       Assert.assertNotNull(webDriver, "Checking that selenium driver can be retrieved from test object");
+    } finally {
+      defaultBrowser.quit();
     }
   }
 
@@ -81,6 +85,8 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
         this.getFullyQualifiedTestClassName())) {
       SeleniumDriverManager webManager = testObject.getWebManager();
       Assert.assertNotNull(webManager, "Checking that selenium driver manager can be retrieved from test object");
+    } finally {
+      defaultBrowser.quit();
     }
   }
 
@@ -109,6 +115,8 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
       Assert.assertNotEquals(hashCode, hashCode1,
           String.format("Checking that the selenium driver is not the same as previous version.  First: %d, Second: %d",
               hashCode, hashCode1));
+    } finally {
+      defaultBrowser.quit();
     }
   }
 
@@ -145,6 +153,8 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
       Assert.assertNotEquals(hashCode, hashCode1,
           String.format("Checking that the selenium driver is not the same as previous version.  First: %d, Second: %d",
               hashCode, hashCode1));
+    } finally {
+      defaultBrowser.quit();
     }
   }
 }
