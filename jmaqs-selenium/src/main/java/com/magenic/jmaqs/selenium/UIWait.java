@@ -22,7 +22,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -75,7 +74,8 @@ public class UIWait {
 
   public UIWait(WebDriver driver, WebDriverWait waitDriver) {
     this(driver, Integer.parseInt(Config.getValueForSection(ConfigSection.SELENIUM_MAQS, "BrowserTimeout", "30000")),
-        Integer.parseInt(Config.getValueForSection(ConfigSection.SELENIUM_MAQS, "BrowserWaitTime", "1000")), waitDriver);
+        Integer.parseInt(Config.getValueForSection(ConfigSection.SELENIUM_MAQS, "BrowserWaitTime", "1000")),
+        waitDriver);
   }
 
   /**
@@ -482,7 +482,7 @@ public class UIWait {
    */
   public boolean waitUntilExactText(final By by, final String text, WebDriverWait wait) {
     try {
-      return wait.until((ExpectedCondition<Boolean>) function -> doesTextMatch(by, text));
+      return wait.until(function -> doesTextMatch(by, text));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }
@@ -539,7 +539,7 @@ public class UIWait {
    */
   public boolean waitUntilContainsText(final By by, final String text, WebDriverWait wait) {
     try {
-      return wait.until((ExpectedCondition<Boolean>) function -> doesContainsText(by, text));
+      return wait.until(function -> doesContainsText(by, text));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }
@@ -661,7 +661,7 @@ public class UIWait {
   public boolean waitUntilAttribute(final By by, final String attribute, final String text, WebDriverWait wait,
       final boolean contains) {
     try {
-      return wait.until((ExpectedCondition<Boolean>) f -> attributeMatches(f, by, attribute, text, contains));
+      return wait.until(f -> attributeMatches(f, by, attribute, text, contains));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }
