@@ -2,7 +2,6 @@
  * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
-
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
@@ -50,13 +49,13 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Event Handler.
    */
 
-  //private EventHandler eventHandler;
+  // private EventHandler eventHandler;
 
   /**
    * Event Firing Web Driver.
    */
 
-  //private EventFiringWebDriver eventFiringWebDriver;
+  // private EventFiringWebDriver eventFiringWebDriver;
 
   /**
    * Home button.
@@ -80,8 +79,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * First name text box.
    */
 
-  private By firstNameTextBox = By
-      .cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
+  private By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
 
   /**
    * First checkbox.
@@ -106,20 +104,20 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     WebDriver webDriverWithHandler = getWebDriverWithHandler();
 
     // Use the Event Firing Web Driver to click an element, then get the log text
-    webDriverWithHandler.findElement(this.checkbox).click();
+    webDriverWithHandler.findElement(EventHandlerUnitTest.checkbox).click();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before clicking element"),
         "Expected message to be logged before clicking element.");
-    softAssert.assertTrue(logText.contains("Element clicked"),
-        "Expected message to be logged after clicking element.");
+    softAssert.assertTrue(logText.contains("Element clicked"), "Expected message to be logged after clicking element.");
     softAssert.assertAll();
   }
 
   /**
-   * Test that checks if the correct messages are logged when changing the value of an element.
+   * Test that checks if the correct messages are logged when changing the value
+   * of an element.
    */
 
   @Test(groups = TestCategories.SELENIUM)
@@ -128,7 +126,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriverWithHandler();
 
-    // Use the Event Firing Web Driver to change the value of an element, then get the log text
+    // Use the Event Firing Web Driver to change the value of an element, then get
+    // the log text
     webDriverWithHandler.findElement(this.firstNameTextBox).sendKeys("Change Value");
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
@@ -152,7 +151,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     WebDriver webDriverWithHandler = getWebDriverWithHandler();
 
     // Use the Event Firing Web Driver to find an element, then get the log text
-    webDriverWithHandler.findElement(this.computerPartsList);
+    webDriverWithHandler.findElement(EventHandlerUnitTest.computerPartsList);
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
@@ -165,7 +164,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test that checks if the correct messages are logged when navigating back to the previous page.
+   * Test that checks if the correct messages are logged when navigating back to
+   * the previous page.
    */
 
   @Test(groups = TestCategories.SELENIUM)
@@ -174,8 +174,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriverWithHandler();
 
-    // Use the Event Firing Web Driver to navigate back to a page, then get the log text
-    webDriverWithHandler.findElement(this.home).click();
+    // Use the Event Firing Web Driver to navigate back to a page, then get the log
+    // text
+    webDriverWithHandler.findElement(EventHandlerUnitTest.home).click();
     webDriverWithHandler.navigate().back();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
@@ -189,7 +190,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test that checks if the correct messages are logged when navigating forward to a page.
+   * Test that checks if the correct messages are logged when navigating forward
+   * to a page.
    */
 
   @Test(groups = TestCategories.SELENIUM)
@@ -198,8 +200,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriverWithHandler();
 
-    // Use the Event Firing Web Driver to navigate forward to a page, then get the log text
-    webDriverWithHandler.findElement(this.home).click();
+    // Use the Event Firing Web Driver to navigate forward to a page, then get the
+    // log text
+    webDriverWithHandler.findElement(EventHandlerUnitTest.home).click();
     webDriverWithHandler.navigate().back();
     webDriverWithHandler.navigate().forward();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
@@ -231,13 +234,13 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before Refreshing the page"),
         "Expected message to be logged before refreshing a page.");
-    softAssert.assertTrue(logText.contains("Page refreshed"),
-        "Expected message to be logged after refreshing a page.");
+    softAssert.assertTrue(logText.contains("Page refreshed"), "Expected message to be logged after refreshing a page.");
     softAssert.assertAll();
   }
 
   /**
-   * Test that checks if the correct messages are logged when navigating to a page.
+   * Test that checks if the correct messages are logged when navigating to a
+   * page.
    */
 
   @Test(groups = TestCategories.SELENIUM)
@@ -278,8 +281,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before executing script"),
         "Expected message to be logged before running a script.");
-    softAssert.assertTrue(logText.contains("Script executed"),
-        "Expected message to be logged after running a script.");
+    softAssert.assertTrue(logText.contains("Script executed"), "Expected message to be logged after running a script.");
     softAssert.assertAll();
   }
 
@@ -361,7 +363,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test that checks if the correct messages are logged when getting the text from an element.
+   * Test that checks if the correct messages are logged when getting the text
+   * from an element.
    */
 
   @Test(groups = TestCategories.SELENIUM)
@@ -370,19 +373,19 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriverWithHandler();
 
-    // Use the Event Firing Web Driver to get the text from an element, then get the log text
-    webDriverWithHandler.findElement(this.swaggerLinkBy).getText();
-    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
+    // Use the Event Firing Web Driver to get the text from an element, then get the
+    // log text
+    webDriverWithHandler.findElement(EventHandlerUnitTest.swaggerLinkBy).getText();
+    String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before getting text from element"),
-    "Expected message to be logged before getting text from an element.");
+        "Expected message to be logged before getting text from an element.");
     softAssert.assertTrue(logText.contains("Got element text"),
-    "Expected message to be logged after getting text from an element.");
+        "Expected message to be logged after getting text from an element.");
     softAssert.assertAll();
   }
-
 
   /**
    * Test that checks if the correct messages are logged when taking a screenshot.
@@ -409,7 +412,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Setup the Event Handler and register the Event Firing Web Driver before each test.
+   * Setup the Event Handler and register the Event Firing Web Driver before each
+   * test.
    */
   private EventFiringWebDriver getEventWebDriver() {
     return new EventFiringWebDriver(this.getWebDriver());
@@ -425,7 +429,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    */
   private void navigateToAutomationSiteUrl() {
     getWebDriver().navigate().to(siteAutomationUrl);
-    //getSeleniumWait().waitForPageLoad();
+    // getSeleniumWait().waitForPageLoad();
   }
 
   /**
@@ -447,4 +451,3 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   }
 
 }
-

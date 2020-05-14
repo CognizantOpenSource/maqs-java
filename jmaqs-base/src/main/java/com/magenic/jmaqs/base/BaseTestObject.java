@@ -44,12 +44,12 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * ArrayList of Strings for associated files.
    */
-  private ArrayList<String> associatedFiles;
+  private final ArrayList<String> associatedFiles;
 
   /**
    * The Fully Qualified Test Name.
    */
-  private String fullyQualifiedTestName;
+  private final String fullyQualifiedTestName;
 
   /**
    * Was the object closed.
@@ -71,7 +71,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param logger                 The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
-  public BaseTestObject(Logger logger, String fullyQualifiedTestName) {
+  public BaseTestObject(final Logger logger, final String fullyQualifiedTestName) {
     this.log = logger;
     this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
     this.values = new ConcurrentHashMap<>();
@@ -88,11 +88,11 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param baseTestObject An existing base test object
    */
-  public BaseTestObject(BaseTestObject baseTestObject) {
+  public BaseTestObject(final BaseTestObject baseTestObject) {
     this.log = baseTestObject.getLog();
     this.perfTimerCollection = baseTestObject.getPerfTimerCollection();
-    this.values = (ConcurrentHashMap) baseTestObject.getValues();
-    this.objects = (ConcurrentHashMap) baseTestObject.getObjects();
+    this.values = (ConcurrentHashMap<String, String>) baseTestObject.getValues();
+    this.objects = (ConcurrentHashMap<String, Object>) baseTestObject.getObjects();
     this.managerStore = baseTestObject.getManagerStore();
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = baseTestObject.getFullyQualifiedTestName();
@@ -114,7 +114,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param logger The logger to use
    */
-  public void setLog(Logger logger) {
+  public void setLog(final Logger logger) {
     this.log = logger;
   }
 
@@ -132,7 +132,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param perfTimerCollection Performance Timer Collection
    */
-  public void setPerfTimerCollection(PerfTimerCollection perfTimerCollection) {
+  public void setPerfTimerCollection(final PerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
   }
 
@@ -154,7 +154,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param values Concurrent Hash Map of string key value pairs to use
    */
-  protected void setValues(ConcurrentHashMap<String, String> values) {
+  protected void setValues(final ConcurrentHashMap<String, String> values) {
     this.values = values;
   }
 
@@ -170,9 +170,10 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Sets the Concurrent Hash Map of string key and object value pairs.
    *
-   * @param objects Concurrent Hash Map of string key and object value pairs to use
+   * @param objects Concurrent Hash Map of string key and object value pairs to
+   *                use
    */
-  protected void setObjects(ConcurrentHashMap<String, Object> objects) {
+  protected void setObjects(final ConcurrentHashMap<String, Object> objects) {
     this.objects = objects;
   }
 
@@ -188,9 +189,10 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Sets the Concurrent Hash Map of string key and driver value pairs.
    *
-   * @param managerStore Concurrent Hash Map of string key and driver value pairs to use.
+   * @param managerStore Concurrent Hash Map of string key and driver value pairs
+   *                     to use.
    */
-  protected void setManagerStore(ManagerDictionary managerStore) {
+  protected void setManagerStore(final ManagerDictionary managerStore) {
     this.managerStore = managerStore;
   }
 
@@ -200,7 +202,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param key   The key
    * @param value The value to associate with the key
    */
-  public void setValue(String key, String value) {
+  public void setValue(final String key, final String value) {
     if (this.values.containsKey(key)) {
       this.values.replace(key, value);
     } else {
@@ -214,7 +216,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param key   The key
    * @param value The value to associate with the key
    */
-  public void setObject(String key, Object value) {
+  public void setObject(final String key, final Object value) {
     if (this.objects.containsKey(key)) {
       this.objects.replace(key, value);
     } else {
@@ -228,7 +230,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param <T>           the type parameter
    * @param driverManager the driver manager
    */
-  public <T extends DriverManager> void addDriverManager(T driverManager) {
+  public <T extends DriverManager<?>> void addDriverManager(final T driverManager) {
     this.addDriverManager(driverManager, false);
   }
 
@@ -239,8 +241,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param driverManager    the driver manager
    * @param overrideIfExists the override if exists
    */
-  public <T extends DriverManager> void addDriverManager(T driverManager,
-      boolean overrideIfExists) {
+  public <T extends DriverManager<?>> void addDriverManager(final T driverManager, final boolean overrideIfExists) {
     if (overrideIfExists) {
       this.overrideDriverManager(driverManager.getClass().getTypeName(), driverManager);
     } else {
@@ -254,7 +255,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param key           the key
    * @param driverManager the driver manager
    */
-  public void addDriverManager(String key, DriverManager driverManager) {
+  public void addDriverManager(final String key, final DriverManager<?> driverManager) {
     this.managerStore.put(key, driverManager);
   }
 
@@ -264,7 +265,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param key           the key
    * @param driverManager the driver manager
    */
-  public void overrideDriverManager(String key, DriverManager driverManager) {
+  public void overrideDriverManager(final String key, final DriverManager<?> driverManager) {
     if (this.managerStore.containsKey(key)) {
       this.managerStore.putOrOverride(key, driverManager);
     } else {
@@ -278,7 +279,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param path the path
    * @return the boolean
    */
-  public boolean addAssociatedFile(String path) {
+  public boolean addAssociatedFile(final String path) {
     if (new File(path).exists()) {
       return this.associatedFiles.add(path);
     }
@@ -291,8 +292,8 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param closing the closing
    */
-  //In C#, but might not be necessary
-  public void close(boolean closing) {
+  // In C#, but might not be necessary
+  public void close(final boolean closing) {
     if (!closing) {
       this.close();
     }
@@ -309,11 +310,11 @@ public class BaseTestObject implements AutoCloseable {
 
     this.log.logMessage(MessageType.VERBOSE, "Start dispose");
 
-    for (DriverManager singleDriver : this.managerStore.values()) {
+    for (final DriverManager<?> singleDriver : this.managerStore.values()) {
       if (singleDriver != null) {
         try {
           singleDriver.close();
-        } catch (Exception e) {
+        } catch (final Exception e) {
           e.printStackTrace();
         }
       }
@@ -330,7 +331,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param path the path
    * @return the boolean
    */
-  public boolean removeAssociatedFile(String path) {
+  public boolean removeAssociatedFile(final String path) {
     return this.associatedFiles.remove(path);
   }
 
@@ -349,7 +350,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param path the path
    * @return the boolean
    */
-  public boolean containsAssociatedFile(String path) {
+  public boolean containsAssociatedFile(final String path) {
     return this.associatedFiles.contains(path);
   }
 }

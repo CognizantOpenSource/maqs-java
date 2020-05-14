@@ -33,7 +33,7 @@ public class ConfigUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void addTestSettingValuesNewSectionTest() {
-    HashMap<String, String> newValueMap = new HashMap();
+    HashMap<String, String> newValueMap = new HashMap<String, String>();
     newValueMap.put("BROWSER1", "CHROME1");
     newValueMap.put("DBString2", "Dbstring2222");
 
@@ -47,7 +47,7 @@ public class ConfigUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void addGeneralTestSettingValuesOverrideValuesTest() {
-    HashMap<String, String> newValueMap = new HashMap();
+    HashMap<String, String> newValueMap = new HashMap<String, String>();
     newValueMap.put("BrowserOverride", "CHROME");
     newValueMap.put("TimeoutOverride", "13333333");
 
@@ -61,20 +61,22 @@ public class ConfigUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void addGeneralTestSettingValuesDontOverrideValuesTest() {
-    HashMap<String, String> newValueMap = new HashMap();
+    HashMap<String, String> newValueMap = new HashMap<String, String>();
     newValueMap.put("DontBrowserOverride", "CHROME");
     newValueMap.put("DontTimeoutOverride", "13333333");
 
-    HashMap<String, String> newValueMapTwo = new HashMap();
+    HashMap<String, String> newValueMapTwo = new HashMap<String, String>();
     newValueMapTwo.put("DontBrowserOverride", "IE");
     newValueMapTwo.put("DontTimeoutOverride", "5555");
 
-    // add values to the override config since the values don't exist in the override config
+    // add values to the override config since the values don't exist in the
+    // override config
     Config.addGeneralTestSettingValues(newValueMap, false);
     Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "CHROME");
     Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "13333333");
 
-    // don't add the values to the override config since the values do exist in the override config
+    // don't add the values to the override config since the values do exist in the
+    // override config
     Config.addGeneralTestSettingValues(newValueMapTwo, false);
     Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "CHROME");
     Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "13333333");
@@ -100,10 +102,8 @@ public class ConfigUnitTest {
   @Test(groups = TestCategories.UTILITIES)
   public void getValueForSectionTest() {
     Assert.assertEquals(Config.getValueForSection("SeleniumMaqs", "TestKey"), "testValueTwo");
-    Assert.assertEquals(Config.getValueForSection(ConfigSection.SeleniumMaqs, "Browser"),
-        "Internet Explorer");
-    Assert.assertEquals(Config.getValueForSection("SeleniumMaqs", "nonExistentKey", "defaultValue"),
-        "defaultValue");
+    Assert.assertEquals(Config.getValueForSection(ConfigSection.SeleniumMaqs, "Browser"), "Internet Explorer");
+    Assert.assertEquals(Config.getValueForSection("SeleniumMaqs", "nonExistentKey", "defaultValue"), "defaultValue");
   }
 
   /**

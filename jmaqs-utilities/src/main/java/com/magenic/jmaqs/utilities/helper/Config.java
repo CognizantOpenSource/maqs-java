@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
@@ -20,7 +21,7 @@ import org.apache.commons.configuration2.sync.ReadWriteSynchronizer;
 public final class Config {
 
   private Config() {
-    //Private constructor
+    // Private constructor
   }
 
   /**
@@ -90,7 +91,7 @@ public final class Config {
    * @return A HashMap of the values in the section
    */
   public static Map<String, String> getSection(String section) {
-    HashMap<String, String> sectionValues = new HashMap();
+    HashMap<String, String> sectionValues = new HashMap<>();
 
     // first parse the override config
     Iterator<String> overridePaths = overrideConfig.getKeys(section);
@@ -223,7 +224,8 @@ public final class Config {
    * Get the configuration value for a specific key. Does not assume a section.
    *
    * @param key The key
-   * @return The configuration value - Returns the empty string if the key is not found
+   * @return The configuration value - Returns the empty string if the key is not
+   *         found
    */
   public static String getValue(String key) {
     String retVal = overrideConfig.getString(key, "");
@@ -235,7 +237,8 @@ public final class Config {
    *
    * @param key          The key
    * @param defaultValue Value to return if the key does not exist
-   * @return The configuration value - Returns the default string if the key is not found
+   * @return The configuration value - Returns the default string if the key is
+   *         not found
    */
   public static String getValue(String key, String defaultValue) {
     String retVal = getValue(key);

@@ -20,7 +20,7 @@ public abstract class DriverManager<T> implements AutoCloseable {
   /**
    * The Base driver.
    */
-  protected Object baseDriver;
+  protected T baseDriver;
 
   /**
    * The Get driver.
@@ -43,7 +43,7 @@ public abstract class DriverManager<T> implements AutoCloseable {
    *
    * @return the base driver
    */
-  public Object getBaseDriver() {
+  public T getBaseDriver() {
     return baseDriver;
   }
 
@@ -52,7 +52,7 @@ public abstract class DriverManager<T> implements AutoCloseable {
    *
    * @param baseDriver the base driver
    */
-  public void setBaseDriver(Object baseDriver) {
+  public void setBaseDriver(T baseDriver) {
     this.baseDriver = baseDriver;
   }
 
@@ -79,7 +79,7 @@ public abstract class DriverManager<T> implements AutoCloseable {
    *
    * @return the object
    */
-  protected Object getBase() {
+  protected T getBase() {
     if (this.baseDriver == null) {
       this.baseDriver = this.getDriverSupplier.get();
     }

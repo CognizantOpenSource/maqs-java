@@ -6,6 +6,8 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -39,10 +41,13 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   public void testSetWebDriver() throws Exception {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     int hashCode = pageElementsPageModel.getWebDriver().hashCode();
-    pageElementsPageModel.setWebDriver(this.getBrowser());
-    int hashCode1 = pageElementsPageModel.getWebDriver().hashCode();
+    WebDriver drive = this.getBrowser();
 
+    pageElementsPageModel.setWebDriver(drive);
+    int hashCode1 = pageElementsPageModel.getWebDriver().hashCode();
     Assert.assertNotEquals(hashCode, hashCode1);
+
+    drive.quit();
   }
 
   @Test
@@ -62,7 +67,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     LazyWebElement initElem = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator);
     LazyWebElement cachedElem = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator);
 
-      Assert.assertSame(initElem, cachedElem);
+    Assert.assertSame(initElem, cachedElem);
   }
 
   @Test
@@ -71,9 +76,8 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     pageElementsPageModel.open();
     pageElementsPageModel.waitForPageLoad();
     LazyWebElement lazyElement = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator);
-    LazyWebElement storedElement = pageElementsPageModel
-            .getLazyElementStore()
-            .get(pageElementsPageModel.pageTitleLocator.toString());
+    LazyWebElement storedElement = pageElementsPageModel.getLazyElementStore()
+        .get(pageElementsPageModel.pageTitleLocator.toString());
 
     Assert.assertNotNull(lazyElement);
     Assert.assertNotNull(storedElement);
@@ -86,11 +90,10 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     pageElementsPageModel.open();
     pageElementsPageModel.waitForPageLoad();
-    LazyWebElement lazyElement = pageElementsPageModel
-        .getLazyElement(pageElementsPageModel.pageTitleLocator, "Page Title");
-    LazyWebElement storedElement = pageElementsPageModel
-            .getLazyElementStore()
-            .get(pageElementsPageModel.pageTitleLocator.toString() + "Page Title");
+    LazyWebElement lazyElement = pageElementsPageModel.getLazyElement(pageElementsPageModel.pageTitleLocator,
+        "Page Title");
+    LazyWebElement storedElement = pageElementsPageModel.getLazyElementStore()
+        .get(pageElementsPageModel.pageTitleLocator.toString() + "Page Title");
 
     Assert.assertNotNull(lazyElement);
     Assert.assertNotNull(storedElement);
@@ -104,11 +107,10 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     pageElementsPageModel.open();
     pageElementsPageModel.waitForPageLoad();
-    LazyWebElement lazyElement = pageElementsPageModel
-        .getLazyElement(pageElementsPageModel.body, pageElementsPageModel.pageTitleLocator);
-    LazyWebElement storedElement = pageElementsPageModel
-            .getLazyElementStore()
-            .get(pageElementsPageModel.pageTitleLocator.toString());
+    LazyWebElement lazyElement = pageElementsPageModel.getLazyElement(pageElementsPageModel.body,
+        pageElementsPageModel.pageTitleLocator);
+    LazyWebElement storedElement = pageElementsPageModel.getLazyElementStore()
+        .get(pageElementsPageModel.pageTitleLocator.toString());
 
     Assert.assertNotNull(lazyElement);
     Assert.assertNotNull(storedElement);
@@ -121,11 +123,10 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     pageElementsPageModel.open();
     pageElementsPageModel.waitForPageLoad();
-    LazyWebElement lazyElement = pageElementsPageModel
-        .getLazyElement(pageElementsPageModel.body, pageElementsPageModel.pageTitleLocator, "Page Title");
-    LazyWebElement storedElement = pageElementsPageModel
-            .getLazyElementStore()
-            .get(pageElementsPageModel.pageTitleLocator.toString() + "Page Title");
+    LazyWebElement lazyElement = pageElementsPageModel.getLazyElement(pageElementsPageModel.body,
+        pageElementsPageModel.pageTitleLocator, "Page Title");
+    LazyWebElement storedElement = pageElementsPageModel.getLazyElementStore()
+        .get(pageElementsPageModel.pageTitleLocator.toString() + "Page Title");
 
     Assert.assertNotNull(lazyElement);
     Assert.assertNotNull(storedElement);
