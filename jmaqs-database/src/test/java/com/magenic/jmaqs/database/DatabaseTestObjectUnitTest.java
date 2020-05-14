@@ -71,4 +71,18 @@ public class DatabaseTestObjectUnitTest extends BaseGenericTest {
     final int hashCode1 = testObject.getDatabaseManager().hashCode();
     Assert.assertNotEquals(hashCode, hashCode1);
   }
+
+  @Test
+  public void testSetDatabaseManagerWithDriver() {
+    DatabaseDriver databaseDriver = ConnectionFactory.getOpenConnection();
+
+    DatabaseTestObject testObject = new DatabaseTestObject(databaseDriver, this.getLogger(),
+        this.getFullyQualifiedTestClassName());
+    final int hashCode = testObject.getDatabaseManager().hashCode();
+    DatabaseDriverManager databaseDriverManager = new DatabaseDriverManager(ConnectionFactory.getOpenConnection(),
+        testObject);
+    testObject.setDatabaseManager(databaseDriverManager);
+    final int hashCode1 = testObject.getDatabaseManager().hashCode();
+    Assert.assertNotEquals(hashCode, hashCode1);
+  }
 }

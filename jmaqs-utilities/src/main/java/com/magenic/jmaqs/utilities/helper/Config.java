@@ -91,7 +91,7 @@ public final class Config {
    * @return A HashMap of the values in the section
    */
   public static Map<String, String> getSection(String section) {
-    HashMap<String, String> sectionValues = new HashMap<String, String>();
+    HashMap<String, String> sectionValues = new HashMap<>();
 
     // first parse the override config
     Iterator<String> overridePaths = overrideConfig.getKeys(section);

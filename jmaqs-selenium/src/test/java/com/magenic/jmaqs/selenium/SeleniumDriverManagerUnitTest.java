@@ -76,4 +76,14 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
       seleniumDriverManager.logVerbose("Logging verbose messaging");
     }
   }
+
+    /**
+   * Test creating driver manager with instantiated web driver .
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void testDriverManWithInstantiatedDriver() {
+    try (SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver.get(), this.getTestObject())) {
+      seleniumDriverManager.logVerbose("Run with new driver");
+    }
+  }
 }

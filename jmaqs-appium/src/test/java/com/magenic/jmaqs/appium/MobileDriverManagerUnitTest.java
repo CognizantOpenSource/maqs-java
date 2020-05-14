@@ -43,6 +43,16 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
   }
 
   /**
+   * Test close with instantiated driver.
+   */
+  @Test
+  public void testCloseWithInstantiatedDriver() {
+    MobileDriverManager mobileDriverManager = new MobileDriverManager(AppiumDriverFactory.getDefaultMobileDriver(), this.getTestObject());
+    mobileDriverManager.close();
+    Assert.assertNull(mobileDriverManager.getBaseDriver(), "Expected Mobile Driver to be null.");
+  }
+
+  /**
    * Test close null base driver.
    */
   @Test

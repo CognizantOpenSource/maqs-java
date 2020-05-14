@@ -443,7 +443,11 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void testGetChromeDriver() {
     final ChromeOptions defaultChromeOptions = WebDriverFactory.getDefaultChromeOptions();
     final WebDriver chromeDriver = WebDriverFactory.getChromeDriver(defaultChromeOptions);
-    Assert.assertNotNull(chromeDriver);
 
+    try {
+      Assert.assertNotNull(chromeDriver);
+    } finally {
+      chromeDriver.quit();
+    }
   }
 }
