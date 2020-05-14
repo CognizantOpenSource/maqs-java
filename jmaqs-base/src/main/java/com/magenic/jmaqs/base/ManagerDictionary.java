@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.base;
 
+import com.magenic.jmaqs.base.exceptions.ManagerDisposalException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
       try {
         entry.getValue().close();
       } catch (Exception e) {
-        e.printStackTrace();
+        throw new ManagerDisposalException(e);
       }
     }
     super.clear();
@@ -81,7 +82,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
       try {
         this.get(key).close();
       } catch (Exception e) {
-        e.printStackTrace();
+        throw new ManagerDisposalException(e);
       }
     }
 

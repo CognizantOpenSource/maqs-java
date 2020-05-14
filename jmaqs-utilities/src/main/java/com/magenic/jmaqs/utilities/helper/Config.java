@@ -252,7 +252,7 @@ public final class Config {
    * @return True if the key exists, false otherwise
    */
   public static boolean doesKeyExist(String key) {
-    return overrideConfig.containsKey(key) ? true : configValues.containsKey(key);
+    return overrideConfig.containsKey(key) || configValues.containsKey(key);
   }
 
   /**

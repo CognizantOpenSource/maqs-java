@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
+import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
@@ -63,9 +64,9 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
    * Get the current browser.
    *
    * @return Current browser Web Driver
-   * @throws Exception Throws exception
+   * @throws WebDriverFactoryException Throws exception
    */
-  protected WebDriver getBrowser() throws Exception {
+  protected WebDriver getBrowser() throws WebDriverFactoryException {
     // Returns the web driver
     return WebDriverFactory.getDefaultBrowser();
   }
