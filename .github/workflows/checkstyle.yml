@@ -17,4 +17,4 @@ jobs:
         with:
           java-version: 11
       - name: Run Checkstyle
-        run: mvn -B checkstyle:check --file pom.xml -e
+        run: mvn -B validate --file pom.xml -e -fae
