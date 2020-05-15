@@ -1026,7 +1026,7 @@ public class UIWait {
   }
 
   /**
-   * Checks if the text of the elements are equal
+   * Checks if the text of the elements are equal.
    *
    * @param by   Selector to examine
    * @param text Text that is being compared to the selector

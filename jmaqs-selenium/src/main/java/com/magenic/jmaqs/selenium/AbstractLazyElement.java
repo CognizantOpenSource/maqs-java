@@ -26,42 +26,42 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
 /**
- * Abstract structure for dynamically finding and interacting with elements
+ * Abstract structure for dynamically finding and interacting with elements.
  */
 public abstract class AbstractLazyElement {
 
   /**
-   * The index in cases where the selector finds multiple elements
+   * The index in cases where the selector finds multiple elements.
    */
   private final Integer elementIndex;
 
   /**
-   * A user friendly name, for logging purposes
+   * A user friendly name, for logging purposes.
    */
   protected final String userFriendlyName;
 
   /**
-   * The parent lazy element
+   * The parent lazy element.
    */
   protected LazyWebElement parent;
 
   /**
-   * The 'by' selector for the element
+   * The 'by' selector for the element.
    */
   protected By by;
 
   /**
-   * The test object for the element
+   * The test object for the element.
    */
   protected SeleniumTestObject testObject;
 
   /**
-   * Cached copy of the element or null if we haven't already found the element
+   * Cached copy of the element or null if we haven't already found the element.
    */
   private WebElement cachedElement;
 
   /**
-   * Initializes a new instance of the {@link #AbstractLazyElement} class
+   * Initializes a new instance of the {@link #AbstractLazyElement} class.
    *
    * @param testObject       The selenium test object
    * @param locator          The by locator to search on
@@ -75,7 +75,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Initializes a new instance of the {@link #AbstractLazyElement} class
+   * Initializes a new instance of the {@link #AbstractLazyElement} class.
    *
    * @param parent           The parent lazy element
    * @param locator          The by locator to search on
@@ -90,7 +90,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Initializes a new instance of the {@link #AbstractLazyElement} class
+   * Initializes a new instance of the {@link #AbstractLazyElement} class.
    *
    * @param parent           The parent lazy element
    * @param locator          THe by locator to search on
@@ -109,7 +109,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the by selector
+   * Gets the by selector.
    *
    * @return the by
    */
@@ -118,7 +118,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the cached element
+   * Gets the cached element.
    *
    * @return the cachedElement
    */
@@ -127,7 +127,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Sets the cached Element
+   * Sets the cached Element.
    *
    * @param cachedElementFactory the cachedElement function to set
    *                             the cached element
@@ -137,7 +137,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the user friendly name
+   * Gets the user friendly name.
    *
    * @return the userFriendlyName
    */
@@ -146,7 +146,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the parent of the lazy element
+   * Gets the parent of the lazy element.
    *
    * @return the parent
    */
@@ -155,7 +155,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the test object
+   * Gets the test object.
    *
    * @return the test object
    */
@@ -164,7 +164,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the tag name of the lazy element
+   * Gets the tag name of the lazy element.
    *
    * @return The tag name
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -177,7 +177,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the lazy element's text
+   * Gets the lazy element's text.
    *
    * @return The element text
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -190,7 +190,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the lazy element's location
+   * Gets the lazy element's location.
    *
    * @return the location as a Point
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -203,7 +203,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the lazy element's size
+   * Gets the lazy element's size.
    *
    * @return The lazy element's size
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -216,7 +216,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Click the lazy element
+   * Click the lazy element.
    *
    * @throws TimeoutException         If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException     If the thread is interrupted while waiting for the element to be found
@@ -230,7 +230,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Send Secret keys with no logging
+   * Send Secret keys with no logging.
    *
    * @param keys the secret keys
    * @throws ExecutionFailedException If error occurs while sending keys
@@ -256,7 +256,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Clear the lazy element
+   * Clear the lazy element.
    *
    * @throws TimeoutException         If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException     If the thread is interrupted while waiting for the element to be found
@@ -270,7 +270,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Submit the lazy element
+   * Submit the lazy element.
    *
    * @throws TimeoutException         If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException     If the thread is interrupted while waiting for the element to be found
@@ -284,7 +284,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the value for the given attribute
+   * Gets the value for the given attribute.
    *
    * @param attributeName The name of the attribute
    * @return The attribute
@@ -298,7 +298,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the current value of an element - Useful for get input box text
+   * Gets the current value of an element - Useful for get input box text.
    *
    * @return The value attribute
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -311,7 +311,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the CSS value for the given attribute
+   * Gets the CSS value for the given attribute.
    *
    * @param propertyName The property name
    * @return the css value for the property
@@ -325,7 +325,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Wait for and get the visible web element
+   * Wait for and get the visible web element.
    *
    * @return The visible web element
    */
@@ -356,7 +356,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Wait for and get the click-able web element
+   * Wait for and get the click-able web element.
    *
    * @return The click-able web element
    */
@@ -385,7 +385,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Waits for and gets the existing web element
+   * Waits for and gets the existing web element.
    *
    * @return The existing web element
    */
@@ -440,7 +440,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Sends the keys to the element
+   * Sends the keys to the element.
    *
    * @param keysToSend The keys being sent to the element
    * @throws TimeoutException         If a timeout occurred while waiting for the element to be found
@@ -464,7 +464,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * If the Element is selected
+   * If the Element is selected.
    *
    * @return If the element is selected
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -477,7 +477,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * If the element is enabled
+   * If the element is enabled.
    *
    * @return If the element is enabled
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -490,7 +490,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * If the element is displayed
+   * If the element is displayed.
    *
    * @return If the element is displayed
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -503,7 +503,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the rectangle value that highlights the lazy element location
+   * Gets the rectangle value that highlights the lazy element location.
    *
    * @return The location and size of the element
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -514,7 +514,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the screenshot as the target type
+   * Gets the screenshot as the target type.
    *
    * @param target The target output type
    * @return The type to get the screenshot as
@@ -526,7 +526,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Returns a string that represents the current object
+   * Returns a string that represents the current object.
    *
    * @return the lazy element string
    */
@@ -545,7 +545,7 @@ public abstract class AbstractLazyElement {
 
   /**
    * Gets a web element using the provided factory if the cached element is
-   * null or if the cached element is stale
+   * null or if the cached element is stale.
    *
    * @param getElement The function that gets the element
    * @return The web element
@@ -579,7 +579,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Execute an element action
+   * Execute an element action.
    *
    * @param elementAction the element action
    * @param caller        Text to identify the caller function
@@ -601,7 +601,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the element at the indexed value
+   * Gets the element at the indexed value.
    *
    * @param matchesState  The predicate to see that the element found at the index matches the state
    *                      we expect
@@ -624,7 +624,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Checks if the element exists
+   * Checks if the element exists.
    *
    * @return If the element exists in the current page state
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found

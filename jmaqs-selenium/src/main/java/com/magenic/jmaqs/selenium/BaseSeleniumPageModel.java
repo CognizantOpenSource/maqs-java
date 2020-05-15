@@ -17,17 +17,17 @@ import org.openqa.selenium.WebDriver;
 public abstract class BaseSeleniumPageModel {
 
   /**
-   * The lazy Element store
+   * The lazy Element store.
    */
   private final HashMap<String, LazyWebElement> lazyElementStore;
 
   /**
-   * The selenium test object
+   * The selenium test object.
    */
   private final SeleniumTestObject testObject;
 
   /**
-   * The web driver
+   * The web driver.
    */
   private WebDriver webDriver;
 
@@ -52,7 +52,7 @@ public abstract class BaseSeleniumPageModel {
   }
 
   /**
-   * Gets the lazy element store
+   * Gets the lazy element store.
    *
    * @return The lazy element store
    */
@@ -88,7 +88,7 @@ public abstract class BaseSeleniumPageModel {
   }
 
   /**
-   * Gets the per timer collection
+   * Gets the per timer collection.
    *
    * @return The perf timer colection
    */
@@ -104,7 +104,7 @@ public abstract class BaseSeleniumPageModel {
   public abstract boolean isPageLoaded();
 
   /**
-   * Waits for the page to load
+   * Waits for the page to load.
    */
   public void waitForPageLoad() {
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();

@@ -11,12 +11,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * Driver for dynamically finding and interacting with elements
+ * Driver for dynamically finding and interacting with elements.
  */
 public class LazyWebElement extends AbstractLazyElement {
 
   /**
-   * Initializes a new instance of the {@link #LazyWebElement} class
+   * Initializes a new instance of the {@link #LazyWebElement} class.
    *
    * @param testObject       The selenium test object
    * @param locator          The by locator to search on
@@ -27,7 +27,7 @@ public class LazyWebElement extends AbstractLazyElement {
   }
 
   /**
-   * Initializes a new instance of the {@link #LazyWebElement} class
+   * Initializes a new instance of the {@link #LazyWebElement} class.
    *
    * @param parent           The parent lazy element
    * @param locator          The by locator to search on
@@ -38,7 +38,7 @@ public class LazyWebElement extends AbstractLazyElement {
   }
 
   /**
-   * Initializes a new instance of the {@link #LazyWebElement} class
+   * Initializes a new instance of the {@link #LazyWebElement} class.
    *
    * @param parent           The parent lazy element
    * @param locator          THe by locator to search on
@@ -52,7 +52,7 @@ public class LazyWebElement extends AbstractLazyElement {
   }
 
   /**
-   * Find the WebElement using the by and then maps it to the LazyWebElement
+   * Find the WebElement using the by and then maps it to the LazyWebElement.
    *
    * @param locator The by locator
    * @return The LazyWebElement of the element found
@@ -65,7 +65,7 @@ public class LazyWebElement extends AbstractLazyElement {
   }
 
   /**
-   * Find the collection of WebElements and then map them to LazyWebElements
+   * Find the collection of WebElements and then map them to LazyWebElements.
    *
    * @param locator The by locator
    * @return The collection of WebElements mapped to LazyWebElements

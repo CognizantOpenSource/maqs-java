@@ -20,12 +20,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class UIWaitFactory {
 
   /**
-   * the collection of wait objects
+   * the collection of wait objects.
    */
   private static ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection = new ConcurrentHashMap<>();
 
   /**
-   * private constructor so class can't be instantiated
+   * private constructor so class can't be instantiated.
    */
   private UIWaitFactory() {
   }
@@ -59,7 +59,7 @@ public class UIWaitFactory {
   }
 
   /**
-   * Gets the WebDriverWait for building the UIWait object
+   * Gets the WebDriverWait for building the UIWait object.
    *
    * @param searchContext The search context
    * @return The WebDriverWait
@@ -77,7 +77,7 @@ public class UIWaitFactory {
   }
 
   /**
-   * Adds the waitDriver to the collection
+   * Adds the waitDriver to the collection.
    *
    * @param driver     The web driver
    * @param waitDriver the Wait object
@@ -89,7 +89,7 @@ public class UIWaitFactory {
   }
 
   /**
-   * Removes the waitDriver from the collection
+   * Removes the waitDriver from the collection.
    *
    * @param driver the web driver
    */
