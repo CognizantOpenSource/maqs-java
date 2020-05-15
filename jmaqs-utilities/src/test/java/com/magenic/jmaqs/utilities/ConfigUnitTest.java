@@ -7,9 +7,7 @@ package com.magenic.jmaqs.utilities;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-
 import java.util.HashMap;
-
 import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -23,7 +21,7 @@ public class ConfigUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void getSectionWithConfigSecEnumTest() {
-    Map<String, String> testSection = Config.getSection(ConfigSection.SeleniumMaqs);
+    Map<String, String> testSection = Config.getSection(ConfigSection.SELENIUM_MAQS);
     Assert.assertEquals(testSection.get("TestKey"), "testValueTwo");
     Assert.assertEquals(testSection.get("Browser"), "Internet Explorer");
   }
@@ -102,7 +100,7 @@ public class ConfigUnitTest {
   @Test(groups = TestCategories.UTILITIES)
   public void getValueForSectionTest() {
     Assert.assertEquals(Config.getValueForSection("SeleniumMaqs", "TestKey"), "testValueTwo");
-    Assert.assertEquals(Config.getValueForSection(ConfigSection.SeleniumMaqs, "Browser"), "Internet Explorer");
+    Assert.assertEquals(Config.getValueForSection(ConfigSection.SELENIUM_MAQS, "Browser"), "Internet Explorer");
     Assert.assertEquals(Config.getValueForSection("SeleniumMaqs", "nonExistentKey", "defaultValue"), "defaultValue");
   }
 
@@ -122,7 +120,7 @@ public class ConfigUnitTest {
   public void doesKeyExistTest() {
     Assert.assertTrue(Config.doesKeyExist("SeleniumMaqs.TestKey"));
     Assert.assertTrue(Config.doesGeneralKeyExist("TimeoutOverride"));
-    Assert.assertTrue(Config.doesKeyExist("HubAddress", ConfigSection.SeleniumMaqs));
-    Assert.assertFalse(Config.doesKeyExist("HubAddress", ConfigSection.MagenicMaqs));
+    Assert.assertTrue(Config.doesKeyExist("HubAddress", ConfigSection.SELENIUM_MAQS));
+    Assert.assertFalse(Config.doesKeyExist("HubAddress", ConfigSection.MAGENIC_MAQS));
   }
 }

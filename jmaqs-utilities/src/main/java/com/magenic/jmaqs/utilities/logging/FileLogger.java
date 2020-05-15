@@ -20,7 +20,7 @@ import java.nio.file.Paths;
 public class FileLogger extends Logger {
 
   /**
-   * Default extension type
+   * Default extension type.
    */
   private static final String TXT = ".txt";
 

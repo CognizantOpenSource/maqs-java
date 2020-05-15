@@ -4,11 +4,11 @@
 
 package com.magenic.jmaqs.utilities.helper;
 
+import com.magenic.jmaqs.utilities.helper.exceptions.FrameworkConfigurationException;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
@@ -32,7 +32,7 @@ public final class Config {
   /**
    * The default section MagenicMaqs.
    */
-  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MagenicMaqs;
+  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MAGENIC_MAQS;
 
   /**
    * The default config.xml file name.
@@ -69,7 +69,7 @@ public final class Config {
       overrideConfig = new XMLConfiguration();
       overrideConfig.setSynchronizer(new ReadWriteSynchronizer());
     } catch (ConfigurationException exception) {
-      throw new RuntimeException(StringProcessor
+      throw new FrameworkConfigurationException(StringProcessor
           .safeFormatter("Exception creating the xml configuration object from the file : %s", exception));
     }
   }
@@ -252,7 +252,7 @@ public final class Config {
    * @return True if the key exists, false otherwise
    */
   public static boolean doesKeyExist(String key) {
-    return overrideConfig.containsKey(key) ? true : configValues.containsKey(key);
+    return overrideConfig.containsKey(key) || configValues.containsKey(key);
   }
 
   /**

@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright 2020 (C) Magenic, All rights Reserved
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -277,7 +281,7 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven-deploy-plugin.version}</version>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${mvncheckstyle.plugin.version}</version>
@@ -297,7 +301,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <failOnWarnings>false</failOnWarnings>
-                    <failOnError>true</failOnError>
+                            <failOnError>true</failOnError>
                             <configLocation>maqs_checks.xml</configLocation>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <consoleOutput>true</consoleOutput>
@@ -306,7 +310,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 </project>

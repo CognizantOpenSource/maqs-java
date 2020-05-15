@@ -20,14 +20,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-/*
-FIXME:  Commenting out tests until repaired.  All failing for same general casting issue.
-FIXME: java.lang.ClassCastException: com.magenic.jmaqs.utilities.logging.ConsoleLogger
- cannot be cast to com.magenic.jmaqs.utilities.logging.FileLogger at
- com.magenic.jmaqs.selenium.EventHandlerUnitTest.eventHandlerSwitchWindow
- (EventHandlerUnitTest.java:253)
-*/
-
 /**
  * Unit tests for EventHandler class.
  */
@@ -44,18 +36,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    */
 
   private static String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
-   * Event Handler.
-   */
-
-  // private EventHandler eventHandler;
-
-  /**
-   * Event Firing Web Driver.
-   */
-
-  // private EventFiringWebDriver eventFiringWebDriver;
 
   /**
    * Home button.
@@ -158,8 +138,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before finding element By"),
         "Expected message to be logged before clicking element.");
-    softAssert.assertTrue(logText.contains("Found element By"),
-        "Expected message to be logged after clicking element.");
+    softAssert
+        .assertTrue(logText.contains("Found element By"), "Expected message to be logged after clicking element.");
     softAssert.assertAll();
   }
 
@@ -305,8 +285,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before switching to window"),
         "Expected message to be logged before switching windows.");
-    softAssert.assertTrue(logText.contains("Switched to window"),
-        "Expected message to be logged after switching windows.");
+    softAssert
+        .assertTrue(logText.contains("Switched to window"), "Expected message to be logged after switching windows.");
     softAssert.assertAll();
   }
 
@@ -331,8 +311,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before accepting the alert"),
         "Expected message to be logged before accepting an alert.");
-    softAssert.assertTrue(logText.contains("Alert accepted"),
-        "Expected message to be logged after accepting an alert.");
+    softAssert
+        .assertTrue(logText.contains("Alert accepted"), "Expected message to be logged after accepting an alert.");
     softAssert.assertAll();
   }
 
@@ -357,8 +337,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before dismissing the alert"),
         "Expected message to be logged before dismissing an alert.");
-    softAssert.assertTrue(logText.contains("Alert dismissed"),
-        "Expected message to be logged after dismissing an alert.");
+    softAssert
+        .assertTrue(logText.contains("Alert dismissed"), "Expected message to be logged after dismissing an alert.");
     softAssert.assertAll();
   }
 

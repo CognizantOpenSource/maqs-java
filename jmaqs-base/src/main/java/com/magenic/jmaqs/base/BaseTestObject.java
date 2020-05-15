@@ -4,6 +4,8 @@
 
 package com.magenic.jmaqs.base;
 
+import com.magenic.jmaqs.base.exceptions.DriverDisposalException;
+import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
@@ -315,7 +317,7 @@ public class BaseTestObject implements AutoCloseable {
         try {
           singleDriver.close();
         } catch (final Exception e) {
-          e.printStackTrace();
+          throw new DriverDisposalException(StringProcessor.safeFormatter("Unable to properly dispose of driver"), e);
         }
       }
       this.managerStore = null;
