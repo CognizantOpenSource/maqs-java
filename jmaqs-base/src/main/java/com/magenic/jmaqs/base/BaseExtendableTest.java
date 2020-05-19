@@ -29,8 +29,9 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
 
   @Override
   public void setTestObject(BaseTestObject baseTestObject) {
-
-    if (this.baseTestObjects.putIfAbsent(this.getFullyQualifiedTestClassName(), baseTestObject) == null) {
+    if (!this.baseTestObjects.containsKey(this.getFullyQualifiedTestClassName())) {
+      this.baseTestObjects.put(this.getFullyQualifiedTestClassName(), baseTestObject);
+    } else {
       this.baseTestObjects.replace(this.getFullyQualifiedTestClassName(), baseTestObject);
     }
   }
