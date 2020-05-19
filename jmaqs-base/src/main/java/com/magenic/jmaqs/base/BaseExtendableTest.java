@@ -27,15 +27,6 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
     return (T) super.getTestObject();
   }
 
-  @Override
-  public void setTestObject(BaseTestObject baseTestObject) {
-    if (!this.baseTestObjects.containsKey(this.getFullyQualifiedTestClassName())) {
-      this.baseTestObjects.put(this.getFullyQualifiedTestClassName(), baseTestObject);
-    } else {
-      this.baseTestObjects.replace(this.getFullyQualifiedTestClassName(), baseTestObject);
-    }
-  }
-
   @BeforeMethod
   @Override
   public void setup(Method method, ITestContext testContext) {
