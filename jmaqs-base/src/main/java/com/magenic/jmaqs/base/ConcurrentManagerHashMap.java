@@ -81,7 +81,7 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
    * @param key Key of the item to close
    */
   private void closeForKey(Object key) {
-    if (super.contains(key)) {
+    if (super.containsKey(key)) {
       super.get(key).close();
     }
   }
