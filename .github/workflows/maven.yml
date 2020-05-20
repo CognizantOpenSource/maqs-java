@@ -11,10 +11,12 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
-
     steps:
+      - name: Lockdown CI Security
+        uses: InstaCode/lockdown@v1
+        with:
+          users: jason-edstrom, dependabot-preview 
       - uses: actions/checkout@v2
       - name: Set up JDK 11
         uses: actions/setup-java@v1
