@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> SeleniumConfig
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> SeleniumConfig
 
 ## Overview
 The SeleniumConfig class is used to get values from the SeleniumMaqs section of your test run properties.

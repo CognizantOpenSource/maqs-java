@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Configuration
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Configuration
 
 ## Overview
 The AppiumConfig class is used to get values from the AppiumMaqs section of your test run properties.

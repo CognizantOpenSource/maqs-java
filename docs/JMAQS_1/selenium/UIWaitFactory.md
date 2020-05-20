@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> UIWaitFactory
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> UIWaitFactory
 
 ## Overview
 Factory class that is used for creating and maintaining a thread-safe collection of wait drivers.

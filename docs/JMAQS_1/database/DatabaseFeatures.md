@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Database Features
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Database Features
 
 ## Overview
 JMAQS provides support for testing database applications.  	

@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> SeleniumDriverManager
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> SeleniumDriverManager
 
 ## Overview
 Manages the Selenium Driver.

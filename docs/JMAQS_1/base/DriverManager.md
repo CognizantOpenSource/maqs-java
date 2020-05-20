@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Driver Manager
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Driver Manager
 
 ## Overview
 The DriverManager has overreach of te BaseTestObject and the BaseDriver.

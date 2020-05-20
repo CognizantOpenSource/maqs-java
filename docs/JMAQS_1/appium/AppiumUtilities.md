@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Utilities
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Utilities
 
 ## Overview
 The Appium Utilities class is a utility class for working with Appium

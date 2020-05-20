@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Selenium Utilities
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Selenium Utilities
 
 ## Overview
 The SeleniumUtilities class is a utility class for working with Selenium

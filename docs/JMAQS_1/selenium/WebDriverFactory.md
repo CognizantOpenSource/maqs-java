@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> WebDriverFactory
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> WebDriverFactory
 
 ## Overview
 Factory class that is used for Web driver configuration.

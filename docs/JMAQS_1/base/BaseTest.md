@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Base Test
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Base Test
 The BaseTest class provides access to the TestObject and DriverManager.
 
 ## Overview

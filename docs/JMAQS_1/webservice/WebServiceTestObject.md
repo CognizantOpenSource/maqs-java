@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Web Service Test Object
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Web Service Test Object
 
 ## Overview
 Takes care of the base test context data.

@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> EventHandler
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> EventHandler
 
 ## Overview
 This class provides additional helper methods on top of Selenium's base interaction methods for common operations done when interacting with HTML element events.

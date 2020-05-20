@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Base Extendable Test
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Base Extendable Test
 
 ## Overview
 The Base Extendable Test is the base code for classes that work with test objects (web drivers, Database connections).

@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Features
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Features
 
 ## Overview
 JMAQS provides support for testing mobile applictions.  	

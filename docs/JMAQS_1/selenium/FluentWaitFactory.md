@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> FluentWaitFactory
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> FluentWaitFactory
 This factory is a handler of fluent wait objects.
 
 ## GetNewElementFluentWait
