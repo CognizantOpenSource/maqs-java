@@ -1,7 +1,7 @@
 # <img src="resources/jmaqslogo.jpg" height="32" width="32"> Mobile Driver Manager
 
 ## Overview
-The Mobile Driver Manager has overreach of the Base Driver Manager.
+The Mobile Driver Manager gets and closes the appium driver.
 
 ## GetMobileDriver
 Get the Appium driver

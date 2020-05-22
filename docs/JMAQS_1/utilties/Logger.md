@@ -46,7 +46,7 @@ CompositeUnitTests.Base.CanRunTest - 2018-08-07-02-01-28-3500.html
 ```
 
 ### Logging without MessageTypes
-Messages that don't provide MessageTypes are categorized as generic messages.*
+Messages that don't provide MessageTypes are categorized as generic messages.  
 ##### Written As
 
 ```java

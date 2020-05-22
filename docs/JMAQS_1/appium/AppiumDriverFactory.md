@@ -1,7 +1,7 @@
 # <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Driver Factory
 
 ## Overview
-Takes care of the base test context data.
+Takes care of the Appium driver set up, teardown and optimization.
 
 [GetDefaultMobileDriver](#GetDefaultMobileDriver)  
 [GetDefaultMobileOptions](#GetDefaultMobileOptions)  

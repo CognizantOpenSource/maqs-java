@@ -15,7 +15,7 @@ public class AppiumTestObject
 ```
 
 ## Overview
-Takes care of the base test context data.
+Takes care of setup, teardown, and management of the appium driver.
 
 [GetAppiumDriver](#GetAppiumDriver)  
 [SetAppiumDriver](#SetAppiumDriver)  

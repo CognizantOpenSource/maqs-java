@@ -1,7 +1,7 @@
 # <img src="resources/jmaqslogo.jpg" height="32" width="32"> Base Web Service Test
 
 ## Overview
-The BaseEmailTest class provides access to the EmailTestObject and EmailDriver.
+The Base Web Service Test class provides access to the WebService TestObject and Web Service Driver.
 
 # Available calls
 [GetWebServiceDriver](#GetWebServiceDriver)  
