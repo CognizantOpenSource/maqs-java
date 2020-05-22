@@ -12,7 +12,7 @@
 
 	- ii. Utilities
 		- [i. Helper](JMAQS_1/ComingSoon.md)
-		- [ii. Logger](JMAQS_1/Logger.md)
+		- [ii. Logger](JMAQS_1/utilties/Logger.md)
 		- [iii. Performance](JMAQS_1/ComingSoon.md)
 
 	- iii. Selenium
@@ -22,7 +22,7 @@
         - [iv. Config](JMAQS_1/Selenium/SeleniumConfig.md)
         - [v. Utilities](JMAQS_1/Selenium/SeleniumUtilities.md)
         - [vi. Driver Manager](JMAQS_1/Selenium/SeleniumDriverManager.md)
-        - [vii. Lazy Element](JMAQS_1/Selenium/ComingSoon.md)
+        - [vii. Lazy Element](JMAQS_1/ComingSoon.md)
         - [viii. Find](JMAQS_1/Selenium/UIFind.md)
         - [ix. Waits](JMAQS_1/Selenium/UIWait.md)
         - [x. Event Handler](JMAQS_1/Selenium/EventHandler.md)
@@ -45,15 +45,15 @@
         - [viii. FAQ](JMAQS_1/Appium/AppiumFAQ.md)
 
 	- v. Database
-		- [i. Features](JMAQS_1/DatabaseFeatures.md)
-        - [ii. Driver](JMAQS_1/DatabaseDriver.md)
-        - [iii. Config](JMAQS_1/DatabaseConfig.md)
-        - [vi. Connection Factory](JMAQS_1/ConnectionFactory.md)
-        - [v. Constants](JMAQS_1/Constants.md)
-        - [vi. Driver Manager](JMAQS_1/DatabaseDriverManager.md)
-        - [vii. Database Persistence Info](JMAQS_1/DatabasePersistenceUnitInfo.md)
-        - [viii. Providers](JMAQS_1/Providers.md)
-        - [viii. FAQ](JMAQS_1/DatabaseFAQ.md)
+		- [i. Features](JMAQS_1/database/DatabaseFeatures.md)
+        - [ii. Driver](JMAQS_1/database/DatabaseDriver.md)
+        - [iii. Config](JMAQS_1/database/DatabaseConfig.md)
+        - [vi. Connection Factory](JMAQS_1/database/ConnectionFactory.md)
+        - [v. Constants](JMAQS_1/database/Constants.md)
+        - [vi. Driver Manager](JMAQS_1/database/DatabaseDriverManager.md)
+        - [vii. Database Persistence Info](JMAQS_1/database/DatabasePersistenceUnitInfo.md)
+        - [viii. Providers](JMAQS_1/database/Providers.md)
+        - [viii. FAQ](JMAQS_1/database/DatabaseFAQ.md)
               
 	- vi. WebServices JDK 8
 		- [i. Features](JMAQS_1/WebService/WebServiceFeatures.md)
@@ -63,8 +63,8 @@
         - [v. Config](JMAQS_1/WebService/WebServiceConfig.md)
         - [vi. Utilities](JMAQS_1/WebService/WebServiceUtilities.md)
         - [viii. Driver Manager](JMAQS_1/WebService/WebServiceDriverManager.md)
-        - [ix. MediaType](JMAQS_1/WebSerivce/MediaType.md)
-        - [xi. FAQ](JMAQS_1/WebService/WebServicesFAQ.md)
+        - [ix. MediaType](JMAQS_1/WebService/MediaType.md)
+        - [xi. FAQ](JMAQS_1/WebService/WebServiceFAQ.md)
 
 	- vii. BaseTest
 		- [i. Features](JMAQS_1/Base/BaseFeatures.md)
@@ -76,5 +76,5 @@
         - [vii. Base Generic Test](JMAQS_1/Base/BaseGenericTest.md)
         - [viii. FAQ](JMAQS_1/Base/BaseFAQ.md)
 
-- [FAQ](JMAQS_1/JMAQS-FAQ.md)
+- [FAQ](JMAQS_1/ComingSoon.md)
 - [License](JMAQS_1/License.md)
