@@ -2,7 +2,7 @@
 
 ## Overview
 The AppiumConfig class is used to get values from the AppiumMaqs section of your test run properties.
-<br>These values come from your config.xml, appsettings.json and/or test run parameters.
+<br>These values come from your config.xml and/or test run parameters.
 
 ## AppiumMaqs
 The AppiumMaqs configuation section contains the following Keys:
@@ -29,7 +29,7 @@ TimeSpan timeout = AppiumConfig.getCommandTimeout();
 ```
 
 Get the Device Name:
-```csharp
+```java
 String name = AppiumConfig.getDeviceName();
 ```
 
