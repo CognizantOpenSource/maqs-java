@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Wait Methods
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Wait Methods
 
 ## Overview
 UI Wait has functions to wait for an element to exist, to not exist, 

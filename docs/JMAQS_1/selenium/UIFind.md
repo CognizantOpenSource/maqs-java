@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> UIFind
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> UIFind
 
 ## Overview
 This is the tool-class used for finding elements with the provided search item.

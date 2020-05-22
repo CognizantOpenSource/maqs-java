@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Web Service Driver Manager
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Web Service Driver Manager
 
 ## Overview
 The WebService Driver Manager has overreach of the Base Driver Manager.

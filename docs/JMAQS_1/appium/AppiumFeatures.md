@@ -1,10 +1,11 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Features
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Features
 
 ## Overview
 JMAQS provides support for testing mobile applictions.  	
 
 ## BaseTest
-Base Appium Test is an abstract test class you can extend.  Extending the class allows you to automatically use MAQS's web service testing capabilities.
+Base Appium Test is an abstract test class you can extend.  
+Extending the class allows you to automatically use JMAQS's web service testing capabilities.
 ```java
 public class MyAppiumTests extends BaseAppiumTest
 ```
@@ -24,14 +25,14 @@ Driver that manages the driver manager.
 ## Log
 There is also logger (also thread safe) the can be used to add log message to your log.
 ```java
-this.getLogger().logMessage("I am testing with MAQS");
+this.getLogger().logMessage("I am testing with JMAQS");
 ```
 
 ## TestObject
 The TestObject can be thought of as your test context.  It holds all the JMAQS test execution replated data.  This includes the web service driver, logger, soft asserts, performance timers, plus more.
 ```java
 this.getWebDriver().navigate().to("http://magenicautomation.azurewebsites.net/");
-this.getLogger().logMessage("I am testing with MAQS");
+this.getLogger().logMessage("I am testing with JMAQS");
 ```
 *Notes:*  
 * *Most of the test object objects are already accessible on the test level. For example **this.getLog()** and **this.getTestObject.getLog()** both access the same logger.*
@@ -59,8 +60,7 @@ public class BaseAppiumTestUnitTest extends BaseAppiumTest {
    * Test get appium driver.
    */
   @Test(groups = TestCategories.APPIUM)
-  public void MobileDeviceTest()
-      {
+  public void MobileDeviceTest() {
   		PageModel page = new PageModel(this.getTestObject());
           page.OpenPage();
       }   

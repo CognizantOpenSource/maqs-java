@@ -1,1 +1,1 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Base FAQ
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Base FAQ

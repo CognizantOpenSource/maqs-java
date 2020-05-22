@@ -1,13 +1,13 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Driver Manager
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Driver Manager
 
 ## Overview
-The DriverManager has overreach of te BaseTestObject and the BaseDriver.
+The DriverManager has overreach of the BaseTestObject and the BaseDriver.
 
-[GetLogger](#GetLogger)
-[GetBaseDriver](#GetBaseDriver) 
+[GetLogger](#GetLogger)  
+[GetBaseDriver](#GetBaseDriver)  
 [SetBaseDriver](#SetBaseDriver)  
-[IsDriverInitialized](#IsDriverInitialized)
-[GetBase](#GetBase)
+[IsDriverInitialized](#IsDriverInitialized)  
+[GetBase](#GetBase)  
 
 ## GetLogger
 Gets the testing object

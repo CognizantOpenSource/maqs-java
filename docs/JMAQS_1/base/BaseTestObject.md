@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Base Test Object
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Base Test Object
 
 ## Overview
 Takes care of the base test context data.

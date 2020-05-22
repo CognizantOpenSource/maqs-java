@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Selenium Features
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Selenium Features
 
 ## Overview
 MAQS provides support for testing web applications.  

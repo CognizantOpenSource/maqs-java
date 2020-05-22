@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Base Generic Test
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Base Generic Test
 
 ## Overview
 Works with creating test objects and logging teardown for tests.

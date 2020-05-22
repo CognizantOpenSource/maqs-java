@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Base Features
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Base Features
 
 ## Overview
 JMAQS provides support for testing, base is the foundation for this support.  

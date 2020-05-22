@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> UIFindFactory
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> UIFindFactory
 
 ## Overview
 Creates UI Find Objects for searchable elements.

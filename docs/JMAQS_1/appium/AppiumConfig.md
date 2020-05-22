@@ -1,8 +1,8 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Configuration
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Configuration
 
 ## Overview
 The AppiumConfig class is used to get values from the AppiumMaqs section of your test run properties.
-<br>These values come from your App.config, appsettings.json and/or test run parameters.
+<br>These values come from your config.xml, appsettings.json and/or test run parameters.
 
 ## AppiumMaqs
 The AppiumMaqs configuation section contains the following Keys:
@@ -70,7 +70,7 @@ AppiumConfig.setTimouts(driver);
 ```
 
 # Sample config files
-## App.config
+## config.xml
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
@@ -152,33 +152,4 @@ AppiumConfig.setTimouts(driver);
     <add key="browserName" value="Chrome" />
   </AppiumCapsMaqs>
 </configuration>
-```
-
-## appsettings.json
-```json
-{
-  "AppiumMaqs"{ 	
-	"PlatformName": "Android"
-    "PlatformVersion": "6.0"
-	"DeviceName": "Android GoogleAPI Emulator"
-    "MobileHubUrl": "http://ondemand.saucelabs.com:80/wd/hub"
-    "MobileCommandTimeout": "122000"
-    "MobileWaitTime": "1000"
-    "MobileTimeout": "10000"
-  },
-  "AppiumCapsMaqs": {
-	"Username": "Partner_Magenic",
-    "AccessKey": "7e0592a4-16de-4c6b-9b87-ee61aa43ceac"
-	"DeviceName": "Android Emulator"
-	"DeviceOrientation": "portrait" 
-	"BrowserName": "Chrome"
-  },
-  "MagenicMaqs": {
-    "WaitTime": "100",
-    "Timeout": "10000",
-    "Log": "OnFail",
-    "LogLevel": "INFORMATION",
-    "LogType": "TXT"
-  }
-}
 ```

@@ -1,20 +1,19 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Driver Factory
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Driver Factory
 
 ## Overview
 Takes care of the base test context data.
 
-[GetDefaultMobileDriver](#GetDefaultMobileDriver)
-[GetDefaultMobileOptions](#GetDefaultMobileOptions)
+[GetDefaultMobileDriver](#GetDefaultMobileDriver)  
+[GetDefaultMobileOptions](#GetDefaultMobileOptions)  
 [GetAndroidDriver](#GetAndriodDriver)   
 [GetIOSDriver](#GetIOSDriver)   
 [GetWindowsDriver](#GetWindowsDriver)   
-[MergeCapabilities](#MergeCapabilities)
+[MergeCapabilities](#MergeCapabilities)  
 [CreateDriver](#CreateDriver)
 
 ## GetDefaultMobileDriver
 Gets default mobile driver
 ```java
-
 AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
 ```
 
@@ -23,8 +22,7 @@ Gets default mobile options
 ```java
 DesiredCapabilities capabilities = getDefaultMobileOptions();
 
-DesiredCapabilities capabilities = AppiumDriverFactory
-        .getDefaultMobileOptions(capabilitiesAsObjects);
+DesiredCapabilities capabilities = AppiumDriverFactory.getDefaultMobileOptions(capabilitiesAsObjects);
 ```
 
 ## GetAndriodDriver

@@ -1,4 +1,18 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Appium Test Object
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Test Object
+
+## Inheritance Hierarchy
+```java
+BaseTestObject
+    com.magenic.jmaqs.appium.AppiumTestObject
+```
+Package: com.magenic.jmaqs.appium;  
+Assembly: import com.magenic.jmaqs.appium.AppiumTestObject
+
+## Syntax
+java
+```java
+public class AppiumTestObject
+```
 
 ## Overview
 Takes care of the base test context data.
@@ -8,19 +22,19 @@ Takes care of the base test context data.
 [GetAppiumManager](#GetAppiumManager)     
 
 ## GetAppiumDriver
-Gets the web service driver
+Gets the Appium driver
 ```java
 AppiumDriver<WebElement> driver = this.AppiumManager.getAppiumDriver();
 ```
 
 ## SetAppiumDriver
-Sets the web service driver
+Sets the Appium driver
 ```java
 appiumTestObject.setAppiumDriver(AppiumDriverFactory.getDefaultMobileDriver());
 ```
 
 ## GetAppiumManager
-Gets the web service driver manager
+Gets the Appium driver manager
 ```java
 MoblieDriverManager mobileDriver = this.AppiumManager.getMobileDriver();
 ```
