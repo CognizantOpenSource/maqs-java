@@ -6,6 +6,7 @@ package com.magenic.jmaqs.base;
 
 import static java.lang.System.out;
 
+import com.magenic.jmaqs.base.interfaces.TestResult;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
@@ -15,6 +16,7 @@ import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.logging.TestResultType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
+
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,6 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -50,6 +58,8 @@ public abstract class BaseTest {
    */
   private ITestResult testResult;
 
+  private TestResult junitTestResult;
+
   /**
    * The Collection of Base Test Objects to use.
    */
@@ -64,6 +74,8 @@ public abstract class BaseTest {
    * The TestNG Test Context.
    */
   private ITestContext testContextInstance;
+
+  private ExtensionContext context;
 
   /**
    * The Fully Qualified Test Class Name.
@@ -228,6 +240,18 @@ public abstract class BaseTest {
     this.createNewTestObject();
   }
 
+  @BeforeEach
+  public void setup(TestInfo info) {
+    //this.context = context;
+
+    // Get the Fully Qualified Test Class Name and set it in the object
+    String testName = info.getTestClass().get().getName() + "." + info.getTestMethod().get().getName();
+    testName = testName.replaceFirst("class ", "");
+    this.fullyQualifiedTestClassName.set(testName);
+
+    this.createNewTestObject();
+  }
+
   /**
    * Cleanup after a test.
    */
@@ -277,6 +301,54 @@ public abstract class BaseTest {
   }
 
   /**
+   * Cleanup after a test.
+   */
+  //@AfterEach
+  public void teardown_junit() {
+//    try {
+//      this.beforeLoggingTeardown(junitTestResult);
+//    } catch (Exception e) {
+//      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
+//    }
+
+    // Log the test result
+    if (junitTestResult.getStatus() == TestResultType.PASS) {
+      this.tryToLog(MessageType.SUCCESS, "Test Passed");
+    } else if (junitTestResult.getStatus() == TestResultType.FAIL) {
+      this.tryToLog(MessageType.ERROR, "Test Failed");
+    } else if (junitTestResult.getStatus() == TestResultType.SKIP) {
+      this.tryToLog(MessageType.INFORMATION, "Test was skipped");
+    } else {
+      this.tryToLog(MessageType.WARNING, "Test had an unexpected result.");
+    }
+
+    // Cleanup log files we don't want
+    try {
+      if ((this.getLogger() instanceof FileLogger) && junitTestResult.getStatus() == TestResultType.PASS
+              && this.loggingEnabledSetting == LoggingEnabled.ONFAIL) {
+        Files.delete(Paths.get(((FileLogger) this.getLogger()).getFilePath()));
+      }
+    } catch (Exception e) {
+      this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
+    }
+
+    // Get the Fully Qualified Test Name
+    String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
+
+    try (BaseTestObject baseTestObject = this.getTestObject()) {
+      // Release logged messages
+      this.loggedExceptions.remove(fullyQualifiedTestName);
+
+      // Release the Base Test Object
+      this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
+    }
+
+    // Create console logger to log subsequent messages
+    this.setTestObject(new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName));
+    this.fullyQualifiedTestClassName.remove();
+  }
+
+  /**
    * Set the test result after each test execution.
    *
    * @param testResult The result object
@@ -285,6 +357,12 @@ public abstract class BaseTest {
   public void setTestResult(ITestResult testResult) {
     this.testContextInstance = testResult.getTestContext();
     this.testResult = testResult;
+  }
+
+  //@AfterEach
+  public void setTestResult(TestResult testResult, ExtensionContext context) {
+    this.context = context;
+    this.junitTestResult = testResult;
   }
 
   /**
