@@ -27,12 +27,12 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           result-encoding: string
           script: |
-            github.repos.listReleases({
+            const releases = await github.repos.listReleases({
               owner: '${{github.repository_owner}}',
               repo: 'JMAQS',
-            }).then (({data}) => {
-            return data.find(element => element.name === 'Draft').body
-            });
+            })
+            let currentRelease = releases.data.find(release => release.name === 'Draft')
+            return currentRelease.body
       - name: Get Draft Release Notes
         run: echo "${{steps.draft-release.outputs.result}}"
 
