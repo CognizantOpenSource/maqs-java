@@ -25,6 +25,7 @@ jobs:
         id: draft-release
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
           script: |
             github.repos.listReleases({
               owner: '${{github.repository_owner}}',
