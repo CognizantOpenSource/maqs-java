@@ -19,7 +19,7 @@ jobs:
       - name: Lockdown CI Security
         uses: InstaCode/lockdown@v1
         with:
-          users: jason-edstrom, dependabot-preview 
+          users: jason-edstrom, dependabot-preview
       - name: Import GPG key
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v2
@@ -34,17 +34,15 @@ jobs:
       - name: Create settings file
         uses: s4u/maven-settings-action@v2.1.0
         with:
-            sonatypeSnapshots: true
-            githubServer: true
-            override: true
-      - name: Run package
-        run: mvn install -B -e -f pom.xml -DskipTests
-      - name: Deploy Packages to Github
-        run: mvn -Pgithub deploy -B -e -f pom.xml -DskipTests
+          sonatypeSnapshots: true
+          githubServer: true
+          override: true
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2
-        with:
+          uses: actions/upload-artifact@v2
+          with:
             # Artifact name
             name: Settings
             # A file, directory or wildcard pattern that describes what to upload
             path: ~/.m2/settings.xml
+      - name: Run package
+        run: mvn package deploy -B -e -f pom.xml -DskipTests
