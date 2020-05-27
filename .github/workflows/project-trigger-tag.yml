@@ -28,7 +28,7 @@ jobs:
           script: |
             github.repos.listReleases({
               owner: '${{github.repository_owner}}',
-              repo: '${{github.repository}}',
+              repo: 'JMAQS',
             }).then (({data}) => {
             return data.find(element => element.name === 'Draft')
             });
