@@ -33,7 +33,7 @@ jobs:
           java-version: 11
       - name: Create settings file
         uses: s4u/maven-settings-action@v2.1.0
-          with:
+        with:
             sonatypeSnapshots: true
             githubServer: true
             override: true
@@ -41,3 +41,10 @@ jobs:
         run: mvn install -B -e -f pom.xml -DskipTests
       - name: Deploy Packages to Github
         run: mvn -Pgithub deploy -B -e -f pom.xml -DskipTests
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+            # Artifact name
+            name: Settings
+            # A file, directory or wildcard pattern that describes what to upload
+            path: ~/.m2/settings.xml
