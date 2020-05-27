@@ -31,12 +31,12 @@ jobs:
               owner: '${{github.repository_owner}}',
               repo: 'JMAQS',
             })
-            let currentRelease = releases.data.find(release => release.name === 'Draft')
-            return currentRelease.body
+            return releases.data.find(release => release.name === 'Draft').body
       - name: Get Draft Release Notes
         run: echo "${{steps.draft-release.outputs.result}}"
       - name: Create a Release
         uses: actions/create-release@v1
+        id: jmaqs-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
