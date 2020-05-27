@@ -30,7 +30,7 @@ jobs:
               owner: '${{github.repository_owner}}',
               repo: 'JMAQS',
             }).then (({data}) => {
-            return data.find(element => element.name === 'Draft').asserts.body
+            return data.find(element => element.name === 'Draft').body
             });
       - name: Get Draft Release Notes
         uses: actions/github-script@v1
