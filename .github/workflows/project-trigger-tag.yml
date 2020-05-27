@@ -5,8 +5,10 @@ name: Trigger tagging on project close
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  project:
-    types: [closed]
+  push:
+    branches: [master]
+#  project:
+#    types: [closed]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,19 +19,31 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - name: Create a Release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
-        tag_name: ${{github.event.project.name}}
-        # The name of the release. For example, `Release v1.0.1`
-        release_name: ${{github.event.project.name}}
-        # Text describing the contents of the tag.
-        body: "Test is a draft release triggered by project close"
-        # `true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`
-        draft: true
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Get Draft Release Notes
+        uses: actions/github-script@v1
+        id: draft-release
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+          github.repos.listReleases({
+          owner: ${{github.context.repo.owner}},
+          repo: ${{github.context.repo.repo}},
+          }).then (({data}) => {
+          return data.find(element => element.name === 'Draft'
+          });
+#      - name: Create a Release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
+#          tag_name: ${{github.event.project.name}}
+#          # The name of the release. For example, `Release v1.0.1`
+#          release_name: ${{github.event.project.name}}
+#          # Text describing the contents of the tag.
+#          body: "Test is a draft release triggered by project close"
+#          # `true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`
+#          draft: true
 
 
