@@ -33,7 +33,7 @@ jobs:
             return data.find(element => element.name === 'Draft').asserts.body
             });
       - name: Get Draft Release Notes
-        uses: github-script@v1
+        uses: actions/github-script@v1
         id: draft-release-notes
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
