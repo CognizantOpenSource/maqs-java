@@ -26,12 +26,12 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-          github.repos.listReleases({
-          owner: ${{github.context.repo.owner}},
-          repo: ${{github.context.repo.repo}},
-          }).then (({data}) => {
-          return data.find(element => element.name === 'Draft'
-          });
+            github.repos.listReleases({
+              owner: ${{github.context.repo.owner}},
+              repo: ${{github.context.repo.repo}},
+            }).then (({data}) => {
+            return data.find(element => element.name === 'Draft'
+            });
 #      - name: Create a Release
 #        uses: actions/create-release@v1
 #        env:
