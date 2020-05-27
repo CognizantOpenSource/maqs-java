@@ -32,7 +32,11 @@ jobs:
         with:
           java-version: 11
       - name: Create settings file
-        uses: s4u/maven-settings-action@v2.1.0     
+        uses: s4u/maven-settings-action@v2.1.0
+          with:
+            sonatypeSnapshots: true
+            githubServer: true
+            override: true
       - name: Run package
         run: mvn install -B -e -f pom.xml -DskipTests
       - name: Deploy Packages to Github
