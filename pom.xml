@@ -62,7 +62,7 @@
         <profile>
             <id>WIP</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <modules>
                 <module>jmaqs-webservices-jdk11</module>
@@ -85,12 +85,12 @@
             <id>github</id>
             <distributionManagement>
                 <repository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/InstaCode/JMAQS</url>
                 </repository>
                 <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/InstaCode/JMAQS</url>
                 </snapshotRepository>
             </distributionManagement>
         </profile>
