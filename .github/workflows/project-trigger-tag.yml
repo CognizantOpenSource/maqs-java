@@ -30,7 +30,7 @@ jobs:
               owner: ${{github.repository_owner}},
               repo: ${{github.repository}},
             }).then (({data}) => {
-            return data.find(element => element.name === 'Draft'
+            return data.find(element => element.name === 'Draft')
             });
 #      - name: Create a Release
 #        uses: actions/create-release@v1
