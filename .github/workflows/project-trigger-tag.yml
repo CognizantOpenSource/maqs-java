@@ -35,19 +35,18 @@ jobs:
             return currentRelease.body
       - name: Get Draft Release Notes
         run: echo "${{steps.draft-release.outputs.result}}"
-
-#      - name: Create a Release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
-#          tag_name: ${{github.event.project.name}}
-#          # The name of the release. For example, `Release v1.0.1`
-#          release_name: ${{github.event.project.name}}
-#          # Text describing the contents of the tag.
-#          body: "Test is a draft release triggered by project close"
-#          # `true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`
-#          draft: true
+      - name: Create a Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
+          tag_name: ${{github.event.project.name}}
+          # The name of the release. For example, `Release v1.0.1`
+          release_name: ${{github.event.project.name}}
+          # Text describing the contents of the tag.
+          body: ${{steps.draft-release.outputs.result}}
+          # `true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`
+          draft: true
 
 
