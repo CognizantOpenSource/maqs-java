@@ -33,12 +33,7 @@ jobs:
             return data.find(element => element.name === 'Draft').body
             });
       - name: Get Draft Release Notes
-        uses: actions/github-script@v1
-        id: draft-release-notes
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            echo ${{steps.draft-release.outputs.result}}
+        run: echo "${{steps.draft-release.outputs.result}}"
 
 #      - name: Create a Release
 #        uses: actions/create-release@v1
