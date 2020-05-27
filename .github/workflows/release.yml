@@ -35,7 +35,7 @@ jobs:
         uses: s4u/maven-settings-action@v2.1.0
         with:
           sonatypeSnapshots: true
-          githubServer: true
+          servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES_PAT}}"}]'
           override: true
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
