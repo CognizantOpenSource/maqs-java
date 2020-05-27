@@ -38,8 +38,8 @@ jobs:
           githubServer: true
           override: true
       - name: Upload a Build Artifact
-          uses: actions/upload-artifact@v2
-          with:
+        uses: actions/upload-artifact@v2
+        with:
             # Artifact name
             name: Settings
             # A file, directory or wildcard pattern that describes what to upload
