@@ -107,12 +107,6 @@
         </profile>
         <profile>
             <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -128,11 +122,10 @@
                                 </goals>
                                 <configuration>
                                     <gpgArguments>
-                                        <argument>-Dgpg.passphrase=${gpg.passphrase}</argument>
+                                        <arg>-Dgpg.passphrase=${gpg.passphrase}</arg>
                                         <arg>--pinentry-mode</arg>
                                         <arg>loopback</arg>
                                     </gpgArguments>
-
                                 </configuration>
                             </execution>
                         </executions>
