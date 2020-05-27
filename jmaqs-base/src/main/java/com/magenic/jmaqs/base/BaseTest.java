@@ -7,6 +7,7 @@ package com.magenic.jmaqs.base;
 import static java.lang.System.out;
 
 import com.magenic.jmaqs.base.interfaces.TestResult;
+import com.magenic.jmaqs.base.watcher.JunitTestWatcher;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
@@ -33,6 +34,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -82,12 +84,17 @@ public abstract class BaseTest {
    */
   ThreadLocal<String> fullyQualifiedTestClassName = new ThreadLocal<>();
 
+  @RegisterExtension
+  public JunitTestWatcher testWatcher;
+
+
   /**
    * Initializes a new instance of the BaseTest class.
    */
   public BaseTest() {
     this.loggedExceptions = new ConcurrentHashMap<>();
     this.baseTestObjects = new ConcurrentManagerHashMap();
+    this.testWatcher = new JunitTestWatcher(this);
   }
 
   /**

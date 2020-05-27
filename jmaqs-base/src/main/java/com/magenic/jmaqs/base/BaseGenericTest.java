@@ -13,13 +13,6 @@ import org.testng.ITestResult;
  */
 public class BaseGenericTest extends BaseExtendableTest<BaseTestObject> {
 
-  @RegisterExtension
-  public JunitTestWatcher testWatcher;
-
-  public BaseGenericTest() {
-    this.testWatcher = new JunitTestWatcher(this);
-  }
-
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
     //No before logging steps needed in this scenario
