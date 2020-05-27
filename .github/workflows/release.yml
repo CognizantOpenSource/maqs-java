@@ -5,8 +5,12 @@ name: Java CI with Maven
 
 #on:
 #  push:
-#    branches:
-#      - master
+#  tags:
+#    -v*
+on:
+  push:
+    branches: [master]
+
 
 jobs:
   build:
@@ -30,4 +34,6 @@ jobs:
       - name: Create settings file
         uses: s4u/maven-settings-action@v2.1.0     
       - name: Run package
-        run: mvn package -B -e -f pom.xml
+        run: mvn install -B -e -f pom.xml -skipTests
+      - name: Deploy Packages to Github
+        run: mvn -Pgithub deploy -B -e -f pom.xml
