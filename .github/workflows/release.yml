@@ -37,6 +37,7 @@ jobs:
           sonatypeSnapshots: true
           servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES_PAT}}"}]'
           override: true
+          githubServer: false
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
