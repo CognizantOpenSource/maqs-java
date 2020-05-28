@@ -91,6 +91,7 @@
                 <snapshotRepository>
                     <id>github</id>
                     <url>https://maven.pkg.github.com/InstaCode/JMAQS</url>
+                    <uniqueVersion>true</uniqueVersion>
                 </snapshotRepository>
             </distributionManagement>
         </profile>
