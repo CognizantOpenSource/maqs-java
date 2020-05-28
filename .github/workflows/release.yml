@@ -36,8 +36,8 @@ jobs:
         with:
           sonatypeSnapshots: true
           #servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES_PAT}}"}]'
-          #override: true
-          #githubServer: false
+          override: false
+          githubServer: false
         env:
           GITHUB_ACTOR: $GITHUB_ACTOR
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
