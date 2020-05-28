@@ -31,16 +31,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      #      - name: Create settings file
-      #        uses: s4u/maven-settings-action@v2.1.0
-      #        with:
-      #          sonatypeSnapshots: true
-      #          #servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES_PAT}}"}]'
-      #          override: false
-      #          githubServer: false
-      #        env:
-      #          GITHUB_ACTOR: $GITHUB_ACTOR
-      #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create settings file
+        uses: s4u/maven-settings-action@v2.1.0
+        with:
+          sonatypeSnapshots: true
+          servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES_PAT}}"}]'
+          override: true
+          githubServer: false
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -48,5 +45,5 @@ jobs:
           name: Settings
           # A file, directory or wildcard pattern that describes what to upload
           path: ~/.m2/settings.xml
-      - name: Run package
-        run: mvn -Pgithub package deploy -B -e -f pom.xml -DskipTests
+      - name: Deploy Packages to GitHub
+        run: mvn -Pgithub deploy -B -e -f pom.xml -DskipTests
