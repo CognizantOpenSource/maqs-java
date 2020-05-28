@@ -1,8 +1,8 @@
 name: import-gpg
 
-on:
-  push:
-    branches: master
+#on:
+#  push:
+#    branches: master
 
 jobs:
   import-gpg:

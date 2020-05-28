@@ -38,12 +38,5 @@ jobs:
           servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES_PAT}}"}]'
           override: true
           githubServer: false
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          # Artifact name
-          name: Settings
-          # A file, directory or wildcard pattern that describes what to upload
-          path: ~/.m2/settings.xml
       - name: Deploy Packages to GitHub
         run: mvn -Pgithub deploy -B -e -f pom.xml -DskipTests
