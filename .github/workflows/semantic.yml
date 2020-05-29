@@ -13,5 +13,7 @@ jobs:
         uses: patrickjahns/version-drafter-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Print Version Number
-        run: echo '${{steps.version.outputs.next-version}}'
+      - name: Print Next Version Number
+        run: echo 'Next Version -  ${{steps.version.outputs.next-version}}'
+      - name: Print Current Version Number
+        run: echo 'Current Version -  ${{steps.version.outputs.current-version}}'
