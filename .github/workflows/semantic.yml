@@ -1,0 +1,19 @@
+name: Update Releaseinfo
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  update_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: calculate next version
+        id: version
+        uses: patrickjahns/version-drafter-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print Next Version Number
+        run: echo 'Next Version -  ${{steps.version.outputs.next-version}}'
+      - name: Print Current Version Number
+        run: echo 'Current Version -  ${{steps.version.outputs.current-version}}'
