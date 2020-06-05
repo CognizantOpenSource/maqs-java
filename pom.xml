@@ -58,6 +58,7 @@
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
+        <module>jmaqs-cucumber</module>
     </modules>
 
     <distributionManagement>
@@ -295,13 +296,13 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>check</goal>
+                            <goal>checkstyle-aggregate</goal>
                         </goals>
                         <id>checkstyle</id>
                         <phase>validate</phase>
                         <configuration>
                             <failOnWarnings>false</failOnWarnings>
-                            <failOnError>true</failOnError>
+                            <failOnError>false</failOnError>
                             <configLocation>maqs_checks.xml</configLocation>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <consoleOutput>true</consoleOutput>

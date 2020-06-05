@@ -8,11 +8,12 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>com.magenic.jmaqs.selenium</groupId>
-    <artifactId>jmaqs-selenium</artifactId>
-    <name>JMAQS Selenium Testing Module</name>
+    <groupId>com.magenic.jmaqs.cucumber</groupId>
+    <artifactId>jmaqs-cucumber</artifactId>
+    <name>JMAQS Cucumber Module</name>
     <packaging>jar</packaging>
     <url>http://maven.apache.org</url>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,11 +21,37 @@
         <selenium.version>3.141.59</selenium.version>
     </properties>
 
+
     <dependencies>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commonsio.version}</version>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-gherkin</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.base</groupId>
+            <artifactId>jmaqs-base</artifactId>
+            <version>2.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.selenium</groupId>
+            <artifactId>jmaqs-selenium</artifactId>
+            <version>2.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -81,6 +108,7 @@
             <artifactId>selenium-support</artifactId>
             <version>${selenium.version}</version>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>
