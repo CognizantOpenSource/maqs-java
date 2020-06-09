@@ -94,12 +94,12 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <installationDirectory>./src/test/resources</installationDirectory>
+                    <installationDirectory>./src/test/resources/drivers</installationDirectory>
                     <drivers>
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>80.0.3987.16</version>
+                            <version>83.0.4103.39</version>
                         </driver>
                         <driver>
                             <name>internetexplorerdriver</name>
