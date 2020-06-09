@@ -72,10 +72,17 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
   }
 
   @Override
-  protected void createNewTestObject() {
+  protected void createNewTestObject()  {
     try {
       this.setTestObject(
-          new SeleniumTestObject(this.getBrowser(), this.createLogger(), this.getFullyQualifiedTestClassName()));
+          new SeleniumTestObject(() -> {
+            try {
+              return getBrowser();
+            } catch (WebDriverFactoryException e) {
+              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
+            }
+            return null;
+          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
     } catch (Exception e) {
       getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }

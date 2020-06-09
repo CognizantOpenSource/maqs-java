@@ -1,13 +1,33 @@
 package com.magenic.jmaqs.cucumber.steps;
 
+import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.base.BaseTest;
+import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.cucumber.ScenarioContext;
 import com.magenic.jmaqs.utilities.logging.Logger;
 
-public class BaseGenericStep {
+/**
+ * Base generic cucumber step
+ */
+public abstract class BaseGenericStep {
 
+    /**
+     * Get the logger.
+     *
+     * @return The logger
+     */
     public Logger getLogger()
     {
-        return ScenarioContext.get("BASE_JMAQS_TEST", BaseTest.class).getLogger();
+        return ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseTest.class).getLogger();
+    }
+
+    /**
+     * Get the generic test object.
+     *
+     * @return The generic test object
+     */
+    public BaseTestObject getTestObject()
+    {
+        return ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseGenericTest.class).getTestObject();
     }
 }

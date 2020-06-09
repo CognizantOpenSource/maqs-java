@@ -4,7 +4,7 @@ Feature: Sample Selenium Tests
     When Selenium Step2
     Then Selenium Step3
 
-  Scenario: Sample 2
+  Scenario: Sample2
     Given Selenium Step
     When Selenium Step2
     Then Selenium Step3

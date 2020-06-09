@@ -2,23 +2,20 @@ package com.magenic.jmaqs.cucumber;
 
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.SeleniumTestObject;
 
+/**
+ * The base Selenium cucumber object
+ */
 public class BaseSeleniumCucumber extends BaseCucumberTestNG {
 
+    /**
+     * Create a test object
+     *
+     * @return A Selenium base test object
+     */
     @Override
     public BaseTest createSpecificBaseTest() {
         return new BaseSeleniumTest();
-    }
-
-    /**
-     * Get the Selenium test object
-     *
-     * @return The Selenium test object
-     */
-    public SeleniumTestObject getTestObject()
-    {
-        return ((BaseSeleniumTest)getBaseTest()).getTestObject();
     }
 }
 
