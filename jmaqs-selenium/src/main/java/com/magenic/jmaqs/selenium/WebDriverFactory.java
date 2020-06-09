@@ -84,8 +84,12 @@ public class WebDriverFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
+
       // Log that something went wrong
-      String message = StringProcessor.safeFormatter("Failed to initial web driver because: %s %sThis likely means your web driver is missing, unsupported or out of date.", e.getMessage() , System.lineSeparator());
+      String message =  "Failed to initial web driver because: %s %s"
+          + "This likely means your web driver is missing, unsupported or out of date.";
+      message = StringProcessor.safeFormatter(message, e.getMessage() , System.lineSeparator());
+
       throw new WebDriverFactoryException(message, e);
     }
   }
