@@ -94,7 +94,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <installationDirectory>./src/test/resources</installationDirectory>
+                    <installationDirectory>./src/test/resources/drivers</installationDirectory>
                     <drivers>
                         <driver>
                             <name>chromedriver</name>
