@@ -40,8 +40,8 @@ public class EventHandler implements WebDriverEventListener {
   public void beforeClickOn(WebElement element, WebDriver driver) {
     try {
       this.logger.logMessage(MessageType.INFORMATION,
-              "Before clicking element: %s Text:%s Location: X:%d Y:%d", element.toString(),
-              element.getText(), element.getLocation().x, element.getLocation().y);
+          "Before clicking element: %s Text:%s Location: X:%d Y:%d", element.toString(),
+          element.getText(), element.getLocation().x, element.getLocation().y);
     } catch (Exception exc) {
       this.logger.logMessage(MessageType.INFORMATION, "Before clicking element");
     }
@@ -57,8 +57,8 @@ public class EventHandler implements WebDriverEventListener {
   public void afterClickOn(WebElement element, WebDriver driver) {
     try {
       this.logger.logMessage(MessageType.INFORMATION,
-              "Element clicked: %s Text:%s Location: X:%d Y:%d", element.toString(),
-              element.getText(), element.getLocation().x, element.getLocation().y);
+          "Element clicked: %s Text:%s Location: X:%d Y:%d", element.toString(),
+          element.getText(), element.getLocation().x, element.getLocation().y);
     } catch (Exception exc) {
       this.logger.logMessage(MessageType.INFORMATION, "Element clicked");
     }
@@ -100,7 +100,7 @@ public class EventHandler implements WebDriverEventListener {
   @Override
   public void beforeFindBy(By by, WebElement element, WebDriver driver) {
     this.logger
-            .logMessage(MessageType.INFORMATION, "Before finding element By: %s", by.toString());
+        .logMessage(MessageType.INFORMATION, "Before finding element By: %s", by.toString());
   }
 
   /**
@@ -133,7 +133,7 @@ public class EventHandler implements WebDriverEventListener {
   @Override
   public void afterNavigateBack(WebDriver driver) {
     this.logger.logMessage(MessageType.INFORMATION, "Navigated back to previous page: %s",
-            driver.getCurrentUrl());
+        driver.getCurrentUrl());
   }
 
   /**
@@ -154,7 +154,7 @@ public class EventHandler implements WebDriverEventListener {
   @Override
   public void afterNavigateForward(WebDriver driver) {
     this.logger.logMessage(MessageType.INFORMATION, "Navigated forward to next page: %s",
-            driver.getCurrentUrl());
+        driver.getCurrentUrl());
   }
 
   /**
