@@ -303,7 +303,7 @@ public abstract class BaseTest {
     Logger log;
 
     this.loggingEnabledSetting = LoggingConfig.getLoggingEnabledSetting();
-    this.setLoggedExceptions(new ArrayList<String>());
+    this.setLoggedExceptions(new ArrayList<>());
 
     if (this.loggingEnabledSetting != LoggingEnabled.NO) {
       log = LoggingConfig.getLogger(StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),

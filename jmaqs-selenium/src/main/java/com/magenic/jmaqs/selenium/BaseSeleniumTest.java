@@ -66,7 +66,7 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
    * @return Current browser Web Driver
    * @throws WebDriverFactoryException Throws exception
    */
-  protected WebDriver getBrowser() throws WebDriverFactoryException {
+  protected WebDriver getBrowser() {
     // Returns the web driver
     return WebDriverFactory.getDefaultBrowser();
   }
