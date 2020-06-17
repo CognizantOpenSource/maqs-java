@@ -19,9 +19,9 @@ public class ScenarioContext {
   private static final ThreadLocal<Map<String, Object>> context = new ThreadLocal<>();
 
   /**
-   * Get object.
+   * Gets the object by the given name
    *
-   * @param name the name
+   * @param name the name maped to the desired object
    * @return the object
    */
   public static Object get(final String name) {
@@ -29,11 +29,11 @@ public class ScenarioContext {
   }
 
   /**
-   * Get t.
+   * Gets the object of type T
    *
    * @param <T>  the type parameter
-   * @param type the type
-   * @return the t
+   * @param type the class type
+   * @return the typed object
    */
   public static <T> T get(final Class<T> type) {
     final Object obj = get(type.toString());
@@ -41,12 +41,12 @@ public class ScenarioContext {
   }
 
   /**
-   * Get t.
+   * Gets the object from the name and cast to the type
    *
    * @param <T>  the type parameter
    * @param name the name
-   * @param type the type
-   * @return the t
+   * @param type the class type
+   * @return the object of the given type
    */
   @SuppressWarnings("unchecked")
   public static <T> T get(final String name, final Class<T> type) {
@@ -55,7 +55,7 @@ public class ScenarioContext {
   }
 
   /**
-   * Remove.
+   * Removes the object of the given type
    *
    * @param <T>  the type parameter
    * @param type the type
@@ -75,7 +75,7 @@ public class ScenarioContext {
   }
 
   /**
-   * Put.
+   * Puts an object by name
    *
    * @param name the name
    * @param obj  the obj
@@ -85,7 +85,7 @@ public class ScenarioContext {
   }
 
   /**
-   * Put.
+   * Puts an object by type
    *
    * @param <T>  the type parameter
    * @param type the type
@@ -93,17 +93,6 @@ public class ScenarioContext {
    */
   public static <T> void put(final Class<T> type, final Object obj) {
     getMap().put(type.toString(), obj);
-  }
-
-  /**
-   * Put.
-   *
-   * @param <T>    the type parameter
-   * @param object the object
-   * @param type   the type
-   */
-  public static <T> void put(final Object object, final Class<T> type) {
-    put(type, object);
   }
 
   /**
