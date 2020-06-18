@@ -4,7 +4,6 @@
 
 package com.magenic.jmaqs.cucumber.steps;
 
-import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.cucumber.ScenarioContext;

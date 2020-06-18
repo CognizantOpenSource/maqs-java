@@ -21,6 +21,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * Initialize a new instance of the BaseSeleniumTest class.
    */
   public BaseSeleniumTest() {
+    // This initializer is intentionally left blank
   }
 
   /**

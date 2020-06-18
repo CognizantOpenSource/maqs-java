@@ -21,7 +21,7 @@ public class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
    * Initialize a new instance of the BaseAppiumTest class.
    */
   public BaseAppiumTest() {
-
+    // Needs an empty constructor
   }
 
   /**

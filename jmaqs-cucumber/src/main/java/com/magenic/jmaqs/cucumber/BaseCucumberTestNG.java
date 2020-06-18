@@ -59,6 +59,7 @@ public abstract class BaseCucumberTestNG extends AbstractTestNGCucumberTests imp
     }
 
     test.teardown();
+    testName.remove();
     ScenarioContext.remove(ScenarioContext.JMAQS_HOLDER);
   }
 

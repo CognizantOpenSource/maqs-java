@@ -28,6 +28,7 @@ public class BaseSeleniumStep extends BaseGenericStep {
    *
    * @return Selenium test object
    */
+  @Override
   public SeleniumTestObject getTestObject() {
     return ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseSeleniumTest.class).getTestObject();
   }

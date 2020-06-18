@@ -13,6 +13,13 @@ import java.util.Map;
 public class ScenarioContext {
 
   /**
+   * Initializes an instance of the ScenarioContext class
+   */
+  public ScenarioContext() {
+    // This constructor is intentionally left empty
+  }
+
+  /**
    * The default string for context of a JMAQS cucumber test.
    */
   public static final String JMAQS_HOLDER = "BASE_JMAQS_TEST";
@@ -100,13 +107,20 @@ public class ScenarioContext {
   }
 
   /**
+   * Removes the context
+   */
+  public static void close() {
+    context.remove();
+  }
+
+  /**
    * Get local thread map.
    *
    * @return the object
    */
   private static Map<String, Object> getMap() {
     if (context.get() == null) {
-      context.set(new HashMap());
+      context.set(new HashMap<>());
     }
     return context.get();
   }
