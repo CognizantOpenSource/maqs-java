@@ -20,8 +20,7 @@ public abstract class BaseGenericStep {
    *
    * @return The logger
    */
-  public Logger getLogger()
-  {
+  public Logger getLogger() {
     return ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseTest.class).getLogger();
   }
 

@@ -12,14 +12,18 @@ import java.util.Map;
  */
 public class ScenarioContext {
 
+  /**
+   * The default string for context of a JMAQS cucumber test.
+   */
   public static final String JMAQS_HOLDER = "BASE_JMAQS_TEST";
+
   /**
    * Field context.
    */
   private static final ThreadLocal<Map<String, Object>> context = new ThreadLocal<>();
 
   /**
-   * Gets the object by the given name
+   * Gets the object by the given name.
    *
    * @param name the name maped to the desired object
    * @return the object
@@ -29,7 +33,7 @@ public class ScenarioContext {
   }
 
   /**
-   * Gets the object of type T
+   * Gets the object of type T.
    *
    * @param <T>  the type parameter
    * @param type the class type
@@ -41,7 +45,7 @@ public class ScenarioContext {
   }
 
   /**
-   * Gets the object from the name and cast to the type
+   * Gets the object from the name and cast to the type.
    *
    * @param <T>  the type parameter
    * @param name the name
@@ -55,7 +59,7 @@ public class ScenarioContext {
   }
 
   /**
-   * Removes the object of the given type
+   * Removes the object of the given type.
    *
    * @param <T>  the type parameter
    * @param type the type
@@ -75,7 +79,7 @@ public class ScenarioContext {
   }
 
   /**
-   * Puts an object by name
+   * Puts an object by name.
    *
    * @param name the name
    * @param obj  the obj
@@ -85,7 +89,7 @@ public class ScenarioContext {
   }
 
   /**
-   * Puts an object by type
+   * Puts an object by type.
    *
    * @param <T>  the type parameter
    * @param type the type

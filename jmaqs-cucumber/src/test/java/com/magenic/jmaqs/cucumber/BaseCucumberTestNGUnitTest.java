@@ -29,15 +29,15 @@ public class BaseCucumberTestNGUnitTest extends BaseGenericTest {
 
     /**
      * Verifies the tear down process correctly cleans up the Scenario Context
-     * HACK: THIS WILL STILL FAIL IN THE REAL teardown
      */
     @Test(groups = TestCategories.CUCUMBER)
-    @Ignore
     public void testTearDown() {
         DummyBaseCucumberTestNG dummyCucumber = new DummyBaseCucumberTestNG();
-        ScenarioContext.put(ScenarioContext.JMAQS_HOLDER, this);
-        DummyTestResult dummyResult = new DummyTestResult(this.getTestContext());
+        BaseTest dummyTest = dummyCucumber.createSpecificBaseTest();
+        String[] dummyArgs = {"Dummy Arg 1", "Dummy Arg 2"};
 
+        dummyCucumber.beforeMethod(null, dummyArgs, dummyTest.getTestContext());
+        DummyTestResult dummyResult = new DummyTestResult(dummyTest.getTestContext());
         dummyCucumber.tearDown(dummyResult);
 
         Assert.assertNull(ScenarioContext.get(ScenarioContext.JMAQS_HOLDER));

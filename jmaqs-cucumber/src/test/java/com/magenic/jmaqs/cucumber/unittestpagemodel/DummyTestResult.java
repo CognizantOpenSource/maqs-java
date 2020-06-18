@@ -8,24 +8,43 @@ import org.testng.ITestResult;
 import java.util.Set;
 
 /**
- * MIGHT NOT NEED
+ * A dummy test result class for unit testing
  */
 public class DummyTestResult implements ITestResult {
+
+    /**
+     * The test context
+     */
+    private ITestContext testContext;
+
+    /**
+     * Initializes a new instance of the DummyTestResult class
+     */
+    public DummyTestResult() {
+        this.testContext = null;
+    }
+
+    /**
+     * Initializes a new instance of the DummyTestResult class
+     * @param testContext The desired test context
+     */
+    public DummyTestResult(ITestContext testContext) {
+        this.testContext = testContext;
+    }
+
+    /**
+     * Gets the test status
+     * @return Will always be a success
+     */
     @Override
     public int getStatus() {
         return this.SUCCESS;
     }
 
-    private ITestContext testContext;
-
-    public DummyTestResult() {
-        this.testContext = null;
-    }
-
-    public DummyTestResult(ITestContext testContext) {
-        this.testContext = testContext;
-    }
-
+    /**
+     * Gets the test context
+     * @return The test context
+     */
     @Override
     public ITestContext getTestContext() {
         return testContext;
@@ -33,126 +52,126 @@ public class DummyTestResult implements ITestResult {
 
     @Override
     public void setStatus(int i) {
-
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public ITestNGMethod getMethod() {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public Object[] getParameters() {
-        return new Object[0];
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public void setParameters(Object[] objects) {
-
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public IClass getTestClass() {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public Throwable getThrowable() {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public void setThrowable(Throwable throwable) {
-
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public long getStartMillis() {
-        return 0;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public long getEndMillis() {
-        return 0;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public void setEndMillis(long l) {
-
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public String getName() {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public boolean isSuccess() {
-        return false;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public String getHost() {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public Object getInstance() {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public Object[] getFactoryParameters() {
-        return new Object[0];
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public String getTestName() {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public String getInstanceName() {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public void setTestName(String s) {
-
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public boolean wasRetried() {
-        return false;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public void setWasRetried(boolean b) {
-
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public int compareTo(ITestResult o) {
-        return 0;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public Object getAttribute(String s) {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public void setAttribute(String s, Object o) {
-
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public Set<String> getAttributeNames() {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 
     @Override
     public Object removeAttribute(String s) {
-        return null;
+        throw new UnsupportedOperationException("This method is intentionally left blank");
     }
 }

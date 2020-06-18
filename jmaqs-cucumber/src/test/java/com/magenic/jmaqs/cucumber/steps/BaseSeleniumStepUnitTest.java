@@ -29,6 +29,6 @@ public class BaseSeleniumStepUnitTest extends BaseSeleniumTest {
     public void testGetTestObject() {
         DummyBaseSeleniumStep stepClass = new DummyBaseSeleniumStep();
         ScenarioContext.put(ScenarioContext.JMAQS_HOLDER, this);
-        Assert.assertNotNull(stepClass.getTestObject(), "Checking that Selenium Driver is not null through BaseSeleniumStep");
+        Assert.assertNotNull(stepClass.getTestObject(), "Checking that Test Object is not null through BaseSeleniumStep");
     }
 }
