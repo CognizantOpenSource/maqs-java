@@ -13,7 +13,7 @@ import java.util.Map;
 public class ScenarioContext {
 
   /**
-   * Initializes an instance of the ScenarioContext class
+   * Initializes an instance of the ScenarioContext class.
    */
   public ScenarioContext() {
     // This constructor is intentionally left empty
@@ -107,7 +107,7 @@ public class ScenarioContext {
   }
 
   /**
-   * Removes the context
+   * Removes the context.
    */
   public static void close() {
     context.remove();
