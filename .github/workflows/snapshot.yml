@@ -30,7 +30,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   snapshot_build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Calculate New SnapShot Version Number
         id: version
