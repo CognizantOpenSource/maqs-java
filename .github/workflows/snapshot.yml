@@ -29,14 +29,24 @@ jobs:
           name: ${{ format('v{0}', steps.version.outputs.next-version) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo ${{steps.version.outputs.next-version}} > version.txt
+      - name: Upload Version Number
+        uses: actions/upload-artifact@v2
+        with:
+          name: version
+          path: version.txt
   snapshot_build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
+    needs: update_release_draft
     steps:
-      - name: Calculate New SnapShot Version Number
-        id: version
-        uses: patrickjahns/version-drafter-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download math result for job 1
+        uses: actions/download-artifact@v1
+        with:
+          name: version
+      - shell: bash
+        run: |
+          value=`cat version/version.txt`
+          echo ::set-env name=VERSION::$value
       - name: Import GPG key
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v2
@@ -50,7 +60,7 @@ jobs:
           java-version: 11
       - name: Create settings file
         uses: s4u/maven-settings-action@v2.1.0
-        with:
+        with: 
           sonatypeSnapshots: true
           servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
           override: true
@@ -60,8 +70,8 @@ jobs:
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
-      - name: Set Snapshot Version to ${{steps.version.outputs.next-version}}
-        run: mvn versions:set -DnewVersion=${{steps.version.outputs.next-version}}-SNAPSHOT
+      - name: Set Snapshot Version to ${{env.VERSION}}
+        run: mvn versions:set -DnewVersion="${{env.VERSION}}-SNAPSHOT"
       - name: Run Unit Tests
         run: mvn -Pgithub install -B -e -f pom.xml -fae
       - name: Deploy Packages to GitHub
