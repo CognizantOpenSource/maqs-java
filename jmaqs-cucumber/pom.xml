@@ -16,6 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commonsio.version>2.6</commonsio.version>
         <selenium.version>3.141.59</selenium.version>
+		<cucumber.version>6.1.2</cucumber.version>
     </properties>
 
     <dependencies>
@@ -23,19 +24,19 @@
             <scope>compile</scope>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
-            <version>5.7.0</version>
+            <version>${cucumber.version}</version>
         </dependency>
         <dependency>
             <scope>compile</scope>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>5.7.0</version>
+            <version>${cucumber.version}</version>
         </dependency>
         <dependency>
             <scope>compile</scope>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-gherkin</artifactId>
-            <version>6.1.2</version>
+            <version>${cucumber.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
