@@ -2,7 +2,7 @@
  * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.mongoDB;
+package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * Test class for database configurations.
  */
-public class MongoDBConfigUnitTests {
+public class MongoDBConfigUnitTest {
   /**
    * Gets the connection string.
    */
