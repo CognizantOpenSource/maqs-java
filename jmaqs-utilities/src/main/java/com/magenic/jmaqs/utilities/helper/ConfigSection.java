@@ -40,6 +40,11 @@ public enum ConfigSection {
   MAGENIC_MAQS("MagenicMaqs"),
 
   /**
+   * The default mongoDB maqs section.
+   */
+  MONGO_MAQS("MongoMaqs"),
+
+  /**
    * The default remote selenium capabilities section.
    */
   REMOTE_SELENIUM_CAPS_MAQS("RemoteSeleniumCapsMaqs"),

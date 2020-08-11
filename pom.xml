@@ -54,6 +54,7 @@
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
         <module>jmaqs-cucumber</module>
+        <module>jmaqs-mongoDB</module>
     </modules>
 
     <distributionManagement>

@@ -52,4 +52,9 @@ public class TestCategories {
    * String for Cucumber unit test category.
    */
   public static final String CUCUMBER = "Cucumber Unit Tests";
+
+  /**
+   * String for MongoDB unit test category.
+   */
+  public static final String MONGO = "MongoDB Unit Tests";
 }

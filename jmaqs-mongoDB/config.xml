@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration>
+    <MagenicMaqs>
+        <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
+        <WaitTime>100</WaitTime>
+
+        <!-- Generic time-out in milliseconds -->
+        <Timeout>10000</Timeout>
+
+        <!-- Do you want to create logs for your tests
+        <Log>YES</Log>
+        <Log>NO</Log>
+        <Log>OnFail</Log>-->
+        <Log>YES</Log>
+
+        <!--Logging Levels
+        <LogLevel>VERBOSE</LogLevel>
+        <LogLevel>INFORMATION</LogLevel>
+        <LogLevel>GENERIC</LogLevel>
+        <LogLevel>SUCCESS</LogLevel>
+        <LogLevel>WARNING</LogLevel>
+        <LogLevel>ERROR</LogLevel>-->
+        <LogLevel>VERBOSE</LogLevel>
+
+        <!-- Logging Types
+        <LogType>CONSOLE</LogType>
+        <LogType>TXT</LogType>
+        <LogType>HTML</LogType>-->
+        <LogType>TXT</LogType>
+
+        <!-- Log file path - Defaults to build location if no value is defined -->
+        <FileLoggerPath>./target/logs</FileLoggerPath>
+    </MagenicMaqs>
+    <MongoMaqs>
+        <MongoConnectionString>mongodb://localhost:27017</MongoConnectionString>
+        <MongoDatabase>MongoDatabaseTest</MongoDatabase>
+        <MongoCollection>MongoTestCollection</MongoCollection>
+        <MongoTimeout>30</MongoTimeout>
+    </MongoMaqs>
+</configuration>
