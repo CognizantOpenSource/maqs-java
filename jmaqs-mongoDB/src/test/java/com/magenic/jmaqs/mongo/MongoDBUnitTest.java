@@ -5,21 +5,22 @@
 package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.mongodb.QueryBuilder;
 import com.mongodb.client.MongoCollection;
 import org.bson.BsonDocument;
 import org.bson.Document;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
-
 import java.util.List;
-/// <summary>
-/// Test basic mongo base test functionality
-/// </summary>
+
+/**
+ * Test basic mongo base test functionality
+ */
 public class MongoDBUnitTest extends BaseMongoTest {
-  /// <summary>
-  /// Is the collection override respected
-  /// </summary>
+  /**
+   * Is the collection override respected.
+   */
   @Test(groups = TestCategories.MONGO)
   public void OverrideCollectionFunction() {
     MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
@@ -31,9 +32,9 @@ public class MongoDBUnitTest extends BaseMongoTest {
     Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
   }
 
-  /// <summary>
-  /// Are the connection string overrides respected
-  /// </summary>
+  /**
+   * Are the connection string overrides respected.
+   */
   @Test(groups = TestCategories.MONGO)
   public void OverrideConnectionStrings() {
     MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
@@ -44,9 +45,9 @@ public class MongoDBUnitTest extends BaseMongoTest {
     Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
   }
 
-  /// <summary>
-  /// Is the driver override respected
-  /// </summary>
+  /**
+   * Is the driver override respected.
+   */
   @Test(groups = TestCategories.MONGO)
   public void OverrideDriver() {
     MongoDBDriver firstDriver = this.getMongoDBDriver();
@@ -58,9 +59,9 @@ public class MongoDBUnitTest extends BaseMongoTest {
     Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
   }
 
-  /// <summary>
-  /// Is the test over-ridable with a custom driver
-  /// </summary>
+  /**
+   * Is the test over-ridable with a custom driver.
+   */
   @Test(groups = TestCategories.MONGO)
   public void OverrideWithCustomDriver() {
     MongoDBDriver firstDriver = this.getMongoDBDriver();
@@ -73,9 +74,9 @@ public class MongoDBUnitTest extends BaseMongoTest {
     Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
   }
 
-  /// <summary>
-  /// Test the list all collection items helper function
-  /// </summary>
+  /**
+   * Test the list all collection items helper function.
+   */
   @Test(groups = TestCategories.MONGO)
   public void TestMongoListAllCollectionItems() {
     List<Document> collectionItems = this.getMongoDBDriver().listAllCollectionItems();
@@ -86,76 +87,73 @@ public class MongoDBUnitTest extends BaseMongoTest {
     Assert.assertEquals(4, collectionItems.size());
   }
 
-  /// <summary>
-  /// Test the count all collection items helper function
-  /// </summary>
+  /**
+   * Test the count all collection items helper function
+   */
   @Test(groups = TestCategories.MONGO)
   public void TestMongoCountItemsInCollection() {
     Assert.assertEquals(4, this.getMongoDBDriver().countAllItemsInCollection());
   }
 
-  /// <summary>
-  /// Test the collection works as expected
-  /// </summary>
+
+  ///**
+  // * Test the collection works as expected.
+  // */
+  //@Test(groups = TestCategories.MONGO)
+  //public void TestMongoGetLoginID() {
+  //  var filter = Builders.Filter.Eq("lid", "test3");
+//
+  //  String value = this.getMongoDBDriver().getCollection().find(filter).ToList()[0]["lid"].ToString();
+  //  Assert.assertEquals("test3", value);
+  //}
+//
+  ///**
+  // * Test the collection works as expected.
+  // */
+  //@Test(groups = TestCategories.MONGO)
+  //public void TestMongoQueryAndReturnFirst() {
+  //  var filter = Builders.Filter.Eq("lid", "test3");
+  //  MongoCollection<Document> document = this.getMongoDBDriver().getCollection().Find(filter).ToList().First();
+  //  Assert.assertEquals("test3", document["lid"].ToString());
+  //}
+//
+  ///**
+  // * Test the collection works as expected
+  // */
+  //@Test(groups = TestCategories.MONGO)
+  //public void TestMongoFindListWithKey() {
+  //  var filter = Builders<Document>.Filter.Exists("lid");
+  //  List<Document> documentList = this.getMongoDBDriver().getCollection().find(filter);
+  //  for (Document documents : documentList) {
+  //    Assert.assertNotEquals(documents.get("lid").toString(), "");
+  //  }
+//
+  //  Assert.assertEquals(4, documentList.size());
+  //}
+//
+  ///**
+  // * Test the collection works as expected.
+  // */
+  //@Test(groups = TestCategories.MONGO)
+  //public void TestMongoLinqQuery() {
+  //  QueryBuilder<BsonDocument> query =
+  //      from e in this.getMongoDBDriver().getCollection().Collection.AsQueryable<BsonDocument>()
+  //  where e["lid"] == "test1"
+  //  select e;
+  //  List<BsonDocument> retList = query.ToList<BsonDocument>();
+  //  for (var value : retList) {
+  //    Assert.assertEquals("test1", value["lid"]);
+  //  }
+  //}
+
+  /**
+   * Make sure the test objects map properly.
+   */
   @Test(groups = TestCategories.MONGO)
-  public void TestMongoGetLoginID() {
-    var filter = Builders.Filter.Eq("lid", "test3");
-
-    String value = this.getMongoDBDriver().getCollection().find(filter).ToList()[0]["lid"].ToString();
-    Assert.assertEquals("test3", value);
-  }
-
-  /// <summary>
-  /// Test the collection works as expected
-  /// </summary>
-  @Test(groups = TestCategories.MONGO)
-  public void TestMongoQueryAndReturnFirst() {
-    var filter = Builders.Filter.Eq("lid", "test3");
-    MongoCollection<Document> document = this.getMongoDBDriver().getCollection().Find(filter).ToList().First();
-    Assert.assertEquals("test3", document["lid"].ToString());
-  }
-
-  /// <summary>
-  /// Test the collection works as expected
-  /// </summary>
-  @Test(groups = TestCategories.MONGO)
-  public void TestMongoFindListWithKey() {
-    var filter = Builders<BsonDocument>.Filter.Exists("lid");
-    List<BsonDocument> documentList = this.MongoDBDriver.Collection.Find(filter).ToList();
-    foreach (BsonDocument documents in documentList)
-    {
-      Assert.AreNotEqual(documents["lid"].ToString(), string.Empty);
-    }
-
-    Assert.AreEqual(4, documentList.Count);
-  }
-
-  /// <summary>
-  /// Test the collection works as expected
-  /// </summary>
-  @Test(groups = TestCategories.MONGO)
-  public void TestMongoLinqQuery() {
-    MongoQueryable<BsonDocument> query =
-        from e in this.MongoDBDriver.Collection.AsQueryable<BsonDocument>()
-    where e["lid"] == "test1"
-    select e;
-    List<BsonDocument> retList = query.ToList<BsonDocument>();
-    foreach (var value in retList)
-    {
-      Assert.AreEqual("test1", value["lid"]);
-    }
-  }
-
-  /// <summary>
-  /// Make sure the test objects map properly
-  /// </summary>
-  @Test(groups = TestCategories.MONGO)
-  public void TestMongoDBTestObjectMapCorrectly()
-  {
-    Assert.AreEqual(this.TestObject.Log, this.Log, "Logs don't match");
-    Assert.AreEqual(this.TestObject.SoftAssert, this.SoftAssert, "Soft asserts don't match");
-    Assert.AreEqual(this.TestObject.PerfTimerCollection, this.PerfTimerCollection, "Soft asserts don't match");
-    Assert.AreEqual(this.TestObject.MongoDBDriver, this.MongoDBDriver, "Web service driver don't match");
+  public void TestMongoDBTestObjectMapCorrectly() {
+    Assert.assertEquals(this.getTestObject().getLogger(), this.getLogger(), "Logs don't match");
+    Assert.assertEquals(this.getTestObject().getPerfTimerCollection(), this.getPerfTimerCollection(), "Soft asserts don't match");
+    Assert.assertEquals(this.getTestObject().getMongoDBDriver(), this.getMongoDBDriver(), "Web service driver don't match");
   }
 
   /**
@@ -163,11 +161,13 @@ public class MongoDBUnitTest extends BaseMongoTest {
    *
    * @param resultType The test result
    */
-  @Override protected void beforeLoggingTeardown(ITestResult resultType) {
+  @Override
+  protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
 
-  @Override protected void createNewTestObject() {
+  @Override
+  protected void createNewTestObject() {
 
   }
 }

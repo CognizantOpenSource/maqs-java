@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.mongo;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Class to wrap the MongoCollection and related helper functions
  */
-public class MongoDBDriver {
+public class MongoDBDriver implements AutoCloseable{
   /**
    * Initializes a new instance of the MongoDBDriver class
    * @param collection The collection object
@@ -50,22 +51,42 @@ public class MongoDBDriver {
   }
 
   /**
+   * The Mongo DB client.
+   */
+  private MongoClient client;
+
+  /**
    * Gets the client object.
    * @return the mongo client
    */
   public MongoClient getMongoClient() {
-      return this.Database.Client;
+      return this.client;
   }
 
+  /**
+   * Sets the client object.
+   * @param newClient the new mongo Client to be set.
+   */
+  public void setMongoClient(MongoClient newClient) {
+    this.client = newClient;
+  }
+
+  /**
+   * The MongoDB Database.
+   */
   private MongoDatabase database;
 
-  /// <summary>
-  /// Gets the database object
-  /// </summary>
+  /**
+   * Gets the database object.
+   * @return the MongoDB database object
+   */
   public MongoDatabase getDatabase() {
-      return this.collection.Database;
+      return this.database;
   }
 
+  /**
+   * The MongoDB collection.
+   */
   private MongoCollection<Document> collection;
 
   /**
@@ -82,27 +103,40 @@ public class MongoDBDriver {
     this.collection = newCollection;
   }
 
-  /// <summary>
-  /// List all of the items in the collection
-  /// </summary>
-  /// <returns>List of the items in the collection</returns>
+  /**
+   * List all of the items in the collection
+   * @return List of the items in the collection
+   */
   public List<Document> listAllCollectionItems() {
-    return this.getCollection().Find<T>(_ => true).ToList();
+    //return this.getCollection().Find<T>(_ -> true).ToList();
+    List<Document> collectionList = null;
+    try {
+      for (Document doc : this.getCollection().find()) {
+        collectionList.add(doc);
+      }
+    } catch (Exception e) {
+      throw new MongoException("Collection document is empty");
+    }
+    return collectionList;
   }
 
-  /// <summary>
-  /// Checks if the collection contains any records
-  /// </summary>
-  /// <returns>True if the collection is empty, false otherwise</returns>
+  /**
+   * Checks if the collection contains any records.
+   * @return True if the collection is empty, false otherwise
+   */
   public boolean isCollectionEmpty() {
-    return !this.getCollection().Find<T>(_ => true).Any();
+    return this.getCollection().find() == null;
   }
 
-  /// <summary>
-  /// Counts all of the items in the collection
-  /// </summary>
-  /// <returns>Number of items in the collection</returns>
+  /**
+   * Counts all of the items in the collection.
+   * @return Number of items in the collection
+   */
   public int countAllItemsInCollection() {
-    return Integer.parseInt(this.getCollection().CountDocuments(_ => true).ToString());
+    return (int) this.getCollection().count();
+  }
+
+  @Override public void close() throws Exception {
+
   }
 }

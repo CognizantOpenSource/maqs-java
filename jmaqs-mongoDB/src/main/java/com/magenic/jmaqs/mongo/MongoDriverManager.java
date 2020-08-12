@@ -60,7 +60,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    */
   public void overrideDriver(String connectionString, String databaseString, String collectionString) {
     this.driver = null;
-    this.overrideDriver(() -> MongoFactory.getCollection(connectionString, databaseString, collectionString));
+    this.overrideDriverGet(() -> MongoFactory.getCollection(connectionString, databaseString, collectionString));
   }
 
   /**
@@ -69,7 +69,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    */
   public void overrideDriver(Supplier<MongoCollection<Document>> overrideCollectionConnection) {
     this.driver = null;
-    this.overrideDriver(overrideCollectionConnection);
+    this.overrideDriverGet(overrideCollectionConnection);
   }
 
   /**
@@ -78,7 +78,8 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    */
   public MongoDBDriver getMongoDriver() {
     if (this.driver == null) {
-      MongoCollection<Document> temp = (MongoCollection<Document>)getBase();
+      // TODO: delete this if it works properly
+      MongoCollection<Document> temp = /*(MongoCollection<Document>)*/ getBase().getCollection();
 
       if (LoggingConfig.getLoggingEnabledSetting() == LoggingEnabled.NO) {
         this.getLogger().logMessage(MessageType.INFORMATION, "Getting Mongo driver");
@@ -91,6 +92,19 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
     return this.driver;
   }
 
+  protected void overrideDriverGet(Supplier<MongoCollection<Document>> driverGet) {
+    this.setBaseDriver((MongoDBDriver) driverGet);
+  }
+
+
   @Override
-  public void close() throws Exception { }
+  public void close() throws Exception {
+    if (!this.isDriverInitialized()) {
+      return;
+    }
+
+    MongoDBDriver mongoDBDriver = this.getMongoDriver();
+    mongoDBDriver.close();
+    this.baseDriver = null;
+  }
 }

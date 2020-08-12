@@ -11,20 +11,87 @@ import org.testng.ITestResult;
 
 import java.util.function.Supplier;
 
-/// <summary>
-/// Generic base MongoDB test class
-/// </summary>
-/// <typeparam name="T">The mongo collection type</typeparam>
+/**
+ * Generic base MongoDB test class.
+ */
 public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
-  /// <summary>
-  /// Initializes a new instance of the <see cref="BaseMongoTest{T}"/> class.
-  /// Setup the database client for each test class
-  /// </summary>
-  public BaseMongoTest() { }
+  /**
+   * Initializes a new instance of the BaseMongoTest class,
+   * Setup the database client for each test class.
+   */
+  public BaseMongoTest() {
+    // Currently not populated with any logic
+  }
+
+  /**
+   * Gets the mongoDB driver.
+   * @return the mongoDB driver
+   */
+  public MongoDBDriver getMongoDBDriver() {
+    return this.getTestObject().getMongoDBDriver();
+  }
+
+  /**
+   * Sets the MongoDB driver
+   * @param value the MongoDB driver to be set.
+   */
+  public void setMongoDBDriver(MongoDBDriver value) {
+    this.getTestObject().overrideMongoDBDriver(value);
+  }
+
+  /**
+   * Override the Mongo driver - does not lazy load.
+   * @param driver New Mongo driver
+   */
+  public void overrideConnectionDriver(MongoDBDriver driver) {
+    this.getTestObject().overrideMongoDBDriver(driver);
+  }
+
+  /**
+   * Override the Mongo driver - respects lazy loading.
+   * @param overrideCollectionConnection The new collection connection
+   */
+  public void overrideConnectionDriver(
+      Supplier<MongoCollection<Document>> overrideCollectionConnection) {
+    this.getTestObject().overrideMongoDBDriver(overrideCollectionConnection);
+  }
+
+  /**
+   * Override the Mongo driver  - respects lazy loading.
+   * @param connectionString Client connection string
+   * @param databaseString Database connection string
+   * @param collectionString Mongo collection string
+   */
+  public void overrideConnectionDriver(String connectionString, String databaseString, String collectionString) {
+    this.getTestObject().overrideMongoDBDriver(connectionString, databaseString, collectionString);
+  }
+
+  /**
+   * Get the base web service url.
+   * @return The base web service url
+   */
+  protected String getBaseConnectionString() {
+    return MongoDBConfig.getConnectionString();
+  }
+
+  /**
+   * Get the base web service url.
+   * @return The base web service url
+   */
+  protected String getBaseDatabaseString() {
+    return MongoDBConfig.getDatabaseString();
+  }
+
+  /**
+   * Get the base web service url.
+   * @return The base web service url
+   */
+  protected String getBaseCollectionString() {
+    return MongoDBConfig.getCollectionString();
+  }
 
   /**
    * Steps to do before logging teardown results.
-   *
    * @param resultType The test result
    */
   @Override protected void beforeLoggingTeardown(ITestResult resultType) {
@@ -32,68 +99,5 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
   }
 
   @Override protected void createNewTestObject() {
-
-  }
-
-  /// <summary>
-  /// Gets or sets the web service driver
-  /// </summary>
-  public MongoDBDriver getMongoDBDriver() {
-    return this.getTestObject().getMongoDBDriver();
-  }
-
-  public void setMongoDBDriver(MongoDBDriver value) {
-    this.getTestObject().overrideMongoDBDriver(value);
-  }
-
-  /// <summary>
-  /// Override the Mongo driver - does not lazy load
-  /// </summary>
-  /// <param name="driver">New Mongo driver</param>
-  public void overrideConnectionDriver(MongoDBDriver driver) {
-    this.getTestObject().overrideMongoDBDriver(driver);
-  }
-
-  /// <summary>
-  /// Override the Mongo driver - respects lazy loading
-  /// </summary>
-  /// <param name="overrideCollectionConnection">The new collection connection</param>
-  public void overrideConnectionDriver(
-      Supplier<MongoCollection<Document>> overrideCollectionConnection) {
-    this.getTestObject().overrideMongoDBDriver(overrideCollectionConnection);
-  }
-
-  /// <summary>
-  /// Override the Mongo driver  - respects lazy loading
-  /// </summary>
-  /// <param name="connectionString">Client connection string</param>
-  /// <param name="databaseString">Database connection string</param>
-  /// <param name="collectionString">Mongo collection string</param>
-  public void overrideConnectionDriver(String connectionString, String databaseString, String collectionString) {
-    this.getTestObject().overrideMongoDBDriver(connectionString, databaseString, collectionString);
-  }
-
-  /// <summary>
-  /// Get the base web service url
-  /// </summary>
-  /// <returns>The base web service url</returns>
-  protected String getBaseConnectionString() {
-    return MongoDBConfig.getConnectionString();
-  }
-
-  /// <summary>
-  /// Get the base web service url
-  /// </summary>
-  /// <returns>The base web service url</returns>
-  protected String getBaseDatabaseString() {
-    return MongoDBConfig.getDatabaseString();
-  }
-
-  /// <summary>
-  /// Get the base web service url
-  /// </summary>
-  /// <returns>The base web service url</returns>
-  protected String getBaseCollectionString() {
-    return MongoDBConfig.getCollectionString();
   }
 }
