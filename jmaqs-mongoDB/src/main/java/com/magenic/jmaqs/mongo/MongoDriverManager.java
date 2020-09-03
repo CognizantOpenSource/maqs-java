@@ -77,9 +77,10 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @return The Mongo driver
    */
   public MongoDBDriver getMongoDriver() {
+    /*
     if (this.driver == null) {
       // TODO: delete this if it works properly
-      MongoCollection<Document> temp = /*(MongoCollection<Document>)*/ getBase().getCollection();
+      MongoCollection<Document> temp = (MongoCollection<Document>) getBase().getCollection();
 
       if (LoggingConfig.getLoggingEnabledSetting() == LoggingEnabled.NO) {
         this.getLogger().logMessage(MessageType.INFORMATION, "Getting Mongo driver");
@@ -90,19 +91,19 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
     }
 
     return this.driver;
+     */
+    return getBase();
   }
 
   protected void overrideDriverGet(Supplier<MongoCollection<Document>> driverGet) {
     this.setBaseDriver((MongoDBDriver) driverGet);
   }
 
-
   @Override
   public void close() throws Exception {
     if (!this.isDriverInitialized()) {
       return;
     }
-
     MongoDBDriver mongoDBDriver = this.getMongoDriver();
     mongoDBDriver.close();
     this.baseDriver = null;

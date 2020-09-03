@@ -5,9 +5,6 @@
 package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.mongodb.QueryBuilder;
-import com.mongodb.client.MongoCollection;
-import org.bson.BsonDocument;
 import org.bson.Document;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -17,63 +14,7 @@ import java.util.List;
 /**
  * Test basic mongo base test functionality
  */
-public class MongoDBUnitTest extends BaseMongoTest {
-  /**
-   * Is the collection override respected.
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void OverrideCollectionFunction() {
-    MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
-    MongoCollection<Document> newCollection = MongoFactory.getDefaultCollection();
-    this.getTestObject().overrideMongoDBDriver(() -> newCollection);
-
-    Assert.assertNotEquals(collection, this.getMongoDBDriver().getCollection());
-    Assert.assertEquals(newCollection, this.getMongoDBDriver().getCollection());
-    Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
-  }
-
-  /**
-   * Are the connection string overrides respected.
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void OverrideConnectionStrings() {
-    MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
-    this.getTestObject().overrideMongoDBDriver(MongoDBConfig.getConnectionString(),
-        MongoDBConfig.getDatabaseString(), MongoDBConfig.getCollectionString());
-
-    Assert.assertNotEquals(collection, this.getMongoDBDriver().getCollection());
-    Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
-  }
-
-  /**
-   * Is the driver override respected.
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void OverrideDriver() {
-    MongoDBDriver firstDriver = this.getMongoDBDriver();
-    MongoDBDriver newDriver = new MongoDBDriver(MongoFactory.getDefaultCollection());
-    this.getTestObject().overrideMongoDBDriver(newDriver);
-
-    Assert.assertNotEquals(firstDriver, this.getMongoDBDriver());
-    Assert.assertEquals(newDriver, this.getMongoDBDriver());
-    Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
-  }
-
-  /**
-   * Is the test over-ridable with a custom driver.
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void OverrideWithCustomDriver() {
-    MongoDBDriver firstDriver = this.getMongoDBDriver();
-    MongoDBDriver newDriver = new MongoDBDriver(MongoFactory.getCollection(MongoDBConfig.getConnectionString(),
-        MongoDBConfig.getDatabaseString(), null, MongoDBConfig.getCollectionString()));
-    this.getTestObject().overrideMongoDBDriver(newDriver);
-
-    Assert.assertNotEquals(firstDriver, this.getMongoDBDriver());
-    Assert.assertEquals(newDriver, this.getMongoDBDriver());
-    Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
-  }
-
+public class MongoDBDriverUnitTest extends BaseMongoTest {
   /**
    * Test the list all collection items helper function.
    */

@@ -5,11 +5,10 @@
 package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.mongodb.client.MongoCollection;
-import org.bson.Document;
+import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
+import com.magenic.jmaqs.utilities.logging.MessageType;
 import org.testng.ITestResult;
-
-import java.util.function.Supplier;
 
 /**
  * Generic base MongoDB test class.
@@ -45,15 +44,6 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
    */
   public void overrideConnectionDriver(MongoDBDriver driver) {
     this.getTestObject().overrideMongoDBDriver(driver);
-  }
-
-  /**
-   * Override the Mongo driver - respects lazy loading.
-   * @param overrideCollectionConnection The new collection connection
-   */
-  public void overrideConnectionDriver(
-      Supplier<MongoCollection<Document>> overrideCollectionConnection) {
-    this.getTestObject().overrideMongoDBDriver(overrideCollectionConnection);
   }
 
   /**
@@ -94,10 +84,14 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
    * Steps to do before logging teardown results.
    * @param resultType The test result
    */
-  @Override protected void beforeLoggingTeardown(ITestResult resultType) {
+  @Override
+  protected void beforeLoggingTeardown(ITestResult resultType) {
+    // Currently not populated with any logic
+      }
 
-  }
-
-  @Override protected void createNewTestObject() {
+  @Override
+  protected void createNewTestObject() {
+    this.setTestObject(new MongoTestObject(this.getBaseConnectionString(), this.getBaseDatabaseString(),
+        this.getBaseCollectionString(), this.createLogger(), this.getFullyQualifiedTestClassName()));
   }
 }
