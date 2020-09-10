@@ -101,7 +101,7 @@ public class WebDriverFactory {
    */
   public static ChromeOptions getDefaultChromeOptions() {
     ChromeOptions chromeOptions = new ChromeOptions();
-    chromeOptions.addArguments("test-type");
+    chromeOptions.addArguments("--test-type");
     chromeOptions.addArguments("--disable-web-security");
     chromeOptions.addArguments("--allow-running-insecure-content");
     chromeOptions.addArguments("--disable-extensions");
@@ -131,7 +131,7 @@ public class WebDriverFactory {
    */
   public static ChromeOptions getDefaultHeadlessChromeOptions(String size) {
     ChromeOptions headlessChromeOptions = new ChromeOptions();
-    headlessChromeOptions.addArguments("test-type");
+    headlessChromeOptions.addArguments("--test-type");
     headlessChromeOptions.addArguments("--disable-web-security");
     headlessChromeOptions.addArguments("--allow-running-insecure-content");
     headlessChromeOptions.addArguments("--disable-extensions");
