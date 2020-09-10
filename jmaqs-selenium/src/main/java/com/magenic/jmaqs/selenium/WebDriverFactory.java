@@ -105,6 +105,11 @@ public class WebDriverFactory {
     chromeOptions.addArguments("--allow-running-insecure-content");
     chromeOptions.addArguments("--disable-extensions");
 
+    if (OperatingSystem.getOperatingSystem() == OperatingSystem.LINUX) {
+      chromeOptions.addArguments("--no-sandbox");
+      chromeOptions.addArguments("--disable-dev-shm-usage");
+    }
+    
     return chromeOptions;
   }
 
