@@ -10,6 +10,7 @@
     <groupId>com.magenic.jmaqs.selenium</groupId>
     <artifactId>jmaqs-selenium</artifactId>
     <name>JMAQS Selenium Testing Module</name>
+    <version>${revision}</version>
     <packaging>jar</packaging>
 
     <properties>

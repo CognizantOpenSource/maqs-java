@@ -8,6 +8,7 @@
 
     <groupId>com.magenic.jmaqs.cucumber</groupId>
     <artifactId>jmaqs-cucumber</artifactId>
+    <version>${revision}</version>
     <name>JMAQS Cucumber Module</name>
 
     <packaging>jar</packaging>
