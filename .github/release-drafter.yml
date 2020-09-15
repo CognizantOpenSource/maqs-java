@@ -1,9 +1,6 @@
 name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
 change-template: "* $TITLE (#$NUMBER)"
-template: |
-  ## What’s Changed
-  $CHANGES
 categories:
   - title: 'Feature'
     label: 'feature'
@@ -19,7 +16,6 @@ categories:
       - 'dependabot'
   - title: 'DevOps'
     label: 'devops'
-    
 version-resolver:
   major:
     labels:
@@ -35,3 +31,7 @@ version-resolver:
       - 'maintenance'
       - 'dependencies'
   default: patch
+template: |
+  ## What’s Changed
+  
+  $CHANGES
