@@ -23,15 +23,14 @@ jobs:
         uses: InstaCode/maven-settings-xml-action@v9
         with:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
-          servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
       - name: Run Unit Tests
         uses: GabrielBB/xvfb-action@v1
         with:
           run: mvn -Psonar -B -Dtesting verify package --file pom.xml -e -fae -T 1C
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #- name: Run SonarCloud Analysis
-        #run: mvn -Psonar -B sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
+      - name: Run SonarCloud Analysis
+        run: mvn -Psonar -B sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
       - name: Publish Unit Test Results Report
         uses: scacap/action-surefire-report@v1
         if: ${{ always() }}
