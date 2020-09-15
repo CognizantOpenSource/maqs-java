@@ -55,28 +55,28 @@ jobs:
           run: mvn -Drevision="${{env.VERSION}}" -Dmaven.test.skip=true -T 1C verify install -B -e -f pom.xml -fae
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #      - name: Run SonarCloud Analysis
-      #        run: mvn -Drevision="${{env.VERSION}}" -Psonar -B package sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
-      #        env:
-      #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run SonarCloud Analysis
+        run: mvn -Drevision="${{env.VERSION}}" -Psonar -B package sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Build Artifacts
         if: ${{ success() }}
         uses: actions/upload-artifact@v2
         with:
           name: packages
           path: ./**/*.jar
-#      - name: Publish Unit Test Results Report
-#        uses: scacap/action-surefire-report@v1
-#        if: ${{ always() }}
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          check_name: Unit Test Results
-#      - name: Upload Test Result Logs
-#        if: ${{ always() }}
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: Logs
-#          path: ./**/logs
+      - name: Publish Unit Test Results Report
+        uses: scacap/action-surefire-report@v1
+        if: ${{ always() }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          check_name: Unit Test Results
+      - name: Upload Test Result Logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Logs
+          path: ./**/logs
 
   deploy_release:
     name: Deploy Release Packages
@@ -111,31 +111,31 @@ jobs:
           servers: '[{"id": "ossrh", "username": "jason-edstrom", "password": "${{secrets.OSSRH_PACKAGES}}"},{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
       - name: Print out version number from needs
         run: echo "${{env.VERSION}}"
-  #      - uses: altinukshini/deployment-action@releases/v1
-  #        name: Create GitHub deployment
-  #        id: deployment
-  #        with:
-  #          token: "${{ github.token }}"
-  #          target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
-  #          environment: Release - ${{matrix.repo}}
-  #      - name: Deploy Release v$GIT_TAG_NAME Packages to '${{matrix.repo}}' Repository
-  #        run: mvn -Drevision="$GIT_TAG_NAME" -P${{matrix.repo}} -Drelease deploy -B -e -f pom.xml
-  #      - name: Update deployment status (success)
-  #        if: success()
-  #        uses: altinukshini/deployment-status@releases/v1
-  #        with:
-  #          token: "${{ github.token }}"
-  #          target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
-  #          state: "success"
-  #          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-  #      - name: Update deployment status (failure)
-  #        if: failure()
-  #        uses: altinukshini/deployment-status@releases/v1
-  #        with:
-  #          token: "${{ github.token }}"
-  #          target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
-  #          state: "failure"
-  #          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        - uses: altinukshini/deployment-action@releases/v1
+          name: Create GitHub deployment
+          id: deployment
+          with:
+            token: "${{ github.token }}"
+            target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
+            environment: Release - ${{matrix.repo}}
+        - name: Deploy Release v$GIT_TAG_NAME Packages to '${{matrix.repo}}' Repository
+          run: mvn -Drevision="$GIT_TAG_NAME" -P${{matrix.repo}} -Drelease deploy -B -e -f pom.xml
+        - name: Update deployment status (success)
+          if: success()
+          uses: altinukshini/deployment-status@releases/v1
+          with:
+            token: "${{ github.token }}"
+            target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
+            state: "success"
+            deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        - name: Update deployment status (failure)
+          if: failure()
+          uses: altinukshini/deployment-status@releases/v1
+          with:
+            token: "${{ github.token }}"
+            target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
+            state: "failure"
+            deployment_id: ${{ steps.deployment.outputs.deployment_id }}
   upload_release:
     name: Upload Release Artifacts
     needs: [ deploy_release, release_information ]
