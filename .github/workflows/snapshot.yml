@@ -111,7 +111,7 @@ jobs:
           target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
           environment: SnapShot - ${{matrix.repo}}
       - name: Deploy SnapShot Packages to '${{matrix.repo}}' Repository
-        run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -P${{matrix.repo}} -Dsnapshot deploy -B -e -f pom.xml
+        run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -pl '!jmaqs-jacoco-reporting,!jmaqs-webservices-jdk11' -P${{matrix.repo}} -Dsnapshot deploy -B -e -f pom.xml
       - name: Update deployment status (success)
         if: success()
         uses: altinukshini/deployment-status@releases/v1
