@@ -52,7 +52,7 @@ jobs:
       - name: Set Version to ${{env.VERSION}} and Run Unit Tests
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: mvn -Drevision="${{env.VERSION}}" -Dmaven.test.skip=true -T 1C verify install -B -e -f pom.xml -fae
+          run: mvn -Drevision="${{env.VERSION}}" -Dtesting -T 1C verify install -B -e -f pom.xml -fae
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run SonarCloud Analysis
@@ -109,33 +109,31 @@ jobs:
         uses: InstaCode/maven-settings-xml-action@v9
         with:
           servers: '[{"id": "ossrh", "username": "jason-edstrom", "password": "${{secrets.OSSRH_PACKAGES}}"},{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
-      - name: Print out version number from needs
-        run: echo "${{env.VERSION}}"
-        - uses: altinukshini/deployment-action@releases/v1
-          name: Create GitHub deployment
+      - name: Create GitHub deployment - ${{matrix.repo}}
+        uses: altinukshini/deployment-action@releases/v1
           id: deployment
-          with:
-            token: "${{ github.token }}"
-            target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
-            environment: Release - ${{matrix.repo}}
-        - name: Deploy Release v$GIT_TAG_NAME Packages to '${{matrix.repo}}' Repository
-          run: mvn -Drevision="$GIT_TAG_NAME" -P${{matrix.repo}} -Drelease deploy -B -e -f pom.xml
-        - name: Update deployment status (success)
+        with:
+          token: "${{ github.token }}"
+          target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
+          environment: Release - ${{matrix.repo}}
+      - name: Deploy Release v${{env.VERSION}} Packages to '${{matrix.repo}}' Repository
+          run: mvn -Drevision="${{env.VERSION}}" -P${{matrix.repo}} -Drelease deploy -B -e -f pom.xml
+      - name: Update deployment status (success)
           if: success()
-          uses: altinukshini/deployment-status@releases/v1
-          with:
-            token: "${{ github.token }}"
-            target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
-            state: "success"
-            deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-        - name: Update deployment status (failure)
+        uses: altinukshini/deployment-status@releases/v1
+        with:
+          token: "${{ github.token }}"
+          target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
+          state: "success"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      - name: Update deployment status (failure)
           if: failure()
-          uses: altinukshini/deployment-status@releases/v1
-          with:
-            token: "${{ github.token }}"
-            target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
-            state: "failure"
-            deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        uses: altinukshini/deployment-status@releases/v1
+        with:
+          token: "${{ github.token }}"
+          target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
+          state: "failure"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
   upload_release:
     name: Upload Release Artifacts
     needs: [ deploy_release, release_information ]
