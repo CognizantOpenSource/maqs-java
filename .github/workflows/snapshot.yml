@@ -81,7 +81,7 @@ jobs:
     strategy:
       matrix:
         #repo: [github, ossrh]
-        repo: [ github ]
+        repo: [ ossrh ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -102,7 +102,7 @@ jobs:
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
         with:
-          servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
+          servers: '[{"id": "ossrh", "username": "jason-edstrom", "password": "${{secrets.OSSRH_PACKAGES}}"},{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
       - uses: altinukshini/deployment-action@releases/v1
         name: Create GitHub deployment
         id: deployment
