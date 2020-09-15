@@ -111,15 +111,15 @@ jobs:
           servers: '[{"id": "ossrh", "username": "jason-edstrom", "password": "${{secrets.OSSRH_PACKAGES}}"},{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
       - name: Create GitHub deployment - ${{matrix.repo}}
         uses: altinukshini/deployment-action@releases/v1
-          id: deployment
+        id: deployment
         with:
           token: "${{ github.token }}"
           target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
           environment: Release - ${{matrix.repo}}
       - name: Deploy Release v${{env.VERSION}} Packages to '${{matrix.repo}}' Repository
-          run: mvn -Drevision="${{env.VERSION}}" -P${{matrix.repo}} -Drelease deploy -B -e -f pom.xml
+        run: mvn -Drevision="${{env.VERSION}}" -P${{matrix.repo}} -Drelease deploy -B -e -f pom.xml
       - name: Update deployment status (success)
-          if: success()
+        if: success()
         uses: altinukshini/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
@@ -127,7 +127,7 @@ jobs:
           state: "success"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
       - name: Update deployment status (failure)
-          if: failure()
+        if: failure()
         uses: altinukshini/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
