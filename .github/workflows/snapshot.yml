@@ -66,9 +66,9 @@ jobs:
           name: Logs
           path: ./**/logs
       - name: Upload Build Artifacts
-          if: ${{ success() }}
-          uses: actions/upload-artifact@v2
-          with:
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v2
+        with:
             name: Artifacts
             path: ./**/*.jar
 
