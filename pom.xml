@@ -143,21 +143,6 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-maven-plugin</artifactId>
-                        <version>2.1</version>
-                        <executions>
-                            <execution>
-                                <id>release</id>
-                                <goals>
-                                    <goal>staging-close</goal>
-                                    <goal>staging-release</goal>
-                                </goals>
-                                <phase>deploy</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>1.6</version>
