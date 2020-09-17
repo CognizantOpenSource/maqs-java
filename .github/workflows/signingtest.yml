@@ -31,7 +31,7 @@ jobs:
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
         with:
-          profiles: '[{ "id": "release-ossrh", "properties": { "gpg.passphrase": "${{ secrets.GPG_PASSPHRASE }}"}]'
+          profiles: '[{ "id": "release-ossrh", "properties": { "gpg.passphrase": "${{ secrets.GPG_PASSPHRASE }}"}}]'
           servers: '[{"id": "ossrh", "username": "jason-edstrom", "password": "${{secrets.OSSRH_PACKAGES}}"},{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
       - name: Deploy Release v2.2.0 Packages to '${{matrix.repo}}' Repository
         run: mvn -Drevision="2.2.0" -Ddeploy=${{matrix.repo}} -Prelease-${{matrix.repo}} install -B -e -f pom.xml
