@@ -51,14 +51,18 @@
         <module>jmaqs-base</module>
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
-        <module>jmaqs-webservices-jdk11</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
         <module>jmaqs-cucumber</module>
-        <module>jmaqs-jacoco-reporting</module>
     </modules>
 
     <profiles>
+        <profile>
+            <id>WIP</id>
+            <modules>
+                <module>jmaqs-webservices-jdk11</module>
+            </modules>
+        </profile>
         <profile>
             <id>deploy</id>
             <activation>
@@ -143,6 +147,17 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>1.6</version>
@@ -190,6 +205,9 @@
                     <name>testing</name>
                 </property>
             </activation>
+            <modules>
+                <module>jmaqs-jacoco-reporting</module>
+            </modules>
             <build>
                 <plugins>
                     <plugin>
