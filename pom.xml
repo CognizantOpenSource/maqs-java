@@ -170,7 +170,6 @@
                                 </goals>
                                 <configuration>
                                     <gpgArguments>
-                                        <arg>-Dgpg.passphrase=${gpg.passphrase}</arg>
                                         <arg>--pinentry-mode</arg>
                                         <arg>loopback</arg>
                                     </gpgArguments>
