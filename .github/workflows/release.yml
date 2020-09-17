@@ -12,6 +12,8 @@ jobs:
       version: ${{steps.bash_v.outputs.version}}
       release_upload_url: ${{steps.get_release.outputs.upload_url}}
       release_html_url: ${{steps.get_release.outputs.html_url}}
+      tag_name: ${{steps.get_release.outputs.tag_name}}
+      release_id: ${{steps.get_release.outputs.id}}
     steps:
       - name: Get release
         id: get_release
@@ -83,6 +85,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERSION: ${{needs.release_information.outputs.version}}
+      TAG_NAME: ${{needs.release_information.outputs.tag_name}}
+      RELEASE_ID: ${{needs.release_information.outputs.relase_id}}
     strategy:
       matrix:
         repo: [github, ossrh]
@@ -132,6 +136,18 @@ jobs:
           target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
           state: "failure"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      - name: Rollback Release
+        if: failure()
+        uses: author/action-rollback@stable
+        with:
+          # Using a known release ID
+          id: ${{ env.RELEASE_ID }}
+          # Using a tag name
+          tag: ${{ env.TAG_NAME }}
+          # Always delete the tag, even if a release is not associated with it.
+          always_delete_tag: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   upload_release:
     name: Upload Release Artifacts
     needs: [ deploy_release, release_information ]
