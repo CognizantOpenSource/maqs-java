@@ -6,9 +6,6 @@ package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.base.DriverManager;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
-import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 

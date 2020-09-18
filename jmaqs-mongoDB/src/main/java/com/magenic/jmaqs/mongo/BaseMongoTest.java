@@ -5,9 +5,6 @@
 package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
-import com.magenic.jmaqs.utilities.logging.MessageType;
 import org.testng.ITestResult;
 
 /**

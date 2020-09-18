@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class BaseMongoUnitTest extends BaseMongoTest {
   @Test(groups = TestCategories.MONGO)
   public void testGetMongoDBDriver() {
-    MongoDBDriver mongoDBDriver = getMongoDBDriver();
+    MongoDBDriver mongoDBDriver = this.getMongoDBDriver();
     Assert.assertNotNull(mongoDBDriver,
         "Checking that MongoDB Driver is not null through BaseMongoTest");
   }
