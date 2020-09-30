@@ -80,10 +80,9 @@
             <version>${selenium.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.deque</groupId>
-            <artifactId>axe-selenium</artifactId>
-            <version>3.0</version>
-            <scope>test</scope>
+            <groupId>com.deque.html.axe-core</groupId>
+            <artifactId>selenium</artifactId>
+            <version>4.0.0</version>
         </dependency>
     </dependencies>
     <build>
