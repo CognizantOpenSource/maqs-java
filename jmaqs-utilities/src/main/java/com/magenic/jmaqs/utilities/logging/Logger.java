@@ -50,6 +50,10 @@ public abstract class Logger {
     this.logLevel = level;
   }
 
+  public MessageType getLoggingLevel() {
+    return this.logLevel;
+  }
+
   /**
    * Suspends logging.
    */

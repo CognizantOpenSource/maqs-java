@@ -3,18 +3,12 @@ package com.magenic.jmaqs.selenium;
 import com.deque.html.axecore.results.AxeRuntimeException;
 import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.ResultType;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.AxeReporter;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -27,93 +21,6 @@ public class AccessibilityUtilities {
    * private constructor.
    */
   private AccessibilityUtilities() { }
-
-  /**
-   * Create a HTML accessibility report for an entire web page.
-   * @param webDriver The WebDriver
-   * @param testObject The TestObject to associate the report with
-   * @param throwOnViolation Should violations cause and exception to be thrown
-   */
-  public static void createAccessibilityHtmlReport(WebDriver webDriver, SeleniumTestObject testObject,
-      boolean throwOnViolation) {
-    AxeBuilder axeBuilder = new AxeBuilder();
-    createAccessibilityHtmlReport(webDriver, testObject, () -> axeBuilder.analyze(webDriver), throwOnViolation);
-  }
-
-  /**
-   * Create a HTML accessibility report for a specific web element and all of it's children.
-   * @param webDriver The WebDriver
-   * @param testObject The TestObject to associate the report with
-   * @param element The WebElement you want to use as the root for your accessibility scan
-   * @param throwOnViolation Should violations cause and exception to be thrown
-   */
-  public static void createAccessibilityHtmlReport(WebDriver webDriver, SeleniumTestObject testObject,
-      WebElement element, boolean throwOnViolation) {
-
-    AxeBuilder axeBuilder = new AxeBuilder();
-
-    // If we are using a lazy element go get the raw element instead
-    LazyWebElement raw = (LazyWebElement) element;
-
-    if (raw != null) {
-      element = ((LazyWebElement)element).getRawExistingElement();
-    }
-
-    createAccessibilityHtmlReport(element, testObject, () -> axeBuilder.analyze(webDriver, element), throwOnViolation);
-  }
-
-  /**
-   * Create a HTML accessibility report.
-   * @param context The scan context, this is either a web driver or web element
-   * @param testObject The TestObject to associate the report with
-   * @param getResults Function for getting the accessibility scan results
-   * @param throwOnViolation Should violations cause and exception to be thrown
-   */
-  public static void createAccessibilityHtmlReport(SearchContext context, SeleniumTestObject testObject,
-      Supplier<Results> getResults, boolean throwOnViolation) {
-    // If we are using a lazy element go get the raw element instead
-    LazyWebElement raw = (LazyWebElement) context;
-
-    if (raw != null) {
-      context = ((LazyWebElement)context).getRawExistingElement();
-    }
-
-    // Check to see if the logger is not verbose and not already suspended
-    boolean restoreLogging = testObject.getLogger().getLoggingLevel() != MessageType.VERBOSE && testObject.getLogger().getLoggingLevel() != MessageType.SUSPENDED;
-
-    Results results;
-    String report = getAccessibilityReportPath(testObject);
-    testObject.getLogger().logMessage(MessageType.INFORMATION, "Running accessibility check");
-
-    try {
-      // Suspend logging if we are not verbose or already suspended
-      if (restoreLogging) {
-        testObject.getLogger().suspendLogging();
-      }
-
-      results = getResults.get();
-      context.createAxeHtmlReport(results, report);
-    } finally {
-      // Restore logging if we suspended it
-      if (restoreLogging) {
-        testObject.getLogger().continueLogging();
-      }
-    }
-
-    // Add the report
-    testObject.addAssociatedFile(report);
-    testObject.getLogger().logMessage(MessageType.INFORMATION, "Ran accessibility check and created HTML report: " + report);
-
-    // Throw exception if we found violations and we want that to cause an error
-    if (throwOnViolation && !results.getViolations().isEmpty()) {
-      throw new AxeRuntimeException("Accessibility violations, see: " + report + " for more details.");
-    }
-
-    // Throw exception if the accessibility check had any errors
-    if (results.getError() == null) {
-      throw new AxeRuntimeException("Accessibility check failure, see: " + report + " for more details.");
-    }
-  }
 
   /**
    * Run axe accessibility and log the results.
@@ -224,23 +131,5 @@ public class AccessibilityUtilities {
       MessageType loggingLevel, boolean throwOnViolation) {
     AxeBuilder axeBuilder = new AxeBuilder();
     checkAccessibility(webDriver, logger, ResultType.Violations.getKey(), () -> axeBuilder.analyze(webDriver).getViolations(), loggingLevel, throwOnViolation);
-  }
-
-  /**
-   * Get a unique file name that we can user for the accessibility HTML report.
-   * @param testObject The TestObject to associate the report with
-   * @return A unique HTML file name, includes full path
-   */
-  private static String getAccessibilityReportPath(SeleniumTestObject testObject) {
-    String logDirectory = testObject.getLogger() instanceof FileLogger ? ((FileLogger)testObject.getLogger()).getFilePath() : LoggingConfig.getLogDirectory();
-    String reportBaseName = testObject.getLogger() instanceof FileLogger ? ((FileLogger)testObject.getLogger()).getFilePath() + "_Axe" : "AxeReport";
-    String reportFile = Path.Combine(logDirectory, reportBaseName + ".html");
-    int reportNumber = 0;
-
-    while (File.Exists(reportFile)) {
-      reportFile = Path.Combine(logDirectory, reportBaseName + reportNumber++ + ".html");
-    }
-
-    return reportFile;
   }
 }
