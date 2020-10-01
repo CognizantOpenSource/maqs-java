@@ -33,7 +33,7 @@ public class PropertyManager {
    * @param key          The key to get the property.
    * @param defaultValue The value to return if the key is null.
    * @return The value of the property or the default value if the
-   * value if null.
+   *         value if null.
    */
   public static String get(String key, String defaultValue) {
     String property = get(key);
