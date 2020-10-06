@@ -1,16 +1,19 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.selenium;
 
 import com.deque.html.axecore.results.AxeRuntimeException;
 import com.deque.html.axecore.results.Rule;
+import com.deque.html.axecore.selenium.AxeBuilder;
+import com.deque.html.axecore.selenium.AxeReporter;
 import com.deque.html.axecore.selenium.ResultType;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-import org.openqa.selenium.WebDriver;
-import com.deque.html.axecore.selenium.AxeBuilder;
-import com.deque.html.axecore.selenium.AxeReporter;
-
 import java.util.List;
 import java.util.function.Supplier;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Utilities class for Accessibility Functionality.
@@ -20,7 +23,8 @@ public class AccessibilityUtilities {
   /**
    * private constructor.
    */
-  private AccessibilityUtilities() { }
+  private AccessibilityUtilities() {
+  }
 
   /**
    * Run axe accessibility and log the results.
@@ -66,7 +70,8 @@ public class AccessibilityUtilities {
    * @param logger Where you want the check logged to
    * @param checkType What kind of check is being run
    * @param getResults Function for getting Axe results
-   * @param loggingLevel What level should logging the check take, this gets used if the check doesn't throw an exception
+   * @param loggingLevel What level should logging the check take,
+   *                     this gets used if the check doesn't throw an exception
    * @param throwOnResults Throw error if any results are found
    */
   public static void checkAccessibility(WebDriver webDriver, Logger logger, String checkType,
@@ -84,7 +89,8 @@ public class AccessibilityUtilities {
    * Run axe accessibility and log the results.
    * @param webDriver The web driver that is on the page you want to run the accessibility check on
    * @param logger Where you want the check logged to
-   * @param loggingLevel What level should logging the check take, this gets used if the check doesn't throw an exception
+   * @param loggingLevel What level should logging the check take,
+   *                     this gets used if the check doesn't throw an exception
    */
   public static void checkAccessibilityPasses(WebDriver webDriver, Logger logger, MessageType loggingLevel) {
     AxeBuilder axeBuilder = new AxeBuilder();
@@ -96,7 +102,8 @@ public class AccessibilityUtilities {
    * Run axe accessibility and log the results.
    * @param webDriver The web driver that is on the page you want to run the accessibility check on
    * @param logger Where you want the check logged to
-   * @param loggingLevel What level should logging the check take, this gets used if the check doesn't throw an exception
+   * @param loggingLevel What level should logging the check take,
+   *                     this gets used if the check doesn't throw an exception
    * @param throwOnInapplicable Should inapplicable cause and exception to be thrown
    */
   public static void checkAccessibilityInapplicable(WebDriver webDriver, Logger logger,
@@ -110,7 +117,8 @@ public class AccessibilityUtilities {
    * Run axe accessibility and log the results.
    * @param webDriver The web driver that is on the page you want to run the accessibility check on
    * @param logger Where you want the check logged to
-   * @param loggingLevel What level should logging the check take, this gets used if the check doesn't throw an exception
+   * @param loggingLevel What level should logging the check take,
+   *                     this gets used if the check doesn't throw an exception
    * @param throwOnIncomplete Should incomplete cause and exception to be thrown
    */
   public static void checkAccessibilityIncomplete(WebDriver webDriver, Logger logger,
@@ -124,12 +132,14 @@ public class AccessibilityUtilities {
    * Run axe accessibility and log the results.
    * @param webDriver The web driver that is on the page you want to run the accessibility check on
    * @param logger Where you want the check logged to
-   * @param loggingLevel What level should logging the check take, this gets used if the check doesn't throw an exception
+   * @param loggingLevel What level should logging the check take,
+   *                     this gets used if the check doesn't throw an exception
    * @param throwOnViolation Should violations cause and exception to be thrown
    */
   public static void checkAccessibilityViolations(WebDriver webDriver, Logger logger,
       MessageType loggingLevel, boolean throwOnViolation) {
     AxeBuilder axeBuilder = new AxeBuilder();
-    checkAccessibility(webDriver, logger, ResultType.Violations.getKey(), () -> axeBuilder.analyze(webDriver).getViolations(), loggingLevel, throwOnViolation);
+    checkAccessibility(webDriver, logger, ResultType.Violations.getKey(),
+        () -> axeBuilder.analyze(webDriver).getViolations(), loggingLevel, throwOnViolation);
   }
 }

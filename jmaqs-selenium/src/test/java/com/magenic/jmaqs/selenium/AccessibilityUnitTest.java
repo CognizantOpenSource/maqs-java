@@ -80,7 +80,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
           "Did not expect expected to check for inapplicable matches.");
       Assert.assertFalse(logContent.contains("INCOMPLETE check for"),
           "Did not expected to find any incomplete matches.");
-      Assert.assertTrue(logContent.contains("Found 6 items"), "Expected to find 6 violations matches.");
+      Assert.assertTrue(logContent.contains("Found 6 items"),
+          "Expected to find 6 violations matches.");
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
@@ -246,7 +247,5 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
 
     Assert.assertTrue(messages.contains("TEST check for"), "Expected header.");
     Assert.assertTrue(messages.contains("Found 6 items"), "Expected to find 6 violations matches.");
-    //File file = new File(filePath);
-    //Assert.assertTrue(file.delete());
   }
 }
