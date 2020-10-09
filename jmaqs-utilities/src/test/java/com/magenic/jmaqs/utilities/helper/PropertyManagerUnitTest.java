@@ -1,6 +1,5 @@
 package com.magenic.jmaqs.utilities.helper;
 
-import org.junit.Before;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
