@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.webservices.jdk8.soap;
@@ -31,7 +31,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class SoapWebServiceDriver extends WebServiceDriver {
-
 
   private final SOAPMessage soapMessage;
   private JAXBContext jaxbContext;
@@ -109,7 +108,6 @@ public class SoapWebServiceDriver extends WebServiceDriver {
     map.keySet().stream().iterator().forEachRemaining(consumer);
   }
 
-
   public <T> String createSoapPayload(T object) throws JAXBException, IOException {
     OutputStream outputStream = new ByteArrayOutputStream();
     Marshaller marshaller = getMarshaller(object);
@@ -154,7 +152,6 @@ public class SoapWebServiceDriver extends WebServiceDriver {
     return modifySoapPrefix(SoapConfig.getSoapPrefix());
   }
 
-
   private SOAPEnvelope modifySoapPrefix(String prefix) throws SOAPException {
     return modifySoapPrefix(soapMessage.getSOAPPart().getEnvelope(), prefix,
         "http://schemas.xmlsoap.org/soap/envelope/");
@@ -170,8 +167,7 @@ public class SoapWebServiceDriver extends WebServiceDriver {
   }
 
   public <T> void addObjectToSoapMessage(T object)
-      throws JAXBException, IOException, SOAPException, SAXException,
-      ParserConfigurationException {
+      throws JAXBException, IOException, SOAPException, SAXException, ParserConfigurationException {
     String soapPayload = createSoapPayload(object);
     addStringToBody(soapPayload);
   }

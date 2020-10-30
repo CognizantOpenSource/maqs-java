@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.webservices.jdk8.soap;
@@ -10,10 +10,9 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceTestObject;
 import java.net.URI;
+import java.net.URISyntaxException;
 import javax.xml.soap.SOAPException;
 import org.testng.ITestResult;
-
-import java.net.URISyntaxException;
 
 /**
  * Base web service test class.
@@ -44,8 +43,7 @@ public class BaseSoapWebServiceTest extends BaseExtendableTest<WebServiceTestObj
    * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest# beforeLoggingTeardown
    * (org.testng.ITestResult)
    */
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
+  @Override protected void beforeLoggingTeardown(ITestResult resultType) {
     // There is no before logging tear-down required
   }
 
@@ -62,17 +60,15 @@ public class BaseSoapWebServiceTest extends BaseExtendableTest<WebServiceTestObj
   /**
    * Creates a new test object.
    */
-  @Override
-  protected void createNewTestObject() {
+  @Override protected void createNewTestObject() {
     Logger logger = this.createLogger();
     try {
 
-      WebServiceTestObject webServiceTestObject = new WebServiceTestObject(
-          this.getWebServiceClient(), logger, this.getFullyQualifiedTestClassName());
+      WebServiceTestObject webServiceTestObject = new WebServiceTestObject(this.getWebServiceClient(), logger,
+          this.getFullyQualifiedTestClassName());
       this.setTestObject(webServiceTestObject);
     } catch (URISyntaxException | SOAPException e) {
-      getLogger().logMessage(
-          StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }
   }
 }
