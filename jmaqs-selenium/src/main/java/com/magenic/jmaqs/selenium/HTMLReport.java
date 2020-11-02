@@ -8,7 +8,10 @@ import com.deque.html.axecore.selenium.ResultType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
@@ -29,19 +32,19 @@ public class HTMLReport {
   }
 
   public static void createAxeHtmlReport(WebDriver webDriver, String destination)
-      throws IOException {
+      throws IOException, ParseException {
     AxeBuilder axeBuilder = new AxeBuilder();
     createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver), destination);
   }
 
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement context,
-      String destination) throws IOException {
+      String destination) throws IOException, ParseException {
     AxeBuilder axeBuilder = new AxeBuilder();
     createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver, context), destination);
   }
 
   public static void createAxeHtmlReport(SearchContext context, Results results, String destination)
-      throws IOException {
+      throws IOException, ParseException {
     // Get the unwrapped element if we are using a wrapped element
     context = (context instanceof WrapsElement)
         ? ((WrapsElement) context).getWrappedElement() : context;
@@ -58,7 +61,9 @@ public class HTMLReport {
     Document doc = Jsoup.parse(stringBuilder);
 
     Element body = doc.body();
-    String content = ".fullImage{" + "content: url('{" + getDataImageString(context)
+    String content = ".fullImage{"
+        + System.lineSeparator()
+        + "content: url('" + getDataImageString(context)
         + "};border: 1px solid black;margin-left:1em;"
         + "} .fullImage:hover {transform:scale(2.75);transform-origin: top left;} p {}"
         + ".wrap .wrapTwo .wrapThree{margin:2px;max-width:70vw;}"
@@ -90,7 +95,7 @@ public class HTMLReport {
     element.appendText("Size: " + results.getTestEnvironment().getwindowWidth() + " x  "
         + results.getTestEnvironment().getWindowHeight());
     element.appendChild(new Element("br"));
-    element.appendText("Time: " + results.getTimestamp());
+    element.appendText("Time: " + getDateFormat(results.getTimestamp()));
     element.appendChild(new Element("br"));
     element.appendText("User agent: " + results.getTestEnvironment().getUserAgent());
     element.appendChild(new Element("br"));
@@ -267,5 +272,10 @@ public class HTMLReport {
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
     return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64) + "');";
+  }
+
+  private static String getDateFormat(String timestamp) throws ParseException {
+    Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(timestamp);
+    return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
   }
 }

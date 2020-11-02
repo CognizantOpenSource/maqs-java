@@ -16,6 +16,7 @@ import com.magenic.jmaqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.List;
 import java.util.function.Supplier;
 import org.apache.commons.io.FilenameUtils;
@@ -218,6 +219,8 @@ public class AccessibilityUtilities {
       }
 
       HTMLReport.createAxeHtmlReport(testObject.getWebDriver(), report);
+    } catch (ParseException e) {
+      e.printStackTrace();
     } finally {
       // Restore logging if we suspended it
       if (restoreLogging) {
