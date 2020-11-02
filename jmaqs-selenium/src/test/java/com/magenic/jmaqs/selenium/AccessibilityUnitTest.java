@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.selenium;
 
 import com.deque.html.axecore.results.AxeRuntimeException;
@@ -7,8 +11,8 @@ import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-import org.testng.annotations.Test;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,12 +21,6 @@ import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
 public class AccessibilityUnitTest extends BaseSeleniumTest {
-  /**
-   * Axe JSON with an error.
-   */
-  // TODO: use after HTML Report functionality has been accepted by DeQue
-  private final String AxeResultWithError = "{\"error\":\"AutomationError\",\"results\":{\"testEngine\": { \"name\":\"axe-core\",\"version\":\"3.4.1\"}, \"testRunner\": { \"name\":\"axe\"}, \"testEnvironment\": { \"userAgent\":\"AutoAgent\",\"windowWidth\": 1200, \"windowHeight\": 646, \"orientationAngle\": 0, \"orientationType\":\"landscape-primary\"},\"timestamp\":\"2020-04-14T01:33:59.139Z\",\"url\":\"url\",\"toolOptions\":{\"reporter\":\"v1\"},\"violations\":[],\"passes\":[],\"incomplete\":[],\"inapplicable\": []}}";
-
   /**
    * Unit testing site URL - Login page.
    */
@@ -37,7 +35,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    * Verify we get verbose message back.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void AccessibilityCheckVerbose() throws IOException {
+  public void accessibilityCheckVerbose() throws IOException {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -60,7 +58,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    * Verify message levels are respected.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void AccessibilityCheckRespectsMessageLevel() {
+  public void accessibilityCheckRespectsMessageLevel() {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -94,7 +92,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    * Verify inapplicable only check respected.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void AccessibilityInapplicableCheckRespectsMessageLevel() {
+  public void accessibilityInapplicableCheckRespectsMessageLevel() {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -123,7 +121,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    * Verify incomplete only check respected
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void AccessibilityIncompleteCheckRespectsMessageLevel() {
+  public void accessibilityIncompleteCheckRespectsMessageLevel() {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
