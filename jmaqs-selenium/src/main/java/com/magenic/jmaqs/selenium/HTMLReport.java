@@ -152,40 +152,24 @@ public class HTMLReport {
 
     if (incompleteCount > 0) {
       area.appendChild(new Element("br"));
-      area.append(getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name()).html());
+      area.appendChild(getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name()));
     }
 
     if (passCount > 0) {
       area.appendChild(new Element("br"));
-      area.append(getReadableAxeResults(results.getPasses(), ResultType.Passes.name()).html());
+      area.appendChild(getReadableAxeResults(results.getPasses(), ResultType.Passes.name()));
     }
 
     if (inapplicableCount > 0) {
       area.appendChild(new Element("br"));
-      area.append(getReadableAxeResults(results.getInapplicable(), ResultType.Inapplicable.name()).html());
+      area.appendChild(getReadableAxeResults(results.getInapplicable(), ResultType.Inapplicable.name()));
     }
 
     body.appendChild(area);
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
 
-  private static int getCount(List<Rule> results, HashSet<String> uniqueList) {
-    int count = 0;
-    for (Rule item : results) {
-      for (Node node : item.getNodes()) {
-        for (Object target : Collections.singletonList(node.getTarget())) {
-          count++;
-          uniqueList.add(target.toString());
-        }
-      }
 
-      // Still add one if no targets are included
-      if (item.getNodes().isEmpty()) {
-        count++;
-      }
-    }
-    return count;
-  }
 
   private static Element getReadableAxeResults(List<Rule> results, String type) {
     Element section = new Element("div");
@@ -267,6 +251,24 @@ public class HTMLReport {
     }
 
     return section;
+  }
+
+  private static int getCount(List<Rule> results, HashSet<String> uniqueList) {
+    int count = 0;
+    for (Rule item : results) {
+      for (Node node : item.getNodes()) {
+        for (Object target : Collections.singletonList(node.getTarget())) {
+          count++;
+          uniqueList.add(target.toString());
+        }
+      }
+
+      // Still add one if no targets are included
+      if (item.getNodes().isEmpty()) {
+        count++;
+      }
+    }
+    return count;
   }
 
   private static String getDataImageString(SearchContext context) {
