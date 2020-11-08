@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.selenium;
 
 import com.deque.html.axecore.results.Node;
@@ -28,38 +32,44 @@ import org.openqa.selenium.WrapsElement;
 
 public class HTMLReport {
 
+  private static final AxeBuilder axeBuilder = new AxeBuilder();
+
   private HTMLReport() {
   }
 
-  public static void createAxeHtmlReport(WebDriver webDriver, String destination)
+  public static void createAxeHtmlReport(SeleniumTestObject testObject, String destination)
       throws IOException, ParseException {
-    AxeBuilder axeBuilder = new AxeBuilder();
-    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver), destination);
+    createAxeHtmlReport(testObject.getWebDriver(), destination, false);
   }
 
-  public static void createAxeHtmlReport(WebDriver webDriver, WebElement context,
-      String destination) throws IOException, ParseException {
-    AxeBuilder axeBuilder = new AxeBuilder();
-    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver, context), destination);
+  public static void createAxeHtmlReport(WebDriver webDriver, WebElement context, String destination)
+      throws IOException, ParseException {
+    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver, context), destination, false);
   }
 
-  public static void createAxeHtmlReport(SearchContext context, Results results, String destination)
+  public static void createAxeHtmlReport(WebDriver webDriver, String destination,
+      boolean writeOnlyViolations) throws IOException, ParseException {
+    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver), destination, writeOnlyViolations);
+  }
+
+  public static void createAxeHtmlReport(SearchContext context, Results results,
+      String destination, boolean writeOnlyViolations)
       throws IOException, ParseException {
     // Get the unwrapped element if we are using a wrapped element
     context = (context instanceof WrapsElement)
         ? ((WrapsElement) context).getWrappedElement() : context;
 
     HashSet<String> selectors = new HashSet<>();
-    int violationCount = getCount(results.getViolations(), selectors);
-    int incompleteCount = getCount(results.getIncomplete(), selectors);
-    int passCount = getCount(results.getPasses(), selectors);
-    int inapplicableCount = getCount(results.getInapplicable(), selectors);
+    final int violationCount = getCount(results.getViolations(), selectors);
+    final int incompleteCount = getCount(results.getIncomplete(), selectors);
+    final int passCount = getCount(results.getPasses(), selectors);
+    final int inapplicableCount = getCount(results.getInapplicable(), selectors);
 
     String stringBuilder = "<!DOCTYPE html>\r\n" + "<html lang=\"en\">" + "<head>"
         + "<meta charset=\"utf-8\"><title>Accessibility Check</title><style></style>"
         + "</head>" + "<body></body>" + "</html>";
-    Document doc = Jsoup.parse(stringBuilder);
 
+    Document doc = Jsoup.parse(stringBuilder);
     Element body = doc.body();
     String content = ".fullImage{"
         + System.lineSeparator()
@@ -90,7 +100,7 @@ public class HTMLReport {
     element.attributes().put("id", "reportContext");
     element.text("Url: " + results.getUrl());
     element.appendChild(new Element("br"));
-    element.appendText("Orientation: "+ results.getTestEnvironment().getOrientationType());
+    element.appendText("Orientation: " + results.getTestEnvironment().getOrientationType());
     element.appendChild(new Element("br"));
     element.appendText("Size: " + results.getTestEnvironment().getwindowWidth() + " x  "
         + results.getTestEnvironment().getWindowHeight());
@@ -150,17 +160,17 @@ public class HTMLReport {
       area.appendChild(getReadableAxeResults(results.getViolations(), ResultType.Violations.name()));
     }
 
-    if (incompleteCount > 0) {
+    if (incompleteCount > 0 && writeOnlyViolations) {
       area.appendChild(new Element("br"));
       area.appendChild(getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name()));
     }
 
-    if (passCount > 0) {
+    if (passCount > 0 && writeOnlyViolations) {
       area.appendChild(new Element("br"));
       area.appendChild(getReadableAxeResults(results.getPasses(), ResultType.Passes.name()));
     }
 
-    if (inapplicableCount > 0) {
+    if (inapplicableCount > 0 && writeOnlyViolations) {
       area.appendChild(new Element("br"));
       area.appendChild(getReadableAxeResults(results.getInapplicable(), ResultType.Inapplicable.name()));
     }
@@ -168,8 +178,6 @@ public class HTMLReport {
     body.appendChild(area);
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
-
-
 
   private static Element getReadableAxeResults(List<Rule> results, String type) {
     Element section = new Element("div");
@@ -190,7 +198,7 @@ public class HTMLReport {
 
       Element childEl2 = new Element("div");
       childEl2.attr("class", "emTwo");
-      childEl2.text("Description: "+ StringEscapeUtils.escapeHtml4(element.getDescription()));
+      childEl2.text("Description: " + StringEscapeUtils.escapeHtml4(element.getDescription()));
       childEl2.appendChild(new Element("br"));
       childEl2.appendText("Help: " + StringEscapeUtils.escapeHtml4(element.getHelp()));
       childEl2.appendChild(new Element("br"));
