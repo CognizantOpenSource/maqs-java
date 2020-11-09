@@ -27,6 +27,8 @@ import org.openqa.selenium.WebElement;
  * Utilities class for Accessibility Functionality.
  */
 public class AccessibilityUtilities {
+  private static final AxeBuilder axeBuilder = new AxeBuilder();
+
   /**
    * private constructor.
    */
@@ -86,7 +88,7 @@ public class AccessibilityUtilities {
     logger.logMessage(MessageType.INFORMATION, "Running accessibility check");
 
     if (AxeReporter.getReadableAxeResults(checkType, webDriver, getResults.get()) && throwOnResults) {
-      throw new AxeRuntimeException(AxeReporter.getAxeResultString());
+      throw new AxeRuntimeException(System.lineSeparator() + AxeReporter.getAxeResultString());
     } else {
       logger.logMessage(loggingLevel, AxeReporter.getAxeResultString());
     }
@@ -100,7 +102,6 @@ public class AccessibilityUtilities {
    *                     this gets used if the check doesn't throw an exception
    */
   public static void checkAccessibilityPasses(WebDriver webDriver, Logger logger, MessageType loggingLevel) {
-    AxeBuilder axeBuilder = new AxeBuilder();
     checkAccessibility(webDriver, logger, ResultType.Passes.getKey(),
         () -> axeBuilder.analyze(webDriver).getPasses(), loggingLevel, false);
   }
@@ -115,7 +116,6 @@ public class AccessibilityUtilities {
    */
   public static void checkAccessibilityInapplicable(WebDriver webDriver, Logger logger,
       MessageType loggingLevel, boolean throwOnInapplicable) {
-    AxeBuilder axeBuilder = new AxeBuilder();
     checkAccessibility(webDriver, logger, ResultType.Inapplicable.getKey(),
         () -> axeBuilder.analyze(webDriver).getInapplicable(), loggingLevel, throwOnInapplicable);
   }
@@ -130,7 +130,6 @@ public class AccessibilityUtilities {
    */
   public static void checkAccessibilityIncomplete(WebDriver webDriver, Logger logger,
       MessageType loggingLevel, boolean throwOnIncomplete) {
-    AxeBuilder axeBuilder = new AxeBuilder();
     checkAccessibility(webDriver, logger, ResultType.Incomplete.getKey(),
         () -> axeBuilder.analyze(webDriver).getIncomplete(), loggingLevel, throwOnIncomplete);
   }
@@ -145,7 +144,6 @@ public class AccessibilityUtilities {
    */
   public static void checkAccessibilityViolations(WebDriver webDriver, Logger logger,
       MessageType loggingLevel, boolean throwOnViolation) {
-    AxeBuilder axeBuilder = new AxeBuilder();
     checkAccessibility(webDriver, logger, ResultType.Violations.getKey(),
         () -> axeBuilder.analyze(webDriver).getViolations(), loggingLevel, throwOnViolation);
   }
@@ -155,11 +153,32 @@ public class AccessibilityUtilities {
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
+  public static void createAccessibilityHtmlViolationsReport(SeleniumTestObject testObject,
+      boolean throwOnViolation) throws IOException, ParseException {
+    createAccessibilityHtmlReport(testObject,
+        () -> axeBuilder.analyze(testObject.getWebDriver()), throwOnViolation, true);
+  }
+
+  /**
+   * Create a HTML accessibility report for an entire web page.
+   * @param testObject The TestObject to associate the report with
+   * @param throwOnViolation Should violations cause an exception to be thrown
+   */
+  public static void createAccessibilityHtmlViolationsReport(SeleniumTestObject testObject,
+      WebElement element, boolean throwOnViolation) throws IOException, ParseException {
+    createAccessibilityHtmlReport(testObject,
+        () -> axeBuilder.analyze(testObject.getWebDriver(), element), throwOnViolation, true);
+  }
+
+  /**
+   * Create a HTML accessibility report for an entire web page.
+   * @param testObject The TestObject to associate the report with
+   * @param throwOnViolation Should violations cause an exception to be thrown
+   */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       boolean throwOnViolation) throws IOException, ParseException {
-    AxeBuilder axeBuilder = new AxeBuilder();
     createAccessibilityHtmlReport(testObject,
-        () -> axeBuilder.analyze(testObject.getWebDriver()), throwOnViolation);
+        () -> axeBuilder.analyze(testObject.getWebDriver()), throwOnViolation, false);
   }
 
   /**
@@ -168,12 +187,11 @@ public class AccessibilityUtilities {
    * @param element The WebElement you want to use as the root for your accessibility scan
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
-  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
-      WebElement element, boolean throwOnViolation) throws IOException, ParseException {
+  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, WebElement element,
+      boolean throwOnViolation) throws IOException, ParseException {
 
-    AxeBuilder axeBuilder = new AxeBuilder();
-    createAccessibilityHtmlReport(testObject, () -> axeBuilder.analyze(testObject.getWebDriver(),
-        element), throwOnViolation);
+    createAccessibilityHtmlReport(testObject, () -> axeBuilder.analyze(testObject.getWebDriver(), element),
+        throwOnViolation, false);
   }
 
   /**
@@ -183,13 +201,15 @@ public class AccessibilityUtilities {
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
-      Supplier<Results> getResults, boolean throwOnViolation) throws IOException, ParseException {
+      Supplier<Results> getResults, boolean throwOnViolation, boolean violationsOnly)
+      throws IOException, ParseException {
 
     // Check to see if the logger is not verbose and not already suspended
     boolean restoreLogging = testObject.getLogger().getLoggingLevel() != MessageType.VERBOSE
         && testObject.getLogger().getLoggingLevel() != MessageType.SUSPENDED;
 
-    String reportPath = getAccessibilityReportPath(testObject);
+    Results results;
+    String report = getAccessibilityReportPath(testObject);
     testObject.getLogger().logMessage(MessageType.INFORMATION, "Running accessibility check");
 
     try {
@@ -198,7 +218,12 @@ public class AccessibilityUtilities {
         testObject.getLogger().suspendLogging();
       }
 
-      HTMLReport.createAxeHtmlReport(testObject, reportPath);
+      results = getResults.get();
+      if (violationsOnly) {
+        HTMLReport.createAxeHtmlViolationsReport(testObject.getWebDriver(), results, report);
+      } else {
+        HTMLReport.createAxeHtmlReport(testObject.getWebDriver(), results, report);
+      }
     } finally {
       // Restore logging if we suspended it
       if (restoreLogging) {
@@ -207,18 +232,18 @@ public class AccessibilityUtilities {
     }
 
     // Add the report
-    testObject.addAssociatedFile(reportPath);
+    testObject.addAssociatedFile(report);
     testObject.getLogger().logMessage(MessageType.INFORMATION,
-        "Ran accessibility check and created HTML report: " + reportPath + " ");
+        "Ran accessibility check and created HTML report: " + report + " ");
 
     // Throw exception if we found violations and we want that to cause an error
-    if (throwOnViolation && getResults.get().getViolations().isEmpty()) {
-      throw new AxeRuntimeException("Accessibility violations, see: " + reportPath + " for more details.");
+    if (throwOnViolation && !getResults.get().getViolations().isEmpty()) {
+      throw new AxeRuntimeException(System.lineSeparator() + "Accessibility violations, see: " + report + " for more details.");
     }
 
     // Throw exception if the accessibility check had any errors
-    if (getResults.get().isErrored()) {
-      throw new AxeRuntimeException("Accessibility check failure, see: " + reportPath + " for more details.");
+    if (getResults.get().getErrorMessage() != null) {
+      throw new AxeRuntimeException(System.lineSeparator() + "Accessibility check failure, see: " + report + " for more details.");
     }
   }
 

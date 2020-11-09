@@ -37,24 +37,38 @@ public class HTMLReport {
   private HTMLReport() {
   }
 
-  public static void createAxeHtmlReport(SeleniumTestObject testObject, String destination)
+  public static void createAxeHtmlViolationsReport(WebDriver webDriver, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(testObject.getWebDriver(), destination, false);
+    createAxeHtmlViolationsReport(webDriver, axeBuilder.analyze(webDriver), destination);
   }
 
-  public static void createAxeHtmlReport(WebDriver webDriver, WebElement context, String destination)
+  public static void createAxeHtmlViolationsReport(WebDriver webDriver, WebElement element, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver, context), destination, false);
+    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver, element), destination, true);
   }
 
-  public static void createAxeHtmlReport(WebDriver webDriver, String destination,
+  public static void createAxeHtmlViolationsReport(WebDriver webDriver, Results results, String destination)
+      throws IOException, ParseException {
+    createAxeHtmlReport(webDriver, results, destination, true);
+  }
+
+  public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
+      throws IOException, ParseException {
+    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver, element), destination, false);
+  }
+
+  public static void createAxeHtmlReport(WebDriver webDriver, String destination)
+      throws IOException, ParseException {
+    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver), destination);
+  }
+
+  public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
+      throws IOException, ParseException {
+    createAxeHtmlReport(webDriver, results, destination, false);
+  }
+
+  public static void createAxeHtmlReport(SearchContext context, Results results, String destination,
       boolean writeOnlyViolations) throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver), destination, writeOnlyViolations);
-  }
-
-  public static void createAxeHtmlReport(SearchContext context, Results results,
-      String destination, boolean writeOnlyViolations)
-      throws IOException, ParseException {
     // Get the unwrapped element if we are using a wrapped element
     context = (context instanceof WrapsElement)
         ? ((WrapsElement) context).getWrappedElement() : context;
@@ -122,11 +136,15 @@ public class HTMLReport {
 
     element.text(" Violation: " + violationCount);
     element.appendChild(new Element("br"));
-    element.appendText(" Incomplete: " + incompleteCount);
-    element.appendChild(new Element("br"));
-    element.appendText(" Pass: " + passCount);
-    element.appendChild(new Element("br"));
-    element.appendText(" Inapplicable: " + inapplicableCount);
+
+    if (!writeOnlyViolations) {
+      element.appendText(" Incomplete: " + incompleteCount);
+      element.appendChild(new Element("br"));
+      element.appendText(" Pass: " + passCount);
+      element.appendChild(new Element("br"));
+      element.appendText(" Inapplicable: " + inapplicableCount);
+    }
+
     body.appendChild(element);
 
     element = new Element("h3");
@@ -160,17 +178,17 @@ public class HTMLReport {
       area.appendChild(getReadableAxeResults(results.getViolations(), ResultType.Violations.name()));
     }
 
-    if (incompleteCount > 0 && writeOnlyViolations) {
+    if (incompleteCount > 0 && !writeOnlyViolations) {
       area.appendChild(new Element("br"));
       area.appendChild(getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name()));
     }
 
-    if (passCount > 0 && writeOnlyViolations) {
+    if (passCount > 0 && !writeOnlyViolations) {
       area.appendChild(new Element("br"));
       area.appendChild(getReadableAxeResults(results.getPasses(), ResultType.Passes.name()));
     }
 
-    if (inapplicableCount > 0 && writeOnlyViolations) {
+    if (inapplicableCount > 0 && !writeOnlyViolations) {
       area.appendChild(new Element("br"));
       area.appendChild(getReadableAxeResults(results.getInapplicable(), ResultType.Inapplicable.name()));
     }

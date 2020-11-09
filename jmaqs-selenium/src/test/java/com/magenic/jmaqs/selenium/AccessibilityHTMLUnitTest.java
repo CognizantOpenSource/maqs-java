@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.deque.html.axecore.results.AxeRuntimeException;
 import com.deque.html.axecore.results.Results;
-import com.deque.html.axecore.selenium.AxeBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -15,8 +15,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -27,7 +32,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
    * Axe JSON with an error.
    */
   // TODO: use after HTML Report functionality has been accepted by DeQue
-  private final String axeResultWithError = "{\"error\":\"AutomationError\",\"results\":{\"testEngine\": { \"name\":\"axe-core\",\"version\":\"3.4.1\"}, \"testRunner\": { \"name\":\"axe\"}, \"testEnvironment\": { \"userAgent\":\"AutoAgent\",\"windowWidth\": 1200, \"windowHeight\": 646, \"orientationAngle\": 0, \"orientationType\":\"landscape-primary\"},\"timestamp\":\"2020-04-14T01:33:59.139Z\",\"url\":\"url\",\"toolOptions\":{\"reporter\":\"v1\"},\"violations\":[],\"passes\":[],\"incomplete\":[],\"inapplicable\": []}}";
+  private final static String axeResultWithError = "{\"error\":\"AutomationError\",\"results\":{\"testEngine\": { \"name\":\"axe-core\",\"version\":\"3.4.1\"}, \"testRunner\": { \"name\":\"axe\"}, \"testEnvironment\": { \"userAgent\":\"AutoAgent\",\"windowWidth\": 1200, \"windowHeight\": 646, \"orientationAngle\": 0, \"orientationType\":\"landscape-primary\"},\"timestamp\":\"2020-04-14T01:33:59.139Z\",\"url\":\"url\",\"toolOptions\":{\"reporter\":\"v1\"},\"violations\":[],\"passes\":[],\"incomplete\":[],\"inapplicable\": []}}";
 
   /**
    * Unit testing site URL - Login page.
@@ -55,9 +60,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
         .filter(x -> x.contains(".html")).findFirst().toString();
     Assert.assertTrue(file.length() > 0, "Accessibility report is empty");
 
-    File filePath = new File(file);
-    Assert.assertTrue(filePath.exists(), "File does not exist");
-    Assert.assertTrue(filePath.delete(), "File was not deleted");
+    //deleteFiles(Collections.singletonList(file));
   }
 
   /**
@@ -81,18 +84,13 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
         "Expected 3 accessibility reports but see " + count + " instead");
     String[] reports = this.getTestObject().getArrayOfAssociatedFiles();
 
-    for (String file : reports) {
-      if (file.contains(".html")) {
-        File filePath = new File(file);
-        Assert.assertTrue(filePath.delete(), "File was not deleted");
-      }
-    }
+    deleteFiles(Arrays.asList(reports.clone()));
   }
 
   /**
    * Verify we throw an exception if the scan has an error.
    */
-  @Test(groups = TestCategories.SELENIUM, expectedExceptions = Exception.class)
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = AxeRuntimeException.class)
   public void AccessibilityHtmlReportWithError() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
@@ -101,20 +99,19 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
     ObjectMapper objectMapper = new ObjectMapper();
     Results results = objectMapper.convertValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
-        () -> results, false);
+        () -> results, false, false);
 
     String file = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().toString();
     Assert.assertTrue(file.length() > 0, "Accessibility report is empty");
 
-    File filePath = new File(file);
-    Assert.assertTrue(filePath.delete(), "File was not deleted");
+    deleteFiles(Collections.singletonList(file));
   }
 
   /**
    * Verify we throw an exception if the scan has an error and are using lazy elements.
    */
-  @Test(groups = TestCategories.SELENIUM, expectedExceptions = Exception.class)
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = AxeRuntimeException.class)
   // [ExpectedException(typeof(ApplicationException))]
   public void AccessibilityHtmlReportWithErrorFromLazyElement() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteUrl);
@@ -123,36 +120,29 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
 
     LazyWebElement foodTable = new LazyWebElement(this.getTestObject(),
         By.id("FoodTable"), "Food Table");
-    AxeBuilder builder = new AxeBuilder();
+
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
-        () -> builder.analyze(this.getWebDriver(), foodTable.getCachedElement()),false);
+        foodTable.getCachedElement(),false);
 
     String file = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().toString();
 
     Assert.assertTrue(file.length() > 0, "Accessibility report is empty");
 
-    File filePath = new File(file);
-    Assert.assertTrue(filePath.delete(), "File was not deleted");
+    deleteFiles(Collections.singletonList(file));
   }
 
   /**
    * Verify we throw an exception if there are violations and we choose the throw exception option.
    * @throws IOException if an exception is thrown
    */
-  @Test(groups = TestCategories.SELENIUM, expectedExceptions = Exception.class)
-  //[ExpectedException(typeof(ApplicationException))]
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = AxeRuntimeException.class)
   public void AccessibilityHtmlReportWithViolation() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
 
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), true);
-    String file = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
-        .filter(x -> x.contains(".html")).findFirst().toString();
-    File filePath = new File(file);
-    Assert.assertTrue(filePath.exists(), "File was not created");
-    Assert.assertTrue(filePath.delete(), "File was not deleted");
   }
 
   /**
@@ -167,15 +157,15 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
 
     LazyWebElement foodTable = new LazyWebElement(this.getTestObject(),
         By.id("FoodTable"), "Food Table");
+
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
-        foodTable.getCachedElement(), false);
+        foodTable.getRawExistingElement(), false);
 
     String file = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().toString();
     Assert.assertFalse(file.isEmpty(), "Accessibility report is empty");
 
-    File filePath = new File(file);
-    Assert.assertTrue(filePath.delete(), "File was not deleted");
+    deleteFiles(Collections.singletonList(file));
   }
 
   /**
@@ -193,12 +183,9 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
 
     String file = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().toString();
-    // Assert.assertTrue(new FileInfo(file).Length > 0, "Accessibility report is empty");
     Assert.assertFalse(file.isEmpty(), "Accessibility report is empty");
 
-    File filePath = new File(file);
-    Assert.assertTrue(filePath.exists(), "File does not exist");
-    Assert.assertTrue(filePath.delete(), "File was not deleted");
+//    deleteFiles(Collections.singletonList(file));
   }
 
   /**
@@ -219,9 +206,67 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
     // The script executed message should be suppressed when we run the accessibility check
     FileInputStream fis = new FileInputStream(((FileLogger)this.getLogger()).getFilePath());
     String file = IOUtils.toString(fis, StandardCharsets.UTF_8);
-    Assert.assertFalse(file.contains("Script executed"), "Logging was not suppressed as expected");
 
-    File filePath = new File(file);
-    Assert.assertTrue(filePath.delete(), "File was not deleted");
+    Assert.assertFalse(file.contains("Script executed"), "Logging was not suppressed as expected");
+    deleteFiles(Collections.singletonList(file));
+  }
+
+  /**
+   * Verify we create an HTML file with only the violations.
+   * @throws IOException if an IO exception occurs
+   * @throws ParseException if a parsing exception occurs
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void AccessibilityHtmlReportViolationsOnly() throws IOException, ParseException {
+    // Make sure we are not using verbose logging
+    this.getLogger().setLoggingLevel(MessageType.INFORMATION);
+
+    getWebDriver().navigate().to(TestSiteUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    wait.waitForPageLoad();
+
+    AccessibilityUtilities.createAccessibilityHtmlViolationsReport(this.getTestObject(), false);
+
+    // The script executed message should be suppressed when we run the accessibility check
+    FileInputStream fis = new FileInputStream(((FileLogger)this.getLogger()).getFilePath());
+    String fileString = IOUtils.toString(fis, StandardCharsets.UTF_8);
+    Assert.assertFalse(fileString.contains("Passes "), "Passes were still in the report");
+    Assert.assertFalse(fileString.contains("Inapplicable "), "Inapplicable were still in the report");
+    Assert.assertFalse(fileString.contains("Incomplete  "), "Incomplete were still in the report");
+
+    List<String> files = new ArrayList<>(
+        Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
+    files.add(((FileLogger)this.getLogger()).getFilePath());
+    deleteFiles(files);
+  }
+
+  /**
+   *  Verify we can create an accessibility HTML report off a normal web element.
+   * @throws IOException if exception is thrown
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void AccessibilityHtmlViolationsReportWithElement() throws IOException, ParseException {
+    getWebDriver().navigate().to(TestSiteAutomationUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    wait.waitForPageLoad();
+
+    AccessibilityUtilities.createAccessibilityHtmlViolationsReport(this.getTestObject(),
+        this.getWebDriver().findElement(By.id("FoodTable")), false);
+
+    String file = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
+        .filter(x -> x.contains(".html")).findFirst().toString();
+    Assert.assertFalse(file.isEmpty(), "Accessibility report is empty");
+
+    //deleteFiles(Collections.singletonList(file));
+  }
+
+  private void deleteFiles(List<String> files) {
+    for (String file : files) {
+      File filePath = new File(file);
+      Assert.assertTrue(filePath.exists(),
+          System.lineSeparator() + "File does not exist: " + file + System.lineSeparator());
+      Assert.assertTrue(filePath.delete(),
+          System.lineSeparator() +"File was not deleted: " + file + System.lineSeparator());
+    }
   }
 }
