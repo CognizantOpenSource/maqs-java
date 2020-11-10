@@ -30,11 +30,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
-public class HTMLReport {
+public class HtmlReporter {
 
   private static final AxeBuilder axeBuilder = new AxeBuilder();
 
-  private HTMLReport() {
+  private HtmlReporter() {
   }
 
   public static void createAxeHtmlViolationsReport(WebDriver webDriver, String destination)

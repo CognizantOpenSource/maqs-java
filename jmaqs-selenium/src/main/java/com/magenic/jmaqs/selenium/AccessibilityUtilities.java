@@ -220,9 +220,9 @@ public class AccessibilityUtilities {
 
       results = getResults.get();
       if (violationsOnly) {
-        HTMLReport.createAxeHtmlViolationsReport(testObject.getWebDriver(), results, report);
+        HtmlReporter.createAxeHtmlViolationsReport(testObject.getWebDriver(), results, report);
       } else {
-        HTMLReport.createAxeHtmlReport(testObject.getWebDriver(), results, report);
+        HtmlReporter.createAxeHtmlReport(testObject.getWebDriver(), results, report);
       }
     } finally {
       // Restore logging if we suspended it
@@ -238,12 +238,14 @@ public class AccessibilityUtilities {
 
     // Throw exception if we found violations and we want that to cause an error
     if (throwOnViolation && !getResults.get().getViolations().isEmpty()) {
-      throw new AxeRuntimeException(System.lineSeparator() + "Accessibility violations, see: " + report + " for more details.");
+      throw new AxeRuntimeException(System.lineSeparator()
+          + "Accessibility violations, see: " + report + " for more details.");
     }
 
     // Throw exception if the accessibility check had any errors
     if (getResults.get().getErrorMessage() != null) {
-      throw new AxeRuntimeException(System.lineSeparator() + "Accessibility check failure, see: " + report + " for more details.");
+      throw new AxeRuntimeException(System.lineSeparator()
+          + "Accessibility check failure, see: " + report + " for more details.");
     }
   }
 
