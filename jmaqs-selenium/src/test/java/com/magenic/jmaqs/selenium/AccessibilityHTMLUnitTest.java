@@ -16,7 +16,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +28,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
   /**
    * Axe JSON with an error.
    */
-  private final static String axeResultWithError = "{\"results\":{\"testEngine\": { \"name\":\"axe-core\",\"version\":\"3.4.1\"}, \"testRunner\": { \"name\":\"axe\"}, \"testEnvironment\": { \"userAgent\":\"AutoAgent\",\"windowWidth\": 1200, \"windowHeight\": 646, \"orientationAngle\": 0, \"orientationType\":\"landscape-primary\"},\"timestamp\":\"2020-04-14T01:33:59.139Z\",\"url\":\"url\",\"toolOptions\":{\"reporter\":\"v1\"},\"violations\":[],\"passes\":[],\"incomplete\":[],\"inapplicable\": [],\"error\":\"AutomationError\"}}";
+  private final static String axeResultWithError = "{\"error\": \"AutomationError\",\"results\":{ \"toolOptions\":{\"reporter\":\"v1\" }, \"testEngine\": {\"name\":\"axe-core\",\"version\":\"3.4.1\" }, \"testEnvironment\": {\"userAgent\":\"AutoAgent\",\"windowWidth\": 1200,\"windowHeight\": 646,\"orientationAngle\": 0,\"orientationType\":\"landscape-primary\" }, \"testRunner\": {\"name\":\"axe\" }, \"url\":\"url\", \"timestamp\":\"2020-04-14T01:33:59.139Z\", \"passes\":[], \"violations\":[], \"incomplete\":[], \"inapplicable\": [],}}";
 
   /**
    * Unit testing site URL - Login page.
@@ -94,6 +93,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
     wait.waitForPageLoad();
 
     ObjectMapper objectMapper = new ObjectMapper();
+
     Results results = objectMapper.convertValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
         () -> results, false, false);
@@ -111,7 +111,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
   @Test(groups = TestCategories.SELENIUM, expectedExceptions = AxeRuntimeException.class)
   // [ExpectedException(typeof(ApplicationException))]
   public void AccessibilityHtmlReportWithErrorFromLazyElement() throws IOException, ParseException {
-    getWebDriver().navigate().to(TestSiteUrl);
+    getWebDriver().navigate().to(TestSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
 
@@ -161,8 +161,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
     String file = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().toString();
     Assert.assertFalse(file.isEmpty(), "Accessibility report is empty");
-
-    deleteFiles(Collections.singletonList(file));
   }
 
   /**
@@ -194,7 +192,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
     // Make sure we are not using verbose logging
     this.getLogger().setLoggingLevel(MessageType.INFORMATION);
 
-    getWebDriver().navigate().to(TestSiteUrl);
+    getWebDriver().navigate().to(TestSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
 
@@ -204,7 +202,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
     FileInputStream fis = new FileInputStream(((FileLogger)this.getLogger()).getFilePath());
     String file = IOUtils.toString(fis, StandardCharsets.UTF_8);
 
-    Assert.assertFalse(file.contains("Script executed"), "Logging was not suppressed as expected");
+    Assert.assertFalse(file.contains("Script executed"), "Logging was not suppressed.");
     deleteFiles(Collections.singletonList(file));
   }
 
@@ -230,11 +228,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest{
     Assert.assertFalse(fileString.contains("Passes "), "Passes were still in the report");
     Assert.assertFalse(fileString.contains("Inapplicable "), "Inapplicable were still in the report");
     Assert.assertFalse(fileString.contains("Incomplete  "), "Incomplete were still in the report");
-
-    List<String> files = new ArrayList<>(
-        Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
-    files.add(((FileLogger)this.getLogger()).getFilePath());
-    deleteFiles(files);
   }
 
   /**

@@ -281,17 +281,20 @@ public class HtmlReporter {
 
   private static int getCount(List<Rule> results, HashSet<String> uniqueList) {
     int count = 0;
-    for (Rule item : results) {
-      for (Node node : item.getNodes()) {
-        for (Object target : Collections.singletonList(node.getTarget())) {
-          count++;
-          uniqueList.add(target.toString());
-        }
-      }
 
-      // Still add one if no targets are included
-      if (item.getNodes().isEmpty()) {
-        count++;
+    if (!uniqueList.isEmpty()) {
+      for (Rule item : results) {
+        for (Node node : item.getNodes()) {
+          for (Object target : Collections.singletonList(node.getTarget())) {
+            count++;
+            uniqueList.add(target.toString());
+          }
+        }
+
+        // Still add one if no targets are included
+        if (item.getNodes().isEmpty()) {
+          count++;
+        }
       }
     }
     return count;
