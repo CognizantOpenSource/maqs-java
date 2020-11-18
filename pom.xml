@@ -354,7 +354,7 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showDeprecation>false</showDeprecation>
-                    <multiReleaseOutput>true</multiReleaseOutput>
+                    <!--<multiReleaseOutput>true</multiReleaseOutput>-->
                     <release>${jdk.version}</release>
                     <workingDirectory>target/</workingDirectory>
                 </configuration>
