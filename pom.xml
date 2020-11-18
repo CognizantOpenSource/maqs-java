@@ -353,8 +353,8 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showDeprecation>false</showDeprecation>
-                    <source>8</source>
-                    <target>8</target>
+                    <multiReleaseOutput>true</multiReleaseOutput>
+                    <release>15</release>
                     <workingDirectory>target/</workingDirectory>
                 </configuration>
             </plugin>

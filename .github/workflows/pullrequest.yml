@@ -8,12 +8,15 @@ jobs:
   unit_tests:
     name: Unit Test Execution
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        jdk: [11, 13, 15]
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: ${{matrix.jdk}}
       - name: Restore Local Maven Cache
         uses: actions/cache@v2
         with:
