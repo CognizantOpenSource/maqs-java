@@ -16,7 +16,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: ${{matrix.jdk}}
+          java-version: 15
       - name: Restore Local Maven Cache
         uses: actions/cache@v2
         with:
