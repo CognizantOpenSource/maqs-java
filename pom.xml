@@ -263,7 +263,7 @@
         <selenium.version>3.141.59</selenium.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
-        <jdk.version>8</jdk.version>
+        <jdk.version>11</jdk.version>
     </properties>
 
     <dependencyManagement>
