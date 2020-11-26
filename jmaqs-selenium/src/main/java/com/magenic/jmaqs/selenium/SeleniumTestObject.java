@@ -5,7 +5,9 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseTestObject;
+import com.magenic.jmaqs.base.exceptions.JMAQSRuntimeException;
 import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.logging.MessageType;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 
@@ -68,8 +70,14 @@ public class SeleniumTestObject extends BaseTestObject {
 
     String name = SeleniumDriverManager.class.getCanonicalName();
     if (this.getManagerStore().containsKey(name)) {
-      this.getManagerStore().get(name).close();
-      this.getManagerStore().remove(name);
+      try {
+        this.getManagerStore().get(name).close();
+        this.getManagerStore().remove(name);
+      } catch (Exception e) {
+        getLogger().logMessage(MessageType.ERROR, "Failed to remove DriverManager: %s", e.getMessage());
+        throw new JMAQSRuntimeException(e.getMessage(), e);
+      }
+
     }
 
     this.getManagerStore().put(name, new SeleniumDriverManager((() -> driver), this));
