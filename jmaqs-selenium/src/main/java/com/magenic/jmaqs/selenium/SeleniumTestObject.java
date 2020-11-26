@@ -66,7 +66,7 @@ public class SeleniumTestObject extends BaseTestObject {
    * @param driver the driver
    * @throws Exception exception
    */
-  public void setWebDriver(WebDriver driver) throws Exception {
+  public void setWebDriver(WebDriver driver) {
 
     String name = SeleniumDriverManager.class.getCanonicalName();
     if (this.getManagerStore().containsKey(name)) {

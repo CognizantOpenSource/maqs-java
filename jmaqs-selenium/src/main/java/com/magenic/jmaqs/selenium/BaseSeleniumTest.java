@@ -37,9 +37,8 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * Sets web driver.
    *
    * @param webDriver the web driver
-   * @throws Exception exception
    */
-  public void setWebDriver(WebDriver webDriver) throws Exception {
+  public void setWebDriver(WebDriver webDriver) {
     this.getTestObject().setWebDriver(webDriver);
   }
 
