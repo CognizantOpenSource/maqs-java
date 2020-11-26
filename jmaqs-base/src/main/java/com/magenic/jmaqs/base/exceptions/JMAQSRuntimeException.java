@@ -4,8 +4,6 @@
 
 package com.magenic.jmaqs.base.exceptions;
 
-
-@SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class JMAQSRuntimeException extends RuntimeException {
 
   public JMAQSRuntimeException(String message, Exception exception) {
