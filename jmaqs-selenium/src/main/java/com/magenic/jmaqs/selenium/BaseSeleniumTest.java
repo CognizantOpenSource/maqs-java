@@ -37,9 +37,8 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * Sets web driver.
    *
    * @param webDriver the web driver
-   * @throws Exception exception
    */
-  public void setWebDriver(WebDriver webDriver) throws Exception {
+  public void setWebDriver(WebDriver webDriver) {
     this.getTestObject().setWebDriver(webDriver);
   }
 
@@ -81,11 +80,12 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
               return getBrowser();
             } catch (WebDriverFactoryException e) {
               getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
+              throw e;
             }
-            return null;
           }, this.createLogger(), this.getFullyQualifiedTestClassName()));
     } catch (Exception e) {
       getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+      throw e;
     }
   }
 }
