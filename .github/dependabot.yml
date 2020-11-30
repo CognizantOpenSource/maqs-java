@@ -10,6 +10,6 @@ updates:
   labels:
   - dependencies
 - package-ecosystem: "github-actions"
-    directory: "/.github"
-    schedule:
-      interval: "daily"
+  directory: "/.github"
+  schedule:
+    interval: "daily"
