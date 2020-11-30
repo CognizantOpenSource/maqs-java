@@ -10,6 +10,6 @@ updates:
   labels:
   - dependencies
 - package-ecosystem: "github-actions"
-  directory: "/.github"
+  directory: "/.github/workflows"
   schedule:
     interval: "daily"
