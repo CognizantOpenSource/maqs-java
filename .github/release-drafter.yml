@@ -31,7 +31,7 @@ version-resolver:
       - 'enhancement'
       - 'documentation'
       - 'maintenance'
-      - 'dependencies'
+      - 'dependabot'
   default: patch
 template: |
   ## What’s Changed
