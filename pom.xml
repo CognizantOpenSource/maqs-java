@@ -263,6 +263,7 @@
         <selenium.version>3.141.59</selenium.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
+        <jdk.version>11</jdk.version>
     </properties>
 
     <dependencyManagement>
@@ -353,8 +354,8 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showDeprecation>false</showDeprecation>
-                    <source>8</source>
-                    <target>8</target>
+                    <!--<multiReleaseOutput>true</multiReleaseOutput>-->
+                    <release>${jdk.version}</release>
                     <workingDirectory>target/</workingDirectory>
                 </configuration>
             </plugin>
@@ -370,7 +371,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <source>8</source>
+                            <source>${jdk.version}</source>
                             <doclint>none</doclint>
                             <additionalparam>-Xdoclint:none</additionalparam>
                             <workingDirectory>target/</workingDirectory>
