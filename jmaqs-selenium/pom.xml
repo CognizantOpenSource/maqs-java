@@ -97,7 +97,7 @@
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>85.0.4183.83</version>
+                            <version>87.0.4280.20</version>
                         </driver>
                         <driver>
                             <name>internetexplorerdriver</name>
@@ -107,7 +107,7 @@
                         <driver>
                             <name>geckodriver</name>
                             <customFileName>geckodriver</customFileName>
-                            <version>0.26.0</version>
+                            <version>0.28.0</version>
                         </driver>
                         <driver>
                             <name>edgedriver</name>
