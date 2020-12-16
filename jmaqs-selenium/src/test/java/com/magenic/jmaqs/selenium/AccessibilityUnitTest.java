@@ -11,6 +11,7 @@ import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
+import org.junit.Before;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.io.File;
@@ -31,14 +32,23 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   private final static String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
 
+  @Before
+  public void setup() {
+    getWebDriver().navigate().to(TestSiteUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    wait.waitForPageLoad();
+  }
+
   /**
    * Verify we get verbose message back.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void accessibilityCheckVerbose() throws IOException {
+    /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
+     */
 
     String filePath = ((FileLogger)getLogger()).getFilePath();
     AccessibilityUtilities.checkAccessibility(getTestObject(), false);
@@ -59,10 +69,11 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void accessibilityCheckRespectsMessageLevel() {
+    /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
-
+*/
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, "LevTest.txt", MessageType.WARNING);
 
@@ -93,9 +104,11 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void accessibilityInapplicableCheckRespectsMessageLevel() {
+        /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
+*/
 
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
@@ -122,9 +135,11 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void accessibilityIncompleteCheckRespectsMessageLevel() {
+        /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
+*/
 
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
@@ -151,9 +166,11 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void AccessibilityPassesCheckRespectsMessageLevel() {
+        /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
+*/
 
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
@@ -180,9 +197,11 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void AccessibilityViolationsCheckRespectsMessageLevel() {
+    /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
+*/
 
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
@@ -209,9 +228,11 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
     @Test(groups = TestCategories.SELENIUM, expectedExceptions = AxeRuntimeException.class)
   public void AccessibilityCheckThrows() {
+        /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
+*/
 
     AccessibilityUtilities.checkAccessibility(getTestObject(), true);
   }
@@ -221,9 +242,11 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void AccessibilityCheckNoThrowOnNoResults() {
+        /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
+*/
 
     // There should be 0 incomplete items found
     AccessibilityUtilities.checkAccessibilityIncomplete(getTestObject().getWebDriver(),
@@ -235,9 +258,11 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void AccessibilityReadableResults() {
+        /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
+*/
 
     AxeBuilder axeBuilder = new AxeBuilder();
     AxeReporter.getReadableAxeResults("TEST", getWebDriver(), axeBuilder.analyze(getWebDriver()).getViolations());

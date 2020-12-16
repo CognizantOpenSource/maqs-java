@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 import org.apache.commons.io.FilenameUtils;
@@ -28,6 +29,9 @@ import org.openqa.selenium.WebElement;
  */
 public class AccessibilityUtilities {
   private static final AxeBuilder axeBuilder = new AxeBuilder();
+
+  protected static final List<ResultType> all = Arrays.asList(
+      ResultType.Passes, ResultType.Violations, ResultType.Incomplete, ResultType.Inapplicable);
 
   /**
    * private constructor.
@@ -153,21 +157,9 @@ public class AccessibilityUtilities {
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
-  public static void createAccessibilityHtmlViolationsReport(SeleniumTestObject testObject,
-      boolean throwOnViolation) throws IOException, ParseException {
-    createAccessibilityHtmlReport(testObject,
-        () -> axeBuilder.analyze(testObject.getWebDriver()), throwOnViolation, true);
-  }
-
-  /**
-   * Create a HTML accessibility report for an entire web page.
-   * @param testObject The TestObject to associate the report with
-   * @param throwOnViolation Should violations cause an exception to be thrown
-   */
-  public static void createAccessibilityHtmlViolationsReport(SeleniumTestObject testObject,
-      WebElement element, boolean throwOnViolation) throws IOException, ParseException {
-    createAccessibilityHtmlReport(testObject,
-        () -> axeBuilder.analyze(testObject.getWebDriver(), element), throwOnViolation, true);
+  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
+      boolean throwOnViolation) {
+    createAccessibilityHtmlReport(testObject, throwOnViolation);
   }
 
   /**
@@ -176,22 +168,41 @@ public class AccessibilityUtilities {
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
-      boolean throwOnViolation) throws IOException, ParseException {
+      boolean throwOnViolation, List<ResultType> requestedResult) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject,
-        () -> axeBuilder.analyze(testObject.getWebDriver()), throwOnViolation, false);
+        () -> axeBuilder.analyze(testObject.getWebDriver()), throwOnViolation, requestedResult);
   }
 
   /**
-   * Create a HTML accessibility report for a specific web element and all of it's children.
+   * Create a HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
-   * @param element The WebElement you want to use as the root for your accessibility scan
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
-  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, WebElement element,
-      boolean throwOnViolation) throws IOException, ParseException {
+  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
+      WebElement element, boolean throwOnViolation) throws IOException, ParseException {
+    createAccessibilityHtmlReport(testObject,
+        () -> axeBuilder.analyze(testObject.getWebDriver(), element), throwOnViolation, all);
+  }
 
-    createAccessibilityHtmlReport(testObject, () -> axeBuilder.analyze(testObject.getWebDriver(), element),
-        throwOnViolation, false);
+  /**
+   * Create a HTML accessibility report for an entire web page.
+   * @param testObject The TestObject to associate the report with
+   * @param throwOnViolation Should violations cause an exception to be thrown
+   */
+  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
+      WebElement element, boolean throwOnViolation, List<ResultType> resultRequested) throws IOException, ParseException {
+    createAccessibilityHtmlReport(testObject,
+        () -> axeBuilder.analyze(testObject.getWebDriver(), element), throwOnViolation, resultRequested);
+  }
+
+  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, Results result,
+      boolean throwOnViolation) throws IOException, ParseException {
+    createAccessibilityHtmlReport(testObject, result, throwOnViolation, all);
+  }
+
+  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, Results result,
+      boolean throwOnViolation, List<ResultType> resultRequested) throws IOException, ParseException {
+    createAccessibilityHtmlReport(testObject, () -> result, throwOnViolation, resultRequested);
   }
 
   /**
@@ -201,7 +212,7 @@ public class AccessibilityUtilities {
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
-      Supplier<Results> getResults, boolean throwOnViolation, boolean violationsOnly)
+      Supplier<Results> getResults, boolean throwOnViolation, List<ResultType> requestedResults)
       throws IOException, ParseException {
 
     // Check to see if the logger is not verbose and not already suspended
@@ -219,11 +230,7 @@ public class AccessibilityUtilities {
       }
 
       results = getResults.get();
-      if (violationsOnly) {
-        HtmlReporter.createAxeHtmlViolationsReport(testObject.getWebDriver(), results, report);
-      } else {
-        HtmlReporter.createAxeHtmlReport(testObject.getWebDriver(), results, report);
-      }
+      HtmlReporter.createAxeHtmlReport(testObject.getWebDriver(), results, report, requestedResults);
     } finally {
       // Restore logging if we suspended it
       if (restoreLogging) {
@@ -243,7 +250,7 @@ public class AccessibilityUtilities {
     }
 
     // Throw exception if the accessibility check had any errors
-    if (getResults.get().getErrorMessage() != null) {
+    if (getResults.get().isErrored()) {
       throw new AxeRuntimeException(System.lineSeparator()
           + "Accessibility check failure, see: " + report + " for more details.");
     }
