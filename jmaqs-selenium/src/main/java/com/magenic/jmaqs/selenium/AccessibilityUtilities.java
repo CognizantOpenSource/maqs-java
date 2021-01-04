@@ -158,8 +158,8 @@ public class AccessibilityUtilities {
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
-      boolean throwOnViolation) {
-    createAccessibilityHtmlReport(testObject, throwOnViolation);
+      boolean throwOnViolation) throws IOException, ParseException {
+    createAccessibilityHtmlReport(testObject, throwOnViolation, all);
   }
 
   /**

@@ -44,11 +44,9 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void accessibilityCheckVerbose() throws IOException {
-    /*
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
-     */
 
     String filePath = ((FileLogger)getLogger()).getFilePath();
     AccessibilityUtilities.checkAccessibility(getTestObject(), false);
