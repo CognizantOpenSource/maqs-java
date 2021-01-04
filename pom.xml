@@ -257,12 +257,13 @@
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
         <mvncheckstyle.plugin.version>3.1.1</mvncheckstyle.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <puppycheckstyle.plugin.version>8.29</puppycheckstyle.plugin.version>
+        <puppycheckstyle.plugin.version>8.38</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.6</jacoco.version>
         <testng.version>7.3.0</testng.version>
         <selenium.version>3.141.59</selenium.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
+        <jdk.version>11</jdk.version>
     </properties>
 
     <dependencyManagement>
@@ -353,8 +354,8 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showDeprecation>false</showDeprecation>
-                    <source>8</source>
-                    <target>8</target>
+                    <!--<multiReleaseOutput>true</multiReleaseOutput>-->
+                    <release>${jdk.version}</release>
                     <workingDirectory>target/</workingDirectory>
                 </configuration>
             </plugin>
@@ -370,7 +371,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <source>8</source>
+                            <source>${jdk.version}</source>
                             <doclint>none</doclint>
                             <additionalparam>-Xdoclint:none</additionalparam>
                             <workingDirectory>target/</workingDirectory>
