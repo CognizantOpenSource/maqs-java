@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jmaqs-framework</artifactId>
+        <groupId>com.magenic.jmaqs</groupId>
+        <version>2.1.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jmaqs-accessibility</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.magenic.jmaqs.utilities</groupId>
+            <artifactId>jmaqs-utilities</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.selenium</groupId>
+            <artifactId>jmaqs-selenium</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.deque.html.axe-core</groupId>
+            <artifactId>selenium</artifactId>
+            <version>4.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.8</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>

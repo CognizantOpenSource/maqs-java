@@ -1,8 +1,8 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium;
+package com.magenic.jmaqs.accessibility;
 
 import com.deque.html.axecore.results.Node;
 import com.deque.html.axecore.results.Results;

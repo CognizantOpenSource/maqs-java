@@ -1,17 +1,24 @@
-package com.magenic.jmaqs.selenium;
+/*
+ * Copyright 2021 (C) Magenic, All rights Reserved
+ */
+
+package com.magenic.jmaqs.accessibility;
 
 import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.selenium.ResultType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.magenic.jmaqs.selenium.BaseSeleniumTest;
+import com.magenic.jmaqs.selenium.SeleniumConfig;
+import com.magenic.jmaqs.selenium.UIWait;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
-
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import org.testng.Assert;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,15 +34,13 @@ import java.util.stream.Collectors;
 
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
-  private final ObjectMapper mapper = new ObjectMapper();
+  //private final ObjectMapper mapper = new ObjectMapper();
 
-  private final static File integrationTestTargetFile = new File("src/test/resources/html/integration-test-target.html");
+  private final static File integrationTestTargetFile = new File("src/test/resources/integration-test-target.html");
   private final static String integrationTestTargetUrl = integrationTestTargetFile.getAbsolutePath();
 
-  private final static File integrationTestJsonResultFile = new File("src/test/java/results/sampleResults.json");
+  private final static File integrationTestJsonResultFile = new File("src/test/java/resources/sampleResults.json");
   private final static String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
-
-  private final String mainElementSelector = "main";
 
   /**
    * Unit testing site URL - Login page.
@@ -50,14 +55,14 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   /**
    * Sets up the tests and navigates to teh integration test site.
    */
-  @Before
+  @BeforeTest
   public void setup() {
     this.getWebDriver().get("file:///" + new File(integrationTestTargetUrl).getAbsolutePath());
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
   }
 
-  @Test()
+  @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlReportFullPage() throws IOException, ParseException {
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
@@ -66,11 +71,11 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     File file = new File(path);
 
     if (file.exists()) {
-      Assert.assertTrue("File was not deleted", file.delete());
+      Assert.assertTrue(file.delete(), "File was not deleted");
     }
   }
 
-  @Test()
+  @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlViolationsOnlyReportFullPage() throws IOException, ParseException {
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path,
@@ -84,11 +89,11 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     File file = new File(path);
 
     if (file.exists()) {
-      Assert.assertTrue("File was not deleted", file.delete());
+      Assert.assertTrue(file.delete(), "File was not deleted");
     }
   }
 
-  @Test()
+  @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlPassesInapplicableViolationsOnlyReportFullPage() throws IOException, ParseException {
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path,
@@ -102,11 +107,11 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     File file = new File(path);
 
     if (file.exists()) {
-      Assert.assertTrue("File was not deleted", file.delete());
+      Assert.assertTrue(file.delete(), "File was not deleted");
     }
   }
 
-  @Test()
+  @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlReportOnElement() throws IOException, ParseException {
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(),
@@ -116,14 +121,14 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     File file = new File(path);
 
     if (file.exists()) {
-      Assert.assertTrue("File was not deleted", file.delete());
+      Assert.assertTrue(file.delete(), "File was not deleted");
     }
   }
 
-  @Test
+  @Test(groups = TestCategories.ACCESSIBILITY)
   public void reportSampleResults() throws IOException, ParseException {
     String path = createReportPath();
-    Results results = mapper.readValue(new File(integrationTestJsonResultUrl), Results.class);
+    Results results = new ObjectMapper().readValue(new File(integrationTestJsonResultUrl), Results.class);
 
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), results, path);
     validateReport(path, 3, 5, 2, 4);
@@ -132,20 +137,20 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     Document doc = Jsoup.parse(text);
 
     String errorMessage = doc.selectFirst("#ErrorMessage").text();
-    Assert.assertEquals("AutomationError", errorMessage);
+    Assert.assertEquals(errorMessage, "AutomationError");
 
     String reportContext = doc.selectFirst("#reportContext").text();
-    Assert.assertTrue("URL is not in the document", reportContext.contains("Url: https://www.google.com/"));
-    Assert.assertTrue("Orientation is not in the document", reportContext.contains("Orientation: landscape-primary"));
-    Assert.assertTrue("Size is not in the document", reportContext.contains("Size: 1200 x 646"));
-    Assert.assertTrue("Time is not in the document", reportContext.contains("Time: 14-Apr-20 01:33:59 -0500"));
-    Assert.assertTrue("User Agent is not in the document", reportContext.contains("User agent: AutoAgent"));
-    Assert.assertTrue("Using is not in the document", reportContext.contains("Using: axe-core (3.4.1)"));
+    Assert.assertTrue( reportContext.contains("Url: https://www.google.com/"), "URL is not in the document");
+    Assert.assertTrue(reportContext.contains("Orientation: landscape-primary"), "Orientation is not in the document");
+    Assert.assertTrue(reportContext.contains("Size: 1200 x 646"), "Size is not in the document");
+    Assert.assertTrue(reportContext.contains("Time: 14-Apr-20 01:33:59 -0500"), "Time is not in the document");
+    Assert.assertTrue(reportContext.contains("User agent: AutoAgent"), "User Agent is not in the document");
+    Assert.assertTrue( reportContext.contains("Using: axe-core (3.4.1)"), "Using is not in the document");
 
     File file = new File(path);
 
     if (file.exists()) {
-      Assert.assertTrue("File was not deleted", file.delete());
+      Assert.assertTrue( file.delete(), "File was not deleted");
     }
   }
 
@@ -178,7 +183,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     assertElementCount(doc, incompleteCount, xpath, ResultType.Incomplete);
 
     // Check header data
-    Assert.assertTrue("Expected to find 'Using: axe-core'", text.contains("Using: axe-core"));
+    Assert.assertTrue(text.contains("Using: axe-core"), "Expected to find 'Using: axe-core'");
 
     if (violationCount != 0) {
       assertResultCount(text, violationCount, ResultType.Violations);
@@ -199,11 +204,12 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   private void assertElementCount(Document doc, int count, String xpath, ResultType resultType) {
     Elements liNodes = doc.select(xpath) != null ? doc.select(xpath) : new Elements();
-    Assert.assertEquals("Expected " + count + " " + resultType, count, liNodes.size());
+    Assert.assertEquals(count, liNodes.size(), "Expected " + count + " " + resultType);
   }
 
   private void assertResultCount(String text, int count, ResultType resultType) {
-    Assert.assertTrue("Expected to find '" + resultType + ": " + count, text.contains(resultType + ": " + count));
+    Assert.assertTrue(text.contains(resultType + ": " + count),
+        "Expected to find '" + resultType + ": " + count);
   }
 
   private void assertResultNotWritten(String path, List<ResultType> resultTypeArray) throws IOException {
@@ -211,7 +217,8 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
         .collect(Collectors.joining(System.lineSeparator()));
 
     for (ResultType resultType : resultTypeArray) {
-      Assert.assertFalse("Expected to not find '" + resultType  + ": '", text.contains(resultType + ": "));
+      Assert.assertFalse(text.contains(resultType + ": "),
+          "Expected to not find '" + resultType  + ": '");
     }
   }
 }
