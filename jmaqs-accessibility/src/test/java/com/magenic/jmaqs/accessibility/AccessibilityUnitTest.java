@@ -15,6 +15,7 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.File;
@@ -28,14 +29,14 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
   /**
    * Unit testing site URL - Login page.
    */
-  private final static String TestSiteUrl = SeleniumConfig.getWebSiteBase();
+  private static final String TestSiteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Unit testing site URL - Automation page.
    */
-  private final static String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
+  private static final String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
 
-  @BeforeTest
+  @BeforeMethod
   public void setup() {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());

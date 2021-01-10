@@ -16,6 +16,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.Assert;
@@ -55,7 +56,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   /**
    * Sets up the tests and navigates to teh integration test site.
    */
-  @BeforeTest
+  @BeforeMethod
   public void setup() {
     this.getWebDriver().get("file:///" + new File(integrationTestTargetUrl).getAbsolutePath());
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());

@@ -36,17 +36,17 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   /**
    * Axe JSON with an error.
    */
-  private final static String axeResultWithError = "{\"errorMessage\": \"AutomationError\",\"results\":{ \"toolOptions\":{\"reporter\":\"v1\" }, \"testEngine\": {\"name\":\"axe-core\",\"version\":\"3.4.1\" }, \"testEnvironment\": {\"userAgent\":\"AutoAgent\",\"windowWidth\": 1200,\"windowHeight\": 646,\"orientationAngle\": 0,\"orientationType\":\"landscape-primary\" }, \"testRunner\": {\"name\":\"axe\" }, \"url\":\"url\", \"timestamp\":\"2020-04-14T01:33:59.139Z\", \"passes\":[], \"violations\":[], \"incomplete\":[], \"inapplicable\": []}}";
+  private static final String axeResultWithError = "{\"errorMessage\": \"AutomationError\",\"results\":{ \"toolOptions\":{\"reporter\":\"v1\" }, \"testEngine\": {\"name\":\"axe-core\",\"version\":\"3.4.1\" }, \"testEnvironment\": {\"userAgent\":\"AutoAgent\",\"windowWidth\": 1200,\"windowHeight\": 646,\"orientationAngle\": 0,\"orientationType\":\"landscape-primary\" }, \"testRunner\": {\"name\":\"axe\" }, \"url\":\"url\", \"timestamp\":\"2020-04-14T01:33:59.139Z\", \"passes\":[], \"violations\":[], \"incomplete\":[], \"inapplicable\": []}}";
 
   /**
    * Unit testing site URL - Login page.
    */
-  private final static String TestSiteUrl = SeleniumConfig.getWebSiteBase();
+  private static final String TestSiteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Unit testing site URL - Automation page.
    */
-  private final static String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
+  private static final String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
 
   /**
    * Verify we can create and associate an accessibility HTML report.
