@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.mongo;
@@ -74,21 +74,6 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @return The Mongo driver
    */
   public MongoDBDriver getMongoDriver() {
-    /*
-    if (this.driver == null) {
-      // TODO: delete this if it works properly
-      MongoCollection<Document> temp = (MongoCollection<Document>) getBase().getCollection();
-
-      if (LoggingConfig.getLoggingEnabledSetting() == LoggingEnabled.NO) {
-        this.getLogger().logMessage(MessageType.INFORMATION, "Getting Mongo driver");
-        this.driver = new MongoDBDriver(temp);
-      } else {
-        this.getLogger().logMessage(MessageType.INFORMATION, "Getting event firing Mongo driver");
-      }
-    }
-
-    return this.driver;
-     */
     return getBase();
   }
 

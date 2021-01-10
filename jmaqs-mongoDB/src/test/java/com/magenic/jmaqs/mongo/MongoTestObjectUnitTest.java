@@ -1,3 +1,7 @@
+/*
+ * Copyright 2021 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -7,13 +11,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class MongoTestObjectUnitTest extends BaseMongoTest{
+  private final MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
+  private final MongoCollection<Document> newCollection = MongoFactory.getDefaultCollection();
+
   /**
    * Is the collection override respected.
    */
   @Test(groups = TestCategories.MONGO)
   public void overrideCollectionFunction() {
-    MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
-    MongoCollection<Document> newCollection = MongoFactory.getDefaultCollection();
     this.getTestObject().overrideMongoDBDriver(() -> newCollection);
 
     Assert.assertNotEquals(collection, this.getMongoDBDriver().getCollection());
@@ -26,7 +31,6 @@ public class MongoTestObjectUnitTest extends BaseMongoTest{
    */
   @Test(groups = TestCategories.MONGO)
   public void overrideConnectionStrings() {
-    MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
     this.getTestObject().overrideMongoDBDriver(MongoDBConfig.getConnectionString(),
         MongoDBConfig.getDatabaseString(), MongoDBConfig.getCollectionString());
 

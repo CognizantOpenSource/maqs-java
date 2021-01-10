@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.mongo;
@@ -29,10 +29,10 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
 
   /**
    * Sets the MongoDB driver
-   * @param value the MongoDB driver to be set.
+   * @param driver the MongoDB driver to be set.
    */
-  public void setMongoDBDriver(MongoDBDriver value) {
-    this.getTestObject().overrideMongoDBDriver(value);
+  public void setMongoDBDriver(MongoDBDriver driver) {
+    this.getTestObject().overrideMongoDBDriver(driver);
   }
 
   /**
