@@ -17,7 +17,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 import java.io.File;
@@ -34,13 +33,10 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
-
-  //private final ObjectMapper mapper = new ObjectMapper();
-
-  private final static File integrationTestTargetFile = new File("src/test/resources/integration-test-target.html");
+  private final static File integrationTestTargetFile = new File("src/test/resources/testFiles/integration-test-target.html");
   private final static String integrationTestTargetUrl = integrationTestTargetFile.getAbsolutePath();
 
-  private final static File integrationTestJsonResultFile = new File("src/test/java/resources/sampleResults.json");
+  private final static File integrationTestJsonResultFile = new File("src/test/java/resources/testFiles/sampleResults.json");
   private final static String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
 
   /**
@@ -157,7 +153,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   private String createReportPath() {
     // TODO: generate ideal path to place report for testing
-    return FileSystems.getDefault().getPath("results").toString() + UUID.randomUUID().toString() + ".html";
+    return FileSystems.getDefault().getPath("targets/logs").toString() + UUID.randomUUID().toString() + ".html";
   }
 
   private void validateReport(String path, int violationCount, int passCount, int incompleteCount, int inapplicableCount)
