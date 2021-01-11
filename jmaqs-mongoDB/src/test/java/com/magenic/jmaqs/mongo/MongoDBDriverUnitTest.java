@@ -19,12 +19,6 @@ import java.util.List;
  * Test basic mongo base test functionality
  */
 public class MongoDBDriverUnitTest extends BaseMongoTest {
-
-  @BeforeTest
-  public void setup() {
-
-  }
-
   /**
    * Test the list all collection items helper function.
    */
