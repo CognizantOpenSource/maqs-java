@@ -5,11 +5,11 @@
 package com.magenic.jmaqs.mongo;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -108,16 +108,7 @@ public class MongoDBDriver implements AutoCloseable{
    * @return List of the items in the collection
    */
   public List<Document> listAllCollectionItems() {
-    //return this.getCollection().Find<T>(_ -> true).ToList();
-    List<Document> collectionList = null;
-    try {
-      for (Document doc : this.getCollection().find()) {
-        collectionList.add(doc);
-      }
-    } catch (Exception e) {
-      throw new MongoException("Collection document is empty");
-    }
-    return collectionList;
+    return this.getCollection().find().into(new ArrayList<>());
   }
 
   /**
