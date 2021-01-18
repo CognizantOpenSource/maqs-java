@@ -62,13 +62,4 @@
         <ImageFormat>jpeg</ImageFormat>
         <WebDriverHintPath>./src/test/resources/drivers</WebDriverHintPath>
     </SeleniumMaqs>
-
-    <RemoteSeleniumCapsMaqs>
-        <username>Sauce_Labs_Username</username>
-        <accessKey>Sauce_Labs_Accesskey</accessKey>
-        <browserName>Chrome</browserName>
-        <platform>OS X 10.11</platform>
-        <version>54.0</version>
-    </RemoteSeleniumCapsMaqs>
-
 </configuration>

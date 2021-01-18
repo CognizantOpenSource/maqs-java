@@ -213,9 +213,8 @@ public class AccessibilityUtilities {
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
-      Supplier<Results> getResults, boolean throwOnViolation, List<ResultType> requestedResults)
-      throws IOException, ParseException {
-
+      Supplier<Results> getResults, boolean throwOnViolation,
+      List<ResultType> requestedResults) throws IOException, ParseException {
     // Check to see if the logger is not verbose and not already suspended
     boolean restoreLogging = testObject.getLogger().getLoggingLevel() != MessageType.VERBOSE
         && testObject.getLogger().getLoggingLevel() != MessageType.SUSPENDED;

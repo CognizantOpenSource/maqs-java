@@ -36,7 +36,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   private final static File integrationTestTargetFile = new File("src/test/resources/testFiles/integration-test-target.html");
   private final static String integrationTestTargetUrl = integrationTestTargetFile.getAbsolutePath();
 
-  private final static File integrationTestJsonResultFile = new File("src/test/java/resources/testFiles/sampleResults.json");
+  private final static File integrationTestJsonResultFile = new File("src/test/resources/testFiles/sampleResults.json");
   private final static String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
 
   /**
@@ -50,7 +50,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   private final static String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
 
   /**
-   * Sets up the tests and navigates to teh integration test site.
+   * Sets up the tests and navigates to the integration test site.
    */
   @BeforeMethod
   public void setup() {
@@ -63,7 +63,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   public void htmlReportFullPage() throws IOException, ParseException {
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
-    validateReport(path, 5, 46, 0, 57);
+    validateReport(path, 5, 46, 0, 49);
 
     File file = new File(path);
 
@@ -97,7 +97,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
         Arrays.asList(ResultType.Passes, ResultType.Inapplicable, ResultType.Violations));
 
     // Check Passes
-    validateReport(path, 5, 46, 0, 57);
+    validateReport(path, 5, 46, 0, 49);
     assertResultNotWritten(path, Collections.singletonList(ResultType.Incomplete));
 
 
@@ -113,7 +113,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(),
         this.getWebDriver().findElement(By.cssSelector("main")), path);
-    validateReport(path, 3, 16, 0, 69);
+    validateReport(path, 3, 16, 0, 61);
 
     File file = new File(path);
 
@@ -153,7 +153,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   private String createReportPath() {
     // TODO: generate ideal path to place report for testing
-    return FileSystems.getDefault().getPath("targets/logs").toString() + UUID.randomUUID().toString() + ".html";
+    return FileSystems.getDefault().getPath("target/logs").toString() + UUID.randomUUID().toString() + ".html";
   }
 
   private void validateReport(String path, int violationCount, int passCount, int incompleteCount, int inapplicableCount)
