@@ -160,7 +160,7 @@ public class AccessibilityUtilities {
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       boolean throwOnViolation) throws IOException, ParseException {
-    createAccessibilityHtmlReport(testObject, throwOnViolation, all);
+     createAccessibilityHtmlReport(testObject, throwOnViolation, all);
   }
 
   /**
@@ -250,7 +250,7 @@ public class AccessibilityUtilities {
     }
 
     // Throw exception if the accessibility check had any errors
-    if (getResults.get().isErrored()) {
+    if (results.isErrored()) {
       throw new AxeRuntimeException(System.lineSeparator()
           + "Accessibility check failure, see: " + report + " for more details.");
     }

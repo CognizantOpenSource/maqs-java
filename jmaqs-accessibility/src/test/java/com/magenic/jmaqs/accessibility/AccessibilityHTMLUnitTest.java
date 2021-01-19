@@ -32,8 +32,6 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
-  ObjectMapper objectMapper = new ObjectMapper();
-
   /**
    * Axe JSON with an error.
    */
@@ -70,8 +68,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertTrue(filePath.length() > 0, "Accessibility report is empty");
-
-    deleteFiles(Collections.singletonList(filePath));
+    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -89,9 +86,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
         .filter(x -> x.contains(".html")).count();
     Assert.assertEquals(count, 3,
         "Expected 3 accessibility reports but see " + count + " instead");
-    String[] reports = this.getTestObject().getArrayOfAssociatedFiles();
-
-    deleteFiles(Arrays.asList(reports.clone()));
+    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -100,14 +95,13 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   // TODO: May not need this test because of error tests in AXE repository
   @Ignore @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void AccessibilityHtmlReportWithError() throws IOException, ParseException {
-    Results results = objectMapper.readValue(axeResultWithError, Results.class);
+    Results results = new ObjectMapper().readValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), results, false);
 
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertTrue(filePath.length() > 0, "Accessibility report is empty");
-
-    deleteFiles(Collections.singletonList(filePath));
+    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -119,14 +113,14 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
 
-    Results error = objectMapper.convertValue(axeResultWithError, Results.class);
+    Results error = new ObjectMapper().convertValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), error,false);
 
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
 
     Assert.assertTrue(filePath.length() > 0, "Accessibility report is empty");
-    deleteFiles(Collections.singletonList(filePath));
+    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -157,6 +151,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertFalse(filePath.isEmpty(), "Accessibility report is empty");
+    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -201,7 +196,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String file = IOUtils.toString(fis, StandardCharsets.UTF_8);
 
     Assert.assertFalse(file.contains("Script executed"), "Logging was not suppressed as expected.");
-    deleteFiles(Collections.singletonList(file));
+    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -223,6 +218,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     Assert.assertFalse(fileString.contains("Passes "), "Passes were still in the report");
     Assert.assertFalse(fileString.contains("Inapplicable "), "Inapplicable were still in the report");
     Assert.assertFalse(fileString.contains("Incomplete  "), "Incomplete were still in the report");
+    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
