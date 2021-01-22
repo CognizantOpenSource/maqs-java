@@ -77,11 +77,6 @@
             <artifactId>selenium-support</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.deque.html.axe-core</groupId>
-            <artifactId>selenium</artifactId>
-            <version>4.0.0</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

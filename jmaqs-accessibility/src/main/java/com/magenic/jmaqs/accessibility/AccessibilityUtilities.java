@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.accessibility;
@@ -160,7 +160,7 @@ public class AccessibilityUtilities {
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       boolean throwOnViolation) throws IOException, ParseException {
-     createAccessibilityHtmlReport(testObject, throwOnViolation, all);
+    createAccessibilityHtmlReport(testObject, throwOnViolation, all);
   }
 
   /**
@@ -191,7 +191,8 @@ public class AccessibilityUtilities {
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
-      WebElement element, boolean throwOnViolation, List<ResultType> resultRequested) throws IOException, ParseException {
+      WebElement element, boolean throwOnViolation, List<ResultType> resultRequested)
+      throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject,
         () -> axeBuilder.analyze(testObject.getWebDriver(), element), throwOnViolation, resultRequested);
   }

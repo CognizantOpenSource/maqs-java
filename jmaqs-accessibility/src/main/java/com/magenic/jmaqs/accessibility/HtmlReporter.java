@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.accessibility;
@@ -56,8 +56,8 @@ public class HtmlReporter {
     createAxeHtmlReport(webDriver, element, destination, all);
   }
 
-  public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination, List<ResultType> requestedResults)
-      throws IOException, ParseException {
+  public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
+      List<ResultType> requestedResults) throws IOException, ParseException {
     createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver, element), destination, requestedResults);
   }
 
@@ -86,7 +86,7 @@ public class HtmlReporter {
     String stringBuilder = "<!DOCTYPE html>\r\n" + "<html lang=\"en\">" + "<head>"
         + "<meta charset=\"utf-8\">"
         + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
-        +"<title>Accessibility Check</title><style></style>"
+        + "<title>Accessibility Check</title><style></style>"
         + "</head>" + "<body><content></content><script></script></body>" + "</html>";
 
     Document doc = Jsoup.parse(stringBuilder);
@@ -198,8 +198,6 @@ public class HtmlReporter {
   }
 
   private static void getReadableAxeResults(List<Rule> results, String type, Element body) {
-    HashSet<String> selectors = new HashSet<>();
-
     Element resultWrapper = new Element("div");
     resultWrapper.attributes().put("class", "resultWrapper");
     body.appendChild(resultWrapper);
@@ -207,6 +205,8 @@ public class HtmlReporter {
     Element sectionButton = new Element("button");
     sectionButton.attributes().put("class", "sectionbutton active");
     resultWrapper.appendChild(sectionButton);
+
+    HashSet<String> selectors = new HashSet<>();
 
     Element sectionButtonHeader = new Element("h2");
     sectionButtonHeader.attributes().put("class", "buttonInfoText");
@@ -306,7 +306,8 @@ public class HtmlReporter {
         + ".emThree {margin-left:3em;overflow-wrap:anywhere;}"
         + "#modal {display: none;position: fixed;z-index: 1;left: 0;top: 0;width: 100%;"
         + "height: 100%;overflow: auto;background-color: rgba(0, 0, 0, 0.9);  flex-direction: column;}"
-        + "#modalclose{font-family: Lucida Console; font-size: 35px; width: auto; color: white; text-align: right; padding: 20px;"
+        + "#modalclose{font-family: Lucida Console; font-size: 35px; width: auto; "
+        + "color: white; text-align: right; padding: 20px;"
         + "cursor: pointer; max-height: 10%}"
         + "#modalimage {margin: auto;display: block;max-width: 95%; padding: 10px; max-height: 90%}"
         + ".htmlTable{border-top:double lightgray;width:100%;display:table;}"
@@ -411,7 +412,7 @@ public class HtmlReporter {
             + "                              {\n"
             + "                                  buttons[i].addEventListener(\"click\", function() \n"
             + "                                  {\n"
-            + "                                      var expandoText = this.getElementsByClassName(\"buttonExpandoText\")[0];\n"
+            + "                              var expandoText = this.getElementsByClassName(\"buttonExpandoText\")[0];\n"
             + "                                      \n"
             + "                                      this.classList.toggle(\"active\");\n"
             + "                              \n"
