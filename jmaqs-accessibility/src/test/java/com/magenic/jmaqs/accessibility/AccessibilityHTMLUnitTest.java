@@ -47,15 +47,17 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   private static final String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
 
-  /**
+  /*
+  /*
    * Sets up the tests and navigates to the test site.
-   */
+   *
   @BeforeMethod
   public void setup() {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
   }
+  */
 
   /**
    * Verify we can create and associate an accessibility HTML report.
@@ -63,6 +65,10 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void AccessibilityHtmlReport() throws IOException, ParseException {
+    getWebDriver().navigate().to(TestSiteUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    wait.waitForPageLoad();
+
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
 
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
@@ -77,6 +83,10 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void AccessibilityMultipleHtmlReports() throws IOException, ParseException {
+    getWebDriver().navigate().to(TestSiteUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    wait.waitForPageLoad();
+
     // Create 3 reports
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
@@ -92,9 +102,12 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   /**
    * Verify we throw an exception if the scan has an error.
    */
-  // TODO: May not need this test because of error tests in AXE repository
   @Ignore @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void AccessibilityHtmlReportWithError() throws IOException, ParseException {
+    getWebDriver().navigate().to(TestSiteUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    wait.waitForPageLoad();
+
     Results results = new ObjectMapper().readValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), results, false);
 
@@ -129,6 +142,9 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void AccessibilityHtmlReportWithViolation() throws IOException, ParseException {
+    getWebDriver().navigate().to(TestSiteUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    wait.waitForPageLoad();
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), true);
   }
 
@@ -206,6 +222,10 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void AccessibilityHtmlReportViolationsOnly() throws IOException, ParseException {
+    getWebDriver().navigate().to(TestSiteUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    wait.waitForPageLoad();
+
     // Make sure we are not using verbose logging
     this.getLogger().setLoggingLevel(MessageType.INFORMATION);
 
