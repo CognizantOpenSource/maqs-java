@@ -8,18 +8,19 @@
         <artifactId>jmaqs-framework</artifactId>
         <version>${revision}</version>
     </parent>
+
     <groupId>com.magenic.jmaqs.webservices</groupId>
     <artifactId>jmaqs-webservices-jdk8</artifactId>
     <name>JMAQS JDK8 WebServices Testing Module</name>
+    <version>${revision}</version>
+
     <properties>
-        <jackson-databind.version>2.10.2</jackson-databind.version>
-        <jackson-core.version>2.11.0</jackson-core.version>
+        <jackson.version>2.12.1</jackson.version>
         <jcommander.version>1.78</jcommander.version>
-        <jackson-dataformat-xml.version>2.11.1</jackson-dataformat-xml.version>
-        <httpcore.version>4.4.13</httpcore.version>
-        <jackson-annotations.version>2.11.1</jackson-annotations.version>
-        <httpclient.version>4.5.12</httpclient.version>
+        <httpcore.version>4.4.14</httpcore.version>
+        <httpclient.version>4.5.13</httpclient.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -38,12 +39,10 @@
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
             <artifactId>jmaqs-base</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.beust</groupId>
@@ -53,22 +52,22 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>${jackson-core.version}</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson-databind.version}</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
-            <version>${jackson-dataformat-xml.version}</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${jackson-annotations.version}</version>
+            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
 </project>

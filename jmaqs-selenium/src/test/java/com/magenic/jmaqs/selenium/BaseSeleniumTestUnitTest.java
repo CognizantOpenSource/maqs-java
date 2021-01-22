@@ -5,7 +5,6 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -35,8 +34,8 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void testGetSeleniumTestObject() {
-    Assert.assertNotNull(this.getTestObject(),
-        "Checking that Selenium Test Object is not null through BaseSeleniumTest");
+    Assert
+        .assertNotNull(this.getTestObject(), "Checking that Selenium Test Object is not null through BaseSeleniumTest");
   }
 
   @Test(groups = TestCategories.SELENIUM)
@@ -46,8 +45,7 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
 
     try {
       driver = this.getBrowser();
-      Assert.assertNotNull(driver,
-              "Checking that Selenium Driver is not null through BaseSeleniumTest");
+      Assert.assertNotNull(driver, "Checking that Selenium Driver is not null through BaseSeleniumTest");
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
@@ -57,11 +55,7 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
 
   @DataProvider(name = "data")
   public Object[][] getData() {
-    return new Object[][]{
-            {"First"},
-            {"Second"},
-            {"Third"}
-    };
+    return new Object[][] { { "First" }, { "Second" }, { "Third" } };
   }
 
   /**

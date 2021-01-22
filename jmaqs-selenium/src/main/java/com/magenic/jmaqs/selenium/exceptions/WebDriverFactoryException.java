@@ -4,10 +4,12 @@
 
 package com.magenic.jmaqs.selenium.exceptions;
 
+import com.magenic.jmaqs.base.exceptions.JMAQSRuntimeException;
+
 /**
  * The type Web driver factory exception.
  */
-public class WebDriverFactoryException extends RuntimeException {
+public class WebDriverFactoryException extends JMAQSRuntimeException {
 
   /**
    * Instantiates a new Web driver factory exception.

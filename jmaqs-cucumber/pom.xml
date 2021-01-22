@@ -8,6 +8,7 @@
 
     <groupId>com.magenic.jmaqs.cucumber</groupId>
     <artifactId>jmaqs-cucumber</artifactId>
+    <version>${revision}</version>
     <name>JMAQS Cucumber Module</name>
 
     <packaging>jar</packaging>
@@ -16,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commonsio.version>2.6</commonsio.version>
         <selenium.version>3.141.59</selenium.version>
-		<cucumber.version>6.1.2</cucumber.version>
+		<cucumber.version>6.9.1</cucumber.version>
     </properties>
 
     <dependencies>
@@ -41,14 +42,10 @@
         <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
             <artifactId>jmaqs-base</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.selenium</groupId>
             <artifactId>jmaqs-selenium</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -78,12 +75,10 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -121,7 +116,7 @@
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>83.0.4103.39</version>
+                            <version>87.0.4280.20</version>
                         </driver>
                         <driver>
                             <name>internetexplorerdriver</name>
@@ -131,7 +126,7 @@
                         <driver>
                             <name>geckodriver</name>
                             <customFileName>geckodriver</customFileName>
-                            <version>0.26.0</version>
+                            <version>0.28.0</version>
                         </driver>
                         <driver>
                             <name>edgedriver</name>
