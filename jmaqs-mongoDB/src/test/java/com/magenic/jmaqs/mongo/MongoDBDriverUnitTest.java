@@ -5,25 +5,53 @@
 package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.mongodb.client.model.Filters;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Test basic mongo base test functionality
  */
 public class MongoDBDriverUnitTest extends BaseMongoTest {
+
+  @Test(groups = TestCategories.MONGO)
+  public void testMongoDBDriver() {
+    MongoCollection<Document> collection = MongoFactory.getDefaultCollection();
+    MongoDBDriver driver = new MongoDBDriver(collection);
+    Assert.assertNotNull(driver);
+
+    driver = new MongoDBDriver(MongoDBConfig.getConnectionString(),
+        MongoDBConfig.getDatabaseString(), MongoDBConfig.getConnectionString());
+    Assert.assertNotNull(driver);
+
+    driver = new MongoDBDriver(MongoDBConfig.getCollectionString());
+    Assert.assertNotNull(driver);
+  }
+
+  @Test(groups = TestCategories.MONGO)
+  public void testGetMongoClient() {
+    this.setMongoDBDriver(new MongoDBDriver());
+    MongoClient client = this.getMongoDBDriver().getMongoClient();
+    Assert.assertNotNull(client);
+  }
+
+  @Test(groups = TestCategories.MONGO)
+  public void testSetMongoClient() {
+    this.setMongoDBDriver(new MongoDBDriver());
+    this.getMongoDBDriver().setMongoClient(new MongoClient());
+    Assert.assertNotNull(this.getMongoDBDriver().getMongoClient());
+  }
+
   /**
    * Test the list all collection items helper function.
    */
   @Test(groups = TestCategories.MONGO)
-  public void testMongoListAllCollectionItems() {
+  public void testListAllCollectionItems() {
+    this.setMongoDBDriver(new MongoDBDriver());
     List<Document> collectionItems = this.getMongoDBDriver().listAllCollectionItems();
     for (Document bson : collectionItems){
       Assert.assertTrue(bson.containsKey("lid"));
@@ -32,80 +60,18 @@ public class MongoDBDriverUnitTest extends BaseMongoTest {
     Assert.assertEquals(collectionItems.size(), 4);
   }
 
+  @Test(groups = TestCategories.MONGO)
+  public void testIsCollectionEmpty() {
+    boolean collection = this.getMongoDBDriver().isCollectionEmpty();
+    Assert.assertTrue(collection);
+  }
+
   /**
    * Test the count all collection items helper function
    */
   @Test(groups = TestCategories.MONGO)
-  public void testMongoCountItemsInCollection() {
+  public void testMongoCountAllItemsInCollection() {
     Assert.assertEquals(this.getMongoDBDriver().countAllItemsInCollection(), 4);
-  }
-
-
-  /**
-   * Test the collection works as expected.
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void TestMongoGetLoginID() {
-    Bson filter = Filters.eq("lid", "test3");
-    //String value = this.getMongoDBDriver().getCollection().find(filter).ToList()[0]["lid"].ToString();
-    List<Document> value = this.getMongoDBDriver().getCollection().find(filter).into(new ArrayList<>());
-    Assert.assertEquals(value.get(0).toString(), "test3");
-  }
-
-  /**
-   * Test the collection works as expected.
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void TestMongoQueryAndReturnFirst() {
-    Bson filter = Filters.eq("lid", "test3");
-    //MongoCollection<Document> document = this.getMongoDBDriver().getCollection().find(filter).ToList().First();
-    Document document = this.getMongoDBDriver().getCollection().find(filter).first();
-    Assert.assertEquals(document.get("lid").toString(), "test3");
-  }
-
-  /**
-   * Test the collection works as expected
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void TestMongoFindListWithKey() {
-    //var filter = Builders<Document>.Filter.Exists("lid");
-    Bson filter = Filters.exists("lid");
-    List<Document> documentList = this.getMongoDBDriver().getCollection().find(filter).into(new ArrayList<>());
-
-    for (Document documents : documentList) {
-      Assert.assertNotEquals(documents.get("lid").toString(), "");
-    }
-    Assert.assertEquals(documentList.size(), 4);
-  }
-
-  /**
-   * Test the collection works as expected.
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void TestMongoLinqQuery() {
-    /*
-    QueryBuilder querys =
-        from e in this.getMongoDBDriver().getCollection()
-    where e["lid"] == "test1"
-    select e;
-     */
-
-    Bson filter = Filters.eq("lid", "test1");
-    List<Document> retList = this.getMongoDBDriver().getCollection().find(filter).into(new ArrayList<>());
-
-    for (Document value : retList) {
-     Assert.assertEquals(value.get("lid"), "test1");
-    }
-  }
-
-  /**
-   * Make sure the test objects map properly.
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void TestMongoDBTestObjectMapCorrectly() {
-    Assert.assertEquals(this.getTestObject().getLogger(), this.getLogger(), "Logs don't match");
-    Assert.assertEquals(this.getTestObject().getPerfTimerCollection(), this.getPerfTimerCollection(), "Soft asserts don't match");
-    Assert.assertEquals(this.getTestObject().getMongoDBDriver(), this.getMongoDBDriver(), "Web service driver don't match");
   }
 
   /**

@@ -28,17 +28,19 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param testObject Test object this driver is getting added to
    */
   public MongoDriverManager(String connectionString, String databaseString, String collectionString, BaseTestObject testObject) {
-    super(() -> (MongoDBDriver) MongoFactory.getCollection(connectionString, databaseString, collectionString), testObject);
+    super(() -> new MongoDBDriver(MongoFactory.getCollection(connectionString, databaseString, collectionString)), testObject);
   }
 
-  /**
+  /*
+  /* TODO: is this needed?
    * Initializes a new instance of the MongoDriverManager class.
    * @param getCollection Function for getting a Mongo collection connection
    * @param testObject Test object this driver is getting added to
-   */
+   *
   public MongoDriverManager(Supplier<MongoDBDriver> getCollection, BaseTestObject testObject) {
     super(getCollection, testObject);
   }
+  */
 
   /**
    * Override the Mongo driver.
@@ -46,7 +48,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    */
   public void overrideDriver(MongoDBDriver overrideDriver) {
     this.driver = overrideDriver;
-    this.setBaseDriver((MongoDBDriver) overrideDriver.getCollection());
+    this.setBaseDriver(new MongoDBDriver(overrideDriver.getCollection()));
   }
 
   /**
@@ -78,7 +80,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
   }
 
   protected void overrideDriverGet(Supplier<MongoCollection<Document>> driverGet) {
-    this.setBaseDriver((MongoDBDriver) driverGet);
+    this.setBaseDriver(new MongoDBDriver(driverGet.get()));
   }
 
   @Override

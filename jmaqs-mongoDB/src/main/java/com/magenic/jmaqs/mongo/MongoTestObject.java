@@ -35,7 +35,7 @@ public class MongoTestObject extends BaseTestObject {
    * @return the mongo driver manager
    */
   public MongoDriverManager getMongoDBManager() {
-    return (MongoDriverManager) this.getManagerStore().get(MongoDriverManager.class.getCanonicalName());
+    return this.getManagerStore().getDriver(MongoDriverManager.class.getCanonicalName());
   }
 
   /**

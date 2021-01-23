@@ -7,10 +7,9 @@ package com.magenic.jmaqs.mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.Document;
 
 /**
  * Class to wrap the MongoCollection and related helper functions
@@ -127,7 +126,7 @@ public class MongoDBDriver implements AutoCloseable{
     return (int) this.getCollection().count();
   }
 
-  @Override public void close() throws Exception {
+  @Override public void close() {
 
   }
 }

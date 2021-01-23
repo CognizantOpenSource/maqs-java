@@ -10,7 +10,7 @@ import org.bson.Document;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class MongoTestObjectUnitTest extends BaseMongoTest{
+public class MongoTestObjectUnitTest extends BaseMongoTest {
   private final MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
   private final MongoCollection<Document> newCollection = MongoFactory.getDefaultCollection();
 
@@ -20,7 +20,6 @@ public class MongoTestObjectUnitTest extends BaseMongoTest{
   @Test(groups = TestCategories.MONGO)
   public void overrideCollectionFunction() {
     this.getTestObject().overrideMongoDBDriver(() -> newCollection);
-
     Assert.assertNotEquals(collection, this.getMongoDBDriver().getCollection());
     Assert.assertEquals(newCollection, this.getMongoDBDriver().getCollection());
     Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
@@ -65,5 +64,15 @@ public class MongoTestObjectUnitTest extends BaseMongoTest{
     Assert.assertNotEquals(firstDriver, this.getMongoDBDriver());
     Assert.assertEquals(newDriver, this.getMongoDBDriver());
     Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
+  }
+
+  /// <summary>
+  /// Make sure the test objects map properly
+  /// </summary>
+  @Test(groups = TestCategories.MONGO)
+  public void testMongoDBTestObjectMapCorrectly() {
+    Assert.assertEquals(this.getTestObject().getLogger(), this.getLogger(), "Logs don't match");
+    Assert.assertEquals(this.getTestObject().getPerfTimerCollection(), this.getPerfTimerCollection(), "The Perf timers don't match");
+    Assert.assertEquals(this.getTestObject().getMongoDBDriver(), this.getMongoDBDriver(), "MongoDB drivers don't match");
   }
 }

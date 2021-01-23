@@ -77,6 +77,12 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
     return MongoDBConfig.getCollectionString();
   }
 
+  @Override
+  protected void createNewTestObject() {
+    this.setTestObject(new MongoTestObject(this.getBaseConnectionString(), this.getBaseDatabaseString(),
+        this.getBaseCollectionString(), this.createLogger(), this.getFullyQualifiedTestClassName()));
+  }
+
   /**
    * Steps to do before logging teardown results.
    * @param resultType The test result
@@ -84,11 +90,5 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
     // Currently not populated with any logic
-      }
-
-  @Override
-  protected void createNewTestObject() {
-    this.setTestObject(new MongoTestObject(this.getBaseConnectionString(), this.getBaseDatabaseString(),
-        this.getBaseCollectionString(), this.createLogger(), this.getFullyQualifiedTestClassName()));
   }
 }
