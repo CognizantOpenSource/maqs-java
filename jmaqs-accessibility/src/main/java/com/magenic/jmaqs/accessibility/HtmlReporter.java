@@ -14,11 +14,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
@@ -33,46 +34,41 @@ import org.openqa.selenium.WrapsElement;
 
 public class HtmlReporter {
 
-  private static final AxeBuilder axeBuilder = new AxeBuilder();
-
-  protected static final List<ResultType> all = Arrays.asList(
-      ResultType.Passes, ResultType.Violations, ResultType.Incomplete, ResultType.Inapplicable);
-
   private HtmlReporter() {
   }
 
   public static void createAxeHtmlReport(WebDriver webDriver, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, destination, all);
+    createAxeHtmlReport(webDriver, destination, EnumSet.allOf(ResultType.class));
   }
 
-  public static void createAxeHtmlReport(WebDriver webDriver, String destination, List<ResultType> requestedResults)
+  public static void createAxeHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver), destination, requestedResults);
+    createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver), destination, requestedResults);
   }
 
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, element, destination, all);
+    createAxeHtmlReport(webDriver, element, destination, EnumSet.allOf(ResultType.class));
   }
 
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
-      List<ResultType> requestedResults) throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, axeBuilder.analyze(webDriver, element), destination, requestedResults);
+      Set<ResultType> requestedResults) throws IOException, ParseException {
+    createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver, element), destination, requestedResults);
   }
 
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, results, destination, all);
+    createAxeHtmlReport(webDriver, results, destination, EnumSet.allOf(ResultType.class));
   }
 
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination,
-      List<ResultType> requestedResults) throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, results, destination, resultTypesToString(requestedResults));
+      Set<ResultType> requestedResults) throws IOException, ParseException {
+    createAxeHtmlReportFile(webDriver, results, destination, requestedResults);
   }
 
-  private static void createAxeHtmlReport(SearchContext context, Results results, String destination,
-      String requestedResults) throws IOException, ParseException {
+  private static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
+      Set<ResultType> requestedResults) throws IOException, ParseException {
     // Get the unwrapped element if we are using a wrapped element
     context = (context instanceof WrapsElement)
         ? ((WrapsElement) context).getWrappedElement() : context;
@@ -162,19 +158,19 @@ public class HtmlReporter {
       contentArea.appendChild(errorContent);
     }
 
-    if (violationCount > 0 && requestedResults.contains(ResultType.Violations.getKey())) {
+    if (violationCount > 0 && requestedResults.contains(ResultType.Violations)) {
       getReadableAxeResults(results.getViolations(), ResultType.Violations.name(), resultsFlex);
     }
 
-    if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete.getKey())) {
+    if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
       getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name(), resultsFlex);
     }
 
-    if (passCount > 0 && requestedResults.contains(ResultType.Passes.getKey())) {
+    if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
       getReadableAxeResults(results.getPasses(), ResultType.Passes.name(), resultsFlex);
     }
 
-    if (inapplicableCount > 0 && requestedResults.contains(ResultType.Inapplicable.getKey())) {
+    if (inapplicableCount > 0 && requestedResults.contains(ResultType.Inapplicable)) {
       getReadableAxeResults(results.getInapplicable(), ResultType.Inapplicable.name(), resultsFlex);
     }
 
@@ -363,23 +359,23 @@ public class HtmlReporter {
   }
 
   private static void getCountContent(int violationCount, int incompleteCount, int passCount,
-      int inapplicableCount, String requestedResults, Element element) {
-    if (requestedResults.contains(ResultType.Violations.getKey())) {
+      int inapplicableCount, Set<ResultType> requestedResults, Element element) {
+    if (requestedResults.contains(ResultType.Violations)) {
       element.text(" Violations: " + violationCount);
       element.appendChild(new Element("br"));
     }
 
-    if (requestedResults.contains(ResultType.Incomplete.getKey())) {
+    if (requestedResults.contains(ResultType.Incomplete)) {
       element.appendText(" Incomplete: " + incompleteCount);
       element.appendChild(new Element("br"));
     }
 
-    if (requestedResults.contains(ResultType.Passes.getKey())) {
+    if (requestedResults.contains(ResultType.Passes)) {
       element.appendText(" Passes: " + passCount);
       element.appendChild(new Element("br"));
     }
 
-    if (requestedResults.contains(ResultType.Inapplicable.getKey())) {
+    if (requestedResults.contains(ResultType.Inapplicable)) {
       element.appendText(" Inapplicable: " + inapplicableCount);
     }
   }
@@ -392,15 +388,6 @@ public class HtmlReporter {
   private static String getDateFormat(String timestamp) throws ParseException {
     Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(timestamp);
     return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
-  }
-
-  private static String resultTypesToString(List<ResultType> requestedResults) {
-    String requested = "";
-
-    for (ResultType reportType : requestedResults) {
-      requested = requested.concat(reportType.getKey());
-    }
-    return requested;
   }
 
   private static String getJavascriptToString() {

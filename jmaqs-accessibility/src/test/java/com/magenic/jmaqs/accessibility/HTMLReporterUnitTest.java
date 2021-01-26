@@ -8,7 +8,6 @@ import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.selenium.ResultType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.SeleniumConfig;
 import com.magenic.jmaqs.selenium.UIWait;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -16,7 +15,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 import java.io.File;
@@ -26,10 +24,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
@@ -38,29 +33,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   private final static File integrationTestJsonResultFile = new File("src/test/resources/testFiles/sampleResults.json");
   private final static String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
-
-  /**
-   * Unit testing site URL - Login page.
-   */
-  private final static String TestSiteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
-   * Unit testing site URL - Automation page.
-   */
-  private final static String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
-
-  /*
-  /**
-   * Sets up the tests and navigates to the integration test site.
-   *
-  @BeforeMethod
-  public void setup() {
-    this.getWebDriver().get("file:///" + new File(integrationTestTargetUrl).getAbsolutePath());
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-  }
-
-   */
 
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlReportFullPage() throws IOException, ParseException {
@@ -87,12 +59,12 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path,
-        Collections.singletonList(ResultType.Violations));
+        EnumSet.of(ResultType.Violations));
 
     // Check violations
     validateReport(path, 5, 0, 0, 0);
     assertResultNotWritten(path,
-        Arrays.asList( ResultType.Passes, ResultType.Inapplicable, ResultType.Incomplete));
+        EnumSet.of(ResultType.Passes, ResultType.Inapplicable, ResultType.Incomplete));
 
     File file = new File(path);
 
@@ -109,11 +81,11 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path,
-        Arrays.asList(ResultType.Passes, ResultType.Inapplicable, ResultType.Violations));
+        EnumSet.of(ResultType.Passes, ResultType.Inapplicable, ResultType.Violations));
 
     // Check Passes
     validateReport(path, 5, 46, 0, 49);
-    assertResultNotWritten(path, Collections.singletonList(ResultType.Incomplete));
+    assertResultNotWritten(path, EnumSet.of(ResultType.Incomplete));
 
 
     File file = new File(path);
@@ -231,7 +203,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
         "Expected to find '" + resultType + ": " + count);
   }
 
-  private void assertResultNotWritten(String path, List<ResultType> resultTypeArray) throws IOException {
+  private void assertResultNotWritten(String path, EnumSet<ResultType> resultTypeArray) throws IOException {
     String text = Files.lines(Paths.get(path), StandardCharsets.UTF_8)
         .collect(Collectors.joining(System.lineSeparator()));
 

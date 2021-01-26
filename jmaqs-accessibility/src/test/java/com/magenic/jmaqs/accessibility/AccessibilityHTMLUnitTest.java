@@ -23,11 +23,11 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
@@ -64,7 +64,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * @throws IOException if an exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
-  public void AccessibilityHtmlReport() throws IOException, ParseException {
+  public void testAccessibilityHtmlReport() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -230,7 +230,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     this.getLogger().setLoggingLevel(MessageType.INFORMATION);
 
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
-        false, Collections.singletonList(ResultType.Violations));
+        false, EnumSet.of(ResultType.Violations));
 
     // The script executed message should be suppressed when we run the accessibility check
     FileInputStream fis = new FileInputStream(((FileLogger)this.getLogger()).getFilePath());
@@ -253,7 +253,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
 
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
         this.getWebDriver().findElement(By.id("FoodTable")),
-        false, Collections.singletonList(ResultType.Violations));
+        false, EnumSet.of(ResultType.Violations));
 
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");

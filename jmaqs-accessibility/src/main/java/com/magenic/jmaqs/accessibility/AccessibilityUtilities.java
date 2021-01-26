@@ -18,8 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 import org.apache.commons.io.FilenameUtils;
 import org.openqa.selenium.WebDriver;
@@ -29,11 +30,6 @@ import org.openqa.selenium.WebElement;
  * Utilities class for Accessibility Functionality.
  */
 public class AccessibilityUtilities {
-  private static final AxeBuilder axeBuilder = new AxeBuilder();
-
-  protected static final List<ResultType> all = Arrays.asList(
-      ResultType.Passes, ResultType.Violations, ResultType.Incomplete, ResultType.Inapplicable);
-
   /**
    * private constructor.
    */
@@ -108,7 +104,7 @@ public class AccessibilityUtilities {
    */
   public static void checkAccessibilityPasses(WebDriver webDriver, Logger logger, MessageType loggingLevel) {
     checkAccessibility(webDriver, logger, ResultType.Passes.getKey(),
-        () -> axeBuilder.analyze(webDriver).getPasses(), loggingLevel, false);
+        () -> new AxeBuilder().analyze(webDriver).getPasses(), loggingLevel, false);
   }
 
   /**
@@ -122,7 +118,7 @@ public class AccessibilityUtilities {
   public static void checkAccessibilityInapplicable(WebDriver webDriver, Logger logger,
       MessageType loggingLevel, boolean throwOnInapplicable) {
     checkAccessibility(webDriver, logger, ResultType.Inapplicable.getKey(),
-        () -> axeBuilder.analyze(webDriver).getInapplicable(), loggingLevel, throwOnInapplicable);
+        () -> new AxeBuilder().analyze(webDriver).getInapplicable(), loggingLevel, throwOnInapplicable);
   }
 
   /**
@@ -136,7 +132,7 @@ public class AccessibilityUtilities {
   public static void checkAccessibilityIncomplete(WebDriver webDriver, Logger logger,
       MessageType loggingLevel, boolean throwOnIncomplete) {
     checkAccessibility(webDriver, logger, ResultType.Incomplete.getKey(),
-        () -> axeBuilder.analyze(webDriver).getIncomplete(), loggingLevel, throwOnIncomplete);
+        () -> new AxeBuilder().analyze(webDriver).getIncomplete(), loggingLevel, throwOnIncomplete);
   }
 
   /**
@@ -150,7 +146,7 @@ public class AccessibilityUtilities {
   public static void checkAccessibilityViolations(WebDriver webDriver, Logger logger,
       MessageType loggingLevel, boolean throwOnViolation) {
     checkAccessibility(webDriver, logger, ResultType.Violations.getKey(),
-        () -> axeBuilder.analyze(webDriver).getViolations(), loggingLevel, throwOnViolation);
+        () -> new AxeBuilder().analyze(webDriver).getViolations(), loggingLevel, throwOnViolation);
   }
 
   /**
@@ -160,7 +156,8 @@ public class AccessibilityUtilities {
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       boolean throwOnViolation) throws IOException, ParseException {
-    createAccessibilityHtmlReport(testObject, throwOnViolation, all);
+    createAccessibilityHtmlReport(testObject,
+        () -> new AxeBuilder().analyze(testObject.getWebDriver()), throwOnViolation, EnumSet.allOf(ResultType.class));
   }
 
   /**
@@ -169,9 +166,9 @@ public class AccessibilityUtilities {
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
-      boolean throwOnViolation, List<ResultType> requestedResult) throws IOException, ParseException {
+      boolean throwOnViolation, Set<ResultType> requestedResult) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject,
-        () -> axeBuilder.analyze(testObject.getWebDriver()), throwOnViolation, requestedResult);
+        () -> new AxeBuilder().analyze(testObject.getWebDriver()), throwOnViolation, requestedResult);
   }
 
   /**
@@ -182,7 +179,8 @@ public class AccessibilityUtilities {
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       WebElement element, boolean throwOnViolation) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject,
-        () -> axeBuilder.analyze(testObject.getWebDriver(), element), throwOnViolation, all);
+        () -> new AxeBuilder().analyze(testObject.getWebDriver(), element),
+        throwOnViolation, EnumSet.allOf(ResultType.class));
   }
 
   /**
@@ -191,19 +189,19 @@ public class AccessibilityUtilities {
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
-      WebElement element, boolean throwOnViolation, List<ResultType> resultRequested)
+      WebElement element, boolean throwOnViolation, Set<ResultType> resultRequested)
       throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject,
-        () -> axeBuilder.analyze(testObject.getWebDriver(), element), throwOnViolation, resultRequested);
+        () -> new AxeBuilder().analyze(testObject.getWebDriver(), element), throwOnViolation, resultRequested);
   }
 
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, Results result,
       boolean throwOnViolation) throws IOException, ParseException {
-    createAccessibilityHtmlReport(testObject, result, throwOnViolation, all);
+    createAccessibilityHtmlReport(testObject, result, throwOnViolation, EnumSet.allOf(ResultType.class));
   }
 
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, Results result,
-      boolean throwOnViolation, List<ResultType> resultRequested) throws IOException, ParseException {
+      boolean throwOnViolation, Set<ResultType> resultRequested) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject, () -> result, throwOnViolation, resultRequested);
   }
 
@@ -215,7 +213,7 @@ public class AccessibilityUtilities {
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       Supplier<Results> getResults, boolean throwOnViolation,
-      List<ResultType> requestedResults) throws IOException, ParseException {
+      Set<ResultType> requestedResults) throws IOException, ParseException {
     // Check to see if the logger is not verbose and not already suspended
     boolean restoreLogging = testObject.getLogger().getLoggingLevel() != MessageType.VERBOSE
         && testObject.getLogger().getLoggingLevel() != MessageType.SUSPENDED;
