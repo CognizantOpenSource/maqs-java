@@ -8,7 +8,6 @@ import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.base.DriverManager;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
-
 import java.util.function.Supplier;
 
 /**
@@ -31,16 +30,15 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
     super(() -> new MongoDBDriver(MongoFactory.getCollection(connectionString, databaseString, collectionString)), testObject);
   }
 
-  /*
-  /* TODO: is this needed?
+  /** TODO: is this needed?
    * Initializes a new instance of the MongoDriverManager class.
    * @param getCollection Function for getting a Mongo collection connection
    * @param testObject Test object this driver is getting added to
-   *
+   */
   public MongoDriverManager(Supplier<MongoDBDriver> getCollection, BaseTestObject testObject) {
     super(getCollection, testObject);
   }
-  */
+
 
   /**
    * Override the Mongo driver.
@@ -60,6 +58,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
   public void overrideDriver(String connectionString, String databaseString, String collectionString) {
     this.driver = null;
     this.overrideDriverGet(() -> MongoFactory.getCollection(connectionString, databaseString, collectionString));
+    this.overrideDriverGet(() -> MongoFactory.getCollection(connectionString, databaseString, collectionString));
   }
 
   /**
@@ -76,7 +75,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @return The Mongo driver
    */
   public MongoDBDriver getMongoDriver() {
-    return getBase();
+    return this.getBase();
   }
 
   protected void overrideDriverGet(Supplier<MongoCollection<Document>> driverGet) {
@@ -84,7 +83,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
   }
 
   @Override
-  public void close() throws Exception {
+  public void close() {
     if (!this.isDriverInitialized()) {
       return;
     }

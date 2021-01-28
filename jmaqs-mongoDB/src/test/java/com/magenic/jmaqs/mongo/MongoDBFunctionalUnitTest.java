@@ -72,14 +72,4 @@ public class MongoDBFunctionalUnitTest extends BaseMongoTest{
       Assert.assertEquals(value.get("lid"), "test1");
     }
   }
-
-  /**
-   * Make sure the test objects map properly.
-   */
-  @Test(groups = TestCategories.MONGO)
-  public void testMongoDBTestObjectMapCorrectly() {
-    Assert.assertEquals(this.getTestObject().getLogger(), this.getLogger(), "Logs don't match");
-    Assert.assertEquals(this.getTestObject().getPerfTimerCollection(), this.getPerfTimerCollection(), "Soft asserts don't match");
-    Assert.assertEquals(this.getTestObject().getMongoDBDriver(), this.getMongoDBDriver(), "Web service driver don't match");
-  }
 }

@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.testng.Assert;
@@ -42,7 +42,7 @@ public class MongoDBDriverUnitTest extends BaseMongoTest {
   @Test(groups = TestCategories.MONGO)
   public void testSetMongoClient() {
     this.setMongoDBDriver(new MongoDBDriver());
-    this.getMongoDBDriver().setMongoClient(new MongoClient());
+    this.getMongoDBDriver().setMongoClient(MongoDBConfig.getConnectionString());
     Assert.assertNotNull(this.getMongoDBDriver().getMongoClient());
   }
 
@@ -70,7 +70,7 @@ public class MongoDBDriverUnitTest extends BaseMongoTest {
    * Test the count all collection items helper function
    */
   @Test(groups = TestCategories.MONGO)
-  public void testMongoCountAllItemsInCollection() {
+  public void testCountAllItemsInCollection() {
     Assert.assertEquals(this.getMongoDBDriver().countAllItemsInCollection(), 4);
   }
 

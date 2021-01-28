@@ -5,20 +5,24 @@
 package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class MongoTestObjectUnitTest extends BaseMongoTest {
-  private final MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
-  private final MongoCollection<Document> newCollection = MongoFactory.getDefaultCollection();
+
 
   /**
    * Is the collection override respected.
    */
   @Test(groups = TestCategories.MONGO)
   public void overrideCollectionFunction() {
+    MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
+    MongoCollection<Document> newCollection = MongoFactory.getDefaultCollection();
+
     this.getTestObject().overrideMongoDBDriver(() -> newCollection);
     Assert.assertNotEquals(collection, this.getMongoDBDriver().getCollection());
     Assert.assertEquals(newCollection, this.getMongoDBDriver().getCollection());
@@ -30,6 +34,7 @@ public class MongoTestObjectUnitTest extends BaseMongoTest {
    */
   @Test(groups = TestCategories.MONGO)
   public void overrideConnectionStrings() {
+    MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
     this.getTestObject().overrideMongoDBDriver(MongoDBConfig.getConnectionString(),
         MongoDBConfig.getDatabaseString(), MongoDBConfig.getCollectionString());
 
@@ -57,8 +62,13 @@ public class MongoTestObjectUnitTest extends BaseMongoTest {
   @Test(groups = TestCategories.MONGO)
   public void overrideWithCustomDriver() {
     MongoDBDriver firstDriver = this.getMongoDBDriver();
-    MongoDBDriver newDriver = new MongoDBDriver(MongoFactory.getCollection(MongoDBConfig.getConnectionString(),
-        MongoDBConfig.getDatabaseString(), null, MongoDBConfig.getCollectionString()));
+
+    MongoClientSettings settings = MongoClientSettings.builder()
+        .applyConnectionString(new ConnectionString(MongoDBConfig.getConnectionString()))
+        .build();
+
+    MongoDBDriver newDriver = new MongoDBDriver(settings,
+        MongoDBConfig.getDatabaseString(), MongoDBConfig.getCollectionString());
     this.getTestObject().overrideMongoDBDriver(newDriver);
 
     Assert.assertNotEquals(firstDriver, this.getMongoDBDriver());
@@ -70,9 +80,9 @@ public class MongoTestObjectUnitTest extends BaseMongoTest {
   /// Make sure the test objects map properly
   /// </summary>
   @Test(groups = TestCategories.MONGO)
-  public void testMongoDBTestObjectMapCorrectly() {
+  public void TestMongoDBTestObjectMapCorrectly() {
     Assert.assertEquals(this.getTestObject().getLogger(), this.getLogger(), "Logs don't match");
-    Assert.assertEquals(this.getTestObject().getPerfTimerCollection(), this.getPerfTimerCollection(), "The Perf timers don't match");
-    Assert.assertEquals(this.getTestObject().getMongoDBDriver(), this.getMongoDBDriver(), "MongoDB drivers don't match");
+    Assert.assertEquals(this.getTestObject().getPerfTimerCollection(), this.getPerfTimerCollection(), "Perf Timer Collections don't match");
+    Assert.assertEquals(this.getTestObject().getMongoDBDriver(), this.getMongoDBDriver(), "Web service driver don't match");
   }
 }

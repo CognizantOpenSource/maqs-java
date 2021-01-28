@@ -4,10 +4,11 @@
 
 package com.magenic.jmaqs.mongo;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoClientURI;
+import com.mongodb.MongoClientException;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -36,31 +37,37 @@ public class MongoFactory {
    * @return The email connection
    */
   public static MongoCollection<Document> getCollection(String connectionString, String databaseString, String collectionString) {
+    MongoClient mongoClient;
     MongoDatabase database;
-    try (MongoClient connection = new MongoClient(new MongoClientURI(connectionString))) {
-      database = connection.getDatabase(databaseString);
-    } catch (Exception e) {
-    throw new MongoException("connection was not created");
-  }
+
+    try {
+      mongoClient = MongoClients.create(connectionString);
+      database = mongoClient.getDatabase(databaseString);
+    } catch (MongoClientException e) {
+      throw new MongoClientException("connection was not created");
+    } catch (MongoException e) {
+      throw new MongoException("database does not exist");
+    }
+
     return database.getCollection(collectionString);
   }
 
   /**
    * Get the email client using connection information from the test run configuration.
-   * @param connectionString the connection string
    * @param databaseString the database string
    * @param settings the mongoDB settings to be set
    * @param collectionString the collection string
    * @return The email connection
    */
-  public static MongoCollection<Document> getCollection(String connectionString, String databaseString,
-      MongoClientOptions settings, String collectionString) {
-    MongoDatabase database;
-    try (MongoClient connection = new MongoClient(connectionString, settings)) {
-      database = connection.getDatabase(databaseString);
-    } catch (Exception e) {
-      throw new MongoException("connection was not created");
-    }
+  public static MongoCollection<Document> getCollection(String databaseString,
+      String collectionString, MongoClientSettings settings) {
+    MongoClient mongoClient = MongoClients.create(settings);
+
+      MongoDatabase database = mongoClient.getDatabase(databaseString);
+
+      if (database.getName() == null) {
+        throw new MongoException("connection was not created");
+      }
       return database.getCollection(collectionString);
   }
 }

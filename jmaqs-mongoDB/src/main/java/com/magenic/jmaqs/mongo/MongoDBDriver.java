@@ -4,11 +4,14 @@
 
 package com.magenic.jmaqs.mongo;
 
-import com.mongodb.MongoClient;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.bson.Document;
 
 /**
@@ -30,7 +33,9 @@ public class MongoDBDriver implements AutoCloseable{
    * @param collectionString Name of the collection
    */
   public MongoDBDriver(String connectionString, String databaseString, String collectionString) {
-    setCollection(MongoFactory.getCollection(connectionString, databaseString, collectionString));
+    setMongoClient(connectionString);
+    setDatabase(this.getMongoClient(), databaseString);
+    setCollection(this.getDatabase(), collectionString);
   }
 
   /**
@@ -40,6 +45,15 @@ public class MongoDBDriver implements AutoCloseable{
   public MongoDBDriver(String collectionString) {
     setCollection(MongoFactory.getCollection(MongoDBConfig.getConnectionString(),
         MongoDBConfig.getDatabaseString(), collectionString));
+  }
+
+  /**
+   * Initializes a new instance of the MongoDBDriver class.
+   * @param collectionString Name of the collection
+   */
+  public MongoDBDriver(MongoClientSettings clientSettings, String databaseString, String collectionString) {
+    this.setMongoClient(clientSettings);
+    setCollection(this.getMongoClient().getDatabase(databaseString).getCollection(collectionString));
   }
 
   /**
@@ -64,10 +78,14 @@ public class MongoDBDriver implements AutoCloseable{
 
   /**
    * Sets the client object.
-   * @param newClient the new mongo Client to be set.
+   * @param connectionString the new mongo Client to be set.
    */
-  public void setMongoClient(MongoClient newClient) {
-    this.client = newClient;
+  public void setMongoClient(String connectionString) {
+    this.client = MongoClients.create(connectionString);
+  }
+
+  public void setMongoClient(MongoClientSettings mongoClientSettings) {
+    this.client = MongoClients.create(mongoClientSettings);
   }
 
   /**
@@ -81,6 +99,14 @@ public class MongoDBDriver implements AutoCloseable{
    */
   public MongoDatabase getDatabase() {
       return this.database;
+  }
+
+  public void setDatabase(MongoClient mongoClient, String mongoDatabase) {
+    this.database = mongoClient.getDatabase(mongoDatabase);
+  }
+
+  public void setDatabase(String mongoDatabase) {
+    this.database = this.getMongoClient().getDatabase(mongoDatabase);
   }
 
   /**
@@ -102,6 +128,10 @@ public class MongoDBDriver implements AutoCloseable{
     this.collection = newCollection;
   }
 
+  private void setCollection(MongoDatabase database, String collection) {
+    this.collection = database.getCollection(collection);
+  }
+
   /**
    * List all of the items in the collection
    * @return List of the items in the collection
@@ -115,7 +145,7 @@ public class MongoDBDriver implements AutoCloseable{
    * @return True if the collection is empty, false otherwise
    */
   public boolean isCollectionEmpty() {
-    return this.getCollection().find() == null;
+    return this.getCollection() == null;
   }
 
   /**
@@ -123,7 +153,7 @@ public class MongoDBDriver implements AutoCloseable{
    * @return Number of items in the collection
    */
   public int countAllItemsInCollection() {
-    return (int) this.getCollection().count();
+    return (int) this.getCollection().countDocuments();
   }
 
   @Override public void close() {
