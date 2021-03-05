@@ -25,12 +25,8 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.jsoup.select.Elements;
+import org.openqa.selenium.*;
 
 public class HtmlReporter {
 
@@ -87,7 +83,8 @@ public class HtmlReporter {
 
     Document doc = Jsoup.parse(stringBuilder);
 
-    doc.select("style").append(getCss(context));
+    // TODO: delete this later
+    doc.select("style").append(getCss(context, "thumbnail"));
 
     Element contentArea = doc.select("content").first();
 
@@ -146,7 +143,6 @@ public class HtmlReporter {
     resultsFlex.attributes().put("id", "results");
     contentArea.appendChild(resultsFlex);
 
-
     if (results.isErrored()) {
       Element errorHeader = new Element("h2");
       errorHeader.appendText("SCAN ERRORS:");
@@ -160,6 +156,7 @@ public class HtmlReporter {
 
     if (violationCount > 0 && requestedResults.contains(ResultType.Violations)) {
       getReadableAxeResults(results.getViolations(), ResultType.Violations.name(), resultsFlex);
+      setImages(ResultType.Violations.name(), doc, context);
     }
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
@@ -280,7 +277,14 @@ public class HtmlReporter {
         htmlAndSelector.attributes().put("class", "wrapTwo");
 
         for (Object target : Collections.singletonList(item.getTarget())) {
-          String targetString = target.toString().replace("[", "").replace("]", "");
+          String targetString = target.toString();
+
+          // target object has outer brackets, this gets rid of them
+          // without deleting the necessary inner brackets
+          while (targetString.indexOf("[") == 0) {
+            targetString = targetString.substring(1, targetString.length() - 1);
+          }
+
           htmlAndSelector.text(targetString);
           htmlAndSelector.html(targetString);
         }
@@ -289,8 +293,32 @@ public class HtmlReporter {
     }
   }
 
-  private static String getCss(SearchContext context) {
-    return ".thumbnail{" + "content: url('" + getDataImageString(context)
+  private static void setImages(String type, Element doc, SearchContext context) {
+    Element section = doc.getElementById(type + "Section");
+    Elements htmlTables = section.getElementsByClass("htmlTable");
+    int count = 1;
+
+      for (Element table : htmlTables) {
+        for (Element three : table.getElementsByClass("emThree")) {
+          String threeString = three.getElementsByClass("wrapTwo").text();
+          WebElement imageElement = context.findElement(By.cssSelector(three.getElementsByClass("wrapTwo").text()));
+          doc.select("style").append(getCss(imageElement, type +"Element" + count));
+
+          Elements style = doc.select("style");
+
+          Element image = new Element("img");
+          image.attributes().put("class", type +"Element" + count);
+
+          Element element = new Element("p");
+          element.attributes().put("class", "wrapThree");
+          element.appendChild(image);
+          three.appendChild(element);
+        }
+      }
+  }
+
+  private static String getCss(SearchContext context, String className) {
+    return "."+ className + "{" + "content: url('" + getDataImageString(context)
         + "; border: 1px solid black;margin-left:1em;margin-right:1em;width:auto;max-height:150px;"
         + "} .thumbnail:hover{border:2px solid black;}"
         + ".wrap .wrapTwo .wrapThree{margin:2px;max-width:70vw;}"
@@ -322,6 +350,11 @@ public class HtmlReporter {
         + "#results {display: flex; flex-direction: column;}"
         + "@media only screen and (max-width: 800px) {#metadata {flex-direction: column;}"
         + "#context {width: 100%;}" + "#image {width: 100%;}";
+  }
+
+  private static String getElementCSS(SearchContext context, String className) {
+    return "."+ className + "{" + "content: url('" + getDataImageString(context)
+        + ";";
   }
 
   private static void getContextContent(Results results, Element element) throws ParseException {
