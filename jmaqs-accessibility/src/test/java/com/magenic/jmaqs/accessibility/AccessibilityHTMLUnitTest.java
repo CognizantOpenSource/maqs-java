@@ -47,18 +47,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   private static final String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
 
-  /*
-  /*
-   * Sets up the tests and navigates to the test site.
-   *
-  @BeforeMethod
-  public void setup() {
-    getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-  }
-  */
-
   /**
    * Verify we can create and associate an accessibility HTML report.
    * @throws IOException if an exception is thrown
