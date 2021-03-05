@@ -11,12 +11,6 @@ import com.magenic.jmaqs.selenium.BaseSeleniumTest;
 import com.magenic.jmaqs.selenium.UIWait;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-import org.openqa.selenium.By;
-import org.testng.annotations.Test;
-import org.testng.Assert;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +21,12 @@ import java.text.ParseException;
 import java.util.EnumSet;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
+import org.testng.annotations.Test;
+import org.testng.Assert;
 
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
   private final static File integrationTestTargetFile = new File("src/test/resources/testFiles/integration-test-target.html");
@@ -160,50 +160,34 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
     Document doc = Jsoup.parse(text);
 
-    // Check violations
-    String xpath = "#ViolationsSection > div > div.htmlTable";
-    assertElementCount(doc, violationCount, xpath, ResultType.Violations);
-
-    // Check passes
-    xpath = "#PassesSection > div > div.htmlTable";
-    assertElementCount(doc, passCount, xpath, ResultType.Passes);
-
-    // Check inapplicable
-    xpath = "#InapplicableSection > div.findings";
-    assertElementCount(doc, inapplicableCount, xpath, ResultType.Inapplicable);
-
-    // Check incomplete
-    xpath = "#IncompleteSection > div > div.htmlTable";
-    assertElementCount(doc, incompleteCount, xpath, ResultType.Incomplete);
+    // Check the Element count for each result type
+    assertElementCount(doc, violationCount, ResultType.Violations);
+    assertElementCount(doc, passCount, ResultType.Passes);
+    assertElementCount(doc, inapplicableCount, ResultType.Inapplicable);
+    assertElementCount(doc, incompleteCount, ResultType.Incomplete);
 
     // Check header data
     Assert.assertTrue(text.contains("Using: axe-core"), "Expected to find 'Using: axe-core'");
 
-    if (violationCount != 0) {
-      assertResultCount(text, violationCount, ResultType.Violations);
-    }
-
-    if (incompleteCount != 0) {
-      assertResultCount(text, incompleteCount, ResultType.Incomplete);
-    }
-
-    if (passCount != 0) {
-      assertResultCount(text, passCount, ResultType.Passes);
-    }
-
-    if (inapplicableCount != 0) {
-      assertResultCount(text, inapplicableCount, ResultType.Inapplicable);
-    }
+    // Check the result count for each result type
+    assertResultCount(text, violationCount, ResultType.Violations);
+    assertResultCount(text, incompleteCount, ResultType.Incomplete);
+    assertResultCount(text, passCount, ResultType.Passes);
+    assertResultCount(text, inapplicableCount, ResultType.Inapplicable);
   }
 
-  private void assertElementCount(Document doc, int count, String xpath, ResultType resultType) {
+  private void assertElementCount(Document doc, int count, ResultType resultType) {
+    String ending = resultType.equals(ResultType.Inapplicable) ? "div.findings" : "div > div.htmlTable";
+    String xpath = "#" + resultType + "Section > " + ending;
     Elements liNodes = doc.select(xpath) != null ? doc.select(xpath) : new Elements();
-    Assert.assertEquals(count, liNodes.size(), "Expected " + count + " " + resultType);
+    Assert.assertEquals(liNodes.size(), count, "Expected " + count + " " + resultType);
   }
 
   private void assertResultCount(String text, int count, ResultType resultType) {
-    Assert.assertTrue(text.contains(resultType + ": " + count),
-        "Expected to find '" + resultType + ": " + count);
+    if (count != 0) {
+      Assert.assertTrue(text.contains(resultType + ": " + count),
+          "Expected to find '" + resultType + ": " + count);
+    }
   }
 
   private void assertResultNotWritten(String path, EnumSet<ResultType> resultTypeArray) throws IOException {
