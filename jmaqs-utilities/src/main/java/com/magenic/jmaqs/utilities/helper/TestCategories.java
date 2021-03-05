@@ -14,7 +14,7 @@ public class TestCategories {
   }
 
   /**
-   * String for email unit test category.
+   * String for Accessibility unit test category.
    */
   public static final String ACCESSIBILITY = "Accessibility Unit Tests";
 
