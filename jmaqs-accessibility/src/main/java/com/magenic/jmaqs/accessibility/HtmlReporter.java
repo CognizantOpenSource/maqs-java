@@ -83,8 +83,7 @@ public class HtmlReporter {
 
     Document doc = Jsoup.parse(stringBuilder);
 
-    // TODO: delete this later
-    doc.select("style").append(getCss(context, "thumbnail"));
+    doc.select("style").append(getCss(context));
 
     Element contentArea = doc.select("content").first();
 
@@ -161,10 +160,12 @@ public class HtmlReporter {
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
       getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name(), resultsFlex);
+      setImages(ResultType.Incomplete.name(), doc, context);
     }
 
     if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
       getReadableAxeResults(results.getPasses(), ResultType.Passes.name(), resultsFlex);
+      setImages(ResultType.Passes.name(), doc, context);
     }
 
     if (inapplicableCount > 0 && requestedResults.contains(ResultType.Inapplicable)) {
@@ -295,36 +296,38 @@ public class HtmlReporter {
 
   private static void setImages(String type, Element doc, SearchContext context) {
     Element section = doc.getElementById(type + "Section");
-    Elements htmlTables = section.getElementsByClass("htmlTable");
+    Elements findings = section.getElementsByClass("findings");
     int count = 1;
 
-      for (Element table : htmlTables) {
-        for (Element three : table.getElementsByClass("emThree")) {
-          String threeString = three.getElementsByClass("wrapTwo").text();
-          WebElement imageElement = context.findElement(By.cssSelector(three.getElementsByClass("wrapTwo").text()));
-          doc.select("style").append(getCss(imageElement, type +"Element" + count));
+      for (Element finding : findings) {
+        for (Element table : finding.getElementsByClass("htmlTable")) {
+          Element emThree = table.selectFirst("div.emThree");
 
-          Elements style = doc.select("style");
+          String selectorText = emThree.selectFirst("p.wrapTwo").text();
+          String imageString = getDataImageString(context.findElement(By.cssSelector(selectorText)));
+
+          Element wrapThree = new Element("div");
+          wrapThree.attributes().put("class", "wrapThree");
 
           Element image = new Element("img");
-          image.attributes().put("class", type +"Element" + count);
+          image.attributes().put("src", imageString);
+          image.attributes().put("alt", type + "Element" + count++);
 
-          Element element = new Element("p");
-          element.attributes().put("class", "wrapThree");
-          element.appendChild(image);
-          three.appendChild(element);
+          wrapThree.appendChild(image);
+          emThree.appendChild(wrapThree);
         }
       }
   }
 
-  private static String getCss(SearchContext context, String className) {
-    return "."+ className + "{" + "content: url('" + getDataImageString(context)
+  private static String getCss(SearchContext context) {
+    return ".thumbnail{" + "content: url('" + getDataImageString(context)
         + "; border: 1px solid black;margin-left:1em;margin-right:1em;width:auto;max-height:150px;"
         + "} .thumbnail:hover{border:2px solid black;}"
         + ".wrap .wrapTwo .wrapThree{margin:2px;max-width:70vw;}"
         + ".wrapOne {margin-left:1em;overflow-wrap:anywhere;}"
         + ".wrapTwo {margin-left:2em;overflow-wrap:anywhere;}"
-        + ".wrapThree {margin-left:3em;overflow-wrap:anywhere;}"
+        + ".wrapThree {margin-left:3em;transition: transform .2s;position: absolute;right: 25%;margin-top: -5.5%}"
+        + ".wrapThree:hover {transform: scale(1.5);}"
         + ".emOne {margin-left:1em;margin-right:1em;overflow-wrap:anywhere;}"
         + ".emTwo {margin-left:2em;overflow-wrap:anywhere;}"
         + ".emThree {margin-left:3em;overflow-wrap:anywhere;}"
@@ -350,11 +353,6 @@ public class HtmlReporter {
         + "#results {display: flex; flex-direction: column;}"
         + "@media only screen and (max-width: 800px) {#metadata {flex-direction: column;}"
         + "#context {width: 100%;}" + "#image {width: 100%;}";
-  }
-
-  private static String getElementCSS(SearchContext context, String className) {
-    return "."+ className + "{" + "content: url('" + getDataImageString(context)
-        + ";";
   }
 
   private static void getContextContent(Results results, Element element) throws ParseException {
