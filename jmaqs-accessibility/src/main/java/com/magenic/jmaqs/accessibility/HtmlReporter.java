@@ -160,7 +160,6 @@ public class HtmlReporter {
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
       getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name(), resultsFlex);
-      setImages(ResultType.Incomplete.name(), doc, context);
     }
 
     if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
@@ -294,8 +293,8 @@ public class HtmlReporter {
     }
   }
 
-  private static void setImages(String type, Element doc, SearchContext context) {
-    Element section = doc.getElementById(type + "Section");
+  private static void setImages(String resultType, Element doc, SearchContext context) {
+    Element section = doc.getElementById(resultType + "Section");
     Elements findings = section.getElementsByClass("findings");
     int count = 1;
 
@@ -304,14 +303,22 @@ public class HtmlReporter {
           Element emThree = table.selectFirst("div.emThree");
 
           String selectorText = emThree.selectFirst("p.wrapTwo").text();
-          String imageString = getDataImageString(context.findElement(By.cssSelector(selectorText)));
+          //String imageString = getDataImageString(context.findElement(By.cssSelector(selectorText)));
+
+          WebElement element = context.findElement(By.cssSelector(selectorText));
+          String elementName = resultType + "Element" + count++;
+          String imageString = setDataImageString(element, elementName) + "}";
 
           Element wrapThree = new Element("div");
           wrapThree.attributes().put("class", "wrapThree");
 
           Element image = new Element("img");
-          image.attributes().put("src", imageString);
-          image.attributes().put("alt", type + "Element" + count++);
+          // image.attributes().put("src", imageString);
+          image.attributes().put("alt", elementName);
+          image.attributes().put("class", elementName);
+
+          // String styleText = doc.selectFirst("style").ownText();
+          doc.select("style").append(imageString);
 
           wrapThree.appendChild(image);
           emThree.appendChild(wrapThree);
@@ -319,8 +326,19 @@ public class HtmlReporter {
       }
   }
 
+  private static String getDataImageString(SearchContext context) {
+    TakesScreenshot newScreen = (TakesScreenshot) context;
+    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64) + "');";
+  }
+
+  private static String setDataImageString(SearchContext context, String cssName) {
+    String string = ".cssName{"
+     + "content: url('" + getDataImageString(context) + ";)";
+    return string.replace("cssName", cssName);
+  }
+
   private static String getCss(SearchContext context) {
-    return ".thumbnail{" + "content: url('" + getDataImageString(context)
+    return setDataImageString(context, "thumbnail")
         + "; border: 1px solid black;margin-left:1em;margin-right:1em;width:auto;max-height:150px;"
         + "} .thumbnail:hover{border:2px solid black;}"
         + ".wrap .wrapTwo .wrapThree{margin:2px;max-width:70vw;}"
@@ -411,11 +429,6 @@ public class HtmlReporter {
     }
   }
 
-  private static String getDataImageString(SearchContext context) {
-    TakesScreenshot newScreen = (TakesScreenshot) context;
-    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64) + "');";
-  }
-
   private static String getDateFormat(String timestamp) throws ParseException {
     Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(timestamp);
     return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
@@ -423,44 +436,44 @@ public class HtmlReporter {
 
   private static String getJavascriptToString() {
     return StringEscapeUtils.escapeEcmaScript(
-        "var buttons = document.getElementsByClassName(\"sectionbutton\");\n"
+        "var buttons = document.getElementsByClassName(\"\"sectionbutton\"\");\n"
             + "                              var i;\n"
             + "                              \n"
             + "                              for (i = 0; i < buttons.length; i++) \n"
             + "                              {\n"
-            + "                                  buttons[i].addEventListener(\"click\", function() \n"
+            + "                                  buttons[i].addEventListener(\"\"click\"\", function() \n"
             + "                                  {\n"
-            + "                              var expandoText = this.getElementsByClassName(\"buttonExpandoText\")[0];\n"
+            + "                              var expandoText = this.getElementsByClassName(\"\"buttonExpandoText\"\")[0];\n"
             + "                                      \n"
-            + "                                      this.classList.toggle(\"active\");\n"
+            + "                                      this.classList.toggle(\"\"active\"\");\n"
             + "                              \n"
             + "                                      var content = this.nextElementSibling;\n"
-            + "                                      if (expandoText.innerHTML == \"-\") \n"
+            + "                                      if (expandoText.innerHTML == \"\"-\"\") \n"
             + "                                      {\n"
             + "                                          content.style.maxHeight = 0;\n"
-            + "                                          expandoText.innerHTML = \"+\";\n"
+            + "                                          expandoText.innerHTML = \"\"+\"\";\n"
             + "                                      } \n"
             + "                                      else \n"
             + "                                      {\n"
-            + "                                          content.style.maxHeight = content.scrollHeight + \"px\";\n"
-            + "                                          expandoText.innerHTML = \"-\";\n"
+            + "                                          content.style.maxHeight = content.scrollHeight + \"\"px\"\";\n"
+            + "                                          expandoText.innerHTML = \"\"-\"\";\n"
             + "                                      }\n"
             + "                                  })\n"
             + "                              }\n"
             + "  \n"
-            + "                              var thumbnail = document.getElementById(\"screenshotThumbnail\");\n"
+            + "                              var thumbnail = document.getElementById(\"\"screenshotThumbnail\"\");\n"
             + "                              var thumbnailStyle = getComputedStyle(thumbnail);      \n"
-            + "                              var modal = document.getElementById(\"modal\");\n"
-            + "                              var modalimg = modal.getElementsByTagName(\"img\")[0]\n"
+            + "                              var modal = document.getElementById(\"\"modal\"\");\n"
+            + "                              var modalimg = modal.getElementsByTagName(\"\"img\"\")[0]\n"
             + "                              \n"
             + "                              modal.addEventListener('click',function(){\n"
-            + "                                 modal.style.display = \"none\";\n"
-            + "                                 modalimg.style.content = \"\";\n"
-            + "                                 modalimg.alt = \"\";\n"
+            + "                                 modal.style.display = \"\"none\"\";\n"
+            + "                                 modalimg.style.content = \"\"\"\";\n"
+            + "                                 modalimg.alt = \"\"\"\";\n"
             + "                               })\n"
             + "                              \n"
             + "                              thumbnail.addEventListener('click',function(){\n"
-            + "                                 modal.style.display = \"flex\";\n"
+            + "                                 modal.style.display = \"\"flex\"\";\n"
             + "                                 modalimg.style.content = thumbnailStyle.content;\n"
             + "                                 modalimg.alt = thumbnail.alt;\n"
             + "                               })");
