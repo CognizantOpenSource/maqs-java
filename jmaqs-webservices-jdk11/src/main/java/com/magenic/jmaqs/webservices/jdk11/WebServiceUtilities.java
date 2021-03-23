@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.webservices.jdk11;
@@ -12,7 +12,6 @@ import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
-import org.apache.http.entity.ContentType;
 
 /**
  * The type Web service utilities.
@@ -77,11 +76,13 @@ public class WebServiceUtilities {
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
+  public static <T> String createStringEntity(T body, MediaType contentType) throws JsonProcessingException {
     if (contentType.toString().toUpperCase().contains("XML")) {
       return serializeXml(body);
     } else if (contentType.toString().toUpperCase().contains("JSON")) {
       return serializeJson(body);
+    } else if (contentType.toString().toUpperCase().contains("TEXT")) {
+      return body.toString();
     } else {
       throw new IllegalArgumentException(
           StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
@@ -110,6 +111,28 @@ public class WebServiceUtilities {
    */
   public static <T> String serializeXml(T body) throws JsonProcessingException {
     return xmlMapper.writeValueAsString(body);
+  }
+
+  /**
+   * Create string entity string entity.
+   *
+   * @param <T>         the type parameter
+   * @param message the String Http Response message
+   * @param mediaType the type the message is going to be turned into
+   * @param type the class or java object to be transferred into
+   * @return the response type
+   * @throws JsonProcessingException the json processing exception
+   */
+  public static <T> T deserializeResponse(HttpResponse<String> message, MediaType mediaType, Type type)
+      throws IOException {
+    if (mediaType.toString().toUpperCase().contains("XML")) {
+      return deserializeXml(message, type);
+    } else if (mediaType.toString().toUpperCase().contains("JSON")) {
+      return deserializeJson(message, type);
+    } else {
+      throw new IllegalArgumentException(
+          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+    }
   }
 
   /**

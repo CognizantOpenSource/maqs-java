@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.webservices.jdk11;
@@ -17,7 +17,9 @@ public class HttpRequestFactory {
   /**
    * class constructor.
    */
-  private HttpRequestFactory() {}
+  private HttpRequestFactory() {
+
+  }
 
   /**
    * Gets a default TTP client based on configuration values.
@@ -75,7 +77,8 @@ public class HttpRequestFactory {
    * @param requestMethod the type of the request being placed
    * @return A HTTP Request
    */
-  public static HttpRequest getRequest(String requestUri, MediaType mediaType, String content, RequestMethod requestMethod) {
+  public static HttpRequest getRequest(String requestUri, MediaType mediaType,
+      String content, RequestMethod requestMethod) {
     return setUpRequest(WebServiceConfig.getWebServiceUri(), requestUri, WebServiceConfig.getWebServiceTimeOut(),
         mediaType, content, requestMethod);
   }
