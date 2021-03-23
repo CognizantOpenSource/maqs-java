@@ -1,3 +1,7 @@
+/*
+ * Copyright 2021 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -5,10 +9,8 @@ import com.magenic.jmaqs.webservices.jdk11.models.Product;
 import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
-
+import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,7 +22,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   /**
    * String to hold the URL.
    */
-  private static String baseUrl = WebServiceConfig.getWebServiceUri();
+  private static final String baseUrl = WebServiceConfig.getWebServiceUri();
 
   /**
    * Test Json Get deserialize a single product.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.webservices.jdk11;
@@ -12,9 +12,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.NotAcceptableStatusException;
@@ -168,7 +166,6 @@ public class WebServiceDriver {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
     HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
-
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
@@ -193,7 +190,6 @@ public class WebServiceDriver {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
     HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
-
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status
@@ -218,7 +214,6 @@ public class WebServiceDriver {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
     HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
-
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
@@ -245,7 +240,6 @@ public class WebServiceDriver {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
     HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
-
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status
@@ -342,8 +336,8 @@ public class WebServiceDriver {
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  public HttpResponse<String> deleteWithResponse(String requestUri, MediaType expectedMediaType, List<String> header, boolean expectSuccess)
-      throws IOException, InterruptedException {
+  public HttpResponse<String> deleteWithResponse(String requestUri, MediaType expectedMediaType,
+      Map<String, String> header, boolean expectSuccess) throws IOException, InterruptedException {
     return this.deleteContent(requestUri, expectedMediaType, header, expectSuccess);
   }
 
@@ -356,8 +350,8 @@ public class WebServiceDriver {
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  public HttpResponse<String> deleteWithResponse(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
+  public HttpResponse<String> deleteWithResponse(String requestUri, MediaType expectedMediaType,
+      HttpStatus expectedStatus) throws IOException, InterruptedException {
     return this.deleteContent(requestUri, expectedMediaType, expectedStatus);
   }
 
@@ -371,11 +365,10 @@ public class WebServiceDriver {
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType, List<String> header
-      , boolean expectSuccess)
-      throws IOException, InterruptedException {
-    setHttpRequest(HttpRequestFactory.getRequest(requestUri, returnMediaType, RequestMethod.DELETE, header));
-    HttpResponse<String> response = baseHttpClient.send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
+  protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType,
+      Map<String, String> header, boolean expectSuccess) throws IOException, InterruptedException {
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.DELETE, returnMediaType, header);
+    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
     if (expectSuccess) {
@@ -395,8 +388,8 @@ public class WebServiceDriver {
    */
   protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType, boolean expectSuccess)
       throws IOException, InterruptedException {
-    setHttpRequest(HttpRequestFactory.getRequest(requestUri, returnMediaType, RequestMethod.DELETE));
-    HttpResponse<String> response = baseHttpClient.send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.DELETE, returnMediaType);
+    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
     if (expectSuccess) {
@@ -414,10 +407,10 @@ public class WebServiceDriver {
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
-    setHttpRequest(HttpRequestFactory.getRequest(requestUri, returnMediaType, RequestMethod.DELETE));
-    HttpResponse<String> response = baseHttpClient.send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
+  protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType,
+      HttpStatus expectedStatus) throws IOException, InterruptedException {
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.DELETE, returnMediaType);
+    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status
     ensureStatusCodesMatch(response, expectedStatus);
@@ -476,7 +469,7 @@ public class WebServiceDriver {
 
     builder
       .header("Content-Type", mediaType.toString())
-      .uri(URI.create(requestUri));
+        .uri(URI.create(requestUri));
 
     for (Map.Entry<String, String> header : additionalHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());

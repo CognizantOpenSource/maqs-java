@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.webservices.jdk11;
@@ -11,7 +11,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.time.Duration;
 import java.util.List;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
@@ -21,7 +20,9 @@ public class HttpRequestFactory {
   /**
    * class constructor.
    */
-  private HttpRequestFactory() { }
+  private HttpRequestFactory() {
+
+  }
 
   /**
    * Gets a default TTP client based on configuration values.
@@ -77,7 +78,8 @@ public class HttpRequestFactory {
         WebServiceConfig.getWebServiceTimeOut(), returnMediaType, "", requestType);
   }
 
-  public static HttpRequest getRequest(String baseUri, MediaType returnMediaType, RequestMethod requestType, List<String> header) {
+  public static HttpRequest getRequest(String baseUri, MediaType returnMediaType,
+      RequestMethod requestType, List<String> header) {
     return setUpRequest(WebServiceConfig.getWebServiceUri(), baseUri,
         WebServiceConfig.getWebServiceTimeOut(), returnMediaType, "", header, requestType);
   }
@@ -102,7 +104,8 @@ public class HttpRequestFactory {
    * @param mediaType the media type being used
    * @return a HTTP Request
    */
-  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType, List<String> header) {
+  public static HttpRequest getRequest(String baseAddress, String baseUri,
+      int timeout, MediaType mediaType, List<String> header) {
     return setUpRequest(baseAddress, baseUri, timeout, mediaType, "", header, RequestMethod.GET);
   }
 
@@ -123,7 +126,7 @@ public class HttpRequestFactory {
         .timeout(Duration.ofSeconds(timeout))
         .version(HttpClient.Version.HTTP_2)
         .header("Content-Type", mediaType.toString());
-   return doRequest(builder, content, requestType);
+    return doRequest(builder, content, requestType);
   }
 
   /**
