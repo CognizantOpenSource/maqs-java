@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium;
@@ -40,7 +40,7 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
     PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
     pageModel.open(siteAutomationUrl);
     WebElement elementDriver = UIWaitFactory
-        .getWaitDriver(pageModel.getSeleniumTestObject().getWebDriver())
+        .getWaitDriver(pageModel.getWebDriver())
         .waitForClickableElement(pageModel.showDialog1ButtonLocator);
 
     UIFind findWithElement = UIFindFactory.getFind(elementDriver);

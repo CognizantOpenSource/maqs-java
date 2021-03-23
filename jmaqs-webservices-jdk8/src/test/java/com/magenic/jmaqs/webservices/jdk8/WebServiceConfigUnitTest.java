@@ -1,6 +1,6 @@
 
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.webservices.jdk8;
@@ -10,6 +10,9 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Unit tests for the Web Service Config functionality.
+ */
 public class WebServiceConfigUnitTest extends BaseGenericTest {
   /**
    * gets if proxy can be used.
@@ -44,5 +47,14 @@ public class WebServiceConfigUnitTest extends BaseGenericTest {
   public void getProxyAddress() {
     Assert.assertEquals(WebServiceConfig.getProxyAddress(), "127.0.0.1:8001",
         "Proxy address is not the same");
+  }
+
+  /**
+   * gets the proxy port.
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getProxyPort() {
+    Assert.assertEquals(WebServiceConfig.getProxyPort(), 8080,
+        "Proxy Port is not the same");
   }
 }
