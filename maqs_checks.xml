@@ -118,7 +118,7 @@
       <property name="caseIndent" value="2"/>
     </module>
     <module name="AbbreviationAsWordInName">
-      <property name="allowedAbbreviationLength" value="3"/>
+      <property name="allowedAbbreviationLength" value="5"/>
       <property name="ignoreFinal" value="false"/>
     </module>
     <module name="OverloadMethodsDeclarationOrder"/>
@@ -187,6 +187,6 @@
     <property name="eachLine" value="true"/>
   </module>
   <module name="Header">
-    <property name="header" value="/*\n * Copyright 2020 (C) Magenic, All rights Reserved\n */\n"/>
+    <property name="header" value="/*\n * Copyright 2021 (C) Magenic, All rights Reserved\n */\n"/>
   </module>
 </module>

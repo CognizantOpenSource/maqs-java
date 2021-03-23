@@ -5,14 +5,11 @@
 package com.magenic.jmaqs.webservices.jdk11.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@JsonPropertyOrder({"Id", "Name", "Category", "Price"})
+import java.math.BigDecimal;
+
 public class Product {
-    /**
-     * the xmlns namespace.
-     */
     @JacksonXmlProperty(isAttribute = true)
     private final String xmlns = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models";
 
@@ -26,9 +23,9 @@ public class Product {
     private String category;
 
     @JsonProperty("Price")
-    private double price;
+    private BigDecimal price;
 
-    public Product(int id, String name, String category, double price) {
+    public Product(int id, String name, String category, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -61,11 +58,11 @@ public class Product {
         this.category = category;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
