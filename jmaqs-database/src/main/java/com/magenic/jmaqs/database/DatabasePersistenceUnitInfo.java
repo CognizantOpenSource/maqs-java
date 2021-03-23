@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.database;
@@ -16,8 +16,6 @@ import javax.persistence.spi.PersistenceUnitTransactionType;
 import javax.sql.DataSource;
 
 public class DatabasePersistenceUnitInfo implements PersistenceUnitInfo {
-
-  private static final String JPA_VERSION = "2.1";
   private String persistenceUnitName;
   private PersistenceUnitTransactionType transactionType = PersistenceUnitTransactionType.RESOURCE_LOCAL;
   private String persistenceProviderClassName = "org.hibernate.jpa.HibernatePersistenceProvider";

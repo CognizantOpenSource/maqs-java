@@ -1,25 +1,36 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
+import org.apache.http.entity.ContentType;
 
 /**
  * The type Web service utilities.
  */
 public class WebServiceUtilities {
+  /**
+   * used to serialize and deserialize json properties.
+   */
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
-  private static final XmlMapper xmlMapper = new XmlMapper();
+  /**
+   * used to serialize and deserialize xml properties.
+   */
+  private static final ObjectMapper xmlMapper = new XmlMapper();
 
-  // private constructor
+  /**
+   * private class constructor.
+   */
   private WebServiceUtilities() {
   }
 
@@ -45,33 +56,32 @@ public class WebServiceUtilities {
       throws IOException {
     T responseBody;
 
-    if (contentType.equals(MediaType.APP_XML)) {
+    if (contentType.equals(MediaType.APP_JSON)) {
       responseBody = deserializeJson(response, type);
-    } else if (contentType.equals(MediaType.APP_JSON)) {
+    } else if (contentType.equals(MediaType.APP_XML)) {
       responseBody = deserializeXml(response, type);
     } else {
       throw new IllegalArgumentException(
           StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
     }
+
     return responseBody;
   }
 
   /**
    * Create string entity string entity.
+   *
    * @param <T>         the type parameter
    * @param body        the body
    * @param contentType the content type
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String makeStringContent(T body, MediaType contentType)
-      throws IOException {
-    if (contentType.equals(MediaType.APP_XML)) {
+  public static <T> String createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
+    if (contentType.toString().toUpperCase().contains("XML")) {
       return serializeXml(body);
-    } else if (contentType.equals(MediaType.APP_JSON)) {
+    } else if (contentType.toString().toUpperCase().contains("JSON")) {
       return serializeJson(body);
-    } else if (contentType.equals(MediaType.PLAIN_TEXT)) {
-      return body.toString();
     } else {
       throw new IllegalArgumentException(
           StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
@@ -80,6 +90,7 @@ public class WebServiceUtilities {
 
   /**
    * Serialize json string.
+   *
    * @param <T>  the type parameter
    * @param body the body
    * @return the string
@@ -91,38 +102,19 @@ public class WebServiceUtilities {
 
   /**
    * Serialize xml string.
+   *
    * @param <T>  the type parameter
    * @param body the body
    * @return the string
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String serializeXml(T body) throws IOException {
-    xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-    xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+  public static <T> String serializeXml(T body) throws JsonProcessingException {
     return xmlMapper.writeValueAsString(body);
   }
 
   /**
-   * Deserialize the response based on the media type.
-   * @param <T>     the type parameter
-   * @param type    the type
-   * @return the t object
-   * @throws IOException the io exception
-   */
-  public static <T> T deserializeResponse(HttpResponse<String> response, MediaType mediaType, Type type)
-      throws IOException {
-    if (mediaType == MediaType.APP_XML) {
-      return deserializeXml(response, type);
-    } else if (mediaType == MediaType.APP_JSON) {
-      return deserializeJson(response, type);
-    } else {
-      throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
-    }
-  }
-
-  /**
-   * Deserialize json t.
+   * Deserialize json to a specified object.
+   *
    * @param <T>     the type parameter
    * @param message the message
    * @param type    the type
@@ -130,12 +122,12 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeJson(HttpResponse<String> message, Type type) throws IOException {
-    String responseEntity = getResponseBody(message);
-    return objectMapper.readValue(responseEntity, objectMapper.getTypeFactory().constructType(type));
+    return objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
   }
 
   /**
-   * Deserialize xml t.
+   * Deserialize xml to a specified object.
+   *
    * @param <T>     the type parameter
    * @param message the message
    * @param type    the type
@@ -143,9 +135,6 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
-    // the body of the response is given back in JSON
-    // therefore deserialize it to JSON then convert into XML
-    String responseEntity = xmlMapper.writeValueAsString(deserializeJson(message, type));
-    return xmlMapper.readValue(responseEntity, xmlMapper.getTypeFactory().constructType(type));
+    return xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
   }
 }

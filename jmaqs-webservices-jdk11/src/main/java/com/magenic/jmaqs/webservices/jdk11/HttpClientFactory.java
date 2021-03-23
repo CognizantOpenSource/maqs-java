@@ -15,9 +15,11 @@ import java.time.Duration;
  */
 public class HttpClientFactory {
   /**
-   * class constructor.
+   * private constructor.
    */
-  private HttpClientFactory() {}
+  private HttpClientFactory() {
+
+  }
 
   /**
    * Gets a HTTP client based on configuration values.
@@ -48,12 +50,11 @@ public class HttpClientFactory {
     HttpClient.Builder builder = HttpClient.newBuilder()
         .version(HttpClient.Version.HTTP_2)
         .followRedirects(HttpClient.Redirect.NORMAL)
-        //.authenticator(Authenticator.getDefault())
         .connectTimeout(timeout);
 
     // sets up proxy settings
     if (useProxy) {
-      builder.proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, 8080)));
+      builder.proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, WebServiceConfig.getProxyPort())));
     }
     return builder.build();
   }
