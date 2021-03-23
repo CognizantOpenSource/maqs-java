@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.utilities.logging;
@@ -12,6 +12,9 @@ import java.io.File;
  * Get logging config data.
  */
 public class LoggingConfig {
+
+  public static final String CONSOLE = "CONSOLE";
+  public static final String TXT = "TXT";
 
   private LoggingConfig() {
     //Hiding implicit contructor
@@ -80,14 +83,14 @@ public class LoggingConfig {
     String logDirectory = getLogDirectory();
     MessageType loggingLevel = getLoggingLevelSetting();
 
-    switch (Config.getGeneralValue("LogType", "CONSOLE").toUpperCase()) {
-      case "CONSOLE":
+    switch (Config.getGeneralValue("LogType", CONSOLE).toUpperCase()) {
+      case CONSOLE:
         return new ConsoleLogger(loggingLevel);
-      case "TXT":
+      case TXT:
         return new FileLogger(false, logDirectory, fileName, loggingLevel);
       default:
         throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Log type %s is not a valid option", Config.getGeneralValue("LogType", "CONSOLE")));
+            .safeFormatter("Log type %s is not a valid option", Config.getGeneralValue("LogType", CONSOLE)));
     }
   }
 

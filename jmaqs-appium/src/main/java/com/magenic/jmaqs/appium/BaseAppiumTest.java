@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.appium;
@@ -15,13 +15,13 @@ import org.testng.ITestResult;
 /**
  * Base Appium Test Class.
  */
-public abstract class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
+public class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
 
   /**
    * Initialize a new instance of the BaseAppiumTest class.
    */
   public BaseAppiumTest() {
-
+    // Needs an empty constructor
   }
 
   /**

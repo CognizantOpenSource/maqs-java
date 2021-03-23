@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.webservices.jdk8;
@@ -13,7 +13,7 @@ import org.testng.ITestResult;
 /**
  * Base web service test class.
  */
-public abstract class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject> {
+public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject> {
 
   /**
    * Get the Web Service Driver.
