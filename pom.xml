@@ -279,11 +279,6 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.accessibility</groupId>
-                <artifactId>jmaqs-accessibility</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.magenic.jmaqs.base</groupId>
                 <artifactId>jmaqs-base</artifactId>
                 <version>${project.version}</version>
