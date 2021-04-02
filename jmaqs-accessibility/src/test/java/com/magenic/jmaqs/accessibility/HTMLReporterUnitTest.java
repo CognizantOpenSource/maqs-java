@@ -136,7 +136,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     Assert.assertTrue(reportContext.contains("Url: https://www.google.com/"), "URL is not in the document");
     Assert.assertTrue(reportContext.contains("Orientation: landscape-primary"), "Orientation is not in the document");
     Assert.assertTrue(reportContext.contains("Size: 1200 x 646"), "Size is not in the document");
-    Assert.assertTrue(reportContext.contains("Time: 14-Apr-20 01:33:59 -0500"), "Time is not in the document: " + reportContext);
+    Assert.assertTrue(reportContext.contains("Time: 14-Apr-20 01:33:59"), "Time is not in the document: " + reportContext);
     Assert.assertTrue(reportContext.contains("User agent: AutoAgent"), "User Agent is not in the document");
     Assert.assertTrue(reportContext.contains("Using: axe-core (3.4.1)"), "Using is not in the document");
 
