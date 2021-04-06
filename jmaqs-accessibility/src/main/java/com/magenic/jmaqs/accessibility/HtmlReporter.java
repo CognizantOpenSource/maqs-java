@@ -33,6 +33,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
 public class HtmlReporter {
+  
+  private static final String classString = "class";
 
   private HtmlReporter() {
   }
@@ -108,7 +110,7 @@ public class HtmlReporter {
     contextGroup.appendChild(contextHeader);
 
     Element contextContent = new Element("div");
-    contextContent.attributes().put("class", "emOne");
+    contextContent.attributes().put(classString, "emOne");
     contextContent.attributes().put("id", "reportContext");
     getContextContent(results, contextContent);
     contextGroup.appendChild(contextContent);
@@ -122,7 +124,7 @@ public class HtmlReporter {
     imgGroup.appendChild(imageHeader);
 
     Element imageContent = new Element("img");
-    imageContent.attributes().put("class", "thumbnail");
+    imageContent.attributes().put(classString, "thumbnail");
     imageContent.attributes().put("id", "screenshotThumbnail");
     imageContent.attributes().put("alt", "A Screenshot of the page");
     imageContent.attributes().put("width", "33%");
@@ -138,7 +140,7 @@ public class HtmlReporter {
     countsGroup.appendChild(countsHeader);
 
     Element countsContent = new Element("div");
-    countsContent.attributes().put("class", "emOne");
+    countsContent.attributes().put(classString, "emOne");
     getCountContent(violationCount, incompleteCount, passCount, inapplicableCount, requestedResults, countsContent);
     countsGroup.appendChild(countsContent);
 
@@ -195,27 +197,27 @@ public class HtmlReporter {
 
   private static void getReadableAxeResults(List<Rule> results, String type, Element body) {
     Element resultWrapper = new Element("div");
-    resultWrapper.attributes().put("class", "resultWrapper");
+    resultWrapper.attributes().put(classString, "resultWrapper");
     body.appendChild(resultWrapper);
 
     Element sectionButton = new Element("button");
-    sectionButton.attributes().put("class", "sectionbutton active");
+    sectionButton.attributes().put(classString, "sectionbutton active");
     resultWrapper.appendChild(sectionButton);
 
     HashSet<String> selectors = new HashSet<>();
 
     Element sectionButtonHeader = new Element("h2");
-    sectionButtonHeader.attributes().put("class", "buttonInfoText");
+    sectionButtonHeader.attributes().put(classString, "buttonInfoText");
     sectionButtonHeader.text(type + ": " + getCount(results, selectors));
     sectionButton.appendChild(sectionButtonHeader);
 
     Element sectionButtonExpando = new Element("h2");
-    sectionButtonExpando.attributes().put("class", "buttonExpandoText");
+    sectionButtonExpando.attributes().put(classString, "buttonExpandoText");
     sectionButtonExpando.text("-");
     sectionButton.appendChild(sectionButtonExpando);
 
     Element section = new Element("div");
-    section.attributes().put("class", "majorSection");
+    section.attributes().put(classString, "majorSection");
     section.attributes().put("id", type + "Section");
     resultWrapper.appendChild(section);
 
@@ -223,12 +225,12 @@ public class HtmlReporter {
 
     for (Rule element : results) {
       Element childEl = new Element("div");
-      childEl.attributes().put("class", "findings");
+      childEl.attributes().put(classString, "findings");
       childEl.appendText(loops++ + ": " + element.getHelp());
       section.appendChild(childEl);
 
       Element content = new Element("div");
-      content.attributes().put("class", "emTwo");
+      content.attributes().put(classString, "emTwo");
       content.text("Description: " + element.getDescription());
       content.appendChild(new Element("br"));
       content.appendText("Help: " + element.getHelp());
@@ -255,29 +257,29 @@ public class HtmlReporter {
       }
 
       Element childEl2 = new Element("div");
-      childEl2.attributes().put("class", "emTwo");
+      childEl2.attributes().put(classString, "emTwo");
       childEl.appendChild(content);
 
       for (Node item : element.getNodes()) {
         Element elementNodes = new Element("div");
-        elementNodes.attr("class", "htmlTable");
+        elementNodes.attr(classString, "htmlTable");
         childEl.appendChild(elementNodes);
 
         Element htmlAndSelectorWrapper = new Element("div");
-        htmlAndSelectorWrapper.attr("class", "emThree");
+        htmlAndSelectorWrapper.attr(classString, "emThree");
         htmlAndSelectorWrapper.text("Html:");
         htmlAndSelectorWrapper.appendChild(new Element("br"));
         elementNodes.appendChild(htmlAndSelectorWrapper);
 
         Element htmlAndSelector = new Element("p");
-        htmlAndSelector.attr("class", "wrapOne");
+        htmlAndSelector.attr(classString, "wrapOne");
         htmlAndSelector.html(item.getHtml());
         htmlAndSelector.text(item.getHtml());
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
         htmlAndSelectorWrapper.appendText("Selector(s):");
 
         htmlAndSelector = new Element("p");
-        htmlAndSelector.attributes().put("class", "wrapTwo");
+        htmlAndSelector.attributes().put(classString, "wrapTwo");
 
         for (Object target : Collections.singletonList(item.getTarget())) {
           String targetString = target.toString().replace("[", "").replace("]", "");
@@ -394,7 +396,7 @@ public class HtmlReporter {
     return StringEscapeUtils.escapeEcmaScript(
         "var buttons = document.getElementsByClassName(\"sectionbutton\");\n"
             + "                              var i;\n"
-            + "                              \n"
+            + "\n"
             + "                              for (i = 0; i < buttons.length; i++) \n"
             + "                              {\n"
             + "                                  buttons[i].addEventListener(\"click\", function() \n"
@@ -402,7 +404,7 @@ public class HtmlReporter {
             + "                              var expandoText = this.getElementsByClassName(\"buttonExpandoText\")[0];\n"
             + "                                      \n"
             + "                                      this.classList.toggle(\"active\");\n"
-            + "                              \n"
+            + "\n"
             + "                                      var content = this.nextElementSibling;\n"
             + "                                      if (expandoText.innerHTML == \"-\") \n"
             + "                                      {\n"
@@ -416,18 +418,18 @@ public class HtmlReporter {
             + "                                      }\n"
             + "                                  })\n"
             + "                              }\n"
-            + "  \n"
+            + "\n"
             + "                              var thumbnail = document.getElementById(\"screenshotThumbnail\");\n"
             + "                              var thumbnailStyle = getComputedStyle(thumbnail);      \n"
             + "                              var modal = document.getElementById(\"modal\");\n"
             + "                              var modalimg = modal.getElementsByTagName(\"img\")[0]\n"
-            + "                              \n"
+            + "\n"
             + "                              modal.addEventListener('click',function(){\n"
             + "                                 modal.style.display = \"none\";\n"
             + "                                 modalimg.style.content = \"\";\n"
             + "                                 modalimg.alt = \"\";\n"
             + "                               })\n"
-            + "                              \n"
+            + "\n"
             + "                              thumbnail.addEventListener('click',function(){\n"
             + "                                 modal.style.display = \"flex\";\n"
             + "                                 modalimg.style.content = thumbnailStyle.content;\n"
