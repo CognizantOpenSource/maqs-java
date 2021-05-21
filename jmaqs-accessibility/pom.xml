@@ -69,7 +69,7 @@
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>{chromedriver.version}</version>
+                            <version>90.0.4430.24}</version>
                         </driver>
                     </drivers>
                 </configuration>
