@@ -97,7 +97,7 @@
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>87.0.4280.20</version>
+                            <version>91.0.4472.19</version>
                         </driver>
                         <driver>
                             <name>internetexplorerdriver</name>
