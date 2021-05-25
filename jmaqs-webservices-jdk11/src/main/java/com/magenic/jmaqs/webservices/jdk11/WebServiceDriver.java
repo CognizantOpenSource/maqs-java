@@ -50,7 +50,7 @@ public class WebServiceDriver {
   }
 
   /**
-   * Class Constructor that sets both the HttpRequest Builder and Http Client
+   * Class Constructor that sets both the HttpRequest Builder and Http Client.
    * @param newHttpClient the Http Client
    * @param newHttpRequestBuilder the Http Request Builder
    */
@@ -165,7 +165,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
+    var httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
@@ -189,7 +189,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
+    var httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status
@@ -213,7 +213,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
+    var httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
@@ -239,7 +239,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
+    var httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status
@@ -420,8 +420,7 @@ public class WebServiceDriver {
       String content, boolean expectSuccess) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PUT, responseMediaType, content);
-
+    var httpRequest = buildHttpRequest(requestUri, RequestMethod.PUT, responseMediaType, content);
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
@@ -445,7 +444,7 @@ public class WebServiceDriver {
       String content, HttpStatus expectedStatus) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PUT, responseMediaType, content);
+    var httpRequest = buildHttpRequest(requestUri, RequestMethod.PUT, responseMediaType, content);
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status
@@ -470,7 +469,7 @@ public class WebServiceDriver {
   }
 
   /**
-   * Build the Http Request
+   * Build the Http Request.
    * @param requestUri The Request URI
    * @param requestMethod The Request Type
    * @param mediaType The Media Type
@@ -481,7 +480,7 @@ public class WebServiceDriver {
   }
 
   /**
-   * Build the Http Request
+   * Build the Http Request.
    * @param requestUri The Request URI
    * @param requestMethod The Request Type
    * @param mediaType The Media Type
@@ -494,7 +493,7 @@ public class WebServiceDriver {
   }
 
   /**
-   * Build the Http Request
+   * Build the Http Request.
    * @param requestUri The Request URI
    * @param requestMethod The Request Type
    * @param mediaType The Media Type
@@ -507,7 +506,7 @@ public class WebServiceDriver {
   }
 
   /**
-   * Build the Http Request
+   * Build the Http Request.
    * @param requestUri The Request URI
    * @param requestMethod The Request Type
    * @param mediaType The Media Type
@@ -517,7 +516,7 @@ public class WebServiceDriver {
    */
   protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestMethod,
       MediaType mediaType, String content, Map<String, String> additionalHeaders) {
-    HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
+    var builder = this.baseHttpRequestBuilder.copy();
 
     builder
       .header("Content-Type", mediaType.toString())
@@ -547,7 +546,7 @@ public class WebServiceDriver {
   private static void ensureSuccessStatusCode(HttpResponse<String> response) {
     // Make sure a response was returned
     if (response == null) {
-      throw new NullPointerException(HttpStatus.NO_CONTENT.toString() + " Response was null");
+      throw new NullPointerException(HttpStatus.NO_CONTENT + " Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
@@ -566,7 +565,7 @@ public class WebServiceDriver {
   private static void ensureStatusCodesMatch(HttpResponse<String> response, HttpStatus expectedStatus) {
     // Make sure a response was returned
     if (response == null) {
-      throw new NullPointerException(HttpStatus.NO_CONTENT.toString() + " Response was null");
+      throw new NullPointerException(HttpStatus.NO_CONTENT + " Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
