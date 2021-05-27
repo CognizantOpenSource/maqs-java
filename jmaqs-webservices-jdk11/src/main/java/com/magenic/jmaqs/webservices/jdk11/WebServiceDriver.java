@@ -300,8 +300,7 @@ public class WebServiceDriver {
    */
   public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content,
       Type type, HttpStatus expectedStatus) throws IOException, InterruptedException {
-    HttpResponse<String> response = this
-        .putContent(requestUri, expectedMediaType, content, expectedStatus);
+    HttpResponse<String> response = this.putContent(requestUri, expectedMediaType, content, expectedStatus);
     return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
   }
 
@@ -316,11 +315,9 @@ public class WebServiceDriver {
    * @throws IOException          if the exception is thrown
    * @throws InterruptedException if the exception is thrown
    */
-  public String put(String requestUri, MediaType expectedMediaType, String content,
+  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content,
       boolean expectSuccess) throws IOException, InterruptedException {
-    HttpResponse<String> response = this
-        .putContent(requestUri, expectedMediaType, content, expectSuccess);
-    return response.body();
+    return this.putContent(requestUri, expectedMediaType, content, expectSuccess);
   }
 
   /**
@@ -336,13 +333,11 @@ public class WebServiceDriver {
    * @throws IOException          if the exception is thrown
    * @throws InterruptedException if the exception is thrown
    */
-  public String put(String requestUri, MediaType expectedMediaType, String content,
+  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content,
       MediaType postMediaType, boolean contentAsString, boolean expectSuccess)
       throws IOException, InterruptedException {
-    HttpResponse<String> response = this
-        .putContent(requestUri, expectedMediaType, content, postMediaType, contentAsString,
-            expectSuccess);
-    return response.body();
+    return this.putContent(requestUri, expectedMediaType, content,
+        postMediaType, contentAsString, expectSuccess);
   }
 
   /**
@@ -358,13 +353,11 @@ public class WebServiceDriver {
    * @throws IOException          if exception is thrown
    * @throws InterruptedException if exception is thrown
    */
-  public String put(String requestUri, MediaType expectedMediaType, String content,
+  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, String content,
       MediaType postMediaType, HttpStatus expectedStatus, boolean contentAsString)
       throws IOException, InterruptedException {
-    HttpResponse<String> response = this
-        .putContent(requestUri, expectedMediaType, content, postMediaType, expectedStatus,
-            contentAsString);
-    return response.body();
+    return this.putContent(requestUri, expectedMediaType, content,
+        postMediaType, expectedStatus, contentAsString);
   }
 
   /**
