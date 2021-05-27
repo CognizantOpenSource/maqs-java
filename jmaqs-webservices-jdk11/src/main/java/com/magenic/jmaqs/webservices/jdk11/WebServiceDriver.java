@@ -261,7 +261,7 @@ public class WebServiceDriver {
    */
   public <T> T delete(String requestUri, MediaType expectedMediaType, Type type, boolean expectSuccess)
       throws IOException, InterruptedException {
-    HttpResponse<String> response = this.deleteWithResponse(requestUri, expectedMediaType, expectSuccess);
+    HttpResponse<String> response = this.deleteContent(requestUri, expectedMediaType, expectSuccess);
     return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
   }
 
@@ -278,7 +278,7 @@ public class WebServiceDriver {
    */
   public <T> T delete(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus, Type type)
       throws IOException, InterruptedException {
-    HttpResponse<String> response = this.deleteWithResponse(requestUri, expectedMediaType, expectedStatus);
+    HttpResponse<String> response = this.deleteContent(requestUri, expectedMediaType, expectedStatus);
     return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
   }
 
@@ -291,10 +291,9 @@ public class WebServiceDriver {
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  public String delete(String requestUri, MediaType expectedMediaType, boolean expectSuccess)
+  public HttpResponse<String> delete(String requestUri, MediaType expectedMediaType, boolean expectSuccess)
       throws IOException, InterruptedException {
-    HttpResponse<String> response = this.deleteWithResponse(requestUri, expectedMediaType, expectSuccess);
-    return response.toString();
+    return this.deleteContent(requestUri, expectedMediaType, expectSuccess);
   }
 
   /**
@@ -308,51 +307,8 @@ public class WebServiceDriver {
    */
   public String delete(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
       throws IOException, InterruptedException {
-    HttpResponse<String> response = deleteWithResponse(requestUri, expectedMediaType, expectedStatus);
+    HttpResponse<String> response = deleteContent(requestUri, expectedMediaType, expectedStatus);
     return response.toString();
-  }
-
-  /**
-   * Execute a web service delete.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param expectSuccess Assert a success code was returned
-   * @return The http response message
-   * @throws IOException if an exception is thrown
-   * @throws InterruptedException if an exception is thrown
-   */
-  public HttpResponse<String> deleteWithResponse(String requestUri, MediaType expectedMediaType, boolean expectSuccess)
-      throws IOException, InterruptedException {
-    return this.deleteContent(requestUri, expectedMediaType, expectSuccess);
-  }
-
-  /**
-   * Execute a web service delete.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param header custom header to be set
-   * @param expectSuccess Assert a success code was returned
-   * @return The http response message
-   * @throws IOException if an exception is thrown
-   * @throws InterruptedException if an exception is thrown
-   */
-  public HttpResponse<String> deleteWithResponse(String requestUri, MediaType expectedMediaType,
-      Map<String, String> header, boolean expectSuccess) throws IOException, InterruptedException {
-    return this.deleteContent(requestUri, expectedMediaType, header, expectSuccess);
-  }
-
-  /**
-   * Execute a web service delete.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param expectedStatus Assert a specific status code was returned
-   * @return The http response message
-   * @throws IOException if an exception is thrown
-   * @throws InterruptedException if an exception is thrown
-   */
-  public HttpResponse<String> deleteWithResponse(String requestUri, MediaType expectedMediaType,
-      HttpStatus expectedStatus) throws IOException, InterruptedException {
-    return this.deleteContent(requestUri, expectedMediaType, expectedStatus);
   }
 
   /**
@@ -495,7 +451,7 @@ public class WebServiceDriver {
   private static void ensureSuccessStatusCode(HttpResponse<String> response) {
     // Make sure a response was returned
     if (response == null) {
-      throw new NullPointerException(HttpStatus.NO_CONTENT.toString() + " Response was null");
+      throw new NullPointerException(HttpStatus.NO_CONTENT + " Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
@@ -514,7 +470,7 @@ public class WebServiceDriver {
   private static void ensureStatusCodesMatch(HttpResponse<String> response, HttpStatus expectedStatus) {
     // Make sure a response was returned
     if (response == null) {
-      throw new NullPointerException(HttpStatus.NO_CONTENT.toString() + " Response was null");
+      throw new NullPointerException(HttpStatus.NO_CONTENT + " Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
