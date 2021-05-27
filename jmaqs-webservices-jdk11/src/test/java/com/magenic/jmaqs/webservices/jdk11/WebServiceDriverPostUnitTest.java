@@ -36,7 +36,7 @@ public class WebServiceDriverPostUnitTest {
       throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.postWithResponse(baseUrl + "/api/XML_JSON/Post",
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
         MediaType.APP_JSON, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
@@ -51,7 +51,7 @@ public class WebServiceDriverPostUnitTest {
       throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.postWithResponse(baseUrl + "/api/XML_JSON/Post",
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
         MediaType.APP_JSON, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
@@ -66,7 +66,7 @@ public class WebServiceDriverPostUnitTest {
       throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.postWithResponse(baseUrl + "/api/XML_JSON/Post",
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
         MediaType.APP_XML, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
@@ -80,8 +80,8 @@ public class WebServiceDriverPostUnitTest {
   public void postWithJson() throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    String result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post", MediaType.APP_JSON, content, true);
-    Assert.assertTrue(result.isEmpty());
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post", MediaType.APP_JSON, content, true);
+    Assert.assertTrue(result.body().isEmpty());
   }
 
   /**
@@ -93,8 +93,8 @@ public class WebServiceDriverPostUnitTest {
   public void postWithXml() throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    String result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post", MediaType.APP_XML, content, true);
-    Assert.assertTrue(result.isEmpty());
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post", MediaType.APP_XML, content, true);
+    Assert.assertTrue(result.body().isEmpty());
   }
 
   /**
@@ -107,8 +107,8 @@ public class WebServiceDriverPostUnitTest {
       throws IOException, InterruptedException {
     //String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    String result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post", MediaType.APP_XML, "", false);
-    Assert.assertTrue(result.contains("value is required"));
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post", MediaType.APP_XML, "", false);
+    Assert.assertTrue(result.body().contains("value is required"));
   }
 
   /**
@@ -120,9 +120,9 @@ public class WebServiceDriverPostUnitTest {
   public void postStringWithoutMakeContent()
       throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    String result = webServiceDriver.post(baseUrl + "/api/String",
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
         MediaType.PLAIN_TEXT, "Test", true);
-    Assert.assertEquals(result, "");
+    Assert.assertEquals(result.body(), "");
   }
 
   /**
@@ -134,9 +134,9 @@ public class WebServiceDriverPostUnitTest {
   public void postStreamWithoutMakeContent()
       throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    String result = webServiceDriver.post(baseUrl + "/api/String",
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
         MediaType.PLAIN_TEXT, "Test", true);
-    Assert.assertEquals(result, "");
+    Assert.assertEquals(result.body(), "");
   }
 
   /**
@@ -149,8 +149,8 @@ public class WebServiceDriverPostUnitTest {
       throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity("Test", MediaType.PLAIN_TEXT);
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    String result = webServiceDriver.post(baseUrl + "/api/String", MediaType.PLAIN_TEXT, content, true);
-    Assert.assertEquals(result, "");
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String", MediaType.PLAIN_TEXT, content, true);
+    Assert.assertEquals(result.body(), "");
   }
 
   /**
@@ -162,7 +162,7 @@ public class WebServiceDriverPostUnitTest {
   public void postStringWithoutContentStatusCode()
       throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.postWithResponse(baseUrl + "/api/String",
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
         MediaType.PLAIN_TEXT, "Test", true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
@@ -175,7 +175,7 @@ public class WebServiceDriverPostUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postExpectContentError() throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.postWithResponse(baseUrl + "/api/String",
+    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
         MediaType.PLAIN_TEXT, "", false);
     Assert.assertEquals(result.statusCode(), HttpStatus.BAD_REQUEST.value());
   }
@@ -188,8 +188,9 @@ public class WebServiceDriverPostUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postExpectStringError() throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    String result = webServiceDriver.post(baseUrl + "/api/String", MediaType.PLAIN_TEXT, "", false);
-    Assert.assertEquals(result, "{\"Message\":\"No data\"}");
+    HttpResponse<String> result = webServiceDriver.post(
+        baseUrl + "/api/String", MediaType.PLAIN_TEXT, "", false);
+    Assert.assertEquals(result.body(), "{\"Message\":\"No data\"}");
   }
 
   /**
@@ -201,7 +202,8 @@ public class WebServiceDriverPostUnitTest {
   public void postExpectStringErrorEmptyHttpContent()
       throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    String result = webServiceDriver.post(baseUrl + "/api/String", MediaType.PLAIN_TEXT, "", false);
-    Assert.assertEquals(result, "{\"Message\":\"No data\"}");
+    HttpResponse<String> result = webServiceDriver.post(
+        baseUrl + "/api/String", MediaType.PLAIN_TEXT, "", false);
+    Assert.assertEquals(result.body(), "{\"Message\":\"No data\"}");
   }
 }

@@ -114,14 +114,14 @@ public class WebServiceUtilities {
   }
 
   /**
-   * Create string entity string entity.
+   * Deserialize response to specific object.
    *
    * @param <T>         the type parameter
    * @param message the String Http Response message
    * @param mediaType the type the message is going to be turned into
    * @param type the class or java object to be transferred into
    * @return the response type
-   * @throws JsonProcessingException the json processing exception
+   * @throws IOException the json processing exception
    */
   public static <T> T deserializeResponse(HttpResponse<String> message, MediaType mediaType, Type type)
       throws IOException {
