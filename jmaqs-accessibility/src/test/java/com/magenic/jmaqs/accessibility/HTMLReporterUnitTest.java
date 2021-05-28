@@ -29,11 +29,11 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
-  private final static File integrationTestTargetFile = new File("src/test/resources/testFiles/integration-test-target.html");
-  private final static String integrationTestTargetUrl = integrationTestTargetFile.getAbsolutePath();
+  private static final File integrationTestTargetFile = new File("src/test/resources/testFiles/integration-test-target.html");
+  private static final String integrationTestTargetUrl = integrationTestTargetFile.getAbsolutePath();
 
-  private final static File integrationTestJsonResultFile = new File("src/test/resources/testFiles/sampleResults.json");
-  private final static String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
+  private static final File integrationTestJsonResultFile = new File("src/test/resources/testFiles/sampleResults.json");
+  private static final String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
 
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlReportFullPage() throws IOException, ParseException {
@@ -139,7 +139,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     Assert.assertTrue(reportContext.contains("Url: https://www.google.com/"), "URL is not in the document");
     Assert.assertTrue(reportContext.contains("Orientation: landscape-primary"), "Orientation is not in the document");
     Assert.assertTrue(reportContext.contains("Size: 1200 x 646"), "Size is not in the document");
-    Assert.assertTrue(reportContext.contains("Time: 14-Apr-20 01:33:59 -0500"), "Time is not in the document: " + reportContext);
+    Assert.assertTrue(reportContext.contains("Time: 14-Apr-20 01:33:59"), "Time is not in the document: " + reportContext);
     Assert.assertTrue(reportContext.contains("User agent: AutoAgent"), "User Agent is not in the document");
     Assert.assertTrue(reportContext.contains("Using: axe-core (3.4.1)"), "Using is not in the document");
 
@@ -151,7 +151,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   }
 
   private String createReportPath() {
-    return FileSystems.getDefault().getPath("target/logs").toString() + UUID.randomUUID().toString() + ".html";
+    return FileSystems.getDefault().getPath("target/logs") + UUID.randomUUID().toString() + ".html";
   }
 
   private void validateReport(String path, int violationCount, int passCount, int incompleteCount, int inapplicableCount)
