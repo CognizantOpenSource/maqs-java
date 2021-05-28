@@ -121,7 +121,7 @@ public class WebServiceDriverPostUnitTest {
       throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
-        MediaType.PLAIN_TEXT, "Test", true);
+        MediaType.PLAIN_TEXT, "test", true);
     Assert.assertEquals(result.body(), "");
   }
 
@@ -135,7 +135,7 @@ public class WebServiceDriverPostUnitTest {
       throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
-        MediaType.PLAIN_TEXT, "Test", true);
+        MediaType.PLAIN_TEXT, "Test", HttpStatus.OK);
     Assert.assertEquals(result.body(), "");
   }
 
@@ -163,7 +163,7 @@ public class WebServiceDriverPostUnitTest {
       throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
-        MediaType.PLAIN_TEXT, "Test", true);
+        MediaType.PLAIN_TEXT, "Test" , true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
