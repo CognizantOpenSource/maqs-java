@@ -333,7 +333,7 @@ public class WebServiceDriver {
   public HttpResponse<String> post(String requestUri, MediaType expectedMediaType, Object content,
       MediaType postMediaType, boolean expectSuccess)
       throws IOException, InterruptedException {
-    return this.postResponse(requestUri, expectedMediaType, content, postMediaType, expectSuccess);
+    return this.postContent(requestUri, expectedMediaType, content, postMediaType, expectSuccess);
   }
 
   /**
@@ -350,7 +350,7 @@ public class WebServiceDriver {
   public HttpResponse<String> post(String requestUri, MediaType expectedMediaType, String content,
       MediaType postMediaType, HttpStatus expectedStatus)
       throws IOException, InterruptedException {
-    return this.postResponse(requestUri, expectedMediaType, content,
+    return this.postContent(requestUri, expectedMediaType, content,
         postMediaType, expectedStatus);
   }
 
@@ -365,8 +365,8 @@ public class WebServiceDriver {
    * @throws IOException if exception is thrown
    * @throws InterruptedException if exception is thrown
    */
-  protected HttpResponse<String> postResponse(String requestUri, MediaType expectedMediaType, Object content,
-      MediaType postMediaType, boolean expectSuccess)
+  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
+      Object content, MediaType postMediaType, boolean expectSuccess)
       throws IOException, InterruptedException {
     String httpContent = createContent(content, postMediaType);
     return this.postContent(requestUri, expectedMediaType, httpContent, expectSuccess);
@@ -383,7 +383,7 @@ public class WebServiceDriver {
    * @throws IOException if exception is thrown
    * @throws InterruptedException if exception is thrown
    */
-  protected HttpResponse<String> postResponse(String requestUri, MediaType expectedMediaType,
+  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
       Object content, MediaType postMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
     String httpContent = createContent(content, postMediaType);
     return this.postContent(requestUri, expectedMediaType, httpContent, expectedStatus);
