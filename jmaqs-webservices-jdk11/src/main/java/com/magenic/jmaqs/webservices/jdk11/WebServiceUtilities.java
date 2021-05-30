@@ -125,14 +125,13 @@ public class WebServiceUtilities {
    */
   public static <T> T deserializeResponse(HttpResponse<String> message, MediaType mediaType, Type type)
       throws IOException {
-    if (mediaType.toString().toUpperCase().contains("XML")) {
-      return deserializeXml(message, type);
-    } else if (mediaType.toString().toUpperCase().contains("JSON")) {
-      return deserializeJson(message, type);
-    } else {
-      throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
-    }
+      if (mediaType.toString().toUpperCase().contains("XML")) {
+        return deserializeXml(message, type);
+      } else if (mediaType.toString().toUpperCase().contains("JSON")) {
+        return deserializeJson(message, type);
+      } else {
+        throw new IllegalArgumentException(StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+      }
   }
 
   /**
