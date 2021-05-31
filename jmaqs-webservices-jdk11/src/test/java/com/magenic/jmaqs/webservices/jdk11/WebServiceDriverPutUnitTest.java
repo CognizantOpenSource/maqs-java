@@ -123,8 +123,8 @@ public class WebServiceDriverPutUnitTest {
   public void putStringWithoutMakeContent()
       throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1", MediaType.PLAIN_TEXT,
-        "Test", MediaType.PLAIN_TEXT, HttpStatus.OK, true);
+    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1",
+        MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT, HttpStatus.OK);
     Assert.assertEquals(result.body(), "");
   }
 
@@ -154,7 +154,7 @@ public class WebServiceDriverPutUnitTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.put(
         baseUrl + "/api/String/Put/1", MediaType.PLAIN_TEXT,
-        "Test", MediaType.PLAIN_TEXT, true, true);
+        "Test", MediaType.PLAIN_TEXT, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
