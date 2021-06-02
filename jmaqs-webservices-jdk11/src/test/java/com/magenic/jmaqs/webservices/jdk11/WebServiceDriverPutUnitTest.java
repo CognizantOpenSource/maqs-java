@@ -10,6 +10,7 @@ import com.magenic.jmaqs.webservices.jdk11.models.Product;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
@@ -24,7 +25,20 @@ public class WebServiceDriverPutUnitTest {
    */
   private static final String baseUrl = WebServiceConfig.getWebServiceUri();
 
+  /**
+   * The full put url with the base URL
+   */
+  private static final String putUrl = baseUrl + "/api/XML_JSON/Put/1";
+
+  /**
+   * Product object to be used in a test.
+   */
   private final Product product = new Product(4, "ff", "ff", BigDecimal.valueOf(3.25));
+
+  /**
+   * The web service driver to be used in a test.
+   */
+  private final WebServiceDriver webServiceDriver = new WebServiceDriver(HttpRequest.newBuilder());
 
   /**
    * Verify the string status code.
@@ -32,12 +46,9 @@ public class WebServiceDriverPutUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putJSONSerializedVerifyStatusCode()
-      throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, content, true);
+  public void putJSONSerializedVerifyStatusCode() throws IOException, InterruptedException {
+    HttpResponse<String> result = webServiceDriver.put(putUrl,
+        MediaType.APP_JSON, product, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -47,12 +58,8 @@ public class WebServiceDriverPutUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putJSONWithType()
-      throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, content, true);
+  public void putJSONWithType() throws IOException, InterruptedException {
+    HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_JSON, product, true);
     Assert.assertEquals(result.body(), "");
   }
 
@@ -62,12 +69,8 @@ public class WebServiceDriverPutUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putJSONStringSerializedVerifyStatusCode()
-      throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, content, true);
+  public void putJSONStringSerializedVerifyStatusCode() throws IOException, InterruptedException {
+    HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_JSON, product, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -78,10 +81,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putXMLSerializedVerifyStatusCode() throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_XML);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(
-        baseUrl + "/api/XML_JSON/Put/1", MediaType.APP_XML, content, true);
+    HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_XML, product, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -92,10 +92,8 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putXMLStringSerializedVerifyStatusCode() throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_XML);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(
-        baseUrl + "/api/XML_JSON/Put/1", MediaType.APP_XML, content, true);
+    HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_XML,
+        WebServiceUtilities.createStringEntity(product, MediaType.APP_XML), true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -105,12 +103,10 @@ public class WebServiceDriverPutUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putXMLSerializedVerifyEmptyString()
-      throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_XML);
+  public void putXMLSerializedVerifyEmptyString() throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(
-        baseUrl + "/api/XML_JSON/Put/1", MediaType.APP_XML, content,true);
+    HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_XML,
+        WebServiceUtilities.createStringEntity(product, MediaType.APP_XML),true);
     Assert.assertEquals(result.body(), "");
   }
 
@@ -120,9 +116,7 @@ public class WebServiceDriverPutUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putStringWithoutMakeContent()
-      throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+  public void putStringWithoutMakeContent() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1",
         MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT, HttpStatus.OK);
     Assert.assertEquals(result.body(), "");
@@ -136,10 +130,9 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithMakeStringContent()
       throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity("Test", MediaType.PLAIN_TEXT);
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1",
-        MediaType.PLAIN_TEXT, content, true);
+    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1", MediaType.PLAIN_TEXT,
+        WebServiceUtilities.createStringEntity("Test", MediaType.PLAIN_TEXT), true);
     Assert.assertEquals(result.body(), "");
   }
 
@@ -151,10 +144,8 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithoutContentStatusCode()
       throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(
-        baseUrl + "/api/String/Put/1", MediaType.PLAIN_TEXT,
-        "Test", MediaType.PLAIN_TEXT, true);
+    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1",
+        MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -164,12 +155,10 @@ public class WebServiceDriverPutUnitTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putStringMakeContentStatusCode()
-      throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity("Test", MediaType.PLAIN_TEXT);
+  public void putStringMakeContentStatusCode() throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1",
-        MediaType.PLAIN_TEXT, content, true);
+    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1", MediaType.PLAIN_TEXT,
+        WebServiceUtilities.createStringEntity("Test", MediaType.PLAIN_TEXT), true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -180,9 +169,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putExpectContentError() throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(
-        baseUrl + "/api/String/Put/1", MediaType.APP_JSON, "", false);
+    HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_JSON, "", false);
     Assert.assertEquals(result.statusCode(), HttpStatus.CONFLICT.value());
   }
 
@@ -193,9 +180,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putExpectStringError() throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1", MediaType.APP_JSON,
-        "", false);
+    HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_JSON, "", false);
     Assert.assertEquals(result.body(), "{\"Message\":\"No Product found for name = 1 \"}");
   }
 }

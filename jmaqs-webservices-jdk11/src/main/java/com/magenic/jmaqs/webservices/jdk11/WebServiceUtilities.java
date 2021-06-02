@@ -145,7 +145,8 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeJson(HttpResponse<String> message, Type type) throws IOException {
-    return objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
+    return checkMessageBodyEmpty(message) ? null
+      : objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
   }
 
   /**
@@ -159,6 +160,16 @@ public class WebServiceUtilities {
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
     // the body of the response is given back in JSON then converted to XML
-    return xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
+    return checkMessageBodyEmpty(message) ? null
+      : xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
+  }
+
+  /**
+   * Checks the message body and returns a boolean if it is an Empty string or null.
+   * @param message the Http Response string to get the body
+   * @return boolean value if the body is empty
+   */
+  private static boolean checkMessageBodyEmpty(HttpResponse<String> message) {
+    return message.body().isEmpty() || message.body() == null;
   }
 }

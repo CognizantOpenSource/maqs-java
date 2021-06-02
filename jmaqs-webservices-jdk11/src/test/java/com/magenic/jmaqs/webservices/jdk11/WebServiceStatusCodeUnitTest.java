@@ -75,9 +75,8 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putTypeParamWithExpectedStatus() throws IOException, InterruptedException {
-    var req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, req, HttpStatus.OK);
+    var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1", MediaType.APP_JSON,
+        WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON), Product.class, true);
     Assert.assertNull(res);
   }
 
@@ -88,10 +87,9 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putWithExpectedStatus() throws IOException, InterruptedException {
-    var req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, req, HttpStatus.OK);
-    Assert.assertNotNull(res);
+    var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1", MediaType.APP_JSON,
+        WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON), Product.class, HttpStatus.OK);
+    Assert.assertNull(res);
   }
 
   /**
@@ -101,9 +99,8 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putMoreParamsWithExpectedStatus() throws IOException, InterruptedException {
-    var req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, req, MediaType.APP_JSON, HttpStatus.CONFLICT);
+    var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1", MediaType.APP_JSON,
+        WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON), MediaType.APP_JSON, HttpStatus.OK);
     Assert.assertNotNull(res);
   }
 
@@ -113,11 +110,10 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    * @throws InterruptedException if an exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void putMoreParamsWithResponseWithExpectedStatus() throws IOException,
-      InterruptedException {
-    var req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
+  public void putMoreParamsWithResponseWithExpectedStatus() throws IOException, InterruptedException {
     var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, req, MediaType.APP_JSON, HttpStatus.NOT_ACCEPTABLE);
+        MediaType.APP_JSON, WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON),
+        MediaType.APP_JSON, HttpStatus.OK);
     Assert.assertNotNull(res);
   }
 
@@ -128,9 +124,8 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putWithResponseWithExpectedStatus() throws IOException, InterruptedException {
-    var req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
     var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, req, HttpStatus.OK);
+        MediaType.APP_JSON, WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON), HttpStatus.OK);
     Assert.assertNotNull(res);
   }
 }
