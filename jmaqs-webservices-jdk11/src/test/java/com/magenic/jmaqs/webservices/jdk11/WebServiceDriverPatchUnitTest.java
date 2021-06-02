@@ -123,7 +123,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
       throws IOException, InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(baseUrl + "/api/String/Patch/1",
-        MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT, true, true);
+        MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT, true);
     Assert.assertEquals(result.body(), "\"Patched\"");
   }
 
@@ -151,7 +151,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(
         baseUrl + "/api/String/Patch/1", MediaType.PLAIN_TEXT,
-        "Test", MediaType.PLAIN_TEXT, true, true);
+        "Test", MediaType.PLAIN_TEXT, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
