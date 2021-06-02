@@ -10,6 +10,7 @@ import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.net.http.HttpResponse;
 import org.springframework.http.HttpStatus;
@@ -75,9 +76,8 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postTypeParamWithExpectedStatus() throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
     HttpResponse<String> res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
-        MediaType.APP_JSON, content, MediaType.APP_JSON, HttpStatus.OK);
+        MediaType.APP_JSON, product, MediaType.APP_JSON, HttpStatus.OK);
     Assert.assertNotNull(res);
   }
 
@@ -101,9 +101,8 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postMoreParamsWithExpectedStatus() throws IOException, InterruptedException {
-    String req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
     HttpResponse<String> res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
-        MediaType.APP_JSON, req, MediaType.APP_JSON, true);
+        MediaType.APP_JSON, product, MediaType.APP_JSON, true);
     Assert.assertNotNull(res);
   }
 
@@ -114,9 +113,8 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postMoreParamsWithResponseWithExpectedStatus() throws IOException, InterruptedException {
-    String req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
     Object res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
-        MediaType.APP_JSON, req, MediaType.APP_JSON, true);
+        MediaType.APP_JSON, product, MediaType.APP_JSON, true);
     Assert.assertNotNull(res);
   }
 
@@ -126,10 +124,10 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    * @throws InterruptedException if an exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
+
   public void postWithResponseWithExpectedStatus() throws IOException, InterruptedException {
-    String req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
     Object res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
-        MediaType.APP_JSON, req, MediaType.APP_JSON, HttpStatus.OK);
+        MediaType.APP_JSON, product, MediaType.APP_JSON, HttpStatus.OK);
     Assert.assertNotNull(res);
   }
 }

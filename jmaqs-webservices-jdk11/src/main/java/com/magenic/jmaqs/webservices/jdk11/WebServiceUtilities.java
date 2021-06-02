@@ -125,13 +125,14 @@ public class WebServiceUtilities {
    */
   public static <T> T deserializeResponse(HttpResponse<String> message, MediaType mediaType, Type type)
       throws IOException {
-      if (mediaType.toString().toUpperCase().contains("XML")) {
-        return deserializeXml(message, type);
-      } else if (mediaType.toString().toUpperCase().contains("JSON")) {
-        return deserializeJson(message, type);
-      } else {
-        throw new IllegalArgumentException(StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
-      }
+    if (mediaType.toString().toUpperCase().contains("XML")) {
+      return deserializeXml(message, type);
+    } else if (mediaType.toString().toUpperCase().contains("JSON")) {
+      return deserializeJson(message, type);
+    } else {
+      throw new IllegalArgumentException(
+          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+    }
   }
 
   /**
@@ -144,7 +145,8 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeJson(HttpResponse<String> message, Type type) throws IOException {
-    return objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
+    return checkMessageBodyEmpty(message) ? null
+        : objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
   }
 
   /**
@@ -157,6 +159,16 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
-    return xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
+    return checkMessageBodyEmpty(message) ? null
+        : xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
+  }
+
+  /**
+   * Checks the message body and returns a boolean if it is an Empty string or null.
+   * @param message the Http Response string to get the body
+   * @return boolean value if the body is empty
+   */
+  private static boolean checkMessageBodyEmpty(HttpResponse<String> message) {
+    return message.body().isEmpty() || message.body() == null;
   }
 }

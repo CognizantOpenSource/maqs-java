@@ -502,7 +502,6 @@ public class WebServiceDriver {
       return builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content)).build();
     }
     return builder.GET().build();
-
   }
 
   /**

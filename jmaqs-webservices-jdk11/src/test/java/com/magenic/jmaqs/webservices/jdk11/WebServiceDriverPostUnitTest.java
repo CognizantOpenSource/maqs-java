@@ -11,6 +11,7 @@ import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
@@ -30,7 +31,8 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
    */
   private final Product product = new Product(4, "ff", "ff", BigDecimal.valueOf(3.25));
 
-  WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+  WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient(),
+      HttpRequest.newBuilder());
 
   /**
    * Post JSON request to verify status codes.
@@ -52,9 +54,8 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postJSONStreamSerializedVerifyStatusCode()
       throws IOException, InterruptedException {
-    String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
-        MediaType.APP_JSON, content, MediaType.APP_JSON, HttpStatus.OK);
+        MediaType.APP_JSON, product, MediaType.APP_JSON, HttpStatus.OK);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -127,10 +128,14 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
    * @throws InterruptedException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void postStreamWithoutMakeContent() throws IOException, InterruptedException {
-    HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
-        MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT, HttpStatus.OK);
-    Assert.assertEquals(result.body(), "");
+  public void postReturnWhenNoContentInResponse() throws IOException, InterruptedException {
+    Product result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_JSON, product, Product.class, HttpStatus.OK);
+    Assert.assertNull(result);
+
+    result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_XML, product, Product.class, true);
+    Assert.assertNull(result);
   }
 
   /**
