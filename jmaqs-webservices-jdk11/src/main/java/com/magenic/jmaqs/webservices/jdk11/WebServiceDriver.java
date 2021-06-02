@@ -276,7 +276,7 @@ public class WebServiceDriver {
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  public <T> T delete(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus, Type type)
+  public <T> T delete(String requestUri, MediaType expectedMediaType, Type type, HttpStatus expectedStatus)
       throws IOException, InterruptedException {
     HttpResponse<String> response = this.deleteContent(requestUri, expectedMediaType, expectedStatus);
     return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
@@ -305,10 +305,39 @@ public class WebServiceDriver {
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  public String delete(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
+  public HttpResponse<String> delete(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
       throws IOException, InterruptedException {
-    HttpResponse<String> response = deleteContent(requestUri, expectedMediaType, expectedStatus);
-    return response.toString();
+    return deleteContent(requestUri, expectedMediaType, expectedStatus);
+  }
+
+  /**
+   * Do a web service delete for the given uri.
+   * @param requestUri The request uri
+   * @param returnMediaType The expected response media type
+   * @param header custom header to be set
+   * @param expectSuccess Assert a success code was returned
+   * @return A http response message
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  public HttpResponse<String> delete(String requestUri, MediaType returnMediaType,
+      Map<String, String> header, boolean expectSuccess) throws IOException, InterruptedException {
+    return deleteContent(requestUri, returnMediaType, header, expectSuccess);
+  }
+
+  /**
+   * Do a web service delete for the given uri.
+   * @param requestUri The request uri
+   * @param returnMediaType The expected response media type
+   * @param header custom header to be set
+   * @param expectedStatus Assert a success code was returned
+   * @return A http response message
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  public HttpResponse<String> delete(String requestUri, MediaType returnMediaType,
+      Map<String, String> header, HttpStatus expectedStatus) throws IOException, InterruptedException {
+    return deleteContent(requestUri, returnMediaType, header, expectedStatus);
   }
 
   /**
@@ -337,13 +366,33 @@ public class WebServiceDriver {
    * Do a web service delete for the given uri.
    * @param requestUri The request uri
    * @param returnMediaType The expected response media type
+   * @param header custom header to be set
+   * @param expectedStatus Assert a success code was returned
+   * @return A http response message
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType,
+      Map<String, String> header, HttpStatus expectedStatus) throws IOException, InterruptedException {
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.DELETE, returnMediaType, header);
+    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+    // We check for specific status
+    ensureStatusCodesMatch(response, expectedStatus);
+    return response;
+  }
+
+  /**
+   * Do a web service delete for the given uri.
+   * @param requestUri The request uri
+   * @param returnMediaType The expected response media type
    * @param expectSuccess Assert a success code was returned
    * @return A http response message
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType, boolean expectSuccess)
-      throws IOException, InterruptedException {
+  protected HttpResponse<String> deleteContent(String requestUri, MediaType returnMediaType,
+      boolean expectSuccess) throws IOException, InterruptedException {
     HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.DELETE, returnMediaType);
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 

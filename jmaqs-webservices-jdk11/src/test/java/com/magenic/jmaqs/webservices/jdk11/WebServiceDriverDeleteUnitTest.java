@@ -13,6 +13,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -23,13 +27,14 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    */
   private static final String baseUrl = WebServiceConfig.getWebServiceUri();
 
+  WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+
   /**
    * Delete Json request to assert status code.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void deleteJSONSerializedVerifyStatusCode()
       throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/1", MediaType.APP_JSON, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
@@ -54,13 +59,10 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void deleteJSONSerializedVerifyStatusCodeWithHeaderOverride()
-      throws IOException, InterruptedException, URISyntaxException {
-    HttpRequest.Builder builder = HttpRequest.newBuilder(new URI(WebServiceConfig.getWebServiceUri()))
-        .header("pass", "word");
-
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient(), builder);
+      throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.delete(
-        baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON, true);
+        baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON,
+        Collections.singletonMap("pass", "word"), true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value() );
   }
 
