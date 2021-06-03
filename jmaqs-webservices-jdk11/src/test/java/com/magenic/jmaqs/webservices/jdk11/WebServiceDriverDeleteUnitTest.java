@@ -9,14 +9,8 @@ import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -27,7 +21,10 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    */
   private static final String baseUrl = WebServiceConfig.getWebServiceUri();
 
-  WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+  /**
+   * The web service driver to be used in a test.
+   */
+  private static final WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
 
   /**
    * Delete Json request to assert status code.
@@ -63,7 +60,11 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON,
         Collections.singletonMap("pass", "word"), true);
-    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value() );
+    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
+    result = webServiceDriver.delete(
+        baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON,
+        Collections.singletonMap("pass", "word"), HttpStatus.OK);
+    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
   /**
