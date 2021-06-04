@@ -9,7 +9,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 import java.util.List;
 
@@ -72,20 +71,5 @@ public class MongoDBDriverUnitTest extends BaseMongoTest {
   @Test(groups = TestCategories.MONGO)
   public void testCountAllItemsInCollection() {
     Assert.assertEquals(this.getMongoDBDriver().countAllItemsInCollection(), 4);
-  }
-
-  /**
-   * Steps to do before logging teardown results.
-   *
-   * @param resultType The test result
-   */
-  @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
-
-  }
-
-  @Override
-  protected void createNewTestObject() {
-
   }
 }

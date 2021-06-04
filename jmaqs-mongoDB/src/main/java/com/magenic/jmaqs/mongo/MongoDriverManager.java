@@ -7,8 +7,8 @@ package com.magenic.jmaqs.mongo;
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.base.DriverManager;
 import com.mongodb.client.MongoCollection;
-import org.bson.Document;
 import java.util.function.Supplier;
+import org.bson.Document;
 
 /**
  * Mongo database driver.
@@ -26,8 +26,10 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param collectionString Mongo collection string
    * @param testObject Test object this driver is getting added to
    */
-  public MongoDriverManager(String connectionString, String databaseString, String collectionString, BaseTestObject testObject) {
-    super(() -> new MongoDBDriver(MongoFactory.getCollection(connectionString, databaseString, collectionString)), testObject);
+  public MongoDriverManager(String connectionString, String databaseString,
+      String collectionString, BaseTestObject testObject) {
+    super(() -> new MongoDBDriver(
+        MongoFactory.getCollection(connectionString, databaseString, collectionString)), testObject);
   }
 
   /** TODO: is this needed?
@@ -71,12 +73,13 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
   }
 
   /**
-   * Get the Mongo driver
+   * Get the Mongo driver.
    * @return The Mongo driver
    */
   public MongoDBDriver getMongoDriver() {
     return this.getBase();
   }
+
 
   protected void overrideDriverGet(Supplier<MongoCollection<Document>> driverGet) {
     this.setBaseDriver(new MongoDBDriver(driverGet.get()));
@@ -88,7 +91,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
       return;
     }
     MongoDBDriver mongoDBDriver = this.getMongoDriver();
-    mongoDBDriver.close();
+    mongoDBDriver.getMongoClient().close();
     this.baseDriver = null;
   }
 }

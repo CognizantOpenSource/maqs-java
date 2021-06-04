@@ -12,7 +12,8 @@ import com.magenic.jmaqs.utilities.helper.ConfigSection;
  */
 public class MongoDBConfig {
 
-  private MongoDBConfig() {}
+  private MongoDBConfig() {
+  }
 
   /**
    * The MongoDB configuration section.
@@ -46,7 +47,7 @@ public class MongoDBConfig {
   /**
    * Get the database timeout in seconds
    * @return The timeout in seconds from the config file or default
-   * of 30 seconds when no config.xml key is found
+   *     of 30 seconds when no config.xml key is found
    */
   public static int getQueryTimeout() {
     return Integer.parseInt(Config.getValueForSection(MONGO_SECTION, "MongoTimeout", "30"));

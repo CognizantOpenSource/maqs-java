@@ -18,13 +18,14 @@ import org.bson.Document;
  */
 public class MongoFactory {
 
-  private MongoFactory() {}
+  private MongoFactory() {
+  }
 
   /**
    * Get the email client using connection information from the test run configuration.
    * @return The email connection
    */
-  public static MongoCollection<Document> getDefaultCollection(){
+  public static MongoCollection<Document> getDefaultCollection() {
     return getCollection(MongoDBConfig.getConnectionString(),
         MongoDBConfig.getDatabaseString(), MongoDBConfig.getCollectionString());
   }
@@ -36,7 +37,8 @@ public class MongoFactory {
    * @param collectionString the collection string
    * @return The email connection
    */
-  public static MongoCollection<Document> getCollection(String connectionString, String databaseString, String collectionString) {
+  public static MongoCollection<Document> getCollection(
+      String connectionString, String databaseString, String collectionString) {
     MongoClient mongoClient;
     MongoDatabase database;
 
@@ -63,11 +65,17 @@ public class MongoFactory {
       String collectionString, MongoClientSettings settings) {
     MongoClient mongoClient = MongoClients.create(settings);
 
-      MongoDatabase database = mongoClient.getDatabase(databaseString);
+    MongoDatabase database;
 
-      if (database.getName() == null) {
-        throw new MongoException("connection was not created");
-      }
-      return database.getCollection(collectionString);
+    try {
+      database = mongoClient.getDatabase(databaseString);
+    } catch (Exception e) {
+      throw new MongoException("connection was not created: " + e);
+    }
+
+    if (database.getName() == null) {
+      throw new MongoException("connection was not created");
+    }
+    return database.getCollection(collectionString);
   }
 }

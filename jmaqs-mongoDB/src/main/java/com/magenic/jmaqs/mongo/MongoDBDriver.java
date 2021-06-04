@@ -11,15 +11,14 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.bson.Document;
 
 /**
- * Class to wrap the MongoCollection and related helper functions
+ * Class to wrap the MongoCollection and related helper functions.
  */
-public class MongoDBDriver implements AutoCloseable{
+public class MongoDBDriver implements AutoCloseable {
   /**
-   * Initializes a new instance of the MongoDBDriver class
+   * Initializes a new instance of the MongoDBDriver class.
    * @param collection The collection object
    */
   public MongoDBDriver(MongoCollection<Document> collection) {
@@ -27,7 +26,7 @@ public class MongoDBDriver implements AutoCloseable{
   }
 
   /**
-   * Initializes a new instance of the MongoDBDriver class
+   * Initializes a new instance of the MongoDBDriver class.
    * @param connectionString Server address
    * @param databaseString Name of the database
    * @param collectionString Name of the collection
@@ -73,7 +72,7 @@ public class MongoDBDriver implements AutoCloseable{
    * @return the mongo client
    */
   public MongoClient getMongoClient() {
-      return this.client;
+    return this.client;
   }
 
   /**
@@ -98,13 +97,22 @@ public class MongoDBDriver implements AutoCloseable{
    * @return the MongoDB database object
    */
   public MongoDatabase getDatabase() {
-      return this.database;
+    return this.database;
   }
 
+  /**
+   * Sets the database object.
+   * @param mongoClient the mongo DB client of the database
+   * @param mongoDatabase the name of the mongo database
+   */
   public void setDatabase(MongoClient mongoClient, String mongoDatabase) {
     this.database = mongoClient.getDatabase(mongoDatabase);
   }
 
+  /**
+   * Sets the database object.
+   * @param mongoDatabase the name of the mongo database
+   */
   public void setDatabase(String mongoDatabase) {
     this.database = this.getMongoClient().getDatabase(mongoDatabase);
   }
@@ -118,7 +126,9 @@ public class MongoDBDriver implements AutoCloseable{
    * Gets the collection object.
    * @return a mongo collection
    */
-  public MongoCollection<Document> getCollection() { return collection; }
+  public MongoCollection<Document> getCollection() {
+    return collection;
+  }
 
   /**
    * Sets the Mongo Collection object.
@@ -128,12 +138,17 @@ public class MongoDBDriver implements AutoCloseable{
     this.collection = newCollection;
   }
 
+  /**
+   * Sets the Mongo Collection object.
+   * @param database the mongo DB database of the collection
+   * @param collection the string value of the collection
+   */
   private void setCollection(MongoDatabase database, String collection) {
     this.collection = database.getCollection(collection);
   }
 
   /**
-   * List all of the items in the collection
+   * List all of the items in the collection.
    * @return List of the items in the collection
    */
   public List<Document> listAllCollectionItems() {
@@ -145,7 +160,7 @@ public class MongoDBDriver implements AutoCloseable{
    * @return True if the collection is empty, false otherwise
    */
   public boolean isCollectionEmpty() {
-    return this.getCollection() == null;
+    return this.getCollection().countDocuments() == 0;
   }
 
   /**
@@ -156,7 +171,7 @@ public class MongoDBDriver implements AutoCloseable{
     return (int) this.getCollection().countDocuments();
   }
 
-  @Override public void close() {
-
+  @Override
+  public void close() {
   }
 }

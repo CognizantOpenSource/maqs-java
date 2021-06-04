@@ -7,16 +7,15 @@ package com.magenic.jmaqs.mongo;
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.mongodb.client.MongoCollection;
-import org.bson.Document;
-
 import java.util.function.Supplier;
+import org.bson.Document;
 
 /**
  * Mongo test context data.
  */
 public class MongoTestObject extends BaseTestObject {
   /**
-   * Initializes a new instance of the MongoTestObject class
+   * Initializes a new instance of the MongoTestObject class.
    * @param connectionString Client connection string
    * @param databaseString Database connection string
    * @param collectionString Mongo collection string
@@ -24,7 +23,7 @@ public class MongoTestObject extends BaseTestObject {
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
   public MongoTestObject(String connectionString, String databaseString, String collectionString, Logger logger,
-     String fullyQualifiedTestName) {
+      String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((MongoDriverManager.class).getCanonicalName(),
             new MongoDriverManager(connectionString,databaseString,collectionString, this));
@@ -43,7 +42,7 @@ public class MongoTestObject extends BaseTestObject {
    * @return the stored mongoDB driver.
    */
   public MongoDBDriver getMongoDBDriver() {
-      return this.getMongoDBManager().getMongoDriver();
+    return this.getMongoDBManager().getMongoDriver();
   }
 
   /**

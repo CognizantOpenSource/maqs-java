@@ -6,10 +6,9 @@ package com.magenic.jmaqs.mongo;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
 import com.mongodb.client.MongoCollection;
+import java.util.function.Supplier;
 import org.bson.Document;
 import org.testng.ITestResult;
-
-import java.util.function.Supplier;
 
 /**
  * Generic base MongoDB test class.
@@ -55,12 +54,12 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
     this.getTestObject().overrideMongoDBDriver(overrideCollectionConnection);
   }
 
-    /**
-     * Override the Mongo driver  - respects lazy loading.
-     * @param connectionString Client connection string
-     * @param databaseString Database connection string
-     * @param collectionString Mongo collection string
-     */
+  /**
+   * Override the Mongo driver  - respects lazy loading.
+   * @param connectionString Client connection string
+   * @param databaseString Database connection string
+   * @param collectionString Mongo collection string
+   */
   public void overrideConnectionDriver(String connectionString, String databaseString, String collectionString) {
     this.getTestObject().overrideMongoDBDriver(connectionString, databaseString, collectionString);
   }
