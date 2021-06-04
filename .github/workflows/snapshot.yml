@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Draft Release Notes
         id: release-drafter
-        uses: release-drafter/release-drafter@v5.11.0
+        uses: release-drafter/release-drafter@v5.14.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - id: bash_v
@@ -36,7 +36,7 @@ jobs:
         with:
           java-version: ${{env.JDK}}
       - name: Maven Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
@@ -45,7 +45,7 @@ jobs:
         with:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}"}}]'
       - name: Set Version to ${{env.VERSION}}-SNAPSHOT and Run Unit Tests
-        uses: GabrielBB/xvfb-action@v1
+        uses: GabrielBB/xvfb-action@v1.4
         with:
           run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -B -Dtesting verify install --file pom.xml -e -fae -T 1C -Djdk.version=${{env.JDK}}
         env:
@@ -91,13 +91,13 @@ jobs:
         with:
             java-version: ${{env.JDK}}
       - name: Maven Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
       - name: Import GPG key
         id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v2
+        uses: crazy-max/ghaction-import-gpg@v3.0.2
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
