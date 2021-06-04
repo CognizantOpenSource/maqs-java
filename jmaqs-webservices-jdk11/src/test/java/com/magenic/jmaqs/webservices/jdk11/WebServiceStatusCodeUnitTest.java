@@ -75,8 +75,8 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putTypeParamWithExpectedStatus() throws IOException, InterruptedException {
-    var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1", MediaType.APP_JSON,
-        WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON), Product.class, true);
+    var res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1", MediaType.APP_XML,
+        WebServiceUtilities.createStringEntity(product, MediaType.APP_XML), Product.class, true);
     Assert.assertNull(res);
   }
 
