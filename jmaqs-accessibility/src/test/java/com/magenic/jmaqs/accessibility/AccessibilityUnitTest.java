@@ -43,8 +43,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     String logContent = Files.lines(Paths.get(filePath),
         StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
 
-    Assert.assertTrue(logContent.contains("Found 19 items"), "Expected to find 19 pass matches.");
-    Assert.assertTrue(logContent.contains("Found 51 items"), "Expected to find 51 inapplicable matches.");
+    Assert.assertTrue(logContent.contains("Found 20 items"), "Expected to find 20 pass matches.");
+    Assert.assertTrue(logContent.contains("Found 62 items"), "Expected to find 62 inapplicable matches.");
     Assert.assertTrue(logContent.contains("Found 6 items"), "Expected to find 6 violations matches.");
     Assert.assertTrue(logContent.contains("INCOMPLETE check for"), "Expected to find any incomplete matches.");
 

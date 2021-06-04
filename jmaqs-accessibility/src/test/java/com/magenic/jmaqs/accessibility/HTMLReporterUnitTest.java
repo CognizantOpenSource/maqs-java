@@ -43,7 +43,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
-    validateReport(path, 5, 46, 0, 49);
+    validateReport(path, 5, 42, 0, 63);
 
     File file = new File(path);
 
@@ -85,7 +85,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
         EnumSet.of(ResultType.Passes, ResultType.Inapplicable, ResultType.Violations));
 
     // Check Passes
-    validateReport(path, 5, 46, 0, 49);
+    validateReport(path, 5, 42, 0, 63);
     assertResultNotWritten(path, EnumSet.of(ResultType.Incomplete));
 
 
@@ -105,7 +105,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(),
         this.getWebDriver().findElement(By.cssSelector("main")), path);
-    validateReport(path, 3, 16, 0, 61);
+    validateReport(path, 3, 14, 0, 75);
 
     File file = new File(path);
 
@@ -130,7 +130,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     Document doc = Jsoup.parse(text);
 
     String errorMessage = doc.selectFirst("#ErrorMessage").text();
-    Assert.assertEquals(errorMessage, "AutomationError");
+    Assert.assertEquals(errorMessage, "java.lang.Exception: AutomationError");
 
     String reportContext = doc.selectFirst("#reportContext").text();
     Assert.assertTrue(reportContext.contains("Url: https://www.google.com/"), "URL is not in the document");
