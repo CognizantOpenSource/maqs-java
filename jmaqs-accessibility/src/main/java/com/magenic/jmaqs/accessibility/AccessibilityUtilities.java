@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.accessibility;
 
+import com.deque.html.axecore.results.AxeRuntimeException;
 import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
@@ -88,7 +89,7 @@ public class AccessibilityUtilities {
     logger.logMessage(MessageType.INFORMATION, "Running accessibility check");
 
     if (AxeReporter.getReadableAxeResults(checkType, webDriver, getResults.get()) && throwOnResults) {
-      throw new AxeResultsException(System.lineSeparator() + AxeReporter.getAxeResultString());
+      throw new AxeRuntimeException(new Exception(System.lineSeparator() + AxeReporter.getAxeResultString()));
     } else {
       logger.logMessage(loggingLevel, AxeReporter.getAxeResultString());
     }
@@ -243,14 +244,14 @@ public class AccessibilityUtilities {
 
     // Throw exception if we found violations and we want that to cause an error
     if (throwOnViolation && !getResults.get().getViolations().isEmpty()) {
-      throw new AxeResultsException(System.lineSeparator()
-          + "Accessibility violations, see: " + report + " for more details.");
+      throw new AxeRuntimeException(new Exception(System.lineSeparator()
+          + "Accessibility violations, see: " + report + " for more details."));
     }
 
     // Throw exception if the accessibility check had any errors
     if (results.isErrored()) {
-      throw new AxeResultsException(System.lineSeparator()
-          + "Accessibility check failure, see: " + report + " for more details.");
+      throw new AxeRuntimeException(new Exception(System.lineSeparator()
+          + "Accessibility check failure, see: " + report + " for more details."));
     }
   }
 
