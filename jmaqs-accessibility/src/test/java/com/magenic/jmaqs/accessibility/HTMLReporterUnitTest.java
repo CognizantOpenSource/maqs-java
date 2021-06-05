@@ -8,7 +8,6 @@ import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.selenium.ResultType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.UIWait;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.io.File;
@@ -25,6 +24,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
@@ -35,12 +35,14 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   private static final File integrationTestJsonResultFile = new File("src/test/resources/testFiles/sampleResults.json");
   private static final String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
 
+  @BeforeMethod
+  public void setup() {
+    this.getWebDriver().get("file:///" + new File(integrationTestTargetUrl).getAbsolutePath());
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+  }
+
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlReportFullPage() throws IOException, ParseException {
-    this.getWebDriver().get("file:///" + new File(integrationTestTargetUrl).getAbsolutePath());
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
     validateReport(path, 5, 42, 0, 63);
@@ -54,10 +56,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlViolationsOnlyReportFullPage() throws IOException, ParseException {
-    this.getWebDriver().get("file:///" + new File(integrationTestTargetUrl).getAbsolutePath());
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path,
         EnumSet.of(ResultType.Violations));
@@ -76,10 +74,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlPassesInapplicableViolationsOnlyReportFullPage() throws IOException, ParseException {
-    this.getWebDriver().get("file:///" + new File(integrationTestTargetUrl).getAbsolutePath());
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path,
         EnumSet.of(ResultType.Passes, ResultType.Inapplicable, ResultType.Violations));
@@ -98,10 +92,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlReportOnElement() throws IOException, ParseException {
-    this.getWebDriver().get("file:///" + new File(integrationTestTargetUrl).getAbsolutePath());
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String path = createReportPath();
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(),
         this.getWebDriver().findElement(By.cssSelector("main")), path);
@@ -116,10 +106,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void reportSampleResults() throws IOException, ParseException {
-    this.getWebDriver().get("file:///" + new File(integrationTestTargetUrl).getAbsolutePath());
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String path = createReportPath();
     Results results = new ObjectMapper().readValue(new File(integrationTestJsonResultUrl), Results.class);
 
