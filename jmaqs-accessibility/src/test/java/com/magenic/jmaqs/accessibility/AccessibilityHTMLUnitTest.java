@@ -54,7 +54,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   public void setup() {
     this.getWebDriver().navigate().to(TestSiteUrl);
     wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
 
   @AfterMethod
@@ -237,7 +237,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertFalse(filePath.isEmpty(), "Accessibility report is empty");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   private void deleteFiles(List<String> files) {
