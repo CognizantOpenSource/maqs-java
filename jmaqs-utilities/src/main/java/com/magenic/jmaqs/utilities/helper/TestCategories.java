@@ -14,11 +14,6 @@ public class TestCategories {
   }
 
   /**
-   * String for Accessibility unit test category.
-   */
-  public static final String ACCESSIBILITY = "Accessibility Unit Tests";
-
-  /**
    * String for database unit test category.
    */
   public static final String DATABASE = "Database Unit Tests";
