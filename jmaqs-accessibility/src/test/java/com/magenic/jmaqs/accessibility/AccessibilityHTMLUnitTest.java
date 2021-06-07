@@ -6,6 +6,7 @@ package com.magenic.jmaqs.accessibility;
 
 import com.deque.html.axecore.results.AxeRuntimeException;
 import com.deque.html.axecore.results.Results;
+import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
@@ -69,7 +70,8 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityHtmlReport() throws IOException, ParseException {
-    AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
+    AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
+        new AxeBuilder().analyze(this.getWebDriver()), false);
 
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
