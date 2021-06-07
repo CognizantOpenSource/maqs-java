@@ -31,9 +31,9 @@ import org.openqa.selenium.WebElement;
  */
 public class AccessibilityUtilities {
   /**
-   * private constructor.
+   * private class constructor.
    */
-  protected AccessibilityUtilities() {
+  private AccessibilityUtilities() {
   }
 
   /**
