@@ -192,7 +192,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
   /**
    * Verify accessibility exception will be thrown.
    */
-    @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
+    @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = RuntimeException.class)
   public void testAccessibilityCheckThrows() {
       AccessibilityUtilities.checkAccessibility(getTestObject(), true);
   }

@@ -74,7 +74,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertTrue(filePath.length() > 0, "Accessibility report is empty");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -92,7 +91,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
         .filter(x -> x.contains(".html")).count();
     Assert.assertEquals(count, 3,
         "Expected 3 accessibility reports but see " + count + " instead");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -129,10 +127,9 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * Verify we throw an exception if there are violations and we choose the throw exception option.
    * @throws IOException if an exception is thrown
    */
-  @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
+  @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = RuntimeException.class)
   public void accessibilityHtmlReportWithViolation() throws IOException, ParseException {
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), true);
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -153,7 +150,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertFalse(filePath.isEmpty(), "Accessibility report is empty");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -196,7 +192,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String file = IOUtils.toString(fis, StandardCharsets.UTF_8);
 
     Assert.assertFalse(file.contains("Script executed"), "Logging was not suppressed as expected.");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -218,7 +213,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     Assert.assertFalse(fileString.contains("Passes "), "Passes were still in the report");
     Assert.assertFalse(fileString.contains("Inapplicable "), "Inapplicable were still in the report");
     Assert.assertFalse(fileString.contains("Incomplete  "), "Incomplete were still in the report");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**

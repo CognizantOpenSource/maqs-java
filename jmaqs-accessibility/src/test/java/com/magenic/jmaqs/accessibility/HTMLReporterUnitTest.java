@@ -116,7 +116,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     Document doc = Jsoup.parse(text);
 
     String errorMessage = doc.selectFirst("#ErrorMessage").text();
-    Assert.assertEquals(errorMessage, "java.lang.Exception: AutomationError");
+    Assert.assertEquals(errorMessage, "AutomationError");
 
     String reportContext = doc.selectFirst("#reportContext").text();
     Assert.assertTrue(reportContext.contains("Url: https://www.google.com/"), "URL is not in the document");
