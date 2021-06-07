@@ -253,6 +253,176 @@ public class WebServiceDriver {
   }
 
   /**
+   * Execute a web service post.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media being requested
+   * @param content The post content
+   * @param type the object to deserialize into
+   * @param expectSuccess Assert a success code was returned
+   * @param <T> The expected response type
+   * @return The response to deserialize as - T
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  public <T> T  post(String requestUri, MediaType expectedMediaType, Object content,
+      Type type, boolean expectSuccess) throws IOException, InterruptedException {
+    HttpResponse<String> response = this.postContent(requestUri, expectedMediaType, content, expectSuccess);
+    return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
+  }
+
+  /**
+   * Execute a web service post.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media being requested
+   * @param content The post content
+   * @param type the object to deserialize into
+   * @param expectedStatus Assert a specific status code was returned
+   * @param <T> The expected response type
+   * @return The response will deserialize as - T
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  public <T> T post(String requestUri, MediaType expectedMediaType,
+      Object content, Type type, HttpStatus expectedStatus)
+      throws IOException, InterruptedException {
+    HttpResponse<String> response = this.postContent(requestUri, expectedMediaType, content, expectedStatus);
+    return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
+  }
+
+  /**
+   * Execute a web service post.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media being requested
+   * @param content How to encode the post content
+   * @param postMediaType The type of the media being posted
+   * @param expectSuccess Assert a success code was returned
+   * @return The response body as a string
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  public HttpResponse<String> post(String requestUri, MediaType expectedMediaType, Object content,
+      MediaType postMediaType, boolean expectSuccess) throws IOException, InterruptedException {
+    return this.postContent(requestUri, expectedMediaType, content, postMediaType, expectSuccess);
+  }
+
+  /**
+   * Execute a web service post.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media being requested
+   * @param content The post content
+   * @param postMediaType The type of the media being posted
+   * @param expectedStatus Assert a specific status code was returned
+   * @return The response body as a string
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  public HttpResponse<String> post(String requestUri, MediaType expectedMediaType, Object content,
+      MediaType postMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
+    return this.postContent(requestUri, expectedMediaType, content, postMediaType, expectedStatus);
+  }
+
+  /**
+   * Execute a web service post for the given uri, content and media type.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media being requested
+   * @param content How to encode the post content
+   * @param expectSuccess Assert a success code was returned
+   * @return The response body as a string
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
+      Object content, boolean expectSuccess) throws IOException, InterruptedException {
+    this.checkIfMediaTypeNotPresent(expectedMediaType.toString());
+
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
+        expectedMediaType, createContent(content, expectedMediaType));
+    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+    // Should we check for success
+    if (expectSuccess) {
+      ensureSuccessStatusCode(response);
+    }
+
+    return response;
+  }
+
+  /**
+   * Execute a web service post for the given uri, content and media type.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media being requested
+   * @param content The post content
+   * @param expectedStatus Assert a specific status code was returned
+   * @return The response body as a string
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
+      Object content, HttpStatus expectedStatus) throws IOException, InterruptedException {
+    this.checkIfMediaTypeNotPresent(expectedMediaType.toString());
+
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
+        expectedMediaType, createContent(content, expectedMediaType));
+    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+    // We check for specific status
+    ensureStatusCodesMatch(response, expectedStatus);
+    return response;
+  }
+
+  /**
+   * Execute a web service post for the given uri, content and media type.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media being requested
+   * @param content How to encode the post content
+   * @param postMediaType The type of the media being posted
+   * @param expectSuccess Assert a success code was returned
+   * @return The response body as a string
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
+      Object content, MediaType postMediaType, boolean expectSuccess)
+      throws IOException, InterruptedException {
+    this.checkIfMediaTypeNotPresent(expectedMediaType.toString());
+
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
+        expectedMediaType, createContent(content, postMediaType));
+    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+    // Should we check for success
+    if (expectSuccess) {
+      ensureSuccessStatusCode(response);
+    }
+
+    return response;
+  }
+
+  /**
+   * Execute a web service post for the given uri, content and media type.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media being requested
+   * @param content The post content
+   * @param postMediaType The type of the media being posted
+   * @param expectedStatus Assert a specific status code was returned
+   * @return The response body as a string
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
+      Object content, MediaType postMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
+    this.checkIfMediaTypeNotPresent(expectedMediaType.toString());
+
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
+        expectedMediaType, createContent(content, postMediaType));
+    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+    // We check for specific status
+    ensureStatusCodesMatch(response, expectedStatus);
+    return response;
+  }
+
+  /**
    * Execute a web service put.
    *
    * @param requestUri        The request uri
@@ -453,195 +623,6 @@ public class WebServiceDriver {
         responseMediaType, createContent(content, putMediaType));
     HttpResponse<String> response = baseHttpClient
         .send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-    // We check for specific status
-    ensureStatusCodesMatch(response, expectedStatus);
-    return response;
-  }
-
-  /**
-   * Create http content.
-   *
-   * @param content         The content as a string
-   * @param postMediaType   The type of the media being posted
-   * @return The content as String
-   * @throws IOException if the exception is thrown
-   */
-  private static String createContent(Object content, MediaType postMediaType) throws IOException {
-    if (content instanceof String) {
-      return content.toString();
-    }
-    return WebServiceUtilities.createStringEntity(content, postMediaType);
-
-  }
-
-  /**
-   * Build the Http Request.
-   *
-   * @param requestUri    The Request URI
-   * Execute a web service post.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content The post content
-   * @param type the object to deserialize into
-   * @param expectSuccess Assert a success code was returned
-   * @param <T> The expected response type
-   * @return The response to deserialize as - T
-   * @throws IOException if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  public <T> T  post(String requestUri, MediaType expectedMediaType, Object content,
-      Type type, boolean expectSuccess) throws IOException, InterruptedException {
-    HttpResponse<String> response = this.postContent(requestUri, expectedMediaType, content, expectSuccess);
-    return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
-  }
-
-  /**
-   * Execute a web service post.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content The post content
-   * @param type the object to deserialize into
-   * @param expectedStatus Assert a specific status code was returned
-   * @param <T> The expected response type
-   * @return The response will deserialize as - T
-   * @throws IOException if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  public <T> T post(String requestUri, MediaType expectedMediaType,
-      Object content, Type type, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
-    HttpResponse<String> response = this.postContent(requestUri, expectedMediaType, content, expectedStatus);
-    return WebServiceUtilities.deserializeResponse(response, expectedMediaType, type);
-  }
-
-  /**
-   * Execute a web service post.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content How to encode the post content
-   * @param postMediaType The type of the media being posted
-   * @param expectSuccess Assert a success code was returned
-   * @return The response body as a string
-   * @throws IOException if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  public HttpResponse<String> post(String requestUri, MediaType expectedMediaType, Object content,
-      MediaType postMediaType, boolean expectSuccess) throws IOException, InterruptedException {
-    return this.postContent(requestUri, expectedMediaType, content, postMediaType, expectSuccess);
-  }
-
-  /**
-   * Execute a web service post.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content The post content
-   * @param postMediaType The type of the media being posted
-   * @param expectedStatus Assert a specific status code was returned
-   * @return The response body as a string
-   * @throws IOException if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  public HttpResponse<String> post(String requestUri, MediaType expectedMediaType, Object content,
-      MediaType postMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
-    return this.postContent(requestUri, expectedMediaType, content, postMediaType, expectedStatus);
-  }
-
-  /**
-   * Execute a web service post for the given uri, content and media type.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content How to encode the post content
-   * @param expectSuccess Assert a success code was returned
-   * @return The response body as a string
-   * @throws IOException if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
-      Object content, boolean expectSuccess) throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(expectedMediaType.toString());
-
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
-        expectedMediaType, createContent(content, expectedMediaType));
-    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-    // Should we check for success
-    if (expectSuccess) {
-      ensureSuccessStatusCode(response);
-    }
-
-    return response;
-  }
-
-  /**
-   * Execute a web service post for the given uri, content and media type.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content The post content
-   * @param expectedStatus Assert a specific status code was returned
-   * @return The response body as a string
-   * @throws IOException if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
-      Object content, HttpStatus expectedStatus) throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(expectedMediaType.toString());
-
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
-        expectedMediaType, createContent(content, expectedMediaType));
-    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-    // We check for specific status
-    ensureStatusCodesMatch(response, expectedStatus);
-    return response;
-  }
-
-  /**
-   * Execute a web service post for the given uri, content and media type.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content How to encode the post content
-   * @param postMediaType The type of the media being posted
-   * @param expectSuccess Assert a success code was returned
-   * @return The response body as a string
-   * @throws IOException if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
-      Object content, MediaType postMediaType, boolean expectSuccess)
-      throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(expectedMediaType.toString());
-
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
-        expectedMediaType, createContent(content, postMediaType));
-    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-    // Should we check for success
-    if (expectSuccess) {
-      ensureSuccessStatusCode(response);
-    }
-
-    return response;
-  }
-
-  /**
-   * Execute a web service post for the given uri, content and media type.
-   * @param requestUri The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content The post content
-   * @param postMediaType The type of the media being posted
-   * @param expectedStatus Assert a specific status code was returned
-   * @return The response body as a string
-   * @throws IOException if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  protected HttpResponse<String> postContent(String requestUri, MediaType expectedMediaType,
-      Object content, MediaType postMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(expectedMediaType.toString());
-
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
-        expectedMediaType, createContent(content, postMediaType));
-    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status
     ensureStatusCodesMatch(response, expectedStatus);

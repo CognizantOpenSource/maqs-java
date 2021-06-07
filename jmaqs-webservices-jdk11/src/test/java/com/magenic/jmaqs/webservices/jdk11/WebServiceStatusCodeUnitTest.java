@@ -10,7 +10,6 @@ import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.net.http.HttpResponse;
 import org.springframework.http.HttpStatus;

@@ -129,6 +129,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     HttpResponse<String> message = client.get(baseUrl + "/api/XML_JSON/GetAllProducts",
        MediaType.APP_JSON, true  );
     Product[] products = WebServiceUtilities.deserializeJson(message, Product[].class);
+    Assert.assertNotNull(products);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
 
@@ -144,6 +145,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     HttpResponse<String> message = client.get(baseUrl + "/api/XML_JSON/GetAllProducts",
         MediaType.APP_XML, true);
     Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
+    Assert.assertNotNull(products);
     Assert.assertEquals(products.length,3,"Expected 3 products to be returned");
   }
 
@@ -159,6 +161,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     HttpResponse<String> message = client.get(baseUrl + "/api/XML_JSON/GetAllProducts",
         MediaType.APP_JSON, HttpStatus.OK);
     Product[] products = WebServiceUtilities.deserializeJson(message, Product[].class);
+    Assert.assertNotNull(products);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
 
@@ -174,6 +177,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     HttpResponse<String> message = client.get(baseUrl + "/api/XML_JSON/GetAllProducts",
         MediaType.APP_XML, HttpStatus.OK);
     Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
+    Assert.assertNotNull(products);
     Assert.assertEquals(products.length,3,"Expected 3 products to be returned");
   }
 }
