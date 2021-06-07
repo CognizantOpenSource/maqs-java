@@ -9,7 +9,6 @@ import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.AxeReporter;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
 import com.magenic.jmaqs.selenium.SeleniumConfig;
-import com.magenic.jmaqs.selenium.UIWait;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
@@ -30,12 +29,9 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   private static final String TestSiteUrl = SeleniumConfig.getWebSiteBase();
 
-  private UIWait wait;
-
   @BeforeMethod
   public void setup() {
     this.getWebDriver().navigate().to(TestSiteUrl);
-    wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
   }
 

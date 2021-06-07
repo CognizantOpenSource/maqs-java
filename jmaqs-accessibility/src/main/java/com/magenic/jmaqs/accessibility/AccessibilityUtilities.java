@@ -33,7 +33,7 @@ public class AccessibilityUtilities {
   /**
    * private constructor.
    */
-  private AccessibilityUtilities() {
+  protected AccessibilityUtilities() {
   }
 
   /**
