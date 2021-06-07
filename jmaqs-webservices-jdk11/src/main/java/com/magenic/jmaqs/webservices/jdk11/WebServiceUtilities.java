@@ -146,7 +146,7 @@ public class WebServiceUtilities {
    */
   public static <T> T deserializeJson(HttpResponse<String> message, Type type) throws IOException {
     return checkMessageBodyEmpty(message) ? null
-      : objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
+        : objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
   }
 
   /**
@@ -159,9 +159,8 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
-    // the body of the response is given back in JSON then converted to XML
     return checkMessageBodyEmpty(message) ? null
-      : xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
+        : xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
   }
 
   /**
