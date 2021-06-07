@@ -275,6 +275,11 @@
                 <version>${testng.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.magenic.jmaqs.accessibility</groupId>
+                <artifactId>jmaqs-accessibility</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.magenic.jmaqs.appium</groupId>
                 <artifactId>jmaqs-appium</artifactId>
                 <version>${project.version}</version>
