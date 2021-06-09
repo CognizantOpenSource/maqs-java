@@ -85,7 +85,6 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
     this.setBaseDriver(new MongoDBDriver(driverGet.get()));
   }
 
-  @Override
   public void close() {
     if (!this.isDriverInitialized()) {
       return;

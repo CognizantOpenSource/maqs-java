@@ -31,7 +31,7 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
   }
 
   /**
-   * Sets the MongoDB driver
+   * Sets the MongoDB driver.
    * @param driver the MongoDB driver to be set.
    */
   public void setMongoDBDriver(MongoDBDriver driver) {

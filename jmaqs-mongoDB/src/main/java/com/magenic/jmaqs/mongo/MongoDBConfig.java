@@ -8,7 +8,7 @@ import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 
 /**
- * MongoDB config class
+ * MongoDB config class.
  */
 public class MongoDBConfig {
 
@@ -29,7 +29,7 @@ public class MongoDBConfig {
   }
 
   /**
-   * Get the database connection string
+   * Get the database connection string.
    * @return The database name
    */
   public static String getDatabaseString() {
@@ -37,7 +37,7 @@ public class MongoDBConfig {
   }
 
   /**
-   * Get the mongo collection string
+   * Get the mongo collection string.
    * @return The mongo collection string
    */
   public static String getCollectionString() {
@@ -45,7 +45,7 @@ public class MongoDBConfig {
   }
 
   /**
-   * Get the database timeout in seconds
+   * Get the database timeout in seconds.
    * @return The timeout in seconds from the config file or default
    *     of 30 seconds when no config.xml key is found
    */

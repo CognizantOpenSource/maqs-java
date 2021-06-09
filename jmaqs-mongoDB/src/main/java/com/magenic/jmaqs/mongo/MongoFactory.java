@@ -50,7 +50,6 @@ public class MongoFactory {
     } catch (MongoException e) {
       throw new MongoException("database does not exist");
     }
-
     return database.getCollection(collectionString);
   }
 
@@ -63,11 +62,12 @@ public class MongoFactory {
    */
   public static MongoCollection<Document> getCollection(String databaseString,
       String collectionString, MongoClientSettings settings) {
-    MongoClient mongoClient = MongoClients.create(settings);
+    MongoClient mongoClient;
 
     MongoDatabase database;
 
     try {
+      mongoClient = MongoClients.create(settings);
       database = mongoClient.getDatabase(databaseString);
     } catch (Exception e) {
       throw new MongoException("connection was not created: " + e);
