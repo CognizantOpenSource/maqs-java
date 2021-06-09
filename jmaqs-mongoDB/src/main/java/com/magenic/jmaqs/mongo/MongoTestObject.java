@@ -22,8 +22,8 @@ public class MongoTestObject extends BaseTestObject {
    * @param logger The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
-  public MongoTestObject(String connectionString, String databaseString, String collectionString, Logger logger,
-      String fullyQualifiedTestName) {
+  public MongoTestObject(String connectionString, String databaseString, String collectionString,
+      Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((MongoDriverManager.class).getCanonicalName(),
             new MongoDriverManager(connectionString,databaseString,collectionString, this));
