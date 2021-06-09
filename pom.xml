@@ -256,7 +256,7 @@
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
-        <mvncheckstyle.plugin.version>3.1.1</mvncheckstyle.plugin.version>
+        <mvncheckstyle.plugin.version>3.1.2</mvncheckstyle.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <puppycheckstyle.plugin.version>8.38</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.6</jacoco.version>
@@ -285,13 +285,8 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.utilities</groupId>
-                <artifactId>jmaqs-utilities</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.magenic.jmaqs.webservices</groupId>
-                <artifactId>jmaqs-webservices-jdk8</artifactId>
+                <groupId>com.magenic.jmaqs.cucumber</groupId>
+                <artifactId>jmaqs-cucumber</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -305,8 +300,13 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.cucumber</groupId>
-                <artifactId>jmaqs-cucumber</artifactId>
+                <groupId>com.magenic.jmaqs.utilities</groupId>
+                <artifactId>jmaqs-utilities</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.webservices</groupId>
+                <artifactId>jmaqs-webservices-jdk8</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

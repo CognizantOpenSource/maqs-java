@@ -14,14 +14,14 @@ public class TestCategories {
   }
 
   /**
-   * String for email unit test category.
-   */
-  public static final String EMAIL = "Email Unit Tests";
-
-  /**
    * String for database unit test category.
    */
   public static final String DATABASE = "Database Unit Tests";
+
+  /**
+   * String for email unit test category.
+   */
+  public static final String EMAIL = "Email Unit Tests";
 
   /**
    * String for Selenium unit test category.
