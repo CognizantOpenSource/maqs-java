@@ -309,6 +309,11 @@
                 <artifactId>jmaqs-cucumber</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.mongoDB</groupId>
+                <artifactId>jmaqs-mongoDB</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
