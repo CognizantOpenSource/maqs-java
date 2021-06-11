@@ -305,8 +305,8 @@ public class WebServiceDriver {
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  public HttpResponse<String> delete(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
+  public HttpResponse<String> delete(String requestUri, MediaType expectedMediaType,
+      HttpStatus expectedStatus) throws IOException, InterruptedException {
     return deleteContent(requestUri, expectedMediaType, expectedStatus);
   }
 
