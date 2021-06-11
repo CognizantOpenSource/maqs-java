@@ -332,8 +332,7 @@ public class WebServiceDriver {
   public HttpResponse<String> patch(String requestUri, MediaType expectedMediaType, Object content,
       MediaType patchMediaType, boolean expectSuccess)
       throws IOException, InterruptedException {
-    return this.patchContent(requestUri, expectedMediaType, content,
-        patchMediaType, expectSuccess);
+    return this.patchContent(requestUri, expectedMediaType, content, expectSuccess);
   }
 
   /**
@@ -349,33 +348,7 @@ public class WebServiceDriver {
    */
   public HttpResponse<String> patch(String requestUri, MediaType expectedMediaType, Object content, MediaType patchMediaType,
       HttpStatus expectedStatus) throws IOException, InterruptedException {
-    return this.patchContent(requestUri, expectedMediaType, content,
-        patchMediaType, expectedStatus);
-  }
-
-  /**
-   * Do a web service put for the given uri, content and media type.
-   * @param requestUri The request uri
-   * @param responseMediaType The response media type
-   * @param content The put body
-   * @param expectSuccess Assert a success code was returned
-   * @return A http response message
-   * @throws IOException if the exception is thrown
-   * @throws InterruptedException if the exception is thrown
-   */
-  protected HttpResponse<String> patchContent(String requestUri, MediaType responseMediaType,
-      Object content, boolean expectSuccess) throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(responseMediaType.toString());
-
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PATCH,
-        responseMediaType, createContent(content, responseMediaType));
-    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-    if (expectSuccess) {
-      ensureSuccessStatusCode(response);
-    }
-
-    return response;
+    return this.patchContent(requestUri, expectedMediaType, content, expectedStatus);
   }
 
   /**
@@ -405,39 +378,17 @@ public class WebServiceDriver {
    * @param requestUri The request uri
    * @param responseMediaType The response media type
    * @param content The put body
-   * @param expectedStatus Assert a specific status code was returned
-   * @return A http response message
-   * @throws IOException if the exception is thrown
-   * @throws InterruptedException if the exception is thrown
-   */
-  protected HttpResponse<String> patchContent(String requestUri, MediaType responseMediaType,
-      Object content, MediaType patchMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(responseMediaType.toString());
-
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PATCH,
-        responseMediaType, createContent(content, patchMediaType));
-    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-    ensureStatusCodesMatch(response, expectedStatus);
-    return response;
-  }
-
-  /**
-   * Do a web service put for the given uri, content and media type.
-   * @param requestUri The request uri
-   * @param responseMediaType The response media type
-   * @param content The put body
    * @param expectSuccess Assert a success code was returned
    * @return A http response message
    * @throws IOException if the exception is thrown
    * @throws InterruptedException if the exception is thrown
    */
   protected HttpResponse<String> patchContent(String requestUri, MediaType responseMediaType,
-      Object content, MediaType patchMediaType, boolean expectSuccess) throws IOException, InterruptedException {
+      Object content, boolean expectSuccess) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
     HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PATCH,
-        responseMediaType, createContent(content, patchMediaType));
+        responseMediaType, createContent(content, responseMediaType));
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     if (expectSuccess) {
