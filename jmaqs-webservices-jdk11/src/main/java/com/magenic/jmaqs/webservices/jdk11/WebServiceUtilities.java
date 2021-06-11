@@ -114,7 +114,7 @@ public class WebServiceUtilities {
   }
 
   /**
-   * Create string entity string entity.
+   * Deserialize response to specific object.
    *
    * @param <T>         the type parameter
    * @param message the String Http Response message
