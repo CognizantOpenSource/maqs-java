@@ -504,7 +504,7 @@ public class WebServiceDriver {
    */
   public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, Object content,
       MediaType postMediaType, boolean expectSuccess) throws IOException, InterruptedException {
-    return this.putContent(requestUri, expectedMediaType, content, postMediaType, expectSuccess);
+    return this.putContent(requestUri, expectedMediaType, content, expectSuccess);
   }
 
   /**
@@ -521,60 +521,7 @@ public class WebServiceDriver {
    */
   public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, Object content,
       MediaType putMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
-    return this.putContent(requestUri, expectedMediaType, content, putMediaType, expectedStatus);
-  }
-
-  /**
-   * Do a web service put for the given uri, content and media type.
-   *
-   * @param requestUri        The request uri
-   * @param responseMediaType The response media type
-   * @param content           The put body
-   * @param expectSuccess     Assert a success code was returned
-   * @return A http response message
-   * @throws IOException          if the exception is thrown
-   * @throws InterruptedException if the exception is thrown
-   */
-  protected HttpResponse<String> putContent(String requestUri, MediaType responseMediaType,
-      Object content, MediaType putMediaType, boolean expectSuccess)
-      throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(responseMediaType.toString());
-
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PUT,
-        responseMediaType, createContent(content, putMediaType));
-    HttpResponse<String> response = baseHttpClient
-        .send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-    // Should we check for success
-    if (expectSuccess) {
-      ensureSuccessStatusCode(response);
-    }
-    return response;
-  }
-
-  /**
-   * Do a web service put for the given uri, content and media type.
-   *
-   * @param requestUri        The request uri
-   * @param responseMediaType The response media type
-   * @param content           The put body
-   * @param expectedStatus    Assert a specific status code was returned
-   * @return A http response message
-   * @throws IOException          if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  protected HttpResponse<String> putContent(String requestUri, MediaType responseMediaType,
-      Object content, HttpStatus expectedStatus) throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(responseMediaType.toString());
-
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PUT,
-        responseMediaType, createContent(content,responseMediaType));
-    HttpResponse<String> response = baseHttpClient
-        .send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-    // We check for specific status
-    ensureStatusCodesMatch(response, expectedStatus);
-    return response;
+    return this.putContent(requestUri, expectedMediaType, content, expectedStatus);
   }
 
   /**
@@ -616,11 +563,11 @@ public class WebServiceDriver {
    * @throws InterruptedException if exception is thrown
    */
   protected HttpResponse<String> putContent(String requestUri, MediaType responseMediaType,
-      Object content, MediaType putMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
+      Object content, HttpStatus expectedStatus) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
     HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PUT,
-        responseMediaType, createContent(content, putMediaType));
+        responseMediaType, createContent(content, responseMediaType));
     HttpResponse<String> response = baseHttpClient
         .send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
