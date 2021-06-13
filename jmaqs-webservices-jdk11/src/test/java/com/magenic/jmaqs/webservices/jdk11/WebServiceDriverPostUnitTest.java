@@ -31,8 +31,11 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
    */
   private final Product product = new Product(4, "ff", "ff", BigDecimal.valueOf(3.25));
 
-  WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient(),
-      HttpRequest.newBuilder());
+  /**
+   * The web service driver to be used in a test.
+   */
+  private final WebServiceDriver webServiceDriver = new WebServiceDriver(
+      HttpClientFactory.getDefaultClient(), HttpRequest.newBuilder());
 
   /**
    * Post JSON request to verify status codes.
@@ -197,5 +200,67 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
         MediaType.PLAIN_TEXT, "", MediaType.PLAIN_TEXT, false);
     Assert.assertEquals(result.body(), "{\"Message\":\"No data\"}");
+  }
+
+  /**
+   * Test type parameterized Post request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void postTypeParamWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_JSON, product, MediaType.APP_JSON, HttpStatus.OK);
+    Assert.assertNotNull(res);
+  }
+
+  /**
+   * Test Post request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void postWithExpectedStatus() throws IOException, InterruptedException {
+    String req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
+    HttpResponse<String> res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_JSON, req, MediaType.APP_JSON, HttpStatus.OK);
+    Assert.assertNotNull(res);
+  }
+
+  /**
+   * Test more parameters Post request with expected status
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void postMoreParamsWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_JSON, product, MediaType.APP_JSON, true);
+    Assert.assertNotNull(res);
+  }
+
+  /**
+   * Test more parameters Post with response request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void postMoreParamsWithResponseWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_JSON, product, MediaType.APP_JSON, true);
+    Assert.assertNotNull(res);
+  }
+
+  /**
+   * Test Post with response request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+
+  public void postWithResponseWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_JSON, product, MediaType.APP_JSON, HttpStatus.OK);
+    Assert.assertNotNull(res);
   }
 }
