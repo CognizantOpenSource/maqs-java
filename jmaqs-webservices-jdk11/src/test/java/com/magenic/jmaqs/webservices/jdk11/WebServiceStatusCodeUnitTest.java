@@ -10,6 +10,7 @@ import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.net.http.HttpResponse;
 import org.springframework.http.HttpStatus;
@@ -40,7 +41,7 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getTypeParamWithExpectedStatus() throws IOException, InterruptedException {
     Object res = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
-        MediaType.APP_JSON, HttpStatus.OK, Product[].class);
+            MediaType.APP_JSON, HttpStatus.OK, Product[].class);
     Assert.assertNotNull(res);
   }
 
@@ -62,8 +63,7 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    * @throws InterruptedException if an exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void getWithResponseWithExpectedStatus()
-      throws InterruptedException, IOException {
+  public void getWithResponseWithExpectedStatus() throws IOException, InterruptedException {
     HttpResponse<String> res = webServiceDriver.get(
         baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, HttpStatus.OK);
     Assert.assertNotNull(res);
@@ -91,6 +91,14 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
    * @throws InterruptedException if an exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
+  public void postMoreParamsWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_JSON, product, MediaType.APP_JSON, true);
+    Assert.assertNotNull(res);
+  }
+
+  /**
+   * Test more parameters Post with response request with expected status.
   public void deleteWithExpectedStatus() throws IOException, InterruptedException {
     var result = this.webServiceDriver.delete(baseUrl +"/api/XML_JSON/Delete/1",
         MediaType.APP_JSON, HttpStatus.OK);
@@ -107,5 +115,24 @@ public class WebServiceStatusCodeUnitTest extends BaseWebServiceTest {
     var result = this.webServiceDriver.delete(baseUrl +"/api/XML_JSON/Delete/1",
         MediaType.APP_JSON, HttpStatus.OK);
     Assert.assertNotNull(result);
+  }
+
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void postMoreParamsWithResponseWithExpectedStatus() throws IOException, InterruptedException {
+    Object res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_JSON, product, MediaType.APP_JSON, true);
+    Assert.assertNotNull(res);
+  }
+
+  /**
+   * Test Post with response request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void postWithResponseWithExpectedStatus() throws IOException, InterruptedException {
+    Object res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
+        MediaType.APP_JSON, product, MediaType.APP_JSON, HttpStatus.OK);
+    Assert.assertNotNull(res);
   }
 }

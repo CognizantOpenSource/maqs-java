@@ -12,7 +12,6 @@ import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
-import org.apache.http.entity.ContentType;
 
 /**
  * The type Web service utilities.
@@ -77,11 +76,13 @@ public class WebServiceUtilities {
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
+  public static <T> String createStringEntity(T body, MediaType contentType) throws JsonProcessingException {
     if (contentType.toString().toUpperCase().contains("XML")) {
       return serializeXml(body);
     } else if (contentType.toString().toUpperCase().contains("JSON")) {
       return serializeJson(body);
+    } else if (contentType.toString().toUpperCase().contains("TEXT")) {
+      return body.toString();
     } else {
       throw new IllegalArgumentException(
           StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
@@ -112,11 +113,14 @@ public class WebServiceUtilities {
     return xmlMapper.writeValueAsString(body);
   }
 
+
   /**
    * Deserialize the response based on the media type.
-   * @param <T>     the type parameter
-   * @param type    the type
-   * @return the t object
+   * @param <T>         the type parameter
+   * @param response the String Http Response message
+   * @param mediaType the type the message is going to be turned into
+   * @param type the class or java object to be transferred into
+
    * @throws IOException the io exception
    */
   public static <T> T deserializeResponse(HttpResponse<String> response, MediaType mediaType, Type type)
