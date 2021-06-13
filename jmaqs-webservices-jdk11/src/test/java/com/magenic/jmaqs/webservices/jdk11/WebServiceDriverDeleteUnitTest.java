@@ -147,8 +147,16 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl +"/api/XML_JSON/Delete/1", MediaType.APP_JSON, Product.class, HttpStatus.OK);
     Assert.assertNull(result);
+  }
 
-    result = webServiceDriver.delete(baseUrl +"/api/XML_JSON/Delete/1",
+  /**
+   * Test type parameterized Delete request  True expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void deleteTypeParamWithTrueExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> result = webServiceDriver.delete(baseUrl +"/api/XML_JSON/Delete/1",
         MediaType.APP_JSON, Product.class, true);
     Assert.assertNull(result);
   }
