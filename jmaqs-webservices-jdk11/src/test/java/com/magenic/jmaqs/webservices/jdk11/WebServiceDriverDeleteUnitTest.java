@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.webservices.jdk11.models.Product;
 import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
@@ -43,7 +44,6 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void deleteJSONSerializedVerifyStatusCodeWithoutHeaderOverride()
       throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON, false);
     Assert.assertEquals(result.statusCode(), HttpStatus.CONFLICT.value());
@@ -72,7 +72,6 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void deleteJSONWithType() throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.delete(baseUrl + "/api/XML_JSON/Delete/1",
         MediaType.APP_JSON, true);
     Assert.assertEquals(result.body(), "");
@@ -82,9 +81,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    * Delete XML request using status code
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void deleteXMLSerializedVerifyStatusCode()
-      throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+  public void deleteXMLSerializedVerifyStatusCode() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/1", MediaType.APP_XML, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
@@ -94,11 +91,9 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    * Verify that the response does not return a message.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void deleteXMLSerializedVerifyEmptyString()
-      throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.delete(baseUrl + "/api/XML_JSON/Delete/1",
-        MediaType.APP_XML, true);
+  public void deleteXMLSerializedVerifyEmptyString() throws IOException, InterruptedException {
+    HttpResponse<String> result = webServiceDriver.delete(
+       baseUrl + "/api/XML_JSON/Delete/1", MediaType.APP_XML, true);
     Assert.assertEquals(result.body(),"");
   }
 
@@ -106,11 +101,9 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    * Delete string request without content utility.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void deleteStringWithoutMakeContent()
-      throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.delete(baseUrl + "/api/String/Delete/1",
-        MediaType.PLAIN_TEXT, true);
+  public void deleteStringWithoutMakeContent() throws IOException, InterruptedException {
+    HttpResponse<String> result = webServiceDriver.delete(
+      baseUrl + "/api/String/Delete/1", MediaType.PLAIN_TEXT, true);
     Assert.assertEquals(result.body(),"");
   }
 
@@ -118,9 +111,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    * Delete string request to verify status code.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void deleteStringMakeContentStatusCode()
-      throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+  public void deleteStringMakeContentStatusCode() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/String/Delete/1", MediaType.PLAIN_TEXT, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
@@ -130,10 +121,8 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    * Delete request to vi
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void deleteExpectContentError()
-      throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.delete(
+  public void deleteExpectContentError() throws IOException, InterruptedException {
+   HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/String/Delete/43", MediaType.PLAIN_TEXT, false);
     Assert.assertEquals(result.statusCode(), HttpStatus.NOT_FOUND.value());
   }
@@ -143,9 +132,48 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void deleteExpectError() throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.delete(baseUrl + "/api/String/Delete/43",
+   HttpResponse<String> result = webServiceDriver.delete(baseUrl + "/api/String/Delete/43",
         MediaType.PLAIN_TEXT, false);
     Assert.assertEquals(result.body(), "{\"Message\":\"Resource was not found\"}");
+  }
+
+  /**
+   * Test type parameterized Delete request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void deleteTypeParamWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> result = webServiceDriver.delete(
+        baseUrl +"/api/XML_JSON/Delete/1", MediaType.APP_JSON, Product.class, HttpStatus.OK);
+    Assert.assertNull(result);
+
+    result = webServiceDriver.delete(baseUrl +"/api/XML_JSON/Delete/1",
+        MediaType.APP_JSON, Product.class, true);
+    Assert.assertNull(result);
+  }
+
+  /**
+   * Test Delete request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void deleteWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> result = webServiceDriver.delete(
+        baseUrl +"/api/XML_JSON/Delete/1", MediaType.APP_JSON, HttpStatus.OK);
+    Assert.assertNotNull(result);
+  }
+
+  /**
+   * Test Delete with response request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void deleteWithResponseWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> result = webServiceDriver.delete(
+        baseUrl +"/api/XML_JSON/Delete/1", MediaType.APP_JSON, HttpStatus.OK);
+    Assert.assertNotNull(result);
   }
 }
