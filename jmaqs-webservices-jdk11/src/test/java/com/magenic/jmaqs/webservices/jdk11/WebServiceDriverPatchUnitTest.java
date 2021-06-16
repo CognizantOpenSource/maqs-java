@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
  * Test web service gets using the base test driver.
  */
 public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
-
   /**
    * String to hold the URL.
    */
@@ -38,10 +37,8 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void patchJSONSerializedVerifyStatusCode()
-      throws IOException, InterruptedException {
+  public void patchJSONSerializedVerifyStatusCode() throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(
         baseUrl + "/api/XML_JSON/Patch/1", MediaType.APP_JSON, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
@@ -54,7 +51,6 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchJSONWithType() throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     Product result = webServiceDriver.patch(baseUrl + "/api/XML_JSON/Patch/1",
         MediaType.APP_JSON, content, Product.class, true);
 
@@ -69,10 +65,8 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void patchJSONStreamSerializedVerifyStatusCode()
-      throws IOException, InterruptedException {
+  public void patchJSONStreamSerializedVerifyStatusCode() throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(
         baseUrl + "/api/XML_JSON/Patch/1", MediaType.APP_JSON, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
@@ -83,10 +77,8 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void patchXMLSerializedVerifyStatusCode()
-      throws IOException, InterruptedException {
+  public void patchXMLSerializedVerifyStatusCode() throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_XML);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(
         baseUrl + "/api/XML_JSON/Patch/1", MediaType.APP_XML, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
@@ -97,10 +89,8 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void patchXMLStreamSerializedVerifyStatusCode()
-      throws IOException, InterruptedException {
+  public void patchXMLStreamSerializedVerifyStatusCode() throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_XML);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(
         baseUrl + "/api/XML_JSON/Patch/1", MediaType.APP_XML, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
@@ -113,7 +103,6 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchXMLWithType() throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity(product, MediaType.APP_XML);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     Product result = webServiceDriver.patch(baseUrl + "/api/XML_JSON/Patch/1",
         MediaType.APP_XML, content, Product.class, true);
     Assert.assertEquals(result.getCategory(), product.getCategory());
@@ -128,7 +117,6 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchStringWithoutMakeContent() throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(baseUrl + "/api/String/Patch/1",
         MediaType.PLAIN_TEXT, "Test", true);
     Assert.assertEquals(result.body(), "\"Patched\"");
@@ -142,7 +130,6 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   public void patchStringWithMakeContent()
       throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity("Test", MediaType.PLAIN_TEXT);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(baseUrl + "/api/String/Patch/1",
         MediaType.PLAIN_TEXT, content, true);
     Assert.assertEquals(result.body(), "\"Patched\"");
@@ -155,7 +142,6 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchStringWithoutContentStatusCode()
       throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(
         baseUrl + "/api/String/Patch/1", MediaType.PLAIN_TEXT, "Test", true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
@@ -169,7 +155,6 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   public void patchStringMakeContentStatusCode()
       throws IOException, InterruptedException {
     String content = WebServiceUtilities.createStringEntity("Test", MediaType.PLAIN_TEXT);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.patch(
         baseUrl + "/api/String/Patch/1", MediaType.PLAIN_TEXT, content, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
@@ -181,8 +166,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE, expectedExceptions = NullPointerException.class)
   public void patchExpectContentError() throws IOException,
       InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-    HttpResponse<String> result = webServiceDriver.patch(
+   HttpResponse<String> result = webServiceDriver.patch(
         baseUrl + "/api/String/Patch/1", MediaType.PLAIN_TEXT, null, false);
     Assert.assertEquals(result.statusCode(), HttpStatus.BAD_REQUEST.value());
   }
@@ -191,16 +175,13 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    * Testing string returned for Patch.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void patchExpectStringError() throws IOException,
-      InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+  public void patchExpectStringError() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.patch(baseUrl + "/api/String/Patch/",
         MediaType.PLAIN_TEXT, "", false);
     String expected = "{\"Message\":\"The requested resource does not support http method 'PATCH'.\"}";
     Assert.assertEquals(result.body(), expected);
   }
-
-
+  
   /**
    * Test type parameterized Patch request with expected status.
    * @throws IOException if an exception is thrown
@@ -208,8 +189,8 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchTypeParamWithExpectedStatus() throws IOException, InterruptedException {
-    var req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    var res = this.webServiceDriver.patch(baseUrl +"/api/XML_JSON/Patch/1",
+    String req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
+    Product res = webServiceDriver.patch(baseUrl +"/api/XML_JSON/Patch/1",
         MediaType.APP_JSON, req, Product.class, HttpStatus.OK);
     Assert.assertNotNull(res);
   }
@@ -221,22 +202,9 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchWithExpectedStatus() throws IOException, InterruptedException {
-    var req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    var res = this.webServiceDriver.patch(
-        baseUrl+ "/api/XML_JSON/Patch/1", MediaType.APP_JSON, req, HttpStatus.OK);
-    Assert.assertNotNull(res);
-  }
-
-  /**
-   * Test more params Patch request with expected status.
-   * @throws IOException if an exception is thrown
-   * @throws InterruptedException if an exception is thrown
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void patchMoreParamsWithExpectedStatus() throws IOException, InterruptedException {
     String req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    HttpResponse<String> res = this.webServiceDriver.patch(baseUrl + "/api/XML_JSON/Patch/1",
-        MediaType.APP_JSON, req, HttpStatus.OK);
+    HttpResponse<String> res = webServiceDriver.patch(
+        baseUrl+ "/api/XML_JSON/Patch/1", MediaType.APP_JSON, req, HttpStatus.OK);
     Assert.assertNotNull(res);
   }
 
@@ -247,7 +215,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchMoreParamsWithResponseWithExpectedStatus() throws IOException, InterruptedException {
-    HttpResponse<String> res = this.webServiceDriver.patch(baseUrl + "/api/XML_JSON/Patch/1",
+    HttpResponse<String> res = webServiceDriver.patch(baseUrl + "/api/XML_JSON/Patch/1",
         MediaType.APP_JSON, WebServiceUtilities.serializeJson(product), HttpStatus.OK);
     Assert.assertNotNull(res);
   }
@@ -260,7 +228,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchWithResponseWithExpectedStatus() throws IOException, InterruptedException {
     String req = WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON);
-    HttpResponse<String> res = this.webServiceDriver.patch(
+    HttpResponse<String> res = webServiceDriver.patch(
         baseUrl + "/api/XML_JSON/Patch/1", MediaType.APP_JSON, req, HttpStatus.OK);
     Assert.assertNotNull(res);
   }

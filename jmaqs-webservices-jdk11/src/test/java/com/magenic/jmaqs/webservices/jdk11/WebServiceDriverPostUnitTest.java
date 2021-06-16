@@ -257,7 +257,6 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
    * @throws InterruptedException if an exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-
   public void postWithResponseWithExpectedStatus() throws IOException, InterruptedException {
     HttpResponse<String> res = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
         MediaType.APP_JSON, product, HttpStatus.OK);
