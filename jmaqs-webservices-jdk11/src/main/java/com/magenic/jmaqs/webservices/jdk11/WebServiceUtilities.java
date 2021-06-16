@@ -121,13 +121,13 @@ public class WebServiceUtilities {
    * @param mediaType the type the message is going to be turned into
    * @param type the class or java object to be transferred into
    * @return the response type
-   * @throws IOException the json processing exception
+   * @throws JsonProcessingException the json processing exception
    */
   public static <T> T deserializeResponse(HttpResponse<String> message, MediaType mediaType, Type type)
       throws IOException {
-    if (mediaType.toString().toUpperCase().contains("XML")) {
+    if (mediaType.equals(MediaType.APP_XML)) {
       return deserializeXml(message, type);
-    } else if (mediaType.toString().toUpperCase().contains("JSON")) {
+    } else if (mediaType.equals(MediaType.APP_JSON)) {
       return deserializeJson(message, type);
     } else {
       throw new IllegalArgumentException(
