@@ -290,14 +290,13 @@ public class WebServiceDriver {
    * @param requestUri The request uri
    * @param responseMediaType The type of media being requested
    * @param content How to encode the post content
-   * @param postMediaType The type of the media being posted
    * @param expectSuccess Assert a success code was returned
    * @return The response body as a string
    * @throws IOException if exception is thrown
    * @throws InterruptedException if exception is thrown
    */
   public HttpResponse<String> post(String requestUri, MediaType responseMediaType, Object content,
-      MediaType postMediaType, boolean expectSuccess) throws IOException, InterruptedException {
+      boolean expectSuccess) throws IOException, InterruptedException {
     return this.postContent(requestUri, responseMediaType, content, expectSuccess);
   }
 
@@ -306,14 +305,13 @@ public class WebServiceDriver {
    * @param requestUri The request uri
    * @param responseMediaType The type of media being requested
    * @param content The post content
-   * @param postMediaType The type of the media being posted
    * @param expectedStatus Assert a specific status code was returned
    * @return The response body as a string
    * @throws IOException if exception is thrown
    * @throws InterruptedException if exception is thrown
    */
   public HttpResponse<String> post(String requestUri, MediaType responseMediaType, Object content,
-      MediaType postMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
+      HttpStatus expectedStatus) throws IOException, InterruptedException {
     return this.postContent(requestUri, responseMediaType, content, expectedStatus);
   }
 
@@ -602,13 +600,13 @@ public class WebServiceDriver {
   /**
    * Create http content.
    * @param content The content as a string
-   * @param postMediaType The type of the media being posted
+   * @param responseMediaType The type of the media being posted
    * @return The content as String
    * @throws IOException if the exception is thrown
    */
-  private static String createContent(Object content, MediaType postMediaType) throws IOException {
+  private static String createContent(Object content, MediaType responseMediaType) throws IOException {
     return content instanceof String ? content.toString()
-        : WebServiceUtilities.createStringEntity(content, postMediaType);
+        : WebServiceUtilities.createStringEntity(content, responseMediaType);
   }
 
   /**
