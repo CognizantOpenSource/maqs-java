@@ -118,7 +118,7 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithoutMakeContent() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1",
-        MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT, HttpStatus.OK);
+        MediaType.PLAIN_TEXT, "Test", HttpStatus.OK);
     Assert.assertEquals(result.body(), "");
   }
 
@@ -145,7 +145,7 @@ public class WebServiceDriverPutUnitTest {
   public void putStringWithoutContentStatusCode()
       throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1",
-        MediaType.PLAIN_TEXT, "Test", MediaType.PLAIN_TEXT, true);
+        MediaType.PLAIN_TEXT, "Test", true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -217,32 +217,7 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putMoreParamsWithExpectedStatus() throws IOException, InterruptedException {
     HttpResponse<String> res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1", MediaType.APP_JSON,
-        WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON), MediaType.APP_JSON, HttpStatus.OK);
-    Assert.assertNotNull(res);
-  }
-
-  /**
-   * Test more params Put with response request with expected status.
-   * @throws IOException if an exception is thrown
-   * @throws InterruptedException if an exception is thrown
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void putMoreParamsWithResponseWithExpectedStatus() throws IOException, InterruptedException {
-    HttpResponse<String> res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON),
-        MediaType.APP_JSON, HttpStatus.OK);
-    Assert.assertNotNull(res);
-  }
-
-  /**
-   * Test Put with response request with expected status.
-   * @throws IOException if an exception is thrown
-   * @throws InterruptedException if an exception is thrown
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void putWithResponseWithExpectedStatus() throws IOException, InterruptedException {
-    HttpResponse<String> res = webServiceDriver.put(baseUrl +"/api/XML_JSON/Put/1",
-        MediaType.APP_JSON, WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON), HttpStatus.OK);
+        WebServiceUtilities.createStringEntity(product, MediaType.APP_JSON), HttpStatus.OK);
     Assert.assertNotNull(res);
   }
 }

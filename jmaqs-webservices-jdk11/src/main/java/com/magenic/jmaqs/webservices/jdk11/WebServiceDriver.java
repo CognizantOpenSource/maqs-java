@@ -491,40 +491,6 @@ public class WebServiceDriver {
   }
 
   /**
-   * Execute a web service put.
-   *
-   * @param requestUri        The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content           The put content
-   * @param postMediaType     The type of the media being put
-   * @param expectSuccess     Assert a success code was returned
-   * @return The response body as a string
-   * @throws IOException          if the exception is thrown
-   * @throws InterruptedException if the exception is thrown
-   */
-  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, Object content,
-      MediaType postMediaType, boolean expectSuccess) throws IOException, InterruptedException {
-    return this.putContent(requestUri, expectedMediaType, content, expectSuccess);
-  }
-
-  /**
-   * Execute a web service put.
-   *
-   * @param requestUri        The request uri
-   * @param expectedMediaType The type of media being requested
-   * @param content           The put content
-   * @param putMediaType     The type of the media being put
-   * @param expectedStatus    Assert a specific status code was returned
-   * @return The response body as a string
-   * @throws IOException          if exception is thrown
-   * @throws InterruptedException if exception is thrown
-   */
-  public HttpResponse<String> put(String requestUri, MediaType expectedMediaType, Object content,
-      MediaType putMediaType, HttpStatus expectedStatus) throws IOException, InterruptedException {
-    return this.putContent(requestUri, expectedMediaType, content, expectedStatus);
-  }
-
-  /**
    * Do a web service put for the given uri, content and media type.
    *
    * @param requestUri        The request uri
