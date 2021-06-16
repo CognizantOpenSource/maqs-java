@@ -172,7 +172,6 @@ public class WebServiceDriver {
     if (expectSuccess) {
       ensureSuccessStatusCode(response);
     }
-
     return response;
   }
 
@@ -219,7 +218,6 @@ public class WebServiceDriver {
     if (expectSuccess) {
       ensureSuccessStatusCode(response);
     }
-
     return WebServiceUtilities.getResponseBody(response, responseMediaType, type);
   }
 
@@ -335,7 +333,6 @@ public class WebServiceDriver {
     if (expectSuccess) {
       ensureSuccessStatusCode(response);
     }
-
     return response;
   }
 
@@ -591,7 +588,6 @@ public class WebServiceDriver {
     if (expectSuccess) {
       ensureSuccessStatusCode(response);
     }
-
     return response;
   }
 
@@ -652,8 +648,8 @@ public class WebServiceDriver {
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
-  public HttpResponse<String> delete(String requestUri, MediaType expectedMediaType,
-      HttpStatus expectedStatus) throws IOException, InterruptedException {
+  public HttpResponse<String> delete(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
+      throws IOException, InterruptedException {
     return deleteContent(requestUri, expectedMediaType, expectedStatus);
   }
 
@@ -768,6 +764,7 @@ public class WebServiceDriver {
     ensureStatusCodesMatch(response, expectedStatus);
     return response;
   }
+
   /**
    * Create http content.
    * @param content The content as a string
