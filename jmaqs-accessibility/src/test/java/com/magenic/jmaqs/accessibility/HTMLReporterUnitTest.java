@@ -129,7 +129,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     File file = new File(path);
 
     if (file.exists()) {
-      Assert.assertTrue( file.delete(), "File was not deleted");
+      Assert.assertTrue(file.delete(), "File was not deleted");
     }
   }
 
