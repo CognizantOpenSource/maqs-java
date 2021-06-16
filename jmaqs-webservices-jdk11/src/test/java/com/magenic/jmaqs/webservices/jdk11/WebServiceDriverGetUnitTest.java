@@ -29,6 +29,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   private final WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
 
+
   /**
    * Test Json Get deserialize a single product.
    * @throws IOException if exception is thrown
@@ -170,5 +171,41 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
     Assert.assertNotNull(products);
     Assert.assertEquals(products.length,3,"Expected 3 products to be returned");
+  }
+
+  /**
+   * Test type parameterized Get request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getTypeParamWithExpectedStatus() throws IOException, InterruptedException {
+    Product[] res = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
+        MediaType.APP_JSON, HttpStatus.OK, Product[].class);
+    Assert.assertNotNull(res);
+  }
+
+  /**
+   * Test Get request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> res = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, HttpStatus.OK);
+    Assert.assertNotNull(res);
+  }
+
+  /**
+   * Test Get with response request with expected status.
+   * @throws IOException if an exception is thrown
+   * @throws InterruptedException if an exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getWithResponseWithExpectedStatus() throws IOException, InterruptedException {
+    HttpResponse<String> res = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, HttpStatus.OK);
+    Assert.assertNotNull(res);
   }
 }
