@@ -77,11 +77,11 @@ public class WebServiceUtilities {
    * @throws JsonProcessingException the json processing exception
    */
   public static <T> String createStringEntity(T body, MediaType contentType) throws JsonProcessingException {
-    if (contentType.toString().toUpperCase().contains("XML")) {
+    if (contentType.equals(MediaType.APP_XML)) {
       return serializeXml(body);
-    } else if (contentType.toString().toUpperCase().contains("JSON")) {
+    } else if (contentType.equals(MediaType.APP_JSON)) {
       return serializeJson(body);
-    } else if (contentType.toString().toUpperCase().contains("TEXT")) {
+    } else if (contentType.equals(MediaType.PLAIN_TEXT)) {
       return body.toString();
     } else {
       throw new IllegalArgumentException(

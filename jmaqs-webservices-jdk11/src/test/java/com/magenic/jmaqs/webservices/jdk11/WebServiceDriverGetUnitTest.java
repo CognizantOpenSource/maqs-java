@@ -23,7 +23,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    * String to hold the URL.
    */
   private static final String baseUrl = WebServiceConfig.getWebServiceUri();
-  
+
   /**
    * The web service driver to be used in a test.
    */
@@ -37,8 +37,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductXmlDeserialize() throws IOException, InterruptedException {
-    HttpResponse<String> response = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetProduct/2", MediaType.APP_XML, false);
-    Product products = WebServiceUtilities.getResponseBody(response, MediaType.APP_XML, Product.class);
+    Product products = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetProduct/2", MediaType.APP_XML, true, Product.class);
     Assert.assertEquals(products.getName(), "Yo-yo", "Expected 3 products to be returned");
   }
 
@@ -49,7 +48,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductsXmlDeserialize() throws IOException, InterruptedException {
-    Product[] products = webServiceDriver.getContent(baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, false, Product[].class);
+    Product[] products = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, false, Product[].class);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
 
@@ -60,7 +59,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductJsonDeserialize() throws IOException, InterruptedException {
-    HttpResponse<String> response = webServiceDriver.getContent(baseUrl + "/api/XML_JSON/GetProduct/2", MediaType.APP_JSON, false);
+    HttpResponse<String> response = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetProduct/2", MediaType.APP_JSON, false);
     Product products = WebServiceUtilities.getResponseBody(response, MediaType.APP_JSON, Product.class);
     Assert.assertEquals(products.getName(),"Yo-yo", "Expected 3 products to be returned");
   }
@@ -72,7 +72,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductsJsonDeserialize() throws IOException, InterruptedException {
-    Product[] products = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, false, Product[].class);
+    Product[] products = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
+        MediaType.APP_JSON, HttpStatus.OK, Product[].class);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
 
@@ -151,8 +152,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeJsonExpectedStatus() throws IOException, InterruptedException {
-    HttpResponse<String> message = webServiceDriver.get(
-        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, HttpStatus.OK);
+    HttpResponse<String> message = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
+        MediaType.APP_JSON, HttpStatus.OK);
     Product[] products = WebServiceUtilities.deserializeJson(message, Product[].class);
     Assert.assertNotNull(products);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
@@ -165,8 +166,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeXmlExpectedStatus() throws IOException, InterruptedException {
-    HttpResponse<String> message = webServiceDriver.get(
-        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, HttpStatus.OK);
+    HttpResponse<String> message = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
+        MediaType.APP_XML, HttpStatus.OK);
     Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
     Assert.assertNotNull(products);
     Assert.assertEquals(products.length,3,"Expected 3 products to be returned");
