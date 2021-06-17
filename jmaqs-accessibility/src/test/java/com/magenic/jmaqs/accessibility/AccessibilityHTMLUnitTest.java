@@ -51,9 +51,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
 
   private UIWait wait;
 
-  public AccessibilityHTMLUnitTest() {
-  }
-
   @BeforeMethod
   public void setup() {
     this.getWebDriver().navigate().to(TestSiteUrl);
