@@ -14,7 +14,6 @@
     <name>JMAQS JDK11 WebServices Testing Module</name>
     <version>${revision}</version>
 
-    <version>${revision}</version>
     <dependencies>
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
@@ -34,8 +33,6 @@
             <version>5.2.5.RELEASE</version>
         </dependency>
     </dependencies>
-
-    <name>JMAQS JDK11 WebServices Testing Module</name>
 
     <build>
         <plugins>
