@@ -51,10 +51,10 @@
         <module>jmaqs-base</module>
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
-        <module>jmaqs-webservices-jdk11</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
         <module>jmaqs-cucumber</module>
+        <module>jmaqs-webservices-jdk11</module>
     </modules>
 
     <profiles>
