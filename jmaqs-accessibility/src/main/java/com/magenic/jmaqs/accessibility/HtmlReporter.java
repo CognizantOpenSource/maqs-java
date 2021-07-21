@@ -23,7 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -368,8 +367,7 @@ public class HtmlReporter {
   }
 
   private static String getJavascriptToString() throws IOException {
-    String javascript = new String(Files.readAllBytes(
+    return new String(Files.readAllBytes(
         Paths.get(resourcesFile + "htmlReporterElements.js")));
-    return StringEscapeUtils.escapeEcmaScript(javascript);
   }
 }
