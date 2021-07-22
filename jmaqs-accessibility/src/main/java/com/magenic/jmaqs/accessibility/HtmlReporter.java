@@ -35,7 +35,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
 public class HtmlReporter {
-  
+
   private static final String classString = "class";
 
   private static final String resourcesFile = "../jmaqs-accessibility/src/main/resources/";
@@ -152,7 +152,6 @@ public class HtmlReporter {
     resultsFlex.attributes().put("id", "results");
     contentArea.appendChild(resultsFlex);
 
-
     if (results.isErrored()) {
       Element errorHeader = new Element("h2");
       errorHeader.appendText("SCAN ERRORS:");
@@ -166,6 +165,7 @@ public class HtmlReporter {
 
     if (violationCount > 0 && requestedResults.contains(ResultType.Violations)) {
       getReadableAxeResults(results.getViolations(), ResultType.Violations.name(), resultsFlex);
+      setImages(ResultType.Violations.name(), doc, context);
     }
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
@@ -174,6 +174,7 @@ public class HtmlReporter {
 
     if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
       getReadableAxeResults(results.getPasses(), ResultType.Passes.name(), resultsFlex);
+      setImages(ResultType.Passes.name(), doc, context);
     }
 
     if (inapplicableCount > 0 && requestedResults.contains(ResultType.Inapplicable)) {
@@ -295,6 +296,50 @@ public class HtmlReporter {
     }
   }
 
+  private static void setImages(String resultType, Element doc, SearchContext context) {
+    Element section = doc.getElementById(resultType + "Section");
+    Elements findings = section.getElementsByClass("findings");
+    int count = 1;
+
+      for (Element finding : findings) {
+        for (Element table : finding.getElementsByClass("htmlTable")) {
+          Element emThree = table.selectFirst("div.emThree");
+
+          String selectorText = emThree.selectFirst("p.wrapTwo").text();
+          //String imageString = getDataImageString(context.findElement(By.cssSelector(selectorText)));
+
+          WebElement element = context.findElement(By.cssSelector(selectorText));
+          String elementName = resultType + "Element" + count++;
+          String imageString = setDataImageString(element, elementName) + "}";
+
+          Element wrapThree = new Element("div");
+          wrapThree.attributes().put("class", "wrapThree");
+
+          Element image = new Element("img");
+          // image.attributes().put("src", imageString);
+          image.attributes().put("alt", elementName);
+          image.attributes().put("class", elementName);
+
+          // String styleText = doc.selectFirst("style").ownText();
+          doc.select("style").append(imageString);
+
+          wrapThree.appendChild(image);
+          emThree.appendChild(wrapThree);
+        }
+      }
+  }
+
+  private static String getDataImageString(SearchContext context) {
+    TakesScreenshot newScreen = (TakesScreenshot) context;
+    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64) + "');";
+  }
+
+  private static String setDataImageString(SearchContext context, String cssName) {
+    String string = ".cssName{"
+     + "content: url('" + getDataImageString(context) + ";)";
+    return string.replace("cssName", cssName);
+  }
+
   private static void getContextContent(Results results, Element element) throws ParseException {
     element.text("Url: " + results.getUrl());
     element.appendChild(new Element("br"));
@@ -355,11 +400,6 @@ public class HtmlReporter {
     String css = new String(Files.readAllBytes(
         Paths.get(resourcesFile + "htmlReporter.css")));
     return  css.replace("url('", "url('" + getDataImageString(context));
-  }
-
-  private static String getDataImageString(SearchContext context) {
-    TakesScreenshot newScreen = (TakesScreenshot) context;
-    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
   }
 
   private static String getDateFormat(String timestamp) throws ParseException {
