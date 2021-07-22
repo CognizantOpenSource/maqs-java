@@ -27,6 +27,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
@@ -170,11 +172,11 @@ public class HtmlReporter {
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
       getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name(), resultsFlex);
+      setImages(ResultType.Incomplete.name(), doc, context);
     }
 
     if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
       getReadableAxeResults(results.getPasses(), ResultType.Passes.name(), resultsFlex);
-      setImages(ResultType.Passes.name(), doc, context);
     }
 
     if (inapplicableCount > 0 && requestedResults.contains(ResultType.Inapplicable)) {
@@ -287,11 +289,21 @@ public class HtmlReporter {
         htmlAndSelector.attributes().put(classString, "wrapTwo");
 
         for (Object target : Collections.singletonList(item.getTarget())) {
-          String targetString = target.toString().replace("[", "").replace("]", "");
+          String targetString = target.toString();
+
+          targetString = targetString.contains("[[") && targetString.contains("]]")
+              ? targetString.substring(2, targetString.length() - 2)
+                : targetString.substring(1, targetString.length() - 1);
+
+
           htmlAndSelector.text(targetString);
           htmlAndSelector.html(targetString);
         }
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+
+        htmlAndSelectorWrapper = new Element("div");
+        htmlAndSelectorWrapper.attr(classString, "emFour");
+        elementNodes.appendChild(htmlAndSelectorWrapper);
       }
     }
   }
@@ -301,43 +313,28 @@ public class HtmlReporter {
     Elements findings = section.getElementsByClass("findings");
     int count = 1;
 
-      for (Element finding : findings) {
-        for (Element table : finding.getElementsByClass("htmlTable")) {
-          Element emThree = table.selectFirst("div.emThree");
+    for (Element finding : findings) {
+      for (Element table : finding.getElementsByClass("htmlTable")) {
+        Element emThree = table.selectFirst("div.emThree");
+        String selectorText = emThree.selectFirst("p.wrapTwo").text();
+        String imageString = getDataImageString(context.findElement(By.cssSelector(selectorText)));
 
-          String selectorText = emThree.selectFirst("p.wrapTwo").text();
-          //String imageString = getDataImageString(context.findElement(By.cssSelector(selectorText)));
+        String elementName = resultType + "Element" + count++;
 
-          WebElement element = context.findElement(By.cssSelector(selectorText));
-          String elementName = resultType + "Element" + count++;
-          String imageString = setDataImageString(element, elementName) + "}";
+        Element image = new Element("img");
+        image.attributes().put("src", imageString);
+        image.attributes().put("alt", elementName);
+        image.attributes().put("class", elementName);
 
-          Element wrapThree = new Element("div");
-          wrapThree.attributes().put("class", "wrapThree");
-
-          Element image = new Element("img");
-          // image.attributes().put("src", imageString);
-          image.attributes().put("alt", elementName);
-          image.attributes().put("class", elementName);
-
-          // String styleText = doc.selectFirst("style").ownText();
-          doc.select("style").append(imageString);
-
-          wrapThree.appendChild(image);
-          emThree.appendChild(wrapThree);
-        }
+        Element emFour = table.selectFirst("div.emFour");
+        emFour.appendChild(image);
       }
+    }
   }
 
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
-    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64) + "');";
-  }
-
-  private static String setDataImageString(SearchContext context, String cssName) {
-    String string = ".cssName{"
-     + "content: url('" + getDataImageString(context) + ";)";
-    return string.replace("cssName", cssName);
+    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
   }
 
   private static void getContextContent(Results results, Element element) throws ParseException {

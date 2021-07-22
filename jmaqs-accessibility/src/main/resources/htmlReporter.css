@@ -38,7 +38,17 @@
 }
 
 .emThree {
-  margin-left: 3em;
+    width: 50%;
+    margin-left: 3em;
+}
+
+.emFour {
+    width: 50%;
+    transition: transform .2s;
+}
+
+.emFour:hover {
+    transform: scale(2);
 }
 
 #modal {
