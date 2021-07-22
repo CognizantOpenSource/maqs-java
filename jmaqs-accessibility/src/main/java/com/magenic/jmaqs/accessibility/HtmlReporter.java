@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.openqa.selenium.OutputType;
@@ -193,7 +194,7 @@ public class HtmlReporter {
     modal.appendChild(modalImage);
 
     Element script = doc.select("script").first();
-    script.text(getJavascriptToString());
+    script.appendChild(new DataNode(getJavascriptFileToString()));
 
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
@@ -366,7 +367,7 @@ public class HtmlReporter {
     return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
   }
 
-  private static String getJavascriptToString() throws IOException {
+  private static String getJavascriptFileToString() throws IOException {
     return new String(Files.readAllBytes(
         Paths.get(resourcesFile + "htmlReporterElements.js")));
   }
