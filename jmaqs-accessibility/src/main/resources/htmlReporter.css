@@ -40,15 +40,17 @@
 .emThree {
     width: 50%;
     margin-left: 3em;
+    flex: 1;
 }
 
 .emFour {
     width: 50%;
+    align-self: center;
     transition: transform .2s;
 }
 
 .emFour:hover {
-    transform: scale(2);
+     transform: scale(1.1);
 }
 
 #modal {
@@ -86,7 +88,8 @@
 .htmlTable {
   border-top: double lightgray;
   width: 100%;
-  display: table;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .sectionbutton {

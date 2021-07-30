@@ -290,11 +290,9 @@ public class HtmlReporter {
 
         for (Object target : Collections.singletonList(item.getTarget())) {
           String targetString = target.toString();
-
           targetString = targetString.contains("[[") && targetString.contains("]]")
               ? targetString.substring(2, targetString.length() - 2)
                 : targetString.substring(1, targetString.length() - 1);
-
 
           htmlAndSelector.text(targetString);
           htmlAndSelector.html(targetString);
