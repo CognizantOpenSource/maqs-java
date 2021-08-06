@@ -9,6 +9,8 @@ import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -16,12 +18,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
@@ -29,7 +33,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -95,6 +101,7 @@ public class HtmlReporter {
 
     Document doc = Jsoup.parse(stringBuilder);
 
+    TakesScreenshot screenshot = getScreenShot(context);
     doc.select("style").append(getCss(context));
 
     Element contentArea = doc.select("content").first();
@@ -167,12 +174,12 @@ public class HtmlReporter {
 
     if (violationCount > 0 && requestedResults.contains(ResultType.Violations)) {
       getReadableAxeResults(results.getViolations(), ResultType.Violations.name(), resultsFlex);
-      setImages(ResultType.Violations.name(), doc, context);
+      setImages(ResultType.Violations.name(), doc, context, screenshot);
     }
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
       getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name(), resultsFlex);
-      setImages(ResultType.Incomplete.name(), doc, context);
+      setImages(ResultType.Incomplete.name(), doc, context, screenshot);
     }
 
     if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
@@ -306,16 +313,24 @@ public class HtmlReporter {
     }
   }
 
-  private static void setImages(String resultType, Element doc, SearchContext context) {
+  private static void setImages(String resultType, Element doc, SearchContext searchContext,
+      TakesScreenshot screenshot) throws IOException {
     Element section = doc.getElementById(resultType + "Section");
     Elements findings = section.getElementsByClass("findings");
     int count = 1;
 
     for (Element finding : findings) {
       for (Element table : finding.getElementsByClass("htmlTable")) {
+        String imageString;
         Element emThree = table.selectFirst("div.emThree");
         String selectorText = emThree.selectFirst("p.wrapTwo").text();
-        String imageString = getDataImageString(context.findElement(By.cssSelector(selectorText)));
+
+        try {
+          imageString = getDataImageString(searchContext.findElement(By.cssSelector(selectorText)));
+          //imageString = getDataElementString(screenshot, searchContext.findElement(By.cssSelector(selectorText)));
+          } catch (NoSuchElementException e) {
+          break;
+        }
 
         String elementName = resultType + "Element" + count++;
 
@@ -333,6 +348,28 @@ public class HtmlReporter {
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
     return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
+  }
+
+  private static TakesScreenshot getScreenShot(SearchContext context) {
+    return (TakesScreenshot) context;
+  }
+
+  private static String getDataElementString(TakesScreenshot screenshot, WebElement element) throws IOException {
+    // Convert the screenshot into BufferedImage
+    BufferedImage fullScreen = ImageIO.read(screenshot.getScreenshotAs(OutputType.FILE));
+
+    // Find location of the web element on the page
+    Point location = element.getLocation();
+
+    // cropping the full image to get only the element screenshot
+    BufferedImage bufferedImage = fullScreen.getSubimage(location.getX(), location.getY(),
+        element.getSize().getWidth(), element.getSize().getHeight());
+
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    ImageIO.write(bufferedImage, "PNG", out);
+
+    String base64bytes = Base64.getEncoder().encodeToString(out.toByteArray());
+    return "data:image/png;base64," + base64bytes;
   }
 
   private static void getContextContent(Results results, Element element) throws ParseException {

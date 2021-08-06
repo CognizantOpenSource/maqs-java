@@ -63,9 +63,9 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
     File file = new File(path);
 
-    if (file.exists()) {
-      Assert.assertTrue(file.delete(), "File was not deleted");
-    }
+//    if (file.exists()) {
+//      Assert.assertTrue(file.delete(), "File was not deleted");
+//    }
   }
 
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -79,13 +79,11 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     assertResultNotWritten(path,
         EnumSet.of(ResultType.Passes, ResultType.Inapplicable, ResultType.Incomplete));
 
-    /*
     File file = new File(path);
 
     if (file.exists()) {
       Assert.assertTrue(file.delete(), "File was not deleted");
     }
-    */
   }
 
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -98,13 +96,11 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     validateReport(path, 5, 42, 0, 63);
     assertResultNotWritten(path, EnumSet.of(ResultType.Incomplete));
 
-    /*
     File file = new File(path);
 
     if (file.exists()) {
       Assert.assertTrue(file.delete(), "File was not deleted");
     }
-    */
   }
 
   @Test(groups = TestCategories.ACCESSIBILITY)
