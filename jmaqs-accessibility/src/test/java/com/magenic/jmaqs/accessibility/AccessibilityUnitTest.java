@@ -49,8 +49,9 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     Assert.assertTrue(logContent.contains("Found 6 items"), "Expected to find 6 violations matches.");
     Assert.assertTrue(logContent.contains("INCOMPLETE check for"), "Expected to find any incomplete matches.");
 
-    File file = new File(filePath);
-    Assert.assertTrue(file.delete());
+    if (new File(filePath).exists()) {
+      Assert.assertTrue(new File(filePath).delete(), "File was not deleted");
+    }
   }
 
   /**
@@ -78,9 +79,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete(), "File was not deleted");
-      Assert.assertFalse(file.exists(), "File Still exists");
+      Assert.assertTrue(new File(filePath).delete(), "File was not deleted");
+      Assert.assertFalse(new File(filePath).exists(), "File Still exists");
     }
   }
 
@@ -105,8 +105,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete());
+      Assert.assertTrue(new File(filePath).delete(), "File was not deleted");
+      Assert.assertFalse(new File(filePath).exists(), "File Still exists");
     }
   }
 
@@ -131,8 +131,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete());
+      Assert.assertTrue(new File(filePath).delete(), "File was not deleted");
+      Assert.assertFalse(new File(filePath).exists(), "File Still exists");
     }
   }
 
@@ -157,8 +157,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete());
+      Assert.assertTrue(new File(filePath).delete(), "File was not deleted");
+      Assert.assertFalse(new File(filePath).exists(), "File Still exists");
     }
   }
 
@@ -183,8 +183,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete());
+      Assert.assertTrue(new File(filePath).delete(), "File was not deleted");
+      Assert.assertFalse(new File(filePath).exists(), "File Still exists");
     }
   }
 

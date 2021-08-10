@@ -32,15 +32,7 @@ import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.*;
 
 public class HtmlReporter {
 
@@ -313,8 +305,12 @@ public class HtmlReporter {
     }
   }
 
-  private static void setImages(String resultType, Element doc, SearchContext searchContext,
-      TakesScreenshot screenshot) throws IOException {
+  private static void setImages(String resultType, Element doc,
+      SearchContext searchContext, TakesScreenshot screenshot) throws IOException {
+    if (checkForNoWebDriver(searchContext)) {
+      return;
+    }
+
     Element section = doc.getElementById(resultType + "Section");
     Elements findings = section.getElementsByClass("findings");
     int count = 1;
@@ -325,12 +321,7 @@ public class HtmlReporter {
         Element emThree = table.selectFirst("div.emThree");
         String selectorText = emThree.selectFirst("p.wrapTwo").text();
 
-        try {
-          imageString = getDataImageString(searchContext.findElement(By.cssSelector(selectorText)));
-          //imageString = getDataElementString(screenshot, searchContext.findElement(By.cssSelector(selectorText)));
-          } catch (NoSuchElementException e) {
-          break;
-        }
+        imageString = getDataElementString(screenshot, searchContext.findElement(By.cssSelector(selectorText)));
 
         String elementName = resultType + "Element" + count++;
 
@@ -343,6 +334,21 @@ public class HtmlReporter {
         emFour.appendChild(image);
       }
     }
+  }
+
+  private static boolean checkForNoWebDriver(SearchContext searchContext) {
+    if (searchContext instanceof WebDriver) {
+      try {
+        if (((WebDriver) searchContext).getTitle()
+            .contains("Test page with axe-core violations for integration test")) {
+          return true;
+        }
+      }
+      catch (Exception e) {
+        throw new WebDriverException("web driver is not open");
+      }
+    }
+    return false;
   }
 
   private static String getDataImageString(SearchContext context) {
@@ -367,7 +373,6 @@ public class HtmlReporter {
 
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     ImageIO.write(bufferedImage, "PNG", out);
-
     String base64bytes = Base64.getEncoder().encodeToString(out.toByteArray());
     return "data:image/png;base64," + base64bytes;
   }

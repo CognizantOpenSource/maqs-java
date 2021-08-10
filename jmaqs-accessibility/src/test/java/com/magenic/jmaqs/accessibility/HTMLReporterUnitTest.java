@@ -61,11 +61,9 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
     validateReport(path, 5, 42, 0, 63);
 
-    File file = new File(path);
-
-//    if (file.exists()) {
-//      Assert.assertTrue(file.delete(), "File was not deleted");
-//    }
+    if (new File(path).exists()) {
+      Assert.assertTrue(new File(path).delete(), "File was not deleted");
+    }
   }
 
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -79,10 +77,8 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     assertResultNotWritten(path,
         EnumSet.of(ResultType.Passes, ResultType.Inapplicable, ResultType.Incomplete));
 
-    File file = new File(path);
-
-    if (file.exists()) {
-      Assert.assertTrue(file.delete(), "File was not deleted");
+    if (new File(path).exists()) {
+      Assert.assertTrue(new File(path).delete(), "File was not deleted");
     }
   }
 
@@ -96,10 +92,8 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     validateReport(path, 5, 42, 0, 63);
     assertResultNotWritten(path, EnumSet.of(ResultType.Incomplete));
 
-    File file = new File(path);
-
-    if (file.exists()) {
-      Assert.assertTrue(file.delete(), "File was not deleted");
+    if (new File(path).exists()) {
+      Assert.assertTrue(new File(path).delete(), "File was not deleted");
     }
   }
 
@@ -110,10 +104,8 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
         this.getWebDriver().findElement(By.cssSelector("main")), path);
     validateReport(path, 3, 14, 0, 75);
 
-    File file = new File(path);
-
-    if (file.exists()) {
-      Assert.assertTrue(file.delete(), "File was not deleted");
+    if (new File(path).exists()) {
+      Assert.assertTrue(new File(path).delete(), "File was not deleted");
     }
   }
 
@@ -139,10 +131,8 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     Assert.assertTrue(reportContext.contains("User agent: AutoAgent"), "User Agent is not in the document");
     Assert.assertTrue(reportContext.contains("Using: axe-core (3.4.1)"), "Using is not in the document");
 
-    File file = new File(path);
-
-    if (file.exists()) {
-      Assert.assertTrue(file.delete(), "File was not deleted");
+    if (new File(path).exists()) {
+      Assert.assertTrue(new File(path).delete(), "File was not deleted");
     }
   }
 
