@@ -1,4 +1,4 @@
-# <img src="resources/jmaqslogo.jpg" height="32" width="32"> JMAQS Installation Guide
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> JMAQS Contribution Installation Guide
 
 ---
 
