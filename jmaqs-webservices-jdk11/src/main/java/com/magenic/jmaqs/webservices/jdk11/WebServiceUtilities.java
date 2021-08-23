@@ -28,6 +28,11 @@ public class WebServiceUtilities {
   private static final ObjectMapper xmlMapper = new XmlMapper();
 
   /**
+   * Error exception message.
+   */
+  private static final String errorMessage = "Only xml and json conversions are currently supported";
+
+  /**
    * private class constructor.
    */
   private WebServiceUtilities() {
@@ -61,7 +66,7 @@ public class WebServiceUtilities {
       responseBody = deserializeXml(response, type);
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(errorMessage));
     }
 
     return responseBody;
@@ -85,7 +90,7 @@ public class WebServiceUtilities {
       return body.toString();
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(errorMessage));
     }
   }
 
@@ -130,7 +135,7 @@ public class WebServiceUtilities {
       return deserializeJson(message, type);
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(errorMessage));
     }
   }
 
