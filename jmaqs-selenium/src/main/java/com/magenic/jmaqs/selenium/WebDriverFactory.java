@@ -38,6 +38,9 @@ import org.openqa.selenium.safari.SafariOptions;
  */
 public class WebDriverFactory {
 
+  /**
+   * Maximize string placeholder.
+   */
   private static final String WINDOW_MAX = "MAXIMIZE";
 
   private WebDriverFactory() {
@@ -47,7 +50,6 @@ public class WebDriverFactory {
    * Gets default browser.
    *
    * @return the default browser
-   * @throws Exception the exception
    */
   public static WebDriver getDefaultBrowser() {
     return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
@@ -143,9 +145,9 @@ public class WebDriverFactory {
   }
 
   /**
-   * Gets default internet explorer options.
+   * Gets default Internet Explorer options.
    *
-   * @return the default internet explorer options
+   * @return the default Internet Explorer options
    */
   public static InternetExplorerOptions getDefaultInternetExplorerOptions() {
     InternetExplorerOptions options = new InternetExplorerOptions();
@@ -173,7 +175,7 @@ public class WebDriverFactory {
    */
   public static EdgeOptions getDefaultEdgeOptions() {
     EdgeOptions edgeOptions = new EdgeOptions();
-    edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL.toString());
+    edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
     return edgeOptions;
   }
@@ -255,11 +257,11 @@ public class WebDriverFactory {
   }
 
   /**
-   * Gets internet explorer driver.
+   * Gets the Internet Explorer driver.
    *
-   * @param internetExplorerOptions the internet explorer options
+   * @param internetExplorerOptions the Internet Explorer options
    * @param size                    the size
-   * @return the internet explorer driver
+   * @return the Internet Explorer driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
     System.setProperty("webdriver.ie.driver",
@@ -344,7 +346,7 @@ public class WebDriverFactory {
             StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
     }
 
-    // Make sure the remote capabilities dictionary exists
+    // Make sure the remote capabilities' dictionary exists
     if (remoteCapabilities == null) {
       remoteCapabilities = new HashMap<>();
     }
@@ -464,7 +466,7 @@ public class WebDriverFactory {
    *
    * @param driverFile      the driver file
    * @param defaultHintPath the default hint path
-   * @param mustExist       the must exist
+   * @param mustExist       if the driver must exist
    * @return the driver location
    */
   public static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {

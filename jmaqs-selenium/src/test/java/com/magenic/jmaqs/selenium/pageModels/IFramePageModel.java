@@ -2,20 +2,21 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.unittestpagemodel;
+package com.magenic.jmaqs.selenium.pageModels;
 
+import com.magenic.jmaqs.selenium.SeleniumConfig;
 import com.magenic.jmaqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.By;
 
 /**
  * The type Frame page model.
  */
-public class IFramePageModel {
+public class IFramePageModel extends MainPageModel{
 
   /**
-   * The Test object.
+   * Unit testing site URL - IFrame page.
    */
-  private SeleniumTestObject testObject;
+  public final String testSiteIFrameUrl = SeleniumConfig.getWebSiteBase() + "Automation/iFramePage";
 
   /**
    * The Iframe locator.
@@ -23,12 +24,12 @@ public class IFramePageModel {
   public By iframeLocator = By.id("mageniciFrame");
 
   /**
-   * Instantiates a new Frame page model.
+   * Instantiates a new IFrame page model.
    *
    * @param testObject the test object
    */
   public IFramePageModel(SeleniumTestObject testObject) {
-    this.testObject = testObject;
+    super(testObject);
   }
 
   /**
@@ -37,16 +38,7 @@ public class IFramePageModel {
    * @param url the url
    */
   public void open(String url) {
-    this.testObject.getWebDriver().get(url);
-  }
-
-  /**
-   * Gets selenium test object.
-   *
-   * @return the selenium test object
-   */
-  public SeleniumTestObject getSeleniumTestObject() {
-    return this.testObject;
+    this.getTestObject().getWebDriver().get(url);
   }
 
 }

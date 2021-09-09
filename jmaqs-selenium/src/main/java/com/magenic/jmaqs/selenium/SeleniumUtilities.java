@@ -24,7 +24,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
  * The type Selenium utilities.
@@ -54,7 +53,7 @@ public class SeleniumUtilities {
    *
    * @param webDriver  the web driver
    * @param testObject the test object
-   * @param appendName the append name
+   * @param appendName the appended name
    * @return the boolean
    */
   public static boolean captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
@@ -131,13 +130,13 @@ public class SeleniumUtilities {
    *
    * @param webDriver  the web driver
    * @param testObject the test object
-   * @param appendName the append name
+   * @param appendName the appended name
    * @return the boolean
    */
   public static boolean savePageSource(WebDriver webDriver, SeleniumTestObject testObject,
       String appendName) {
     try {
-      String path = "";
+      String path;
 
       // Check if we are using a file logger.
       if (!(testObject.getLogger() instanceof FileLogger)) {
@@ -227,10 +226,9 @@ public class SeleniumUtilities {
     driver = ((WrapsDriver) webElement).getWrappedDriver();
 
     // If this an even firing wrapper get the base wrapper
-    if (driver instanceof EventFiringWebDriver) {
-      return ((EventFiringWebDriver) driver).getWrappedDriver();
+    if (driver instanceof WrapsDriver) {
+      return ((WrapsDriver) driver).getWrappedDriver();
     }
-
     return driver;
   }
 
