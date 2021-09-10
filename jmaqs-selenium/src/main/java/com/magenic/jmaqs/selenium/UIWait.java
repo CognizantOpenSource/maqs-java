@@ -28,8 +28,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Selenium waiter This is the tool-class used for waiting. It can be used to wait for many
- * circumstances (element exist, not exist, be visible, to equal a desired value, etc..
+ * Selenium waiter This is the tool-class used for waiting.
+ * It can be used to wait for many circumstances: element exist, not exist, be visible, to equal a desired value, etc..
  */
 public class UIWait {
 
@@ -44,19 +44,19 @@ public class UIWait {
   private static final By BODY_BY = By.cssSelector("BODY");
 
   /**
-   * The Webdriver that the test is currently running on.
+   * The Web driver that the test is currently running on.
    */
-  private WebDriver driver;
+  private final WebDriver driver;
 
   /**
    * The retry time.
    */
-  private int fluentRetryTime;
+  private final int fluentRetryTime;
 
   /**
    * The timeout time.
    */
-  private int timeout;
+  private final int timeout;
 
   /**
    * The web driver wait that the test is currently running on.
@@ -291,8 +291,7 @@ public class UIWait {
       try {
         return obj.isEnabled();
       } catch (NoSuchElementException | StaleElementReferenceException e) {
-        // Do not throw these exceptions here.
-        // Instead return false and let the fluentwait try again.
+        // Do not throw these exceptions here. Instead return false and let the fluent wait try again.
         return false;
       }
     };
@@ -415,7 +414,6 @@ public class UIWait {
    * @param timeOutInMillis the number of milliseconds to wait before failing
    * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return List of WebElements - all web elements found by the specified selector
-   * @throws Exception if encountered
    */
   public List<WebElement> waitForElements(final By by, final int timeOutInMillis, final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
@@ -429,7 +427,6 @@ public class UIWait {
    * @param by   Selector value to wait for
    * @param wait The wait driver
    * @return List of WebElements - all web elements found by the specified selector
-   * @throws Exception if encountered
    */
   public List<WebElement> waitForElements(final By by, WebDriverWait wait) {
     return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
@@ -975,7 +972,8 @@ public class UIWait {
    */
   protected WebDriverWait getNewWaitDriver(WebDriver driver, int timeOutInMillis, int sleepInMillis) {
     int timeoutInSeconds = timeOutInMillis / 1000;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(sleepInMillis));
+    WebDriverWait wait = new WebDriverWait(
+        driver, Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(sleepInMillis));
     setWaitDriver(wait);
     return wait;
   }
