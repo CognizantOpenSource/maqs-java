@@ -16,7 +16,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.WrapsDriver;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -306,7 +306,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to accept an alert, then get the log text
-    UIWait waitDriver = UIWaitFactory.getWaitDriver(((EventFiringWebDriver) this.getWebDriver()).getWrappedDriver());
+    UIWait waitDriver = UIWaitFactory.getWaitDriver(((WrapsDriver) this.getWebDriver()).getWrappedDriver());
     waitDriver.waitForClickableElement(alert).click();
     Alert alert = webDriverWithHandler.switchTo().alert();
     alert.accept();
@@ -332,7 +332,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to dismiss an alert, then get the log text
-    UIWait waitDriver = UIWaitFactory.getWaitDriver(((EventFiringWebDriver) this.getWebDriver()).getWrappedDriver());
+    UIWait waitDriver = UIWaitFactory.getWaitDriver(((WrapsDriver)this.getWebDriver()).getWrappedDriver());
     waitDriver.waitForClickableElement(alertWithConfirm).click();
     Alert alert = webDriverWithHandler.switchTo().alert();
     alert.dismiss();
@@ -418,8 +418,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     } catch (Exception e) {
       e.printStackTrace();
     }
-
     return text;
   }
-
 }
