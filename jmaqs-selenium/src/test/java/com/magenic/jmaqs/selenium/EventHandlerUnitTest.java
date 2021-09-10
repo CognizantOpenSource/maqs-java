@@ -29,54 +29,54 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Url for the site.
    */
 
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
+  private static final String siteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Automation site url.
    */
 
-  private static String siteAutomationUrl = siteUrl + "Automation/";
+  private static final String siteAutomationUrl = siteUrl + "Automation/";
 
   /**
    * Home button.
    */
 
-  private static By home = By.cssSelector("#homeButton > a");
+  private static final By home = By.cssSelector("#homeButton > a");
 
   /**
    * Alert button.
    */
-  private static By alert = By.id("javascriptAlertButton");
+  private static final By alert = By.id("javascriptAlertButton");
 
   /**
    * Alert button with confirm option.
    */
 
-  private static By alertWithConfirm = By.id("javascriptConfirmAlertButton");
+  private static final By alertWithConfirm = By.id("javascriptConfirmAlertButton");
 
   /**
    * Swagger link.
    */
 
-  private static By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
+  private static final By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
 
   /**
    * First name text box.
    */
 
-  private By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
+  private final By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
 
   /**
    * First checkbox.
    */
 
-  private static By checkbox = By.cssSelector("#Checkbox1");
+  private static final By checkbox = By.cssSelector("#Checkbox1");
 
   /**
    * Computer parts list.
    */
 
-  private static By computerPartsList = By.cssSelector("#computerParts");
+  private static final By computerPartsList = By.cssSelector("#computerParts");
 
   /**
    * Test that checks if the correct messages are logged when clicking an element.
@@ -84,7 +84,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerClickElement() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -107,7 +107,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerChangeValueOf() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -131,7 +131,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerFindBy() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -155,7 +155,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerNavigateBack() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -181,7 +181,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerNavigateForward() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -207,7 +207,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerRefresh() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -230,7 +230,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerNavigateTo() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -253,7 +253,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerScript() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -276,13 +276,13 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerSwitchWindow() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to open a new tab, then get the log text
     ((JavascriptExecutor) webDriverWithHandler).executeScript("window.open()");
-    ArrayList<String> tabs = new ArrayList<String>(webDriverWithHandler.getWindowHandles());
+    ArrayList<String> tabs = new ArrayList<>(webDriverWithHandler.getWindowHandles());
     webDriverWithHandler.switchTo().window(tabs.get(1));
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
@@ -301,7 +301,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerAcceptAlert() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -327,7 +327,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerAcceptDismiss() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -354,7 +354,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerGetText() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
@@ -378,7 +378,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerScreenshot() {
-    // Navigate to the Automation site and setup the event handler
+    // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
