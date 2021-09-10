@@ -369,7 +369,7 @@ public class EventHandler2 implements WebDriverListener {
    */
   @Override
   public void afterBack(WebDriver.Navigation navigation) {
-    this.logger.logMessage(MessageType.INFORMATION, "After navigating back to previous page");
+    this.logger.logMessage(MessageType.INFORMATION, "Navigated back to previous page");
   }
 
   /**
@@ -389,7 +389,7 @@ public class EventHandler2 implements WebDriverListener {
    */
   @Override
   public void afterForward(WebDriver.Navigation navigation) {
-    this.logger.logMessage(MessageType.INFORMATION, "After navigating forward to next page");
+    this.logger.logMessage(MessageType.INFORMATION, "Navigated forward to next page");
   }
 
   /**
