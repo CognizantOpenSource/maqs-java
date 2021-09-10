@@ -47,7 +47,6 @@ public class WebDriverFactory {
    * Gets default browser.
    *
    * @return the default browser
-   * @throws Exception the exception
    */
   public static WebDriver getDefaultBrowser() {
     return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
@@ -173,7 +172,7 @@ public class WebDriverFactory {
    */
   public static EdgeOptions getDefaultEdgeOptions() {
     EdgeOptions edgeOptions = new EdgeOptions();
-    edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL.toString());
+    edgeOptions.setPageLoadStrategy((PageLoadStrategy.NORMAL));
 
     return edgeOptions;
   }

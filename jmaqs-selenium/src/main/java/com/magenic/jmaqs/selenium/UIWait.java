@@ -8,6 +8,7 @@ import com.magenic.jmaqs.selenium.factories.FluentWaitFactory;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import java.text.MessageFormat;
+import java.time.Duration;
 import java.util.List;
 import java.util.function.Function;
 import org.openqa.selenium.By;
@@ -974,7 +975,7 @@ public class UIWait {
    */
   protected WebDriverWait getNewWaitDriver(WebDriver driver, int timeOutInMillis, int sleepInMillis) {
     int timeoutInSeconds = timeOutInMillis / 1000;
-    WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds, sleepInMillis);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(sleepInMillis));
     setWaitDriver(wait);
     return wait;
   }

@@ -7,6 +7,8 @@ package com.magenic.jmaqs.selenium.factories;
 import com.magenic.jmaqs.selenium.SeleniumConfig;
 import com.magenic.jmaqs.selenium.SeleniumUtilities;
 import com.magenic.jmaqs.selenium.UIWait;
+
+import java.time.Duration;
 import java.util.concurrent.ConcurrentHashMap;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +24,7 @@ public class UIWaitFactory {
   /**
    * the collection of wait objects.
    */
-  private static ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection = new ConcurrentHashMap<>();
+  private static final ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection = new ConcurrentHashMap<>();
 
   /**
    * private constructor so class can't be instantiated.
@@ -70,7 +72,7 @@ public class UIWaitFactory {
     if (waitCollection.containsKey(unwrappedDriver)) {
       return waitCollection.get(unwrappedDriver);
     } else {
-      WebDriverWait waitDriver = new WebDriverWait(unwrappedDriver, SeleniumConfig.getTimeoutTime().getSeconds());
+      WebDriverWait waitDriver = new WebDriverWait(unwrappedDriver, Duration.ofSeconds(SeleniumConfig.getTimeoutTime().getSeconds()));
       setWaitDriver(unwrappedDriver, waitDriver);
       return waitDriver;
     }
