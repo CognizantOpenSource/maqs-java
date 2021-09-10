@@ -9,12 +9,9 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;
 import org.testng.annotations.Test;
@@ -25,22 +22,20 @@ import org.testng.asserts.SoftAssert;
  */
 
 public class EventHandlerUnitTest extends BaseSeleniumTest {
+
   /**
    * Url for the site.
    */
-
   private static final String siteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Automation site url.
    */
-
   private static final String siteAutomationUrl = siteUrl + "Automation/";
 
   /**
    * Home button.
    */
-
   private static final By home = By.cssSelector("#homeButton > a");
 
   /**
@@ -51,37 +46,31 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Alert button with confirm option.
    */
-
   private static final By alertWithConfirm = By.id("javascriptConfirmAlertButton");
 
   /**
    * Swagger link.
    */
-
   private static final By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
 
   /**
    * First name text box.
    */
-
   private final By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
 
   /**
    * First checkbox.
    */
-
   private static final By checkbox = By.cssSelector("#Checkbox1");
 
   /**
    * Computer parts list.
    */
-
   private static final By computerPartsList = By.cssSelector("#computerParts");
 
   /**
    * Test that checks if the correct messages are logged when clicking an element.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerClickElement() {
     // Navigate to the Automation site and set up the event handler
@@ -104,15 +93,13 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when changing the value
    * of an element.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerChangeValueOf() {
     // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
-    // Use the Event Firing Web Driver to change the value of an element, then get
-    // the log text
+    // Use the Event Firing Web Driver to change the value of an element, then get the log text
     webDriverWithHandler.findElement(this.firstNameTextBox).sendKeys("Change Value");
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
@@ -128,7 +115,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when finding an element.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerFindBy() {
     // Navigate to the Automation site and set up the event handler
@@ -152,15 +138,13 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when navigating back to
    * the previous page.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerNavigateBack() {
     // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
-    // Use the Event Firing Web Driver to navigate back to a page, then get the log
-    // text
+    // Use the Event Firing Web Driver to navigate back to a page, then get the log text
     webDriverWithHandler.findElement(EventHandlerUnitTest.home).click();
     webDriverWithHandler.navigate().back();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
@@ -178,15 +162,13 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when navigating forward
    * to a page.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerNavigateForward() {
     // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
-    // Use the Event Firing Web Driver to navigate forward to a page, then get the
-    // log text
+    // Use the Event Firing Web Driver to navigate forward to a page, then get the log text
     webDriverWithHandler.findElement(EventHandlerUnitTest.home).click();
     webDriverWithHandler.navigate().back();
     webDriverWithHandler.navigate().forward();
@@ -204,7 +186,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when refreshing a page.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerRefresh() {
     // Navigate to the Automation site and set up the event handler
@@ -227,7 +208,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when navigating to a
    * page.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerNavigateTo() {
     // Navigate to the Automation site and set up the event handler
@@ -250,7 +230,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when running a script.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerScript() {
     // Navigate to the Automation site and set up the event handler
@@ -273,17 +252,16 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when switching windows.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerSwitchWindow() {
     // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriver();
+    WebDriver webDriverWithHandler = this.getTestObject().getWebDriver();
 
     // Use the Event Firing Web Driver to open a new tab, then get the log text
     ((JavascriptExecutor) webDriverWithHandler).executeScript("window.open()");
-    ArrayList<String> tabs = new ArrayList<>(webDriverWithHandler.getWindowHandles());
-    webDriverWithHandler.switchTo().window(tabs.get(1));
+    SeleniumUtilities.switchToWindow(this.getTestObject(), "");
+
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
@@ -291,14 +269,13 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertTrue(logText.contains("Before switching to window"),
         "Expected message to be logged before switching windows.");
     softAssert
-        .assertTrue(logText.contains("Switched to window"), "Expected message to be logged after switching windows.");
+        .assertTrue(logText.contains("After switching to window"), "Expected message to be logged after switching windows.");
     softAssert.assertAll();
   }
 
   /**
    * Test that checks if the correct messages are logged when accepting an alert.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerAcceptAlert() {
     // Navigate to the Automation site and set up the event handler
@@ -324,7 +301,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when dismissing an alert.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerAcceptDismiss() {
     // Navigate to the Automation site and set up the event handler
@@ -340,10 +316,10 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertTrue(logText.contains("Before dismissing the alert"),
+    softAssert.assertTrue(logText.contains("Before dismissing the Alert"),
         "Expected message to be logged before dismissing an alert.");
     softAssert
-        .assertTrue(logText.contains("Alert dismissed"), "Expected message to be logged after dismissing an alert.");
+        .assertTrue(logText.contains("After dismissing the Alert"), "Expected message to be logged after dismissing an alert.");
     softAssert.assertAll();
   }
 
@@ -351,15 +327,13 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * Test that checks if the correct messages are logged when getting the text
    * from an element.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerGetText() {
     // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
     WebDriver webDriverWithHandler = getWebDriver();
 
-    // Use the Event Firing Web Driver to get the text from an element, then get the
-    // log text
+    // Use the Event Firing Web Driver to get the text from an element, then get the log text
     webDriverWithHandler.findElement(EventHandlerUnitTest.swaggerLinkBy).getText();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
@@ -375,18 +349,14 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when taking a screenshot.
    */
-
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerScreenshot() {
     // Navigate to the Automation site and set up the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriver();
+    SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getTestObject());
 
     // Use the Event Firing Web Driver to take a screenshot, then get the log text
-    TakesScreenshot takeScreenshot = ((TakesScreenshot) webDriverWithHandler);
-    takeScreenshot.getScreenshotAs(OutputType.FILE);
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
-
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before screenshot capture"),

@@ -69,20 +69,12 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @return the web driver
    */
   public WebDriver getWebDriver() {
-
     if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-      //WebDriver tempDriver = this.getBase();
 
-      WebDriverListener listener = new EventHandler2(this.getLogger());
+      WebDriverListener listener = new EventHandler(this.getLogger());
       this.baseDriver = new EventFiringDecorator(listener).decorate(this.getBase());
 
-//      EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(tempDriver);
-//      eventFiringWebDriver.register(new EventHandler(getTestObject().getLogger()));
-//      tempDriver = eventFiringWebDriver;
-//      this.baseDriver = tempDriver;
-
       // Log the setup
-//      this.loggingStartup(tempDriver);
       this.loggingStartup(this.baseDriver);
     }
 
@@ -96,7 +88,6 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @param args    the args
    */
   protected void logVerbose(String message, Object... args) {
-
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args));
     String fullTestName = getTestObject().getFullyQualifiedTestName();

@@ -6,17 +6,20 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.events.WebDriverListener;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.util.List;
 
 /**
  * Event Handler Class implementing WebDriverEventListener.
  */
-// TODO: replace the web driver event listener
-public class EventHandler implements WebDriverEventListener {
+public class EventHandler implements WebDriverListener {
   /**
    * The Event Handler Logger.
    */
@@ -32,13 +35,120 @@ public class EventHandler implements WebDriverEventListener {
   }
 
   /**
-   * Log message before clicking element.
+   * Log Message when there is a Global exception.
+   * @param target the target object
+   * @param method the method run
+   * @param args the object arguments
+   * @param e the exception
+   */
+  @Override
+  public void onError(Object target, Method method, Object[] args, InvocationTargetException e) {
+    // First chance handler catches these when it is a real error - These are typically retry loops
+    this.logger.logMessage(MessageType.VERBOSE, "Exception occurred at %s", e.getMessage());
+  }
+
+  /**
+   * Log message before finding an element with the web driver.
    *
+   * @param by      The By Element to find
+   * @param driver  The Web Driver
+   */
+  @Override
+  public void beforeFindElement(WebDriver driver, By by) {
+    this.logger
+        .logMessage(MessageType.INFORMATION, "Before finding element By: %s", by.toString());
+  }
+
+  /**
+   * Log message after finding an element with the web driver.
+   *
+   * @param by      The By element to find
    * @param element The Web Element
    * @param driver  The Web Driver
    */
   @Override
-  public void beforeClickOn(WebElement element, WebDriver driver) {
+  public void afterFindElement(WebDriver driver, By by, WebElement element) {
+    this.logger.logMessage(MessageType.INFORMATION, "Found element By: " + by.toString());
+  }
+
+  /**
+   * Log message before finding web elements with the web driver.
+   *
+   * @param by      The By Element to find
+   * @param driver  The Web Driver
+   */
+  @Override
+  public void beforeFindElements(WebDriver driver, By by) {
+    this.logger
+        .logMessage(MessageType.INFORMATION, "Before finding element By: %s", by.toString());
+  }
+
+  /**
+   * Log message before finding web elements with the web driver.
+   *
+   * @param by      The By Element to find
+   * @param element  The Web element
+   */
+  @Override
+  public void beforeFindElements(WebElement element, By by) {
+    this.logger
+        .logMessage(MessageType.INFORMATION, "Before finding element By: %s", by.toString());
+  }
+
+  /**
+   * Log message after finding web elements with the web driver.
+   *
+   * @param by      The By element to find
+   * @param element The Web Element
+   * @param driver  The Web Driver
+   */
+  @Override
+  public void afterFindElements(WebDriver driver, By by, List<WebElement> element) {
+    this.logger.logMessage(MessageType.INFORMATION, "Found element By: " + by.toString());
+  }
+
+  /**
+   * Log message after finding web elements with the web driver.
+   * @param by      The By element to find
+   * @param element The Web Element
+   * @param result  The result
+   */
+  @Override
+  public void afterFindElements(WebElement element, By by, List<WebElement> result) {
+    this.logger.logMessage(MessageType.INFORMATION, "Found elements By: " + by.toString());
+  }
+
+  /**
+   * Log message before executing a script.
+   *
+   * @param script The script
+   * @param driver The Web Driver
+   * @param args the arguments of the script
+   */
+  @Override
+  public void beforeExecuteScript(WebDriver driver, String script, Object[] args) {
+    this.logger.logMessage(MessageType.INFORMATION, "Before executing script: %s", script);
+  }
+
+  /**
+   * Log message after executing a script.
+   * @param driver The Web Driver
+   * @param script The script
+   * @param args the arguments of the script
+   * @param result the result of the script
+   */
+  @Override
+  public void afterExecuteScript(WebDriver driver, String script, Object[] args, Object result) {
+    this.logger.logMessage(MessageType.INFORMATION, "Script executed: %s", script);
+  }
+
+  /**
+   * Log message before clicking the web element.
+   *
+   * @param element The Web Element
+   */
+  @Override
+  public void beforeClick(WebElement element) {
     try {
       this.logger.logMessage(MessageType.INFORMATION,
           "Before clicking element: %s Text:%s Location: X:%d Y:%d", element.toString(),
@@ -49,13 +159,12 @@ public class EventHandler implements WebDriverEventListener {
   }
 
   /**
-   * Log message after clicking element.
+   * Log message after clicking the web element.
    *
    * @param element The Web Element
-   * @param driver  The Web Driver
    */
   @Override
-  public void afterClickOn(WebElement element, WebDriver driver) {
+  public void afterClick(WebElement element) {
     try {
       this.logger.logMessage(MessageType.INFORMATION,
           "Element clicked: %s Text:%s Location: X:%d Y:%d", element.toString(),
@@ -66,126 +175,111 @@ public class EventHandler implements WebDriverEventListener {
   }
 
   /**
-   * Log message before changing an element's value.
+   * Log message before changing a web element's value.
    *
    * @param element    The Web Element
-   * @param driver     The Web Driver
    * @param keysToSend The keys to send
    */
   @Override
-  public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
+  public void beforeSendKeys(WebElement element, CharSequence[] keysToSend) {
     String value = element.getAttribute("value");
     this.logger.logMessage(MessageType.INFORMATION, "Element value before change: %s", value);
   }
 
   /**
-   * Log message after changing an element's value.
+   * Log message after changing a web element's value.
    *
    * @param element    The Web Element
-   * @param driver     The Web Driver
    * @param keysToSend The keys to send
    */
   @Override
-  public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
+  public void afterSendKeys(WebElement element, CharSequence[] keysToSend) {
     String value = element.getAttribute("value");
     this.logger.logMessage(MessageType.INFORMATION, "Element value changed to: %s", value);
   }
 
   /**
-   * Log message before finding an element.
+   * Log message before clearing a web element's text value.
    *
-   * @param by      The By Element to find
-   * @param element The Web Element
-   * @param driver  The Web Driver
+   * @param element    The Web Element
    */
   @Override
-  public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-    this.logger
-        .logMessage(MessageType.INFORMATION, "Before finding element By: %s", by.toString());
+  public void beforeClear(WebElement element) {
+    String value = element.getAttribute("value");
+    this.logger.logMessage(MessageType.INFORMATION, "Element value before clear: %s", value);
   }
 
   /**
-   * Log message after finding an element.
+   * Log message after clearing a web element's text value.
    *
-   * @param by      The By element to find
-   * @param element The Web Element
-   * @param driver  The Web Driver
+   * @param element    The Web Element
    */
   @Override
-  public void afterFindBy(By by, WebElement element, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Found element By: " + by.toString());
+  public void afterClear(WebElement element) {
+    String value = element.getAttribute("value");
+    this.logger.logMessage(MessageType.INFORMATION, "Element value changed to: %s", value);
   }
 
   /**
-   * Log message before navigating back to a page.
+   * Log message before getting text from a web element.
    *
-   * @param driver The Web Driver
+   * @param element The element
    */
   @Override
-  public void beforeNavigateBack(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before navigating back to previous page");
+  public void beforeGetText(WebElement element) {
+    this.logger.logMessage(MessageType.INFORMATION, "Before getting text from element");
   }
 
   /**
-   * Log message after navigating back to a page.
+   * Log message before an exception is thrown getting text from an element.
    *
-   * @param driver The Web Driver
+   * @param alert the exception being thrown
    */
   @Override
-  public void afterNavigateBack(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Navigated back to previous page: %s",
-        driver.getCurrentUrl());
+  public void beforeGetText(Alert alert) {
+    this.logger.logMessage(MessageType.INFORMATION, "Before getting text from element");
   }
 
   /**
-   * Log message before navigating forward to a page.
+   * Log message after getting text from a web element.
    *
-   * @param driver The Web Driver
+   * @param element The element
+   * @param text    The text from the element
    */
   @Override
-  public void beforeNavigateForward(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before navigating forward to next page");
+  public void afterGetText(WebElement element, String text) {
+    this.logger.logMessage(MessageType.INFORMATION, "Got element text: %s", text);
   }
 
   /**
-   * Log message after navigating forward to a page.
-   *
-   * @param driver The Web Driver
+   * Log message after an exception is thrown getting text from an element.
+   * @param alert the exception being thrown
+   * @param text The text from the element
    */
   @Override
-  public void afterNavigateForward(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Navigated forward to next page: %s",
-        driver.getCurrentUrl());
-  }
-
-  /**
-   * Log message before refreshing the page.
-   *
-   * @param driver The Web Driver
-   */
-  @Override
-  public void beforeNavigateRefresh(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before Refreshing the page");
-  }
-
-  /**
-   * Log message after refreshing the page.
-   *
-   * @param driver The Web Driver
-   */
-  @Override
-  public void afterNavigateRefresh(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Page refreshed");
+  public void afterGetText(Alert alert, String text) {
+    this.logger.logMessage(MessageType.INFORMATION, "Got element text: %s", text);
   }
 
   /**
    * Log message before navigating to a page.
    *
    * @param url    The URL
-   * @param driver The Web Driver
+   * @param navigation The Web Driver
    */
   @Override
-  public void beforeNavigateTo(String url, WebDriver driver) {
+  public void beforeTo(WebDriver.Navigation navigation, String url) {
+    this.logger.logMessage(MessageType.INFORMATION, "Before navigating to page: %s", url);
+  }
+
+  /**
+   * Log message before navigating to a page.
+   *
+   * @param url    The URL
+   * @param navigation The Web Driver
+   */
+  @Override
+  public void beforeTo(WebDriver.Navigation navigation, URL url) {
     this.logger.logMessage(MessageType.INFORMATION, "Before navigating to page: %s", url);
   }
 
@@ -193,152 +287,121 @@ public class EventHandler implements WebDriverEventListener {
    * Log message after navigating to a page.
    *
    * @param url    The URL
-   * @param driver The Web Driver
+   * @param navigation The Web Driver
    */
   @Override
-  public void afterNavigateTo(String url, WebDriver driver) {
+  public void afterTo(WebDriver.Navigation navigation, String url) {
     this.logger.logMessage(MessageType.INFORMATION, "After navigating to page: %s", url);
   }
 
   /**
-   * Log message before executing a script.
+   * Log message after navigating to a page.
    *
-   * @param script The script
-   * @param driver The Web Driver
+   * @param url    The URL
+   * @param navigation The Web Driver
    */
   @Override
-  public void beforeScript(String script, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before executing script: %s", script);
+  public void afterTo(WebDriver.Navigation navigation, URL url) {
+    this.logger.logMessage(MessageType.INFORMATION, "After navigating to page: %s", url);
   }
 
   /**
-   * Log message after executing a script.
+   * Log message before navigating back to a page.
    *
-   * @param script The script
-   * @param driver The Web Driver
+   * @param navigation The Web Driver navigation
    */
   @Override
-  public void afterScript(String script, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Script executed: %s", script);
+  public void beforeBack(WebDriver.Navigation navigation) {
+    this.logger.logMessage(MessageType.INFORMATION, "Before navigating back to previous page");
   }
 
   /**
-   * Log message before switching to a window.
+   * Log message after navigating back to a page.
    *
-   * @param windowName The name of the window
-   * @param driver     The Web Driver
+   * @param navigation The Web Driver
    */
   @Override
-  public void beforeSwitchToWindow(String windowName, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before switching to window: %s", windowName);
+  public void afterBack(WebDriver.Navigation navigation) {
+    this.logger.logMessage(MessageType.INFORMATION, "Navigated back to previous page");
   }
 
   /**
-   * Log message after switching to a window.
+   * Log message before navigating forward to a page.
    *
-   * @param windowName The name of the window
-   * @param driver     The Web Driver
+   * @param navigation The Web Driver
    */
   @Override
-  public void afterSwitchToWindow(String windowName, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Switched to window: %s", windowName);
+  public void beforeForward(WebDriver.Navigation navigation) {
+    this.logger.logMessage(MessageType.INFORMATION, "Before navigating forward to next page");
+  }
+
+  /**
+   * Log message after navigating forward to a page.
+   *
+   * @param navigation The Web Driver
+   */
+  @Override
+  public void afterForward(WebDriver.Navigation navigation) {
+    this.logger.logMessage(MessageType.INFORMATION, "Navigated forward to next page");
+  }
+
+  /**
+   * Log message before refreshing the page.
+   *
+   * @param navigation The Web Driver
+   */
+  @Override
+  public void beforeRefresh(WebDriver.Navigation navigation) {
+    this.logger.logMessage(MessageType.INFORMATION, "Before Refreshing the page");
+  }
+
+  /**
+   * Log message after refreshing the page.
+   *
+   * @param navigation The Web Driver
+   */
+  @Override
+  public void afterRefresh(WebDriver.Navigation navigation) {
+    this.logger.logMessage(MessageType.INFORMATION, "Page refreshed");
   }
 
   /**
    * Log message before accepting an alert.
    *
-   * @param driver The Web Driver
+   * @param alert The Web Driver
    */
   @Override
-  public void beforeAlertAccept(WebDriver driver) {
+  public void beforeAccept(Alert alert) {
     this.logger.logMessage(MessageType.INFORMATION, "Before accepting the alert");
   }
 
   /**
    * Log message after accepting an alert.
    *
-   * @param driver The Web Driver
+   * @param alert The Web Driver
    */
   @Override
-  public void afterAlertAccept(WebDriver driver) {
+  public void afterAccept(Alert alert) {
     this.logger.logMessage(MessageType.INFORMATION, "Alert accepted");
-  }
-
-  /**
-   * Log message after dismissing an alert.
-   *
-   * @param driver The Web Driver
-   */
-  @Override
-  public void afterAlertDismiss(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before dismissing the alert");
   }
 
   /**
    * Log Message before dismissing an alert.
    *
-   * @param driver The Web Driver
+   * @param alert The Web Driver
    */
   @Override
-  public void beforeAlertDismiss(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Alert dismissed");
+  public void beforeDismiss(Alert alert) {
+    this.logger.logMessage(MessageType.INFORMATION, "Before dismissing the Alert");
   }
 
   /**
-   * Log Message when there is an exception.
+   * Log message after dismissing an alert.
    *
-   * @param e      The exception
-   * @param driver The Web Driver
+   * @param alert The Web Driver
    */
   @Override
-  public void onException(Throwable e, WebDriver driver) {
-    // First chance handler catches these when it is a real error - These are typically retry loops
-    this.logger.logMessage(MessageType.VERBOSE, "Exception occurred at %s", e.getMessage());
-  }
-
-  /**
-   * Log message before getting a screenshot.
-   *
-   * @param target The Output Type target
-   * @param <X>    The specified Output Type
-   */
-  @Override
-  public <X> void beforeGetScreenshotAs(OutputType<X> target) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before screenshot capture");
-  }
-
-  /**
-   * Log message after getting a screenshot.
-   *
-   * @param target     The Output Type target
-   * @param screenshot The screenshot
-   * @param <X>        The specified Output Type
-   */
-  @Override
-  public <X> void afterGetScreenshotAs(OutputType<X> target, X screenshot) {
-    this.logger.logMessage(MessageType.INFORMATION, "After screenshot capture");
-  }
-
-  /**
-   * Log message before getting text from an element.
-   *
-   * @param element The element
-   * @param driver  The Web Driver
-   */
-  @Override
-  public void beforeGetText(WebElement element, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before getting text from element");
-  }
-
-  /**
-   * Log message after getting text from an element.
-   *
-   * @param element The element
-   * @param driver  The Web Driver
-   * @param text    The text from the element
-   */
-  @Override
-  public void afterGetText(WebElement element, WebDriver driver, String text) {
-    this.logger.logMessage(MessageType.INFORMATION, "Got element text: %s", text);
+  public void afterDismiss(Alert alert) {
+    this.logger.logMessage(MessageType.INFORMATION, "After dismissing the Alert");
   }
 }
