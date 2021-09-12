@@ -14,8 +14,7 @@ import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringDecorator;
-import org.openqa.selenium.support.events.WebDriverListener;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
  * The type Selenium driver manager.
@@ -68,17 +67,16 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    *
    * @return the web driver
    */
-  // TODO: Replace Event Firing Web Driver
   public WebDriver getWebDriver() {
     if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-      // Sets up the Web Driver listener via the event handler
-      WebDriverListener listener = new EventHandler2(getTestObject().getLogger());
-
-      // Creates a web driver via the event firing decorator
-      this.baseDriver = new EventFiringDecorator(listener).decorate(this.getBase());
+      WebDriver tempDriver = this.getBase();
+      EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(tempDriver);
+      eventFiringWebDriver.register(new EventHandler(getTestObject().getLogger()));
+      tempDriver = eventFiringWebDriver;
+      this.baseDriver = tempDriver;
 
       // Log the setup
-      this.loggingStartup(baseDriver);
+      this.loggingStartup(tempDriver);
     }
     return getBase();
   }

@@ -504,7 +504,7 @@ public abstract class AbstractLazyElement {
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
-  // TODO: Should we keep this method?
+  @Deprecated
   public Rectangle getRect() throws InterruptedException {
     return new Rectangle(this.getLocation(), this.getSize());
   }
@@ -517,7 +517,7 @@ public abstract class AbstractLazyElement {
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
-  // TODO: Should we keep this method?
+  @Deprecated
   public <X> X getScreenshotAs(OutputType<X> target) throws InterruptedException {
     return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getScreenshotAs(target));
   }
