@@ -28,10 +28,13 @@ import org.testng.asserts.SoftAssert;
 public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   /**
-   * the Automation page model.
+   * The Automation page model.
    */
   private AutomationPageModel automationPageModel;
-  
+
+  /**
+   * The web driver to be used in the tests.
+   */
   private WebDriver webDriverWithHandler;
 
   /**
@@ -61,7 +64,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before clicking element"),
         "Expected message to be logged before clicking element.");
-    softAssert.assertTrue(logText.contains("Element clicked"), "Expected message to be logged after clicking element.");
+    softAssert.assertTrue(logText.contains("Element clicked"),
+        "Expected message to be logged after clicking element.");
     softAssert.assertAll();
   }
 
@@ -98,8 +102,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before finding element By"),
         "Expected message to be logged before clicking element.");
-    softAssert
-        .assertTrue(logText.contains("Found element By"), "Expected message to be logged after clicking element.");
+    softAssert.assertTrue(logText.contains("Found element By"),
+            "Expected message to be logged after clicking element.");
     softAssert.assertAll();
   }
 
@@ -109,8 +113,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerNavigateBack() {
-    // Use the Event Firing Web Driver to navigate back to a page, then get the log
-    // text
+    // Use the Event Firing Web Driver to navigate back to a page, then get the log text
     webDriverWithHandler.findElement(automationPageModel.homeButton).click();
     webDriverWithHandler.navigate().back();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
@@ -119,7 +122,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before navigating back to previous page"),
         "Expected message to be logged before navigating back to the previous page.");
-    softAssert.assertTrue(logText.contains("After navigating back to previous page"),
+    softAssert.assertTrue(logText.contains("Navigated back to previous page"),
         "Expected message to be logged after navigating back to the previous page.");
     softAssert.assertAll();
   }
@@ -140,7 +143,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before navigating forward to next page"),
         "Expected message to be logged before navigating to a page.");
-    softAssert.assertTrue(logText.contains("After navigating forward to next page"),
+    softAssert.assertTrue(logText.contains("Navigated forward to next page"),
         "Expected message to be logged after navigating to a page.");
     softAssert.assertAll();
   }
@@ -158,7 +161,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before Refreshing the page"),
         "Expected message to be logged before refreshing a page.");
-    softAssert.assertTrue(logText.contains("Page refreshed"), "Expected message to be logged after refreshing a page.");
+    softAssert.assertTrue(logText.contains("Page refreshed"),
+        "Expected message to be logged after refreshing a page.");
     softAssert.assertAll();
   }
 
@@ -195,7 +199,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before executing script"),
         "Expected message to be logged before running a script.");
-    softAssert.assertTrue(logText.contains("Script executed"), "Expected message to be logged after running a script.");
+    softAssert.assertTrue(logText.contains("Script executed"),
+        "Expected message to be logged after running a script.");
     softAssert.assertAll();
   }
 
@@ -214,8 +219,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before switching to window"),
         "Expected message to be logged before switching windows.");
-    softAssert
-        .assertTrue(logText.contains("Switched to window"), "Expected message to be logged after switching windows.");
+    softAssert.assertTrue(logText.contains("Switched to window"),
+            "Expected message to be logged after switching windows.");
     softAssert.assertAll();
   }
 
@@ -236,7 +241,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertTrue(logText.contains("Before accepting the alert"),
         "Expected message to be logged before accepting an alert.");
     softAssert
-        .assertTrue(logText.contains("Alert accepted"), "Expected message to be logged after accepting an alert.");
+        .assertTrue(logText.contains("Alert accepted"),
+            "Expected message to be logged after accepting an alert.");
     softAssert.assertAll();
   }
 
@@ -257,7 +263,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertTrue(logText.contains("Before dismissing the alert"),
         "Expected message to be logged before dismissing an alert.");
     softAssert
-        .assertTrue(logText.contains("Alert dismissed"), "Expected message to be logged after dismissing an alert.");
+        .assertTrue(logText.contains("Alert dismissed"),
+            "Expected message to be logged after dismissing an alert.");
     softAssert.assertAll();
   }
 
