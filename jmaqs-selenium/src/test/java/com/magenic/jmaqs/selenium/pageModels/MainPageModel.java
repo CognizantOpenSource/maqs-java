@@ -26,7 +26,7 @@ public class MainPageModel extends BaseSeleniumPageModel {
   /**
    * Selector that is not in page.
    */
-  public final By notInPage = By.cssSelector("NOTINPAGE");
+  public final By notInPage = By.cssSelector("NotInPage");
 
   /**
    * Home button css selector.
@@ -57,6 +57,23 @@ public class MainPageModel extends BaseSeleniumPageModel {
    */
   public MainPageModel(SeleniumTestObject testObject) {
     super(testObject);
+  }
+
+  /**
+   * Opens the page to the specified url.
+   *
+   */
+  public void open() {
+    open(testSiteUrl);
+  }
+
+  /**
+   * Open.
+   *
+   * @param url the url
+   */
+  public void open(String url) {
+    this.getTestObject().getWebDriver().get(url);
   }
 
   /**

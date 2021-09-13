@@ -116,10 +116,19 @@ public class AutomationPageModel extends MainPageModel {
    */
   public final By employeePageTitle = By.cssSelector("body > div.container.body-content > h2");
 
+  /**
+   * The body selector.
+   */
   public By bodyLocator = By.cssSelector("body");
 
+  /**
+   *  The body lazy element.
+   */
   public LazyWebElement body = new LazyWebElement(getTestObject(), bodyLocator, "Body");
 
+  /**
+   * The page model lazy element.
+   */
   public LazyWebElement pageTitle = new LazyWebElement(getTestObject(), employeePageTitle , "Page Title");
 
   /**
@@ -152,20 +161,11 @@ public class AutomationPageModel extends MainPageModel {
   }
 
   /**
-   * Open.
+   * Opens the page to the specified url.
    *
    */
   public void open() {
     open(testSiteAutomationUrl);
-  }
-
-  /**
-   * Open.
-   *
-   * @param url the url
-   */
-  public void open(String url) {
-    this.getTestObject().getWebDriver().get(url);
   }
 
   /**

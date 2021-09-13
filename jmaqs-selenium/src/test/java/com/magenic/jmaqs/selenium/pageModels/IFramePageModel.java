@@ -33,12 +33,9 @@ public class IFramePageModel extends MainPageModel{
   }
 
   /**
-   * Open.
-   *
-   * @param url the url
+   * Opens the page to the specified url.
    */
-  public void open(String url) {
-    this.getTestObject().getWebDriver().get(url);
+  public void open() {
+    open(testSiteIFrameUrl);
   }
-
 }
