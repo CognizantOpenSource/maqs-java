@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.pageModels.AutomationPageModel;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -23,27 +24,27 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     automationPageModel = new AutomationPageModel(this.getTestObject());
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetLogger() {
     Assert.assertNotNull(automationPageModel.getLogger());
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetTestObject() {
     Assert.assertNotNull(automationPageModel.getTestObject());
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
     Assert.assertNotNull(automationPageModel.getWebDriver());
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetPerfTimerCollection() {
     Assert.assertNotNull(automationPageModel.getPerfTimerCollection());
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriver() {
     int hashCode = automationPageModel.getWebDriver().hashCode();
     WebDriver drive = this.getBrowser();
@@ -54,13 +55,13 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     drive.quit();
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testIsPageLoaded() {
     automationPageModel.open();
     Assert.assertTrue(automationPageModel.isPageLoaded());
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetElementCalledTwiceReturnsTheSameElement() {
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
@@ -71,7 +72,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     Assert.assertSame(initElem, cachedElem);
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithBy() throws TimeoutException, InterruptedException {
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
@@ -85,7 +86,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithByAndName() throws TimeoutException, InterruptedException {
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
@@ -101,7 +102,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     Assert.assertEquals(lazyElement.getUserFriendlyName(), "Page Title");
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementAndBy() throws TimeoutException, InterruptedException {
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
@@ -116,7 +117,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
   }
 
-  @Test
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementByAndName() throws TimeoutException, InterruptedException {
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
