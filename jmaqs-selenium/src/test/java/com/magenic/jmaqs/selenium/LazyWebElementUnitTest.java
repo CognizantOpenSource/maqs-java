@@ -731,7 +731,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
 
-		UIWaitFactory.setWaitDriver(this.getWebDriver(), new WebDriverWait(this.getWebDriver(), Duration.ofSeconds(1)));
+		UIWaitFactory.setWaitDriver(this.getWebDriver(), new WebDriverWait(this.getWebDriver(), 1));
 		firstElement.click();
 	}
 

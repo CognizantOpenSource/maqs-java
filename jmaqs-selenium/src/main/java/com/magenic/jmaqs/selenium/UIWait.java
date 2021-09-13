@@ -974,7 +974,7 @@ public class UIWait {
   protected WebDriverWait getNewWaitDriver(WebDriver driver, int timeOutInMillis, int sleepInMillis) {
     int timeoutInSeconds = timeOutInMillis / 1000;
     WebDriverWait wait = new WebDriverWait(driver,
-        Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(sleepInMillis));
+        timeoutInSeconds, sleepInMillis);
     setWaitDriver(wait);
     return wait;
   }

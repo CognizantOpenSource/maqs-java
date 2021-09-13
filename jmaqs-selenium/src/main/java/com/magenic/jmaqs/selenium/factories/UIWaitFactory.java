@@ -72,7 +72,7 @@ public class UIWaitFactory {
       return waitCollection.get(unwrappedDriver);
     } else {
       WebDriverWait waitDriver = new WebDriverWait(
-          unwrappedDriver, Duration.ofSeconds(SeleniumConfig.getTimeoutTime().getSeconds()));
+          unwrappedDriver, SeleniumConfig.getTimeoutTime().getSeconds());
       setWaitDriver(unwrappedDriver, waitDriver);
       return waitDriver;
     }
