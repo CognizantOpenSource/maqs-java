@@ -30,7 +30,7 @@ public class WebServiceUtilities {
   /**
    * Error exception message.
    */
-  private static final String message = "Only xml and json conversions are currently supported";
+  private static final String EXCEPTION_MESSAGE = "Only xml and json conversions are currently supported";
 
   /**
    * private class constructor.
@@ -66,7 +66,7 @@ public class WebServiceUtilities {
       responseBody = deserializeXml(response, type);
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter(message));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
 
     return responseBody;
@@ -90,7 +90,7 @@ public class WebServiceUtilities {
       return body.toString();
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter(message));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
   }
 
@@ -135,7 +135,7 @@ public class WebServiceUtilities {
       return deserializeJson(response, type);
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter(message));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
   }
 
