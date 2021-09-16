@@ -34,6 +34,9 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         private WebDriver webDriver;
 
+        /**
+         * Sets up the web driver for the unit tests.
+         */
         @BeforeMethod
         public void setUp() {
                 webDriver = WebDriverFactory.getDefaultBrowser();
@@ -289,7 +292,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
         }
 
         /**
-         * Test kill driver.
+         * Test killing the driver.
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testKillDriver() {

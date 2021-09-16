@@ -15,12 +15,18 @@ import org.testng.annotations.Test;
  */
 public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
 
+  /**
+   * Tests getting the web driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
     Assert.assertNotNull(this.getWebDriver(),
         "Checking that Selenium Driver is not null through BaseSeleniumTest");
   }
 
+  /**
+   * Tests setting the web driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriver() {
     int hashCode = this.getWebDriver().hashCode();
@@ -33,12 +39,18 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
+  /**
+   * Tests getting the selenium test object.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetSeleniumTestObject() {
-    Assert
-        .assertNotNull(this.getTestObject(), "Checking that Selenium Test Object is not null through BaseSeleniumTest");
+    Assert.assertNotNull(
+        this.getTestObject(), "Checking that Selenium Test Object is not null through BaseSeleniumTest");
   }
 
+  /**
+   * Tests getting the browser.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetBrowser() {
     WebDriver driver = null;

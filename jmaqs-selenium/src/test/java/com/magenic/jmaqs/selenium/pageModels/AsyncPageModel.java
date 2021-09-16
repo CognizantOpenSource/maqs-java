@@ -8,6 +8,9 @@ import com.magenic.jmaqs.selenium.SeleniumConfig;
 import com.magenic.jmaqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.By;
 
+/**
+ * The Async page model.
+ */
 public class AsyncPageModel extends MainPageModel{
 
   /**
@@ -29,7 +32,6 @@ public class AsyncPageModel extends MainPageModel{
    * Asynchronous div that loads after a delay on Async Testing Page.
    */
   public final By asyncLoadingTextDiv = By.cssSelector("#loading-div-text");
-
 
   /**
    * Dropdown label - hidden once dropdown loads.

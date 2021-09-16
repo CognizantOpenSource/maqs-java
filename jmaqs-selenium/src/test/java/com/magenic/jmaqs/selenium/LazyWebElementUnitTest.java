@@ -21,7 +21,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Duration;
 import java.util.List;
 import java.util.function.Predicate;
 import org.openqa.selenium.By;
@@ -49,12 +48,16 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	private static final String FOOTER = "Footer";
 	private static final String THREAD = "THEAD TH";
 
+	/**
+	 * Gets the div root.
+	 * @return the div root lazy element
+	 */
 	private LazyWebElement getDivRoot() {
 		return new LazyWebElement(this.getTestObject(), By.cssSelector("#ItemsToAutomate"), "Div Root");
 	}
 
 	/**
-	 * Gets the disabled item
+	 * Gets the disabled item.
 	 * 
 	 * @return The disabled item
 	 */
@@ -63,7 +66,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the first name input box
+	 * Gets the first name input box.
 	 * 
 	 * @return The input box
 	 */
@@ -72,7 +75,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the last name input box
+	 * Gets the last name input box.
 	 *
 	 * @return The input box
 	 */
@@ -81,7 +84,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the dialog one
+	 * Gets the dialog one.
 	 * 
 	 * @return The dialog one
 	 */
@@ -90,7 +93,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the dialog one button
+	 * Gets the dialog one button.
 	 * 
 	 * @return The dialog one button
 	 */
@@ -99,7 +102,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the submit button
+	 * Gets the submit button.
 	 * 
 	 * @return The submit button
 	 */
@@ -109,7 +112,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the not selected element
+	 * Gets the not selected element.
 	 * 
 	 * @return The not selected element
 	 */
@@ -118,7 +121,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets an item that is going to be selected
+	 * Gets an item that is going to be selected.
 	 * 
 	 * @return The selected element
 	 */
@@ -127,7 +130,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets a parent element
+	 * Gets a parent element.
 	 * 
 	 * @return The parent element
 	 */
@@ -136,7 +139,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets a child element, the second table caption
+	 * Gets a child element, the second table caption.
 	 * 
 	 * @return The second table caption
 	 */
@@ -146,7 +149,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the first table caption
+	 * Gets the first table caption.
 	 * 
 	 * @return The first table caption
 	 */
@@ -155,7 +158,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the disabled DIV
+	 * Gets the disabled DIV.
 	 * 
 	 * @return The disabled div
 	 */
@@ -164,7 +167,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the disabled input
+	 * Gets the disabled input.
 	 * 
 	 * @return The disabled input
 	 */
@@ -173,7 +176,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Setup before a test
+	 * Setup before a test.
 	 */
 	@BeforeMethod
 	public void navigateToTestPage() {
@@ -182,7 +185,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element search respects the parent find by finding mismatch
+	 * Verify Lazy Element search respects the parent find by finding mismatch.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyWithParentAndWithoutDoNotMatch() throws TimeoutException, InterruptedException {
@@ -194,7 +197,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element search respects the parent find by finding match
+	 * Verify Lazy Element search respects the parent find by finding match.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyWithParentAndWithoutMatch() throws TimeoutException, InterruptedException {
@@ -210,7 +213,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element is cached as expected
+	 * Verify Lazy Element is cached as expected.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyPreCaching() {
@@ -222,7 +225,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * A new find does not return the cached element
+	 * A new find does not return the cached element.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void newFindDifferentThanCached() throws TimeoutException, InterruptedException {
@@ -242,7 +245,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Check that the element was cached
+	 * Check that the element was cached.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementCached() throws TimeoutException, InterruptedException {
@@ -262,7 +265,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Stale elements trigger a new find
+	 * Stale elements trigger a new find.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyCaching() throws TimeoutException, InterruptedException {
@@ -287,8 +290,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify the get elements trigger new finds - We do this because we are looking
-	 * for specific states
+	 * Verify the get elements trigger new finds.
+	 * We do this because we are looking for specific states.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyGetsTriggerFind() {
@@ -302,8 +305,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify the get click-able element triggers new finds - We do this because we
-	 * are looking for specific states
+	 * Verify the get click-able element triggers new finds.
+	 * We do this because we are looking for specific states.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyGetClickableTriggerFind() {
@@ -318,8 +321,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify the get existing element triggers new finds - We do this because we
-	 * are looking for specific states
+	 * Verify the get existing element triggers new finds.
+	 * We do this because we are looking for specific states.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyGetExistTriggerFind() {
@@ -334,8 +337,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify the get visible element triggers new finds - We do this because we are
-	 * looking for specific states
+	 * Verify the get visible element triggers new finds.
+	 * We do this because we are looking for specific states.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyGetVisibleTriggerFind() {
@@ -350,7 +353,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element Clear test
+	 * Verify Lazy Element Clear test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementClear() throws TimeoutException, InterruptedException, ExecutionFailedException {
@@ -364,7 +367,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element Click test
+	 * Verify Lazy Element Click test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementClick() throws TimeoutException, InterruptedException, ExecutionFailedException {
@@ -373,7 +376,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element get By test
+	 * Verify Lazy Element get By test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetBy() {
@@ -384,7 +387,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element get of the test object
+	 * Verify Lazy Element get of the test object.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetTestObject() {
@@ -394,7 +397,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element GetAttribute test
+	 * Verify Lazy Element GetAttribute test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetAttribute() throws TimeoutException, InterruptedException {
@@ -402,7 +405,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element with a parent GetAttribute test
+	 * Verify Lazy Element with a parent GetAttribute test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetAttributeWithParent() throws TimeoutException, InterruptedException {
@@ -410,7 +413,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element GetCssValue test
+	 * Verify Lazy Element GetCssValue test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetCssValue() throws TimeoutException, InterruptedException {
@@ -418,7 +421,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element with parent GetCssValue test
+	 * Verify Lazy Element with parent GetCssValue test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetCssValueWithParent() throws TimeoutException, InterruptedException {
@@ -426,7 +429,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element SendKeys test
+	 * Verify Lazy Element SendKeys test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSendKeys() throws TimeoutException, InterruptedException, ExecutionFailedException {
@@ -435,7 +438,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element with a parent SendKeys test
+	 * Verify Lazy Element with a parent SendKeys test.
 	 */
 	@Test(groups = TestCategories.SELENIUM, expectedExceptions = ExecutionFailedException.class)
 	public void lazyElementSendKeysWithParent()
@@ -444,7 +447,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element SendKeys test
+	 * Verify Lazy Element SendKeys test.
 	 * 
 	 * @throws IOException, Exception
 	 */
@@ -471,7 +474,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element Submit test
+	 * Verify Lazy Element Submit test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSubmit() throws TimeoutException, InterruptedException, ExecutionFailedException {
@@ -486,7 +489,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element with parent Submit test
+	 * Verify Lazy Element with parent Submit test.
 	 */
 	@Test(groups = TestCategories.SELENIUM, expectedExceptions = ExecutionFailedException.class)
 	public void lazyElementSubmitWithParent() throws TimeoutException, InterruptedException, ExecutionFailedException {
@@ -494,7 +497,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element Displayed test
+	 * Verify Lazy Element Displayed test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementDisplayed() throws TimeoutException, InterruptedException {
@@ -503,7 +506,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element with parent Displayed test
+	 * Verify Lazy Element with parent Displayed test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementDisplayedWithParent() throws TimeoutException, InterruptedException {
@@ -511,7 +514,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element Enabled test
+	 * Verify Lazy Element Enabled test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementEnabled() throws TimeoutException, InterruptedException {
@@ -520,7 +523,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element with parent Enabled test
+	 * Verify Lazy Element with parent Enabled test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementEnabledWithParent() throws TimeoutException, InterruptedException {
@@ -529,7 +532,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element Selected test
+	 * Verify Lazy Element Selected test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSelected() throws TimeoutException, InterruptedException {
@@ -540,7 +543,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element Text test
+	 * Verify Lazy Element Text test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementText() throws TimeoutException, InterruptedException {
@@ -548,7 +551,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element with parent Text test
+	 * Verify Lazy Element with parent Text test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementTextWithParent() throws TimeoutException, InterruptedException {
@@ -559,7 +562,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element Location test
+	 * Verify Lazy Element Location test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementLocation() throws TimeoutException, InterruptedException {
@@ -568,7 +571,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element with parent Location test
+	 * Verify Lazy Element with parent Location test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementLocationWithParent() throws TimeoutException, InterruptedException {
@@ -580,7 +583,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element Size test
+	 * Verify Lazy Element Size test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSize() throws TimeoutException, InterruptedException {
@@ -589,7 +592,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify Lazy Element with parent Size test
+	 * Verify Lazy Element with parent Size test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSizeWithParent() throws TimeoutException, InterruptedException {
@@ -599,7 +602,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify lazy element tag name test
+	 * Verify lazy element tag name test.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementTagName() throws TimeoutException, InterruptedException {
@@ -607,7 +610,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify lazy element with parent tag name test
+	 * Verify lazy element with parent tag name.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementTagNameWithParent() throws TimeoutException, InterruptedException {
@@ -615,7 +618,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify lazy element get the visible element
+	 * Verify lazy element get the visible element.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetVisibleElement() {
@@ -623,7 +626,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify lazy element get the click-able element
+	 * Verify lazy element get the click-able element.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetClickableElement() {
@@ -631,7 +634,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify lazy element get the existing element
+	 * Verify lazy element get the existing element.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetExistingElement() {
@@ -639,7 +642,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify lazy element to string
+	 * Verify lazy element to string.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementToString() {
@@ -650,7 +653,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify lazy element with parent to string
+	 * Verify lazy element with parent to string.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementWithParentToString() {
@@ -662,7 +665,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify find element
+	 * Verify find element.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElement() throws TimeoutException, InterruptedException {
@@ -672,7 +675,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify find Raw element
+	 * Verify find Raw element.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindRawElement() throws TimeoutException, InterruptedException {
@@ -681,7 +684,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify find elements
+	 * Verify find elements.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElements() throws TimeoutException, InterruptedException {
@@ -690,7 +693,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Stacked lazy elements handle staleness
+	 * Stacked lazy elements handle staleness.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElementsStackedWithStale() throws TimeoutException, InterruptedException {
@@ -705,7 +708,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Find elements are all lazy
+	 * Find elements are all lazy.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElementsAreLazy() throws TimeoutException, InterruptedException {
@@ -721,7 +724,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Find elements respects action waits
+	 * Find elements respects action waits.
 	 */
 	@Test(groups = TestCategories.SELENIUM, expectedExceptions = { TimeoutException.class })
 	public void lazyElementFindElementsRespectAction()
@@ -736,7 +739,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Stacked get visible
+	 * Stacked get visible.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElementsGetVisible() throws TimeoutException, InterruptedException {
@@ -748,7 +751,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Find Element the run Actions that cast to ILocatable
+	 * Find Element the run Actions that cast to ILocatable.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindRawElementWorksWithActions() throws TimeoutException, InterruptedException {
@@ -763,7 +766,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Verify the element does exist function behaves correctly
+	 * Verify the element does exist function behaves correctly.
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementDoesExist() throws TimeoutException, InterruptedException {

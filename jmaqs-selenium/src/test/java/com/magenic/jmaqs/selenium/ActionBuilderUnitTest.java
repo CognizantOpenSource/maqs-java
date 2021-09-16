@@ -22,6 +22,9 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
    */
   private AutomationPageModel automationPageModel;
 
+  /**
+   * Sets up the test and navigates to the test page.
+   */
   @BeforeMethod()
   public void navigateToTestPage() {
     automationPageModel = new AutomationPageModel(this.getTestObject());
@@ -29,6 +32,9 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
 
+  /**
+   * Tests the hover over functionality.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void hoverOverTest() {
     ActionBuilder.hoverOver(this.getWebDriver(), automationPageModel.manageDropdown);
@@ -37,6 +43,9 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForExactText(automationPageModel.employeePageTitle, "Index");
   }
 
+  /**
+   * Tests pressing the modifier key.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void pressModifierKeyTest() {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(automationPageModel.listBoxOption1)
@@ -53,6 +62,9 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
             .isSelected());
   }
 
+  /**
+   * Tests moving the slider.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void moveSliderTest() {
     ActionBuilder.slideElement(this.getWebDriver(), automationPageModel.slider, 50);
@@ -60,6 +72,9 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
         "4");
   }
 
+  /**
+   * Tests right-clicking to trigger the context menu.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void rightClickToTriggerContextMenu() {
     ActionBuilder.rightClick(this.getWebDriver(), automationPageModel.rightClickableElementWithContextMenu);

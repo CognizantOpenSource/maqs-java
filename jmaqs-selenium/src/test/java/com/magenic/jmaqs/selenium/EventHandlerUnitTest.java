@@ -24,7 +24,6 @@ import org.testng.asserts.SoftAssert;
 /**
  * Unit tests for EventHandler class.
  */
-
 public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   /**

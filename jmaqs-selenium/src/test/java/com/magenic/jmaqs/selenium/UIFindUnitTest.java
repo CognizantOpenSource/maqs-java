@@ -23,6 +23,9 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    */
   private AutomationPageModel automationPageModel;
 
+  /**
+   * Sets up the page model and navigates to the test page for the unit test.
+   */
   @BeforeMethod
   public void navigateToTestPage() {
     automationPageModel = new AutomationPageModel(this.getTestObject());

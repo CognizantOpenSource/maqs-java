@@ -9,7 +9,7 @@ import com.magenic.jmaqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.By;
 
 /**
- * The type Frame page model.
+ * The IFrame page model.
  */
 public class IFramePageModel extends MainPageModel{
 

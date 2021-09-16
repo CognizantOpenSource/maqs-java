@@ -11,6 +11,9 @@ import com.magenic.jmaqs.selenium.SeleniumTestObject;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.By;
 
+/**
+ * The main site page model.
+ */
 public class MainPageModel extends BaseSeleniumPageModel {
 
   /**
@@ -48,7 +51,6 @@ public class MainPageModel extends BaseSeleniumPageModel {
    */
   public final By manageDropdown = By
       .cssSelector("body > div.navbar > div > div > ul > li:nth-child(2) > a");
-
 
   /**
    * Instantiates a new Main page model.

@@ -36,6 +36,9 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
    */
   private IFramePageModel iframePageModel;
 
+  /**
+   * Sets up the page models for the unit tests.
+   */
   @BeforeMethod
   public void setUp() {
     automationPageModel = new AutomationPageModel(this.getTestObject());

@@ -15,6 +15,9 @@ import org.testng.annotations.Test;
  */
 public class SeleniumTestObjectUnitTest extends BaseGenericTest {
 
+  /**
+   * The default browser that is set in the test.
+   */
   private WebDriver defaultBrowser = null;
 
   /**
@@ -47,6 +50,9 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
     }
   }
 
+  /**
+   * Test getting the web driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
     defaultBrowser = setDefaultBrowser();
@@ -62,6 +68,9 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
     }
   }
 
+  /**
+   * Test getting the web manager.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebManager() {
     defaultBrowser = setDefaultBrowser();
@@ -77,6 +86,9 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
     }
   }
 
+  /**
+   * Tests setting the web driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriver() {
     defaultBrowser = setDefaultBrowser();
@@ -104,6 +116,9 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
     }
   }
 
+  /**
+   * Test setting the web driver supplier.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriverSupplier() {
     defaultBrowser = setDefaultBrowser();

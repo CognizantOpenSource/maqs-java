@@ -45,7 +45,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   private final String version = "version";
 
   /**
-   * Browser name.
+   * Test getting the browser name.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserName() {
@@ -54,7 +54,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Web site base.
+   * Test getting the website base.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWebsiteBase() {
@@ -63,7 +63,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Hub Url.
+   * Tests getting the hub url.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getHubUrl() {
@@ -72,7 +72,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Driver hint path.
+   * Tests getting the Driver hint path.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getDriverHintPath() {
@@ -81,7 +81,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Remote browser name test.
+   * Tests getting the Remote browser name test.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteBrowserName() {
@@ -90,7 +90,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Remote platform test.
+   * Tests getting the Remote platform test.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemotePlatform() {
@@ -99,7 +99,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Remote browser version.
+   * Tests getting the Remote browser version.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteBrowserVersion() {
@@ -108,7 +108,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Verify remote capabilities section of config.
+   * Tests getting the remote capabilities section of config.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteCapabilitiesAsStrings() {
@@ -129,7 +129,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Verify remote capabilities section of config.
+   * Tests getting the remote capabilities section of config.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteCapabilitiesAsObjects() {
@@ -150,7 +150,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Verify SavePageSourceOnFail is enabled.
+   * Tests getting the SavePageSourceOnFail section of the config.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getSavePageSourceOnFail() {
@@ -159,7 +159,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Verify SoftAssertScreenshot is enabled.
+   * Tests getting the SoftAssertScreenshot section of the config.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getSoftAssertScreenshot() {
@@ -168,7 +168,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Verify the config Image Format.
+   * Tests getting the config Image Format.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getImageFormat() {
@@ -177,7 +177,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get wait time.
+   * Tests getting the wait time.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWaitTime() {
@@ -186,7 +186,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get timeout time.
+   * Tests getting the timeout time.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getTimeoutTime() {
@@ -195,7 +195,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get browser size.
+   * Tests getting the browser size.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserSize() {
@@ -204,7 +204,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the browser type: IE
+   * Tests getting the browser type: IE.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserTypeIeTest() {
@@ -213,7 +213,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the browser type: FIREFOX
+   * Tests getting the browser type: FIREFOX.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserTypeFirefoxTest() {
@@ -221,6 +221,9 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
     Assert.assertEquals(browserType, BrowserType.FIREFOX);
   }
 
+  /**
+   * Tests getting the browser type: Chrome.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserTypeChromeTest() {
     BrowserType browserType = SeleniumConfig.getBrowserType("chrome");
@@ -228,7 +231,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the browser type: HEADLESS CHROME
+   * Tests getting the browser type: HEADLESS CHROME.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserTypeHeadlessChromeTest() {
@@ -237,7 +240,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the browser type: EDGE
+   * Tests getting the browser type: EDGE.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserTypeEdgeTest() {
@@ -246,7 +249,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the browser type: REMOTE TEST
+   * Tests getting the browser type: REMOTE TEST.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserTypeRemoteTest() {
@@ -255,7 +258,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the browser type: PHANTOM JS
+   * Tests getting the browser type: PHANTOM JS.
    */
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.SELENIUM)
   public void getBrowserTypePhantomJSTest() {
@@ -263,7 +266,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Try to Get an INVALID browser type
+   * Tests trying to Get an INVALID browser type
    */
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.SELENIUM)
   public void getBrowserTypeInvalidTest() {
@@ -271,7 +274,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the Remote browser type: IE
+   * Tests getting the Remote browser type: IE.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteBrowserTypeIeTest() {
@@ -280,7 +283,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the Remote browser type: FIREFOX
+   * Tests getting the Remote browser type: FIREFOX.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteBrowserTypeFirefoxTest() {
@@ -289,7 +292,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the Remote browser type: CHROME
+   * Tests getting the Remote browser type: CHROME.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteBrowserTypeChromeTest() {
@@ -298,7 +301,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the Remote browser type: SAFARI
+   * Tests getting the Remote browser type: SAFARI.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteBrowserTypeSafariTest() {
@@ -307,7 +310,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Get the Remote browser type: EDGE
+   * Tests getting the Remote browser type: EDGE.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteBrowserTypeEdgeTest() {
@@ -316,7 +319,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Try to get an INVALID Remote browser type
+   * Tests Trying to get an INVALID Remote browser type
    */
   @Test(groups = TestCategories.SELENIUM, expectedExceptions = IllegalArgumentException.class)
   public void getRemoteBrowserTypeInvalidTest() {

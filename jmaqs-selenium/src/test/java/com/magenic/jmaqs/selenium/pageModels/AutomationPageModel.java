@@ -10,6 +10,9 @@ import com.magenic.jmaqs.selenium.SeleniumTestObject;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.By;
 
+/**
+ * The Automation page model.
+ */
 public class AutomationPageModel extends MainPageModel {
 
   /**
@@ -55,19 +58,16 @@ public class AutomationPageModel extends MainPageModel {
   /**
    * Alert button with confirm option.
    */
-
   public final By alertWithConfirm = By.id("javascriptConfirmAlertButton");
 
   /**
    * Swagger link.
    */
-
   public final By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
 
   /**
    * First name text box.
    */
-
   public final By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
 
   /**
@@ -94,7 +94,6 @@ public class AutomationPageModel extends MainPageModel {
    * List box option 2.
    */
   public final By listBoxOption2 = By.cssSelector("#computerParts > option:nth-child(2)");
-
 
   /**
    * Female radio button.

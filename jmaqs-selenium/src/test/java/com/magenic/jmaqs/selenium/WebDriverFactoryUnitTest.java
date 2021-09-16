@@ -31,6 +31,7 @@ import org.testng.annotations.Test;
  * The WebDriverFactory test class.
  */
 public class WebDriverFactoryUnitTest extends BaseGenericTest {
+
   /**
    * Tests getting the default browser.
    */
@@ -426,6 +427,9 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
     Assert.assertEquals(driverLocation, "");
   }
 
+  /**
+   * Tests getting the chrome driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetChromeDriver() {
     final ChromeOptions defaultChromeOptions = WebDriverFactory.getDefaultChromeOptions();

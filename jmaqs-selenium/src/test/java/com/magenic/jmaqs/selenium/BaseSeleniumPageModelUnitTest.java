@@ -12,6 +12,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * The base selenium page model unit tests.
+ */
 public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
 
   /**
@@ -19,31 +22,49 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   private AutomationPageModel automationPageModel;
 
+  /**
+   * Sets up the page model to be tested.
+   */
   @BeforeMethod
   public void setUp() {
     automationPageModel = new AutomationPageModel(this.getTestObject());
   }
 
+  /**
+   * Tests getting the page model logger.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLogger() {
     Assert.assertNotNull(automationPageModel.getLogger());
   }
 
+  /**
+   * Tests getting the page model's test object.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetTestObject() {
     Assert.assertNotNull(automationPageModel.getTestObject());
   }
 
+  /**
+   * Tests getting the page model web driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
     Assert.assertNotNull(automationPageModel.getWebDriver());
   }
 
+  /**
+   * Tests getting the page model performance timer collection.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetPerfTimerCollection() {
     Assert.assertNotNull(automationPageModel.getPerfTimerCollection());
   }
 
+  /**
+   * Tests setting the page model web driver
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriver() {
     int hashCode = automationPageModel.getWebDriver().hashCode();
@@ -55,12 +76,18 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     drive.quit();
   }
 
+  /**
+   * Tests if the page is loaded.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testIsPageLoaded() {
     automationPageModel.open();
     Assert.assertTrue(automationPageModel.isPageLoaded());
   }
 
+  /**
+   * Tests getting the element called twice and returns the same element.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetElementCalledTwiceReturnsTheSameElement() {
     automationPageModel.open();
@@ -72,6 +99,11 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     Assert.assertSame(initElem, cachedElem);
   }
 
+  /**
+   * Tests getting the lazy element with the By type.
+   * @throws TimeoutException if a timeout occurs
+   * @throws InterruptedException if an interruption occurs
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithBy() throws TimeoutException, InterruptedException {
     automationPageModel.open();
@@ -86,6 +118,11 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
   }
 
+  /**
+   * Tests getting the lazy element with By and its Name
+   * @throws TimeoutException if a Timeout occurs
+   * @throws InterruptedException if an interruption occurs
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithByAndName() throws TimeoutException, InterruptedException {
     automationPageModel.open();
@@ -102,6 +139,11 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     Assert.assertEquals(lazyElement.getUserFriendlyName(), "Page Title");
   }
 
+  /**
+   * Tests getting the lazy element with parent element and the By value.
+   * @throws TimeoutException if a timeout occurs
+   * @throws InterruptedException if an interruption occurs
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementAndBy() throws TimeoutException, InterruptedException {
     automationPageModel.open();
@@ -117,6 +159,11 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     Assert.assertEquals(lazyElement.getText(), "Elements to be automated");
   }
 
+  /**
+   * Test getting the lazy element with the parent By and Name
+   * @throws TimeoutException if a timeout occurs
+   * @throws InterruptedException if an interruption occurs
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementByAndName() throws TimeoutException, InterruptedException {
     automationPageModel.open();

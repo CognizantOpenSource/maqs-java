@@ -7,7 +7,6 @@ package com.magenic.jmaqs.selenium.factories;
 import com.magenic.jmaqs.selenium.SeleniumConfig;
 import com.magenic.jmaqs.selenium.SeleniumUtilities;
 import com.magenic.jmaqs.selenium.UIWait;
-import java.time.Duration;
 import java.util.concurrent.ConcurrentHashMap;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -86,7 +85,6 @@ public class UIWaitFactory {
    */
   public static void setWaitDriver(SearchContext driver, WebDriverWait waitDriver) {
     WebDriver baseDriver = getLowLevelDriver(driver);
-
     waitCollection.put(baseDriver, waitDriver);
   }
 
@@ -97,7 +95,6 @@ public class UIWaitFactory {
    */
   public static void removeWaitDriver(SearchContext driver) {
     WebDriver baseDriver = getLowLevelDriver(driver);
-
     waitCollection.remove(baseDriver);
   }
 
