@@ -52,7 +52,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Create an HTML accessibility report for an entire web page with specific Result types
+   * Create an HTML accessibility report for an entire web page with specific Result types.
    * @param webDriver the web driver used in the scan
    * @param destination the destination file the html report will go to
    * @param requestedResults the specified result types to include in the report
@@ -78,7 +78,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Create an HTML accessibility report for a specific element and specified result types
+   * Create an HTML accessibility report for a specific element and specified result types.
    * @param webDriver the web driver used in the scan
    * @param element the element to be scanned
    * @param destination the destination file the html report will go to
