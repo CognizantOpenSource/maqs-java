@@ -39,36 +39,95 @@ public class HtmlReporter {
   protected HtmlReporter() {
   }
 
+  /**
+   * Create an HTML accessibility report for an entire web page.
+   * @param webDriver the web driver used in the scan
+   * @param destination the destination file the html report will go to
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, destination, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Create an HTML accessibility report for an entire web page with specific Result types
+   * @param webDriver the web driver used in the scan
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver), destination, requestedResults);
   }
 
+  /**
+   * Create an HTML accessibility report for a specific element.
+   * @param webDriver the web driver used in the scan
+   * @param element the element to be scanned
+   * @param destination the destination file the html report will go to
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, element, destination, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Create an HTML accessibility report for a specific element and specified result types
+   * @param webDriver the web driver used in the scan
+   * @param element the element to be scanned
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver, element), destination, requestedResults);
   }
 
+  /**
+   * Create an HTML accessibility report for an entire web page with already scanned results.
+   * @param webDriver the web driver used in the scan
+   * @param results the results type variable used after scanning the web page
+   * @param destination the destination file the html report will go to
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, results, destination, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Create an HTML accessibility report for an entire web page with specified Result types
+   * and inputted already scanned results.
+   * @param webDriver the web driver used in the scan
+   * @param results the results object created after scanning the web page
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     createAxeHtmlReportFile(webDriver, results, destination, requestedResults);
   }
 
+  /**
+   * Create an HTML accessibility report.
+   * @param context the Search Context to be used in the scan
+   * @param results the results object created after scanning the web page
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
+   */
   private static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     // Get the unwrapped element if we are using a wrapped element
@@ -326,6 +385,12 @@ public class HtmlReporter {
         + "#context {width: 100%;}" + "#image {width: 100%;}";
   }
 
+  /**
+   * Adds and formats important base information to the created HTML page.
+   * @param results the results object created after scanning the web page
+   * @param element the context content html element to be edited
+   * @throws ParseException if a parse exception might occur
+   */
   private static void getContextContent(Results results, Element element) throws ParseException {
     element.text("Url: " + results.getUrl());
     element.appendChild(new Element("br"));
@@ -360,6 +425,15 @@ public class HtmlReporter {
     return count;
   }
 
+  /**
+   * Sets the count content to html element object.
+   * @param violationCount int value of the number of violations found in the scan
+   * @param incompleteCount int value of the number of incomplete found in the scan
+   * @param passCount int the value of the number of the pass found in the scan
+   * @param inapplicableCount int value of the number of inapplicable found in the scan
+   * @param requestedResults the specified result types to include in the report
+   * @param element the count content html element to be edited
+   */
   private static void getCountContent(int violationCount, int incompleteCount, int passCount,
       int inapplicableCount, Set<ResultType> requestedResults, Element element) {
     if (requestedResults.contains(ResultType.Violations)) {
@@ -382,11 +456,22 @@ public class HtmlReporter {
     }
   }
 
+  /**
+   * Gets a screenshot of the search context into a base 64 and png format.
+   * @param context the web driver or web element to be converted
+   * @return a string value of the image
+   */
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
     return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64) + "');";
   }
 
+  /**
+   * Returns the timestamp into a specified date format.
+   * @param timestamp the time stamp to be changed
+   * @return string format of the new date format
+   * @throws ParseException if a parse exception occurs
+   */
   private static String getDateFormat(String timestamp) throws ParseException {
     Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(timestamp);
     return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);

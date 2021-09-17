@@ -80,7 +80,7 @@ public class AccessibilityUtilities {
    * @param logger Where you want the check logged to
    * @param checkType What kind of check is being run
    * @param getResults Function for getting Axe results
-   * @param loggingLevel What level should logging the check take,
+   * @param loggingLevel What level should the log check take,
    *                     this gets used if the check doesn't throw an exception
    * @param throwOnResults Throw error if any results are found
    */
@@ -99,7 +99,7 @@ public class AccessibilityUtilities {
    * Run axe accessibility and log the results.
    * @param webDriver The web driver that is on the page you want to run the accessibility check on
    * @param logger Where you want the check logged to
-   * @param loggingLevel What level should logging the check take,
+   * @param loggingLevel What level should the log check take,
    *                     this gets used if the check doesn't throw an exception
    */
   public static void checkAccessibilityPasses(WebDriver webDriver, Logger logger, MessageType loggingLevel) {
@@ -111,7 +111,7 @@ public class AccessibilityUtilities {
    * Run axe accessibility and log the results.
    * @param webDriver The web driver that is on the page you want to run the accessibility check on
    * @param logger Where you want the check logged to
-   * @param loggingLevel What level should logging the check take,
+   * @param loggingLevel What level should the log check take,
    *                     this gets used if the check doesn't throw an exception
    * @param throwOnInapplicable Should inapplicable cause an exception to be thrown
    */
@@ -125,7 +125,7 @@ public class AccessibilityUtilities {
    * Run axe accessibility and log the results.
    * @param webDriver The web driver that is on the page you want to run the accessibility check on
    * @param logger Where you want the check logged to
-   * @param loggingLevel What level should logging the check take,
+   * @param loggingLevel What level should the log check take,
    *                     this gets used if the check doesn't throw an exception
    * @param throwOnIncomplete Should incomplete cause an exception to be thrown
    */
@@ -139,7 +139,7 @@ public class AccessibilityUtilities {
    * Run axe accessibility and log the results.
    * @param webDriver The web driver that is on the page you want to run the accessibility check on
    * @param logger Where you want the check logged to
-   * @param loggingLevel What level should logging the check take,
+   * @param loggingLevel What level should the log check take,
    *                     this gets used if the check doesn't throw an exception
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
@@ -150,7 +150,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create a HTML accessibility report for an entire web page.
+   * Create an HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
@@ -161,7 +161,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create a HTML accessibility report for an entire web page.
+   * Create an HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
@@ -172,7 +172,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create a HTML accessibility report for an entire web page.
+   * Create an HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
@@ -184,7 +184,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create a HTML accessibility report for an entire web page.
+   * Create an HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
@@ -206,7 +206,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create a HTML accessibility report.
+   * Create an HTML accessibility report.
    * @param testObject The TestObject to associate the report with
    * @param getResults Function for getting the accessibility scan results
    * @param throwOnViolation Should violations cause an exception to be thrown
@@ -242,7 +242,7 @@ public class AccessibilityUtilities {
     testObject.getLogger().logMessage(MessageType.INFORMATION,
         "Ran accessibility check and created HTML report: " + report + " ");
 
-    // Throw exception if we found violations and we want that to cause an error
+    // Throw exception if we found violations, we want that to cause an error
     if (throwOnViolation && !getResults.get().getViolations().isEmpty()) {
       throw new AxeRuntimeException(new Exception(System.lineSeparator()
           + "Accessibility violations, see: " + report + " for more details."));
@@ -256,7 +256,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Get a unique file name that we can user for the accessibility HTML report.
+   * Get a unique file name that we can use for the accessibility HTML report.
    * @param testObject The TestObject to associate the report with
    * @return A unique HTML file name, includes full path
    */
