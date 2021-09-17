@@ -4,7 +4,7 @@
 JMAQS provides support for testing database applications.  	
 
 ## BaseTest
-BaseDatabaseTest is an abstract test class you can extend.  
+BaseDatabaseTest is an abstract test class you can extend.
 Extending the class allows you to automatically use the JMAQS database testing capabilities.
 ```java
 public class MyDatabaseTests extends BaseDatabaseTest

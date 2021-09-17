@@ -23,7 +23,7 @@ private bool falseMethod() {
     return false;
 }
 
-// The Falsemethod will always return false, as the method will always return false.  The Generic Wait will return false.
+// The falseMethod will always return false, as the method will always return false.  The Generic Wait will return false.
 bool methodResults = GenericWait.WaitUntil(falseMethod);  
 GenericWait.waitUntil(falseMethod());
 ```

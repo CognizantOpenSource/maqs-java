@@ -81,7 +81,7 @@ Get the remote browser platform:
 ```java
 String platform = SeleniumConfig.getRemotePlatform();
 ```
-Get the base web site url:
+Get the base website url:
 ```java
 String siteUrl = SeleniumConfig.getWebSiteBase();
 ```

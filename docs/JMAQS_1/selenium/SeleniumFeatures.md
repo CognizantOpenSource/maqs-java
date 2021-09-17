@@ -6,7 +6,7 @@ MAQS provides support for testing web applications.
 ## BaseSeleniumTest
 BaseSeleniumTest is an abstract test class you can extend.  Extending the class allows you to automatically use MAQS's web application testing capabilities.
 ```java
-public class MySeleniumTest extends BaseSeleniumTest
+public class MySeleniumTest extends BaseSeleniumTest {}
 ```
 
 ## WebDriver
@@ -22,12 +22,15 @@ Information, such as the type of browser and website base url are pulled from th
  this.getWebDriver().navigate().to(SeleniumConfig.GetWebSiteBase());
 ```
 ## Log
-There is also logger (also thread safe) the can be used to add log message to your log.
+There is also logger (also thread safe) that can be used to add log message to your log.
 ```java
 this.getLog().logMessage("I am testing with MAQS");
 ```
 ## TestObject
-The TestObject can be thought of as your test context.  It holds all the MAQS test execution replated data.  This includes the Selenium driver, logger, soft asserts, performance timers, plus more.
+The TestObject can be thought of as your test context.  
+It holds all the JMAQS test execution related data.  
+This includes the Selenium driver, logger, soft asserts, performance timers, plus more.
+
 ```java
 this.getTestObject().getWebDriver().navigate().to("http://magenicautomation.azurewebsites.net/");
 this.getTestObject().getLog().logMessage("I am testing with MAQS");

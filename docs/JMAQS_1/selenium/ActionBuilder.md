@@ -39,6 +39,6 @@ Performs a right click on an element
 ```java
 private static By titleImage = By.cssSelector(".title > img");
 
-// Right clicks the title image
+// Right-clicks the title image
 ActionBuilder.rightClick(this.getWebDriver(), titleImage);
 ```

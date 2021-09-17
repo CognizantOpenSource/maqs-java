@@ -1,7 +1,7 @@
 # <img src="resources/jmaqslogo.jpg" height="32" width="32"> Web Service Features
 
 ## Overview
-MAQS provides support for testing web services.  
+JMAQS provides support for testing web services.  
 
 
 ## BaseWebServiceTest

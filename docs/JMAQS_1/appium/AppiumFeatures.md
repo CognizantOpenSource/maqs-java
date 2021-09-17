@@ -11,9 +11,9 @@ public class MyAppiumTests extends BaseAppiumTest
 ```
 
 ## Driver
-The AppiumDriver is an object that allows you to interact with appium services.  
-This driver wraps common web service interactions, making appium testing relatively easy.  
-The driver is also thread safe, which means you can run multiple appium tests in parallel.  
+The AppiumDriver is an object that allows you to interact with appium services.
+This driver wraps common web service interactions, making appium testing relatively easy.
+The driver is also thread safe, which means you can run multiple appium tests in parallel.
 *Information, such as the OS version is pulled from the JMAQS configuration.
 ```java
 AppiumDriver<WebElement> driver = AppiumDriverFactory.getDefaultMobileDriver();
@@ -29,7 +29,10 @@ this.getLogger().logMessage("I am testing with JMAQS");
 ```
 
 ## TestObject
-The TestObject can be thought of as your test context.  It holds all the JMAQS test execution replated data.  This includes the web service driver, logger, soft asserts, performance timers, plus more.
+The TestObject can be thought of as your test context.
+It holds all the JMAQS test execution related data.
+This includes the web service driver, logger, soft asserts, performance timers, plus more.
+
 ```java
 this.getWebDriver().navigate().to("http://magenicautomation.azurewebsites.net/");
 this.getLogger().logMessage("I am testing with JMAQS");
@@ -61,8 +64,8 @@ public class BaseAppiumTestUnitTest extends BaseAppiumTest {
    */
   @Test(groups = TestCategories.APPIUM)
   public void MobileDeviceTest() {
-  		PageModel page = new PageModel(this.getTestObject());
-          page.OpenPage();
-      }   
+      PageModel page = new PageModel(this.getTestObject());
+      page.OpenPage();
+    }   
 }
 ```

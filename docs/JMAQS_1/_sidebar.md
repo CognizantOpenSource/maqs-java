@@ -1,14 +1,14 @@
 - [Introduction to JMAQS ](../JMAQS_1/Introduction.md)
 
-
 - [Installation](../JMAQS_1/ComingSoon.md)
 - [Getting Started](../JMAQS_1/ComingSoon.md)
+
 
 - Features
 
     - i. General
-        - [i. Configurations](../JMAQS_1/ComingSoon.md)
-        - [ii. Manager Store](../JMAQS_1/ComingSoon.md)
+        - [i. Configurations](../JMAQS_1/general/Configurations.md)
+        - [ii. Manager Store](../JMAQS_1/general/ManagerStore.md)
 
     - ii. Utilities
         - [i. Helper](../JMAQS_1/ComingSoon.md)
@@ -77,9 +77,11 @@
         - [viii. FAQ](../JMAQS_1/base/BaseFAQ.md)
 
     - vii. Accessibility
-      - [i. Features](../JMAQS_1/base/BaseFAQ.md)
-      - [ii. Accessibility Utilities](../JMAQS_1/base/BaseFAQ.md)
-      - [iii. HTML Reporter](../JMAQS_1/base/BaseFAQ.md)
+      - [i. Features](../JMAQS_1/accessibility/AccessibilityFeatures.md)
+      - [ii. Accessibility Utilities](../JMAQS_1/accessibility/AccessibilityUtilities.md)
+      - [iii. HTML Reporter](../JMAQS_1/accessibility/HtmlReporter.md)
 
+
+- [Contribution SetUp](../JMAQS_1/ContributionInstallation.md)
 - [FAQ](../JMAQS_1/ComingSoon.md)
 - [License](../JMAQS_1/License.md)

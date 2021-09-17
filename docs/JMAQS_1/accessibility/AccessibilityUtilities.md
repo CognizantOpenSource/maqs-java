@@ -6,7 +6,7 @@ The Accessibility Utilities class is a utility class for working with the Axe op
 # Available methods
 [CreateAxeHtmlReport](#CheckAccessibility)  
 [CreateAxeHtmlReportFile](#CheckAccessibilityPasses)  
-[CheckAccessibilityInapplicable](#CheckAccessibilityInapplicable)
+[CheckAccessibilityInapplicable](#CheckAccessibilityInapplicable)  
 [CheckAccessibilityIncomplete](#CheckAccessibilityIncomplete)  
 [CheckAccessibilityViolations](#CheckAccessibilityViolations)  
 [CreateAccessibilityHtmlReport](#CreateAccessibilityHtmlReport)  

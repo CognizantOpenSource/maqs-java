@@ -91,7 +91,7 @@ public class SeleniumTest extends BaseSeleniumTest {
     Assert.assertEquals(this.getWebDriver().getTitle(), namedWebDriver.getTitle(), "Expect page to have the same title");
 
     // Get the default database driver from the store
-    DatabaseDriver databaseDriver = this.getTestObject().getManagerStore()..getDatabaseDriver();
+    DatabaseDriver databaseDriver = this.getTestObject().getManagerStore().getDatabaseDriver();
 
     String query = "UPDATE States SET WasRun = 'Yes' WHERE WasRun = 'No'";
     int result = databaseDriver.execute(query);
