@@ -143,7 +143,7 @@ Set the test result after each test execution
 ```
 
 ## BeforeLoggingTeardown
-Steps to do before logging teardown results - If not override nothing is done before logging the results
+The steps taken before logging teardown results - If not overriding, nothing is done before logging the results
 ```java
 this.beforeLoggingTeardown(resultType);
 ```

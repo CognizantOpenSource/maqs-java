@@ -17,7 +17,7 @@ public AppiumDriver<WebElement> getAppiumDriver() {
 ```
 
 ## BeforeLoggingTeardown
-Takes a screen shot if needed and tear down the appium driver. It is called during teardown.
+Takes a screenshot if needed and tear down the appium driver. It is called during teardown.
 ```java
 this.beforeLoggingTeardown(resultType);
 ```

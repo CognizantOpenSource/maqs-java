@@ -5,7 +5,7 @@ Takes care of the base test context data.
 
 [GetClosed](#GetClosed)  
 [Log](#Log)  
-[PerftimerCollection](#PerftimerCollection)  
+[PerfTimerCollection](#PerfTimerCollection)  
 [Values](#Values)   
 [Objects](#GetObjects)  
 [SetManagerStore](#SetManagerStore)  
@@ -39,14 +39,14 @@ this.getTestObject.setLog(logger);
 this.log = logger;
 ```
 
-## PerftimeCollection
-### GetPerftimerCollection
+## PerfTimerCollection
+### GetPerfTimerCollection
 Gets the performance timer collection
 ```java
 PerfTimerCollection collection = testObject.getPerfTimerCollection();
 ```
 
-### SetPerftimerCollection
+### SetPerfTimerCollection
 Sets the performance timer collection
 ```java
 BaseTestObject testObject = this.getBaseTestObject();

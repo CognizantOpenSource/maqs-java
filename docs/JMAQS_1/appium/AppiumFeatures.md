@@ -23,7 +23,7 @@ AppiumDriver<WebElement> driver = AppiumDriverFactory.getDefaultMobileDriver();
 Driver that manages the driver manager.
 
 ## Log
-There is also logger (also thread safe) the can be used to add log message to your log.
+There is also logger (also thread safe) that can be used to add log message to your log.
 ```java
 this.getLogger().logMessage("I am testing with JMAQS");
 ```
@@ -39,7 +39,7 @@ this.getLogger().logMessage("I am testing with JMAQS");
 * *You seldom use the test object directly. It is usually only used when you want to share your test JMAQS context with another piece of code*
 
 ## Utilities
-Stores functions for Capturing screenshots, saving page sources, waiting with the web driver, and killing the driver.
+Stores the functions for Capturing screenshots, saving page sources, waiting with the web driver, and killing the driver.
 
 ## Config
 Stores methods for interacting with the config.xml
@@ -53,7 +53,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Base appium test test.
+ * The type Base appium test.
  */
 public class BaseAppiumTestUnitTest extends BaseAppiumTest {
 /**

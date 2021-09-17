@@ -4,8 +4,8 @@
 The Accessibility Utilities class is a utility class for working with the Axe open source framework.
 
 # Available methods
-[createAxeHtmlReport](#CheckAccessibility)  
-[createAxeHtmlReportFile](#CheckAccessibilityPasses)  
+[CreateAxeHtmlReport](#CheckAccessibility)  
+[CreateAxeHtmlReportFile](#CheckAccessibilityPasses)  
 [CheckAccessibilityInapplicable](#CheckAccessibilityInapplicable)
 [CheckAccessibilityIncomplete](#CheckAccessibilityIncomplete)  
 [CheckAccessibilityViolations](#CheckAccessibilityViolations)  
