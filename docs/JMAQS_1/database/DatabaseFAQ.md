@@ -3,9 +3,9 @@
 ## How do use a provider besides SQL, SQLite and PostgreSql
 There are multiple ways to use a custom provider.
 
-[Override the GetDataBaseConnection method](../database/DatabaseBaseTest.md)
-[Create your own DatabaseDriver](../database/DatabaseDriver.md)
-[Implement the IProvider Class](../database/Providers.md)
+[Override the GetDataBaseConnection method](../database/DatabaseBaseTest.md)  
+[Create your own DatabaseDriver](../database/DatabaseDriver.md)  
+[Implement the IProvider Class](../database/Providers.md)  
 
 ## Why doesn't JMAQS directly support Oracle SQL anymore
 The Oracle SQL library has a non-standard license, we are not confident it adheres to most user licensing standards.
