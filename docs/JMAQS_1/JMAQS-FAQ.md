@@ -1,4 +1,4 @@
-# <img src="resources/jmaqslogo.jpg" height="32" width="32"> JMAQS FAQ
+# <img src="resources/jmaqslogo.ico" height="32" width="32"> JMAQS FAQ
 
 # Open source
 As of July 2020, JMAQS became fully open source.  
@@ -46,11 +46,3 @@ Suspended mode will result in no information written to the log.
 ## PhantomJS
 - The PhantomJS project has been archived and Selenium support has been deprecated.
 - Headless Chrome is the primary replacement for PhantomJS
-
-# Test Run Settings - MSTest
-There are two types of file for configuring tests. *.runsettings are used for unit tests. And *.testsettings for lab environment tests, web performance and load tests, and for customizing some types of diagnostic data adapters such as IntelliTrace and event log adapters.   
-Both test settings files are written in XML (eXtensible Markup Language).  
-*_**TestSettings files have been deprecated and should no longer be used!**_
-
-## Run Settings Configurations
-A .runsettings file can be added as a test setting to add additional configurations when running unit tests. This allows tests to be run on additional cores on a single machine, to run on different versions of the unit test framework, or to specify where the results of the test should be output.

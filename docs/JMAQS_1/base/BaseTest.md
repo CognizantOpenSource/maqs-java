@@ -41,13 +41,13 @@ Sets the performance timer collection for a test
 ### GetLogger
 Gets the testing object logger.
 ```java
-Logger log = this.getTestObject().getLog();
+Logger log = this.getTestObject().getLogger();
 ```
 
 ### SetLogger
 Sets the testing object logger.
 ```java
-this.getTestObject().setLog(log);
+this.getTestObject().setLogger(log);
 ```
 
 ## LoggingEnabledSetting

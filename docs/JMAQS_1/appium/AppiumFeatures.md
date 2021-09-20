@@ -1,13 +1,13 @@
 # <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Features
 
 ## Overview
-JMAQS provides support for testing mobile applictions.  	
+JMAQS provides support for testing mobile applications.  	
 
 ## BaseTest
 Base Appium Test is an abstract test class you can extend.  
-Extending the class allows you to automatically use JMAQS's web service testing capabilities.
+Extending the class allows you to automatically use JMAQS' web service testing capabilities.
 ```java
-public class MyAppiumTests extends BaseAppiumTest
+public class MyAppiumTests extends BaseAppiumTest {}
 ```
 
 ## Driver

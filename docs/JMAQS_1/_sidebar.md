@@ -11,9 +11,12 @@
         - [ii. Manager Store](../JMAQS_1/general/ManagerStore.md)
 
     - ii. Utilities
-        - [i. Helper](../JMAQS_1/ComingSoon.md)
-        - [ii. Logger](../JMAQS_1/utilties/Logger.md)
-        - [iii. Performance](../JMAQS_1/ComingSoon.md)
+        - [i. Config](../JMAQS_1/utilities/helper/Config.md)
+        - [ii. Logger](../JMAQS_1/utilities/Logger.md)
+        - [iii. Performance](../JMAQS_1/utilities/Performance.md)
+        - [iv. Helper](../JMAQS_1/ComingSoon.md)
+        - [v. Generic Waits](../JMAQS_1/utilities/helper/GenericWaits.md)
+        - [vi. List Processor](../JMAQS_1/utilities/helper/ListProcessor.md)
 
     - iii. Selenium
         - [i. Features](../JMAQS_1/selenium/SeleniumFeatures.md)

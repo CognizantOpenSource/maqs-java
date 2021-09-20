@@ -66,7 +66,7 @@ JMAQS – Installation Guide via IntelliJ and GitHub
     ![alt text](../resources/installationImages/FrameworkExpanded.png)
 
 ---   
-## III. Code Style Settings - MAQS Formatter
+## III. Code Style Settings - JMAQS Formatter
 
 1.  Navigate to File > **Settings**
 2.   Navigate to Editor > **Code Style**

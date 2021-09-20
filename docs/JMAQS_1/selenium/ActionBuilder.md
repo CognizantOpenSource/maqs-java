@@ -12,7 +12,7 @@ Hovers the mouse over an element.
 ```java
 private static By javascriptAlertButton = By.cssSelector(".javaScriptAlertButton");
 
-ActionBuilder.HoverOver(this.getWebDriver(), this.javascriptAlertButton);
+ActionBuilder.hoverOver(this.getWebDriver(), this.javascriptAlertButton);
 ```
 ## PressModifierKey
 Press modifier keys synchronously.  Each key will be pressed at the same time.  The Keys class is used to quickly write keys.

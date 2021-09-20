@@ -24,7 +24,7 @@ private bool falseMethod() {
 }
 
 // The falseMethod will always return false, as the method will always return false.  The Generic Wait will return false.
-bool methodResults = GenericWait.WaitUntil(falseMethod);  
+bool methodResults = GenericWait.waitUntil(falseMethod);  
 GenericWait.waitUntil(falseMethod());
 ```
 
