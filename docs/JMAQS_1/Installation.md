@@ -2,4 +2,4 @@
 
 ---
 
-## I. Cloning JMAQS Repository
+## Adding JMAQS to your project
