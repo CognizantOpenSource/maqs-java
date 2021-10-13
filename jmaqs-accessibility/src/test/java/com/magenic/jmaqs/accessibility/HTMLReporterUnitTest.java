@@ -28,6 +28,9 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
+/**
+ * Accessibility HTML Reporter unit tests.
+ */
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   /**
@@ -63,6 +66,9 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
    */
   private static final String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
 
+  /**
+   * String value of main element selector.
+   */
   private static final String mainElementSelector = "main";
 
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -71,10 +77,10 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
     //var timeBeforeScan = DateTime.Now;
 
-    var axeRunOptions = new AxeRunOptions();
+    AxeRunOptions axeRunOptions = new AxeRunOptions();
     axeRunOptions.setXPath(true);
 
-    var builder = new AxeBuilder();
+    AxeBuilder builder = new AxeBuilder();
         builder.withOptions(axeRunOptions);
         builder.withTags(Arrays.asList("wcag2a", "wcag2aa"));
         builder.disableRules(Collections.singletonList("color-contrast"));
@@ -204,7 +210,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     String path = createReportPath();
 
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
-
     validateReport(path, 4, 43, 0, 64);
 
     deleteFile(new File(path));
@@ -221,7 +226,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     var builder = new AxeBuilder().withOptions(runOptions);
 
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
-
     validateReport(path, 4, 43, 0, 64);
 
     deleteFile(new File(path));
@@ -236,9 +240,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     runOptions.setIFrames(false);
 
     var builder = new AxeBuilder().withOptions(runOptions);
-
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
-
     validateReport(path, 4, 43, 0, 64);
 
     deleteFile(new File(path));
@@ -248,7 +250,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   public void runSiteThatReturnsMultipleTargets() {
     loadTestPage(integrationTestTargetComplexUrl);
 
-    var axeResult = new AxeBuilder()
+    Results axeResult = new AxeBuilder()
         .withOutputFile("./raw-axe-results.json").analyze(this.getWebDriver());
 
     Rule colorContrast = null;
@@ -262,19 +264,15 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
     Assert.assertNotNull(colorContrast);
 
-    List<Check> complexTargetNode = null;
-
     for (CheckedNode checkedNode : colorContrast.getNodes()) {
       for (Check check : checkedNode.getAny()) {
         if (check.getId().equals("color-contrast")) {
-          complexTargetNode = checkedNode.getAny();
+          Assert.assertNotNull(checkedNode.getAny());
+          Assert.assertEquals(checkedNode.getAny().size(), 1);
           break;
         }
       }
     }
-
-    Assert.assertNotNull(complexTargetNode);
-    Assert.assertEquals(complexTargetNode.size(), 1);
   }
 
   private String createReportPath() {
