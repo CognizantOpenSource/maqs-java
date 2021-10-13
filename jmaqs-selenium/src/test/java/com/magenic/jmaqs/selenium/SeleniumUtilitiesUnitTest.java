@@ -21,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -37,7 +36,6 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
         /**
          * Sets up the web driver for the unit tests.
          */
-
         public void setUp() {
                 webDriver = WebDriverFactory.getDefaultBrowser();
         }
