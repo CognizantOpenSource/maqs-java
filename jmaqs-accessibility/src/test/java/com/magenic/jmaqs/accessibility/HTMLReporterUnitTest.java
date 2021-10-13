@@ -10,7 +10,6 @@ import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.UIWait;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.io.File;
@@ -26,12 +25,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
+
   /**
    * The file to be opened in the browser.
    */
@@ -67,20 +65,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   private static final String mainElementSelector = "main";
 
-  private UIWait wait;
-
-  @BeforeMethod
-  public void setup() {
-    this.getWebDriver().get("file:///" + new File(integrationTestTargetSimpleUrl).getAbsolutePath());
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-    wait = new UIWait(this.getWebDriver());
-  }
-
-  @AfterMethod
-  public void cleanUp() {
-
-  }
-
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void runScanOnPage() {
     loadTestPage(integrationTestTargetSimpleUrl);
@@ -96,7 +80,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
         builder.disableRules(Collections.singletonList("color-contrast"));
         builder.withOutputFile("./raw-axe-results.json");
 
-    var results = builder.analyze(this.getWebDriver());
+    Results results = builder.analyze(this.getWebDriver());
 
     Assert.assertEquals(results.getViolations().size(), 2);
 
@@ -105,9 +89,9 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
       // results.Violations.FirstOrDefault(v => !v.Tags.Contains("wcag2a") && !v.Tags.Contains("wcag2aa")).Should().BeNull();
       Assert.assertTrue(violations.getTags().contains("wcag2a"));
-      //Assert.assertTrue(violations.getTags().contains("wcag2aa"));
+      // Assert.assertTrue(violations.getTags().contains("wcag2aa"));
     }
-//    results.Violations.First().Nodes.First().XPath.Should().NotBeNullOrEmpty();
+
     Assert.assertNotNull(results.getViolations().get(0).getNodes().get(0));
 
 //    File.GetLastWriteTime(@"./raw-axe-results.json").Should().BeOnOrAfter(timeBeforeScan);
@@ -174,7 +158,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), mainElement, path);
 
     validateReport(path, 3, 14, 0, 75);
-
     deleteFile(new File(path));
   }
 
@@ -187,7 +170,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
 
     validateReport(path, 3, 21, 0, 69);
-
     deleteFile(new File(path));
   }
 
@@ -337,6 +319,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   }
 
   private void validateResultNotWritten(String path, EnumSet<ResultType> resultTypeArray) throws IOException {
+    loadTestPage(integrationTestTargetSimpleUrl);
     String text = Files.lines(Paths.get(path), StandardCharsets.UTF_8)
         .collect(Collectors.joining(System.lineSeparator()));
 
@@ -349,12 +332,13 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   private void loadTestPage(String testPage) {
     this.getWebDriver().get("file:///" + new File(testPage).getAbsolutePath());
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-    wait.waitUntilVisibleElement(By.cssSelector(mainElementSelector));
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitUntilVisibleElement(By.cssSelector(mainElementSelector));
   }
 
   private void deleteFile(File file) {
     if (file.exists()) {
       Assert.assertTrue(file.delete(), "File was not deleted");
+      Assert.assertFalse(file.exists(), "file still exists");
     }
   }
 }
