@@ -9,7 +9,6 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -25,7 +24,6 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   /**
    * Sets up the page model to be tested.
    */
-  @BeforeMethod
   public void setUp() {
     automationPageModel = new AutomationPageModel(this.getTestObject());
   }
@@ -35,6 +33,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLogger() {
+    setUp();
     Assert.assertNotNull(automationPageModel.getLogger());
   }
 
@@ -43,6 +42,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetTestObject() {
+    setUp();
     Assert.assertNotNull(automationPageModel.getTestObject());
   }
 
@@ -51,6 +51,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
+    setUp();
     Assert.assertNotNull(automationPageModel.getWebDriver());
   }
 
@@ -59,6 +60,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetPerfTimerCollection() {
+    setUp();
     Assert.assertNotNull(automationPageModel.getPerfTimerCollection());
   }
 
@@ -67,6 +69,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriver() {
+    setUp();
     int hashCode = automationPageModel.getWebDriver().hashCode();
     WebDriver drive = this.getBrowser();
 
@@ -81,6 +84,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testIsPageLoaded() {
+    setUp();
     automationPageModel.open();
     Assert.assertTrue(automationPageModel.isPageLoaded());
   }
@@ -90,6 +94,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetElementCalledTwiceReturnsTheSameElement() {
+    setUp();
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
 
@@ -106,6 +111,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithBy() throws TimeoutException, InterruptedException {
+    setUp();
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
@@ -125,6 +131,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithByAndName() throws TimeoutException, InterruptedException {
+    setUp();
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.employeePageTitle,
@@ -146,6 +153,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementAndBy() throws TimeoutException, InterruptedException {
+    setUp();
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.body,
@@ -166,6 +174,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementByAndName() throws TimeoutException, InterruptedException {
+    setUp();
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.body,
