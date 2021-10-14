@@ -9,7 +9,6 @@ import com.magenic.jmaqs.selenium.pageModels.AutomationPageModel;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -25,7 +24,6 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   /**
    * Sets up the test and navigates to the test page.
    */
-  @BeforeMethod()
   public void navigateToTestPage() {
     automationPageModel = new AutomationPageModel(this.getTestObject());
     this.getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
@@ -37,6 +35,7 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void hoverOverTest() {
+    navigateToTestPage();
     ActionBuilder.hoverOver(this.getWebDriver(), automationPageModel.manageDropdown);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(automationPageModel.employeeButton)
         .click();
@@ -48,6 +47,7 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void pressModifierKeyTest() {
+    navigateToTestPage();
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(automationPageModel.listBoxOption1)
         .click();
     ActionBuilder.pressModifierKey(this.getWebDriver(), Keys.CONTROL);
@@ -67,6 +67,7 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void moveSliderTest() {
+    navigateToTestPage();
     ActionBuilder.slideElement(this.getWebDriver(), automationPageModel.slider, 50);
     Assert.assertEquals(this.getWebDriver().findElement(automationPageModel.sliderLabelNumber).getAttribute("value"),
         "4");
@@ -77,6 +78,7 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void rightClickToTriggerContextMenu() {
+    navigateToTestPage();
     ActionBuilder.rightClick(this.getWebDriver(), automationPageModel.rightClickableElementWithContextMenu);
     Assert.assertTrue(this.getWebDriver().findElement(automationPageModel.rightClickContextSaveText).isDisplayed());
   }

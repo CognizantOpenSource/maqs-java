@@ -30,7 +30,6 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -178,7 +177,6 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	/**
 	 * Setup before a test.
 	 */
-	@BeforeMethod
 	public void navigateToTestPage() {
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
 		UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
@@ -189,6 +187,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyWithParentAndWithoutDoNotMatch() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
+
 		// Make sure we got the table caption we are looking for
 		assertEquals(this.getFlowerTableCaptionWithParent().getText(), FLOWER_TABLE);
 
@@ -201,6 +201,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyWithParentAndWithoutMatch() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
+
 		// Get the lazy element without a parent
 		LazyWebElement flowerTableCaptionWithoutParent = new LazyWebElement(this.getTestObject(),
 				By.cssSelector("#FlowerTable CAPTION > Strong"), FLOWER_TABLE);
@@ -217,6 +219,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyPreCaching() {
+		navigateToTestPage();
+
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
@@ -229,6 +233,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void newFindDifferentThanCached() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
+
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
@@ -249,6 +255,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementCached() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
+
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
@@ -269,6 +277,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyCaching() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
@@ -295,6 +304,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyGetsTriggerFind() {
+		navigateToTestPage();
+
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
@@ -310,6 +321,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyGetClickableTriggerFind() {
+		navigateToTestPage();
+
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
@@ -326,6 +339,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyGetExistTriggerFind() {
+		navigateToTestPage();
+
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
@@ -342,6 +357,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyGetVisibleTriggerFind() {
+		navigateToTestPage();
+
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
@@ -357,6 +374,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementClear() throws TimeoutException, InterruptedException, ExecutionFailedException {
+		navigateToTestPage();
+
 		// Make sure we can set the value
 		this.getFirstNameInputBox().sendKeys("test");
 		assertEquals(this.getFirstNameInputBox().getAttribute("value"), "test");
@@ -371,6 +390,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementClick() throws TimeoutException, InterruptedException, ExecutionFailedException {
+		navigateToTestPage();
 		this.getDialogOneButton().click();
 		assertTrue(this.getDialogOne().isDisplayed());
 	}
@@ -380,9 +400,9 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetBy() {
+		navigateToTestPage();
 		By testBy = By.cssSelector("#ItemsToAutomate");
 		LazyWebElement testLazyWebElement = new LazyWebElement(this.getTestObject(), testBy, "TEST");
-
 		assertEquals(testBy, testLazyWebElement.getBy());
 	}
 
@@ -391,6 +411,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetTestObject() {
+		navigateToTestPage();
 		LazyWebElement testLazyWebElement = new LazyWebElement(this.getTestObject(), By.cssSelector("#ItemsToAutomate"),
 				"TEST");
 		assertEquals(this.getTestObject(), testLazyWebElement.getTestObject());
@@ -401,6 +422,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetAttribute() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertEquals(this.getDisabledItem().getAttribute("value"), DISABLED);
 	}
 
@@ -409,6 +431,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetAttributeWithParent() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertEquals(this.getDisabledInput().getValue(), DISABLED);
 	}
 
@@ -417,6 +440,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetCssValue() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertEquals(this.getDialogOneButton().getCssValue("overflow"), "visible");
 	}
 
@@ -425,6 +449,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetCssValueWithParent() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertEquals(this.getDisabledInput().getCssValue("max-width"), "280px");
 	}
 
@@ -433,6 +458,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSendKeys() throws TimeoutException, InterruptedException, ExecutionFailedException {
+		navigateToTestPage();
 		this.getFirstNameInputBox().sendKeys("test");
 		assertEquals(this.getFirstNameInputBox().getValue(), "test");
 	}
@@ -443,6 +469,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM, expectedExceptions = ExecutionFailedException.class)
 	public void lazyElementSendKeysWithParent()
 			throws TimeoutException, InterruptedException, ExecutionFailedException {
+		navigateToTestPage();
 		this.getDisabledInput().sendKeys("test");
 	}
 
@@ -454,6 +481,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSendSecretKeys()
 			throws IOException, ExecutionFailedException, InterruptedException, TimeoutException {
+		navigateToTestPage();
 		this.getFirstNameInputBox().sendKeys("beforeSuspendTest");
 		this.getFirstNameInputBox().clear();
 		this.getLastNameInputBox().sendSecretKeys("secretKeys");
@@ -478,6 +506,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSubmit() throws TimeoutException, InterruptedException, ExecutionFailedException {
+		navigateToTestPage();
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Employees");
 		UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
@@ -493,6 +522,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM, expectedExceptions = ExecutionFailedException.class)
 	public void lazyElementSubmitWithParent() throws TimeoutException, InterruptedException, ExecutionFailedException {
+		navigateToTestPage();
 		this.getDisabledInput().submit();
 	}
 
@@ -501,6 +531,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementDisplayed() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertTrue(this.getDialogOneButton().isDisplayed());
 		assertFalse(this.getDialogOne().isDisplayed());
 	}
@@ -510,6 +541,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementDisplayedWithParent() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertTrue(this.getDisabledInput().isDisplayed());
 	}
 
@@ -518,6 +550,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementEnabled() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertFalse(this.getDisabledItem().isEnabled());
 		assertTrue(this.getFirstNameInputBox().isEnabled());
 	}
@@ -527,6 +560,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementEnabledWithParent() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertFalse(this.getDisabledInput().isEnabled());
 		assertTrue(this.getFlowerTableCaptionWithParent().isEnabled());
 	}
@@ -536,8 +570,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSelected() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		ElementHandler.selectDropDownOptionByValue(this.getWebDriver(), By.cssSelector("#computerParts"), "two");
-
 		assertTrue(this.getSelected().isSelected());
 		assertFalse(this.getNotSelected().isSelected());
 	}
@@ -547,6 +581,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementText() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertEquals(this.getDialogOneButton().getText(), "Show dialog");
 	}
 
@@ -555,9 +590,9 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementTextWithParent() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		LazyWebElement elem = this.getFlowerTableCaptionWithParent().getParent();
 		elem.getText();
-
 		assertEquals(this.getFlowerTableCaptionWithParent().getText(), FLOWER_TABLE);
 	}
 
@@ -566,6 +601,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementLocation() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		Point point = this.getFirstNameInputBox().getLocation();
 		assertTrue(point.getX() > 0 && point.getY() > 0, "Unexpected point: " + point);
 	}
@@ -575,6 +611,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementLocationWithParent() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		Point earlierPoint = this.getFirstNameInputBox().getLocation();
 		Point laterPoint = this.getDisabledInput().getLocation();
 
@@ -587,6 +624,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSize() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		Dimension size = this.getFirstNameInputBox().getSize();
 		assertTrue(size.getWidth() > 0 && size.getHeight() > 0, "Height and/or width are less than 1");
 	}
@@ -596,6 +634,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSizeWithParent() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		Dimension size = this.getDisabledInput().getSize();
 		assertTrue(size.getWidth() > 152 && size.getHeight() > 21,
 				"Height of greater than 22 and width of greater than 152, but got " + size);
@@ -606,6 +645,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementTagName() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertEquals(this.getFirstNameInputBox().getTagName(), "input");
 	}
 
@@ -614,6 +654,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementTagNameWithParent() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		assertEquals(this.getFlowerTableCaptionWithParent().getTagName(), "strong");
 	}
 
@@ -622,6 +663,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetVisibleElement() {
+		navigateToTestPage();
 		assertNotEquals(this.getFirstNameInputBox().getRawVisibleElement(), null);
 	}
 
@@ -630,6 +672,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetClickableElement() {
+		navigateToTestPage();
 		assertNotNull(this.getFirstNameInputBox().getRawClickableElement());
 	}
 
@@ -638,6 +681,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetExistingElement() {
+		navigateToTestPage();
 		assertNotNull(this.getFirstNameInputBox().getRawExistingElement());
 	}
 
@@ -646,6 +690,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementToString() {
+		navigateToTestPage();
+
 		// Hard-coded userFriendlyName due to private access on LazyElement
 		String stringValue = this.getFlowerTableLazyElement().getBy().toString() + FLOWER_TABLE;
 
@@ -657,6 +703,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementWithParentToString() {
+		navigateToTestPage();
+
 		// Hard-coded userFriendlyName due to private access on LazyElement
 		String stringValue = this.getFlowerTableLazyElement().getBy().toString() + FLOWER_TABLE
 				+ this.getFlowerTableCaptionWithParent().getBy().toString() + FLOWER_TABLE_CAPTION;
@@ -669,6 +717,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElement() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		LazyWebElement mainElement = new LazyWebElement(this.getTestObject(), By.cssSelector("#FoodTable"), "Header");
 		LazyWebElement subElement = mainElement.findElement(By.cssSelector(THREAD));
 		assertEquals(subElement.getText(), "Number of items");
@@ -679,6 +728,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindRawElement() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		WebElement firstElement = this.getFlowerTableLazyElement().findRawElement(By.cssSelector(THREAD));
 		assertEquals(firstElement.getText(), "Flowers");
 	}
@@ -688,6 +738,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElements() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		List<WebElement> elements = this.getFlowerTableLazyElement().findRawElements(By.cssSelector(THREAD));
 		assertEquals(elements.get(4).getText(), "Color");
 	}
@@ -697,6 +748,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElementsStackedWithStale() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		LazyWebElement lazyRoot = this.getDivRoot();
 		LazyWebElement secondTable = lazyRoot.findElements(By.cssSelector("TABLE")).get(1);
 		LazyWebElement lastTableHeader = secondTable.findElements(By.cssSelector(THREAD)).get(4);
@@ -712,6 +764,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElementsAreLazy() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		SoftAssert softAssertion = new SoftAssert();
 		for (LazyWebElement element : this.getFlowerTableLazyElement().findElements(By.cssSelector(THREAD))) {
 			Predicate<LazyWebElement> predicate = e -> {
@@ -729,6 +782,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM, expectedExceptions = { TimeoutException.class })
 	public void lazyElementFindElementsRespectAction()
 			throws InterruptedException, TimeoutException, ExecutionFailedException {
+		navigateToTestPage();
 		LazyWebElement firstElement = this.getDivRoot().findElements(this.getDisabledItem().getBy()).get(0);
 
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
@@ -743,10 +797,10 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElementsGetVisible() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		LazyWebElement lazyRoot = this.getDivRoot();
 		LazyWebElement secondTable = lazyRoot.findElements(By.cssSelector("TABLE")).get(1);
 		WebElement getSecondTable = secondTable.getRawVisibleElement();
-
 		assertEquals(secondTable.getText(), getSecondTable.getText());
 	}
 
@@ -755,6 +809,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindRawElementWorksWithActions() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		WebElement rawElement = this.getDivRoot().findRawElement(this.getDisabledItem().getBy());
 
 		Actions a1 = new Actions(this.getWebDriver());
@@ -770,6 +825,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementDoesExist() throws TimeoutException, InterruptedException {
+		navigateToTestPage();
 		LazyWebElement element = this.getFlowerTableLazyElement();
 		assertTrue(element.doesExist(), "element didn't exist when it was expected to");
 	}

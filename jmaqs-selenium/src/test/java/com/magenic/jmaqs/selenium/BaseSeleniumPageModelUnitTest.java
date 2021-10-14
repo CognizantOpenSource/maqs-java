@@ -26,6 +26,8 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   public void setUp() {
     automationPageModel = new AutomationPageModel(this.getTestObject());
+    automationPageModel.open();
+    automationPageModel.waitForPageLoad();
   }
 
   /**
@@ -85,7 +87,6 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testIsPageLoaded() {
     setUp();
-    automationPageModel.open();
     Assert.assertTrue(automationPageModel.isPageLoaded());
   }
 
@@ -95,9 +96,6 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testGetElementCalledTwiceReturnsTheSameElement() {
     setUp();
-    automationPageModel.open();
-    automationPageModel.waitForPageLoad();
-
     LazyWebElement initElem = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
     LazyWebElement cachedElem = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
 
@@ -112,8 +110,6 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithBy() throws TimeoutException, InterruptedException {
     setUp();
-    automationPageModel.open();
-    automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
         .get(automationPageModel.employeePageTitle.toString());
@@ -132,8 +128,6 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithByAndName() throws TimeoutException, InterruptedException {
     setUp();
-    automationPageModel.open();
-    automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.employeePageTitle,
         "Page Title");
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
@@ -154,8 +148,6 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementAndBy() throws TimeoutException, InterruptedException {
     setUp();
-    automationPageModel.open();
-    automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.body,
         automationPageModel.employeePageTitle);
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
@@ -175,8 +167,6 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementByAndName() throws TimeoutException, InterruptedException {
     setUp();
-    automationPageModel.open();
-    automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.body,
         automationPageModel.employeePageTitle, "Page Title");
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
