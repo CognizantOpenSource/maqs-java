@@ -4,7 +4,6 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -26,7 +25,7 @@ import org.testng.annotations.Test;
 /**
  * The type Selenium utilities test.
  */
-public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
+public class SeleniumUtilitiesUnitTest extends BaseSeleniumTest {
 
         /**
          * The web driver.
