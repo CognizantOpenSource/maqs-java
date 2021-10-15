@@ -5,7 +5,10 @@
 package com.magenic.jmaqs.accessibility;
 
 import com.deque.html.axecore.axeargs.AxeRunOptions;
-import com.deque.html.axecore.results.*;
+import com.deque.html.axecore.results.Check;
+import com.deque.html.axecore.results.CheckedNode;
+import com.deque.html.axecore.results.Results;
+import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +22,10 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
