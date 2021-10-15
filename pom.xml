@@ -51,6 +51,7 @@
         <module>jmaqs-base</module>
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
+        <module>jmaqs-webservices-jdk11</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
         <module>jmaqs-cucumber</module>
@@ -266,6 +267,9 @@
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
         <jdk.version>11</jdk.version>
+        <chromedriver.version>94.0.4606.41</chromedriver.version>
+        <geckodriver.version>0.28.0</geckodriver.version>
+        <edgedriver.version>5.16299</edgedriver.version>
     </properties>
 
     <dependencyManagement>
@@ -313,6 +317,11 @@
             <dependency>
                 <groupId>com.magenic.jmaqs.webservices</groupId>
                 <artifactId>jmaqs-webservices-jdk8</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.webservices</groupId>
+                <artifactId>jmaqs-webservices-jdk11</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
