@@ -31,10 +31,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
@@ -172,6 +176,7 @@ public class HtmlReporter {
     Document doc = Jsoup.parse(stringBuilder);
 
     TakesScreenshot screenshot = getScreenShot(context);
+
     doc.select("style").append(getCss(context));
 
     Element contentArea = doc.select("content").first();
@@ -244,11 +249,12 @@ public class HtmlReporter {
 
     if (violationCount > 0 && requestedResults.contains(ResultType.Violations)) {
       getReadableAxeResults(results.getViolations(), ResultType.Violations, resultsFlex);
+      setImages(ResultType.Violations, doc, context, screenshot );
     }
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
       getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete, resultsFlex);
-      setImages(ResultType.Incomplete.name(), doc, context, screenshot);
+      setImages(ResultType.Incomplete, doc, context, screenshot);
     }
 
     if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
@@ -381,11 +387,9 @@ public class HtmlReporter {
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
         htmlAndSelectorWrapper = new Element("div");
-        htmlAndSelectorWrapper.attr(classString, "emFour");
         elementNodes.appendChild(htmlAndSelectorWrapper);
-      }
-    }
         addFixes(item, type, htmlAndSelectorWrapper);
+        htmlAndSelectorWrapper.attr(CLASS, "emFour");
       }
     }
   }
@@ -476,25 +480,23 @@ public class HtmlReporter {
     htmlAndSelectorWrapper.appendChild(htmlAndSelector);
   }
 
-  private static void setImages(String resultType, Element doc,
+  private static void setImages(ResultType resultType, Element doc,
       SearchContext searchContext, TakesScreenshot screenshot) throws IOException {
-    if (checkForNoWebDriver(searchContext)) {
+    if (!checkForNoWebDriver(searchContext)) {
       return;
     }
 
-    Element section = doc.getElementById(resultType + "Section");
+    Element section = doc.getElementById(resultType.name() + "Section");
     Elements findings = section.getElementsByClass("findings");
     int count = 1;
 
     for (Element finding : findings) {
       for (Element table : finding.getElementsByClass("htmlTable")) {
-        String imageString;
+        String elementName = resultType.name() + "Element" + count++;
+
         Element emThree = table.selectFirst("div.emThree");
         String selectorText = emThree.selectFirst("p.wrapTwo").text();
-
-        imageString = getDataElementString(screenshot, searchContext.findElement(By.cssSelector(selectorText)));
-
-        String elementName = resultType + "Element" + count++;
+        String imageString = getDataElementString(screenshot, searchContext.findElement(By.cssSelector(selectorText)));
 
         Element image = new Element("img");
         image.attributes().put("src", imageString);
@@ -514,17 +516,11 @@ public class HtmlReporter {
             .contains("Test page with axe-core violations for integration test")) {
           return true;
         }
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         throw new WebDriverException("web driver is not open");
       }
     }
     return false;
-  }
-
-  private static String getDataImageString(SearchContext context) {
-    TakesScreenshot newScreen = (TakesScreenshot) context;
-    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
   }
 
   private static TakesScreenshot getScreenShot(SearchContext context) {
