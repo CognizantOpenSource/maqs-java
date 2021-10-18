@@ -28,6 +28,11 @@ public class WebServiceUtilities {
   private static final ObjectMapper xmlMapper = new XmlMapper();
 
   /**
+   * Error exception message.
+   */
+  private static final String EXCEPTION_MESSAGE = "Only xml and json conversions are currently supported";
+
+  /**
    * private class constructor.
    */
   private WebServiceUtilities() {
@@ -61,14 +66,14 @@ public class WebServiceUtilities {
       responseBody = deserializeXml(response, type);
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
 
     return responseBody;
   }
 
   /**
-   * Create string entity string entity.
+   * Create a string entity.
    *
    * @param <T>         the type parameter
    * @param body        the body
@@ -77,15 +82,15 @@ public class WebServiceUtilities {
    * @throws JsonProcessingException the json processing exception
    */
   public static <T> String createStringEntity(T body, MediaType contentType) throws JsonProcessingException {
-    if (contentType.toString().toUpperCase().contains("XML")) {
+    if (contentType.equals(MediaType.APP_XML)) {
       return serializeXml(body);
-    } else if (contentType.toString().toUpperCase().contains("JSON")) {
+    } else if (contentType.equals(MediaType.APP_JSON)) {
       return serializeJson(body);
-    } else if (contentType.toString().toUpperCase().contains("TEXT")) {
+    } else if (contentType.equals(MediaType.PLAIN_TEXT)) {
       return body.toString();
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
   }
 
@@ -114,24 +119,23 @@ public class WebServiceUtilities {
   }
 
   /**
-   * Deserialize response to specific object.
-   *
+   * Deserialize the response based on the media type.
    * @param <T>         the type parameter
-   * @param message the String Http Response message
+   * @param response the String Http Response message
    * @param mediaType the type the message is going to be turned into
    * @param type the class or java object to be transferred into
    * @return the response type
-   * @throws IOException the json processing exception
+   * @throws IOException the io exception
    */
-  public static <T> T deserializeResponse(HttpResponse<String> message, MediaType mediaType, Type type)
+  public static <T> T deserializeResponse(HttpResponse<String> response, MediaType mediaType, Type type)
       throws IOException {
-    if (mediaType.toString().toUpperCase().contains("XML")) {
-      return deserializeXml(message, type);
-    } else if (mediaType.toString().toUpperCase().contains("JSON")) {
-      return deserializeJson(message, type);
+    if (mediaType.equals(MediaType.APP_XML)) {
+      return deserializeXml(response, type);
+    } else if (mediaType.equals(MediaType.APP_JSON)) {
+      return deserializeJson(response, type);
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
   }
 
