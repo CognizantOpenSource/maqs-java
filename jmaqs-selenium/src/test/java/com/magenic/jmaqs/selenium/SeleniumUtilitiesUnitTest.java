@@ -23,7 +23,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -32,23 +31,11 @@ import org.testng.annotations.Test;
 public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
         /**
-         * The web driver used in the test.
-         */
-        private WebDriver webDriver;
-
-        /**
-         * Sets up the web driver for the unit tests.
-         */
-        @BeforeMethod
-        public void setUp() {
-                webDriver = WebDriverFactory.getDefaultBrowser();
-        }
-
-        /**
          * Test capture screenshot no append.
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testCaptureScreenshotNoAppend() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -75,6 +62,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testCaptureScreenshotAppend() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -106,6 +94,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testCaptureScreenshotConsoleLogger() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         ConsoleLogger consoleLogger = new ConsoleLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
@@ -128,6 +117,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testCaptureScreenshotCustomDirectoryFileName() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -158,6 +148,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testSavePageSourceNoAppend() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -184,6 +175,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testSavePageSourceAppend() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -215,6 +207,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testSavePageSourceCustomDirectoryFileName() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -250,6 +243,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testSavePageSourceConsoleLogger() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         ConsoleLogger consoleLogger = new ConsoleLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
@@ -276,6 +270,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testWebElementToWebDriver() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         WebDriverListener listener = new EventHandler(this.getLogger());
                         webDriver = new EventFiringDecorator(listener).decorate(webDriver);
@@ -301,6 +296,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          */
         @Test(groups = TestCategories.SELENIUM)
         public void testKillDriver() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
                         ConsoleLogger consoleLogger = new ConsoleLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
