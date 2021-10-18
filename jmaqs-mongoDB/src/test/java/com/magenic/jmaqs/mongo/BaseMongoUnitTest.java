@@ -8,6 +8,9 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Test the Base Mongo Test functionality.
+ */
 public class BaseMongoUnitTest extends BaseMongoTest {
   @Test(groups = TestCategories.MONGO)
   public void testGetMongoDBDriver() {

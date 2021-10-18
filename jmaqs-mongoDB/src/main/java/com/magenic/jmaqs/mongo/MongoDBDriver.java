@@ -17,6 +17,7 @@ import org.bson.Document;
  * Class to wrap the MongoCollection and related helper functions.
  */
 public class MongoDBDriver implements AutoCloseable {
+
   /**
    * Initializes a new instance of the MongoDBDriver class.
    * @param collection The collection object

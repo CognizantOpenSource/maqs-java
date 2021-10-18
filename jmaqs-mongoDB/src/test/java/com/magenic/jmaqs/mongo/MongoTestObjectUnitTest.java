@@ -12,8 +12,10 @@ import org.bson.Document;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Test the mongo test object functionality.
+ */
 public class MongoTestObjectUnitTest extends BaseMongoTest {
-
 
   /**
    * Is the collection override respected.

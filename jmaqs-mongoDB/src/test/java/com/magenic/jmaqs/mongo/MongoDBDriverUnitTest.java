@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /**
- * Test basic mongo base test functionality
+ * Test mongo base test functionality
  */
 public class MongoDBDriverUnitTest extends BaseMongoTest {
 

@@ -14,12 +14,13 @@ import org.testng.ITestResult;
  * Generic base MongoDB test class.
  */
 public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
+
   /**
    * Initializes a new instance of the BaseMongoTest class,
    * Setup the database client for each test class.
    */
   public BaseMongoTest() {
-    // Currently not populated with any logic
+    // Currently, not populated with any logic
   }
 
   /**

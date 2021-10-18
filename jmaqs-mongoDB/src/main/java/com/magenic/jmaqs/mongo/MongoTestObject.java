@@ -14,6 +14,7 @@ import org.bson.Document;
  * Mongo test context data.
  */
 public class MongoTestObject extends BaseTestObject {
+
   /**
    * Initializes a new instance of the MongoTestObject class.
    * @param connectionString Client connection string

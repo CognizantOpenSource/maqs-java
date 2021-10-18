@@ -14,6 +14,7 @@ import org.bson.Document;
  * Mongo database driver.
  */
 public class MongoDriverManager extends DriverManager<MongoDBDriver> {
+
   /**
    * Cached copy of the connection driver.
    */
@@ -79,7 +80,6 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
   public MongoDBDriver getMongoDriver() {
     return this.getBase();
   }
-
 
   protected void overrideDriverGet(Supplier<MongoCollection<Document>> driverGet) {
     this.setBaseDriver(new MongoDBDriver(driverGet.get()));

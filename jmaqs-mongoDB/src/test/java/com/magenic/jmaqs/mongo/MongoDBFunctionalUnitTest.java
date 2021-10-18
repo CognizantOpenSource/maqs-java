@@ -10,10 +10,12 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test Mongo Functionality.
+ */
 public class MongoDBFunctionalUnitTest extends BaseMongoTest{
 
   /**
