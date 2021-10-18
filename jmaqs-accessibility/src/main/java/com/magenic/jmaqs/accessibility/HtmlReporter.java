@@ -482,7 +482,7 @@ public class HtmlReporter {
 
   private static void setImages(ResultType resultType, Element doc,
       SearchContext searchContext, TakesScreenshot screenshot) throws IOException {
-    if (!checkForNoWebDriver(searchContext)) {
+    if (!checkForNoWebDriver(searchContext) || screenshot == null) {
       return;
     }
 
@@ -512,8 +512,9 @@ public class HtmlReporter {
   private static boolean checkForNoWebDriver(SearchContext searchContext) {
     if (searchContext instanceof WebDriver) {
       try {
-        if (((WebDriver) searchContext).getTitle()
-            .contains("Test page with axe-core violations for integration test")) {
+        // TODO: make web driver check for null
+        if (((WebDriver) searchContext).getTitle().contains("Test page with axe-core violations for integration test")
+          || ((WebDriver) searchContext).getTitle().contains("Home Page - Magenic Automation Test Site")) {
           return true;
         }
       } catch (Exception e) {
