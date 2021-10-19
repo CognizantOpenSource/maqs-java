@@ -503,8 +503,9 @@ public abstract class AbstractLazyElement {
    * @return The location and size of the element
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
+   * @deprecated method is not used
    */
-  @Deprecated
+  @Deprecated(since="2021", forRemoval=true)
   public Rectangle getRect() throws InterruptedException {
     return new Rectangle(this.getLocation(), this.getSize());
   }
@@ -516,8 +517,9 @@ public abstract class AbstractLazyElement {
    * @return The type to get the screenshot as
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
+   * @deprecated method is not used
    */
-  @Deprecated
+  @Deprecated(since="2021", forRemoval=true)
   public <X> X getScreenshotAs(OutputType<X> target) throws InterruptedException {
     return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getScreenshotAs(target));
   }
@@ -565,7 +567,6 @@ public abstract class AbstractLazyElement {
       this.setCachedElement(getElement);
       return this.getCachedElement();
     } catch (NoSuchElementException noSuchElementException) {
-
       String messageBuilder =
           "Failed to find: " + this.userFriendlyName + System.lineSeparator() + "Locator: "
               + this.getBy() + System.lineSeparator() + "Because: " + noSuchElementException.getMessage()

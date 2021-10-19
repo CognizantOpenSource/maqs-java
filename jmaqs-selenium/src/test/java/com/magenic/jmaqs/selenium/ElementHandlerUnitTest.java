@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.exceptions.ElementHandlerException;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.selenium.pageModels.AutomationPageModel;
 import com.magenic.jmaqs.utilities.helper.ListProcessor;
@@ -67,13 +68,14 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit test for entering text into a text box and getting text from a text box.
    */
-  @Test(groups = TestCategories.SELENIUM)
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementHandlerException.class)
   public void setTextBoxAndVerifyValueTest() {
     navigateToTestPage();
     String expectedValue = "Tester";
     ElementHandler.setTextBox(getWebDriver(), automationPageModel.firstNameTextBox, expectedValue);
     String actualValue = ElementHandler.getElementAttribute(getWebDriver(), automationPageModel.firstNameTextBox);
     verifyText(actualValue, expectedValue);
+    ElementHandler.setTextBox(getWebDriver(), automationPageModel.firstNameTextBox, "");
   }
 
   /**
