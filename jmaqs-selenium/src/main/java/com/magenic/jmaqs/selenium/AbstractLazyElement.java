@@ -505,7 +505,7 @@ public abstract class AbstractLazyElement {
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    * @deprecated method is not used
    */
-  @Deprecated(since="2021", forRemoval=true)
+  @Deprecated(since = "2021", forRemoval = true)
   public Rectangle getRect() throws InterruptedException {
     return new Rectangle(this.getLocation(), this.getSize());
   }
@@ -519,7 +519,7 @@ public abstract class AbstractLazyElement {
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    * @deprecated method is not used
    */
-  @Deprecated(since="2021", forRemoval=true)
+  @Deprecated(since = "2021", forRemoval = true)
   public <X> X getScreenshotAs(OutputType<X> target) throws InterruptedException {
     return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getScreenshotAs(target));
   }
