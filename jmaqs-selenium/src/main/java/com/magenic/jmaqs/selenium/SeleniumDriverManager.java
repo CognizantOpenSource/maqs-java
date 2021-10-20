@@ -70,7 +70,6 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    */
   public WebDriver getWebDriver() {
     if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-
       WebDriverListener listener = new EventHandler(this.getLogger());
       this.baseDriver = new EventFiringDecorator(listener).decorate(this.getBase());
 
