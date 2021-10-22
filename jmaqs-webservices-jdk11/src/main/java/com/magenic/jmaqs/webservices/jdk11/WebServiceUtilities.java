@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.webservices.jdk11;
@@ -12,7 +12,6 @@ import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
-import org.apache.http.entity.ContentType;
 
 /**
  * The type Web service utilities.
@@ -27,6 +26,11 @@ public class WebServiceUtilities {
    * used to serialize and deserialize xml properties.
    */
   private static final ObjectMapper xmlMapper = new XmlMapper();
+
+  /**
+   * Error exception message.
+   */
+  private static final String EXCEPTION_MESSAGE = "Only xml and json conversions are currently supported";
 
   /**
    * private class constructor.
@@ -62,14 +66,14 @@ public class WebServiceUtilities {
       responseBody = deserializeXml(response, type);
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
 
     return responseBody;
   }
 
   /**
-   * Create string entity string entity.
+   * Create a string entity.
    *
    * @param <T>         the type parameter
    * @param body        the body
@@ -77,14 +81,16 @@ public class WebServiceUtilities {
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
-    if (contentType.toString().toUpperCase().contains("XML")) {
+  public static <T> String createStringEntity(T body, MediaType contentType) throws JsonProcessingException {
+    if (contentType.equals(MediaType.APP_XML)) {
       return serializeXml(body);
-    } else if (contentType.toString().toUpperCase().contains("JSON")) {
+    } else if (contentType.equals(MediaType.APP_JSON)) {
       return serializeJson(body);
+    } else if (contentType.equals(MediaType.PLAIN_TEXT)) {
+      return body.toString();
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
   }
 
@@ -113,6 +119,27 @@ public class WebServiceUtilities {
   }
 
   /**
+   * Deserialize the response based on the media type.
+   * @param <T>         the type parameter
+   * @param response the String Http Response message
+   * @param mediaType the type the message is going to be turned into
+   * @param type the class or java object to be transferred into
+   * @return the response type
+   * @throws IOException the io exception
+   */
+  public static <T> T deserializeResponse(HttpResponse<String> response, MediaType mediaType, Type type)
+      throws IOException {
+    if (mediaType.equals(MediaType.APP_XML)) {
+      return deserializeXml(response, type);
+    } else if (mediaType.equals(MediaType.APP_JSON)) {
+      return deserializeJson(response, type);
+    } else {
+      throw new IllegalArgumentException(
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
+    }
+  }
+
+  /**
    * Deserialize json to a specified object.
    *
    * @param <T>     the type parameter
@@ -122,7 +149,8 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeJson(HttpResponse<String> message, Type type) throws IOException {
-    return objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
+    return checkMessageBodyEmpty(message) ? null
+        : objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
   }
 
   /**
@@ -135,6 +163,16 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
-    return xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
+    return checkMessageBodyEmpty(message) ? null
+        : xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
+  }
+
+  /**
+   * Checks the message body and returns a boolean if it is an Empty string or null.
+   * @param message the Http Response string to get the body
+   * @return boolean value if the body is empty
+   */
+  private static boolean checkMessageBodyEmpty(HttpResponse<String> message) {
+    return message.body().isEmpty() || message.body() == null;
   }
 }
