@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.utilities.logging;
@@ -38,6 +38,14 @@ public abstract class Logger {
    */
   protected Logger(MessageType level) {
     this.logLevel = level;
+  }
+
+  /**
+   * Gets the logging level.
+   * @return the Message Type
+   */
+  public MessageType getLoggingLevel() {
+    return this.logLevel;
   }
 
   /**
