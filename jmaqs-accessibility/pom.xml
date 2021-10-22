@@ -15,16 +15,21 @@
     <name>JMAQS Accessibility Testing Module</name>
     <packaging>jar</packaging>
 
+    <properties>
+        <apachecommons.version>1.9</apachecommons.version>
+        <deque.version>4.3.1</deque.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.deque.html.axe-core</groupId>
             <artifactId>selenium</artifactId>
-            <version>4.2.2</version>
+            <version>${deque.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.9</version>
+            <version>${apachecommons.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.selenium</groupId>
