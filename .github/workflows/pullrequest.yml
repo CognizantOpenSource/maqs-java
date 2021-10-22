@@ -65,6 +65,7 @@ jobs:
         run: mvn -B validate --file pom.xml -e -fae
   labels:
     name: Pull Request Labels
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Label Pull Request
