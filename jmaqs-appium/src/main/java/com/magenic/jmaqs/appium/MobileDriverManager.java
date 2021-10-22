@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.appium;
@@ -57,7 +57,7 @@ public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>>
 
     try {
       AppiumDriver<WebElement> driver = this.getMobileDriver();
-      driver.close();
+      //driver.close();
       driver.quit();
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR,
