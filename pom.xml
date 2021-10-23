@@ -274,6 +274,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>5.0.2</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
