@@ -243,7 +243,8 @@
                         <configuration>
                             <parallel>methods</parallel>
                             <threadCount>5</threadCount>
-                            <argLine>${argLine}</argLine>
+<!--                            <argLine>${argLine}</argLine>-->
+<!--                            <argLine>-javaagent @{maven.dependency.io.github.bonigarcia:webdrivermanager:jar:path}</argLine>-->
                         </configuration>
                     </plugin>
                 </plugins>

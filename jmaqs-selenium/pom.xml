@@ -77,6 +77,10 @@
             <artifactId>selenium-support</artifactId>
             <version>${selenium.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -88,6 +92,7 @@
                     <execution>
                         <goals>
                             <goal>properties</goal>
+                            <goal>build-classpath</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -97,8 +102,17 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
-                    <argLine>-javaagent:${io.github.bonigarcia:webdrivermanager:jar}</argLine>
+                    <parallel>methods</parallel>
+                    <threadCount>5</threadCount>
+                    <argLine>-javaagent:@{io.github.bonigarcia:webdrivermanager:jar}</argLine>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-testng</artifactId>
+                        <version>3.0.0-M5</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <!--<plugin>
                 <groupId>com.github.webdriverextensions</groupId>

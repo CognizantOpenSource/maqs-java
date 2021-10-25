@@ -86,9 +86,9 @@ public class WebDriverFactory {
     } catch (Exception e) {
 
       // Log that something went wrong
-      String message =  "Failed to initial web driver because: %s %s"
+      String message = "Failed to initial web driver because: %s %s"
           + "This likely means your web driver is missing, unsupported or out of date.";
-      message = StringProcessor.safeFormatter(message, e.getMessage() , System.lineSeparator());
+      message = StringProcessor.safeFormatter(message, e.getMessage(), System.lineSeparator());
 
       throw new WebDriverFactoryException(message, e);
     }
@@ -110,7 +110,7 @@ public class WebDriverFactory {
       chromeOptions.addArguments("--no-sandbox");
       chromeOptions.addArguments("--disable-dev-shm-usage");
     }
-    
+
     return chromeOptions;
   }
 
@@ -196,9 +196,11 @@ public class WebDriverFactory {
    * @return the chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
-    System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
     WebDriver driver = new ChromeDriver(chromeOptions);
+    //    System.setProperty("webdriver.chrome.driver",
+    //        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator +
+    //        WebDriverFile.CHROME.getFileName());
+    //
     setBrowserSize(driver, size);
     return driver;
   }
@@ -210,8 +212,9 @@ public class WebDriverFactory {
    * @return the headless chrome driver
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
-    System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
+    //    System.setProperty("webdriver.chrome.driver",
+    //        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator +
+    //        WebDriverFile.CHROME.getFileName());
     return new ChromeDriver(headlessChromeOptions);
   }
 
