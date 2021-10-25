@@ -24,12 +24,12 @@ public class EventHandler implements WebDriverListener {
   /**
    * String value of value for duplicate instances in this class.
    */
-  private static final String valueField = "value";
+  private static final String VALUE = "value";
 
   /**
    * String value of before finding element value for duplicate instance in this class.
    */
-  private static final String beforeFindingString = "Before finding element By: %s";
+  private static final String BEFORE_FINDING_STRING = "Before finding element By: %s";
 
   /**
    * The Event Handler Logger.
@@ -66,7 +66,7 @@ public class EventHandler implements WebDriverListener {
    */
   @Override
   public void beforeFindElement(WebDriver driver, By by) {
-    this.logger.logMessage(MessageType.INFORMATION, beforeFindingString, by.toString());
+    this.logger.logMessage(MessageType.INFORMATION, BEFORE_FINDING_STRING, by.toString());
   }
 
   /**
@@ -89,7 +89,7 @@ public class EventHandler implements WebDriverListener {
    */
   @Override
   public void beforeFindElements(WebDriver driver, By by) {
-    this.logger.logMessage(MessageType.INFORMATION, beforeFindingString, by.toString());
+    this.logger.logMessage(MessageType.INFORMATION, BEFORE_FINDING_STRING, by.toString());
   }
 
   /**
@@ -100,7 +100,7 @@ public class EventHandler implements WebDriverListener {
    */
   @Override
   public void beforeFindElements(WebElement element, By by) {
-    this.logger.logMessage(MessageType.INFORMATION, beforeFindingString, by.toString());
+    this.logger.logMessage(MessageType.INFORMATION, BEFORE_FINDING_STRING, by.toString());
   }
 
   /**
@@ -190,7 +190,7 @@ public class EventHandler implements WebDriverListener {
    */
   @Override
   public void beforeSendKeys(WebElement element, CharSequence[] keysToSend) {
-    String value = element.getAttribute(valueField);
+    String value = element.getAttribute(VALUE);
     this.logger.logMessage(MessageType.INFORMATION, "Element value before change: %s", value);
   }
 
@@ -202,7 +202,7 @@ public class EventHandler implements WebDriverListener {
    */
   @Override
   public void afterSendKeys(WebElement element, CharSequence[] keysToSend) {
-    String value = element.getAttribute(valueField);
+    String value = element.getAttribute(VALUE);
     this.logger.logMessage(MessageType.INFORMATION, "Element value changed to: %s", value);
   }
 
@@ -213,7 +213,7 @@ public class EventHandler implements WebDriverListener {
    */
   @Override
   public void beforeClear(WebElement element) {
-    String value = element.getAttribute(valueField);
+    String value = element.getAttribute(VALUE);
     this.logger.logMessage(MessageType.INFORMATION, "Element value before clear: %s", value);
   }
 
@@ -224,7 +224,7 @@ public class EventHandler implements WebDriverListener {
    */
   @Override
   public void afterClear(WebElement element) {
-    String value = element.getAttribute(valueField);
+    String value = element.getAttribute(VALUE);
     this.logger.logMessage(MessageType.INFORMATION, "Element value changed to: %s", value);
   }
 
