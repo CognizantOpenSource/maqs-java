@@ -8,7 +8,6 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.List;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -239,16 +238,6 @@ public class EventHandler implements WebDriverListener {
   }
 
   /**
-   * Log message before an exception is thrown getting text from an element.
-   *
-   * @param alert the exception being thrown
-   */
-  @Override
-  public void beforeGetText(Alert alert) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before getting text from element");
-  }
-
-  /**
    * Log message after getting text from a web element.
    *
    * @param element The element
@@ -256,16 +245,6 @@ public class EventHandler implements WebDriverListener {
    */
   @Override
   public void afterGetText(WebElement element, String text) {
-    this.logger.logMessage(MessageType.INFORMATION, "Got element text: %s", text);
-  }
-
-  /**
-   * Log message after an exception is thrown getting text from an element.
-   * @param alert the exception being thrown
-   * @param text The text from the element
-   */
-  @Override
-  public void afterGetText(Alert alert, String text) {
     this.logger.logMessage(MessageType.INFORMATION, "Got element text: %s", text);
   }
 
@@ -281,17 +260,6 @@ public class EventHandler implements WebDriverListener {
   }
 
   /**
-   * Log message before navigating to a page.
-   *
-   * @param url    The URL
-   * @param navigation The Web Driver
-   */
-  @Override
-  public void beforeTo(WebDriver.Navigation navigation, URL url) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before navigating to page: %s", url);
-  }
-
-  /**
    * Log message after navigating to a page.
    *
    * @param url    The URL
@@ -299,17 +267,6 @@ public class EventHandler implements WebDriverListener {
    */
   @Override
   public void afterTo(WebDriver.Navigation navigation, String url) {
-    this.logger.logMessage(MessageType.INFORMATION, "After navigating to page: %s", url);
-  }
-
-  /**
-   * Log message after navigating to a page.
-   *
-   * @param url    The URL
-   * @param navigation The Web Driver
-   */
-  @Override
-  public void afterTo(WebDriver.Navigation navigation, URL url) {
     this.logger.logMessage(MessageType.INFORMATION, "After navigating to page: %s", url);
   }
 

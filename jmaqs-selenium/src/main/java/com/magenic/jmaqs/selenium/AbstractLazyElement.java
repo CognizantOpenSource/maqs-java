@@ -357,8 +357,8 @@ public abstract class AbstractLazyElement {
    * @return The click-able web element
    */
   public WebElement getRawClickableElement() {
-
     Supplier<WebElement> elementSupplier;
+
     if (this.elementIndex == null) {
       if (this.parent == null) {
         elementSupplier = () -> {
@@ -386,7 +386,6 @@ public abstract class AbstractLazyElement {
    * @return The existing web element
    */
   public WebElement getRawExistingElement() {
-
     Supplier<WebElement> elementSupplier;
 
     if (this.elementIndex == null) {
@@ -503,7 +502,7 @@ public abstract class AbstractLazyElement {
    * @return The location and size of the element
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
-   * @deprecated due to getRect method being handled in web driver class
+   * @deprecated due to getRect method being handled in web driver/ web element class
    */
   @Deprecated
   public Rectangle getRect() throws InterruptedException {
@@ -517,7 +516,7 @@ public abstract class AbstractLazyElement {
    * @return The type to get the screenshot as
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
-   * @deprecated due to getRect method being handled in web driver class
+   * @deprecated due to getScreenshotAs method being handled in web driver class
    */
   @Deprecated
   public <X> X getScreenshotAs(OutputType<X> target) throws InterruptedException {
@@ -568,9 +567,9 @@ public abstract class AbstractLazyElement {
       return this.getCachedElement();
     } catch (NoSuchElementException noSuchElementException) {
       String messageBuilder =
-          "Failed to find: " + this.userFriendlyName + System.lineSeparator() + "Locator: "
-              + this.getBy() + System.lineSeparator() + "Because: " + noSuchElementException.getMessage()
-              + System.lineSeparator();
+          "Failed to find: " + this.userFriendlyName + System.lineSeparator()
+              + "Locator: " + this.getBy() + System.lineSeparator()
+              + "Because: " + noSuchElementException.getMessage() + System.lineSeparator();
       throw new NoSuchElementException(messageBuilder, noSuchElementException);
     }
   }
