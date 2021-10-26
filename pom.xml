@@ -253,19 +253,22 @@
 
     <properties>
         <revision>2.1.1-SNAPSHOT</revision>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>11</jdk.version>
+        <testng.version>7.3.0</testng.version>
+
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
         <javadoc.plugin.version>3.3.1</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
-        <mvncheckstyle.plugin.version>3.1.2</mvncheckstyle.plugin.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.checkstyle.plugin.version>3.1.2</maven.checkstyle.plugin.version>
         <puppycheckstyle.plugin.version>8.38</puppycheckstyle.plugin.version>
+
         <jacoco.version>0.8.7</jacoco.version>
-        <testng.version>7.3.0</testng.version>
-        <selenium.version>3.141.59</selenium.version>
-        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
-        <jdk.version>11</jdk.version>
+
+        <selenium.version>3.141.59</selenium.version>
+        <webdriver.extensions>3.2.0</webdriver.extensions>
         <chromedriver.version>94.0.4606.41</chromedriver.version>
         <geckodriver.version>0.28.0</geckodriver.version>
         <edgedriver.version>5.16299</edgedriver.version>
@@ -421,7 +424,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${mvncheckstyle.plugin.version}</version>
+                <version>${maven.checkstyle.plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
