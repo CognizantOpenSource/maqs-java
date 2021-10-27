@@ -239,7 +239,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${surefire.plugin.version}</version>
+                        <version>${maven.surefire.plugin.version}</version>
                         <configuration>
                             <parallel>methods</parallel>
                             <threadCount>5</threadCount>
@@ -260,12 +260,17 @@
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
         <javadoc.plugin.version>3.3.1</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
-        <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
         <maven.checkstyle.plugin.version>3.1.2</maven.checkstyle.plugin.version>
-        <puppycheckstyle.plugin.version>8.38</puppycheckstyle.plugin.version>
+        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
+        <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
+        <puppy.checkstyle.plugin.version>8.38</puppy.checkstyle.plugin.version>
 
         <jacoco.version>0.8.7</jacoco.version>
         <checkstyle.version>8.29</checkstyle.version>
+
+        <commons.io.version>2.11.0</commons.io.version>
+        <apache.commons.version>1.9</apache.commons.version>
 
         <selenium.version>3.141.59</selenium.version>
         <webdriver.extensions>3.2.0</webdriver.extensions>
@@ -343,7 +348,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.2.7</version>
+                <version>${flatten.maven.plugin.version}</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>
@@ -400,7 +405,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>${maven.source.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -414,7 +419,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.plugin.version}</version>
+                <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>6</threadCount>
@@ -429,7 +434,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>${puppycheckstyle.plugin.version}</version>
+                        <version>${puppy.checkstyle.plugin.version}</version>
                     </dependency>
                 </dependencies>
                 <executions>

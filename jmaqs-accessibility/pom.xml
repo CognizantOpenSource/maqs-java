@@ -16,7 +16,6 @@
     <packaging>jar</packaging>
 
     <properties>
-        <apache.commons.version>1.9</apache.commons.version>
         <deque.axe.version>4.3.1</deque.axe.version>
     </properties>
 
