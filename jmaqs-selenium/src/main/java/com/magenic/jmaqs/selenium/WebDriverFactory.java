@@ -49,7 +49,6 @@ public class WebDriverFactory {
    * Gets default browser.
    *
    * @return the default browser
-   * @throws Exception the exception
    */
   public static WebDriver getDefaultBrowser() {
     return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
@@ -198,10 +197,6 @@ public class WebDriverFactory {
    * @return the chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
-    if (Config.doesKeyExist("WebDriverHintPath", ConfigSection.SELENIUM_MAQS)) {
-      System.setProperty("webdriver.chrome.driver",
-          getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
-    }
     WebDriver driver = new ChromeDriver(chromeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -214,11 +209,6 @@ public class WebDriverFactory {
    * @return the headless chrome driver
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
-    if (Config.doesKeyExist("WebDriverHintPath", ConfigSection.SELENIUM_MAQS)) {
-      System.setProperty("webdriver.chrome.driver",
-          getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
-    }
-
     return new ChromeDriver(headlessChromeOptions);
   }
 
@@ -230,12 +220,6 @@ public class WebDriverFactory {
    * @return the firefox driver
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
-    if (Config.doesKeyExist("WebDriverHintPath", ConfigSection.SELENIUM_MAQS)) {
-      System.setProperty("webdriver.gecko.driver",
-          getDriverLocation(WebDriverFile.FIREFOX.getFileName()) + File.separator
-              + WebDriverFile.FIREFOX.getFileName());
-    }
-
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
 
@@ -250,17 +234,6 @@ public class WebDriverFactory {
    * @return the edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
-    if (Config.doesKeyExist("WebDriverHintPath", ConfigSection.SELENIUM_MAQS)) {
-      String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName(),
-          getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFileName()));
-
-      // If we can't find an installed edge driver, look in the normal places
-      if (driverLocation.isEmpty()) {
-        driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName());
-      }
-
-      System.setProperty("webdriver.edge.driver", driverLocation + File.separator + WebDriverFile.EDGE.getFileName());
-    }
     EdgeDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -274,10 +247,6 @@ public class WebDriverFactory {
    * @return the internet explorer driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
-    if (Config.doesKeyExist("WebDriverHintPath", ConfigSection.SELENIUM_MAQS)) {
-      System.setProperty("webdriver.ie.driver",
-          getDriverLocation(WebDriverFile.IE.getFileName()) + File.separator + WebDriverFile.IE.getFileName());
-    }
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
 
@@ -457,7 +426,9 @@ public class WebDriverFactory {
    *
    * @param driverFile the driver file
    * @return the driver location
+   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */
+  @Deprecated(forRemoval = true)
   public static String getDriverLocation(String driverFile) {
     return getDriverLocation(driverFile, "", true);
   }
@@ -468,7 +439,9 @@ public class WebDriverFactory {
    * @param driverFile      the driver file
    * @param defaultHintPath the default hint path
    * @return the driver location
+   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */
+  @Deprecated(forRemoval = true)
   public static String getDriverLocation(String driverFile, String defaultHintPath) {
     return getDriverLocation(driverFile, defaultHintPath, true);
   }
@@ -480,7 +453,9 @@ public class WebDriverFactory {
    * @param defaultHintPath the default hint path
    * @param mustExist       the must exist
    * @return the driver location
+   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */
+  @Deprecated(forRemoval = true)
   public static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {
     // Get the hint path from the config
     String hintPath = SeleniumConfig.getDriverHintPath();
@@ -523,7 +498,9 @@ public class WebDriverFactory {
    *
    * @param file the file
    * @return the windows edge driver location
+   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */
+  @Deprecated(forRemoval = true)
   static String getWindowsEdgeDriverLocation(String file) {
     String edgeDriverFolder = "Microsoft Web Driver";
 
