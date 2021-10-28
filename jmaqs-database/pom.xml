@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -67,4 +67,33 @@
             <version>${sqlite-jdbc.version}</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.37.0</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <alias>mssql</alias>
+                            <name>mcr.microsoft.com/mssql/server:latest</name>
+                            <external>
+                                <type>compose</type>
+                                <basedir>../Docker/MAQSSQLServer/</basedir>
+                                <composeFile>docker-compose.yml</composeFile>
+                            </external>
+                        </image>
+                    </images>
+                    <execution>
+                        <id>setup-database</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
