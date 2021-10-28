@@ -43,7 +43,7 @@
     </dependencies>
     <build>
         <plugins>
-            <plugin>
+            <!--<plugin>
                 <groupId>com.github.webdriverextensions</groupId>
                 <artifactId>webdriverextensions-maven-plugin</artifactId>
                 <version>3.2.0</version>
@@ -64,7 +64,7 @@
                         </driver>
                     </drivers>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>
