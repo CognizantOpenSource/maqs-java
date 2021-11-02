@@ -60,7 +60,6 @@
         <SoftAssertScreenshot>Yes</SoftAssertScreenshot>
         <SavePageSourceOnFail>Yes</SavePageSourceOnFail>
         <ImageFormat>jpeg</ImageFormat>
-        <WebDriverHintPath>./src/test/resources/drivers</WebDriverHintPath>
     </SeleniumMaqs>
 
     <RemoteSeleniumCapsMaqs>
