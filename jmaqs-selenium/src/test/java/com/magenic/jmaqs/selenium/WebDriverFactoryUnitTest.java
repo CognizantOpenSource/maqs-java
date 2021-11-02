@@ -129,7 +129,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Fire Fox driver.
    */
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getFirefoxDriverTest() {
     FirefoxDriver driver = null;
@@ -387,17 +386,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
     Assert.assertFalse(driverLocation.isEmpty());
     Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
         "Checking that driver location and default hint path are the same.");
-  }
-
-  /**
-   * Tests getting the driver location and its resource test.
-   */
-  @Test(groups = TestCategories.SELENIUM, enabled = false)
-  public void getDriverLocationTestResourcesLocationTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
-    Assert.assertFalse(driverLocation.isEmpty());
-    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
-        "Checking that driver location and config hint path are the same.");
   }
 
   /**

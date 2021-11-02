@@ -30,8 +30,14 @@ import org.openqa.selenium.WrapsDriver;
  */
 public class SeleniumUtilities {
 
+  /**
+   * The format for the date.
+   */
   private static final String DEFAULT_DATE_TIME_FORMAT = "uuuu-MM-dd-HH-mm-ss-SSSS";
 
+  /**
+   * String value of the log message prefix.
+   */
   private static final String LOG_MESSAGE_PREFIX = "%s - %s%s";
 
   private SeleniumUtilities() {

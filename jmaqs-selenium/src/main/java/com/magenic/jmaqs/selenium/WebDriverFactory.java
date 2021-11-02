@@ -7,11 +7,8 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.OperatingSystem;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
-import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.selenium.exceptions.DriverNotFoundException;
 import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.File;
 import java.net.URL;
@@ -304,6 +301,7 @@ public class WebDriverFactory {
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser, String remotePlatform,
       String remoteBrowserVersion, Map<String, Object> remoteCapabilities) {
     MutableCapabilities options;
+
     switch (remoteBrowser) {
       case IE:
         options = new InternetExplorerOptions();
