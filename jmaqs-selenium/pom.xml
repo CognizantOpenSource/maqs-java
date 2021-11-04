@@ -47,6 +47,18 @@
             <version>${selenium.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.utilities</groupId>
+            <artifactId>jmaqs-utilities</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.base</groupId>
+            <artifactId>jmaqs-base</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-edge-driver</artifactId>
             <version>${selenium.version}</version>
@@ -61,59 +73,5 @@
             <artifactId>selenium-support</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.magenic.jmaqs.utilities</groupId>
-            <artifactId>jmaqs-utilities</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.magenic.jmaqs.base</groupId>
-            <artifactId>jmaqs-base</artifactId>
-        </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.github.webdriverextensions</groupId>
-                <artifactId>webdriverextensions-maven-plugin</artifactId>
-                <version>${webdriver.extensions}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>install-drivers</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <installationDirectory>./src/test/resources/drivers</installationDirectory>
-                    <drivers>
-                        <driver>
-                            <name>chromedriver</name>
-                            <customFileName>chromedriver</customFileName>
-                            <version>${chromedriver.version}</version>
-                        </driver>
-                        <driver>
-                            <name>internetexplorerdriver</name>
-                            <platform>windows</platform>
-                            <customFileName>IEDriverServer</customFileName>
-                        </driver>
-                        <driver>
-                            <name>geckodriver</name>
-                            <customFileName>geckodriver</customFileName>
-                            <version>${geckodriver.version}</version>
-                        </driver>
-                        <driver>
-                            <name>edgedriver</name>
-                            <platform>windows</platform>
-                            <customFileName>MicrosoftWebDriver</customFileName>
-                            <version>${edgedriver.version}</version>
-                        </driver>
-                    </drivers>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
