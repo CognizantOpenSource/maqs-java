@@ -16,7 +16,7 @@
     <version>${revision}</version>
 
     <properties>
-        <spring.web.version>5.2.5.RELEASE</spring.web.version>
+        <spring.web.version>5.3.11</spring.web.version>
     </properties>
 
     <dependencies>
