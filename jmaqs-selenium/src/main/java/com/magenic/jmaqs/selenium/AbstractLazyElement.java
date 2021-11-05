@@ -502,7 +502,7 @@ public abstract class AbstractLazyElement {
    * @return The location and size of the element
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
-   * @deprecated due to getRect method being handled in web driver/ web element class
+   * @deprecated due to getRect method being handled in web driver/web element class
    */
   @Deprecated
   public Rectangle getRect() throws InterruptedException {
@@ -566,11 +566,11 @@ public abstract class AbstractLazyElement {
       this.setCachedElement(getElement);
       return this.getCachedElement();
     } catch (NoSuchElementException noSuchElementException) {
-      String messageBuilder =
+      String exceptionReason =
           "Failed to find: " + this.userFriendlyName + System.lineSeparator()
               + "Locator: " + this.getBy() + System.lineSeparator()
               + "Because: " + noSuchElementException.getMessage() + System.lineSeparator();
-      throw new NoSuchElementException(messageBuilder, noSuchElementException);
+      throw new NoSuchElementException(exceptionReason, noSuchElementException);
     }
   }
 
