@@ -249,7 +249,7 @@ public class HtmlReporter {
 
     if (violationCount > 0 && requestedResults.contains(ResultType.Violations)) {
       getReadableAxeResults(results.getViolations(), ResultType.Violations, resultsFlex);
-      setImages(ResultType.Violations, doc, context, screenshot );
+      setImages(ResultType.Violations, doc, context, screenshot);
     }
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
@@ -304,10 +304,10 @@ public class HtmlReporter {
     sectionButtonHeader.text(type.name() + ": " + getCount(results));
     sectionButton.appendChild(sectionButtonHeader);
 
-    Element sectionButtonExpando = new Element("h2");
-    sectionButtonExpando.attributes().put(CLASS, "buttonExpandoText");
-    sectionButtonExpando.text("-");
-    sectionButton.appendChild(sectionButtonExpando);
+    Element sectionButtonExpander = new Element("h2");
+    sectionButtonExpander.attributes().put(CLASS, "buttonExpandoText");
+    sectionButtonExpander.text("-");
+    sectionButton.appendChild(sectionButtonExpander);
 
     Element section = new Element("div");
     section.attributes().put(CLASS, "majorSection");
@@ -496,7 +496,11 @@ public class HtmlReporter {
 
         Element emThree = table.selectFirst("div.emThree");
         String selectorText = emThree.selectFirst("p.wrapTwo").text();
-        String imageString = getDataElementString(screenshot, searchContext.findElement(By.cssSelector(selectorText)));
+        By by = By.cssSelector(selectorText);
+        WebElement foundElement = searchContext.findElement(By.cssSelector(selectorText));
+
+        Point location = searchContext.findElement(by).getLocation();
+        String imageString = getDataElementString(searchContext, by);
 
         Element image = new Element("img");
         image.attributes().put("src", imageString);
@@ -512,9 +516,7 @@ public class HtmlReporter {
   private static boolean checkForNoWebDriver(SearchContext searchContext) {
     if (searchContext instanceof WebDriver) {
       try {
-        // TODO: make web driver check for null
-        if (((WebDriver) searchContext).getTitle().contains("Test page with axe-core violations for integration test")
-          || ((WebDriver) searchContext).getTitle().contains("Home Page - Magenic Automation Test Site")) {
+        if (((WebDriver) searchContext).getCurrentUrl().contains("http")) {
           return true;
         }
       } catch (Exception e) {
@@ -528,12 +530,22 @@ public class HtmlReporter {
     return (TakesScreenshot) context;
   }
 
-  private static String getDataElementString(TakesScreenshot screenshot, WebElement element) throws IOException {
+  private static String getDataElementString(SearchContext webDriver, By by) {
+    WebElement webElement = webDriver.findElement(by);
+    String base64bytes = Base64.getEncoder().encodeToString(webElement.getScreenshotAs(OutputType.BYTES));
+    return "data:image/png;base64," + base64bytes;
+  }
+
+  private static String getDataElementString(TakesScreenshot screenshot, SearchContext webDriver, By by) throws IOException {
+    // Get screenshot as a file
+    File screenshotFile = screenshot.getScreenshotAs(OutputType.FILE);
+
     // Convert the screenshot into BufferedImage
-    BufferedImage fullScreen = ImageIO.read(screenshot.getScreenshotAs(OutputType.FILE));
+    BufferedImage fullScreen = ImageIO.read(screenshotFile);
 
     // Find location of the web element on the page
-    Point location = element.getLocation();
+    WebElement element = webDriver.findElement(by);
+    Point location = webDriver.findElement(by).getLocation();
 
     // cropping the full image to get only the element screenshot
     BufferedImage bufferedImage = fullScreen.getSubimage(location.getX(), location.getY(),

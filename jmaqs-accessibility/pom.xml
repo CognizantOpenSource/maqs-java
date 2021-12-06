@@ -18,6 +18,7 @@
     <properties>
         <apache.commons.version>1.9</apache.commons.version>
         <deque.version>4.3.1</deque.version>
+        <jsoup.version>1.14.3</jsoup.version>
     </properties>
 
     <dependencies>
@@ -32,18 +33,18 @@
             <version>${apache.commons.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.magenic.jmaqs.selenium</groupId>
             <artifactId>jmaqs-selenium</artifactId>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.14.3</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
