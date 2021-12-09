@@ -14,7 +14,7 @@ import com.deque.html.axecore.selenium.ResultType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

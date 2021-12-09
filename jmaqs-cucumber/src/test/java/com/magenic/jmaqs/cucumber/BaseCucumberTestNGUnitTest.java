@@ -8,9 +8,8 @@ import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.cucumber.unittestpagemodel.DummyBaseCucumberTestNG;
 import com.magenic.jmaqs.cucumber.unittestpagemodel.DummyTestResult;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**

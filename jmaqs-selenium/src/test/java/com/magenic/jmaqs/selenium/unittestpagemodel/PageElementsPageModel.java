@@ -8,7 +8,7 @@ import com.magenic.jmaqs.selenium.BaseSeleniumPageModel;
 import com.magenic.jmaqs.selenium.LazyWebElement;
 import com.magenic.jmaqs.selenium.SeleniumConfig;
 import com.magenic.jmaqs.selenium.SeleniumTestObject;
-import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+import com.magenic.jmaqs.utilities.exceptions.TimeoutException;
 import org.openqa.selenium.By;
 
 /**

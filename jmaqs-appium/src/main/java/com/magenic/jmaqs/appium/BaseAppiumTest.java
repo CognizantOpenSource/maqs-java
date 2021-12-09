@@ -5,9 +5,9 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.logging.FileLogger;
+import com.magenic.jmaqs.logging.LoggingEnabled;
+import com.magenic.jmaqs.logging.MessageType;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;

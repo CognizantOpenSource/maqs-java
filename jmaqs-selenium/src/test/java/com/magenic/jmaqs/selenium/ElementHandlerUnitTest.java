@@ -5,9 +5,9 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.ListProcessor;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.magenic.jmaqs.utilities.helpers.ListProcessor;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
+import com.magenic.jmaqs.logging.FileLogger;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

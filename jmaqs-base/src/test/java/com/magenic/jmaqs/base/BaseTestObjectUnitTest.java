@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
+import com.magenic.jmaqs.logging.Logger;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.io.IOException;

@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.webservices.jdk8.WebServiceDriverRequestUnitTest;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import java.io.IOException;
 import java.net.URISyntaxException;
 

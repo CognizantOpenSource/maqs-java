@@ -6,10 +6,10 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
+import com.magenic.jmaqs.logging.ConsoleLogger;
+import com.magenic.jmaqs.logging.FileLogger;
 import java.io.File;
 import java.nio.file.Paths;
 import java.time.Clock;

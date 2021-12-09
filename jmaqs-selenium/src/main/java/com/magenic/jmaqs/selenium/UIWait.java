@@ -5,8 +5,8 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.factories.FluentWaitFactory;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import com.magenic.jmaqs.utilities.helpers.Config;
+import com.magenic.jmaqs.utilities.helpers.ConfigSection;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Function;

@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.utilities.performance;
 
-import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.logging.Logger;
 
 /**
  * Response timer collection class.

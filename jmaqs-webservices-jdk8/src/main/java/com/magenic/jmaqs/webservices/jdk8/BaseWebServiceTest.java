@@ -5,8 +5,8 @@
 package com.magenic.jmaqs.webservices.jdk8;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
+import com.magenic.jmaqs.logging.Logger;
 import java.net.URISyntaxException;
 import org.testng.ITestResult;
 

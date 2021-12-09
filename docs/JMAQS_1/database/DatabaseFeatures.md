@@ -49,10 +49,11 @@ Manages the provider connections.
 Gets a database connection based on configuration values
 
 ## Sample code
+
 ```java
 import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.database.entities.StatesEntity;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;

@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;

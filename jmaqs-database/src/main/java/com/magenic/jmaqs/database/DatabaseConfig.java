@@ -8,8 +8,8 @@ import com.magenic.jmaqs.database.constants.DataProviderType;
 import com.magenic.jmaqs.database.providers.IDataSourceProvider;
 import com.magenic.jmaqs.database.providers.SQLProvider;
 import com.magenic.jmaqs.database.providers.SQLiteProvider;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import com.magenic.jmaqs.utilities.helpers.Config;
+import com.magenic.jmaqs.utilities.helpers.ConfigSection;
 import java.util.HashMap;
 import java.util.Map;
 

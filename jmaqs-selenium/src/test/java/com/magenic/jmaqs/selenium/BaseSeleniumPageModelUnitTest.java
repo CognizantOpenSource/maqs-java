@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
-import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+import com.magenic.jmaqs.utilities.exceptions.TimeoutException;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;

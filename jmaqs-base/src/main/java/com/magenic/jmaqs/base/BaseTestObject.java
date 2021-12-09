@@ -5,9 +5,9 @@
 package com.magenic.jmaqs.base;
 
 import com.magenic.jmaqs.base.exceptions.DriverDisposalException;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
+import com.magenic.jmaqs.logging.Logger;
+import com.magenic.jmaqs.logging.MessageType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.util.ArrayList;

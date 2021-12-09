@@ -4,9 +4,9 @@
 
 package com.magenic.jmaqs.utilities;
 
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.Config;
+import com.magenic.jmaqs.utilities.helpers.ConfigSection;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;

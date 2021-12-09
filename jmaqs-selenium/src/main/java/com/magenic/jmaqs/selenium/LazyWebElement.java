@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+import com.magenic.jmaqs.utilities.exceptions.TimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;

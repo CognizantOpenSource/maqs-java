@@ -6,9 +6,9 @@ package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.constants.PlatformType;
 import com.magenic.jmaqs.appium.exceptions.AppiumConfigException;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.helpers.Config;
+import com.magenic.jmaqs.utilities.helpers.ConfigSection;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;

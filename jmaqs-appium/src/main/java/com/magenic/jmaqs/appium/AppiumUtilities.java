@@ -4,10 +4,10 @@
 
 package com.magenic.jmaqs.appium;
 
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
+import com.magenic.jmaqs.logging.FileLogger;
+import com.magenic.jmaqs.logging.LoggingConfig;
+import com.magenic.jmaqs.logging.MessageType;
 import io.appium.java_client.AppiumDriver;
 import java.io.File;
 import java.io.FileWriter;

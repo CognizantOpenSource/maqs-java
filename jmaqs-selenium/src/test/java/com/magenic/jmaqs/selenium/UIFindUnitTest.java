@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.factories.UIFindFactory;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

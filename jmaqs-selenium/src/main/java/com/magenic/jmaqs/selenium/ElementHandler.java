@@ -6,9 +6,9 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.exceptions.ElementHandlerException;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.ListProcessor;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.helpers.ListProcessor;
+import com.magenic.jmaqs.logging.Logger;
+import com.magenic.jmaqs.logging.MessageType;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;

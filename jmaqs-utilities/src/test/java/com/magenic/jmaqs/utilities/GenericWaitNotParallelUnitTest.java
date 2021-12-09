@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.utilities;
 
-import com.magenic.jmaqs.utilities.helper.GenericWait;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.GenericWait;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

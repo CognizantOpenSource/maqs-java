@@ -6,10 +6,10 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.base.DriverManager;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
+import com.magenic.jmaqs.logging.LoggingConfig;
+import com.magenic.jmaqs.logging.LoggingEnabled;
+import com.magenic.jmaqs.logging.MessageType;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;

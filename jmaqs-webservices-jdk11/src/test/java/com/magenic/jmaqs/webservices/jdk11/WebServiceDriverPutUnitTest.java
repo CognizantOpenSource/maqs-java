@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import com.magenic.jmaqs.webservices.jdk11.models.Product;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;

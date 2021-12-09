@@ -6,11 +6,9 @@ package com.magenic.jmaqs.cucumber;
 
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * Unit test class for BaseSeleniumCucumber class.

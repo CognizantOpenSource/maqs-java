@@ -8,7 +8,7 @@ import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import java.util.HashMap;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.MutableCapabilities;

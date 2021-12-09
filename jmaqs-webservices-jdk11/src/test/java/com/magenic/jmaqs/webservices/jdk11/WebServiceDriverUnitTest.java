@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.webservices.jdk11;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.net.http.HttpRequest;
 import org.testng.Assert;

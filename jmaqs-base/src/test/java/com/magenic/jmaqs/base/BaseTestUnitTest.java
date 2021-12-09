@@ -4,12 +4,12 @@
 
 package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
+import com.magenic.jmaqs.logging.ConsoleLogger;
+import com.magenic.jmaqs.logging.FileLogger;
+import com.magenic.jmaqs.logging.Logger;
+import com.magenic.jmaqs.logging.LoggingConfig;
+import com.magenic.jmaqs.logging.MessageType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.util.ArrayList;
 import org.testng.Assert;

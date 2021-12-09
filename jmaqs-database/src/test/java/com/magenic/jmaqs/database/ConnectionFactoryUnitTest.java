@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.database;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;

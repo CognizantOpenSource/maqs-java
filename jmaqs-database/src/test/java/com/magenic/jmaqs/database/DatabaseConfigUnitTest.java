@@ -8,7 +8,7 @@ import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.database.constants.DataProviderType;
 import com.magenic.jmaqs.database.providers.IDataSourceProvider;
 import com.magenic.jmaqs.database.providers.SQLProvider;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

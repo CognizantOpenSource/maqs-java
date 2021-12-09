@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.logging.Logger;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.util.HashMap;
 import org.openqa.selenium.By;

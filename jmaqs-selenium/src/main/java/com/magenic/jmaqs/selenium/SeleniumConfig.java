@@ -6,9 +6,9 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.helpers.Config;
+import com.magenic.jmaqs.utilities.helpers.ConfigSection;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;

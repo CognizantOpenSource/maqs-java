@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.cucumber;
 
 import com.magenic.jmaqs.base.BaseTest;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.logging.MessageType;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import java.lang.reflect.Method;
 import org.testng.ITest;

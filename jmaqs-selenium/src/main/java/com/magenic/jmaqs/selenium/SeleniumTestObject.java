@@ -6,8 +6,8 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.base.exceptions.JMAQSRuntimeException;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.logging.Logger;
+import com.magenic.jmaqs.logging.MessageType;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 

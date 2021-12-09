@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

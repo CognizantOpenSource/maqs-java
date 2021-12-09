@@ -6,9 +6,9 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
 import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
+import com.magenic.jmaqs.logging.LoggingEnabled;
+import com.magenic.jmaqs.logging.MessageType;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 

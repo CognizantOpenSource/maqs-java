@@ -7,7 +7,7 @@ package com.magenic.jmaqs.webservices.jdk11;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.lang.reflect.Type;

@@ -7,7 +7,7 @@ package com.magenic.jmaqs.cucumber.steps;
 import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.cucumber.ScenarioContext;
 import com.magenic.jmaqs.cucumber.unittestpagemodel.DummyBaseGenericStep;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

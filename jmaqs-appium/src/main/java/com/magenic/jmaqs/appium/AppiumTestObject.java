@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.logging.Logger;
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;

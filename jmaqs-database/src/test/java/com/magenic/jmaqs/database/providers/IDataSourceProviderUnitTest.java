@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.database.providers;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import java.util.Iterator;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;

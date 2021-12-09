@@ -4,16 +4,17 @@
 
 package com.magenic.jmaqs.base;
 
+import com.magenic.jmaqs.logging.SingletonLogger;
 import static java.lang.System.out;
 
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
-import com.magenic.jmaqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.logging.TestResultType;
+import com.magenic.jmaqs.utilities.helpers.StringProcessor;
+import com.magenic.jmaqs.logging.ConsoleLogger;
+import com.magenic.jmaqs.logging.FileLogger;
+import com.magenic.jmaqs.logging.Logger;
+import com.magenic.jmaqs.logging.LoggingConfig;
+import com.magenic.jmaqs.logging.LoggingEnabled;
+import com.magenic.jmaqs.logging.MessageType;
+import com.magenic.jmaqs.logging.TestResultType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -69,6 +70,8 @@ public abstract class BaseTest {
    * The Fully Qualified Test Class Name.
    */
   ThreadLocal<String> fullyQualifiedTestClassName = new ThreadLocal<>();
+
+  ThreadLocal<SingletonLogger> logger = new ThreadLocal<>();
 
   /**
    * Initializes a new instance of the BaseTest class.

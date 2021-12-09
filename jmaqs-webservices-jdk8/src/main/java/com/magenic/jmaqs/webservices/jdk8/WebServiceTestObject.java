@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.webservices.jdk8;
 
 import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.logging.Logger;
 import java.util.function.Supplier;
 import org.apache.http.impl.client.CloseableHttpClient;
 

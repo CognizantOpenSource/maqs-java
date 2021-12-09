@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.magenic.jmaqs.logging.Logger;
+import com.magenic.jmaqs.logging.MessageType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;

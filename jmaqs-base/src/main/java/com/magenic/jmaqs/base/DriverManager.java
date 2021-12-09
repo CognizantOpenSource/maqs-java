@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.logging.Logger;
 import java.util.function.Supplier;
 
 /**

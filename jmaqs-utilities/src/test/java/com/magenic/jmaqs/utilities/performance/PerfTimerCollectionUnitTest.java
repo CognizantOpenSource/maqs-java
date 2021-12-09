@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.utilities.performance;
 
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
+import com.magenic.jmaqs.logging.ConsoleLogger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

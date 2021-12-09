@@ -37,10 +37,11 @@ this.getTestObject().getLog().logMessage("I am testing with MAQS");
 * *You seldom what you use the test object directly.  It is usually only used when you want to share your test MAQS context with another piece of code*
 
 ## Sample code
+
 ```java
 package com.magenic.jmaqs.webservices;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;

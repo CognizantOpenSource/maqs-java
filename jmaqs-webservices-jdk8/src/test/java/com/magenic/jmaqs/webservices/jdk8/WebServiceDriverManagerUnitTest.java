@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.webservices.jdk8;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helpers.TestCategories;
 import java.net.URISyntaxException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
