@@ -17,11 +17,11 @@ public class SingletonLogger {
     // config dictionary of logging options
     // Add to a collection based on FQDN of the class
     // Iterate over the collection at runtime to log the message across the collection
-
+  return null;
 
   }
 
-}
+
   private SingletonLogger() {
   }
 }
