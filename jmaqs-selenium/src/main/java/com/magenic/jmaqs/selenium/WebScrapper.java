@@ -25,11 +25,12 @@ public class WebScrapper {
     Document doc = Jsoup.connect(webDriver.getCurrentUrl()).get();
 
     String stringBuilder = concatClassStart(fileName, webDriver.getCurrentUrl())
-        + concatCheckBoxes(doc.select("body input[type=\"checkbox\"]"), "Checkbox")
-        + concatCheckBoxes(doc.select("body input[type=\"radio\"]"), "Radio Button")
-        + concatCheckBoxes(doc.select("body input[type=\"text\"]"), "Text Box")
-        + concatCheckBoxes(doc.select("body button"), "Button")
-        + concatCheckBoxes(doc.select("body a[href]"), "Link")
+        + concatElements(doc.select("body input[type=\"checkbox\"]"), "Checkbox")
+        + concatElements(doc.select("body input[type=\"radio\"]"), "Radio Button")
+        + concatElements(doc.select("body input[type=\"text\"]"), "Text Box")
+        + concatElements(doc.select("body button"), "Button")
+        + concatElements(doc.select("body a[href]"), "Link")
+        + concatElements(doc.select("body table"), "Table")
         + concatClassMethods(fileName);
 
     String string = stringBuilder;
@@ -66,7 +67,7 @@ public class WebScrapper {
         + System.lineSeparator();
   }
 
-  private static String concatCheckBoxes(Elements checkBoxes, String elementType) {
+  private static String concatElements(Elements checkBoxes, String elementType) {
     StringBuilder checkBoxesString = new StringBuilder();
     int num = 2;
 
