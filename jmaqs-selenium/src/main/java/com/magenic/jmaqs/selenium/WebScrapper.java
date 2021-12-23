@@ -7,7 +7,6 @@ package com.magenic.jmaqs.selenium;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,7 +34,8 @@ public class WebScrapper {
 
     String string = stringBuilder;
 
-    FileUtils.writeStringToFile(new File(destinationOfFile + "/" + fileName + ".java"), stringBuilder, StandardCharsets.UTF_8);
+//    FileUtils.writeStringToFile(new File(destinationOfFile + File.separator + fileName + ".java"),
+//        stringBuilder, StandardCharsets.UTF_8);
   }
 
   private static String concatClassStart(String fileName, String currentUrl) {
@@ -84,9 +84,11 @@ public class WebScrapper {
       }
 
       checkBoxesString.append("/**").append(System.lineSeparator())
-          .append("* The ").append(commentName).append(" ").append(elementType).append(" Selector.").append(System.lineSeparator())
-          .append("*/").append(System.lineSeparator()).append("private static final By ").append(selectorName.toUpperCase())
-          .append(" = By.cssSelector(\"").append(selector).append("\");").append(System.lineSeparator())
+          .append("* The ").append(commentName).append(" ").append(elementType)
+          .append(" Selector.").append(System.lineSeparator())
+          .append("*/").append(System.lineSeparator()).append("private static final By ")
+          .append(selectorName.toUpperCase()).append(" = By.cssSelector(\"")
+          .append(selector).append("\");").append(System.lineSeparator())
           .append(System.lineSeparator());
     }
 
