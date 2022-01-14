@@ -7,12 +7,10 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.OperatingSystem;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
-import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.selenium.exceptions.DriverNotFoundException;
 import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
@@ -197,6 +195,7 @@ public class WebDriverFactory {
    * @return the chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
+    WebDriverManager.chromedriver().setup();
     WebDriver driver = new ChromeDriver(chromeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -209,6 +208,7 @@ public class WebDriverFactory {
    * @return the headless chrome driver
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
+    WebDriverManager.chromedriver().setup();
     return new ChromeDriver(headlessChromeOptions);
   }
 
@@ -220,6 +220,7 @@ public class WebDriverFactory {
    * @return the firefox driver
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
+    WebDriverManager.firefoxdriver().setup();
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
 
@@ -234,6 +235,7 @@ public class WebDriverFactory {
    * @return the edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
+    WebDriverManager.edgedriver().setup();
     EdgeDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -247,6 +249,7 @@ public class WebDriverFactory {
    * @return the internet explorer driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
+    WebDriverManager.iedriver().setup();
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
 
