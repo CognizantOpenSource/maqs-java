@@ -332,12 +332,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-        </dependency>
-    </dependencies>
 
     <build>
         <pluginManagement>
@@ -440,7 +434,6 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>5</threadCount>
-                    <argLine>-javaagent:@{io.github.bonigarcia:webdrivermanager:jar}</argLine>
                 </configuration>
                 <dependencies>
                     <dependency>
