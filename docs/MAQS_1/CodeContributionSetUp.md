@@ -192,7 +192,7 @@ Download Git Bash here: [https://git-scm.com/download](https://git-scm.com/downl
 
 13.  When the project has reloaded, navigate to File > **Settings**
 14.  Navigate to Other Settings > **Checkstyle**
-15.  Set the **Checkstyle version to 7.6.1**
+15.  Set the **Checkstyle version** to the latest one
 16.  Set the **Scan Scope** to **All sources (including tests)**
 17.  Under Configuration File, click the **+** (add) button  
      ![alt text](../resources/installationImages/intellij/AddCheckStyle.png)
@@ -217,27 +217,4 @@ Download Git Bash here: [https://git-scm.com/download](https://git-scm.com/downl
 25. Check the **Active** box next to the added Configuration File
 26. Click **Apply**
 27. Click **OK**  
-     ![alt text](../resources/installationImages/intellij/TheEnd.png) 
-
-#### Setting up the Web Driver manager
-1. Open a file explorer and find your .m2 file
-   ![alt text](../resources/installationImages/intellij/m2FileExplorer.png)
-2. Copy the file path
-3. In IntelliJ Click Test/Build configurations drop down
-4. Click **Edit Configurations**
-5. In the test config, click **Edit configuration templates...**
-6. Click the **Test NG** template
-7. In VM options enter **-javaagent:""**
-8. Next, paste in the copied file path
-9. After that, paste in this path: 
-**repository/io/github/bonigarcia/webdrivermanager/5.0.3/webdrivermanager-5.0.3.jar**
-10. Your VM Options should look something like this:  
--ea -javaagent:"/Users/MY_NAME/.m2/repository/io/github/bonigarcia/webdrivermanager/5.0.3/webdrivermanager-5.0.3.jar"
-![alt text](../resources/installationImages/intellij/VM_Options.png)
-
-
-11. In the Configuration template menu:  
-Click **Apply** and **OK**
-12. In the Run/Debug configuration menu:  
-Click **Apply** and **OK**
-![alt text](../resources/installationImages/intellij/OKandApply.png)
+     ![alt text](../resources/installationImages/intellij/TheEnd.png)
