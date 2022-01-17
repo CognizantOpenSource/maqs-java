@@ -113,7 +113,7 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
     ![alt text](../resources/installationImages/intellij/SearchProject.png)
 
 
-11. Verify **com.magenic.jmaqs:jmaqs-framework** is selected
+11. Verify **com.cognizantsoftvision.maqs** is selected
 12. Click **Next**  
     ![alt text](../resources/installationImages/intellij/jmaqsframework.png)
 
