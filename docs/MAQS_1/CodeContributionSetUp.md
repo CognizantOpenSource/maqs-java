@@ -11,18 +11,18 @@
 ---
 
 ## Github Desktop
-For these steps, Git Bash is required.  
-Download Git Bash here: [https://git-scm.com/download](https://git-scm.com/download)
+Before going to your IDE, downloading Git Desktop is recommending
+Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.com/)
 
-1. Navigate to [https://github.com/Magenic/JMAQS](https://github.com/Magenic/JMAQS)
-2. Click the **Clone or download button**
-3. Copy the URL - [https://github.com/Magenic/JMAQS.git](https://github.com/Magenic/JMAQS.git)
-   ![alt text](../resources/installationImages/MagenicJMAQS.png)
-4. Open Git Bash and navigate to where you want the repo to be
-5. Right click in Git Bash, paste the URL copied from GitHub, and hit enter
-   ![alt text](../resources/installationImages/NavigateToFile.png)
-6. You should now have the MAQS project in your file explorer
-   ![alt text](../resources/installationImages/JMAQS_InFileExplorer.png)
+1. Navigate to [https://github.com/CognizantOpenSource/maqs-java](https://github.com/CognizantOpenSource/maqs-java)
+2. Click the **Clone** button
+3. Click the **Open with GitHub Desktop** button
+   ![alt text](../resources/installationImages/CopyMAQS.png)
+4. Select the choose button to dictate where you want the repo to be (or leave it to the default path)
+5. Click the clone button
+6. Wait for the cloning download to complete
+7. You should now see the maqs-java project under the current repository drop dop
+
 
 ---
 
@@ -36,7 +36,7 @@ Download Git Bash here: [https://git-scm.com/download](https://git-scm.com/downl
 
 
 3. Navigate to the MAQS folder
-![alt text](../resources/installationImages/vsCode/NavigateToJMAQS.png)
+![alt text](../resources/installationImages/NavigateToMAQS.png)
 
 
 4. Click **Select Folder**
@@ -201,7 +201,7 @@ Download Git Bash here: [https://git-scm.com/download](https://git-scm.com/downl
 18.  Click **Browse** under **Use a local Checkstyle file**
 19.  Navigate to the project directory, expand the Framework folder, select **maqs_checks.xml**
 20.  Click **OK**  
-     ![alt text](../resources/installationImages/intellij/JMAQS_Checkstyle.png)
+     ![alt text](../resources/installationImages/intellij/MAQS_Checkstyle.png)
 
 
 21.  Enter a Description
