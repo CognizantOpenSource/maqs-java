@@ -17,30 +17,35 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 1. Navigate to [https://github.com/CognizantOpenSource/maqs-java](https://github.com/CognizantOpenSource/maqs-java)
 2. Click the **Clone** button
 3. Click the **Open with GitHub Desktop** button
-   ![alt text](../resources/installationImages/CopyMAQS.png)
-4. Select the choose button to dictate where you want the repo to be (or leave it to the default path)
-5. Click the clone button
-6. Wait for the cloning download to complete
-7. You should now see the maqs-java project under the current repository drop dop
+   ![alt text](../resources/installationImages/githubDesktop/CopyMAQS.png)
+ 
 
+4. Select the **Choose...** button to dictate where you want the repo to be (or leave it to the default path)
+5. Then click the **Clone** button
+   ![alt text](../resources/installationImages/githubDesktop/GithubDesktopFileSet.png)
+
+
+7. Wait for the cloning download to complete
+8. You should now see the **maqs-java** project under the current repository drop down
+   ![alt text](../resources/installationImages/githubDesktop/FrameworkInGithubDesktop.png)
 
 ---
 
 ## VS Code
 
 ### Setting up the MAQS Java Repository
-#### If you have cloned via Git Bash
+#### If you have cloned via GitHub Desktop
 1. Open VS Code
 2. Click Open Folder
 ![alt text](../resources/installationImages/vsCode/OpenFolder.png)
 
 
 3. Navigate to the MAQS folder
-![alt text](../resources/installationImages/NavigateToMAQS.png)
-
-
 4. Click **Select Folder**
-5. The MAQS project should appear in the Explorer section
+![alt text](../resources/installationImages/vsCode/NavigateToMAQS.png)
+
+
+6. The MAQS project should appear in the Explorer section
 ![alt text](../resources/installationImages/vsCode/ExplorerSection.png)
 
 #### if the repo has not been cloned
@@ -55,8 +60,8 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 
 4. Login to your git-hub account  
 (if you don't have an account, use the Git Bash instructions)
-5. Type in: CognizantOpenSource/maqs-java and select it in the dropdown
-![alt text](../resources/installationImages/vsCode/GitHubJMAQSLink.png)
+5. Type in: **CognizantOpenSource/maqs-java** and select it in the dropdown
+![alt text](../resources/installationImages/vsCode/GitHubMAQSLink.png)
 
 
 6. Select the location you want the repo to be
@@ -66,8 +71,6 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
    
 8. You should now be able to open a new window to the MAQS project
  ![alt text](../resources/installationImages/vsCode/ExplorerSection.png)
-
-### Setting up the WebDriver Manager
 
 ---
 
@@ -92,7 +95,7 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 ## II. Settings and Configurations – MAQS Framework
 
 1. Click **Import Project**  
-   ![alt text](../resources/installationImages/intellij/IntelliJ_Idea_Import.png)
+   ![alt text](../resources/installationImages/intellij/IntelliJ_ImportProject.png)
 
 
 2. Navigate to the project directory and select the **Framework** folder
@@ -125,7 +128,7 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 
 15. Verify the project name and file location
 16. Click **Finish**  
-    ![alt text](../resources/installationImages/intellij/projectLocation.png)
+    ![alt text](../resources/installationImages/intellij/jmaqsProjectLocation.png)
 
 
 17. When finished loading, the project structure should have Framework at the top-level:  
@@ -148,7 +151,7 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 
 5.   Navigate to the project directory and select **maqs_formatter.xml**
 6.   Click **OK**  
-     ![alt text](../resources/installationImages/intellij/MAQSformatter.png)
+     ![alt text](../resources/installationImages/intellij/MAQS_Formatter.png)
 
 
 7.   Click **OK**  
@@ -207,7 +210,7 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 21.  Enter a Description
 22.  Check **Store relative to project location**
 23.  Click **Next**  
-     ![alt text](../resources/installationImages/intellij/MAQScheckstyleDescription.png)
+     ![alt text](../resources/installationImages/intellij/MAQS_CheckstyleDescription.png)
 
 
 24.  Click **Finish**  
