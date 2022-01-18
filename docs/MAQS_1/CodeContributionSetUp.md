@@ -178,7 +178,7 @@ Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/down
       ![alt text](../resources/installationImages/intellij/CodeStyle.png)
 
 ### Plugins: CheckStyle-IDEA and SonarLint
-1.   Navigate to (File > Settings) **Plugins**
+1.   Navigate to **File** > **Settings** > **Plugins**
 2.   Enter **Checkstyle** into the search bar(Note:Make sure Marketplace tab is selected)
 3.   Select **CheckStyle-IDEA**
 4.   Click **Install**  
@@ -208,8 +208,8 @@ Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/down
      ![alt text](../resources/installationImages/intellij/RestartConfirm.png)
 
 
-13.  When the project has reloaded, navigate to File > **Settings**
-14.  Navigate to Other Settings > **Checkstyle**
+13.  When the project has reloaded, navigate to **File** > **Settings**
+14.  Navigate to **Tools** > **Checkstyle**
 15.  Set the **Checkstyle version** to the latest one
 16.  Set the **Scan Scope** to **All sources (including tests)**
 17.  Under Configuration File, click the **+** (add) button  
