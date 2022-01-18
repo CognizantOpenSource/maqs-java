@@ -75,18 +75,36 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 ---
 
 ## IntelliJ
-1. Open IntelliJ
-   Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/download/#section=windows](https://www.jetbrains.com/idea/download/#section=windows)
-2. Click **Check out from Version Control**
-3. Select **Git**  
-   ![alt text](../resources/installationImages/intellij/IntelliJ_Idea.png)
+Before setting up the project, make sure you have IntelliJ installed  
+Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/download/#section=windows](https://www.jetbrains.com/idea/download/#section=windows)
+
+### If you have cloned via GitHub Desktop
+1. Click the **Open** button
+![alt text](../resources/installationImages/intellij/OpenProject.png)
 
 
-4. Paste in the MAQS Git URL
-5. Select a directory for the project
-6. Click **Clone**  
+2. Navigate to the **maqs-java** file and select it
+3. Click the **OK** button
+![alt text](../resources/installationImages/intellij/MAQS_Location.png)
+
+
+4. The project should show up in the project window (on the left side)
+   ![alt text](../resources/installationImages/intellij/MAQS_Framework.png)
+
+### if the repo has not been cloned
+1. Click the **Get From VCS** button
+
+
+
+4. The project should show up in the project window (on the left side)
+   ![alt text](../resources/installationImages/intellij/MAQS_Framework.png)
+
+----
+
+2. Paste in the MAQS Git URL
+3. Select a directory for the project
+4. Click **Clone**  
    ![alt text](../resources/installationImages/intellij/clone01.png)
-
 
 7. Click  **No**  
    ![alt text](../resources/installationImages/intellij/clone02.png)
