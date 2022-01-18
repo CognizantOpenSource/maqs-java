@@ -93,10 +93,11 @@ Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/down
 
 ### if the repo has not been cloned
 1. Click the **Get From VCS** button
+   ![alt text](../resources/installationImages/intellij/OpenFromVCS.png)
 
 
-
-4. The project should show up in the project window (on the left side)
+2. 
+3. The project should show up in the project window (on the left side)
    ![alt text](../resources/installationImages/intellij/MAQS_Framework.png)
 
 ----
