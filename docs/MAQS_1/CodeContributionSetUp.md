@@ -89,28 +89,24 @@ Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/down
 
 
 4. The project should show up in the project window (on the left side)
-   ![alt text](../resources/installationImages/intellij/MAQS_Framework.png)
+![alt text](../resources/installationImages/intellij/MAQS_Framework.png)
 
 ### if the repo has not been cloned
 1. Click the **Get From VCS** button
    ![alt text](../resources/installationImages/intellij/OpenFromVCS.png)
 
 
-2. 
-3. The project should show up in the project window (on the left side)
+2. Select the **Repository URL** tab
+3. In the URL text box enter the maqs-java git url:  
+   https://github.com/CognizantOpenSource/maqs-java.git
+   ![alt text](../resources/installationImages/intellij/GitSetup.png)
+
+4. Select the **Trust Project** button if the prompt appears
+5. The project should show up in the project window (on the left side)
    ![alt text](../resources/installationImages/intellij/MAQS_Framework.png)
 
-----
-
-2. Paste in the MAQS Git URL
-3. Select a directory for the project
-4. Click **Clone**  
-   ![alt text](../resources/installationImages/intellij/clone01.png)
-
-7. Click  **No**  
-   ![alt text](../resources/installationImages/intellij/clone02.png)
-
 ---  
+
 ## II. Settings and Configurations – MAQS Framework
 
 1. Click **Import Project**  
