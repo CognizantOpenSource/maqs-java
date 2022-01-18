@@ -156,7 +156,7 @@ Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/down
 ---   
 ## III. Code Style Settings - MAQS Java Formatter
 
-#### Set up CheckStyle
+### Set up CheckStyle
 1.  Navigate to File > **Settings**
 2.   Navigate to Editor > **Code Style**
 3.   Select the gear icon next to Scheme
@@ -177,7 +177,7 @@ Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/down
 9.    Click **Apply**  
       ![alt text](../resources/installationImages/intellij/CodeStyle.png)
 
-#### Plugins: CheckStyle-IDEA and SonarLint
+### Plugins: CheckStyle-IDEA and SonarLint
 1.   Navigate to (File > Settings) **Plugins**
 2.   Enter **Checkstyle** into the search bar(Note:Make sure Marketplace tab is selected)
 3.   Select **CheckStyle-IDEA**
