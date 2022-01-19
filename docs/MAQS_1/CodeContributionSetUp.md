@@ -112,15 +112,13 @@ Note:  You can download IntelliJ Idea here: [https://www.jetbrains.com/idea/down
 
 ---  
 
-## II. Settings and Configurations – MAQS Framework  
-
-
+## II. Settings and Configurations – MAQS Framework
 13. Select the project SDK (JDK 11 or higher is required)
 14. Click **Next**  
 ![alt text](../resources/installationImages/intellij/projectSDK.png)
 
-    
----   
+---
+
 ## III. Code Style Settings - MAQS Java Formatter
 
 ### Set up CheckStyle
