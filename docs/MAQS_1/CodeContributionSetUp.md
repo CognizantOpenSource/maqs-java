@@ -32,9 +32,10 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 ---
 
 ## VS Code
+Before setting up the project, make sure you have VS Code  installed  
+Note:  You can download VS Code here: [https://code.visualstudio.com/Download](https://code.visualstudio.com/Download)
 
-### Setting up the MAQS Java Repository
-#### If you have cloned via GitHub Desktop
+#### If you have cloned MAQS via GitHub Desktop
 1. Open VS Code
 2. Click Open Folder
 ![alt text](../resources/installationImages/vsCode/OpenFolder.png)
@@ -48,7 +49,7 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 6. The MAQS project should appear in the Explorer section
 ![alt text](../resources/installationImages/vsCode/ExplorerSection.png)
 
-#### if the repo has not been cloned
+#### If MAQS has not been cloned
 1. Open VS Code
 2. Click the "Clone Git Repository" button
 ![alt text](../resources/installationImages/vsCode/OpenGitRepo.png)
@@ -68,17 +69,21 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 7. Select the **Select Repository Location** button
 ![alt text](../resources/installationImages/vsCode/GitHubInstallationLocation.png)
 
-   
-8. You should now be able to open a new window to the MAQS project
+
+8. Click the **Open in New Window** button
+![alt text](../resources/installationImages/vsCode/OpenClonedRepo.png)
+
+
+10. You should now be able to open a new window to the MAQS project
  ![alt text](../resources/installationImages/vsCode/ExplorerSection.png)
 
 ---
 
 ## IntelliJ
 Before setting up the project, make sure you have IntelliJ installed  
-Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/download/#section=windows](https://www.jetbrains.com/idea/download/#section=windows)
+Note:  You can download IntelliJ Idea here: [https://www.jetbrains.com/idea/download/#section=windows](https://www.jetbrains.com/idea/download/#section=windows)
 
-### If you have cloned via GitHub Desktop
+### If you have cloned MAQS via GitHub Desktop
 1. Click the **Open** button
 ![alt text](../resources/installationImages/intellij/OpenProject.png)
 
@@ -91,7 +96,7 @@ Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/down
 4. The project should show up in the project window (on the left side)
 ![alt text](../resources/installationImages/intellij/MAQS_Framework.png)
 
-### if the repo has not been cloned
+### if MAQS has not been cloned
 1. Click the **Get From VCS** button
    ![alt text](../resources/installationImages/intellij/OpenFromVCS.png)
 
@@ -107,52 +112,14 @@ Note:  You can download IntelliJ Idea from: [https://www.jetbrains.com/idea/down
 
 ---  
 
-## II. Settings and Configurations – MAQS Framework
-
-1. Click **Import Project**  
-   ![alt text](../resources/installationImages/intellij/IntelliJ_ImportProject.png)
-
-
-2. Navigate to the project directory and select the **Framework** folder
-3. Click **OK**  
-   ![alt text](../resources/installationImages/intellij/FileDirImport.png)
-
-
-4. Select **Import project from external model**
-5. Select **Maven**
-6. Click **Next**  
-   ![alt text](../resources/installationImages/intellij/ImportProject.png)
-
-
-7. Check **Search for projects recursively**
-8. Check **Import Maven projects automatically**
-9. Check **Create module groups for multi-module Maven projects**
-10. Click **Next**  
-    ![alt text](../resources/installationImages/intellij/SearchProject.png)
-
-
-11. Verify **com.cognizantsoftvision.maqs** is selected
-12. Click **Next**  
-    ![alt text](../resources/installationImages/intellij/jmaqsframework.png)
+## II. Settings and Configurations – MAQS Framework  
 
 
 13. Select the project SDK (JDK 11 or higher is required)
 14. Click **Next**  
-    ![alt text](../resources/installationImages/intellij/projectSDK.png)
+![alt text](../resources/installationImages/intellij/projectSDK.png)
 
-
-15. Verify the project name and file location
-16. Click **Finish**  
-    ![alt text](../resources/installationImages/intellij/jmaqsProjectLocation.png)
-
-
-17. When finished loading, the project structure should have Framework at the top-level:  
-    ![alt text](../resources/installationImages/intellij/FrameworkTop.png)
-
-
-18. Framework expanded:  
-    ![alt text](../resources/installationImages/intellij/FrameworkExpanded.png)
-
+    
 ---   
 ## III. Code Style Settings - MAQS Java Formatter
 
