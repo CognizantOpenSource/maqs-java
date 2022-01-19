@@ -120,7 +120,7 @@ Note:  You can download IntelliJ Idea here: [https://www.jetbrains.com/idea/down
 
 ### Setting up the Java JDK
 1. Select **File** and click **Project Structure** (default hotkey: ctrl + alt + shift + S)
-2. Select the project SDK (JDK 11 or higher is required)
+2. Select the SDK you have locally for the project (JDK 11 or higher is required)
 3. Click **Apply** and then click the **OK** button  
 ![alt text](../resources/installationImages/intellij/projectSDK.png)
 
