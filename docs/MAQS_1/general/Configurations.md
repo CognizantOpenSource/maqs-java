@@ -9,7 +9,7 @@ These configurations are stored in an XML document called the **app.config**.
 The **config.xml** file includes configurations for each project solution, as well as generic configurations for handling MAQS specific functions.
 The XML and JSON versions of the configuration files follow a very similar format.*
 
-### MagenicMaqs - General Test Configurations
+### Maqs - General Test Configurations
 General test configurations are included in every project template. 
 They control wait time, time-out, and log levels.
 
@@ -126,7 +126,7 @@ Primarily used with Maven implementation of MAQS.
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <configSections>
-    <section name="MagenicMaqs" type="System.Configuration.NameValueSectionHandler" />
+    <section name="GlobalMaqs" type="System.Configuration.NameValueSectionHandler" />
     <section name="AppiumMaqs" type="System.Configuration.NameValueSectionHandler"/>
     <section name="AppiumCapsMaqs" type="System.Configuration.NameValueSectionHandler"/>
     <section name="DatabaseMaqs" type="System.Configuration.NameValueSectionHandler" />
@@ -135,7 +135,7 @@ Primarily used with Maven implementation of MAQS.
     <section name="RemoteSeleniumCapsMaqs" type="System.Configuration.NameValueSectionHandler"/>
     <section name="WebServiceMaqs" type="System.Configuration.NameValueSectionHandler"/>
   </configSections>
-  <MagenicMaqs>
+  <GlobalMaqs>
     <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
     <add key="WaitTime" value="1000" />
 
@@ -173,7 +173,7 @@ Primarily used with Maven implementation of MAQS.
      <!-- Should the configuration validation be skipped
     <add key="SkipConfigValidation" value="YES"/>
     <add key="SkipConfigValidation" value="NO"/>-->
-  </MagenicMaqs>
+  </GlobalMaqs>
   <AppiumMaqs>
     <!--Device platform
     <add key="PlatformName" value="ANDROID"/>
@@ -212,9 +212,9 @@ Primarily used with Maven implementation of MAQS.
     <add key="ImageFormat" value="Png"/>
 
     <!-- Do you want to save page source when a Soft Assert fails
-    <add key="SavePagesourceOnFail" value="YES"/>
-    <add key="SavePagesourceOnFail" value="NO"/> -->
-    <add key="SavePagesourceOnFail" value="NO"/>
+    <add key="SavePageSourceOnFail" value="YES"/>
+    <add key="SavePageSourceOnFail" value="NO"/> -->
+    <add key="SavePageSourceOnFail" value="NO"/>
   </AppiumMaqs>
   <AppiumCapsMaqs>
     <!-- Local App File Path -->
@@ -225,8 +225,8 @@ Primarily used with Maven implementation of MAQS.
     <!--<add key="appiumVersion" value="1.7.1"/> -->
     <!-- <add key="app" value="sauce-storage:app-name.extension"/> -->
     <add key="app" value="App_Path" />
-    <add key="appActivity" value="com.magenic.appiumtesting.maqsregistrydemo.LoginPage" />
-    <add key="appPackage" value="com.magenic.appiumtesting.maqsregistrydemo" /> 
+    <add key="appActivity" value="com.cognizantsoftvision.appiumtesting.maqsregistrydemo.LoginPage" />
+    <add key="appPackage" value="com.cognizantsoftvision.appiumtesting.maqsregistrydemo" /> 
   </AppiumCapsMaqs>
   <DatabaseMaqs>
     <!--<add key="DataBaseProviderType" value="SQLSERVER" />
@@ -308,9 +308,9 @@ Primarily used with Maven implementation of MAQS.
     <add key="ImageFormat" value="Png"/>
 
     <!-- Do you want to save page source when a Soft Assert fails
-    <add key="SavePagesourceOnFail" value="YES"/>
-    <add key="SavePagesourceOnFail" value="NO"/> -->
-    <add key="SavePagesourceOnFail" value="NO"/>
+    <add key="SavePageSourceOnFail" value="YES"/>
+    <add key="SavePageSourceOnFail" value="NO"/> -->
+    <add key="SavePageSourceOnFail" value="NO"/>
 
     <!-- Proxy options -->
     <add key="UseProxy" value="NO" />
@@ -337,11 +337,12 @@ Primarily used with Maven implementation of MAQS.
   </WebServiceMaqs>
 </configuration>
 ```
+
 ## appsettings.json
-Primarily uses with the .Net Core implementation of MAQS.
+Primarily uses with the implementation of MAQS.
 ```json
 {
-  "MagenicMaqs": {
+  "GlobalMaqs": {
     "WaitTime": "100",
     "Timeout": "10000",
     "Log": "OnFail",

@@ -1,7 +1,7 @@
 # <img src="resources/MAQS.jpg" height="32" width="32"> BaseDatabaseTest
 
 ## Overview
-JMAQS provides support for testing databases.
+MAQS provides support for testing databases.
 
 ## BaseDatabaseTest
 BaseDatabaseTest is an abstract test class you can extend.  Extending the class allows you to automatically use MAQS's database testing capabilities.
@@ -14,7 +14,7 @@ public class DatabaseTest extends BaseDatabaseTest {}
 The DatabaseDriver is an object that allows you to interact with databases.  
 This driver wraps common database interactions, making database testing relatively easy.  
 The driver is also thread safe, which means you can run multiple database tests in parallel.  
-*Information, such as connection strings are pulled from the JMAQS configuration.
+*Information, such as connection strings are pulled from the MAQS configuration.
 ```java
 List<T> table = this.getDatabaseDriver().query("SELECT * FROM information_schema.tables").ToList();
 ```
@@ -24,7 +24,7 @@ There is also logger (also thread safe) that can be used to add log message to y
 this.getLogger().logMessage("I am testing with MAQS");
 ```
 ## TestObject
-The TestObject can be thought of as your test context.  It holds all the JMAQS test execution related data.  
+The TestObject can be thought of as your test context.  It holds all the MAQS test execution related data.  
 This includes the database driver, logger, soft asserts, performance timers, plus more.
 ```java
 List<T> table = this.getDatabaseDriver().query("SELECT * FROM information_schema.tables").toArray();
@@ -36,9 +36,9 @@ this.getTestObject().getLogger().logMessage("I am testing with MAQS");
 
 ## Sample code
 ```java
-import com.magenic.jmaqs.database.BaseDatabaseTest;
-import com.magenic.jmaqs.utilites.helper.logger;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.maqs.database.BaseDatabaseTest;
+import com.magenic.maqs.utilites.helper.logger;
+import com.magenic.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

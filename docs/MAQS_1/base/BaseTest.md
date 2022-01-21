@@ -93,7 +93,7 @@ tester.setTestContext(this.getTestContext());
 Sets the TestNG Test Context
 ```java
 final ITestContext testContext = this.getTestContext();
-testContext.setAttribute("testName", "SetTestContext");
+testContext.setAttribute("testName", "setTestContext");
 this.setTestContext(testContext);
 ```
 
@@ -101,7 +101,7 @@ this.setTestContext(testContext);
 ### GetTestObject
 Gets the test object
 ```java
-Assert.IsNotNull(this.getTestObject());
+Assert.isNotNull(this.getTestObject());
 ```
 
 ###  SetTestObject

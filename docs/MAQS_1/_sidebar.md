@@ -1,6 +1,6 @@
 - [Introduction to MAQS ](./Introduction.md)
 
-- [Installation](./CodeContributionSetUp.md)
+- [Installation](./Installation.md)
 - [Getting Started](./ComingSoon.md)
 
 

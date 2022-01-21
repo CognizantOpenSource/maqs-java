@@ -49,9 +49,9 @@ Stores methods for interacting with the config.xml
 
 ## Sample code
 ```java
-package com.magenic.jmaqs.appium;
+package com.magenic.maqs.appium;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

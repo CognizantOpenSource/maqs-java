@@ -38,9 +38,9 @@ this.getTestObject().getLog().logMessage("I am testing with MAQS");
 
 ## Sample code
 ```java
-package com.magenic.jmaqs.webservices;
+package com.magenic.maqs.webservices;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.maqs.utilities.helper.TestCategories;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;

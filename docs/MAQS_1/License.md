@@ -12,4 +12,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ----
 
-![MAQS](../resources/maqsfull.png)
+![MAQS](../resources/maqsfull2.png)

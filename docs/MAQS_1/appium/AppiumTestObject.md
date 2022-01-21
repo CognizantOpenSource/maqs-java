@@ -3,10 +3,10 @@
 ## Inheritance Hierarchy
 ```java
 BaseTestObject
-    com.magenic.jmaqs.appium.AppiumTestObject
+    com.magenic.maqs.appium.AppiumTestObject
 ```
-Package: com.magenic.jmaqs.appium;  
-Assembly: import com.magenic.jmaqs.appium.AppiumTestObject
+Package: com.magenic.maqs.appium;  
+Assembly: import com.magenic.maqs.appium.AppiumTestObject
 
 ## Syntax
 java

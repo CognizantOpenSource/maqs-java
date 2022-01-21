@@ -7,7 +7,7 @@ MAQS provides support for testing database applications.
 BaseDatabaseTest is an abstract test class you can extend.
 Extending the class allows you to automatically use the MAQS database testing capabilities.
 ```java
-public class MyDatabaseTests extends BaseDatabaseTest
+public class MyDatabaseTests extends BaseDatabaseTest {}
 ```
 
 ## Driver
@@ -50,16 +50,17 @@ Gets a database connection based on configuration values
 
 ## Sample code
 ```java
-import com.magenic.jmaqs.base.BaseGenericTest;
-import com.magenic.jmaqs.database.entities.StatesEntity;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.maqs.base.BaseGenericTest;
+import com.magenic.maqs.database.entities.StatesEntity;
+import com.magenic.maqs.utilities.helper.TestCategories;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class DatabaseDriverUnitTest extends BaseGenericTest {
-  {
-    @Test(groups = TestCategories.DATABASE) public void testQuery () {
+  { 
+    @Test(groups = TestCategories.DATABASE)
+    public void testQuery() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     List results = openConnection.query("SELECT * FROM information_schema.tables");
     Assert.assertTrue(results.stream().anyMatch(n -> ((Object[]) n)[2].equals("States")));

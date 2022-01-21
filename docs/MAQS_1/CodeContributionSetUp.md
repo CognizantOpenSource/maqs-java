@@ -167,7 +167,7 @@ Note:  You can download IntelliJ Idea here: [https://www.jetbrains.com/idea/down
 
 
 7. Click **OK**  
-   ![alt text](../resources/installationImages/intellij/EclipseJMAQSbase.png)
+   ![alt text](../resources/installationImages/intellij/EclipseMAQSbase.png)
 
 
 8. A success popup should be displayed

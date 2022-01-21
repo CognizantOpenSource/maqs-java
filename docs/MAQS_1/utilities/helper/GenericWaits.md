@@ -1,8 +1,10 @@
 # <img src="resources/MAQSf.jpg" height="32" width="32"> Generic Waits
 
 ## Overview
-MAQS includes a class of generic wait methods that can assist with waiting until a condition has been met. This provides additional flexibility when special handling is required.
-We use waits to test if a condition was met within a certain amount of time in milliseconds, to do this we use wait time which is how long you wait between retries.
+MAQS includes a class of generic wait methods that can assist with waiting until a condition has been met.
+This provides additional flexibility when special handling is required.
+We use waits to test if a condition was met within a certain amount of time in milliseconds, 
+to do this we use wait time which is how long you wait between retries.
 These retries are bound by the timeout in milliseconds and are set in the configuration.
 
 We use Wait for if we want to throw an exception if the desired state is not met.  
@@ -12,6 +14,7 @@ We use Wait until if we want the boolean was met within the permitted timeout.
 ## Wait Until
 ### Wait Until a Func Returns True
 This function will return true if the method returns true, false if the method times out or times out waiting for the method to return true.
+
 ##### Written as
 ```java
 boolean waitUntil(Predicate<T> waitForTrue, T arg)
@@ -29,9 +32,11 @@ GenericWait.waitUntil(falseMethod());
 ```
 
 ### Wait Until Func With Argument Type T and Returns Type T
-This function will return true if the func returns true, false if the func times out or times out waiting for the func to return true.
+This function will return true if the func returns true, 
+false if the func times out or times out waiting for the func to return true.
 
 This wait accepts an argument that will be passed into the test method.
+
 ##### Written As
 ```java
 boolean waitUntil(Predicate<T> waitForTrue, T arg)
@@ -52,10 +57,12 @@ bool textResults = GenericWait.waitUntil(this::isParamTestString, teststring + "
 This function will throw an exception if it times out before the func returns true.
 
 This wait accepts an argument of the type, this argument will be passed to the function.
+
 ##### Written As
 ```java
 T waitFor(Function<U, T> waitFor, U arg)
 ```
+
 ##### Example
 ```java
 // A method that will return a false boolean
@@ -95,6 +102,7 @@ The wait time and time-out can be explicitly set, as well as the ability to supp
 ```java
 boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout, boolean throwException)
 ```
+
 ##### Examples
 ```java
 private bool isFalseBool()

@@ -3,8 +3,8 @@
 # Open source
 As of July 2020, our MAQS java framework became fully open source.  
 
-## Template types
-- Java Framework project templates - These templates are available to Magenic clients
+## Templates: Out of the box templates
+- Java Framework project templates
     - Appium (with tests and page object models)
     - Base
     - Composite (mix and match all MAQS capabilities)
@@ -35,10 +35,10 @@ Suspended mode will result in no information written to the log.
 - The performance measures are human-readable and requires a Name, Embedded Perf tests to start at different times, Basically it tells how long the data collection took using this as a stop watch
 
 ## TestObject
-- Holds test specific objects and available in all Magenic MAQS flavors
+- Holds test specific objects and available in all MAQS flavors
 
 ## Waits
-- GenericWait.WaitFor waits until exceptions are no longer thrown (calls the function N number of times) or GenericWait.waitUntil  responds with true / false
+- GenericWait.waitFor waits until exceptions are no longer thrown (calls the function N number of times) or GenericWait.waitUntil  responds with true / false
 
 ## Customizations
 - Utilizes the app.config which is Globally used information, avoids hard-coded code and you can add Key|Value custom pairs such as UserName =YOU PassWord=ABC   We also allow you to use 'default'
