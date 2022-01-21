@@ -17,7 +17,7 @@ Find the configuration of browsers within the app.config file and define one and
 ## How do I fix common user errors?
 
 ### My code can't find the config class  
-- Make sure you've imported the Full namespace such as com.magenic.maqs.utilities.helper.Config
+- Make sure you've imported the Full namespace such as com.cognizantsoftvision.maqs.utilities.helper.Config
 ### Test can't find the page element for a test, errors indicate something is wrong with Selenium  
 - Kill the existing Chrome processes spawned and orphaned from the test kick off then update Browser and start fresh
 ### Test fails on driver, such as Chrome  

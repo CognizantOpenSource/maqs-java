@@ -6,7 +6,28 @@
 [VS Code](#VS Code)  
 [IntelliJ](#IntelliJ)
 
-## Cloning the MAQS Repository
+# Cloning the MAQS Repository
+
+## With Chocolatey
+
+1. Download chocolety
+2. Open Powershell as an administrator level
+3. Enter this script into powershell and run the script  
+
+`
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+refreshenv
+choco install openjdk11 -y
+choco install vscode -y
+choco install maven -y
+choco install gradle -y
+refreshenv
+code --install-extension redhat.java
+code --install-extension vscjava.vscode-maven
+code --install-extension vscjava.vscode-gradle
+code --install-extension vscjava.vscode-java-pack
+`
+
 
 ---
 
@@ -36,7 +57,7 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 Before setting up the project, make sure you have VS Code  installed  
 Note:  You can download VS Code here: [https://code.visualstudio.com/Download](https://code.visualstudio.com/Download)
 
-#### If MAQS has been cloned via GitHub Desktop
+#### If MAQS has already been cloned
 1. Open VS Code
 2. Click Open Folder
 ![alt text](../resources/installationImages/vsCode/OpenFolder.png)
@@ -84,7 +105,7 @@ Note:  You can download VS Code here: [https://code.visualstudio.com/Download](h
 Before setting up the project, make sure you have IntelliJ installed  
 Note:  You can download IntelliJ Idea here: [https://www.jetbrains.com/idea/download/#section=windows](https://www.jetbrains.com/idea/download/#section=windows)
 
-### If MAQS has been cloned via GitHub Desktop
+### If MAQS has been already been cloned
 1. Click the **Open** button
 ![alt text](../resources/installationImages/intellij/OpenProject.png)
 

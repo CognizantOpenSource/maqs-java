@@ -21,4 +21,5 @@
 - right-click the Solution and select Properties then locate the Configuration Properties and set Platform to Any CPU for all Projects such as Tests and WebServiceModel (in this case the solution would be a WebService)
 
 ## Errors trying to locate Enterprise when restoring NuGet packages
-- right-click the Solution and select Properties > Options > NuGet Package Manager > Package Sources  here you will find Available package sources and Machine-wide package sources.  A mapping to the internal Magenic package storage url (for internal use only) or an external reference such as and internal NuGet repository or file share.
+- right-click the Solution and select Properties > Options > NuGet Package Manager > Package Sources  here you will find Available package sources and Machine-wide package sources.
+A mapping to the internal Cognizant Softvision package storage url (for internal use only) or an external reference such as and internal NuGet repository or file share.

@@ -50,9 +50,9 @@ Gets a database connection based on configuration values
 
 ## Sample code
 ```java
-import com.magenic.maqs.base.BaseGenericTest;
-import com.magenic.maqs.database.entities.StatesEntity;
-import com.magenic.maqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
+import com.cognizantsoftvision.maqs.database.entities.StatesEntity;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;

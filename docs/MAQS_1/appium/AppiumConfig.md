@@ -75,11 +75,11 @@ AppiumConfig.setTimouts(driver);
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <configSections>
-    <section name="MagenicMaqs" type="System.Configuration.NameValueSectionHandler" />
+    <section name="ModularMaqs" type="System.Configuration.NameValueSectionHandler" />
     <section name="AppiumMaqs" type="System.Configuration.NameValueSectionHandler" />
     <section name="AppiumCapsMaqs" type="System.Configuration.NameValueSectionHandler" />
   </configSections>
-  <MagenicMaqs>
+  <ModularMaqs>
     <!-- Do you want to create logs for your tests
     <add key="Log" value="YES"/>
     <add key="Log" value="NO"/>
@@ -107,7 +107,7 @@ AppiumConfig.setTimouts(driver);
     <!--Retry and overall timeout in milliseconds-->
     <add key="WaitTime" value="1000" />
     <add key="Timeout" value="10000" />
-  </MagenicMaqs>
+  </ModularMaqs>
   <AppiumMaqs>
     <!-- Device settings -->
     <add key="PlatformName" value="Android" />
@@ -145,7 +145,7 @@ AppiumConfig.setTimouts(driver);
     <add key="SavePagesourceOnFail" value="NO" />
   </AppiumMaqs>
   <AppiumCapsMaqs>
-    <add key="username" value="Partner_Magenic" />
+    <add key="username" value="Partner_CognizantSoftvison" />
     <add key="accessKey" value="7e0592a4-16de-4c6b-9b87-ee61aa43ceac" />
     <add key="deviceName" value="Android Emulator" />
     <add key="deviceOrientation" value="portrait" />

@@ -98,7 +98,7 @@ String imageFormat = SeleniumConfig.getImageFormat();
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
-    <MagenicMaqs>
+    <ModularMaqs>
         <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
         <WaitTime>100</WaitTime>
 
@@ -128,7 +128,7 @@ String imageFormat = SeleniumConfig.getImageFormat();
 
         <!-- Log file path - Defaults to build location if no value is defined -->
         <FileLoggerPath>./target/logs</FileLoggerPath>
-    </MagenicMaqs>
+    </ModularMaqs>
 
     <SeleniumMaqs>
         <!--Local browser settings
@@ -195,7 +195,7 @@ String imageFormat = SeleniumConfig.getImageFormat();
     "Platform": "OS X 10.11",
     "Version": "54.0"
   },
-  "MagenicMaqs": {
+  "ModularMaqs": {
     "WaitTime": "100",
     "Timeout": "10000",
     "Log": "OnFail",
