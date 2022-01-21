@@ -9,12 +9,15 @@
 # Cloning the MAQS Repository
 
 ## With Chocolatey
-
-1. Download chocolety
-2. Open Powershell as an administrator level
+To do this you must first have Chocolatey downloaded.  
+To install Chocolatey follow the instructions here: [https://chocolatey.org/install](https://chocolatey.org/install)
+ 
+1. Open Powershell as an administrator level (right click Powershell before opening it)
+2. To confirm if Chocolatey is installed, in Powershell enter: **choco -v**   
+   It should return a version number (Example: **0.12.0**)
 3. Enter this script into powershell and run the script  
 
-`
+```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 refreshenv
 choco install openjdk11 -y
@@ -26,8 +29,9 @@ code --install-extension redhat.java
 code --install-extension vscjava.vscode-maven
 code --install-extension vscjava.vscode-gradle
 code --install-extension vscjava.vscode-java-pack
-`
+```
 
+3. 
 
 ---
 
@@ -54,8 +58,41 @@ Download Git Desktop here: [https://desktop.github.com/](https://desktop.github.
 ---
 
 ## VS Code
-Before setting up the project, make sure you have VS Code  installed  
-Note:  You can download VS Code here: [https://code.visualstudio.com/Download](https://code.visualstudio.com/Download)
+Before setting up the project, make sure you have VS Code installed.  
+You can install it manually but through Chocolatey is recommended.
+
+### Download VS Code Manually
+You can download VS Code here: [https://code.visualstudio.com/Download](https://code.visualstudio.com/Download)
+
+---
+
+## Set up With Chocolatey
+To do this you must first have Chocolatey downloaded.  
+To install Chocolatey follow the instructions here: [https://chocolatey.org/install](https://chocolatey.org/install)
+
+1. Open Powershell as an **administrator** level  
+(right click **Powershell**, left click **Run as Administrator**)
+2. To confirm if Chocolatey is installed, in Powershell enter: **choco -v**   
+   It should return a version number (Example: **0.12.0**)
+3. Enter this script into powershell and run the script
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+refreshenv
+choco install openjdk11 -y
+choco install vscode -y
+choco install maven -y
+choco install gradle -y
+refreshenv
+code --install-extension redhat.java
+code --install-extension vscjava.vscode-maven
+code --install-extension vscjava.vscode-gradle
+code --install-extension vscjava.vscode-java-pack
+```
+
+3. VS Code should now be installed in your machine
+
+---
 
 #### If MAQS has already been cloned
 1. Open VS Code
