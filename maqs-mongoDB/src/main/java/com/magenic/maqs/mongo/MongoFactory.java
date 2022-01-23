@@ -1,8 +1,8 @@
 /*
- * Copyright 2021 (C) Magenic, All rights Reserved
+ * Copyright 2022 Cognizant, All rights Reserved
  */
 
-package com.magenic.jmaqs.mongo;
+package com.magenic.maqs.mongo;
 
 import com.mongodb.MongoClientException;
 import com.mongodb.MongoClientSettings;
@@ -73,7 +73,7 @@ public class MongoFactory {
       throw new MongoException("connection was not created: " + e);
     }
 
-    if (database.getName() == null) {
+    if (database.getName().isEmpty()) {
       throw new MongoException("connection was not created");
     }
     return database.getCollection(collectionString);

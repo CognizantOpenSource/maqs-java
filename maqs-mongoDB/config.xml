@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <configuration>
-    <MagenicMaqs>
+    <ModualMaqs>
         <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
         <WaitTime>100</WaitTime>
 
@@ -31,7 +31,7 @@
 
         <!-- Log file path - Defaults to build location if no value is defined -->
         <FileLoggerPath>./target/logs</FileLoggerPath>
-    </MagenicMaqs>
+    </ModualMaqs>
     <MongoMaqs>
         <MongoConnectionString>mongodb://localhost:27017</MongoConnectionString>
         <MongoDatabase>MongoDatabaseTest</MongoDatabase>

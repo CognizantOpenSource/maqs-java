@@ -56,7 +56,7 @@
         <module>jmaqs-database</module>
         <module>jmaqs-cucumber</module>
         <module>jmaqs-accessibility</module>
-        <module>jmaqs-mongoDB</module>
+        <module>maqs-mongoDB</module>
     </modules>
 
     <profiles>
@@ -332,8 +332,8 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.mongoDB</groupId>
-                <artifactId>jmaqs-mongoDB</artifactId>
+                <groupId>com.magenic.maqs.mongoDB</groupId>
+                <artifactId>maqs-mongoDB</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

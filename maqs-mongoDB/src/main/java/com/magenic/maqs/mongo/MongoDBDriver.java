@@ -1,8 +1,8 @@
 /*
- * Copyright 2021 (C) Magenic, All rights Reserved
+ * Copyright 2022 Cognizant, All rights Reserved
  */
 
-package com.magenic.jmaqs.mongo;
+package com.magenic.maqs.mongo;
 
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
@@ -149,7 +149,7 @@ public class MongoDBDriver implements AutoCloseable {
   }
 
   /**
-   * List all of the items in the collection.
+   * List all the items in the collection.
    * @return List of the items in the collection
    */
   public List<Document> listAllCollectionItems() {
@@ -165,7 +165,7 @@ public class MongoDBDriver implements AutoCloseable {
   }
 
   /**
-   * Counts all of the items in the collection.
+   * Counts all the items in the collection.
    * @return Number of items in the collection
    */
   public int countAllItemsInCollection() {

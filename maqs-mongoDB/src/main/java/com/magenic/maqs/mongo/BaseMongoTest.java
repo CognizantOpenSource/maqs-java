@@ -1,8 +1,8 @@
 /*
- * Copyright 2021 (C) Magenic, All rights Reserved
+ * Copyright 2022 Cognizant, All rights Reserved
  */
 
-package com.magenic.jmaqs.mongo;
+package com.magenic.maqs.mongo;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
 import com.mongodb.client.MongoCollection;
@@ -17,7 +17,7 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
 
   /**
    * Initializes a new instance of the BaseMongoTest class,
-   * Setup the database client for each test class.
+   * Set up the database client for each test class.
    */
   public BaseMongoTest() {
     // Currently, not populated with any logic
@@ -96,11 +96,11 @@ public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
   }
 
   /**
-   * Steps to do before logging teardown results.
+   * Steps to take before logging teardown results.
    * @param resultType The test result
    */
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
-    // Currently not populated with any logic
+    // Currently, not populated with any logic
   }
 }
