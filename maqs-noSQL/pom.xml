@@ -3,16 +3,22 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.magenic.jmaqs</groupId>
         <artifactId>jmaqs-framework</artifactId>
         <version>${revision}</version>
     </parent>
-    <groupId>com.magenic.maqs.mongoDB</groupId>
-    <artifactId>jmaqs-mongoDB</artifactId>
-    <name>MAQS MongoDB Testing Module</name>
+
+    <groupId>com.cognizantsoftvision.maqs.noSQL</groupId>
+    <artifactId>maqs-noSQL</artifactId>
+    <name>MAQS NoSQL Testing Module</name>
+    <version>${revision}</version>
+
     <properties>
+        <mongoDB.version>4.4.1</mongoDB.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
@@ -28,12 +34,11 @@
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
-            <version>4.4.1</version>
+            <version>${mongoDB.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
         </dependency>
-
     </dependencies>
 </project>

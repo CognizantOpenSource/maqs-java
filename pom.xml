@@ -56,7 +56,7 @@
         <module>jmaqs-database</module>
         <module>jmaqs-cucumber</module>
         <module>jmaqs-accessibility</module>
-        <module>maqs-mongoDB</module>
+        <module>maqs-noSQL</module>
     </modules>
 
     <profiles>
@@ -332,8 +332,8 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.maqs.mongoDB</groupId>
-                <artifactId>maqs-mongoDB</artifactId>
+                <groupId>com.cognizantsoftvision.maqs.noSQL</groupId>
+                <artifactId>maqs-noSQL</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
