@@ -4,4 +4,4 @@
 
 * [JMAQS 1](MAQS_1/Introduction.md)
 
-![MAQS](resources/maqsfull2.png)
+![MAQS](resources/maqsfull.png)

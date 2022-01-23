@@ -85,6 +85,6 @@
       - [iii. HTML Reporter](./accessibility/HtmlReporter.md)
 
 
-- [Contribution SetUp](./CodeContributionSetUp.md)
+- [Contribution SetUp](./ContributionSetUp.md)
 - [FAQ](./ComingSoon.md)
 - [License](./License.md)
