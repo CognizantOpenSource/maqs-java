@@ -63,7 +63,6 @@ public class MongoFactory {
   public static MongoCollection<Document> getCollection(String databaseString,
       String collectionString, MongoClientSettings settings) {
     MongoClient mongoClient;
-
     MongoDatabase database;
 
     try {

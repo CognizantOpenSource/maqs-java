@@ -107,7 +107,8 @@ public class MongoDBDriver implements AutoCloseable {
    * @param mongoDatabase the name of the mongo database
    */
   public void setDatabase(MongoClient mongoClient, String mongoDatabase) {
-    this.database = mongoClient.getDatabase(mongoDatabase);
+    this.client = mongoClient;
+    setDatabase(mongoDatabase);
   }
 
   /**

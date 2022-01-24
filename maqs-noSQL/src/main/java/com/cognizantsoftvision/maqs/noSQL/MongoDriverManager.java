@@ -48,7 +48,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param overrideDriver The new Mongo driver
    */
   public void overrideDriver(MongoDBDriver overrideDriver) {
-    this.driver = overrideDriver;
+    driver = overrideDriver;
     this.setBaseDriver(new MongoDBDriver(overrideDriver.getCollection()));
   }
 
@@ -59,7 +59,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param collectionString Collection string to use
    */
   public void overrideDriver(String connectionString, String databaseString, String collectionString) {
-    this.driver = null;
+    driver = null;
     this.overrideDriverGet(() -> MongoFactory.getCollection(connectionString, databaseString, collectionString));
     this.overrideDriverGet(() -> MongoFactory.getCollection(connectionString, databaseString, collectionString));
   }
@@ -69,7 +69,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param overrideCollectionConnection The new collection connection
    */
   public void overrideDriver(Supplier<MongoCollection<Document>> overrideCollectionConnection) {
-    this.driver = null;
+    driver = null;
     this.overrideDriverGet(overrideCollectionConnection);
   }
 

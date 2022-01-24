@@ -41,4 +41,32 @@
             <artifactId>testng</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.37.0</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <alias>mongoDB</alias>
+                            <external>
+                                <type>compose</type>
+                                <basedir>../Docker/MAQSMongoDB/</basedir>
+                                <composeFile>docker-compose.yml</composeFile>
+                            </external>
+                        </image>
+                    </images>
+                    <execution>
+                        <id>setup-database</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
