@@ -6,8 +6,8 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.base.exceptions.JMAQSRuntimeException;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 

@@ -6,8 +6,8 @@ package com.magenic.jmaqs.appium;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.base.DriverManager;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;

@@ -14,10 +14,10 @@ import static org.testng.Assert.assertTrue;
 
 import com.google.common.base.Predicate;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
-import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.ExecutionFailedException;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;

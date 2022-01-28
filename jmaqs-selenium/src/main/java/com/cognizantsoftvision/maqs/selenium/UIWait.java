@@ -5,8 +5,8 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.FluentWaitFactory;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.Config;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Function;

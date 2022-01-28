@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.selenium.constants;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

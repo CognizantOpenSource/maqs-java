@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;

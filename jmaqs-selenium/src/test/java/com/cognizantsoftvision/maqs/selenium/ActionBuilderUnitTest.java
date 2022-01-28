@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;

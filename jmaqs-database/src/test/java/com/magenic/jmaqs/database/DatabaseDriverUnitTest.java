@@ -6,7 +6,7 @@ package com.magenic.jmaqs.database;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.magenic.jmaqs.database.entities.StatesEntity;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;

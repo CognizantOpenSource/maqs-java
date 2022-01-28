@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.appium;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

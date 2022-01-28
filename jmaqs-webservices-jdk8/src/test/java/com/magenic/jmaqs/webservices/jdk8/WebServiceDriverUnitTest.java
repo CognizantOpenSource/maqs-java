@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.webservices.jdk8;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.net.URISyntaxException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;

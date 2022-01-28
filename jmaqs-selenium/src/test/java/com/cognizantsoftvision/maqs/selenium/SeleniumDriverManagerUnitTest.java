@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;

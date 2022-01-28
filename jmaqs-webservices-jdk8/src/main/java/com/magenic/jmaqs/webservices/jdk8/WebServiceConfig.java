@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.webservices.jdk8;
 
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.Config;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 
 /**
  * Web service specific configuration settings.

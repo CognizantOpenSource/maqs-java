@@ -6,7 +6,7 @@ package com.cognizantsoftvision.maqs.base;
 
 import static org.testng.Assert.assertNotNull;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.function.Supplier;
 import org.testng.Assert;
 import org.testng.annotations.Test;

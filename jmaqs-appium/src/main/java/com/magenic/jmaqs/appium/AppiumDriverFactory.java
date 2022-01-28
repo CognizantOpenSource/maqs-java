@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.constants.PlatformType;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;

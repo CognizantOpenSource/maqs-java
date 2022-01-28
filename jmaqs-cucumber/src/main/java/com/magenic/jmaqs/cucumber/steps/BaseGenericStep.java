@@ -7,7 +7,7 @@ package com.magenic.jmaqs.cucumber.steps;
 import com.cognizantsoftvision.maqs.base.BaseTest;
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.magenic.jmaqs.cucumber.ScenarioContext;
-import com.magenic.jmaqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 
 /**
  * Base generic cucumber step.

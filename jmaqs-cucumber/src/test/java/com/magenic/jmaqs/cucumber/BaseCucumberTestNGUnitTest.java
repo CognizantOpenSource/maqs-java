@@ -8,7 +8,7 @@ import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.base.BaseTest;
 import com.magenic.jmaqs.cucumber.unittestpagemodel.DummyBaseCucumberTestNG;
 import com.magenic.jmaqs.cucumber.unittestpagemodel.DummyTestResult;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

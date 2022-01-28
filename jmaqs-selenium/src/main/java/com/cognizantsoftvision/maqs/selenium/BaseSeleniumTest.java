@@ -6,9 +6,9 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
 import com.cognizantsoftvision.maqs.selenium.exceptions.WebDriverFactoryException;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 

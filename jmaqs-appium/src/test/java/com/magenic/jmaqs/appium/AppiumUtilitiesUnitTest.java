@@ -5,10 +5,10 @@
 package com.magenic.jmaqs.appium;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import io.appium.java_client.AppiumDriver;
 import java.io.File;
 import java.nio.file.Paths;

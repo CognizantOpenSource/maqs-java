@@ -4,10 +4,10 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

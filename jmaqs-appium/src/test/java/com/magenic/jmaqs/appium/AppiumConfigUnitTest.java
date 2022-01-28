@@ -6,9 +6,9 @@ package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.constants.PlatformType;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.Config;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;

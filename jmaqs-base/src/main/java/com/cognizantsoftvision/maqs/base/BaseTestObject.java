@@ -5,10 +5,10 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.base.exceptions.DriverDisposalException;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;

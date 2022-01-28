@@ -5,8 +5,8 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.util.HashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

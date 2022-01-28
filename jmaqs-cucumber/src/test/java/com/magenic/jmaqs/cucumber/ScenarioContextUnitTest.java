@@ -4,11 +4,9 @@
 
 package com.magenic.jmaqs.cucumber;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * Unit test class for ScenarioContext class.

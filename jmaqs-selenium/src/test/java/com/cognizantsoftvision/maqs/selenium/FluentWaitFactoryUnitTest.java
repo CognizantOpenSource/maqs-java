@@ -7,7 +7,7 @@ package com.cognizantsoftvision.maqs.selenium;
 import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.PageElementsPageModel;
 import com.cognizantsoftvision.maqs.selenium.factories.FluentWaitFactory;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;

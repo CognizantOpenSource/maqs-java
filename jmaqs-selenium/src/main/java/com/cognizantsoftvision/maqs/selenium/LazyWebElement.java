@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;

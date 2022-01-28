@@ -4,9 +4,9 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.io.IOException;
 import java.util.function.Supplier;

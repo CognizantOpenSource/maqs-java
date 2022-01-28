@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;

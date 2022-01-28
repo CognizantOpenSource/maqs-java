@@ -7,7 +7,7 @@ package com.cognizantsoftvision.maqs.selenium;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.time.Duration;
 import java.util.Map;
 import org.testng.Assert;

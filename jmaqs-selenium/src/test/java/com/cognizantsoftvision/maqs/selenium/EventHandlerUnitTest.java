@@ -5,8 +5,8 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;

@@ -4,8 +4,8 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;

@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.magenic.jmaqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import java.util.function.Supplier;
 
 /**

@@ -6,7 +6,7 @@ package com.magenic.jmaqs.webservices.jdk8;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.magenic.jmaqs.webservices.jdk8.models.Product;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;

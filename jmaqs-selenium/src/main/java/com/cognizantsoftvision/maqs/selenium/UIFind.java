@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;

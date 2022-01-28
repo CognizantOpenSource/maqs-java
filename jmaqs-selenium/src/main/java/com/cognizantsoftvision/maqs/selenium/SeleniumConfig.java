@@ -6,9 +6,9 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.helper.Config;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;

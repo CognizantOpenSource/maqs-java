@@ -6,11 +6,11 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.FluentWaitFactory;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.GenericWait;
-import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
-import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
-import com.magenic.jmaqs.utilities.helper.functionalinterfaces.Action;
-import com.magenic.jmaqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.helper.GenericWait;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.ExecutionFailedException;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
+import com.cognizantsoftvision.maqs.utilities.helper.functionalinterfaces.Action;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;

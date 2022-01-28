@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.webservices.jdk8.WebServiceDriverRequestUnitTest;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;

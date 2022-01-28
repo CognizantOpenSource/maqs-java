@@ -5,9 +5,9 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.ListProcessor;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.helper.ListProcessor;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

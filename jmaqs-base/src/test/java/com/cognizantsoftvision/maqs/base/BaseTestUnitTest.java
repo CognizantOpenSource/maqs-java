@@ -4,13 +4,13 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.util.ArrayList;
 import org.testng.Assert;
 import org.testng.ITestContext;

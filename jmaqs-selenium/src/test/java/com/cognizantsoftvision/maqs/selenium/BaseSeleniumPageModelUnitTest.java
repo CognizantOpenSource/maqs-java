@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.PageElementsPageModel;
-import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
