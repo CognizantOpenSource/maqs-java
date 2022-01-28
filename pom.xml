@@ -54,7 +54,7 @@
         <module>jmaqs-webservices-jdk11</module>
         <module>maqs-appium</module>
         <module>maqs-database</module>
-        <module>jmaqs-cucumber</module>
+        <module>maqs-cucumber</module>
         <module>jmaqs-accessibility</module>
     </modules>
 
