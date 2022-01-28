@@ -47,8 +47,8 @@
     </scm>
 
     <modules>
-        <module>jmaqs-utilities</module>
-        <module>jmaqs-base</module>
+        <module>maqs-utilities</module>
+        <module>maqs-base</module>
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-webservices-jdk11</module>
