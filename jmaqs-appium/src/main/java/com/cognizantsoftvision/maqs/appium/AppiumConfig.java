@@ -2,10 +2,10 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.appium;
+package com.cognizantsoftvision.maqs.appium;
 
-import com.magenic.jmaqs.appium.constants.PlatformType;
-import com.magenic.jmaqs.appium.exceptions.AppiumConfigException;
+import com.cognizantsoftvision.maqs.appium.constants.PlatformType;
+import com.cognizantsoftvision.maqs.appium.exceptions.AppiumConfigException;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;

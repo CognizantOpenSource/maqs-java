@@ -2,9 +2,9 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.appium;
+package com.cognizantsoftvision.maqs.appium;
 
-import com.magenic.jmaqs.appium.constants.PlatformType;
+import com.cognizantsoftvision.maqs.appium.constants.PlatformType;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import io.appium.java_client.AppiumDriver;
