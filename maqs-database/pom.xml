@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.magenic.jmaqs</groupId>
-        <artifactId>jmaqs-framework</artifactId>
+        <groupId>com.cognizantsoftvision.maqs</groupId>
+        <artifactId>maqs-java</artifactId>
         <version>${revision}</version>
     </parent>
-    <groupId>com.magenic.jmaqs.database</groupId>
-    <artifactId>jmaqs-database</artifactId>
+    <groupId>com.cognizantsoftvision.maqs.database</groupId>
+    <artifactId>maqs-database</artifactId>
     <version>${revision}</version>
-    <name>JMAQS Database Testing Module</name>
+    <name>MAQS Database Testing Module</name>
     <properties>
         <hibernate-core.version>5.6.0.Final</hibernate-core.version>
         <sqlite-jdbc.version>3.36.0.3</sqlite-jdbc.version>
@@ -27,13 +27,13 @@
             <version>${sqlite-dialect.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.base</groupId>
-            <artifactId>jmaqs-base</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.base</groupId>
+            <artifactId>maqs-base</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.utilities</groupId>
-            <artifactId>jmaqs-utilities</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
+            <artifactId>maqs-utilities</artifactId>
         </dependency>
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>

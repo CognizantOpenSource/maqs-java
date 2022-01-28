@@ -3,14 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>jmaqs-framework</artifactId>
-        <groupId>com.magenic.jmaqs</groupId>
+        <artifactId>maqs-java</artifactId>
+        <groupId>com.cognizantsoftvision.maqs</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jmaqs-jacoco-reporting</artifactId>
-    <name>JMAQS Code Coverage Reporting Module</name>
+    <artifactId>maqs-jacoco-reporting</artifactId>
+    <name>MAQS Code Coverage Reporting Module</name>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
@@ -55,40 +55,40 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.magenic.jmaqs.appium</groupId>
-            <artifactId>jmaqs-appium</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.appium</groupId>
+            <artifactId>maqs-appium</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.accessibility</groupId>
-            <artifactId>jmaqs-accessibility</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.accessibility</groupId>
+            <artifactId>maqs-accessibility</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.base</groupId>
-            <artifactId>jmaqs-base</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.base</groupId>
+            <artifactId>maqs-base</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.utilities</groupId>
-            <artifactId>jmaqs-utilities</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
+            <artifactId>maqs-utilities</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.webservices</groupId>
-            <artifactId>jmaqs-webservices-jdk8</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+            <artifactId>maqs-webservices-jdk8</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.webservices</groupId>
-            <artifactId>jmaqs-webservices-jdk11</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+            <artifactId>maqs-webservices-jdk11</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.database</groupId>
-            <artifactId>jmaqs-database</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.database</groupId>
+            <artifactId>maqs-database</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.selenium</groupId>
-            <artifactId>jmaqs-selenium</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.selenium</groupId>
+            <artifactId>maqs-selenium</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.cucumber</groupId>
-            <artifactId>jmaqs-cucumber</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.cucumber</groupId>
+            <artifactId>maqs-cucumber</artifactId>
         </dependency>
     </dependencies>
 </project>

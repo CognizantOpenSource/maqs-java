@@ -4,26 +4,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>jmaqs-framework</artifactId>
-        <groupId>com.magenic.jmaqs</groupId>
+        <artifactId>maqs-java</artifactId>
+        <groupId>com.cognizantsoftvision.maqs</groupId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>com.magenic.jmaqs.webservices</groupId>
-    <artifactId>jmaqs-webservices-jdk11</artifactId>
-    <name>JMAQS JDK11 WebServices Testing Module</name>
+    <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+    <artifactId>maqs-webservices-jdk11</artifactId>
+    <name>MAQS JDK11 WebServices Testing Module</name>
     <version>${revision}</version>
 
     <dependencies>
         <dependency>
-            <groupId>com.magenic.jmaqs.utilities</groupId>
-            <artifactId>jmaqs-utilities</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
+            <artifactId>maqs-utilities</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.webservices</groupId>
-            <artifactId>jmaqs-webservices-jdk8</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+            <artifactId>maqs-webservices-jdk8</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>

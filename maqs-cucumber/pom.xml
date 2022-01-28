@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.magenic.jmaqs</groupId>
-        <artifactId>jmaqs-framework</artifactId>
+        <groupId>com.cognizantsoftvision.maqs</groupId>
+        <artifactId>maqs-java</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>com.magenic.jmaqs.cucumber</groupId>
-    <artifactId>jmaqs-cucumber</artifactId>
+    <groupId>com.cognizantsoftvision.maqs.cucumber</groupId>
+    <artifactId>maqs-cucumber</artifactId>
     <version>${revision}</version>
-    <name>JMAQS Cucumber Module</name>
+    <name>MAQS Cucumber Module</name>
 
     <packaging>jar</packaging>
 
@@ -40,12 +40,12 @@
             <version>${cucumber.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.base</groupId>
-            <artifactId>jmaqs-base</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.base</groupId>
+            <artifactId>maqs-base</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.selenium</groupId>
-            <artifactId>jmaqs-selenium</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.selenium</groupId>
+            <artifactId>maqs-selenium</artifactId>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -77,8 +77,8 @@
             <artifactId>testng</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.utilities</groupId>
-            <artifactId>jmaqs-utilities</artifactId>
+            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
+            <artifactId>maqs-utilities</artifactId>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
