@@ -2,7 +2,7 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.base;
+package com.cognizantsoftvision.maqs.base;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;

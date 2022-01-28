@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.appium;
 
-import com.magenic.jmaqs.base.BaseGenericTest;
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;

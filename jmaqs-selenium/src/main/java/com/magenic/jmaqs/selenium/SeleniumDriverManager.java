@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
+import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.DriverManager;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;

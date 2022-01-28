@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.database;
 
-import com.magenic.jmaqs.base.BaseExtendableTest;
+import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
 import org.testng.ITestResult;
 
 /**

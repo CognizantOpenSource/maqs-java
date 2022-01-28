@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.cucumber;
 
-import com.magenic.jmaqs.base.BaseGenericTest;
-import com.magenic.jmaqs.base.BaseTest;
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
+import com.cognizantsoftvision.maqs.base.BaseTest;
 
 /**
  * The base generic cucumber object.

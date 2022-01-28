@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.exceptions.JMAQSRuntimeException;
+import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.exceptions.JMAQSRuntimeException;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import java.util.function.Supplier;

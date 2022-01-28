@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.webservices.jdk8;
 
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
+import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.DriverManager;
 import java.util.function.Supplier;
 import org.apache.http.impl.client.CloseableHttpClient;
 

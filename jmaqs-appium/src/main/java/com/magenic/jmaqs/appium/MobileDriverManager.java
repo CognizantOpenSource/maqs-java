@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.appium;
 
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
+import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.DriverManager;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import io.appium.java_client.AppiumDriver;

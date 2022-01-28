@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.selenium.exceptions;
 
-import com.magenic.jmaqs.base.exceptions.JMAQSRuntimeException;
+import com.cognizantsoftvision.maqs.base.exceptions.JMAQSRuntimeException;
 
 /**
  * The type Web driver factory exception.

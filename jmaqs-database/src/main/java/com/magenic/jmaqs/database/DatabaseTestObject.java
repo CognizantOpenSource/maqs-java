@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.database;
 
-import com.magenic.jmaqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import java.util.function.Supplier;
 

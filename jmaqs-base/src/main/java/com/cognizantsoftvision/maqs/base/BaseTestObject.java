@@ -2,9 +2,9 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.base;
+package com.cognizantsoftvision.maqs.base;
 
-import com.magenic.jmaqs.base.exceptions.DriverDisposalException;
+import com.cognizantsoftvision.maqs.base.exceptions.DriverDisposalException;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;

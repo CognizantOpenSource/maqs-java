@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.cucumber;
 
-import com.magenic.jmaqs.base.BaseTest;
+import com.cognizantsoftvision.maqs.base.BaseTest;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
 
 /**

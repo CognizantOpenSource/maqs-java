@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.webservices.jdk8;
 
-import com.magenic.jmaqs.base.BaseExtendableTest;
+import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import java.net.URISyntaxException;

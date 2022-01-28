@@ -2,9 +2,9 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.base;
+package com.cognizantsoftvision.maqs.base;
 
-import com.magenic.jmaqs.base.exceptions.ManagerDisposalException;
+import com.cognizantsoftvision.maqs.base.exceptions.ManagerDisposalException;
 import java.util.HashMap;
 import java.util.Map;
 

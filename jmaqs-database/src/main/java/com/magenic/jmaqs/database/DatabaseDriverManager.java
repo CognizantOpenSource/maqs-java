@@ -4,8 +4,8 @@
 
 package com.magenic.jmaqs.database;
 
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
+import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.DriverManager;
 import java.util.function.Supplier;
 
 public class DatabaseDriverManager extends DriverManager<DatabaseDriver> {

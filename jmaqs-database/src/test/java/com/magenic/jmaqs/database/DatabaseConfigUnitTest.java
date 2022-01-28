@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.database;
 
-import com.magenic.jmaqs.base.BaseGenericTest;
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.magenic.jmaqs.database.constants.DataProviderType;
 import com.magenic.jmaqs.database.providers.IDataSourceProvider;
 import com.magenic.jmaqs.database.providers.SQLProvider;

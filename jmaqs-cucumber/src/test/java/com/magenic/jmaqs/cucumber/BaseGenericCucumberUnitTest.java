@@ -4,14 +4,11 @@
 
 package com.magenic.jmaqs.cucumber;
 
-import com.magenic.jmaqs.base.BaseGenericTest;
-import com.magenic.jmaqs.base.BaseTest;
-import com.magenic.jmaqs.selenium.BaseSeleniumTest;
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
+import com.cognizantsoftvision.maqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * Unit test class for BaseGenericCucumber class.

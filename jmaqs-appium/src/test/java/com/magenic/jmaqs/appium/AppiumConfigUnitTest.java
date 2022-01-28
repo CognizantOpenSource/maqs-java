@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.constants.PlatformType;
-import com.magenic.jmaqs.base.BaseGenericTest;
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
