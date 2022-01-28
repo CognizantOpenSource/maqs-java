@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 (C) Magenic, All rights Reserved
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
 package com.cognizantsoftvision.maqs.utilities;
