@@ -55,7 +55,7 @@
         <module>maqs-appium</module>
         <module>maqs-database</module>
         <module>maqs-cucumber</module>
-        <module>jmaqs-accessibility</module>
+        <module>maqs-accessibility</module>
     </modules>
 
     <profiles>
