@@ -10,7 +10,7 @@ import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.AxeReporter;
 import com.deque.html.axecore.selenium.ResultType;
-import com.magenic.jmaqs.selenium.SeleniumTestObject;
+import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;

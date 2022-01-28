@@ -5,8 +5,8 @@
 package com.magenic.jmaqs.cucumber.steps;
 
 import com.magenic.jmaqs.cucumber.ScenarioContext;
-import com.magenic.jmaqs.selenium.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.SeleniumTestObject;
+import com.cognizantsoftvision.maqs.selenium.BaseSeleniumTest;
+import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.WebDriver;
 
 /**

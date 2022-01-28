@@ -6,9 +6,9 @@ package com.magenic.jmaqs.accessibility;
 
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.AxeReporter;
-import com.magenic.jmaqs.selenium.BaseSeleniumTest;
-import com.magenic.jmaqs.selenium.SeleniumConfig;
-import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
+import com.cognizantsoftvision.maqs.selenium.BaseSeleniumTest;
+import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
+import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.MessageType;

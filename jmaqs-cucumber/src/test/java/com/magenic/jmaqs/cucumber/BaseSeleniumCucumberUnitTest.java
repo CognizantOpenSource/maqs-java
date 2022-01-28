@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.cucumber;
 
 import com.cognizantsoftvision.maqs.base.BaseTest;
-import com.magenic.jmaqs.selenium.BaseSeleniumTest;
+import com.cognizantsoftvision.maqs.selenium.BaseSeleniumTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
