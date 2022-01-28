@@ -2,11 +2,11 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.cucumber.steps;
+package com.cognizantsoftvision.maqs.cucumber.steps;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
-import com.magenic.jmaqs.cucumber.ScenarioContext;
-import com.magenic.jmaqs.cucumber.unittestpagemodel.DummyBaseGenericStep;
+import com.cognizantsoftvision.maqs.cucumber.ScenarioContext;
+import com.cognizantsoftvision.maqs.cucumber.unittestpagemodel.DummyBaseGenericStep;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;

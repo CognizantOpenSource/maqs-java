@@ -4,7 +4,7 @@
 
 package stepdefs.generic;
 
-import com.magenic.jmaqs.cucumber.steps.BaseGenericStep;
+import com.cognizantsoftvision.maqs.cucumber.steps.BaseGenericStep;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

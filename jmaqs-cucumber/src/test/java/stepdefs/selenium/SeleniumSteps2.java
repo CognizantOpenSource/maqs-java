@@ -4,9 +4,8 @@
 
 package stepdefs.selenium;
 
-import com.magenic.jmaqs.cucumber.steps.BaseSeleniumStep;
+import com.cognizantsoftvision.maqs.cucumber.steps.BaseSeleniumStep;
 import io.cucumber.java.en.When;
-import io.cucumber.java.en.Then;
 
 public class SeleniumSteps2  extends BaseSeleniumStep {
 

@@ -2,7 +2,7 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.cucumber.unittestpagemodel;
+package com.cognizantsoftvision.maqs.cucumber.unittestpagemodel;
 
 import org.testng.IClass;
 import org.testng.ITestContext;

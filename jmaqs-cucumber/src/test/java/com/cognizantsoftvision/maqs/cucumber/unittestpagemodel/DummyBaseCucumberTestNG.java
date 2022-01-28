@@ -2,11 +2,11 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.cucumber.unittestpagemodel;
+package com.cognizantsoftvision.maqs.cucumber.unittestpagemodel;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.base.BaseTest;
-import com.magenic.jmaqs.cucumber.BaseCucumberTestNG;
+import com.cognizantsoftvision.maqs.cucumber.BaseCucumberTestNG;
 
 /**
  * A Dummy BaseCucumberTestNG class for testing

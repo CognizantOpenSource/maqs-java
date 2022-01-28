@@ -2,11 +2,11 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.cucumber.steps;
+package com.cognizantsoftvision.maqs.cucumber.steps;
 
 import com.cognizantsoftvision.maqs.base.BaseTest;
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
-import com.magenic.jmaqs.cucumber.ScenarioContext;
+import com.cognizantsoftvision.maqs.cucumber.ScenarioContext;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 
 /**

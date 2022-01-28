@@ -2,9 +2,9 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.cucumber.unittestpagemodel;
+package com.cognizantsoftvision.maqs.cucumber.unittestpagemodel;
 
-import com.magenic.jmaqs.cucumber.steps.BaseGenericStep;
+import com.cognizantsoftvision.maqs.cucumber.steps.BaseGenericStep;
 
 /**
  * A Dummy DummyBaseGenericStep class for testing

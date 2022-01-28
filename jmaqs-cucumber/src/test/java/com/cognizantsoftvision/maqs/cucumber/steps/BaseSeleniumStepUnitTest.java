@@ -2,10 +2,10 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.cucumber.steps;
+package com.cognizantsoftvision.maqs.cucumber.steps;
 
-import com.magenic.jmaqs.cucumber.ScenarioContext;
-import com.magenic.jmaqs.cucumber.unittestpagemodel.DummyBaseSeleniumStep;
+import com.cognizantsoftvision.maqs.cucumber.ScenarioContext;
+import com.cognizantsoftvision.maqs.cucumber.unittestpagemodel.DummyBaseSeleniumStep;
 import com.cognizantsoftvision.maqs.selenium.BaseSeleniumTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
