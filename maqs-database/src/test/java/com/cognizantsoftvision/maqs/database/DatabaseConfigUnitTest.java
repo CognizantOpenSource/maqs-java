@@ -40,7 +40,7 @@ public class DatabaseConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.DATABASE)
   public void testGetEntityDirectoryString() {
     Assert.assertEquals(DatabaseConfig.getEntityDirectoryString(),
-        "./src/test/java/com/magenic/jmaqs/database/entities/");
+        "./src/test/java/com/cognizantsoftvision/maqs/database/entities/");
   }
 
   @Test(groups = TestCategories.DATABASE)
@@ -58,21 +58,21 @@ public class DatabaseConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.DATABASE)
   public void testGetEntityPackageString() {
     Assert.assertEquals(DatabaseConfig.getEntityPackageString(),
-        "com.magenic.jmaqs.database.entities");
+        "com.cognizantsoftvision.maqs.database.entities");
   }
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetDatabaseName() {
-    Assert.assertEquals(DatabaseConfig.getDatabaseName(), "MagenicAutomation");
+    Assert.assertEquals(DatabaseConfig.getDatabaseName(), "GlobalAutomation");
   }
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetDatabaseUser() {
-    Assert.assertEquals(DatabaseConfig.getDatabaseUser(), "MagenicQA");
+    Assert.assertEquals(DatabaseConfig.getDatabaseUser(), "GlobalQA");
   }
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetDatabasePassword() {
-    Assert.assertEquals(DatabaseConfig.getDatabasePassword(), "1magenicMARQ");
+    Assert.assertEquals(DatabaseConfig.getDatabasePassword(), "1globalMARQ");
   }
 }

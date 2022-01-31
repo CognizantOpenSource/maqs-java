@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class DatabaseDriverUnitTest extends BaseGenericTest {
 
   /**
-   * Field INFOMATION_SCHEMAS_QUERY
+   * Field INFORMATION_SCHEMAS_QUERY
    */
   private static final String INFORMATION_SCHEMAS_QUERY = "SELECT * FROM information_schema.tables";
 

@@ -32,7 +32,7 @@ public final class Config {
   /**
    * The default section MagenicMaqs.
    */
-  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MAGENIC_MAQS;
+  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MODULAR_MAQS;
 
   /**
    * The default config.xml file name.

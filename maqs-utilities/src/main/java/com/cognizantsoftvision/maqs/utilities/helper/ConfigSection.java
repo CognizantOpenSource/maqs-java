@@ -35,9 +35,9 @@ public enum ConfigSection {
   EMAIL_MAQS("EmailMaqs"),
 
   /**
-   * The default magenic maqs section.
+   * The default modular maqs section.
    */
-  MAGENIC_MAQS("MagenicMaqs"),
+  MODULAR_MAQS("ModularMaqs"),
 
   /**
    * The default remote selenium capabilities section.

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <configuration>
-    <MagenicMaqs>
+    <GlobalMaqs>
         <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
         <WaitTime>100</WaitTime>
 
@@ -31,9 +31,9 @@
 
         <!-- Log file path - Defaults to build location if no value is defined -->
         <FileLoggerPath>./target/logs</FileLoggerPath>
-    </MagenicMaqs>
+    </GlobalMaqs>
     <!--<DatabaseMaqs>
-        <Name>JMAQS</Name>
+        <Name>MAQS</Name>
         &lt;!&ndash;<DatabaseProviderType>SQLSERVER</DatabaseProviderType>
         <DatabaseProviderType>MYSQL</DatabaseProviderType>&ndash;&gt;
         <DatabaseProviderType>SQLITE</DatabaseProviderType>
@@ -49,15 +49,15 @@
     </DatabaseCaps>-->
 
     <DatabaseMaqs>
-        <DatabaseName>MagenicAutomation</DatabaseName>
+        <DatabaseName>GlobalAutomation</DatabaseName>
         <!--<DatabaseProviderType>SQL</DatabaseProviderType>
         <DatabaseProviderType>MYSQL</DatabaseProviderType>-->
         <DatabaseProviderType>SQL</DatabaseProviderType>
-        <DatabaseUser>MagenicQA</DatabaseUser>
-        <DatabasePassword>1magenicMARQ</DatabasePassword>
+        <DatabaseUser>GlobalQA</DatabaseUser>
+        <DatabasePassword>1globalMARQ</DatabasePassword>
         <DatabaseConnectionString>jdbc:sqlserver://qasqlserver.database.windows.net</DatabaseConnectionString>
-        <EntityDirectory>./src/test/java/com/magenic/jmaqs/database/entities/</EntityDirectory>
-        <EntityPackage>com.magenic.jmaqs.database.entities</EntityPackage>
+        <EntityDirectory>./src/test/java/com/cognizantsoftvision/maqs/database/entities/</EntityDirectory>
+        <EntityPackage>com.cognizantsoftvision.maqs.database.entities</EntityPackage>
     </DatabaseMaqs>
     <DatabaseCaps>
         <hibernate.archive.autodetection>class</hibernate.archive.autodetection>
@@ -67,7 +67,7 @@
     </DatabaseCaps>
 </configuration>
 
-<!--<persistence-unit name="JMAQS">-->
+<!--<persistence-unit name="MAQS">-->
 <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
 <!--<class>OrdersEntity</class>-->
 <!--<class>ProductsEntity</class>-->
