@@ -4,16 +4,16 @@
 
 package com.cognizantsoftvision.maqs.accessibility;
 
+import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.deque.html.axecore.results.AxeRuntimeException;
 import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.AxeReporter;
 import com.deque.html.axecore.selenium.ResultType;
-import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;

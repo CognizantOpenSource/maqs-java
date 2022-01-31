@@ -4,10 +4,10 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;

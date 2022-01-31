@@ -4,8 +4,8 @@
 
 package com.cognizantsoftvision.maqs.database.providers;
 
-import com.cognizantsoftvision.maqs.database.constants.DataProviderType;
 import com.cognizantsoftvision.maqs.database.DatabaseConfig;
+import com.cognizantsoftvision.maqs.database.constants.DataProviderType;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import javax.sql.DataSource;
 
