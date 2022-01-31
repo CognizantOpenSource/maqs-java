@@ -17,11 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
@@ -52,7 +49,7 @@ public class HtmlReporter {
   /**
    * File path to resources java resources folder.
    */
-  private static final String resourcesFile = "../jmaqs-accessibility/src/main/resources/";
+  private static final String RESOURCES_FILE = "../maqs-accessibility/src/main/resources/";
 
   /**
    * Class constructor.
@@ -173,7 +170,7 @@ public class HtmlReporter {
 
     Element reportTitle = new Element("h1");
     reportTitle.text("Accessibility Check");
-    contentArea.appendChild(reportTitle);
+    Objects.requireNonNull(contentArea).appendChild(reportTitle);
 
     Element metaFlex = new Element("div");
     metaFlex.attributes().put("id", "metadata");
@@ -267,7 +264,7 @@ public class HtmlReporter {
     modal.appendChild(modalImage);
 
     Element script = doc.select("script").first();
-    script.appendChild(new DataNode(getJavascriptFileToString()));
+    Objects.requireNonNull(script).appendChild(new DataNode(getJavascriptFileToString()));
 
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
@@ -538,7 +535,7 @@ public class HtmlReporter {
    */
   private static String getCss(SearchContext context) throws IOException {
     String css = new String(Files.readAllBytes(
-        Paths.get(resourcesFile + "htmlReporter.css")));
+        Paths.get(RESOURCES_FILE + "htmlReporter.css")));
     return  css.replace("url('", "url('" + getDataImageString(context));
   }
 
@@ -569,6 +566,6 @@ public class HtmlReporter {
    * @throws IOException if an exception is thrown
    */
   private static String getJavascriptFileToString() throws IOException {
-    return new String(Files.readAllBytes(Paths.get(resourcesFile + "htmlReporterElements.js")));
+    return new String(Files.readAllBytes(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
   }
 }
