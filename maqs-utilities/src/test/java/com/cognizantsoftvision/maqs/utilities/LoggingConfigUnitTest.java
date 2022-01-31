@@ -11,7 +11,6 @@ import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.logging.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
