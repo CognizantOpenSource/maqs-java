@@ -5,10 +5,10 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
+import com.cognizantsoftvision.maqs.selenium.constants.OperatingSystem;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
 import com.cognizantsoftvision.maqs.selenium.exceptions.DriverNotFoundException;
 import com.cognizantsoftvision.maqs.selenium.exceptions.WebDriverFactoryException;
-import com.cognizantsoftvision.maqs.selenium.constants.OperatingSystem;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.io.File;
