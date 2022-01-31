@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
-    <MagenicMaqs>
+    <GlobalMaqs>
         <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
         <WaitTime>100</WaitTime>
 
@@ -30,7 +30,7 @@
 
         <!-- Log file path - Defaults to build location if no value is defined -->
         <FileLoggerPath>./target/logs</FileLoggerPath>
-    </MagenicMaqs>
+    </GlobalMaqs>
 
     <SeleniumMaqs>
         <!--Local browser settings
@@ -69,5 +69,4 @@
         <platform>OS X 10.11</platform>
         <version>54.0</version>
     </RemoteSeleniumCapsMaqs>
-
 </configuration>

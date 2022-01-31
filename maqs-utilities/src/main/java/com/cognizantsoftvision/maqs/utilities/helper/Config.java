@@ -30,14 +30,14 @@ public final class Config {
   public static final String NEW_LINE = System.getProperty("line.separator");
 
   /**
-   * The default section MagenicMaqs.
+   * The default section GlobalMaqs.
    */
-  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MODULAR_MAQS;
+  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.GLOBAL_MAQS;
 
   /**
    * The default config.xml file name.
    */
-  public static final String CONFIG_FILE = PropertyManager.get("jmaqs.config.location", "config.xml");
+  public static final String CONFIG_FILE = PropertyManager.get("maqs.config.location", "config.xml");
 
   /**
    * The configuration containing values loaded in from the config.xml file.

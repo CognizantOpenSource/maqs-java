@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
-    <MagenicMaqs>
+    <GlobalMaqs>
         <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
         <WaitTime>100</WaitTime>
 
@@ -40,7 +40,7 @@
         <TimeoutOverride>13.52</TimeoutOverride>
         <DontBrowserOverride>FireFox</DontBrowserOverride>
         <DontTimeoutOverride>13.52</DontTimeoutOverride>
-    </MagenicMaqs>
+    </GlobalMaqs>
 
     <SeleniumMaqs>
         <!-- CONFIG TEST VALUES -->
@@ -48,5 +48,4 @@
         <Browser>Internet Explorer</Browser>
         <HubAddress>132.15.12</HubAddress>
     </SeleniumMaqs>
-
 </configuration>

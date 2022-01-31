@@ -121,6 +121,6 @@ public class ConfigUnitTest {
     Assert.assertTrue(Config.doesKeyExist("SeleniumMaqs.TestKey"));
     Assert.assertTrue(Config.doesGeneralKeyExist("TimeoutOverride"));
     Assert.assertTrue(Config.doesKeyExist("HubAddress", ConfigSection.SELENIUM_MAQS));
-    Assert.assertFalse(Config.doesKeyExist("HubAddress", ConfigSection.MODULAR_MAQS));
+    Assert.assertFalse(Config.doesKeyExist("HubAddress", ConfigSection.GLOBAL_MAQS));
   }
 }
