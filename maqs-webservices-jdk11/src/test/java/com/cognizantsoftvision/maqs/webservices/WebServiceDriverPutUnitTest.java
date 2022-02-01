@@ -45,8 +45,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putJSONSerializedVerifyStatusCode() throws IOException, InterruptedException {
-    HttpResponse<String> result = webServiceDriver.put(putUrl,
-        MediaType.APP_JSON, product, true);
+    HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_JSON, product, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
