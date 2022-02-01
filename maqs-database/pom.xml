@@ -12,6 +12,7 @@
     <artifactId>maqs-database</artifactId>
     <version>${revision}</version>
     <name>MAQS Database Testing Module</name>
+
     <properties>
         <hibernate-core.version>5.6.0.Final</hibernate-core.version>
         <sqlite-jdbc.version>3.36.0.3</sqlite-jdbc.version>

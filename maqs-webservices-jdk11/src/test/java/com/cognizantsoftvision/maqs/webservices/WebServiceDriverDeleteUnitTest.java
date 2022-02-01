@@ -7,7 +7,9 @@ package com.cognizantsoftvision.maqs.webservices;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
+import java.util.Collections;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
@@ -58,16 +60,14 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void deleteJSONSerializedVerifyStatusCodeWithHeaderOverride()
       throws IOException, InterruptedException {
-    /*
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON,
-        Collections.singletonMap("pass", "word"), true);
+        (Type) Collections.singletonMap("pass", "word"), true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
     result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON,
-        Collections.singletonMap("pass", "word"), HttpStatus.OK);
+        (Type) Collections.singletonMap("pass", "word"), HttpStatus.OK);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
-     */
   }
 
   /**

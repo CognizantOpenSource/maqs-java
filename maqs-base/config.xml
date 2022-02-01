@@ -31,36 +31,4 @@
         <!-- Log file path - Defaults to build location if no value is defined -->
         <FileLoggerPath>./target/logs</FileLoggerPath>
     </GlobalMaqs>
-
-    <SeleniumMaqs>
-        <!--Local browser settings
-        <Browser>Chrome</Browser>
-        <Browser>Internet Explorer</Browser>
-        <Browser>Firefox</Browser>
-        <Browser>Edge</Browser>-->
-        <Browser>PhantomJS</Browser>
-
-        <!--Remote browser settings-->
-        <!--<Browser>REMOTE</Browser>-->
-        <RemoteBrowser>Chrome</RemoteBrowser>
-        <HubUrl>http://ondemand.saucelabs.com:80/wd/hub</HubUrl>
-        <WebSiteBase>http://magenicautomation.azurewebsites.net/</WebSiteBase>
-        <BrowserWaitTime>1000</BrowserWaitTime>
-        <BrowserTimeout>20000</BrowserTimeout>
-        <SeleniumCommandTimeout>61000</SeleniumCommandTimeout>
-
-        <!--Browser Resize settings
-        <BrowserSize>MAXIMIZE</BrowserSize>
-        <BrowserSize>DEFAULT</BrowserSize>-->
-        <BrowserSize>1024x768</BrowserSize>
-
-        <SoftAssertScreenshot>Yes</SoftAssertScreenshot>
-        <SavePagesourceOnFail>Yes</SavePagesourceOnFail>
-        <ImageFormat>Jpeg</ImageFormat>
-    </SeleniumMaqs>
-
-    <RemoteSeleniumCapsMaqs>
-        <username>Sauce_Labs_Username</username>
-        <accessKey>Sauce_Labs_Accesskey</accessKey>
-    </RemoteSeleniumCapsMaqs>
 </configuration>

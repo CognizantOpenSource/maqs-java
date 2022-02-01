@@ -27,20 +27,18 @@ public class DatabaseConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Test get provider type string.
-   */
-  @Test(groups = TestCategories.DATABASE)
-  public void testGetProviderTypeString() {
-    Assert.assertEquals(DatabaseConfig.getProviderTypeString(), "SQL");
-  }
-
-  /**
    * Test get entity directory string.
    */
   @Test(groups = TestCategories.DATABASE)
   public void testGetEntityDirectoryString() {
     Assert.assertEquals(DatabaseConfig.getEntityDirectoryString(),
         "./src/test/java/com/cognizantsoftvision/maqs/database/entities/");
+  }
+
+  @Test(groups = TestCategories.DATABASE)
+  public void testGetEntityPackageString() {
+    Assert.assertEquals(DatabaseConfig.getEntityPackageString(),
+        "com.cognizantsoftvision.maqs.database.entities");
   }
 
   @Test(groups = TestCategories.DATABASE)
@@ -55,24 +53,26 @@ public class DatabaseConfigUnitTest extends BaseGenericTest {
     Assert.assertTrue(provider instanceof SQLProvider);
   }
 
+  /**
+   * Test get provider type string.
+   */
   @Test(groups = TestCategories.DATABASE)
-  public void testGetEntityPackageString() {
-    Assert.assertEquals(DatabaseConfig.getEntityPackageString(),
-        "com.cognizantsoftvision.maqs.database.entities");
+  public void testGetProviderTypeString() {
+    Assert.assertEquals(DatabaseConfig.getProviderTypeString(), "SQL");
   }
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetDatabaseName() {
-    Assert.assertEquals(DatabaseConfig.getDatabaseName(), "GlobalAutomation");
+    Assert.assertEquals(DatabaseConfig.getDatabaseName(), "MagenicAutomation");
   }
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetDatabaseUser() {
-    Assert.assertEquals(DatabaseConfig.getDatabaseUser(), "GlobalQA");
+    Assert.assertEquals(DatabaseConfig.getDatabaseUser(), "MagenicQA");
   }
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetDatabasePassword() {
-    Assert.assertEquals(DatabaseConfig.getDatabasePassword(), "1globalMARQ");
+    Assert.assertEquals(DatabaseConfig.getDatabasePassword(), "1magenicMARQ");
   }
 }
