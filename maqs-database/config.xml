@@ -47,15 +47,15 @@
         <hibernate.format_sql>true</hibernate.format_sql>
         <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
     </DatabaseCaps>-->
-
+<!--    Data Source=localhost;Initial Catalog=GlobalAutomation;Persist Security Info=True;User ID=sa;Password=globalMAQS2;Connection Timeout=30"-->
     <DatabaseMaqs>
-        <DatabaseName>MagenicAutomation</DatabaseName>
+        <DatabaseName>GlobalAutomation</DatabaseName>
         <!--<DatabaseProviderType>SQL</DatabaseProviderType>
         <DatabaseProviderType>MYSQL</DatabaseProviderType>-->
         <DatabaseProviderType>SQL</DatabaseProviderType>
-        <DatabaseUser>MagenicQA</DatabaseUser>
-        <DatabasePassword>1magenicMARQ</DatabasePassword>
-        <DatabaseConnectionString>jdbc:sqlserver://qasqlserver.database.windows.net</DatabaseConnectionString>
+        <DatabaseUser>sa</DatabaseUser>
+        <DatabasePassword>globalMAQS2</DatabasePassword>
+        <DatabaseConnectionString>jdbc:sqlserver://localhost</DatabaseConnectionString>
         <EntityDirectory>./src/test/java/com/cognizantsoftvision/maqs/database/entities/</EntityDirectory>
         <EntityPackage>com.cognizantsoftvision.maqs.database.entities</EntityPackage>
     </DatabaseMaqs>
