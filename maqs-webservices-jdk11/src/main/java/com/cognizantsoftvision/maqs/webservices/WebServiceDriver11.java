@@ -19,7 +19,7 @@ import org.springframework.web.server.NotAcceptableStatusException;
 /**
  * The Web Service Driver.
  */
-public class WebServiceDriver {
+public class WebServiceDriver11 {
   /**
    * The base HTTP client control.
    */
@@ -34,7 +34,7 @@ public class WebServiceDriver {
    * Class Constructor that sets the http Client.
    * @param newHttpClient the http client to be set.
    */
-  public WebServiceDriver(HttpClient newHttpClient) {
+  public WebServiceDriver11(HttpClient newHttpClient) {
     this.baseHttpClient = newHttpClient;
     this.baseHttpRequestBuilder = HttpRequest.newBuilder();
   }
@@ -43,7 +43,7 @@ public class WebServiceDriver {
    * Class constructor that sets the HttpRequest Builder.
    * @param newHttpRequestBuilder the new Http request Builder to be set
    */
-  public WebServiceDriver(HttpRequest.Builder newHttpRequestBuilder) {
+  public WebServiceDriver11(HttpRequest.Builder newHttpRequestBuilder) {
     this.baseHttpClient = HttpClientFactory.getDefaultClient();
     this.baseHttpRequestBuilder = newHttpRequestBuilder;
   }
@@ -53,7 +53,7 @@ public class WebServiceDriver {
    * @param newHttpClient the Http Client
    * @param newHttpRequestBuilder the Http Request Builder
    */
-  public WebServiceDriver(HttpClient newHttpClient, HttpRequest.Builder newHttpRequestBuilder) {
+  public WebServiceDriver11(HttpClient newHttpClient, HttpRequest.Builder newHttpRequestBuilder) {
     this.baseHttpClient = newHttpClient;
     this.baseHttpRequestBuilder = newHttpRequestBuilder;
   }
@@ -783,7 +783,7 @@ public class WebServiceDriver {
       throw new NullPointerException(HttpStatus.NO_CONTENT + " Response was null");
     }
 
-    // Check if it was a success and if not create a user friendly error message
+    // Check if it was a success and if not create a user-friendly error message
     if (response.statusCode() != HttpStatus.OK.value()) {
       throw new NotAcceptableStatusException(
           String.format("Response did not indicate a success. %s Response code was: %d",

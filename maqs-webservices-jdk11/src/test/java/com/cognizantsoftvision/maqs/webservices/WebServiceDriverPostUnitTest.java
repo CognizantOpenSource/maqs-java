@@ -31,7 +31,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   /**
    * The web service driver to be used in a test.
    */
-  private final WebServiceDriver webServiceDriver = new WebServiceDriver(
+  private final WebServiceDriver11 webServiceDriver = new WebServiceDriver11(
       HttpClientFactory.getDefaultClient(), HttpRequest.newBuilder());
 
   /**

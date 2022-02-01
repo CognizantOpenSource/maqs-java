@@ -16,10 +16,10 @@ public class WebServiceDriverUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void setHttpClient() {
-    WebServiceDriver webServiceDriver1 = new WebServiceDriver(
+    WebServiceDriver11 webServiceDriver1 = new WebServiceDriver11(
         HttpClientFactory.getDefaultClient());
     webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient());
-    WebServiceDriver webServiceDriver2 = new WebServiceDriver(
+    WebServiceDriver11 webServiceDriver2 = new WebServiceDriver11(
         webServiceDriver1.getHttpClient());
     Assert.assertNotNull(webServiceDriver1.getHttpClient(),
         "Driver 1 is null");
@@ -31,7 +31,7 @@ public class WebServiceDriverUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void setHttpRequest() {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(
+    WebServiceDriver11 webServiceDriver = new WebServiceDriver11(
         HttpClientFactory.getDefaultClient());
     webServiceDriver.setHttpRequestBuilder(HttpRequest.newBuilder());
     Assert.assertNotNull(webServiceDriver.getHttpRequestBuilder());

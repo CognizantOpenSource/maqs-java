@@ -36,7 +36,7 @@ public class WebServiceDriverPutUnitTest {
   /**
    * The web service driver to be used in a test.
    */
-  private final WebServiceDriver webServiceDriver = new WebServiceDriver(HttpRequest.newBuilder());
+  private final WebServiceDriver11 webServiceDriver = new WebServiceDriver11(HttpRequest.newBuilder());
 
   /**
    * Verify the string status code.
@@ -101,7 +101,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putXMLSerializedVerifyEmptyString() throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    WebServiceDriver11 webServiceDriver = new WebServiceDriver11(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_XML,
         WebServiceUtilities.createStringEntity(product, MediaType.APP_XML),true);
     Assert.assertEquals(result.body(), "");
@@ -127,7 +127,7 @@ public class WebServiceDriverPutUnitTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringWithMakeStringContent()
       throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    WebServiceDriver11 webServiceDriver = new WebServiceDriver11(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1", MediaType.PLAIN_TEXT,
         WebServiceUtilities.createStringEntity("Test", MediaType.PLAIN_TEXT), true);
     Assert.assertEquals(result.body(), "");
@@ -153,7 +153,7 @@ public class WebServiceDriverPutUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void putStringMakeContentStatusCode() throws IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    WebServiceDriver11 webServiceDriver = new WebServiceDriver11(HttpClientFactory.getDefaultClient());
     HttpResponse<String> result = webServiceDriver.put(baseUrl + "/api/String/Put/1", MediaType.PLAIN_TEXT,
         WebServiceUtilities.createStringEntity("Test", MediaType.PLAIN_TEXT), true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());

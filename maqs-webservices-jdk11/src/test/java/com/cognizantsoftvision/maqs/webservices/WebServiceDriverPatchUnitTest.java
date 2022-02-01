@@ -31,7 +31,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   /**
    * The web service driver to be used in a test.
    */
-  private final WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+  private final WebServiceDriver11 webServiceDriver = new WebServiceDriver11(HttpClientFactory.getDefaultClient());
 
   /**
    * Verify the string status code.
