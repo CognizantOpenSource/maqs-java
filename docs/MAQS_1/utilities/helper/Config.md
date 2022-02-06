@@ -12,7 +12,7 @@ Config is class file granting access to properties in the config.xml.
 
 
 ## GetGeneralValue
-This pulls configuration values from ModularMaqs section of your app.config. It will return an emtpy string if the key is not found in the app.config.
+This pulls configuration values from ModularMaqs section of your app.config. It will return an empty string if the key is not found in the app.config.
 
 ```java
 Config.getGeneralValue("Key");  

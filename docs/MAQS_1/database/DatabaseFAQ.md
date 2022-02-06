@@ -36,9 +36,8 @@ public class DatabaseCustomUnitTests extends BaseDatabaseTest {
     /// Override the database connection
     /// </summary>
     /// <returns>The database connection</returns>
-//    protected override IDbConnection GetDataBaseConnection()
-//    {
-//        return new OracleConnection(DatabaseConfig.GetConnectionString());
-//    }
+    protected override IDbConnection GetDataBaseConnection() {
+        return new OracleConnection(DatabaseConfig.GetConnectionString());
+    }
 }
 ```

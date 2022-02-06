@@ -230,7 +230,7 @@ Primarily used with Maven implementation of MAQS.
   </AppiumCapsMaqs>
   <DatabaseMaqs>
     <!--<add key="DataBaseProviderType" value="SQLSERVER" />
-    <add key="DataBaseConnectionString" value="Data Source=DB;Initial Catalog=MagenicAutomation;Persist Security Info=True;User ID=ID;Password=PW;Connection Timeout=30" />   
+    <add key="DataBaseConnectionString" value="Data Source=DB;Initial Catalog=GlobalAutomation;Persist Security Info=True;User ID=ID;Password=PW;Connection Timeout=30" />   
     <add key="DataBaseProviderType" value="POSTGRE" />
     <add key="DataBaseConnectionString" value="Server=127.0.0.1;Port=1234;Database=maqs;User Id=UserID;Password=PW;" />    
     <add key="DataBaseProviderType" value="SQLITE" />
@@ -360,7 +360,7 @@ Primarily uses with the implementation of MAQS.
     "MobileTimeout": "10000",
     "SoftAssertScreenshot": "NO",
     "ImageFormat": "Png",
-    "SavePagesourceOnFail": "NO"
+    "SavePageSourceOnFail": "NO"
   },
    "AppiumCapsMaqs": {
     "username": "Sauce_Labs_Username",
@@ -393,7 +393,7 @@ Primarily uses with the implementation of MAQS.
     "BrowserSize": "MAXIMIZE",
     "SoftAssertScreenshot": "NO",
     "ImageFormat": "Png",
-    "SavePagesourceOnFail": "NO",
+    "SavePageSourceOnFail": "NO",
     "UseProxy": "No",
     "ProxyAddress": "127.0.0.1:8080"
   },

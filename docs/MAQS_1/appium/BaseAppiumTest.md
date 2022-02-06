@@ -1,7 +1,7 @@
 # <img src="resources/MAQS.jpg" height="32" width="32"> Base Appium Test
 
 ## Overview
-The Base Appium Test has methods that sets up the web driver, gets the mobile driver, tears down the appium driver, and creates a new test object. 
+The Base Appium Test has methods that set up the web driver, gets the mobile driver, tears down the appium driver, and creates a new test object. 
 
 # Available calls
 [GetAppiumDriver](#GetAppiumDriver)  

@@ -20,12 +20,12 @@ CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML
 Product jsonProduct = WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_JSON, Product.class);
 ```
 ## Log
-There is also logger (also thread safe) the can be used to add log message to your log.
+There is also logger (also thread safe) that can be used to add log message to your log.
 ```java
 this.getTestObject().getLog().logMessage("I am testing with MAQS");
 ```
 ## TestObject
-The TestObject can be thought of as your test context.  It holds all the MAQS test execution replated data. This includes the web service driver, logger, soft asserts, performance timers, plus more.
+The TestObject can be thought of as your test context.  It holds all the MAQS test execution related data. This includes the web service driver, logger, soft asserts, performance timers, plus more.
 ```java
 CloseableHttpResponse response = this.getWebServiceDriver().getContent(
 "/api/XML_JSON/GetProduct/1",ContentType.APPLICATION_JSON, true);

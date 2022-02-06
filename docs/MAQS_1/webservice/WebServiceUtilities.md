@@ -20,12 +20,12 @@ return newEntity;
 ```
 
 ## GetResponseBody
-Gets the body from a HTTP response with a closeable response.
+Gets the body from an HTTP response with a closeable response.
 ```java
 HttpEntity entity = response.getEntity();
 return EntityUtils.toString(entity);
 ```
-Gets the body from a HTTP response with a closeable response, a content type, and a type.
+Gets the body from an HTTP response with a closeable response, a content type, and a type.
 ```java
  if (contentType.toString().toUpperCase().contains("JSON")) {
       responseBody = deserializeJson(response, type);

@@ -5,7 +5,7 @@ Takes care of the Appium driver set up, teardown and optimization.
 
 [GetDefaultMobileDriver](#GetDefaultMobileDriver)  
 [GetDefaultMobileOptions](#GetDefaultMobileOptions)  
-[GetAndroidDriver](#GetAndriodDriver)   
+[GetAndroidDriver](#GetAndroidDriver)   
 [GetIOSDriver](#GetIOSDriver)   
 [GetWindowsDriver](#GetWindowsDriver)   
 [MergeCapabilities](#MergeCapabilities)  
@@ -25,7 +25,7 @@ DesiredCapabilities capabilities = getDefaultMobileOptions();
 DesiredCapabilities capabilities = AppiumDriverFactory.getDefaultMobileOptions(capabilitiesAsObjects);
 ```
 
-## GetAndriodDriver
+## GetAndroidDriver
 Gets the android driver
 ```java
 AppiumDriver<WebElement> appiumDriver = getAndroidDriver(mobileHubUrl, capabilities, duration);
@@ -38,7 +38,7 @@ AppiumDriver<WebElement> appiumDriver = getIosDriver(mobileHubUrl, capabilities,
 ```
 
 ## GetWindowsDriver
-Gets the windows driver
+Gets the Windows driver
 ```java
 Gets windows driver
 AppiumDriver<WebElement> appiumDriver = getWindowsDriver(mobileHubUrl, capabilities, duration);

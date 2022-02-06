@@ -4,7 +4,7 @@
 MAQS provides support for testing databases.
 
 ## BaseDatabaseTest
-BaseDatabaseTest is an abstract test class you can extend.  Extending the class allows you to automatically use MAQS's database testing capabilities.
+BaseDatabaseTest is an abstract test class you can extend.  Extending the class allows you to automatically use MAQS' database testing capabilities.
 ```java
 @Test
 public class DatabaseTest extends BaseDatabaseTest {}

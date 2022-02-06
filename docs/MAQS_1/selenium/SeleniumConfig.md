@@ -24,7 +24,7 @@ The SeleniumMaqs configuration section contains the following Keys:
 * ***BrowserTimeout*** : How long to wait for something before timing out - Used heavily with the MAQS waits
 * ***SoftAssertScreenshot*** : If a screenshot should be taken when a soft assert fails
 * ***ImageFormat*** :  What format screenshot should be saved as
-* ***SavePagesourceOnFail*** : If page source is saved when a test fails
+* ***SavePageSourceOnFail*** : If page source is saved when a test fails
 * ***UseProxy*** : If the browser should use a proxy address
 * ***ProxyAddress*** : The proxy address and port the browser will use
 
@@ -162,8 +162,8 @@ String imageFormat = SeleniumConfig.getImageFormat();
     </SeleniumMaqs>
 
     <RemoteSeleniumCapsMaqs>
-        <username>Sauce_Labs_Username</username>
-        <accessKey>Sauce_Labs_Accesskey</accessKey>
+        <username>Sauce_Labs_UserName</username>
+        <accessKey>Sauce_Labs_AccessKey</accessKey>
         <browserName>Chrome</browserName>
         <platform>OS X 10.11</platform>
         <version>54.0</version>
@@ -184,13 +184,13 @@ String imageFormat = SeleniumConfig.getImageFormat();
     "BrowserSize": "MAXIMIZE",
     "SoftAssertScreenshot": "NO",
     "ImageFormat": "Png",
-    "SavePagesourceOnFail": "NO",
+    "SavePageSourceOnFail": "NO",
     "UseProxy": "NO",
     "ProxyAddress": "127.0.0.1:8080"
   },
   "RemoteSeleniumCapsMaqs": {
     "Username": "Sauce_Labs_Username",
-    "AccessKey": "Sauce_Labs_Accesskey",
+    "AccessKey": "Sauce_Labs_AccessKey",
     "BrowserName": "Chrome",
     "Platform": "OS X 10.11",
     "Version": "54.0"

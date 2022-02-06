@@ -30,7 +30,6 @@ Suspended mode will result in no information written to the log.
 
 ## Configuration
 
-
 ## Performance Measures
 - The performance measures are human-readable and requires a Name, Embedded Perf tests to start at different times, Basically it tells how long the data collection took using this as a stop watch
 
@@ -41,7 +40,7 @@ Suspended mode will result in no information written to the log.
 - GenericWait.waitFor waits until exceptions are no longer thrown (calls the function N number of times) or GenericWait.waitUntil  responds with true / false
 
 ## Customizations
-- Utilizes the app.config which is Globally used information, avoids hard-coded code and you can add Key|Value custom pairs such as UserName =YOU PassWord=ABC   We also allow you to use 'default'
+- Utilizes the app.config which is Globally used information, avoids hard-coded code, and you can add Key|Value custom pairs such as UserName =YOU PassWord=ABC   We also allow you to use 'default'
 
 ## PhantomJS
 - The PhantomJS project has been archived and Selenium support has been deprecated.

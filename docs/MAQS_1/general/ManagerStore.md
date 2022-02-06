@@ -73,10 +73,10 @@ public class SeleniumTest extends BaseSeleniumTest {
   @BeforeTest
   public void setUpStore() {
     // Add database driver
-    this.getManagerStore().put(new DatabaseDriverManager(() -> DatabaseConfig.getOpenConnection());
+    this.getManagerStore().put(new DatabaseDriverManager(() -> DatabaseConfig.getOpenConnection()));
 
     // Add named WebService driver
-    this.getManagerStore().putOrOverride("NAMESEL", new DatabaseDriverManager(() -> DatabaseConfig.getOpenConnection());
+    this.getManagerStore().putOrOverride("NAMESEL", new DatabaseDriverManager(() -> DatabaseConfig.getOpenConnection()));
   }
   
   @Test

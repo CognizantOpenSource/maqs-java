@@ -49,7 +49,7 @@ Find the configuration of browsers within the app.config file and define one and
   ```
 
 ### BrowserStack
-- Support for and configuration of integration with BrowserStack can be done by providing a browserstack.use and browserstack.key in the RemoteSeleniumCapsMaqs section of your configuration file.
+- Support for and configuration of integration with BrowserStack can be done by providing a browserstack.user and browserstack.key in the RemoteSeleniumCapsMaqs section of your configuration file.
 ```xml
   <SeleniumMaqs>
     <!--Remote browser settings-->
