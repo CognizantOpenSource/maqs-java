@@ -16,7 +16,7 @@ You can download VS Code here: [https://code.visualstudio.com/Download](https://
 
 1. Open Powershell as an **administrator** level  
    (right click **Powershell**, left click **Run as Administrator**)
-2. Enter this script into powershell and run the script
+2. Enter this script into powershell and run the script 
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -31,10 +31,11 @@ code --install-extension vscjava.vscode-maven
 code --install-extension vscjava.vscode-gradle
 code --install-extension vscjava.vscode-java-pack
 ```
+* If the JDK fails to install, rerun that command
 
 3. VS Code should now be installed in your machine
 4. Open VS code
-5. Click the extensions button  
+5. Click the extensions button:  
    ![alt text](../resources/installationImages/vsCode/ExtensionsButton.png)
 
 
@@ -106,5 +107,5 @@ code --install-extension vscjava.vscode-java-pack
 
 2. Click one of the **Play** buttons next to a testing module  
    (the **Utilities** test module is recommended)
-3. All the tests should pass and no errors should show up in the **Debug Console**
+3. All the tests should pass and no errors should show up in the **Debug Console**  
    ![alt text](../resources/installationImages/vsCode/PassingTests.png)
