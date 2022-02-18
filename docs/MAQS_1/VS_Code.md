@@ -50,7 +50,7 @@ code --install-extension vscjava.vscode-java-pack
    **Maven for Java**  
    **Test Runner for Java**  
    **Language Support for Java(TM) by Red Hat**
-
+   **Checkstyle for Java**
 
 8. VS Code is now ready, continue to set up the project
 
