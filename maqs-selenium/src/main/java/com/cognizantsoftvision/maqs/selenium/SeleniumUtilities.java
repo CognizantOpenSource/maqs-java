@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
@@ -261,7 +262,7 @@ public class SeleniumUtilities {
       testObject.getWebDriver().switchTo().window(windowName);
       testObject.getLogger().logMessage(MessageType.VERBOSE, "After switching to window: %s", windowName);
     } catch (Exception e) {
-      throw new JMAQSRuntimeException(e.getMessage(), e);
+      throw new MAQSRuntimeException(e.getMessage(), e);
     }
   }
 }

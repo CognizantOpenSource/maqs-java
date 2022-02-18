@@ -7,6 +7,8 @@ package com.cognizantsoftvision.maqs.selenium.factories;
 import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
 import com.cognizantsoftvision.maqs.selenium.SeleniumUtilities;
 import com.cognizantsoftvision.maqs.selenium.UIWait;
+
+import java.time.Duration;
 import java.util.concurrent.ConcurrentHashMap;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
