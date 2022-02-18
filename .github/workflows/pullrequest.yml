@@ -23,6 +23,8 @@ jobs:
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
+      - name: Build the docker-compose stack
+        run: docker-compose -f docker/MAQSSQLServer/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
         with:
