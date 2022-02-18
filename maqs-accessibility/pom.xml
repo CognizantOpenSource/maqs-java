@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.cognizantsoftvision.maqs</groupId>
+        <artifactId>maqs-java</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <groupId>com.cognizantsoftvision.maqs.accessibility</groupId>
+    <artifactId>maqs-accessibility</artifactId>
+    <version>${revision}</version>
+    <name>MAQS Accessibility Testing Module</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.deque.html.axe-core</groupId>
+            <artifactId>selenium</artifactId>
+            <version>4.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cognizantsoftvision.maqs.selenium</groupId>
+            <artifactId>maqs-selenium</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
+            <artifactId>maqs-utilities</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.14.3</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -2,30 +2,30 @@ framework:
   - ./*
 
 base:
-  - jmaqs-base/*
-  - jmaqs-base/**/*
+  - maqs-base/*
+  - maqs-base/**/*
 
 appium:
-  - jmaqs-appium/*
-  - jmaqs-appium/**/*
+  - maqs-appium/*
+  - maqs-appium/**/*
 
 selenium:
-  - jmaqs-selenium/*
-  - jmaqs-selenium/**/*
+  - maqs-selenium/*
+  - maqs-selenium/**/*
 
 webservices:
-  - jmaqs-webservices-jdk8/*
-  - jmaqs-webservices-jdk8/**/*
-  - jmaqs-webservices-jdk11/*
-  - jmaqs-webservices-jdk11/**/*
+  - maqs-webservices-jdk8/*
+  - maqs-webservices-jdk8/**/*
+  - maqs-webservices-jdk11/*
+  - maqs-webservices-jdk11/**/*
 
 utilities:
-  - jmaqs-utilities/*
-  - jmaqs-utilities/**/*
+  - maqs-utilities/*
+  - maqs-utilities/**/*
 
 database:
-  - jmaqs-database/*
-  - jmaqs-database/**/*
+  - maqs-database/*
+  - maqs-database/**/*
 
 devops:
   - .dependabot/*
@@ -33,9 +33,9 @@ devops:
   - .github/**/*
 
 JDK11:
-  - jmaqs-webservices-jdk11/*
-  - jmaqs-webservices-jdk11/**/*
+  - maqs-webservices-jdk11/*
+  - maqs-webservices-jdk11/**/*
 
 JDK8:
-  - jmaqs-webservices-jdk8/*
-  - jmaqs-webservices-jdk8/**/*
+  - maqs-webservices-jdk8/*
+  - maqs-webservices-jdk8/**/*
