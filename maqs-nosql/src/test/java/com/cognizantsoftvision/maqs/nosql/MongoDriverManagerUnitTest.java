@@ -2,9 +2,9 @@
  * Copyright 2022 Cognizant, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.noSQL;
+package com.cognizantsoftvision.maqs.nosql;
 
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.testng.Assert;

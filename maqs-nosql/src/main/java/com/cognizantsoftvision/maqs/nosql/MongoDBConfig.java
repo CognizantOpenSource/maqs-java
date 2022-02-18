@@ -2,10 +2,10 @@
  * Copyright 2022 Cognizant, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.noSQL;
+package com.cognizantsoftvision.maqs.nosql;
 
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.Config;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 
 /**
  * MongoDB config class.

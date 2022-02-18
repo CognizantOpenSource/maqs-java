@@ -2,7 +2,7 @@
  * Copyright 2022 Cognizant, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.noSQL;
+package com.cognizantsoftvision.maqs.nosql;
 
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;

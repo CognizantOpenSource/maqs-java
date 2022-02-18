@@ -2,10 +2,11 @@
  * Copyright 2022 Cognizant, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.noSQL;
+package com.cognizantsoftvision.maqs.nosql;
 
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
+
+import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.DriverManager;
 import com.mongodb.client.MongoCollection;
 import java.util.function.Supplier;
 import org.bson.Document;
