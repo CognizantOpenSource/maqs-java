@@ -20,6 +20,7 @@ import org.springframework.web.server.NotAcceptableStatusException;
  * The Web Service Driver.
  */
 public class WebServiceDriver {
+
   /**
    * The base HTTP client control.
    */
@@ -56,6 +57,10 @@ public class WebServiceDriver {
   public WebServiceDriver(HttpClient newHttpClient, HttpRequest.Builder newHttpRequestBuilder) {
     this.baseHttpClient = newHttpClient;
     this.baseHttpRequestBuilder = newHttpRequestBuilder;
+  }
+
+  public URI getBaseWebServiceAddress() {
+    return baseHttpRequestBuilder.build().uri();
   }
 
   /**

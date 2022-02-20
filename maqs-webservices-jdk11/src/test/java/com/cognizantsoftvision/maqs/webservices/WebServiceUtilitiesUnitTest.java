@@ -16,10 +16,17 @@ import org.testng.annotations.Test;
  * Unit tests for the Web Service Utilities functionality.
  */
 public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
+
   /**
   The web service object used for the test.
    */
   private final Product product = new Product(1, "Milk", "Dairy", BigDecimal.TEN);
+
+  /**
+   * The web service driver to be used in a test.
+   */
+  private static final WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+
 
   /**
    * Tests the functionality of the Get Response body.
@@ -27,7 +34,8 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBody() throws Exception {
-    HttpResponse<String> response = this.getWebServiceDriver()
+    // HttpResponse<String> response = this.getWebServiceDriver()
+    HttpResponse<String> response = webServiceDriver
         .getContent("/api/String/1", MediaType.PLAIN_TEXT, true);
     String responseString = WebServiceUtilities.getResponseBody(response);
 
