@@ -23,7 +23,17 @@ public enum MediaType {
   /**
    * Image png media type.
    */
-  IMAGE_PNG("image/png");
+  IMAGE_PNG("image/png"),
+
+  /**
+   * Octet stream media type.
+   */
+  OCTET_STREAM("application/octet-stream"),
+
+  /**
+   * Form urlencoded media type.
+   */
+  FORM_URLENCODED("application/x-www-form-urlencoded");
 
   /**
    * Getter for property 'mediaTypeString'.

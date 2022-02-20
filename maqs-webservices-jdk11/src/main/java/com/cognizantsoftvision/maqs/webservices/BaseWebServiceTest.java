@@ -7,7 +7,11 @@ package com.cognizantsoftvision.maqs.webservices;
 import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.http.HttpRequest;
+
 import org.testng.ITestResult;
 
 /**
@@ -51,7 +55,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
    * @throws URISyntaxException when URI is incorrect
    */
   protected WebServiceDriver getWebServiceClient() throws URISyntaxException {
-    return new WebServiceDriver(WebServiceConfig.getWebServiceUri());
+    return new WebServiceDriver(HttpRequest.newBuilder(URI.create(WebServiceConfig.getWebServiceUri())));
   }
 
   /**

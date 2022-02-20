@@ -6,8 +6,8 @@ package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import java.net.http.HttpClient;
 import java.util.function.Supplier;
-import org.apache.http.impl.client.CloseableHttpClient;
 
 /**
  * Web service test object class.
@@ -19,7 +19,7 @@ public class WebServiceTestObject extends BaseTestObject {
    * @param logger the Logger.
    * @param fullyQualifiedTestName the fully qualified test name.
    */
-  public WebServiceTestObject(Supplier<CloseableHttpClient> getDriverSupplier,
+  public WebServiceTestObject(Supplier<HttpClient> getDriverSupplier,
       Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((WebServiceDriverManager.class).getCanonicalName(),
@@ -70,7 +70,7 @@ public class WebServiceTestObject extends BaseTestObject {
    * overrides the web service driver using a closable Http Client.
    * @param httpClient the Http Client to be set.
    */
-  public void setWebServiceDriver(CloseableHttpClient httpClient) {
+  public void setWebServiceDriver(HttpClient httpClient) {
     this.getManagerStore().put(WebServiceDriverManager.class.getCanonicalName(),
         new WebServiceDriverManager((() -> httpClient),this));
   }
@@ -79,7 +79,7 @@ public class WebServiceTestObject extends BaseTestObject {
    * overrides the Web Service driver using a supplier.
    * @param webServiceSupplier the web service driver supplier.
    */
-  public void setWebServiceDriver(Supplier<CloseableHttpClient> webServiceSupplier) {
+  public void setWebServiceDriver(Supplier<HttpClient> webServiceSupplier) {
     this.getManagerStore().put(WebServiceDriverManager.class.getCanonicalName(),
         new WebServiceDriverManager(webServiceSupplier, this));
   }

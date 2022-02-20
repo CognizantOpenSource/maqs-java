@@ -2,8 +2,9 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.webservices;
+package com.cognizantsoftvision.maqs.webservices.WebServiceDriverRequestUnitTest;
 
+import com.cognizantsoftvision.maqs.webservices.*;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.io.IOException;

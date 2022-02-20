@@ -7,13 +7,8 @@ package com.cognizantsoftvision.maqs.webservices;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.nio.charset.Charset;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.entity.ContentType;
+import java.net.http.HttpResponse;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -32,8 +27,8 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBody() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver()
-        .getContent("/api/String/1", ContentType.TEXT_PLAIN, true);
+    HttpResponse<String> response = this.getWebServiceDriver()
+        .getContent("/api/String/1", MediaType.PLAIN_TEXT, true);
     String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertNotNull(responseString, "Response body did not deserialize string correctly");
@@ -45,9 +40,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromJson() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver()
-        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
-    Product jsonProduct = WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_JSON, Product.class);
+    HttpResponse<String> response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", MediaType.APP_JSON, true);
+    Product jsonProduct = WebServiceUtilities.getResponseBody(response, MediaType.APP_JSON, Product.class);
 
     Assert.assertNotNull(jsonProduct, "Response body did not deserialize object from json correctly");
   }
@@ -58,24 +53,23 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromXml() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver()
-        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_XML, true);
-    Product xmlProduct = WebServiceUtilities
-        .getResponseBody(response, ContentType.APPLICATION_XML, Product.class);
+    HttpResponse<String> response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", MediaType.APP_XML, true);
+    Product xmlProduct = WebServiceUtilities.getResponseBody(response, MediaType.APP_XML, Product.class);
 
     Assert.assertNotNull(xmlProduct, "Response body did not deserialize object from xml correctly");
   }
 
   /**
    * Try to get a response body as an object from
-   * neither Xml or Jason, this should throw an error which is caught.
+   * neither Xml nor Json, this should throw an error which is caught.
    * @throws Exception because the object is not supported
    */
-  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WEB_SERVICE)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromNeitherXmlOrJson() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver()
-        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_OCTET_STREAM, true);
-    WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_OCTET_STREAM, Product.class);
+    HttpResponse<String> response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", MediaType.OCTET_STREAM, true);
+    WebServiceUtilities.getResponseBody(response, MediaType.OCTET_STREAM, Product.class);
 
     Assert.fail("Exception was not thrown for attempting to deserialize json to an object");
   }
@@ -86,8 +80,8 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testDeserializeJson() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver()
-        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
+    HttpResponse<String> response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", MediaType.APP_JSON, true);
     Product product = WebServiceUtilities.deserializeJson(response, Product.class);
 
     Assert.assertNotNull(product);
@@ -99,8 +93,8 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testDeserializeXml() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver()
-        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_XML, true);
+    HttpResponse<String> response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", MediaType.APP_XML, true);
     Product product = WebServiceUtilities.deserializeXml(response, Product.class);
 
     Assert.assertNotNull(product);
@@ -109,24 +103,22 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   /**
    * Tests creating a string entity from Json.
    * @throws JsonProcessingException if there is an error in converting Json to a string
-   * @throws UnsupportedEncodingException if there is an unsupported conversion
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testCreateStringEntityJson()
-      throws JsonProcessingException, UnsupportedEncodingException {
-    HttpEntity entity = WebServiceUtilities.createStringEntity(this.product, ContentType.APPLICATION_JSON);
+      throws JsonProcessingException {
+    Object entity = WebServiceUtilities.createStringEntity(this.product, MediaType.APP_JSON);
     Assert.assertNotNull(entity, "string entity wasn't created using content type application/json");
   }
 
   /**
    * Tests creating a string entity from Xml.
    * @throws JsonProcessingException if there is an error in converting Json to a string
-   * @throws UnsupportedEncodingException if there is an unsupported conversion
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testCreateStringEntityXml()
-      throws JsonProcessingException, UnsupportedEncodingException {
-    HttpEntity entity = WebServiceUtilities.createStringEntity(this.product, ContentType.APPLICATION_XML);
+      throws JsonProcessingException {
+    Object entity = WebServiceUtilities.createStringEntity(this.product, MediaType.APP_XML);
     Assert.assertNotNull(entity, "string entity wasn't created using content type application/xml");
   }
 
@@ -150,11 +142,10 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeXml() throws JsonProcessingException {
-    String expectedXml = "<?xml version='1.0' encoding='UTF-8'?>"
-        + "<Product xmlns=\"http://schemas.datacontract.org/2004/07/AutomationTestSite.Models\">"
+    String expectedXml = "<Product xmlns=\"http://schemas.datacontract.org/2004/07/AutomationTestSite.Models\">"
         + "<Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10</Price></Product>";
     String actualXml = WebServiceUtilities.serializeXml(this.product);
-    Assert.assertEquals(expectedXml, actualXml, String
+    Assert.assertEquals(actualXml, expectedXml, String
         .format("the xml values compared aren't equal, expected was %s while actual was %s", expectedXml, actualXml));
   }
 
@@ -162,27 +153,21 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    * Tests that an error occurs when trying to create a string entity
    * with an unsupported object type.
    * @throws JsonProcessingException if an error occurs in the object to string process
-   * @throws UnsupportedEncodingException If there is an illegal or unsupported exception thrown
    */
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WEB_SERVICE)
-  public void testCreateStringEntityNotJsonOrXml()
-      throws JsonProcessingException, UnsupportedEncodingException {
-    WebServiceUtilities.createStringEntity(this.product, ContentType.APPLICATION_FORM_URLENCODED);
-
+  public void testCreateStringEntityNotJsonOrXml() throws JsonProcessingException {
+    WebServiceUtilities.createStringEntity(this.product, MediaType.FORM_URLENCODED);
     Assert.fail("Expected exception of IllegalArgumentException was not caught for content type that did not contain xml or json");
   }
 
   /**
    * Tests creating a string entity custom content type.
    * @throws JsonProcessingException if an error is thrown during conversion to string
-   * @throws UnsupportedEncodingException if there is an unsupported type
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testCreateStringEntityCustomContentType()
-      throws JsonProcessingException, UnsupportedEncodingException {
-    HttpEntity entity = WebServiceUtilities.createStringEntity(this.product,
-        Charset.defaultCharset(), "application/json");
-
+      throws JsonProcessingException {
+    Object entity = WebServiceUtilities.createStringEntity(this.product, MediaType.APP_JSON);
     Assert.assertNotNull(entity, "Entity was not set correctly with custom charset and mime-type");
   }
 }

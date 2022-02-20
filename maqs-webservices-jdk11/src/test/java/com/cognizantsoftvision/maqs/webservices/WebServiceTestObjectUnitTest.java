@@ -6,10 +6,11 @@ package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import java.net.URISyntaxException;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 import java.util.function.Supplier;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,7 +23,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    * Test object creation with driver.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void testWebServiceTestObjectCreationWithDriver() throws URISyntaxException {
+  public void testWebServiceTestObjectCreationWithDriver() {
     WebServiceDriver defaultBrowser = getWebServiceDriver();
     WebServiceTestObject testObject = new WebServiceTestObject(defaultBrowser, this.getLogger(),
         this.getFullyQualifiedTestClassName());
@@ -34,7 +35,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testWebServiceTestObjectCreationWithSupplier() {
-    Supplier<CloseableHttpClient> httpClientSupplier = getCloseableHttpClientSupplier();
+    Supplier<HttpClient> httpClientSupplier = getCloseableHttpClientSupplier();
     WebServiceTestObject testObject = new WebServiceTestObject(httpClientSupplier, this.getLogger(),
         this.getFullyQualifiedTestClassName());
     Assert.assertNotNull(testObject, "Checking that the Web service test object via driver is not null");
@@ -44,7 +45,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    * tests getting the web service driver.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void testGetWebServiceDriver() throws URISyntaxException {
+  public void testGetWebServiceDriver() {
     WebServiceDriver testObject = getWebServiceDriver();
     Assert.assertNotNull(testObject, "Checking that the Web service test object via driver is null");
   }
@@ -53,7 +54,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    * tests getting the web service driver manager.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void testGetWebServiceDriverManager() throws URISyntaxException {
+  public void testGetWebServiceDriverManager() {
     WebServiceDriver defaultBrowser = getWebServiceDriver();
     try (WebServiceTestObject testObject = new WebServiceTestObject(defaultBrowser, this.getLogger(),
         this.getFullyQualifiedTestClassName())) {
@@ -66,7 +67,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    * tests overriding the web service driver with a web service driver.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void testSetWebServiceDriverWithDriver() throws URISyntaxException {
+  public void testSetWebServiceDriverWithDriver() {
     WebServiceDriver serviceDriver = getWebServiceDriver();
     try (WebServiceTestObject testObject = new WebServiceTestObject(serviceDriver, this.getLogger(),
         this.getFullyQualifiedTestClassName())) {
@@ -83,9 +84,9 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    * tests overriding the web service driver with a closeable http client.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void testSetWebServiceDriverWithHttpClient() throws URISyntaxException {
+  public void testSetWebServiceDriverWithHttpClient() {
     WebServiceDriver serviceDriver = getWebServiceDriver();
-    CloseableHttpClient client = HttpClientBuilder.create().build();
+    HttpClient client = HttpClient.newBuilder().build();
     try (WebServiceTestObject testObject = new WebServiceTestObject(serviceDriver, this.getLogger(),
         this.getFullyQualifiedTestClassName())) {
       testObject.setWebServiceDriver(client);
@@ -102,7 +103,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSetWebServiceDriverSupplier() {
-    Supplier<CloseableHttpClient> httpClientSupplier = getCloseableHttpClientSupplier();
+    Supplier<HttpClient> httpClientSupplier = getCloseableHttpClientSupplier();
     try (WebServiceTestObject testObject = new WebServiceTestObject(httpClientSupplier, this.getLogger(),
         this.getFullyQualifiedTestClassName())) {
       Assert.assertNotNull(testObject.getWebServiceDriver(), "the web service driver is null");
@@ -118,8 +119,8 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    *
    * @return a Closeable http client supplier.
    */
-  private Supplier<CloseableHttpClient> getCloseableHttpClientSupplier() {
-    CloseableHttpClient client = HttpClientBuilder.create().build();
+  private Supplier<HttpClient> getCloseableHttpClientSupplier() {
+    HttpClient client = HttpClient.newBuilder().build();
     return () -> client;
   }
 
@@ -127,9 +128,8 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    * gets the web service driver via the config uri.
    *
    * @return a web service driver.
-   * @throws URISyntaxException if URI is invalid.
    */
-  private WebServiceDriver getWebServiceDriver() throws URISyntaxException {
-    return new WebServiceDriver(WebServiceConfig.getWebServiceUri());
+  private WebServiceDriver getWebServiceDriver() {
+    return new WebServiceDriver(HttpRequest.newBuilder(URI.create(WebServiceConfig.getWebServiceUri())));
   }
 }
