@@ -59,27 +59,6 @@
 
     <profiles>
         <profile>
-            <id>WIP</id>
-            <modules>
-                <module>maqs-webservices-jdk8</module>
-                <module>maqs-webservices-jdk11</module>
-            </modules>
-            <dependencyManagement>
-            <dependencies>
-            <dependency>
-                <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
-                <artifactId>maqs-webservices-jdk8</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
-                <artifactId>maqs-webservices-jdk11</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-        </profile>
-        <profile>
             <id>deploy</id>
             <activation>
                 <property>
@@ -332,6 +311,11 @@
             <dependency>
                 <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
                 <artifactId>maqs-utilities</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+                <artifactId>maqs-webservices</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
