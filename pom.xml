@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.magenic.jmaqs</groupId>
-    <artifactId>jmaqs-framework</artifactId>
+    <groupId>com.cognizantsoftvision.maqs</groupId>
+    <artifactId>maqs-java</artifactId>
     <version>${revision}</version>
-    <name>JMAQS Framework</name>
+    <name>MAQS Framework</name>
     <description>A collection of testing libraries and convenience classes to accelerate startup
         automation efforts
     </description>
@@ -47,23 +47,38 @@
     </scm>
 
     <modules>
-        <module>jmaqs-utilities</module>
-        <module>jmaqs-base</module>
-        <module>jmaqs-selenium</module>
-        <module>jmaqs-webservices-jdk8</module>
-        <module>jmaqs-webservices-jdk11</module>
-        <module>jmaqs-appium</module>
-        <module>jmaqs-database</module>
-        <module>jmaqs-cucumber</module>
-        <module>jmaqs-accessibility</module>
+        <module>maqs-utilities</module>
+        <module>maqs-base</module>
+        <module>maqs-selenium</module>
+<!--        <module>maqs-webservices-jdk8</module>-->
+<!--        <module>maqs-webservices-jdk11</module>-->
+        <module>maqs-appium</module>
+        <module>maqs-database</module>
+        <module>maqs-cucumber</module>
+        <module>maqs-accessibility</module>
     </modules>
 
     <profiles>
         <profile>
             <id>WIP</id>
             <modules>
-                <module>jmaqs-webservices-jdk11</module>
+                <module>maqs-webservices-jdk8</module>
+                <module>maqs-webservices-jdk11</module>
             </modules>
+            <dependencyManagement>
+            <dependencies>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+                <artifactId>maqs-webservices-jdk8</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+                <artifactId>maqs-webservices-jdk11</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
         </profile>
         <profile>
             <id>deploy</id>
@@ -208,7 +223,7 @@
                 </property>
             </activation>
             <modules>
-                <module>jmaqs-jacoco-reporting</module>
+                <module>maqs-jacoco-reporting</module>
             </modules>
             <build>
                 <plugins>
@@ -253,7 +268,7 @@
     </profiles>
 
     <properties>
-        <revision>2.1.1-SNAPSHOT</revision>
+        <revision>3.0.0-SNAPSHOT</revision>
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
         <javadoc.plugin.version>3.3.1</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
@@ -286,58 +301,42 @@
                 <version>${testng.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.accessibility</groupId>
-                <artifactId>jmaqs-accessibility</artifactId>
+                <groupId>com.cognizantsoftvision.maqs.accessibility</groupId>
+                <artifactId>maqs-accessibility</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.appium</groupId>
-                <artifactId>jmaqs-appium</artifactId>
+                <groupId>com.cognizantsoftvision.maqs.appium</groupId>
+                <artifactId>maqs-appium</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.base</groupId>
-                <artifactId>jmaqs-base</artifactId>
+                <groupId>com.cognizantsoftvision.maqs.base</groupId>
+                <artifactId>maqs-base</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.cucumber</groupId>
-                <artifactId>jmaqs-cucumber</artifactId>
+                <groupId>com.cognizantsoftvision.maqs.cucumber</groupId>
+                <artifactId>maqs-cucumber</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.database</groupId>
-                <artifactId>jmaqs-database</artifactId>
+                <groupId>com.cognizantsoftvision.maqs.database</groupId>
+                <artifactId>maqs-database</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.selenium</groupId>
-                <artifactId>jmaqs-selenium</artifactId>
+                <groupId>com.cognizantsoftvision.maqs.selenium</groupId>
+                <artifactId>maqs-selenium</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.magenic.jmaqs.utilities</groupId>
-                <artifactId>jmaqs-utilities</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.magenic.jmaqs.webservices</groupId>
-                <artifactId>jmaqs-webservices-jdk8</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.magenic.jmaqs.webservices</groupId>
-                <artifactId>jmaqs-webservices-jdk11</artifactId>
+                <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
+                <artifactId>maqs-utilities</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-        </dependency>
-    </dependencies>
 
     <build>
         <pluginManagement>
@@ -440,7 +439,6 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>5</threadCount>
-                    <argLine>-javaagent:@{io.github.bonigarcia:webdrivermanager:jar}</argLine>
                 </configuration>
                 <dependencies>
                     <dependency>
