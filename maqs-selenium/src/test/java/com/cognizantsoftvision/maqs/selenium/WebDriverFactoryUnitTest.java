@@ -145,6 +145,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the Edge driver.
    */
   @Test(groups = TestCategories.SELENIUM)
+  @Ignore
   public void getEdgeDriverTest() throws Exception {
     EdgeDriver driver = null;
     try {
@@ -160,6 +161,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the IE driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
