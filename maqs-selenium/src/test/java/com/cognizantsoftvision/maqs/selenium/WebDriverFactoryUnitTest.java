@@ -8,6 +8,7 @@ import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.WebDriverFile;
+import com.cognizantsoftvision.maqs.selenium.exceptions.WebDriverFactoryException;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import org.openqa.selenium.Dimension;

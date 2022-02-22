@@ -1,14 +1,14 @@
 /*
- * Copyright 2021 (C) Magenic, All rights Reserved
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.pageModels;
+package com.cognizantsoftvision.maqs.selenium.pageModels;
 
-import com.magenic.jmaqs.selenium.BaseSeleniumPageModel;
-import com.magenic.jmaqs.selenium.LazyWebElement;
-import com.magenic.jmaqs.selenium.SeleniumConfig;
-import com.magenic.jmaqs.selenium.SeleniumTestObject;
-import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+import com.cognizantsoftvision.maqs.selenium.BaseSeleniumPageModel;
+import com.cognizantsoftvision.maqs.selenium.LazyWebElement;
+import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
+import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.By;
 
 /**

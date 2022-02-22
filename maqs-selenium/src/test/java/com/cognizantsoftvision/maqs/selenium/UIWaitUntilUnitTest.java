@@ -1,14 +1,14 @@
 /*
- * Copyright 2021 (C) Magenic, All rights Reserved
+ * Copyright 2021 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium;
+package com.cognizantsoftvision.maqs.selenium;
 
-import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.selenium.pageModels.AsyncPageModel;
-import com.magenic.jmaqs.selenium.pageModels.AutomationPageModel;
-import com.magenic.jmaqs.selenium.pageModels.IFramePageModel;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
+import com.cognizantsoftvision.maqs.selenium.pageModels.AsyncPageModel;
+import com.cognizantsoftvision.maqs.selenium.pageModels.AutomationPageModel;
+import com.cognizantsoftvision.maqs.selenium.pageModels.IFramePageModel;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

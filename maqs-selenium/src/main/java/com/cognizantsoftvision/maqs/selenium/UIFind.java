@@ -204,10 +204,10 @@ public class UIFind {
    * @return The Web Element Collection
    */
   private List<WebElement> getElementList(By by, boolean throwException) {
-    List<WebElement> elems = this.searchItem.findElements(by);
+    List<WebElement> elements = this.searchItem.findElements(by);
 
-    if (!elems.isEmpty() || !throwException) {
-      return elems;
+    if (!elements.isEmpty() || !throwException) {
+      return elements;
     }
 
     throw new NotFoundException(

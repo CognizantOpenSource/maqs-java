@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -27,6 +26,11 @@ import org.testng.annotations.Test;
  * The type Selenium utilities test.
  */
 public class SeleniumUtilitiesUnitTest extends BaseSeleniumTest {
+
+        /**
+         * The Date format.
+         */
+        private final String dateFormat = "uuuu-MM-dd-HH-mm-ss-SSSS";
 
         /**
          * Test capture screenshot no append.
@@ -124,7 +128,7 @@ public class SeleniumUtilitiesUnitTest extends BaseSeleniumTest {
 
                         // Open Google and take a screenshot
                         webDriver.navigate().to("http://www.google.com");
-                        String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+                        String dateTime = DateTimeFormatter.ofPattern(dateFormat, Locale.getDefault())
                                         .format(LocalDateTime.now(Clock.systemUTC()));
                         String filePath = SeleniumUtilities.captureScreenshot(webDriver, testObject,
                                         fileLogger.getDirectory(),
@@ -214,7 +218,7 @@ public class SeleniumUtilitiesUnitTest extends BaseSeleniumTest {
 
                         // Open Google and take a screenshot
                         webDriver.navigate().to("http://www.google.com");
-                        String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+                        String dateTime = DateTimeFormatter.ofPattern(dateFormat, Locale.getDefault())
                                         .format(LocalDateTime.now(Clock.systemUTC()));
                         String filePath = SeleniumUtilities.savePageSource(webDriver, testObject,
                                         fileLogger.getDirectory(),

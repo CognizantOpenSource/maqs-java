@@ -78,7 +78,7 @@ public class OperatingSystemUnitTest extends BaseGenericTest {
    * Test get operating system - Linux.
    */
   @Test(singleThreaded = true,
-        dependsOnMethods = "com.magenic.jmaqs.selenium.constants.OperatingSystemUnitTest.testGetOperatingSystemMacOS")
+        dependsOnMethods = "com.cognizantsoftvision.maqs.selenium.constants.OperatingSystemUnitTest.testGetOperatingSystemMacOS")
   public void testGetOperatingSystemLinux() {
     System.setProperty("os.name", "Linux");
     OperatingSystem operatingSystem = OperatingSystem.getOperatingSystem();
@@ -89,7 +89,7 @@ public class OperatingSystemUnitTest extends BaseGenericTest {
    * Test get operating system - Windows.
    */
   @Test(singleThreaded = true,
-        dependsOnMethods = "com.magenic.jmaqs.selenium.constants.OperatingSystemUnitTest.testGetOperatingSystemLinux")
+        dependsOnMethods = "com.cognizantsoftvision.maqs.selenium.constants.OperatingSystemUnitTest.testGetOperatingSystemLinux")
   public void testGetOperatingSystemWindows() {
     System.setProperty("os.name", "Windows");
     OperatingSystem operatingSystem = OperatingSystem.getOperatingSystem();

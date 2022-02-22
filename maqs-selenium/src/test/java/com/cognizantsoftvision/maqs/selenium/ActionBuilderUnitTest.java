@@ -5,8 +5,8 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
+import com.cognizantsoftvision.maqs.selenium.pageModels.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -29,21 +29,6 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
-
-  /**
-   * Tests the hover over functionality.
-   */
-  private static By sliderLabelNumber = By.cssSelector("#sliderNumber");
-
-  /**
-   * Element with context menu for testing right click.
-   */
-  private static By rightClickableElementWithContextMenu = By.cssSelector("#rightclickspace");
-
-  /**
-   * Text within context menu triggered by right click on specific element.
-   */
-  private static By rightClickContextSaveText = By.cssSelector("#RightClickSaveText");
 
   @Test(groups = TestCategories.SELENIUM)
   public void hoverOverTest() {

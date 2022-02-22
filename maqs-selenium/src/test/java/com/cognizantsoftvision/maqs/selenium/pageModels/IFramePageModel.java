@@ -1,17 +1,17 @@
 /*
- * Copyright 2021 (C) Magenic, All rights Reserved
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.magenic.jmaqs.selenium.pageModels;
+package com.cognizantsoftvision.maqs.selenium.pageModels;
 
-import com.magenic.jmaqs.selenium.SeleniumConfig;
-import com.magenic.jmaqs.selenium.SeleniumTestObject;
+import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
+import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.By;
 
 /**
  * The IFrame page model.
  */
-public class IFramePageModel extends MainPageModel{
+public class IFramePageModel extends MainPageModel {
 
   /**
    * Unit testing site URL - IFrame page.
