@@ -2,6 +2,7 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+<<<<<<<< HEAD:maqs-webservices/src/test/java/com/cognizantsoftvision/maqs/webservices/WebServiceDriverRequestUnitTest/WebServiceDriverPostUnitTest.java
 package com.cognizantsoftvision.maqs.webservices.WebServiceDriverRequestUnitTest;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -11,6 +12,11 @@ import com.cognizantsoftvision.maqs.webservices.MediaType;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
 import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
 import com.cognizantsoftvision.maqs.webservices.WebServiceUtilities;
+========
+package com.cognizantsoftvision.maqs.webservices;
+
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+>>>>>>>> main:maqs-webservices-jdk11/src/test/java/com/cognizantsoftvision/maqs/webservices/WebServiceDriverPostUnitTest.java
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import java.io.IOException;
 import java.math.BigDecimal;
