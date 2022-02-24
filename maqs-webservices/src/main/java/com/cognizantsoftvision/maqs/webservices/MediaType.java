@@ -25,7 +25,6 @@ public enum MediaType {
    * Image png media type.
    */
   IMAGE_PNG("image/png"),
-
   /**
    * App arbitrary binary media type.
    */
