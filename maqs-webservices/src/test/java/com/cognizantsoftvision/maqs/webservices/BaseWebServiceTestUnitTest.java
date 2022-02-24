@@ -5,14 +5,17 @@
 package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import java.net.URISyntaxException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.net.URISyntaxException;
 
 /**
- * Tests the Base Web Service Test functionality.
+ * Unit tests the Base Web Service Test functionality.
  */
 public class BaseWebServiceTestUnitTest extends BaseWebServiceTest {
+
   /**
    * Test getting the web service driver.
    */

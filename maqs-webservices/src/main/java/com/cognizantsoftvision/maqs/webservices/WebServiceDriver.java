@@ -21,10 +21,18 @@ import org.springframework.web.server.NotAcceptableStatusException;
  * The Web Service Driver.
  */
 public class WebServiceDriver {
+
   /**
    * The base HTTP client control.
    */
   private HttpClient baseHttpClient;
+
+  /**
+   * the base HTTP request control.
+   */
+  private HttpRequest.Builder baseHttpRequestBuilder;
+
+
   private URI baseAddress;
 
   /**
@@ -47,13 +55,8 @@ public class WebServiceDriver {
   }
 
   /**
-   * the base HTTP request control.
-   */
-  private HttpRequest.Builder baseHttpRequestBuilder;
-
-  /**
    * Class Constructor that sets the http Client.
-   * 
+   *
    * @param newHttpClient the http client to be set.
    */
   public WebServiceDriver(HttpClient newHttpClient) {
@@ -63,7 +66,7 @@ public class WebServiceDriver {
 
   /**
    * Class constructor that sets the HttpRequest Builder.
-   * 
+   *
    * @param newHttpRequestBuilder the new Http request Builder to be set
    */
   public WebServiceDriver(HttpRequest.Builder newHttpRequestBuilder) {
@@ -73,7 +76,7 @@ public class WebServiceDriver {
 
   /**
    * Class Constructor that sets both the HttpRequest Builder and Http Client.
-   * 
+   *
    * @param newHttpClient         the Http Client
    * @param newHttpRequestBuilder the Http Request Builder
    */
@@ -83,8 +86,17 @@ public class WebServiceDriver {
   }
 
   /**
+   * Gets base web service address.
+   *
+   * @return the base web service address
+   */
+  public URI getBaseWebServiceAddress() {
+    return baseHttpRequestBuilder.build().uri();
+  }
+
+  /**
    * Sets http client.
-   * 
+   *
    * @param httpClient the http client
    */
   public void setHttpClient(HttpClient httpClient) {
@@ -92,27 +104,8 @@ public class WebServiceDriver {
   }
 
   /**
-   * Gets base web service address.
-   *
-   * @return the base web service address
-   */
-  public URI getBaseWebServiceAddress() {
-    return this.baseAddress;
-  }
-
-  /**
-   * Sets base web service address.
-   *
-   * @param address the address
-   * @throws URISyntaxException the uri syntax exception
-   */
-  public void setBaseWebServiceAddress(String address) throws URISyntaxException {
-    this.baseAddress = new URI(address);
-  }
-
-  /**
    * Gets http client.
-   * 
+   *
    * @return the http client
    */
   public HttpClient getHttpClient() {
@@ -121,7 +114,7 @@ public class WebServiceDriver {
 
   /**
    * Sets the Http Request Builder.
-   * 
+   *
    * @param httpRequestBuilder the new http request Builder to be set
    */
   public void setHttpRequestBuilder(HttpRequest.Builder httpRequestBuilder) {
@@ -130,7 +123,7 @@ public class WebServiceDriver {
 
   /**
    * Gets the http request Builder.
-   * 
+   *
    * @return the http request Builder
    */
   public HttpRequest.Builder getHttpRequestBuilder() {
@@ -139,7 +132,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service get.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media you are expecting back
    * @param expectSuccess     Assert a success code was returned
@@ -154,7 +147,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service get.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media you are expecting back
    * @param expectedStatus    Assert a specific status code was returned
@@ -169,7 +162,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service get.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media you are expecting back
    * @param expectSuccess     Assert a success code was returned
@@ -186,7 +179,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service get.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media you are expecting back
    * @param expectedStatus    Assert a specific status code was returned
@@ -203,7 +196,7 @@ public class WebServiceDriver {
 
   /**
    * Do a web service get for the given uri and media type.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType What type of media are we expecting
    * @param expectSuccess     Assert a success code was returned
@@ -227,7 +220,7 @@ public class WebServiceDriver {
 
   /**
    * Do a web service get for the given uri and media type.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType What type of media are we expecting
    * @param expectedStatus    Assert a specific status code was returned
@@ -249,7 +242,7 @@ public class WebServiceDriver {
 
   /**
    * Do a web service get for the given uri and media type.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType What type of media are we expecting
    * @param expectSuccess     Assert a success code was returned
@@ -275,7 +268,7 @@ public class WebServiceDriver {
 
   /**
    * Do a web service get for the given uri and media type.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType What type of media are we expecting
    * @param expectedStatus    Assert a specific status code was returned
@@ -299,7 +292,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service post.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media being requested
    * @param content           The post content
@@ -318,7 +311,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service post.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media being requested
    * @param content           The post content
@@ -338,7 +331,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service post.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media being requested
    * @param content           How to encode the post content
@@ -354,7 +347,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service post.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media being requested
    * @param content           The post content
@@ -370,7 +363,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service post for the given uri, content and media type.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media being requested
    * @param content           How to encode the post content
@@ -396,7 +389,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service post for the given uri, content and media type.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media being requested
    * @param content           The post content
@@ -540,7 +533,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service patch.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media being requested
    * @param content           The patch content
@@ -559,7 +552,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service patch.
-   * 
+   *
    * @param requestUri        The request uri
    * @param expectedMediaType The type of media being requested
    * @param content           The put content
@@ -578,7 +571,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service patch.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media being requested
    * @param content           The put content
@@ -594,7 +587,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service patch.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The type of media being requested
    * @param content           The patch content
@@ -610,7 +603,7 @@ public class WebServiceDriver {
 
   /**
    * Do a web service put for the given uri, content and media type.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The response media type
    * @param content           The put body
@@ -633,7 +626,7 @@ public class WebServiceDriver {
 
   /**
    * Do a web service put for the given uri, content and media type.
-   * 
+   *
    * @param requestUri        The request uri
    * @param responseMediaType The response media type
    * @param content           The put body
@@ -658,10 +651,10 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service delete.
-   * 
+   *
    * @param requestUri        The request uri
    * @param expectedMediaType The type of media being requested
-   * @param type              the request type type being done
+   * @param type              the request type being done
    * @param expectSuccess     Assert a success code was returned
    * @param <T>               The expected response type
    * @return The response by deserialize as the T
@@ -676,11 +669,11 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service delete.
-   * 
+   *
    * @param requestUri        The request uri
    * @param expectedMediaType The type of media being requested
    * @param expectedStatus    Assert a specific status code was returned
-   * @param type              the request type type being done
+   * @param type              the request type being done
    * @param <T>               The expected response type
    * @return The response by deserialize as the T
    * @throws IOException          if an exception is thrown
@@ -694,7 +687,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service delete.
-   * 
+   *
    * @param requestUri        The request uri
    * @param expectedMediaType The type of media being requested
    * @param expectSuccess     Assert a success code was returned
@@ -709,7 +702,7 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service delete.
-   * 
+   *
    * @param requestUri        The request uri
    * @param expectedMediaType The type of media being requested
    * @param expectedStatus    Assert a specific status code was returned
@@ -724,7 +717,7 @@ public class WebServiceDriver {
 
   /**
    * Do a web service delete for the given uri.
-   * 
+   *
    * @param requestUri      The request uri
    * @param returnMediaType The expected response media type
    * @param expectSuccess   Assert a success code was returned
@@ -746,7 +739,7 @@ public class WebServiceDriver {
 
   /**
    * Do a web service delete for the given uri.
-   * 
+   *
    * @param requestUri      The request uri
    * @param returnMediaType The expected response media type
    * @param expectedStatus  Assert a specific status code was returned
@@ -766,7 +759,7 @@ public class WebServiceDriver {
 
   /**
    * Create http content.
-   * 
+   *
    * @param content           The content as a string
    * @param responseMediaType The type of the media being posted
    * @return The content as String
@@ -779,7 +772,7 @@ public class WebServiceDriver {
 
   /**
    * Build the Http Request.
-   * 
+   *
    * @param requestUri    The Request URI
    * @param requestMethod The Request Type
    * @param mediaType     The Media Type
@@ -791,7 +784,7 @@ public class WebServiceDriver {
 
   /**
    * Build the Http Request.
-   * 
+   *
    * @param requestUri    The Request URI
    * @param requestMethod The Request Type
    * @param mediaType     The Media Type
@@ -805,7 +798,7 @@ public class WebServiceDriver {
 
   /**
    * Build the Http Request.
-   * 
+   *
    * @param requestUri        The Request URI
    * @param requestMethod     The Request Type
    * @param mediaType         The Media Type
@@ -819,7 +812,7 @@ public class WebServiceDriver {
 
   /**
    * Build the Http Request.
-   * 
+   *
    * @param requestUri        The Request URI
    * @param requestMethod     The Request Type
    * @param mediaType         The Media Type
@@ -833,7 +826,6 @@ public class WebServiceDriver {
 
     builder
         .header("Content-Type", mediaType.toString())
-        .uri(URI.create(requestUri));
 
     for (Map.Entry<String, String> header : additionalHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -852,9 +844,8 @@ public class WebServiceDriver {
   }
 
   /**
-   * Ensure the HTTP response was successful, if not throw a user friendly error
-   * message.
-   * 
+   * Ensure the HTTP response was successful,
+   * if not throw a user-friendly error message.
    * @param response The HTTP response
    */
   private static void ensureSuccessStatusCode(HttpResponse<String> response) {
@@ -872,9 +863,8 @@ public class WebServiceDriver {
   }
 
   /**
-   * Ensure the HTTP response has specified status, if not throw a user friendly
-   * error message.
-   * 
+   * Ensure the HTTP response has specified status, if not throw a user-friendly error message.
+   *
    * @param response       The HTTP response
    * @param expectedStatus Assert a specific status code was returned
    */
@@ -884,7 +874,7 @@ public class WebServiceDriver {
       throw new NullPointerException(HttpStatus.NO_CONTENT + " Response was null");
     }
 
-    // Check if it was a success and if not create a user friendly error message
+    // Check if it was a success and if not create a user-friendly error message
     if (response.statusCode() != expectedStatus.value()) {
       String body = response.body();
       throw new NotAcceptableStatusException(String.format("Response status did not match expected. %s "
@@ -896,7 +886,7 @@ public class WebServiceDriver {
 
   /**
    * Check if the media type is supported.
-   * 
+   *
    * @param mediaType Media type to add
    */
   private void checkIfMediaTypeNotPresent(String mediaType) {

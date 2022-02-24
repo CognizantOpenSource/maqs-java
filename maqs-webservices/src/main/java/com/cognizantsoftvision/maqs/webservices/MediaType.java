@@ -8,6 +8,7 @@ package com.cognizantsoftvision.maqs.webservices;
  * The enum Media type.
  */
 public enum MediaType {
+
   /**
    * App json media type.
    */
@@ -23,9 +24,10 @@ public enum MediaType {
   /**
    * Image png media type.
    */
-  IMAGE_PNG("image/png"), 
+  IMAGE_PNG("image/png"),
+
   /**
-   * App arbitrary binary media type. 
+   * App arbitrary binary media type.
    */
   APPLICATION_OCTET_STREAM("application/octet-stream"),
   /**

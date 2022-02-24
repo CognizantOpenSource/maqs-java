@@ -19,9 +19,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Test web service gets.
+ * Unit tests for web service gets.
  */
 public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
+
   /**
    * String to hold the URL.
    */
@@ -31,7 +32,6 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    * The web service driver to be used in a test.
    */
   private final WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
-
 
   /**
    * Test Json Get deserialize a single product.

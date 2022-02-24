@@ -21,9 +21,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Test web service gets using the base test driver.
+ * Unit tests the web service patches.
  */
 public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
+
   /**
    * String to hold the URL.
    */
@@ -41,7 +42,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Verify the string status code.
-   * 
+   *
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -54,7 +55,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Patch With JSON Type.
-   * 
+   *
    * @throws IOException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -71,7 +72,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Verify the stream status code.
-   * 
+   *
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -84,7 +85,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * XML string verify status code.
-   * 
+   *
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -97,7 +98,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * XML stream verify status code.
-   * 
+   *
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -110,7 +111,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Verify put returns an empty string.
-   * 
+   *
    * @throws IOException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -126,7 +127,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Patch string without utility.
-   * 
+   *
    * @throws IOException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -138,7 +139,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Patch string with utility.
-   * 
+   *
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -152,7 +153,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Patch string without utility to verify status code.
-   * 
+   *
    * @throws IOException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -165,7 +166,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Patch string with utility to verify status code.
-   * 
+   *
    * @throws JsonProcessingException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -201,7 +202,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Test type parameterized Patch request with expected status.
-   * 
+   *
    * @throws IOException          if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
@@ -215,7 +216,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Test Patch request with expected status.
-   * 
+   *
    * @throws IOException          if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
@@ -229,7 +230,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Test more params Patch with response request with expected status.
-   * 
+   *
    * @throws IOException          if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
@@ -242,7 +243,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 
   /**
    * Test Patch with response request with expected status.
-   * 
+   *
    * @throws IOException          if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */

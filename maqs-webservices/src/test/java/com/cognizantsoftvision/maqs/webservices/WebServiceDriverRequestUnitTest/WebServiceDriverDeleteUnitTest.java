@@ -21,9 +21,10 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
- * Test web service Deletes.
+ * Unit tests for web service Deletes.
  */
 public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
+
   /**
    * String to hold the URL.
    */
