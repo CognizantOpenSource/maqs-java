@@ -7,7 +7,6 @@ package com.cognizantsoftvision.maqs.webservices;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -31,28 +30,6 @@ public class WebServiceDriver {
    * the base HTTP request control.
    */
   private HttpRequest.Builder baseHttpRequestBuilder;
-
-
-  private URI baseAddress;
-
-  /**
-   * Instantiates a new Web service driver.
-   *
-   * @param baseAddress the base address
-   * @throws URISyntaxException the uri syntax exception
-   */
-  public WebServiceDriver(String baseAddress) throws URISyntaxException {
-    this(new URI(baseAddress));
-  }
-
-  /**
-   * Instantiates a new Web service driver.
-   *
-   * @param baseAddress the base address
-   */
-  public WebServiceDriver(URI baseAddress) {
-    this.baseAddress = baseAddress;
-  }
 
   /**
    * Class Constructor that sets the http Client.
@@ -825,7 +802,7 @@ public class WebServiceDriver {
     HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
 
     builder
-        .header("Content-Type", mediaType.toString())
+        .header("Content-Type", mediaType.toString());
 
     for (Map.Entry<String, String> header : additionalHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
