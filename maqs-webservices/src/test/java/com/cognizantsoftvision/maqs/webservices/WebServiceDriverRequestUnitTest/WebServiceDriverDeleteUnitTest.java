@@ -2,9 +2,14 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.webservices;
+package com.cognizantsoftvision.maqs.webservices.WebServiceDriverRequestUnitTest;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.webservices.BaseWebServiceTest;
+import com.cognizantsoftvision.maqs.webservices.HttpClientFactory;
+import com.cognizantsoftvision.maqs.webservices.MediaType;
+import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
+import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -27,7 +32,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   /**
    * The web service driver to be used in a test.
    */
-  private static final WebServiceDriver11 webServiceDriver = new WebServiceDriver11(HttpClientFactory.getDefaultClient());
+  private static final WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
 
   /**
    * Delete Json request to assert status code.
