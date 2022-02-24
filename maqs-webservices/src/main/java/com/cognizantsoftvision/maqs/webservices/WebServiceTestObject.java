@@ -6,10 +6,7 @@ package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-<<<<<<<< HEAD:maqs-webservices/src/main/java/com/cognizantsoftvision/maqs/webservices/WebServiceTestObject.java
 import java.net.http.HttpClient;
-========
->>>>>>>> main:maqs-webservices-jdk8/src/main/java/com/cognizantsoftvision/maqs/webservices/WebServiceTestObject.java
 import java.util.function.Supplier;
 
 /**

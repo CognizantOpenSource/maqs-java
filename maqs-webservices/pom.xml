@@ -2,41 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-<<<<<<<< HEAD:maqs-webservices/pom.xml
         <artifactId>maqs-java</artifactId>
         <groupId>com.cognizantsoftvision.maqs</groupId>
-========
-        <groupId>com.cognizantsoftvision.maqs</groupId>
-        <artifactId>maqs-java</artifactId>
->>>>>>>> main:maqs-webservices-jdk8/pom.xml
         <version>${revision}</version>
     </parent>
 
     <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
-<<<<<<<< HEAD:maqs-webservices/pom.xml
     <artifactId>maqs-webservices</artifactId>
     <name>MAQS WebServices Testing Module</name>
-========
-    <artifactId>maqs-webservices-jdk8</artifactId>
-    <name>MAQS JDK8 WebServices Testing Module</name>
->>>>>>>> main:maqs-webservices-jdk8/pom.xml
     <version>${revision}</version>
 
     <properties>
         <jackson.version>2.13.1</jackson.version>
-        <jcommander.version>1.81</jcommander.version>
-        <spring.web.version>5.3.12</spring.web.version>
+        <jcommander.version>1.82</jcommander.version>
+        <spring.web.version>5.3.15</spring.web.version>
         <httpcore.version>4.4.14</httpcore.version>
         <httpclient.version>4.5.13</httpclient.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
-            <artifactId>maqs-utilities</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -45,14 +29,6 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
-            <artifactId>maqs-utilities</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cognizantsoftvision.maqs.base</groupId>
-            <artifactId>maqs-base</artifactId>
         </dependency>
         <dependency>
             <groupId>com.beust</groupId>
@@ -78,6 +54,14 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
+            <artifactId>maqs-utilities</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cognizantsoftvision.maqs.base</groupId>
+            <artifactId>maqs-base</artifactId>
         </dependency>
     </dependencies>
 </project>

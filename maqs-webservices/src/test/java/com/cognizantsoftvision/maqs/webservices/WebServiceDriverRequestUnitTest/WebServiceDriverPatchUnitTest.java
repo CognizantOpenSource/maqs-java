@@ -2,7 +2,6 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-<<<<<<<< HEAD:maqs-webservices/src/test/java/com/cognizantsoftvision/maqs/webservices/WebServiceDriverRequestUnitTest/WebServiceDriverPatchUnitTest.java
 package com.cognizantsoftvision.maqs.webservices.WebServiceDriverRequestUnitTest;
 
 import com.cognizantsoftvision.maqs.webservices.BaseWebServiceTest;
@@ -11,10 +10,6 @@ import com.cognizantsoftvision.maqs.webservices.MediaType;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
 import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
 import com.cognizantsoftvision.maqs.webservices.WebServiceUtilities;
-========
-package com.cognizantsoftvision.maqs.webservices;
-
->>>>>>>> main:maqs-webservices-jdk11/src/test/java/com/cognizantsoftvision/maqs/webservices/WebServiceDriverPatchUnitTest.java
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
