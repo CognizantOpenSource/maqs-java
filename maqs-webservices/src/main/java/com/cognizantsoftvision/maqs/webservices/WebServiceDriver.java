@@ -801,8 +801,8 @@ public class WebServiceDriver {
       MediaType mediaType, String content, Map<String, String> additionalHeaders) {
     HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
 
-    builder
-        .header("Content-Type", mediaType.toString());
+    builder.header("Content-Type", mediaType.toString())
+        .uri(URI.create(requestUri));
 
     for (Map.Entry<String, String> header : additionalHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
