@@ -50,8 +50,7 @@
         <module>maqs-utilities</module>
         <module>maqs-base</module>
         <module>maqs-selenium</module>
-        <module>maqs-webservices-jdk8</module>
-        <module>maqs-webservices-jdk11</module>
+        <module>maqs-webservices</module>
         <module>maqs-appium</module>
         <module>maqs-database</module>
         <module>maqs-cucumber</module>
@@ -62,7 +61,7 @@
         <profile>
             <id>WIP</id>
             <modules>
-                <module>maqs-webservices-jdk11</module>
+                <module>maqs-webservices</module>
             </modules>
         </profile>
         <profile>
@@ -322,12 +321,7 @@
             </dependency>
             <dependency>
                 <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
-                <artifactId>maqs-webservices-jdk8</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
-                <artifactId>maqs-webservices-jdk11</artifactId>
+                <artifactId>maqs-webservices</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
