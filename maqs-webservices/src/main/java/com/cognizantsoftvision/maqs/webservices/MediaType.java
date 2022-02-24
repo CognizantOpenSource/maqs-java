@@ -28,11 +28,11 @@ public enum MediaType {
   /**
    * App arbitrary binary media type.
    */
-  APPLICATION_OCTET_STREAM("application/octet-stream"),
+  OCTET_STREAM("application/octet-stream"),
   /**
    * Url Encoded media type.
    */
-  APPLICATION_FORM_URLENCODED("application/x-www-form-urlencoded");
+  FORM_URLENCODED("application/x-www-form-urlencoded");
 
   /**
    * Getter for property 'mediaTypeString'.

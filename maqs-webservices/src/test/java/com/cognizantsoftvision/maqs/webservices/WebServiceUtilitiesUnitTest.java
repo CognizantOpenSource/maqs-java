@@ -74,8 +74,8 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE, expectedExceptions = IllegalArgumentException.class)
   public void testGetResponseBodyAsObjectFromNeitherXmlOrJson() throws Exception {
     HttpResponse<String> response = this.getWebServiceDriver()
-        .getContent(baseUrl +"/api/XML_JSON/GetProduct/1", MediaType.APPLICATION_OCTET_STREAM, true);
-    WebServiceUtilities.getResponseBody(response, MediaType.APPLICATION_OCTET_STREAM, Product.class);
+        .getContent(baseUrl +"/api/XML_JSON/GetProduct/1", MediaType.OCTET_STREAM, true);
+    WebServiceUtilities.getResponseBody(response, MediaType.OCTET_STREAM, Product.class);
 
     Assert.fail("Exception was not thrown for attempting to deserialize json to an object");
   }
@@ -162,7 +162,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WEB_SERVICE)
   public void testCreateStringEntityNotJsonOrXml() throws JsonProcessingException {
-    WebServiceUtilities.createStringEntity(this.product, MediaType.APPLICATION_FORM_URLENCODED);
+    WebServiceUtilities.createStringEntity(this.product, MediaType.FORM_URLENCODED);
     Assert.fail("Expected exception of IllegalArgumentException was not caught for content type that did not contain xml or json");
   }
 
