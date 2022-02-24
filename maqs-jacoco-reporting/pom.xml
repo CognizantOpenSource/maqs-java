@@ -67,14 +67,6 @@
             <artifactId>maqs-base</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.cognizantsoftvision.maqs.accessibility</groupId>
-            <artifactId>maqs-accessibility</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cognizantsoftvision.maqs.base</groupId>
-            <artifactId>maqs-base</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
             <artifactId>maqs-utilities</artifactId>
         </dependency>
@@ -89,6 +81,10 @@
         <dependency>
             <groupId>com.cognizantsoftvision.maqs.cucumber</groupId>
             <artifactId>maqs-cucumber</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+            <artifactId>maqs-webservices</artifactId>
         </dependency>
     </dependencies>
 </project>
