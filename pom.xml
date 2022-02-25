@@ -256,7 +256,7 @@
         <puppycheckstyle.plugin.version>8.38</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.7</jacoco.version>
         <testng.version>7.3.0</testng.version>
-        <selenium.version>4.1.2</selenium.version>
+        <selenium.version>4.1.0</selenium.version>
         <!-- TODO: delete seleniumAppium.version when appium is updated with appium java client 8.0 -->
         <seleniumAppium.version>3.141.59</seleniumAppium.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
@@ -272,7 +272,7 @@
             <dependency>
                 <groupId>io.github.bonigarcia</groupId>
                 <artifactId>webdrivermanager</artifactId>
-                <version>5.0.3</version>
+                <version>5.1.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

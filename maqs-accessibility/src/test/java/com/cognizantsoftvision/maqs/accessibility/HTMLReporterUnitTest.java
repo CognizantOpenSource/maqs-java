@@ -77,6 +77,12 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
    */
   private static final String mainElementSelector = "main";
 
+  private void loadTestPage(String testPage) {
+    this.getWebDriver().get("file:///" + new File(testPage).getAbsolutePath());
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitUntilVisibleElement(By.cssSelector(mainElementSelector));
+  }
+
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void runScanOnPage() {
     loadTestPage(integrationTestTargetSimpleUrl);
@@ -331,12 +337,6 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
       Assert.assertFalse(text.contains(resultType + ": "),
           "Expected to not find '" + resultType  + ": '");
     }
-  }
-
-  private void loadTestPage(String testPage) {
-    this.getWebDriver().get("file:///" + new File(testPage).getAbsolutePath());
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitUntilVisibleElement(By.cssSelector(mainElementSelector));
   }
 
   private void deleteFile(File file) {
