@@ -15,30 +15,40 @@
     <name>MAQS Accessibility Testing Module</name>
     <packaging>jar</packaging>
 
+    <properties>
+        <deque.axe.version>4.3.1</deque.axe.version>
+        <apache.commons.version>1.9</apache.commons.version>
+        <jsoup.version>1.14.3</jsoup.version>
+    </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>com.deque.html.axe-core</groupId>
-            <artifactId>selenium</artifactId>
-            <version>4.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>1.9</version>
-        </dependency>
         <dependency>
             <groupId>com.cognizantsoftvision.maqs.selenium</groupId>
             <artifactId>maqs-selenium</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
-            <artifactId>maqs-utilities</artifactId>
+            <groupId>com.deque.html.axe-core</groupId>
+            <artifactId>selenium</artifactId>
+            <version>${deque.axe.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${apache.commons.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.14.3</version>
+            <version>${jsoup.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
         </dependency>
     </dependencies>
 </project>
