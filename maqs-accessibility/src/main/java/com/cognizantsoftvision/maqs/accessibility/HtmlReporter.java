@@ -270,9 +270,7 @@ public class HtmlReporter {
     Element script = doc.select("script").first();
     Objects.requireNonNull(script).appendChild(new DataNode(getJavascriptFileToString()));
 
-    // TODO: see if this works instead of FileUtils
     Files.writeString(new File(destination).toPath(), doc.outerHtml(), StandardCharsets.UTF_8);
-    //FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
 
   /**
