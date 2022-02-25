@@ -70,14 +70,6 @@
             <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
             <artifactId>maqs-utilities</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.cognizantsoftvision.maqs.webservices</groupId>-->
-<!--            <artifactId>maqs-webservices-jdk8</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.cognizantsoftvision.maqs.webservices</groupId>-->
-<!--            <artifactId>maqs-webservices-jdk11</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.cognizantsoftvision.maqs.database</groupId>
             <artifactId>maqs-database</artifactId>
@@ -89,6 +81,10 @@
         <dependency>
             <groupId>com.cognizantsoftvision.maqs.cucumber</groupId>
             <artifactId>maqs-cucumber</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+            <artifactId>maqs-webservices</artifactId>
         </dependency>
     </dependencies>
 </project>
