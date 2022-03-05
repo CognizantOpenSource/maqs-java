@@ -13,9 +13,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Configuration unit test class.
+ * The Configuration unit test class.
  */
 public class ConfigUnitTest {
+
   /**
    * Test getting an entire section from the config.
    */

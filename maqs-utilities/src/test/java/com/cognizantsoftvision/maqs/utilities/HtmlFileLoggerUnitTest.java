@@ -8,19 +8,20 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import org.apache.tools.ant.util.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * Unit test class for HtmlFileLogger.java
+ * The Html File Logger unit test class.
  */
 @Test
 public class HtmlFileLoggerUnitTest {
+
   /**
    * Test logging to a new file.
    */
@@ -78,23 +79,22 @@ public class HtmlFileLoggerUnitTest {
    * Verify HtmlFileLogger constructor creates the correct directory if it does
    * not already exist. Delete Directory after each run.
    */
-  /*
-   * @Test public void HtmlFileLoggerConstructorCreateDirectory() { HtmlFileLogger
-   * logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
-   * "HtmlFileLoggerCreateDirectoryDelete").toString(),
-   * "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
-   * logger.logMessage(MessageType.WARNING,
-   * "Test to ensure that the file in the created directory can be written to.");
-   * 
-   * File file = new File(logger.getFilePath());
-   * Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains(
-   * "Test to ensure that the file in the created directory can be written to."));
-   * file.delete();
-   * 
-   * file = new File(logger.getDirectory()); try {
-   * FileUtils.deleteDirectory(file); } catch (IOException e) {
-   * e.printStackTrace(); } }
-   */
+   @Test public void HtmlFileLoggerConstructorCreateDirectory() {
+      HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
+         "HtmlFileLoggerCreateDirectoryDelete").toString(),
+      "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
+      logger.logMessage(MessageType.WARNING,
+      "Test to ensure that the file in the created directory can be written to.");
+
+      File file = new File(logger.getFilePath());
+      Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains(
+      "Test to ensure that the file in the created directory can be written to."));
+      file.delete();
+
+      file = new File(logger.getDirectory());
+      FileUtils.delete(file);
+   }
+
 
   /**
    * Verify that HtmlFileLogger can log message without defining a Message Type

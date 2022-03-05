@@ -23,17 +23,18 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-/**
- * Unit test class for FileLogger.java
- */
-@Test(singleThreaded = true)
+
 
 /**
  * Don't check for serial version unique IDs as we will never serialize the test
  * data
  */
+@Test(singleThreaded = true)
 @SuppressWarnings("serial")
 
+/**
+ * The File Logger unit test class.
+ */
 public class FileLoggerUnitTest {
 
   public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY = LoggingConfig.getLogDirectory() + "/"
@@ -661,7 +662,7 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.WARNING, logLine, MessageType.WARNING);
     logger.logMessage(MessageType.ERROR, logLine, MessageType.ERROR);
 
-    // Give the write time
+    // Gives the writing time
     try {
       Thread.sleep(250);
     } catch (InterruptedException e) {

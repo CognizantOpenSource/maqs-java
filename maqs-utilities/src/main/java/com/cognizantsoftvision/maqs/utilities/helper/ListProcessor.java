@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * The List Processor class.
  * Contains methods for processing lists.
  */
-
 public class ListProcessor {
 
   private ListProcessor() {
