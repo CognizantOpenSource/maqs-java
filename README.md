@@ -8,6 +8,8 @@
 |**Code Quality**|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.magenic.jmaqs%3Ajmaqs-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.magenic.jmaqs%3Ajmaqs-framework)|
 |**License**|[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://raw.githubusercontent.com/Magenic/JMAQS/master/LICENSE)| 
 
+[![Testing Powered By Sauce Labs](https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-white.png?sanitize=true "Testing Powered By Sauce Labs")](https://saucelabs.com)
+
 ## Introduction 
 JMAQS stands for Magenic's Automation Quick Start - Java Edtion.
 
@@ -23,7 +25,7 @@ The main idea behind JMAQS is to avoid **reinventing the wheel**. Most automatio
 
 ## License
 The MIT License (MIT)
-Copyright (c) 2020 Magenic
+Copyright (c) 2021 Magenic
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
