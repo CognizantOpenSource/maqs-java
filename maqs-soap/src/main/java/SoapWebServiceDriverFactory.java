@@ -1,10 +1,8 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.magenic.jmaqs.webservices.jdk8.soap;
-
-import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
+import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.function.Consumer;

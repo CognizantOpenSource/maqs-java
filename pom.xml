@@ -55,6 +55,7 @@
         <module>maqs-database</module>
         <module>maqs-cucumber</module>
         <module>maqs-accessibility</module>
+        <module>maqs-soap</module>
     </modules>
 
     <profiles>

@@ -1,16 +1,16 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.magenic.jmaqs.webservices.jdk8.soap;
-
-import com.magenic.jmaqs.webservices.jdk8.WebServiceDriver;
+import com.cognizantsoftvision.maqs.webservices.BaseWebServiceTest;
+import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.http.HttpClient;
 import java.util.Map;
 import java.util.function.Consumer;
 import javax.xml.XMLConstants;
@@ -24,10 +24,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
+
 import org.xml.sax.SAXException;
 
 public class SoapWebServiceDriver extends WebServiceDriver {
@@ -35,17 +34,20 @@ public class SoapWebServiceDriver extends WebServiceDriver {
   private final SOAPMessage soapMessage;
   private JAXBContext jaxbContext;
 
-  public SoapWebServiceDriver(SOAPMessage message, String baseAddress) throws URISyntaxException {
-    super(baseAddress);
+  private String baseAddress;
+
+  public SoapWebServiceDriver(SOAPMessage message, String baseAddress) {
+    super();
+    this.baseAddress = baseAddress;
     soapMessage = message;
   }
 
   public SoapWebServiceDriver(URI baseAddress) throws SOAPException {
-    super(baseAddress);
+    this.baseAddress = baseAddress.toString();
     soapMessage = SoapWebServiceDriverFactory.getDefaultMessage();
   }
 
-  public SoapWebServiceDriver(CloseableHttpClient newHttpClient, SOAPMessage message) {
+  public SoapWebServiceDriver(HttpClient newHttpClient, SOAPMessage message) {
     super(newHttpClient);
     soapMessage = message;
   }
@@ -69,8 +71,8 @@ public class SoapWebServiceDriver extends WebServiceDriver {
     return messageOutputStream.toString();
   }
 
-  public StringEntity getSoapBodyStringEntity() throws IOException, SOAPException {
-    return new StringEntity(getSoapBodyString());
+  public String getSoapBodyStringEntity() throws IOException, SOAPException {
+    return getSoapBodyString();
   }
 
   public void addStringToBody(String outputStream)

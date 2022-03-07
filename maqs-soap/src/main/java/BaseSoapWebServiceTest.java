@@ -1,14 +1,12 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.magenic.jmaqs.webservices.jdk8.soap;
-
-import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
-import com.magenic.jmaqs.webservices.jdk8.WebServiceTestObject;
+import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
+import com.cognizantsoftvision.maqs.webservices.WebServiceTestObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 import javax.xml.soap.SOAPException;
@@ -40,11 +38,12 @@ public class BaseSoapWebServiceTest extends BaseExtendableTest<WebServiceTestObj
   /*
    * (non-Javadoc)
    *
-   * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest# beforeLoggingTeardown
+   * @see com.cognizantsoftvision.maqs.utilities.BaseTest.BaseTest# beforeLoggingTeardown
    * (org.testng.ITestResult)
    */
-  @Override protected void beforeLoggingTeardown(ITestResult resultType) {
-    // There is no before logging tear-down required
+  @Override
+  protected void beforeLoggingTeardown(ITestResult resultType) {
+    // There is no logging tear-down required before
   }
 
   /**
@@ -60,7 +59,8 @@ public class BaseSoapWebServiceTest extends BaseExtendableTest<WebServiceTestObj
   /**
    * Creates a new test object.
    */
-  @Override protected void createNewTestObject() {
+  @Override
+  protected void createNewTestObject() {
     Logger logger = this.createLogger();
     try {
 

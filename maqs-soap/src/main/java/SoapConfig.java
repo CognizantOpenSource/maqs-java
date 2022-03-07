@@ -1,10 +1,8 @@
 /*
- * Copyright 2020 (C) Magenic, All rights Reserved
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.magenic.jmaqs.webservices.jdk8.soap;
-
-import com.magenic.jmaqs.utilities.helper.Config;
+import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import java.util.Map;
 
 public final class SoapConfig {
