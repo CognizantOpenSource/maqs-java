@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 import org.bson.Document;
 
 /**
- * Mongo test context data.
+ * The Mongo Test Object class.
  */
 public class MongoTestObject extends BaseTestObject {
 

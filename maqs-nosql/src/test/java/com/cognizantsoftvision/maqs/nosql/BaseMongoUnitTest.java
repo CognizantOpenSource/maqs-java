@@ -9,9 +9,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Test the Base Mongo Test functionality.
+ * The Base Mongo unit test class.
  */
 public class BaseMongoUnitTest extends BaseMongoTest {
+
+  /**
+   * Test the get mongo db driver.
+   */
   @Test(groups = TestCategories.MONGO)
   public void testGetMongoDBDriver() {
     MongoDBDriver mongoDBDriver = this.getMongoDBDriver();
@@ -19,6 +23,9 @@ public class BaseMongoUnitTest extends BaseMongoTest {
         "Checking that MongoDB Driver is not null through BaseMongoTest");
   }
 
+  /**
+   * Test the set mongo db driver.
+   */
   @Test(groups = TestCategories.MONGO)
   public void testSetMongoDBDriver() {
     int hashCode = this.getMongoDBDriver().hashCode();
@@ -31,6 +38,9 @@ public class BaseMongoUnitTest extends BaseMongoTest {
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
+  /**
+   * Test the override connection driver with the mongo db driver.
+   */
   @Test(groups = TestCategories.MONGO)
   public void testOverrideConnectionDriverWithMongoDBDriver() {
     overrideConnectionDriver(this.getMongoDBDriver());
@@ -40,7 +50,7 @@ public class BaseMongoUnitTest extends BaseMongoTest {
   }
 
   /**
-   * Gets the connection string.
+   * Test getting the connection string.
    */
   @Test(groups = TestCategories.MONGO)
   public void testGetBaseMongoConnectionStringTest() {
@@ -49,7 +59,7 @@ public class BaseMongoUnitTest extends BaseMongoTest {
   }
 
   /**
-   * Gets the database string.
+   * Test getting the database string.
    */
   @Test(groups = TestCategories.MONGO)
   public void testGetBaseMongoStringTest() {
@@ -58,7 +68,7 @@ public class BaseMongoUnitTest extends BaseMongoTest {
   }
 
   /**
-   * Gets the connection string.
+   * Test getting the connection string.
    */
   @Test(groups = TestCategories.MONGO)
   public void testGetBaseMongoCollectionStringTest() {

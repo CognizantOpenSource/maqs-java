@@ -12,14 +12,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Test Mongo Functionality.
+ * The Mongo Database Functional unit test class.
  */
 public class MongoDBFunctionalUnitTest extends BaseMongoTest{
 
   /**
-   * Test the collection works as expected.
+   * Test the collection works as expected when getting the login id.
    */
   @Test(groups = TestCategories.MONGO)
   public void testMongoGetLoginID() {
@@ -30,18 +31,18 @@ public class MongoDBFunctionalUnitTest extends BaseMongoTest{
   }
 
   /**
-   * Test the collection works as expected.
+   * Test the collection works as expected when running a query and returning the first result.
    */
   @Test(groups = TestCategories.MONGO)
   public void testMongoQueryAndReturnFirst() {
     Bson filter = Filters.eq("lid", "test3");
-    //MongoCollection<Document> document = this.getMongoDBDriver().getCollection().find(filter).ToList().First();
+    // MongoCollection<Document> document = this.getMongoDBDriver().getCollection().find(filter).ToList().First();
     Document document = this.getMongoDBDriver().getCollection().find(filter).first();
-    Assert.assertEquals(document.get("lid").toString(), "test3");
+    Assert.assertEquals(Objects.requireNonNull(document).get("lid").toString(), "test3");
   }
 
   /**
-   * Test the collection works as expected
+   * Test the collection works as expected when finding a list with a key.
    */
   @Test(groups = TestCategories.MONGO)
   public void testMongoFindListWithKey() {
@@ -61,7 +62,7 @@ public class MongoDBFunctionalUnitTest extends BaseMongoTest{
   @Test(groups = TestCategories.MONGO)
   public void testMongoLinqQuery() {
     /*
-    QueryBuilder querys =
+    QueryBuilder queries =
         from e in this.getMongoDBDriver().getCollection()
     where e["lid"] == "test1"
     select e;

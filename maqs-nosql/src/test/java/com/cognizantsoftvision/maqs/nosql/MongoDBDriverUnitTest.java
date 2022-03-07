@@ -13,10 +13,13 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /**
- * Test mongo base test functionality
+ * The Mongo Database Driver unit test class.
  */
 public class MongoDBDriverUnitTest extends BaseMongoTest {
 
+  /**
+   * Test setting up the mongo db driver.
+   */
   @Test(groups = TestCategories.MONGO)
   public void testMongoDBDriver() {
     MongoCollection<Document> collection = MongoFactory.getDefaultCollection();
@@ -31,6 +34,9 @@ public class MongoDBDriverUnitTest extends BaseMongoTest {
     Assert.assertNotNull(driver);
   }
 
+  /**
+   * Test getting the mongo client.
+   */
   @Test(groups = TestCategories.MONGO)
   public void testGetMongoClient() {
     this.setMongoDBDriver(new MongoDBDriver());
@@ -38,6 +44,9 @@ public class MongoDBDriverUnitTest extends BaseMongoTest {
     Assert.assertNotNull(client);
   }
 
+  /**
+   * Test setting the mongo client.
+   */
   @Test(groups = TestCategories.MONGO)
   public void testSetMongoClient() {
     this.setMongoDBDriver(new MongoDBDriver());

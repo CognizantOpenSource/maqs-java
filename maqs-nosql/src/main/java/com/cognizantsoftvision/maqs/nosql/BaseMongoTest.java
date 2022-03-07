@@ -11,7 +11,7 @@ import org.bson.Document;
 import org.testng.ITestResult;
 
 /**
- * Generic base MongoDB test class.
+ * The Base Mongo Test class.
  */
 public class BaseMongoTest extends BaseExtendableTest<MongoTestObject> {
 

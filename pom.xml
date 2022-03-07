@@ -53,6 +53,7 @@
         <module>maqs-appium</module>
         <module>maqs-webservices</module>
         <module>maqs-database</module>
+        <module>maqs-nosql</module>
         <module>maqs-cucumber</module>
         <module>maqs-accessibility</module>
     </modules>
@@ -316,6 +317,11 @@
             <dependency>
                 <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
                 <artifactId>maqs-webservices</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.nosql</groupId>
+                <artifactId>maqs-nosql</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

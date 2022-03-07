@@ -14,7 +14,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 /**
- * Mongo database factory.
+ * The Mongo Factory Class.
  */
 public class MongoFactory {
 

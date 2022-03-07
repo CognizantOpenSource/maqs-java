@@ -13,12 +13,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Test the mongo test object functionality.
+ * The Mongo Test Object unit test class.
  */
 public class MongoTestObjectUnitTest extends BaseMongoTest {
 
   /**
-   * Is the collection override respected.
+   * Tests if the collection override is respected.
    */
   @Test(groups = TestCategories.MONGO)
   public void overrideCollectionFunction() {
@@ -32,7 +32,7 @@ public class MongoTestObjectUnitTest extends BaseMongoTest {
   }
 
   /**
-   * Are the connection string overrides respected.
+   * Tests if the connection string overrides respected.
    */
   @Test(groups = TestCategories.MONGO)
   public void overrideConnectionStrings() {
@@ -45,7 +45,7 @@ public class MongoTestObjectUnitTest extends BaseMongoTest {
   }
 
   /**
-   * Is the driver override respected.
+   * Tests if the driver override respected.
    */
   @Test(groups = TestCategories.MONGO)
   public void overrideDriver() {
@@ -59,7 +59,7 @@ public class MongoTestObjectUnitTest extends BaseMongoTest {
   }
 
   /**
-   * Is the test overridable with a custom driver.
+   * Tests if the custom driver is overridable.
    */
   @Test(groups = TestCategories.MONGO)
   public void overrideWithCustomDriver() {
@@ -78,9 +78,9 @@ public class MongoTestObjectUnitTest extends BaseMongoTest {
     Assert.assertFalse(this.getMongoDBDriver().isCollectionEmpty());
   }
 
-  /// <summary>
-  /// Make sure the test objects map properly
-  /// </summary>
+  /**
+   * Make sure the test objects map properly.
+   */
   @Test(groups = TestCategories.MONGO)
   public void TestMongoDBTestObjectMapCorrectly() {
     Assert.assertEquals(this.getTestObject().getLogger(), this.getLogger(), "Logs don't match");

@@ -14,7 +14,8 @@ import java.util.List;
 import org.bson.Document;
 
 /**
- * Class to wrap the MongoCollection and related helper functions.
+ * The MongoDB Driver class.
+ * Wraps the MongoCollection and related helper functions.
  */
 public class MongoDBDriver implements AutoCloseable {
 
@@ -175,5 +176,6 @@ public class MongoDBDriver implements AutoCloseable {
 
   @Override
   public void close() {
+    this.getMongoClient().close();
   }
 }

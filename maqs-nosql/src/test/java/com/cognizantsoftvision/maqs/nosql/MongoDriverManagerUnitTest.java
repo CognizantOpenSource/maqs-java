@@ -11,12 +11,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Test the mongo driver manager functionality.
+ * The Mongo Driver Manager unit test class.
  */
 public class MongoDriverManagerUnitTest extends BaseMongoTest{
 
   /**
-   * Override with default driver.
+   * Test overriding the default driver.
    */
   @Test(groups = TestCategories.MONGO)
   public void respectDefaultDriverOverride() {
@@ -28,7 +28,7 @@ public class MongoDriverManagerUnitTest extends BaseMongoTest{
   }
 
   /**
-   * Override driver with collection string.
+   * Override driver with the collection string.
    */
   @Test(groups = TestCategories.MONGO)
   public void respectCollectionDriverOverride() {
@@ -39,10 +39,10 @@ public class MongoDriverManagerUnitTest extends BaseMongoTest{
   }
 
   /**
-   * Override drive with all 3 connection strings.
+   * Override drive with all 3 connection parameters.
    */
   @Test(groups = TestCategories.MONGO)
-  public void RespectDriverConnectionsOverride() {
+  public void respectDriverConnectionsOverride() {
     MongoDBDriver mongoDriver = new MongoDBDriver(MongoDBConfig.getConnectionString(),
         MongoDBConfig.getDatabaseString(), MongoDBConfig.getCollectionString());
     this.getTestObject().getMongoDBManager().overrideDriver(mongoDriver);
@@ -53,7 +53,7 @@ public class MongoDriverManagerUnitTest extends BaseMongoTest{
    * Override driver directly.
    */
   @Test(groups = TestCategories.MONGO)
-  public void RespectDirectDriverOverride() {
+  public void respectDirectDriverOverride() {
     MongoDBDriver mongoDriver = new MongoDBDriver(MongoDBConfig.getCollectionString());
     this.setMongoDBDriver(mongoDriver);
     Assert.assertEquals(mongoDriver.getCollection(), this.getMongoDBDriver().getCollection());
@@ -63,7 +63,7 @@ public class MongoDriverManagerUnitTest extends BaseMongoTest{
    * Override driver with new driver.
    */
   @Test(groups = TestCategories.MONGO)
-  public void RespectNewDriverOverride() {
+  public void respectNewDriverOverride() {
     MongoDBDriver mongoDriver = new MongoDBDriver(MongoDBConfig.getCollectionString());
     this.getTestObject().overrideMongoDBDriver(mongoDriver);
     Assert.assertEquals(mongoDriver.getCollection(), this.getMongoDBDriver().getCollection());
@@ -73,7 +73,7 @@ public class MongoDriverManagerUnitTest extends BaseMongoTest{
    * Override drive with collection function.
    */
   @Test(groups = TestCategories.MONGO)
-  public void RespectCollectionOverride() {
+  public void respectCollectionOverride() {
     MongoCollection<Document> collection = MongoFactory.getDefaultCollection();
     this.getTestObject().overrideMongoDBDriver(() -> collection);
     Assert.assertEquals(collection, this.getMongoDBDriver().getCollection());
@@ -83,7 +83,7 @@ public class MongoDriverManagerUnitTest extends BaseMongoTest{
    * Override drive with all 3 connection strings.
    */
   @Test(groups = TestCategories.MONGO)
-  public void RespectDriverConnectionStingsOverride() {
+  public void respectDriverConnectionStingsOverride() {
     MongoCollection<Document> collection = this.getMongoDBDriver().getCollection();
     this.getTestObject().overrideMongoDBDriver(MongoDBConfig.getConnectionString(),
         MongoDBConfig.getDatabaseString(), MongoDBConfig.getCollectionString());
@@ -94,7 +94,7 @@ public class MongoDriverManagerUnitTest extends BaseMongoTest{
    * Override in base with collection function.
    */
   @Test(groups = TestCategories.MONGO)
-  public void RespectCollectionOverrideInBase() {
+  public void respectCollectionOverrideInBase() {
     MongoCollection<Document> collection = MongoFactory.getDefaultCollection();
     this.overrideConnectionDriver(() -> collection);
     Assert.assertEquals(collection, this.getMongoDBDriver().getCollection());

@@ -9,12 +9,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Test class for database configurations.
+ * The Mongo Database Config unit test class.
  */
 public class MongoDBConfigUnitTest extends BaseMongoTest{
 
   /**
-   * Gets the connection string.
+   * Test getting the connection string.
    */
   @Test(groups = TestCategories.MONGO)
   public void testGetMongoDBConnectionStringTest() {
@@ -23,7 +23,7 @@ public class MongoDBConfigUnitTest extends BaseMongoTest{
   }
 
   /**
-   * Gets the database string.
+   * Test getting the database string.
    */
   @Test(groups = TestCategories.MONGO)
   public void testGetMongoDBDatabaseStringTest() {
@@ -32,7 +32,7 @@ public class MongoDBConfigUnitTest extends BaseMongoTest{
   }
 
   /**
-   * Gets the connection string.
+   * Test getting the connection string.
    */
   @Test(groups = TestCategories.MONGO)
   public void testGetMongoDBCollectionStringTest() {
@@ -41,7 +41,7 @@ public class MongoDBConfigUnitTest extends BaseMongoTest{
   }
 
   /**
-   * Gets the timeout value.
+   * Test getting the timeout value.
    */
   @Test(groups = TestCategories.MONGO)
   public void testGetMongoDBQueryTimeout() {

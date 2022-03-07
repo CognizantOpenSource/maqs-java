@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 import org.bson.Document;
 
 /**
- * Mongo database driver.
+ * The Mongo Driver Manager class.
  */
 public class MongoDriverManager extends DriverManager<MongoDBDriver> {
 

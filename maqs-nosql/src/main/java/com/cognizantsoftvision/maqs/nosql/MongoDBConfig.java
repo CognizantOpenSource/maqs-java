@@ -8,7 +8,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 
 /**
- * MongoDB config class.
+ * The MongoDB Config class.
  */
 public class MongoDBConfig {
 
