@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Cognizant SoftVision, All rights Reserved
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
 package com.cognizantsoftvision.maqs.nosql;
@@ -34,7 +34,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
         MongoFactory.getCollection(connectionString, databaseString, collectionString)), testObject);
   }
 
-  /** TODO: is this needed?
+  /**
    * Initializes a new instance of the MongoDriverManager class.
    * @param getCollection Function for getting a Mongo collection connection
    * @param testObject Test object this driver is getting added to

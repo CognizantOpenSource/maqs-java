@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Cognizant SoftVision, All rights Reserved
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
 package com.cognizantsoftvision.maqs.nosql;
 
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.mongodb.client.MongoCollection;
 import java.util.function.Supplier;
 import org.bson.Document;
