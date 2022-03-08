@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Cognizant, All rights Reserved
+ * Copyright 2022 Cognizant SoftVision, All rights Reserved
  */
 
 package com.cognizantsoftvision.maqs.nosql;
