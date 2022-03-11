@@ -75,11 +75,11 @@ AppiumConfig.setTimouts(driver);
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <configSections>
-    <section name="ModularMaqs" type="System.Configuration.NameValueSectionHandler" />
+    <section name="GlobalMaqs" type="System.Configuration.NameValueSectionHandler" />
     <section name="AppiumMaqs" type="System.Configuration.NameValueSectionHandler" />
     <section name="AppiumCapsMaqs" type="System.Configuration.NameValueSectionHandler" />
   </configSections>
-  <ModularMaqs>
+  <GlobalMaqs>
     <!-- Do you want to create logs for your tests
     <add key="Log" value="YES"/>
     <add key="Log" value="NO"/>
@@ -107,7 +107,7 @@ AppiumConfig.setTimouts(driver);
     <!--Retry and overall timeout in milliseconds-->
     <add key="WaitTime" value="1000" />
     <add key="Timeout" value="10000" />
-  </ModularMaqs>
+  </GlobalMaqs>
   <AppiumMaqs>
     <!-- Device settings -->
     <add key="PlatformName" value="Android" />

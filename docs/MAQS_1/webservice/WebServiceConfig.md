@@ -27,7 +27,7 @@ boolean useProxy = WebServiceConfig.getUseProxy();
 
 Get the proxy address to use
 ```java
-string proxyAddress = WebServiceConfig.getProxyAddress();
+String proxyAddress = WebServiceConfig.getProxyAddress();
 ```
 
 # Sample config files
@@ -36,7 +36,7 @@ string proxyAddress = WebServiceConfig.getProxyAddress();
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
   <configSections>
-    <section name="ModularMaqs" type="System.Configuration.NameValueSectionHandler"/>
+    <section name="GlobalMaqs" type="System.Configuration.NameValueSectionHandler"/>
     <section name="WebServiceMaqs" type="System.Configuration.NameValueSectionHandler"/>
   </configSections>
   <WebServiceMaqs>
@@ -50,7 +50,7 @@ string proxyAddress = WebServiceConfig.getProxyAddress();
     <add key="UseProxy" value="NO" />
     <add key="ProxyAddress" value="127.0.0.1:8080" />
   </WebServiceMaqs>
-  <ModularMaqs>
+  <GlobalMaqs>
     <!-- Wait time in milliseconds - AKA how long do you wait for rechecking something -->
     <add key="WaitTime" value="100"/>
 
@@ -80,8 +80,7 @@ string proxyAddress = WebServiceConfig.getProxyAddress();
 
     <!-- Log file path - Defaults to build location if no value is defined
     <add key="FileLoggerPath" value="C:\Frameworks\"/>-->
-
-  </ModularMaqs>
+  </GlobalMaqs>
 </configuration>
 
 ```
@@ -92,7 +91,7 @@ string proxyAddress = WebServiceConfig.getProxyAddress();
     "WebServiceUri": "http://magenicautomation.azurewebsites.net",
     "WebServiceTimeout": "1000",
   },
-  "ModularMaqs": {
+  "GlobalMaqs": {
     "WaitTime": "100",
     "Timeout": "10000",
     "Log": "OnFail",

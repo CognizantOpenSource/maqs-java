@@ -34,7 +34,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   private final WebServiceDriver webServiceDriver = new WebServiceDriver(HttpClientFactory.getDefaultClient());
 
   /**
-   * Test Json Get deserialize a single product.
+   * Test XML Get deserialize a single product.
    * @throws IOException if exception is thrown
    * @throws InterruptedException if exception is thrown
    */

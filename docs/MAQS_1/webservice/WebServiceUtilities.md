@@ -73,8 +73,8 @@ String actualXml = WebServiceUtilities.serializeXml(this.product);
 Deserialize the body of a response message.  
 *This will only work if the body is XML and can be deserialized as the given object.
 ```java
-CloseableHttpResponse response = this.getWebServiceDriver().getContent(
-"/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_XML, true);
+HttpResponse<String> response = this.getWebServiceDriver().getContent(
+    url + "/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_XML, true);
 Product product = WebServiceUtilities.deserializeXml(response, Product.class);
 Assert.assertNotNull(product);
 ```
@@ -83,8 +83,8 @@ Assert.assertNotNull(product);
 Deserialize the body of a response message.  
 *This will only work if the body is JSON and can be deserialized as the given object.
 ```java
-CloseableHttpResponse response = this.getWebServiceDriver().getContent(
-"/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
+HttpResponse<String> response = this.getWebServiceDriver().getContent(
+    url + "/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
 Product product = WebServiceUtilities.deserializeJson(response, Product.class);
 Assert.assertNotNull(product);
 ```

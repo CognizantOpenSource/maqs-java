@@ -22,40 +22,39 @@ Each web driver call has a similar format
 ## Get
 Execute a "get" call and get the response body back as a Closeable HTTP response.
 ```java
-CloseableHttpResponse response = this.getWebServiceDriver().getContent(
-"/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
+HttpResponse<String> response = this.getWebServiceDriver().getContent(url + "/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
 Product jsonProduct = WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_JSON, Product.class);
 Assert.assertNotNull(jsonProduct, "Response body did not deserialize object from json correctly");
 ```
 
 ## Put
-Execute a "put" call and get the response body back as a Closable Http Response.
+Execute a "put" call and get the response body back as a Http Response.
 ```java
 HttpEntity content = WebServiceUtilities.createEntity("", ContentType.TEXT_PLAIN);
-CloseableHttpResponse response = this.getWebServiceDriver().putContent(
-"/api/XML_JSON/Put/1", content, ContentType.APPLICATION_XML, false);
+HttpResponse<String> response = this.getWebServiceDriver().putContent(
+    url + "/api/XML_JSON/Put/1", content, ContentType.APPLICATION_XML, false);
 ```
 
 ## Patch
 Execute a "patch" call and get the response body back as a Closeable Http Response.
 ```java
 HttpEntity content = WebServiceUtilities.createEntity("", ContentType.TEXT_PLAIN);
-CloseableHttpResponse response = this.getWebServiceDriver().patchContent(
-"/api/XML_JSON/Put/1", content, ContentType.APPLICATION_XML, false);
+HttpResponse<String> response = this.getWebServiceDriver().patchContent(
+    url + "/api/XML_JSON/Put/1", content, ContentType.APPLICATION_XML, false);
 ```
 
 ## Post
 Execute a "post" call and get the response body back as Closeable Http Response.
 ```java
 HttpEntity content = WebServiceUtilities.createEntity("", ContentType.TEXT_PLAIN);
-CloseableHttpResponse response = this.getWebServiceDriver().postContent(
-"/api/String", content, ContentType.TEXT_PLAIN, false);
+HttpResponse<String> response = this.getWebServiceDriver().postContent(
+    url + "/api/String", content, ContentType.TEXT_PLAIN, false);
 ```
 
 ## Delete
 Execute a "get" call and get the response body back as a Closeable Http Response.
 ```java
- CloseableHttpResponse response = this.getWebServiceDriver()
-.deleteContent("/api/XML_JSON/Delete/1", ContentType.TEXT_PLAIN, false);
+HttpResponse<String> response = this.getWebServiceDriver().deleteContent(
+    url + "/api/XML_JSON/Delete/1", ContentType.TEXT_PLAIN, false);
 Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
 ```

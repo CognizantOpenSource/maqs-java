@@ -12,7 +12,7 @@ Config is class file granting access to properties in the config.xml.
 
 
 ## GetGeneralValue
-This pulls configuration values from ModularMaqs section of your app.config. It will return an empty string if the key is not found in the app.config.
+This pulls configuration values from GlobalMaqs section of your app.config. It will return an empty string if the key is not found in the app.config.
 
 ```java
 Config.getGeneralValue("Key");  
@@ -47,7 +47,7 @@ Config.getValue("TestKey", "defaultValue")
 ```
 
 ## DoesKeyExist
-Does a key exist in the ModularMaqs section of the config file.
+Does a key exist in the GlobalMaqs section of the config file.
 
 ```java
 Config.doesKeyExist("Key");
@@ -59,7 +59,7 @@ Config.doesKeyExist("Key", "SeleniumMaqs");
 ```
 
 ## AddGeneralTestSettingValues
-Ability to Add or Override settings for ModularMaqs section of the config.
+Ability to Add or Override settings for GlobalMaqs section of the config.
 
 ```java
 HashMap<String, String> newValueMap = new HashMap<String, String>();

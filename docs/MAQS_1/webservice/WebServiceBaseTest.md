@@ -38,8 +38,8 @@ Create a web service test object
 ```java
  protected void createNewTestObject() {
     Logger logger = this.createLogger();
+    
     try {
-
       WebServiceTestObject webServiceTestObject = new WebServiceTestObject(
           this.getWebServiceClient(), logger, this.getFullyQualifiedTestClassName());
       this.setTestObject(webServiceTestObject);
