@@ -5,13 +5,15 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.base.exceptions.ManagerDisposalException;
+import com.cognizantsoftvision.maqs.base.interfaces.IManagerDictionary;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Driver manager dictionary.
  */
-public class ManagerDictionary extends HashMap<String, DriverManager<?>> implements AutoCloseable {
+public class ManagerDictionary extends HashMap<String, DriverManager<?>> implements
+    IManagerDictionary {
 
   @Override
   public void close() {
@@ -38,7 +40,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
    * @return the driver
    */
   @SuppressWarnings("unchecked")
-  public <T extends Object> T getDriver(String key) {
+  public <T> T getDriver(String key) {
     return (T) this.get(key);
   }
 
@@ -85,9 +87,16 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
         throw new ManagerDisposalException(e);
       }
     }
-
     super.remove(key);
     return !this.containsKey(key);
+  }
 
+  /**
+   * Check if the managers contains the keyed manager.
+   * @param key the Key name
+   * @return True if the store contains the key
+   */
+  public boolean managerContains(String key) {
+    return this.containsKey(key);
   }
 }

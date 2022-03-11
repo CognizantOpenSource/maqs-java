@@ -5,6 +5,7 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.base.exceptions.DriverDisposalException;
+import com.cognizantsoftvision.maqs.base.interfaces.ITestObject;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
@@ -17,7 +18,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * The BaseTestObject class.
  */
-public class BaseTestObject implements AutoCloseable {
+public class BaseTestObject implements ITestObject {
   /**
    * The Logger.
    */
@@ -98,6 +99,7 @@ public class BaseTestObject implements AutoCloseable {
     this.managerStore = baseTestObject.getManagerStore();
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = baseTestObject.getFullyQualifiedTestName();
+    this.isClosed = baseTestObject.isClosed;
 
     baseTestObject.getLogger().logMessage(MessageType.INFORMATION, "Setup test object");
   }
