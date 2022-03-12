@@ -32,7 +32,7 @@ public interface ITestObject extends AutoCloseable {
    *
    * @return the manager Dictionary
    */
-  ManagerDictionary getManagerStore();
+  ManagerStore getManagerStore();
 
   /**
    * Gets a dictionary of string key and object value pairs.

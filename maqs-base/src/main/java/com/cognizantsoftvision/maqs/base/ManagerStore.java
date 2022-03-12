@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Driver manager dictionary.
  */
-public class ManagerDictionary extends HashMap<String, DriverManager<?>> implements
+public class ManagerStore extends HashMap<String, DriverManager<?>> implements
     IManagerDictionary {
 
   @Override
@@ -92,6 +92,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
 
   /**
    * Check if the managers contains the keyed manager.
+   *
    * @param key the Key name
    * @return True if the store contains the key
    */

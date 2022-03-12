@@ -41,7 +41,7 @@ public class BaseTestObject implements ITestObject {
   /**
    * Dictionary of String key and driver value pairs.
    */
-  private ManagerDictionary managerStore;
+  private ManagerStore managerStore;
 
   /**
    * ArrayList of Strings for associated files.
@@ -78,7 +78,7 @@ public class BaseTestObject implements ITestObject {
     this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
     this.values = new ConcurrentHashMap<>();
     this.objects = new ConcurrentHashMap<>();
-    this.managerStore = new ManagerDictionary();
+    this.managerStore = new ManagerStore();
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = fullyQualifiedTestName;
 
@@ -185,7 +185,7 @@ public class BaseTestObject implements ITestObject {
    *
    * @return Concurrent Hash Map of string key and driver value pairs
    */
-  public ManagerDictionary getManagerStore() {
+  public ManagerStore getManagerStore() {
     return this.managerStore;
   }
 
@@ -195,7 +195,7 @@ public class BaseTestObject implements ITestObject {
    * @param managerStore Concurrent Hash Map of string key and driver value pairs
    *                     to use.
    */
-  protected void setManagerStore(final ManagerDictionary managerStore) {
+  protected void setManagerStore(final ManagerStore managerStore) {
     this.managerStore = managerStore;
   }
 
