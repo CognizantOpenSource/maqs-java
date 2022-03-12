@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * The SeleniumTestObject Class.
  */
-public class SeleniumTestObject extends BaseTestObject {
+public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestObject {
 
   /**
    * Instantiates a new Selenium test object.
@@ -64,7 +64,6 @@ public class SeleniumTestObject extends BaseTestObject {
    * Sets web driver.
    *
    * @param driver the driver
-   * @throws Exception exception
    */
   public void setWebDriver(WebDriver driver) {
 
