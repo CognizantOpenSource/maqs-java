@@ -88,14 +88,4 @@ public class ManagerStore extends HashMap<String, DriverManager<?>> implements I
     super.remove(key);
     return !this.containsKey(key);
   }
-
-  /**
-   * Check if the managers contains the keyed manager.
-   *
-   * @param key the Key name
-   * @return True if the store contains the key
-   */
-  public boolean managerContains(String key) {
-    return this.containsKey(key);
-  }
 }

@@ -30,11 +30,11 @@ public interface IDriverManager<T> extends AutoCloseable {
   /**
    * Gets logger.
    */
-  Logger getLogger();
+   Logger getLogger();
 
 
   /**
    * Gets test object.
    */
-  BaseTestObject getTestObject();
+   BaseTestObject getTestObject();
 }

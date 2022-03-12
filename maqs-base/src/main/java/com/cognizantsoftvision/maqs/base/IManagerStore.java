@@ -38,12 +38,4 @@ public interface IManagerStore extends AutoCloseable {
    * @return the boolean
    */
   boolean remove(String key);
-
-  /**
-   * Check if the managers contains the keyed manager.
-   *
-   * @param key the Key name
-   * @return True if the store contains the key
-   */
-  boolean managerContains(String key);
-  }
+}

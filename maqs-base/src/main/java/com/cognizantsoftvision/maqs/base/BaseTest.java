@@ -413,7 +413,8 @@ public abstract class BaseTest {
 
     for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
       // If the stack trace element is from this package (excluding this method) append the stack trace line
-      if (element.toString().startsWith("com.cognizantsoftvision") && !element.toString().contains("BaseTest.logVerbose")) {
+      if (element.toString().startsWith("com.cognizantsoftvision")
+          && !element.toString().contains("BaseTest.logVerbose")) {
         messages.append(element).append(System.lineSeparator());
       }
     }
