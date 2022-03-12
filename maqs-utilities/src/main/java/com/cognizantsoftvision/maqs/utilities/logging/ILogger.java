@@ -11,6 +11,7 @@ public interface ILogger {
 
   /**
    * Gets the logging level.
+   *
    * @return the Message Type
    */
   MessageType getLoggingLevel();
@@ -35,22 +36,17 @@ public interface ILogger {
   /**
    * Write the formatted message (one line) to the console as a generic message.
    *
-   * @param messageType
-   *          The type of message
-   * @param message
-   *          The message text
-   * @param args
-   *          String format arguments
+   * @param messageType The type of message
+   * @param message The message text
+   * @param args String format arguments
    */
   void logMessage(MessageType messageType, String message, Object... args);
 
   /**
    * Write the formatted message (one line) to the console as a generic message.
    *
-   * @param message
-   *          The message text
-   * @param args
-   *          String format arguments
+   * @param message The message text
+   * @param args String format arguments
    */
   void logMessage(String message, Object... args);
 }

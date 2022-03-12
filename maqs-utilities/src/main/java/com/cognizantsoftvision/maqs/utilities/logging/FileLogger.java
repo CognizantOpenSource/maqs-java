@@ -6,7 +6,6 @@ package com.cognizantsoftvision.maqs.utilities.logging;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -295,28 +294,28 @@ public class FileLogger extends Logger implements IFileLogger {
     return TXT;
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Logs a message to the log file.
    *
-   * @see com.cognizantsoftvision.maqs.utilities.Logging.Logger#logMessage(
-   * java.lang.String, java.lang.Object[])
+   * @param message The message text
+   * @param args String format arguments
    */
   @Override
   public void logMessage(String message, Object... args) {
     this.logMessage(MessageType.INFORMATION, message, args);
   }
 
-  /*
-   * (non-Javadoc)
+  /**
+   * Logs a message to the log file.
    *
-   * @see com.cognizantsoftvision.maqs.utilities.Logging.Logger#logMessage(
-   * com.cognizantsoftvision.maqs.utilities.
-   * Logging.MessageType, java.lang.String, java.lang.Object[])
+   * @param messageType The type of message
+   * @param message The message text
+   * @param args String format arguments
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
-    // If the message level is greater that the current log level then do not log
-    // it.
+    // If the message level is greater than the
+    // current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
       try (FileWriter fw = new FileWriter(this.filePath, true);
           BufferedWriter bw = new BufferedWriter(fw);

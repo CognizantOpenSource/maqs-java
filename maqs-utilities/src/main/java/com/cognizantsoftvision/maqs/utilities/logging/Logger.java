@@ -8,6 +8,7 @@ package com.cognizantsoftvision.maqs.utilities.logging;
  * Abstract logging interface base class.
  */
 public abstract class Logger implements ILogger {
+
   /**
    * Default date format.
    */
@@ -42,6 +43,7 @@ public abstract class Logger implements ILogger {
 
   /**
    * Gets the logging level.
+   *
    * @return the Message Type
    */
   public MessageType getLoggingLevel() {
@@ -51,8 +53,7 @@ public abstract class Logger implements ILogger {
   /**
    * Set the logging level.
    *
-   * @param level
-   *          The logging level.
+   * @param level The logging level.
    */
   public void setLoggingLevel(MessageType level) {
     this.logLevel = level;
@@ -87,10 +88,8 @@ public abstract class Logger implements ILogger {
    * Determine if the message should be logged.
    * The message should be logged if it's level is greater than or equal to the current logging level.
    *
-   * @param messageType
-   *          The type of message being logged.
-   * @return
-   *          True if the message should be logged.
+   * @param messageType The type of message being logged.
+   * @return True if the message should be logged.
    */
   protected boolean shouldMessageBeLogged(MessageType messageType) {
     // The message should be logged if it's level is less than or equal to the current logging level

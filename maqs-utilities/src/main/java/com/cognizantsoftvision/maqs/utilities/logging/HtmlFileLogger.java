@@ -186,21 +186,20 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
     }
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see com.cognizantsoftvision.maqs.utilities.Logging.Logger#logMessage(java.lang.String,
-   * java.lang.Object[])
+  /**
+   * Logs the message to the log file.
+   * @param message the string message to be logged
+   * @param args the object in addition to the string message
    */
   @Override public void logMessage(String message, Object... args) {
     this.logMessage(MessageType.INFORMATION, message, args);
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(com.magenic.jmaqs.utilities.
-   * Logging.MessageType, java.lang.String, java.lang.Object[])
+  /**
+   * Logs the message to the log file.
+   * @param messageType the message type that is being logged
+   * @param message the string message to be logged
+   * @param args the object in addition to the string message
    */
   @Override public void logMessage(MessageType messageType, String message, Object... args) {
     // If the message level is greater that the current log level then do not log it.
