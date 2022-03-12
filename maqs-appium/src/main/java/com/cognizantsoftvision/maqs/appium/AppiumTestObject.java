@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Class AppiumTestObject.
  */
-public class AppiumTestObject extends BaseTestObject {
+public class AppiumTestObject extends BaseTestObject implements  IAppiumTestObject {
 
   /**
    * Instantiates a new Appium test object.
@@ -49,7 +49,6 @@ public class AppiumTestObject extends BaseTestObject {
    * @return the appium driver
    */
   public AppiumDriver<WebElement> getAppiumDriver() {
-
     return this.getAppiumManager().getMobileDriver();
   }
 
