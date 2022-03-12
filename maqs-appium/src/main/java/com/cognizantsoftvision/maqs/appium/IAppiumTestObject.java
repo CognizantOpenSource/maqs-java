@@ -6,9 +6,8 @@ package com.cognizantsoftvision.maqs.appium;
 
 import com.cognizantsoftvision.maqs.base.interfaces.ITestObject;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.WebElement;
-
 import java.util.function.Supplier;
+import org.openqa.selenium.WebElement;
 
 /**
  * The Appium Test Object interface class.
