@@ -58,4 +58,4 @@ public interface IFileLogger extends ILogger {
    * @param args String format arguments
    */
   void logMessage(MessageType messageType, String message, Object... args);
-  }
+}
