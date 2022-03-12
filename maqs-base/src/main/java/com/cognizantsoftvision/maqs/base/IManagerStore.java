@@ -7,7 +7,7 @@ package com.cognizantsoftvision.maqs.base;
 /**
  * The Manager Dictionary interface class.
  */
-public interface IManagerDictionary extends AutoCloseable {
+public interface IManagerStore extends AutoCloseable {
 
   /**
    * Put.

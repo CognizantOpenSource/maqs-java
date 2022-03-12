@@ -11,8 +11,7 @@ import java.util.Map;
 /**
  * Driver manager dictionary.
  */
-public class ManagerStore extends HashMap<String, DriverManager<?>> implements
-    IManagerDictionary {
+public class ManagerStore extends HashMap<String, DriverManager<?>> implements IManagerStore {
 
   @Override
   public void close() {
