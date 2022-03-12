@@ -298,8 +298,8 @@ public class FileLogger extends Logger implements IFileLogger {
   /*
    * (non-Javadoc)
    *
-   * @see com.cognizantsoftvision.maqs.utilities.Logging.Logger#logMessage(java.lang.String,
-   * java.lang.Object[])
+   * @see com.cognizantsoftvision.maqs.utilities.Logging.Logger#logMessage(
+   * java.lang.String, java.lang.Object[])
    */
   @Override
   public void logMessage(String message, Object... args) {
@@ -309,8 +309,9 @@ public class FileLogger extends Logger implements IFileLogger {
   /*
    * (non-Javadoc)
    *
-   * @see com.cognizantsoftvision.maqs.utilities.Logging.Logger#logMessage(com.magenic.jmaqs.
-   * utilities. Logging.MessageType, java.lang.String, java.lang.Object[])
+   * @see com.cognizantsoftvision.maqs.utilities.Logging.Logger#logMessage(
+   * com.cognizantsoftvision.maqs.utilities.
+   * Logging.MessageType, java.lang.String, java.lang.Object[])
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
@@ -338,7 +339,7 @@ public class FileLogger extends Logger implements IFileLogger {
   /**
    * Take a name sting and make it a valid file name.
    *
-   * @param name The string to cleanup
+   * @param name The string to clean up
    * @return returns the string of a valid filename
    */
   private static String makeValidFileName(String name) {
