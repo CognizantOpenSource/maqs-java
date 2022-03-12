@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.base.interfaces.IDriverManager;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import java.util.function.Supplier;
 

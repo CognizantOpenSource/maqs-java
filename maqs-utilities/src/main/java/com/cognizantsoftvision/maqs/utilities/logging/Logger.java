@@ -4,8 +4,6 @@
 
 package com.cognizantsoftvision.maqs.utilities.logging;
 
-import com.cognizantsoftvision.maqs.utilities.logging.interfaces.ILogger;
-
 /**
  * Abstract logging interface base class.
  */

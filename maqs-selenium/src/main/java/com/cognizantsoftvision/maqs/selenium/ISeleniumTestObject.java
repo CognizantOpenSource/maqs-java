@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.base.interfaces.ITestObject;
+import com.cognizantsoftvision.maqs.base.ITestObject;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 

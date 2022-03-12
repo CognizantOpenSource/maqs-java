@@ -6,7 +6,7 @@ package com.cognizantsoftvision.maqs.utilities.logging;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.interfaces.IFileLogger;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

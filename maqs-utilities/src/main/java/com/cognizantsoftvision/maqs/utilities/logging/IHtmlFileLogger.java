@@ -2,9 +2,7 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities.logging.interfaces;
-
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+package com.cognizantsoftvision.maqs.utilities.logging;
 
 /**
  * The Html File Logger interface class.

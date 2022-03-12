@@ -2,9 +2,7 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.base.interfaces;
-
-import com.cognizantsoftvision.maqs.base.DriverManager;
+package com.cognizantsoftvision.maqs.base;
 
 /**
  * The Manager Dictionary interface class.

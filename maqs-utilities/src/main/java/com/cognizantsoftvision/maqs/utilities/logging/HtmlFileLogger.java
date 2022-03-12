@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.utilities.logging;
 
-import com.cognizantsoftvision.maqs.utilities.logging.interfaces.IHtmlFileLogger;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.io.File;
 import java.io.FileWriter;

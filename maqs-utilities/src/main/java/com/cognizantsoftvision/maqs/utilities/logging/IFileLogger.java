@@ -2,14 +2,12 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities.logging.interfaces;
-
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+package com.cognizantsoftvision.maqs.utilities.logging;
 
 /**
  * The File Logger interface class.
  */
-public interface IFileLogger extends ILogger{
+public interface IFileLogger extends ILogger {
 
   /**
    * Gets the FilePath value.

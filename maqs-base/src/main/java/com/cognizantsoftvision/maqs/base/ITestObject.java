@@ -2,10 +2,8 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.base.interfaces;
+package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.base.DriverManager;
-import com.cognizantsoftvision.maqs.base.ManagerDictionary;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.util.concurrent.ConcurrentMap;

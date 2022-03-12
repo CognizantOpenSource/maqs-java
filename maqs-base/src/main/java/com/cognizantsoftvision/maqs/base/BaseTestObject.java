@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.base.exceptions.DriverDisposalException;
-import com.cognizantsoftvision.maqs.base.interfaces.ITestObject;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;

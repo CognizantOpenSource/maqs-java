@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.base.exceptions.ManagerDisposalException;
-import com.cognizantsoftvision.maqs.base.interfaces.IManagerDictionary;
 import java.util.HashMap;
 import java.util.Map;
 

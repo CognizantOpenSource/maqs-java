@@ -2,9 +2,8 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.base.interfaces;
+package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 
 /**

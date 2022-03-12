@@ -1,6 +1,6 @@
 package com.cognizantsoftvision.maqs.webservices;
 
-import com.cognizantsoftvision.maqs.base.interfaces.ITestObject;
+import com.cognizantsoftvision.maqs.base.ITestObject;
 import java.net.http.HttpClient;
 import java.util.function.Supplier;
 
