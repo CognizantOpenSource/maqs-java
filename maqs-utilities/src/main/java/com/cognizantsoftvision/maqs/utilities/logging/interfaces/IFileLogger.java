@@ -3,7 +3,7 @@ package com.cognizantsoftvision.maqs.utilities.logging.interfaces;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 
 /**
- * The File Logger interface class
+ * The File Logger interface class.
  */
 public interface IFileLogger extends ILogger{
 

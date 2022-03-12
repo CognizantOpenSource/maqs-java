@@ -6,6 +6,9 @@ package com.cognizantsoftvision.maqs.base.interfaces;
 
 import com.cognizantsoftvision.maqs.base.DriverManager;
 
+/**
+ * The Manager Dictionary interface class.
+ */
 public interface IManagerDictionary extends AutoCloseable {
 
   /**

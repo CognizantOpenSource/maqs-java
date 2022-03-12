@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.function.Supplier;
 
 /**
- * The Appium Test Object interface.
+ * The Appium Test Object interface class.
  */
 public interface IAppiumTestObject extends ITestObject {
 

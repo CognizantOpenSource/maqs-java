@@ -10,6 +10,9 @@ import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * The Test Object interface class.
+ */
 public interface ITestObject extends AutoCloseable {
 
   /**

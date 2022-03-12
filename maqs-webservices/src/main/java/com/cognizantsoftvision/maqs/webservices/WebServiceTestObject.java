@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 /**
  * Web service test object class.
  */
-public class WebServiceTestObject extends BaseTestObject {
+public class WebServiceTestObject extends BaseTestObject implements IWebServiceTestObject {
   /**
    * Instantiates a new Web Service Test Object with a supplier.
    * 

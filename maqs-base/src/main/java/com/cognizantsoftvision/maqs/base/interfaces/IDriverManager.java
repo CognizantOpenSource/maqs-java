@@ -7,6 +7,10 @@ package com.cognizantsoftvision.maqs.base.interfaces;
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 
+/**
+ * The Driver Manager interface class.
+ * @param <T> the type of driver being used
+ */
 public interface IDriverManager<T> extends AutoCloseable {
 
   /**
