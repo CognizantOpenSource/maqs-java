@@ -1,3 +1,7 @@
+/*
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
+ */
+
 package com.cognizantsoftvision.maqs.appium;
 
 import com.cognizantsoftvision.maqs.base.interfaces.ITestObject;
