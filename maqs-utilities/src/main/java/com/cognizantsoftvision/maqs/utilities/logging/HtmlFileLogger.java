@@ -4,20 +4,20 @@
 
 package com.cognizantsoftvision.maqs.utilities.logging;
 
+import com.cognizantsoftvision.maqs.utilities.logging.interfaces.IHtmlFileLogger;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.cognizantsoftvision.maqs.utilities.logging.interfaces.IHtmlFileLogger;
 import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * Helper class for adding logs to an HTML file. Allows configurable file path.
  */
 public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
+
   /**
    * The default log name.
    */

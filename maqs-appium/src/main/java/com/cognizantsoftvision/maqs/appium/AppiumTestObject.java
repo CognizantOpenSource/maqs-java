@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Class AppiumTestObject.
  */
-public class AppiumTestObject extends BaseTestObject implements  IAppiumTestObject {
+public class AppiumTestObject extends BaseTestObject implements IAppiumTestObject {
 
   /**
    * Instantiates a new Appium test object.
