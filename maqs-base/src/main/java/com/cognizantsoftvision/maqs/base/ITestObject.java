@@ -42,7 +42,7 @@ public interface ITestObject extends AutoCloseable {
   ConcurrentMap<String, Object> getObjects();
 
   /**
-   * Gets or sets the performance timer collection
+   * Gets or sets the performance timer collection.
    *
    * @return the performance timer collection
    */
