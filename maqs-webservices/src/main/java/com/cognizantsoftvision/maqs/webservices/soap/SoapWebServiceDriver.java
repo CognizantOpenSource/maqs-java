@@ -2,17 +2,10 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-import com.cognizantsoftvision.maqs.webservices.BaseWebServiceTest;
+package com.cognizantsoftvision.maqs.webservices.soap;
+
+import com.cognizantsoftvision.maqs.webservices.HttpClientFactory;
 import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.StringReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.util.Map;
-import java.util.function.Consumer;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,33 +17,45 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.StringReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.util.Map;
+import java.util.function.Consumer;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-
 import org.xml.sax.SAXException;
 
+/**
+ * The Soap Web Service Driver class.
+ */
 public class SoapWebServiceDriver extends WebServiceDriver {
 
   private final SOAPMessage soapMessage;
   private JAXBContext jaxbContext;
-
   private String baseAddress;
 
   public SoapWebServiceDriver(SOAPMessage message, String baseAddress) {
-    super();
+    super(HttpClientFactory.getDefaultClient());
     this.baseAddress = baseAddress;
-    soapMessage = message;
+    this.soapMessage = message;
   }
 
   public SoapWebServiceDriver(URI baseAddress) throws SOAPException {
+    super(HttpClientFactory.getDefaultClient());
     this.baseAddress = baseAddress.toString();
-    soapMessage = SoapWebServiceDriverFactory.getDefaultMessage();
+    this.soapMessage = SoapWebServiceDriverFactory.getDefaultMessage();
   }
 
   public SoapWebServiceDriver(HttpClient newHttpClient, SOAPMessage message) {
     super(newHttpClient);
     soapMessage = message;
   }
+
 
   public String getDefaultSoapMessage(String outputStream)
       throws SOAPException, ParserConfigurationException, SAXException, IOException {

@@ -2,15 +2,20 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+package com.cognizantsoftvision.maqs.webservices.soap;
+
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.function.Consumer;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.function.Consumer;
 
+/**
+ * The Soap Web Service Driver Factory class.
+ */
 public class SoapWebServiceDriverFactory {
 
   private SoapWebServiceDriverFactory() {

@@ -2,18 +2,20 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+package com.cognizantsoftvision.maqs.webservices.soap;
+
 import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
 import com.cognizantsoftvision.maqs.webservices.WebServiceTestObject;
+import javax.xml.soap.SOAPException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import javax.xml.soap.SOAPException;
 import org.testng.ITestResult;
 
 /**
- * Base web service test class.
+ * The Base Soap Web Service Test class.
  */
 public class BaseSoapWebServiceTest extends BaseExtendableTest<WebServiceTestObject> {
 
@@ -63,12 +65,12 @@ public class BaseSoapWebServiceTest extends BaseExtendableTest<WebServiceTestObj
   protected void createNewTestObject() {
     Logger logger = this.createLogger();
     try {
-
-      WebServiceTestObject webServiceTestObject = new WebServiceTestObject(this.getWebServiceClient(), logger,
-          this.getFullyQualifiedTestClassName());
+      WebServiceTestObject webServiceTestObject = new WebServiceTestObject(
+              this.getWebServiceClient(), logger, this.getFullyQualifiedTestClassName());
       this.setTestObject(webServiceTestObject);
     } catch (URISyntaxException | SOAPException e) {
-      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+      getLogger().logMessage(StringProcessor.safeFormatter(
+          "Test Object could not be created: %s", e.getMessage()));
     }
   }
 }
