@@ -50,6 +50,16 @@ public enum ConfigSection {
   SELENIUM_MAQS("SeleniumMaqs"),
 
   /**
+   * The default soap namespace section.
+   */
+  SOAP_NAMESPACE_MAQS("SoapMaqsNameSpaces"),
+
+  /**
+   * The default soap maqs section.
+   */
+  SOAP_MAQS("SoapMaqs"),
+
+  /**
    * The default web service section.
    */
   WEB_SERVICE_MAQS("WebServiceMaqs");

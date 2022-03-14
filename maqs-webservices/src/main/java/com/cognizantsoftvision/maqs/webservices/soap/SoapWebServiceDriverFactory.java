@@ -5,13 +5,13 @@
 package com.cognizantsoftvision.maqs.webservices.soap;
 
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.function.Consumer;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.function.Consumer;
 
 /**
  * The Soap Web Service Driver Factory class.
@@ -24,6 +24,7 @@ public class SoapWebServiceDriverFactory {
   public static SOAPMessage getDefaultMessage() throws SOAPException {
     SOAPMessage message = MessageFactory.newInstance().createMessage();
     SOAPEnvelope envelope = message.getSOAPPart().getEnvelope();
+
     if (!SoapConfig.getSoapPrefix().isEmpty()) {
       modifySoapPrefix(envelope);
     }
@@ -34,10 +35,8 @@ public class SoapWebServiceDriverFactory {
     return message;
   }
 
-  public static SoapWebServiceDriver getDefaultSoapDriver() throws SOAPException, URISyntaxException {
-
+  public static SoapWebServiceDriver getDefaultSoapDriver() throws SOAPException {
     return new SoapWebServiceDriver(getDefaultMessage(), WebServiceConfig.getWebServiceUri());
-
   }
 
   protected static SOAPEnvelope modifySoapPrefix(SOAPEnvelope envelope) throws SOAPException {

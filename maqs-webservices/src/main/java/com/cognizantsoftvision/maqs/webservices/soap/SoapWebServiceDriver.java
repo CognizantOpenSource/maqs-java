@@ -6,6 +6,14 @@ package com.cognizantsoftvision.maqs.webservices.soap;
 
 import com.cognizantsoftvision.maqs.webservices.HttpClientFactory;
 import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.StringReader;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.util.Map;
+import java.util.function.Consumer;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -17,15 +25,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.StringReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.util.Map;
-import java.util.function.Consumer;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -141,9 +140,7 @@ public class SoapWebServiceDriver extends WebServiceDriver {
   }
 
   public Unmarshaller getCachedUnMarshaller() throws JAXBException {
-
     return jaxbContext.createUnmarshaller();
-
   }
 
   private Document getDocument(String bodyContent) throws ParserConfigurationException, SAXException, IOException {
