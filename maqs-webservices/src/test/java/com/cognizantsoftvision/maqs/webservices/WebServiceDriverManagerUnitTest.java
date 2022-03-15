@@ -7,6 +7,7 @@ package com.cognizantsoftvision.maqs.webservices;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -23,7 +24,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceDriverWithSupplierTest() {
     WebServiceDriver webServiceDriver = new WebServiceDriver(
-        HttpRequest.newBuilder(URI.create(WebServiceConfig.getWebServiceUri())));
+        HttpRequest.newBuilder(WebServiceConfig.getWebServiceUri()));
     webServiceDriver.setHttpClient(webServiceDriver.getHttpClient());
 
     try (WebServiceDriverManager driverManager = new WebServiceDriverManager(
@@ -39,7 +40,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceDriverTest() {
     WebServiceDriver webServiceDriver = new WebServiceDriver(
-        HttpRequest.newBuilder(URI.create(WebServiceConfig.getWebServiceUri())));
+        HttpRequest.newBuilder(WebServiceConfig.getWebServiceUri()));
     try (WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver, this.getTestObject())) {
       Assert.assertNotNull(driverManager.getWebServiceDriver(), "Expected Web Service Driver to not be null");
     }
@@ -53,7 +54,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceDriverNullDriver() {
     WebServiceDriver webServiceDriver = new WebServiceDriver(
-        HttpRequest.newBuilder(URI.create(WebServiceConfig.getWebServiceUri())));
+        HttpRequest.newBuilder(WebServiceConfig.getWebServiceUri()));
     try (WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver, this.getTestObject())) {
       // Set the Driver to be null then check Get Web Service Driver creates default Driver.
       driverManager.overrideDriver(null);
@@ -69,7 +70,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void overrideWebServiceDriverTest() {
     WebServiceDriver webServiceDriver = new WebServiceDriver(
-        HttpRequest.newBuilder(URI.create(WebServiceConfig.getWebServiceUri())));
+        HttpRequest.newBuilder(WebServiceConfig.getWebServiceUri()));
     WebServiceDriver webServiceDriver2 = new WebServiceDriver(
         HttpRequest.newBuilder(URI.create("http://www.google.com/")));
 
@@ -88,7 +89,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void closeWebServiceDriverTest() {
     WebServiceDriver webServiceDriver = new WebServiceDriver(
-        HttpRequest.newBuilder(URI.create(WebServiceConfig.getWebServiceUri())));
+        HttpRequest.newBuilder(WebServiceConfig.getWebServiceUri()));
     WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver, this.getTestObject());
 
     driverManager.close();

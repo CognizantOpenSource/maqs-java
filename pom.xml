@@ -235,9 +235,8 @@
                         <version>${surefire.plugin.version}</version>
                         <configuration>
                             <parallel>methods</parallel>
-                            <threadCount>5</threadCount>
-                            <!--                            <argLine>${argLine}</argLine>-->
-                            <!--                            <argLine>-javaagent @{maven.dependency.io.github.bonigarcia:webdrivermanager:jar:path}</argLine>-->
+                            <threadCount>6</threadCount>
+                            <argLine>${argLine}</argLine>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -263,6 +262,7 @@
         <chromedriver.version>94.0.4606.41</chromedriver.version>
         <geckodriver.version>0.28.0</geckodriver.version>
         <edgedriver.version>5.16299</edgedriver.version>
+        <failOnCheckStyleError>true</failOnCheckStyleError>
     </properties>
 
     <dependencyManagement>
@@ -451,7 +451,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <failOnWarnings>false</failOnWarnings>
-                            <failOnError>true</failOnError>
+                            <failOnError>${failOnCheckStyleError}</failOnError>
                             <configLocation>maqs_checks.xml</configLocation>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <consoleOutput>true</consoleOutput>

@@ -20,7 +20,7 @@ public class WebServiceConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceUri() {
-    Assert.assertEquals(WebServiceConfig.getWebServiceUri(),
+    Assert.assertEquals(WebServiceConfig.getWebServiceURIString(),
         "http://magenicautomation.azurewebsites.net", "the web service URI does not match");
   }
 

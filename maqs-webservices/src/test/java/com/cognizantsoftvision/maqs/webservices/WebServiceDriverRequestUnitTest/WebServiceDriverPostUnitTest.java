@@ -28,7 +28,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   /**
    * String to hold the URL.
    */
-  private static final String baseUrl = WebServiceConfig.getWebServiceUri();
+  private static final String baseUrl = WebServiceConfig.getWebServiceURIString();
 
   /**
    * Product object to be used in a test.

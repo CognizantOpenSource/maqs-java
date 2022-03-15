@@ -26,7 +26,7 @@ public class WebServiceDriverPutUnitTest {
   /**
    * String to hold the URL.
    */
-  private static final String baseUrl = WebServiceConfig.getWebServiceUri();
+  private static final String baseUrl = WebServiceConfig.getWebServiceURIString();
 
   /**
    * The full put url with the base URL

@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
+import java.net.URI;
 
 /**
  * Web service specific configuration settings.
@@ -25,8 +26,17 @@ public final class WebServiceConfig {
    *
    * @return A String containing the URI for the WebService to test
    */
-  public static String getWebServiceUri() {
+  public static String getWebServiceURIString() {
     return Config.getValueForSection(WEBSERVICE_SECTION, "WebServiceUri");
+  }
+
+  /**
+   * Grabs the URI for the Web Service.
+   *
+   * @return A String containing the URI for the WebService to test
+   */
+  public static URI getWebServiceUri() {
+    return URI.create(getWebServiceURIString());
   }
 
   /**
@@ -35,8 +45,8 @@ public final class WebServiceConfig {
    * @return the Timeout value for the web service test, or -1 if none are configured
    */
   public static int getWebServiceTimeOut() {
-    return Integer
-        .parseInt(Config.getValueForSection(WEBSERVICE_SECTION, "WebServiceTimeout", "-1"));
+    return Integer.parseInt(
+        Config.getValueForSection(WEBSERVICE_SECTION, "WebServiceTimeout", "-1"));
   }
 
   /**
@@ -63,7 +73,7 @@ public final class WebServiceConfig {
    * @return The Proxy Port
    */
   public static int getProxyPort() {
-    return Integer
-        .parseInt(Config.getValueForSection(WEBSERVICE_SECTION, "ProxyPort", "-1"));
+    return Integer.parseInt(
+        Config.getValueForSection(WEBSERVICE_SECTION, "ProxyPort", "-1"));
   }
 }
