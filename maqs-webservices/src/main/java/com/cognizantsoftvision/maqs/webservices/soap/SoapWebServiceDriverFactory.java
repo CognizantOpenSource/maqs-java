@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.webservices.soap;
 
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.function.Consumer;
 import javax.xml.soap.MessageFactory;
@@ -36,7 +35,7 @@ public class SoapWebServiceDriverFactory {
   }
 
   public static SoapWebServiceDriver getDefaultSoapDriver() throws SOAPException {
-    return new SoapWebServiceDriver(getDefaultMessage(), WebServiceConfig.getWebServiceUri());
+    return new SoapWebServiceDriver(getDefaultMessage(), WebServiceConfig.getWebServiceURIString());
   }
 
   protected static SOAPEnvelope modifySoapPrefix(SOAPEnvelope envelope) throws SOAPException {

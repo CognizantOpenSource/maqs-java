@@ -28,7 +28,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   /**
    * String to hold the URL.
    */
-  private static final String baseUrl = WebServiceConfig.getWebServiceUri();
+  private static final String baseUrl = WebServiceConfig.getWebServiceURIString();
 
   /**
    * The web service driver to be used in a test.

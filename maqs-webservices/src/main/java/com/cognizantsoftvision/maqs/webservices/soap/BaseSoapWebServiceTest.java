@@ -9,9 +9,8 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
 import com.cognizantsoftvision.maqs.webservices.WebServiceTestObject;
-import javax.xml.soap.SOAPException;
-import java.net.URI;
 import java.net.URISyntaxException;
+import javax.xml.soap.SOAPException;
 import org.testng.ITestResult;
 
 /**
@@ -55,7 +54,7 @@ public class BaseSoapWebServiceTest extends BaseExtendableTest<WebServiceTestObj
    * @throws URISyntaxException when URI is incorrect
    */
   protected SoapWebServiceDriver getWebServiceClient() throws URISyntaxException, SOAPException {
-    return new SoapWebServiceDriver(new URI(WebServiceConfig.getWebServiceUri()));
+    return new SoapWebServiceDriver(WebServiceConfig.getWebServiceUri());
   }
 
   /**

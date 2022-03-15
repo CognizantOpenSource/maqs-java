@@ -157,8 +157,8 @@ public class SoapWebServiceDriver extends WebServiceDriver {
   }
 
   private SOAPEnvelope modifySoapPrefix(String prefix) throws SOAPException {
-    return modifySoapPrefix(soapMessage.getSOAPPart().getEnvelope(), prefix,
-        "http://schemas.xmlsoap.org/soap/envelope/");
+    return modifySoapPrefix(
+        soapMessage.getSOAPPart().getEnvelope(), prefix, "http://schemas.xmlsoap.org/soap/envelope/");
   }
 
   private SOAPEnvelope modifySoapPrefix(SOAPEnvelope envelope, String prefix, String url) throws SOAPException {
