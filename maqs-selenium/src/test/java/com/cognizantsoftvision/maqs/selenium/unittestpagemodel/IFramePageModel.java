@@ -4,18 +4,19 @@
 
 package com.cognizantsoftvision.maqs.selenium.unittestpagemodel;
 
+import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
 import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.By;
 
 /**
- * The type Frame page model.
+ * The IFrame page model.
  */
-public class IFramePageModel {
+public class IFramePageModel extends MainPageModel {
 
   /**
-   * The Test object.
+   * Unit testing site URL - IFrame page.
    */
-  private SeleniumTestObject testObject;
+  public final String testSiteIFrameUrl = SeleniumConfig.getWebSiteBase() + "Automation/iFramePage";
 
   /**
    * The Iframe locator.
@@ -23,30 +24,18 @@ public class IFramePageModel {
   public By iframeLocator = By.id("mageniciFrame");
 
   /**
-   * Instantiates a new Frame page model.
+   * Instantiates a new IFrame page model.
    *
    * @param testObject the test object
    */
   public IFramePageModel(SeleniumTestObject testObject) {
-    this.testObject = testObject;
+    super(testObject);
   }
 
   /**
-   * Open.
-   *
-   * @param url the url
+   * Opens the page to the specified url.
    */
-  public void open(String url) {
-    this.testObject.getWebDriver().get(url);
+  public void open() {
+    open(testSiteIFrameUrl);
   }
-
-  /**
-   * Gets selenium test object.
-   *
-   * @return the selenium test object
-   */
-  public SeleniumTestObject getSeleniumTestObject() {
-    return this.testObject;
-  }
-
 }
