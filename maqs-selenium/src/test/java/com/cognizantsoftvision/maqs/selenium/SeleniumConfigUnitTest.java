@@ -107,7 +107,7 @@ public class SeleniumConfigUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Tests getting the remote capabilities section of config.
+   * Tests getting the remote capabilities' section of config.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteCapabilitiesAsStrings() {
@@ -128,7 +128,7 @@ public class SeleniumConfigUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Tests getting the remote capabilities section of config.
+   * Tests getting the remote capabilities' section of config.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteCapabilitiesAsObjects() {

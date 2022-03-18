@@ -129,7 +129,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Fire Fox driver.
    */
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getFirefoxDriverTest() {
     FirefoxDriver driver = null;
@@ -146,9 +145,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Edge driver.
    */
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
-  // TODO: File path to the WebDriver.exe might be an issue here.
   public void getEdgeDriverTest() {
     EdgeDriver driver = null;
     try {

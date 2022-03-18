@@ -91,7 +91,6 @@ public class WebDriverFactory {
       String message = "Failed to initial web driver because: %s %s"
           + "This likely means your web driver is missing, unsupported or out of date.";
       message = StringProcessor.safeFormatter(message, e.getMessage(), System.lineSeparator());
-
       throw new WebDriverFactoryException(message, e);
     }
   }
@@ -112,7 +111,6 @@ public class WebDriverFactory {
       chromeOptions.addArguments("--no-sandbox");
       chromeOptions.addArguments("--disable-dev-shm-usage");
     }
-
     return chromeOptions;
   }
 
@@ -140,7 +138,6 @@ public class WebDriverFactory {
     headlessChromeOptions.addArguments("--no-sandbox");
     headlessChromeOptions.addArguments("--headless");
     headlessChromeOptions.addArguments(getHeadlessWindowSizeString(size));
-
     return headlessChromeOptions;
   }
 
@@ -152,7 +149,6 @@ public class WebDriverFactory {
   public static InternetExplorerOptions getDefaultInternetExplorerOptions() {
     InternetExplorerOptions options = new InternetExplorerOptions();
     options.ignoreZoomSettings();
-
     return options;
   }
 
@@ -164,7 +160,6 @@ public class WebDriverFactory {
   public static FirefoxOptions getDefaultFirefoxOptions() {
     FirefoxOptions firefoxOptions = new FirefoxOptions();
     firefoxOptions.setProfile(new FirefoxProfile());
-
     return firefoxOptions;
   }
 
@@ -311,23 +306,18 @@ public class WebDriverFactory {
       case IE:
         options = new InternetExplorerOptions();
         break;
-
       case FIREFOX:
         options = new FirefoxOptions();
         break;
-
       case CHROME:
         options = new ChromeOptions();
         break;
-
       case EDGE:
         options = new EdgeOptions();
         break;
-
       case SAFARI:
         options = new SafariOptions();
         break;
-
       default:
         throw new IllegalArgumentException(
             StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
@@ -350,7 +340,6 @@ public class WebDriverFactory {
 
     // Add additional capabilities to the driver options
     setDriverOptions(options, remoteCapabilities);
-
     return options;
   }
 
@@ -495,7 +484,6 @@ public class WebDriverFactory {
     if (mustExist) {
       throw new DriverNotFoundException(StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
     }
-
     return "";
   }
 
@@ -524,7 +512,6 @@ public class WebDriverFactory {
     if (path.toFile().isFile()) {
       return path.getParent().toString();
     }
-
     return "";
   }
 }
