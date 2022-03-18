@@ -8,6 +8,7 @@ package com.cognizantsoftvision.maqs.selenium.constants;
  * Known remote browser types.
  */
 public enum RemoteBrowserType {
+
   /**
    * Remote Chrome web browser.
    */

@@ -7,6 +7,7 @@ package com.cognizantsoftvision.maqs.selenium.factories;
 import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
 import com.cognizantsoftvision.maqs.selenium.SeleniumUtilities;
 import com.cognizantsoftvision.maqs.selenium.UIWait;
+
 import java.time.Duration;
 import java.util.concurrent.ConcurrentHashMap;
 import org.openqa.selenium.SearchContext;
@@ -15,8 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Factory class that is used for creating and maintaining a
- * thread-safe collection of wait drivers.
+ * Factory class that is used for creating and maintaining a thread-safe collection of wait drivers.
  */
 public class UIWaitFactory {
 
@@ -72,7 +72,7 @@ public class UIWaitFactory {
       return waitCollection.get(unwrappedDriver);
     } else {
       WebDriverWait waitDriver = new WebDriverWait(
-          unwrappedDriver, SeleniumConfig.getTimeoutTime().getSeconds());
+          unwrappedDriver, Duration.ofMillis(SeleniumConfig.getTimeoutTime().getSeconds()));
       setWaitDriver(unwrappedDriver, waitDriver);
       return waitDriver;
     }
