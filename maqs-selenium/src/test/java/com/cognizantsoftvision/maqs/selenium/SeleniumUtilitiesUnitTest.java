@@ -19,6 +19,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -273,8 +275,10 @@ public class SeleniumUtilitiesUnitTest extends BaseSeleniumTest {
         @Test(groups = TestCategories.SELENIUM)
         public void testWebElementToWebDriver() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
+                        WebDriverListener listener = new EventHandler(this.getLogger());
+                        webDriver = new EventFiringDecorator(listener).decorate(webDriver);
+
                         ConsoleLogger consoleLogger = new ConsoleLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
                             this.getTestObject().getFullyQualifiedTestName());
@@ -297,7 +301,6 @@ public class SeleniumUtilitiesUnitTest extends BaseSeleniumTest {
         @Test(groups = TestCategories.SELENIUM)
         public void testKillDriver() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         ConsoleLogger consoleLogger = new ConsoleLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,

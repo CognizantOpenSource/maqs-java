@@ -8,6 +8,7 @@ import com.cognizantsoftvision.maqs.selenium.factories.FluentWaitFactory;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import java.text.MessageFormat;
+import java.time.Duration;
 import java.util.List;
 import java.util.function.Function;
 import org.openqa.selenium.By;
@@ -94,7 +95,7 @@ public class UIWait {
   }
 
   /**
-   * Get the WebDriverWait for use outside this instance class.
+   * Get the WebDriverWait for use outside of this instance class.
    *
    * @return The WebDriverWait
    */
@@ -291,8 +292,7 @@ public class UIWait {
       try {
         return obj.isEnabled();
       } catch (NoSuchElementException | StaleElementReferenceException e) {
-        // Do not throw these exceptions here.
-        // Instead, return false and let the fluent wait try again.
+        // Do not throw these exceptions here. Instead return false and let the fluent wait try again.
         return false;
       }
     };
@@ -654,7 +654,7 @@ public class UIWait {
    * @param attribute String value of the attribute to look at on the specified selector
    * @param text      String value of the text to look for in the attribute
    * @param wait      The wait driver
-   * @param contains  boolean true if checking contains, false if exact match
+   * @param contains  boolean true checking if contains, false if exact match
    * @return true if the attribute with the specified text value is found, else false
    */
   public boolean waitUntilAttribute(final By by, final String attribute, final String text, WebDriverWait wait,
@@ -972,7 +972,8 @@ public class UIWait {
    */
   protected WebDriverWait getNewWaitDriver(WebDriver driver, int timeOutInMillis, int sleepInMillis) {
     int timeoutInSeconds = timeOutInMillis / 1000;
-    WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds, sleepInMillis);
+    WebDriverWait wait = new WebDriverWait(
+        driver, Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(sleepInMillis));
     setWaitDriver(wait);
     return wait;
   }

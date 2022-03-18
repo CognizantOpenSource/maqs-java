@@ -175,8 +175,7 @@ public class WebDriverFactory {
    */
   public static EdgeOptions getDefaultEdgeOptions() {
     EdgeOptions edgeOptions = new EdgeOptions();
-    edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL.name());
-
+    edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
     return edgeOptions;
   }
 

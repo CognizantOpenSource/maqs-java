@@ -36,7 +36,7 @@ public class ElementHandler {
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
-   * @return Text of the selected option in drop down
+   * @return Text of the selected option in dropdown
    */
   public static String getSelectedOptionFromDropdown(WebDriver webDriver, By by) {
     Select select = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
@@ -48,7 +48,7 @@ public class ElementHandler {
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
-   * @return String array list of selected items in drop down
+   * @return String array list of selected items in dropdown
    */
   public static List<String> getSelectedOptionsFromDropdown(WebDriver webDriver, By by) {
     ArrayList<WebElement> elements;
@@ -189,7 +189,7 @@ public class ElementHandler {
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
-   * @param option    The option to select in drop down
+   * @param option    The option to select in dropdown
    */
   public static void selectDropDownOption(WebDriver webDriver, By by, String option) {
     Select select = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
@@ -255,7 +255,7 @@ public class ElementHandler {
   }
 
   /**
-   * The JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webDriver The WebDriver
    * @param by        By selector for the element
@@ -266,7 +266,7 @@ public class ElementHandler {
   }
 
   /**
-   * The JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webElement The parent web element
    * @param by         By element
@@ -279,7 +279,7 @@ public class ElementHandler {
   }
 
   /**
-   * The JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webDriver The web driver
    * @param by        By element
@@ -292,7 +292,7 @@ public class ElementHandler {
   }
 
   /**
-   * The JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webElement The parent web element
    * @param by         By element
@@ -305,7 +305,7 @@ public class ElementHandler {
   }
 
   /**
-   * The JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webDriver The web driver
    * @param x         Horizontal direction
@@ -317,7 +317,7 @@ public class ElementHandler {
   }
 
   /**
-   * The JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webElement The web element
    * @param x          Horizontal direction

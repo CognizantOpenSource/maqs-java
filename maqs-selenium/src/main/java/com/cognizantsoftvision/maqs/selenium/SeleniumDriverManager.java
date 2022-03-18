@@ -14,7 +14,8 @@ import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 
 /**
  * The type Selenium driver manager.
@@ -69,14 +70,11 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    */
   public WebDriver getWebDriver() {
     if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-      WebDriver tempDriver = this.getBase();
-      EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(tempDriver);
-      eventFiringWebDriver.register(new EventHandler(getTestObject().getLogger()));
-      tempDriver = eventFiringWebDriver;
-      this.baseDriver = tempDriver;
+      WebDriverListener listener = new EventHandler(this.getLogger());
+      this.baseDriver = new EventFiringDecorator(listener).decorate(this.getBase());
 
       // Log the setup
-      this.loggingStartup(tempDriver);
+      this.loggingStartup(this.baseDriver);
     }
     return getBase();
   }

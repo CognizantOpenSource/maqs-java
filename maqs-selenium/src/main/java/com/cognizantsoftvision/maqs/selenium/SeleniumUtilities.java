@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
@@ -70,6 +71,8 @@ public class SeleniumUtilities {
         return false;
       }
 
+      testObject.getLogger().logMessage(MessageType.VERBOSE, "Before screenshot capture");
+
       // Calculate the file name with Date Time Stamp
       String directory = ((FileLogger) testObject.getLogger()).getDirectory();
       String fileNameWithoutExtension = StringProcessor
@@ -79,6 +82,7 @@ public class SeleniumUtilities {
       captureScreenshot(webDriver, testObject, directory, fileNameWithoutExtension);
 
       testObject.getLogger().logMessage(MessageType.INFORMATION, "Screenshot saved.");
+      testObject.getLogger().logMessage(MessageType.VERBOSE, "After screenshot capture");
       return true;
     } catch (Exception exception) {
       testObject.getLogger().logMessage(MessageType.ERROR,
@@ -248,6 +252,22 @@ public class SeleniumUtilities {
       webDriver.close();
     } finally {
       webDriver.quit();
+    }
+  }
+
+  /**
+   * Switches to a different window.
+   * @param testObject the test object to be used
+   * @param windowName the name of the window being switched to
+   */
+  public static void switchToWindow(SeleniumTestObject testObject, String windowName) {
+    testObject.getLogger().logMessage(MessageType.VERBOSE, "Before switching to window: %s", windowName);
+
+    try {
+      testObject.getWebDriver().switchTo().window(windowName);
+      testObject.getLogger().logMessage(MessageType.VERBOSE, "After switching to window: %s", windowName);
+    } catch (Exception e) {
+      throw new MAQSRuntimeException(e.getMessage(), e);
     }
   }
 }
