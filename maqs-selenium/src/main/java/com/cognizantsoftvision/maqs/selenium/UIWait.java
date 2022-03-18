@@ -95,7 +95,7 @@ public class UIWait {
   }
 
   /**
-   * Get the WebDriverWait for use outside of this instance class.
+   * Get the WebDriverWait for use outside this instance class.
    *
    * @return The WebDriverWait
    */
@@ -292,7 +292,7 @@ public class UIWait {
       try {
         return obj.isEnabled();
       } catch (NoSuchElementException | StaleElementReferenceException e) {
-        // Do not throw these exceptions here. Instead return false and let the fluent wait try again.
+        // Do not throw these exceptions here, instead return false and let the fluent wait try again.
         return false;
       }
     };
