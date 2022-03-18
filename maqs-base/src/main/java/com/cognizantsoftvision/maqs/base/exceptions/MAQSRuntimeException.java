@@ -4,13 +4,13 @@
 
 package com.cognizantsoftvision.maqs.base.exceptions;
 
-public class JMAQSRuntimeException extends RuntimeException {
+public class MAQSRuntimeException extends RuntimeException {
 
-  public JMAQSRuntimeException(String message, Exception exception) {
+  public MAQSRuntimeException(String message, Exception exception) {
     super(message, exception);
   }
 
-  public JMAQSRuntimeException(String message) {
+  public MAQSRuntimeException(String message) {
     super(message);
   }
 }
