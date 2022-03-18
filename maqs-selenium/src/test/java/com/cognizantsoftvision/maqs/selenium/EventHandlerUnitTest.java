@@ -10,10 +10,8 @@ import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WrapsDriver;
+
+import org.openqa.selenium.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -21,36 +19,6 @@ import org.testng.asserts.SoftAssert;
  * Unit tests for EventHandler class.
  */
 public class EventHandlerUnitTest extends BaseSeleniumTest {
-
-  /**
-   * Url for the site.
-   */
-  private static final String siteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
-   * Automation site url.
-   */
-  private static final String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
-   * Home button.
-   */
-  private static final By home = By.cssSelector("#homeButton > a");
-
-  /**
-   * Alert button.
-   */
-  private static final By alertButton = By.id("javascriptAlertButton");
-
-  /**
-   * Alert button with confirm option.
-   */
-  private static final By alertWithConfirm = By.id("javascriptConfirmAlertButton");
-
-  /**
-   * Swagger link.
-   */
-  private static final By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
 
   /**
    * The Automation page model.
@@ -104,8 +72,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     navigateToTestPage();
 
     // Use the Event Firing Web Driver to change the value of an element, then get the log text
-    webDriverWithHandler.findElement(automationPageModel).clear();
-    webDriverWithHandler.findElement(automationPageModel).sendKeys("Change Value");
+    webDriverWithHandler.findElement(automationPageModel.firstNameTextBox).clear();
+    webDriverWithHandler.findElement(automationPageModel.firstNameTextBox).sendKeys("Change Value");
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
@@ -316,8 +284,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before dismissing the Alert"),
         "Expected message to be logged before dismissing an alert.");
-    softAssert
-        .assertTrue(logText.contains("Alert dismissed"),
+    softAssert.assertTrue(logText.contains("After dismissing the Alert"),
             "Expected message to be logged after dismissing an alert.");
     softAssert.assertAll();
   }
@@ -349,6 +316,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void eventHandlerScreenshot() {
     navigateToTestPage();
+    SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getTestObject());
 
     // Use the Event Firing Web Driver to take a screenshot, then get the log text
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());

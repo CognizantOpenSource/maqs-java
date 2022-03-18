@@ -129,6 +129,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Fire Fox driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getFirefoxDriverTest() {
     FirefoxDriver driver = null;
