@@ -2,7 +2,7 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.selenium.pageModels;
+package com.cognizantsoftvision.maqs.selenium.pagemodels;
 
 import com.cognizantsoftvision.maqs.selenium.LazyWebElement;
 import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;

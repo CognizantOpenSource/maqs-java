@@ -6,7 +6,7 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.exceptions.ElementHandlerException;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.cognizantsoftvision.maqs.selenium.pageModels.AutomationPageModel;
+import com.cognizantsoftvision.maqs.selenium.pagemodels.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.ListProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;

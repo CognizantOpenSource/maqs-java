@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIFindFactory;
-import com.cognizantsoftvision.maqs.selenium.pageModels.AutomationPageModel;
+import com.cognizantsoftvision.maqs.selenium.pagemodels.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.List;
 import org.openqa.selenium.WebElement;

@@ -5,9 +5,9 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.cognizantsoftvision.maqs.selenium.pageModels.AsyncPageModel;
-import com.cognizantsoftvision.maqs.selenium.pageModels.AutomationPageModel;
-import com.cognizantsoftvision.maqs.selenium.pageModels.IFramePageModel;
+import com.cognizantsoftvision.maqs.selenium.pagemodels.AsyncPageModel;
+import com.cognizantsoftvision.maqs.selenium.pagemodels.AutomationPageModel;
+import com.cognizantsoftvision.maqs.selenium.pagemodels.IFramePageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.TimeoutException;
