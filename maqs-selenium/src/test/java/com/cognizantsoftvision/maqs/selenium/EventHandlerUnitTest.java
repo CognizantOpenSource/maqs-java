@@ -11,7 +11,6 @@ import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;
@@ -21,53 +20,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * Unit tests for EventHandler class.
  */
-
 public class EventHandlerUnitTest extends BaseSeleniumTest {
-
-  /**
-   * Url for the site.
-   */
-  private static final String siteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
-   * Automation site url.
-   */
-  private static final String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
-   * Home button.
-   */
-  private static final By home = By.cssSelector("#homeButton > a");
-
-  /**
-   * Alert button.
-   */
-  private static final By alertButton = By.id("javascriptAlertButton");
-
-  /**
-   * Alert button with confirm option.
-   */
-  private static final By alertWithConfirm = By.id("javascriptConfirmAlertButton");
-
-  /**
-   * Swagger link.
-   */
-  private static final By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
-
-  /**
-   * First name text box.
-   */
-  private final By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
-
-  /**
-   * First checkbox.
-   */
-  private static final By checkbox = By.cssSelector("#Checkbox1");
-
-  /**
-   * Computer parts list.
-   */
-  private static final By computerPartsList = By.cssSelector("#computerParts");
 
   /**
    * The Automation Page Model.

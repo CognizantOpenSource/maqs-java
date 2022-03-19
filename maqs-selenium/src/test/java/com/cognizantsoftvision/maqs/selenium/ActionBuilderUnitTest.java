@@ -16,7 +16,10 @@ import org.testng.annotations.Test;
  */
 public class ActionBuilderUnitTest extends BaseSeleniumTest {
 
-
+  /**
+   * Navigates to the specified url test page.
+   * @param url the url to be navigated to
+   */
   private void navigateToUrl(String url) {
     this.getWebDriver().navigate().to(url);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
