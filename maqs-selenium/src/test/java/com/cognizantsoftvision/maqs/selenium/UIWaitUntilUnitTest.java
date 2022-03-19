@@ -20,17 +20,17 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
   /**
    * The Automation Page Model.
    */
-  AutomationPageModel automationPageModel;
+  private AutomationPageModel automationPageModel;
 
   /**
    * The IFrame Page Model.
    */
-  IFramePageModel iFramePageModel;
+  private IFramePageModel iFramePageModel;
 
   /**
    * The Asynchronous Page Model.
    */
-  AsyncPageModel asyncPageModel;
+  private AsyncPageModel asyncPageModel;
 
   /**
    * Sets up the page models for the test.

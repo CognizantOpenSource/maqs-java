@@ -20,7 +20,7 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
   /**
    * The Automation Page Model.
    */
-  AutomationPageModel automationPageModel;
+  private AutomationPageModel automationPageModel;
 
   /**
    * Error string templates for assertion failures.

@@ -20,7 +20,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   /**
    * The Automation Page Model.
    */
-  AutomationPageModel automationPageModel;
+  private AutomationPageModel automationPageModel;
 
   /**
    * Sets up the page models for the test.

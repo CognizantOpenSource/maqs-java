@@ -19,7 +19,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * The Automation Page Model.
    */
-  AutomationPageModel automationPageModel;
+  private AutomationPageModel automationPageModel;
 
   /**
    * The constant assertEqualErrorTemplate.
