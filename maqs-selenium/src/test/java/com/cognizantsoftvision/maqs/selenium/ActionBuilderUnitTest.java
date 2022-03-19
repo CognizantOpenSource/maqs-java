@@ -5,6 +5,7 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
+import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -67,51 +68,64 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
    */
   private static By rightClickContextSaveText = By.cssSelector("#RightClickSaveText");
 
-  @Test(groups = TestCategories.SELENIUM)
-  public void hoverOverTest() {
-    this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.hoverOver(this.getWebDriver(), manageDropdown);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(employeeButton)
-        .click();
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForExactText(employeePageTitle, "Index");
-  }
-
-  @Test(groups = TestCategories.SELENIUM)
-  public void pressModifierKeyTest() {
-    this.navigateToUrl(siteAutomationUrl);
-
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1)
-        .click();
-    ActionBuilder.pressModifierKey(this.getWebDriver(), Keys.CONTROL);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2)
-        .click();
-
-    Assert.assertTrue(
-        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption1)
-            .isSelected());
-    Assert.assertTrue(
-        UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForClickableElement(listBoxOption2)
-            .isSelected());
-  }
-
-  @Test(groups = TestCategories.SELENIUM)
-  public void moveSliderTest() {
-    this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.slideElement(this.getWebDriver(), slider, 50);
-    Assert.assertEquals(this.getWebDriver().findElement(sliderLabelNumber).getAttribute("value"),
-        "4");
-  }
-
-  @Test(groups = TestCategories.SELENIUM)
-  public void rightClickToTriggerContextMenu() {
-    this.navigateToUrl(siteAutomationUrl);
-    ActionBuilder.rightClick(this.getWebDriver(), rightClickableElementWithContextMenu);
-    Assert.assertTrue(this.getWebDriver().findElement(rightClickContextSaveText).isDisplayed());
-  }
-
   private void navigateToUrl(String url) {
     this.getWebDriver().navigate().to(url);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
 
+  /**
+   * Test hover over functionality.
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void hoverOverTest() {
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    this.navigateToUrl(automationPageModel.testSiteAutomationUrl);
+    ActionBuilder.hoverOver(this.getWebDriver(), automationPageModel.manageDropdown);
+    UIWaitFactory.getWaitDriver(
+        this.getWebDriver()).waitForClickableElement(automationPageModel.employeeButton).click();
+    UIWaitFactory.getWaitDriver(
+        this.getWebDriver()).waitForExactText(automationPageModel.employeePageTitle, "Index");
+  }
+
+  /**
+   * Test press modifier key functionality.
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void pressModifierKeyTest() {
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    this.navigateToUrl(automationPageModel.testSiteAutomationUrl);
+    UIWaitFactory.getWaitDriver(
+        this.getWebDriver()).waitForClickableElement(automationPageModel.listBoxOption1).click();
+    ActionBuilder.pressModifierKey(this.getWebDriver(), Keys.CONTROL);
+    UIWaitFactory.getWaitDriver(
+        this.getWebDriver()).waitForClickableElement(automationPageModel.listBoxOption2).click();
+
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(
+        this.getWebDriver()).waitForClickableElement(automationPageModel.listBoxOption1).isSelected());
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(
+        this.getWebDriver()).waitForClickableElement(automationPageModel.listBoxOption2).isSelected());
+  }
+
+  /**
+   * Test move slider functionality.
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void moveSliderTest() {
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    this.navigateToUrl(automationPageModel.testSiteAutomationUrl);
+    ActionBuilder.slideElement(this.getWebDriver(), slider, 50);
+    Assert.assertEquals(this.getWebDriver().findElement(
+            automationPageModel.sliderLabelNumber).getAttribute("value"), "4");
+  }
+
+  /**
+   * Test move right click to trigger context menu functionality.
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void rightClickToTriggerContextMenu() {
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    this.navigateToUrl(automationPageModel.testSiteAutomationUrl);
+    ActionBuilder.rightClick(this.getWebDriver(), automationPageModel.rightClickableElementWithContextMenu);
+    Assert.assertTrue(this.getWebDriver().findElement(automationPageModel.rightClickContextSaveText).isDisplayed());
+  }
 }
