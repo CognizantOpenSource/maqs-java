@@ -27,61 +27,6 @@ import org.testng.annotations.Test;
 public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
   /**
-   * Url for the site.
-   */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
-   * Automation site url.
-   */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
-   * Options for computer parts list.
-   */
-  private static By computerPartsListOptions = By.cssSelector("#computerParts > option");
-
-  /**
-   * Swagger link.
-   */
-  private static By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
-
-  /**
-   * First name textbox.
-   */
-  private static By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
-
-  /**
-   * Female radio button.
-   */
-  private static By femaleRadioButton = By.cssSelector("#FemaleRadio");
-
-  /**
-   * First checkbox.
-   */
-  private static By checkbox = By.cssSelector("#Checkbox1");
-
-  /**
-   * Name dropdown list.
-   */
-  private static By nameDropdown = By.cssSelector("#namesDropdown");
-
-  /**
-   * Computer parts list.
-   */
-  private static By computerPartsList = By.cssSelector("#computerParts");
-
-  /**
-   * Employee link.
-   */
-  private static By employeeButton = By.cssSelector("#EmployeeButton > a");
-
-  /**
-   * Employee page title.
-   */
-  private static By employeePageTitle = By.cssSelector("body > div.container.body-content > h2");
-
-  /**
    * Unit Test for creating a sorted comma delimited String.
    */
   @Test(groups = TestCategories.SELENIUM)
@@ -106,7 +51,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit test for entering text into a textbox and getting text from a textbox.
+   * Unit test for entering text into a text box and getting text from a text box.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void setTextBoxAndVerifyValueTest() {
@@ -133,10 +78,10 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void checkCheckBoxTest() {
-    navigateToUrl();
-    ElementHandler.checkCheckBox(getWebDriver(), checkbox, true);
-    Assert.assertTrue(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(checkbox).isSelected(),
-        "Checkbox was not enabled");
+    AutomationPageModel automationPageModel = navigateToUrl();
+    ElementHandler.checkCheckBox(getWebDriver(), automationPageModel.checkbox, true);
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(
+        automationPageModel.checkbox).isSelected(), "Checkbox was not enabled");
   }
 
   /**
