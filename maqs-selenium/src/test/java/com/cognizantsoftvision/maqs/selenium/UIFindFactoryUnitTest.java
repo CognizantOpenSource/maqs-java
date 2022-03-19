@@ -18,30 +18,19 @@ import org.testng.annotations.Test;
 public class UIFindFactoryUnitTest extends BaseSeleniumTest {
 
   /**
-   * The Automation Page Model.
-   */
-  private AutomationPageModel automationPageModel;
-
-  /**
    * Error string templates for assertion failures.
    */
   private static final String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
-
-  /**
-   * Sets up the page models for the test.
-   */
-  public UIFind setUp() {
-    automationPageModel = new AutomationPageModel(this.getTestObject());
-    this.getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
-    return UIFindFactory.getFind(this.getWebDriver());
-  }
 
   /**
    * Test get ui find with element.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetUIFindWithElement() {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    this.getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
+    UIFind find = UIFindFactory.getFind(this.getWebDriver());
+    Assert.assertNotNull(find, "the UI Find returned null");
     automationPageModel.open(automationPageModel.testSiteAutomationUrl);
     WebElement elementDriver = UIWaitFactory
         .getWaitDriver(automationPageModel.getWebDriver())
