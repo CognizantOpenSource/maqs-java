@@ -7,6 +7,7 @@ package com.cognizantsoftvision.maqs.selenium.unittestpagemodel;
 import com.cognizantsoftvision.maqs.selenium.LazyWebElement;
 import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
 import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
+import com.cognizantsoftvision.maqs.selenium.UIWait;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.By;
 
@@ -175,6 +176,7 @@ public class AutomationPageModel extends MainPageModel {
   @Override
   public boolean isPageLoaded() {
     try {
+      new UIWait(this.getWebDriver()).waitForPageLoad();
       return pageTitle.doesExist();
     } catch (TimeoutException | InterruptedException e) {
       e.printStackTrace();
