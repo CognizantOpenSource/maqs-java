@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.AutomationPageModel;
-import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.PageElementsPageModel;
 import com.cognizantsoftvision.maqs.selenium.factories.UIFindFactory;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -14,7 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Ui find factory unit test.
+ * The UI Find Factory unit test class.
  */
 public class UIFindFactoryUnitTest extends BaseSeleniumTest {
 
@@ -24,19 +23,9 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
   AutomationPageModel automationPageModel;
 
   /**
-   * Url for the site.
-   */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
-   * Automation site url.
-   */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
    * Error string templates for assertion failures.
    */
-  private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
+  private static final String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
 
   /**
    * Sets up the page models for the test.
@@ -53,7 +42,7 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testGetUIFindWithElement() {
     setUp();
-    automationPageModel.open(siteAutomationUrl);
+    automationPageModel.open(automationPageModel.testSiteAutomationUrl);
     WebElement elementDriver = UIWaitFactory
         .getWaitDriver(automationPageModel.getWebDriver())
         .waitForClickableElement(automationPageModel.automationShowDialog1);

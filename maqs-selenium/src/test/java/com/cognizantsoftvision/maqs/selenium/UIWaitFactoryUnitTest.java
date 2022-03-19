@@ -12,7 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Ui wait factory unit test.
+ * The UI Wait Factory unit test class.
  */
 public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 
@@ -22,27 +22,13 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   AutomationPageModel automationPageModel;
 
   /**
-   * Url for the site.
-   */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
-   * Automation site url.
-   */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
-   * Error string templates for assertion failures.
-   */
-  private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
-  /**
    * The constant assertEqualErrorTemplate.
    */
-  private static String assertEqualErrorTemplate = "%s was not equal to %s when they were expected to be.";
+  private static final String assertEqualErrorTemplate = "%s was not equal to %s when they were expected to be.";
   /**
    * The constant assertNotEqualErrorTemplate.
    */
-  private static String assertNotEqualErrorTemplate = "%s was equal to %s when they were expected not to be.";
+  private static final String assertNotEqualErrorTemplate = "%s was equal to %s when they were expected not to be.";
 
   /**
    * Sets up the page models for the test.
@@ -58,6 +44,9 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   public void getWaitDriverTest() {
     setUp();
     UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
+
+    // Error string templates for assertion failures.
+    String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
     Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
   }
 
@@ -102,7 +91,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
     Assert.assertEquals(newWaitDriver.getWaitDriver(), overriddenWaitDriver.getWaitDriver(),
         String.format(assertEqualErrorTemplate, "newWaitDriver", "overriddenWaitDriver"));
     Assert.assertNotEquals(oldWaitDriver.getWaitDriver(), overriddenWaitDriver.getWaitDriver(),
-        String.format(assertNotEqualErrorTemplate, "oldWaitDriver", "overriddentWaitDriver"));
+        String.format(assertNotEqualErrorTemplate, "oldWaitDriver", "overriddenWaitDriver"));
   }
 
   /**

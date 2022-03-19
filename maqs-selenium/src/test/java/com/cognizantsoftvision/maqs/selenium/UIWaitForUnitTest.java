@@ -12,7 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The UI Wait For Unit Test Class.
+ * The UI Wait For unit test class.
  */
 public class UIWaitForUnitTest extends BaseSeleniumTest {
 

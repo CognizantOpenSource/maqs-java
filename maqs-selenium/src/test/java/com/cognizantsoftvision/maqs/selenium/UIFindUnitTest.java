@@ -8,13 +8,12 @@ import com.cognizantsoftvision.maqs.selenium.factories.UIFindFactory;
 import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.List;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The UI Find functionality unit test.
+ * The UI Find functionality unit test class.
  */
 public class UIFindUnitTest extends BaseSeleniumTest {
 
@@ -22,47 +21,6 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * The Automation Page Model.
    */
   AutomationPageModel automationPageModel;
-
-  /**
-   * Url for the site.
-   */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
-   * Automation site url.
-   */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
-   * Flower table.
-   */
-  private static By flowerTable = By.cssSelector("#FlowerTable TD");
-
-  /**
-   * Home button css selector.
-   */
-  private By homeButton = By.cssSelector("#homeButton > a");
-
-  /**
-   * Selector that is not in page.
-   */
-  private By notInPage = By.cssSelector("NOTINPAGE");
-
-  /**
-   * Names label.
-   */
-  private By automationNamesLabel = By.cssSelector("#Dropdown > p > strong > label");
-
-  /**
-   * Home button css selector.
-   */
-  private By dropdownToggleClassSelector = By.className("dropdown-toggle");
-
-  /**
-   * First dialog button.
-   */
-  private By automationShowDialog1 = By.cssSelector("#showDialog1");
-
 
   /**
    * Sets up the page models for the test.
@@ -109,7 +67,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
     Assert.assertEquals(list.get(2).getText(), "Training");
     Assert.assertTrue(list.get(2).isDisplayed());
 
-    List<WebElement> elements = find.findElements(flowerTable);
+    List<WebElement> elements = find.findElements(automationPageModel.flowerTable);
     Assert.assertEquals(elements.size(), 20);
   }
 
@@ -239,7 +197,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void findIndexOfElementInCollectionTextNotFoundAssertIsTrue() {
     UIFind find = setUp();
-    int index = find.findIndexOfElementWithText(find.findElements(flowerTable),
+    int index = find.findIndexOfElementWithText(find.findElements(automationPageModel.flowerTable),
         "#notfound", false);
     Assert.assertEquals(index, -1);
   }

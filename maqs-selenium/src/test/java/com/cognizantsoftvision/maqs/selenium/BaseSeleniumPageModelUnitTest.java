@@ -5,13 +5,14 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.AutomationPageModel;
-import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.PageElementsPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * The Base Selenium Page Model unit test class.
+ */
 public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
 
   /**
@@ -51,7 +52,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   @Test
-  public void testSetWebDriver() throws Exception {
+  public void testSetWebDriver() {
     setUp();
     int hashCode = automationPageModel.getWebDriver().hashCode();
     WebDriver drive = this.getBrowser();
