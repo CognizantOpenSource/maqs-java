@@ -17,11 +17,6 @@ import org.testng.annotations.Test;
 public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 
   /**
-   * The Automation Page Model.
-   */
-  private AutomationPageModel automationPageModel;
-
-  /**
    * The constant assertEqualErrorTemplate.
    */
   private static final String assertEqualErrorTemplate = "%s was not equal to %s when they were expected to be.";
@@ -31,18 +26,11 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   private static final String assertNotEqualErrorTemplate = "%s was equal to %s when they were expected not to be.";
 
   /**
-   * Sets up the page models for the test.
-   */
-  public void setUp() {
-    automationPageModel = new AutomationPageModel(this.getTestObject());
-  }
-
-  /**
    * Gets wait driver test.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverTest() {
-    setUp();
+    new AutomationPageModel(this.getTestObject());
     UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
     // Error string templates for assertion failures.
@@ -55,7 +43,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverWhenOneExists() {
-    setUp();
+    new AutomationPageModel(this.getTestObject());
     UIWait firstWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWait secondWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
@@ -99,7 +87,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverWithWebElement() {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     automationPageModel.open(automationPageModel.testSiteAutomationUrl);
     WebElement elementDriver = UIWaitFactory.getWaitDriver(automationPageModel.getWebDriver())
         .waitForClickableElement(automationPageModel.automationShowDialog1);
