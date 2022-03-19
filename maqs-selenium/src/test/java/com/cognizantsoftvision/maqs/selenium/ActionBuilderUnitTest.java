@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.AutomationPageModel;
+import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;

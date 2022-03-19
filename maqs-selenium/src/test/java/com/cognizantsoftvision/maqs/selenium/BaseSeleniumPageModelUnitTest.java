@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.selenium.unittestpagemodel.AutomationPageModel;
+import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.WebDriver;
