@@ -4,15 +4,15 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.cognizantsoftvision.maqs.selenium.pagemodels.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Ui wait factory unit test.
+ * The UI Wait Factory unit test class.
  */
 public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 
@@ -30,12 +30,13 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverTest() {
+    new AutomationPageModel(this.getTestObject());
     UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
+
     String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
     Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
 
     waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver(), 5000, 500);
-    assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
     Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
   }
 
@@ -44,6 +45,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverWhenOneExists() {
+    new AutomationPageModel(this.getTestObject());
     UIWait firstWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWait secondWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
@@ -77,9 +79,9 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
     UIWait overriddenWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
     Assert.assertEquals(newWaitDriver.getWaitDriver(), overriddenWaitDriver.getWaitDriver(),
-        String.format(assertEqualErrorTemplate, "newWaitDriver", "overriddenWaitDriver"));
+        String.format(assertEqualErrorTemplate, "newWaitDriver", "overriddenWaitDriver1"));
     Assert.assertNotEquals(oldWaitDriver.getWaitDriver(), overriddenWaitDriver.getWaitDriver(),
-        String.format(assertNotEqualErrorTemplate, "oldWaitDriver", "overrideWaitDriver"));
+        String.format(assertNotEqualErrorTemplate, "oldWaitDriver", "overriddenWaitDriver2"));
   }
 
   /**
@@ -89,12 +91,10 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   public void getWaitDriverWithWebElement() {
     AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     automationPageModel.open(automationPageModel.testSiteAutomationUrl);
-    WebElement elementDriver = UIWaitFactory
-        .getWaitDriver(automationPageModel.getWebDriver())
+    WebElement elementDriver = UIWaitFactory.getWaitDriver(automationPageModel.getWebDriver())
         .waitForClickableElement(automationPageModel.automationShowDialog1);
 
     UIWait waitDriver = UIWaitFactory.getWaitDriver(elementDriver);
-
     Assert.assertNotNull(waitDriver);
   }
 

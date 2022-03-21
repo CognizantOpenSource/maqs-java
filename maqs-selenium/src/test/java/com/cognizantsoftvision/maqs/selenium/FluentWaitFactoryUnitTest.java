@@ -4,9 +4,9 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.selenium.factories.FluentWaitFactory;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.cognizantsoftvision.maqs.selenium.pagemodels.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -14,7 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Fluent wait factory unit test.
+ * The Fluent Wait Factory unit test class.
  */
 public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
 
@@ -34,6 +34,7 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
     FluentWait<WebElement> fluentWait = FluentWaitFactory
         .getNewElementFluentWait(elementDriver, timeout, polling);
 
+    // Error string templates for assertion failures.
     String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
     Assert.assertNotNull(fluentWait, String.format(assertNotNullErrorTemplate, "fluentWait"));
   }

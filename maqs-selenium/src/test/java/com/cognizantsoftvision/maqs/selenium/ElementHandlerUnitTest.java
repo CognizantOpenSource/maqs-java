@@ -6,7 +6,7 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.exceptions.ElementHandlerException;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.cognizantsoftvision.maqs.selenium.pagemodels.AutomationPageModel;
+import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.ListProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
@@ -28,26 +28,12 @@ import org.testng.annotations.Test;
 public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
   /**
-   * the Automation page model.
-   */
-  private AutomationPageModel automationPageModel;
-
-  /**
-   * Navigate to test page url and waits for page to load.
-   */
-  public void navigateToTestPage() {
-      automationPageModel = new AutomationPageModel(this.getTestObject());
-      getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
-      UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-  }
-
-  /**
    * Unit Test for creating a sorted comma delimited String.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void createSortedCommaDelimitedStringFromWebElementsTest() {
-    navigateToTestPage();
     String expectedText = "Hard Drive, Keyboard, Monitor, Motherboard, Mouse, Power Supply";
+    AutomationPageModel automationPageModel = navigateToUrl();
     Assert.assertEquals(ElementHandler.createCommaDelimitedString(
         getWebDriver(), automationPageModel.computerPartsListOptions, true),
         expectedText, "Expected String does not match actual");
@@ -58,18 +44,29 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void createCommaDelimitedStringFromWebElementsTest() {
-    navigateToTestPage();
     String expectedText = "Motherboard, Power Supply, Hard Drive, Monitor, Mouse, Keyboard";
+    AutomationPageModel automationPageModel = navigateToUrl();
     Assert.assertEquals(ElementHandler.createCommaDelimitedString(
-        getWebDriver(), automationPageModel.computerPartsListOptions),
-        expectedText, "Expected String does not match actual");
+        getWebDriver(), automationPageModel.computerPartsListOptions), expectedText, "Expected String does not match actual");
+  }
+
+  /**
+   * Unit test for entering text into a text box and getting text from a text box.
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void setTextBoxAndVerifyValueTest() {
+    String expectedValue = "Tester";
+    AutomationPageModel automationPageModel = navigateToUrl();
+    ElementHandler.setTextBox(getWebDriver(), automationPageModel.firstNameTextBox, expectedValue);
+    String actualValue = ElementHandler.getElementAttribute(getWebDriver(), automationPageModel.firstNameTextBox);
+    verifyText(actualValue, expectedValue);
   }
 
   /**
    * Unit test for entering text into a text box and getting text from a text box.
    */
   @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementHandlerException.class)
-  public void setTextBoxAndVerifyValueTest() {
+  public void setTextBoxAndVerifyValueTestException() {
     navigateToTestPage();
     String expectedValue = "Tester";
     ElementHandler.setTextBox(getWebDriver(), automationPageModel.firstNameTextBox, expectedValue);
@@ -83,11 +80,10 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void checkRadioButtonTest() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.clickButton(getWebDriver(), automationPageModel.femaleRadioButton, false);
-    Assert.assertTrue(
-        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(automationPageModel.femaleRadioButton).isSelected(),
-        "Radio button was not selected");
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(
+            automationPageModel.femaleRadioButton).isSelected(), "Radio button was not selected");
   }
 
   /**
@@ -95,10 +91,10 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void checkCheckBoxTest() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.checkCheckBox(getWebDriver(), automationPageModel.checkbox, true);
-    Assert.assertTrue(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(automationPageModel.checkbox).isSelected(),
-        "Checkbox was not enabled");
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(
+        automationPageModel.checkbox).isSelected(), "Checkbox was not enabled");
   }
 
   /**
@@ -106,9 +102,10 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getElementAttributeTest() {
-    navigateToTestPage();
     String expectedText = "http://magenicautomation.azurewebsites.net/Swagger";
-    String actualText = ElementHandler.getElementAttribute(getWebDriver(), automationPageModel.swaggerLinkBy, "href");
+     AutomationPageModel automationPageModel =navigateToUrl();
+    String actualText = ElementHandler.getElementAttribute(
+        getWebDriver(), automationPageModel.swaggerLinkBy, "href");
     verifyText(actualText, expectedText);
   }
 
@@ -118,8 +115,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void selectItemFromDropDownTest() {
-    navigateToTestPage();
     String expectedSelection = "Emily";
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectDropDownOption(getWebDriver(), automationPageModel.nameDropdown, expectedSelection);
     String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), automationPageModel.nameDropdown);
     verifyText(actualSelection, expectedSelection);
@@ -131,8 +128,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void selectItemFromDropDownByValueTest() {
-    navigateToTestPage();
     String expectedSelection = "Jack";
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectDropDownOptionByValue(getWebDriver(), automationPageModel.nameDropdown, "two");
     String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), automationPageModel.nameDropdown);
     verifyText(actualSelection, expectedSelection);
@@ -144,16 +141,18 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void selectMultipleItemsFromListBoxTest() {
-    navigateToTestPage();
     final StringBuilder results = new StringBuilder();
     ArrayList<String> itemsToSelect = new ArrayList<>();
     itemsToSelect.add("Monitor");
     itemsToSelect.add("Hard Drive");
     itemsToSelect.add("Keyboard");
+
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectMultipleElementsFromListBox(getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
-    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(getWebDriver(),
-        automationPageModel.computerPartsList);
+    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(
+        getWebDriver(), automationPageModel.computerPartsList);
     ListProcessor.listOfStringsComparer(itemsToSelect, selectedItems, results, false);
+
     if (results.length() > 0) {
       Assert.fail(results.toString());
     }
@@ -165,14 +164,15 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void selectMultipleItemsFromListBoxTestByValue() {
-    navigateToTestPage();
     ArrayList<String> itemsToSelect = new ArrayList<>();
     itemsToSelect.add("one");
     itemsToSelect.add("four");
     itemsToSelect.add("five");
+
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectMultipleElementsFromListBoxByValue(getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
-    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(getWebDriver(),
-        automationPageModel.computerPartsList);
+    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(
+        getWebDriver(), automationPageModel.computerPartsList);
 
     if (selectedItems.size() != 3) {
       Assert.fail("Does not contain 3 elements: " + selectedItems);
@@ -185,7 +185,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void clickElementByJavascriptFromHoverDropdown() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.clickElementByJavaScript(getWebDriver(), automationPageModel.employeeButton);
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForExactText(automationPageModel.employeePageTitle, "Index");
@@ -196,7 +196,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void scrollIntoView() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.scrollIntoView(getWebDriver(), automationPageModel.checkbox);
   }
 
@@ -205,7 +205,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void scrollIntoViewWithCoordinates() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.scrollIntoView(getWebDriver(), automationPageModel.checkbox, 50, 0);
   }
 
@@ -214,18 +214,17 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void scrollIntoViewElement() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     WebElement element = this.getWebDriver().findElement(By.cssSelector("body"));
     ElementHandler.scrollIntoView(element, automationPageModel.checkbox);
   }
 
   /**
-   * Test to verify scrolling into view when passing a parent WebElement with
-   * coordinates.
+   * Test to verify scrolling into view when passing a parent WebElement with coordinates.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void scrollIntoViewElementWithCoordinates() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     WebElement element = this.getWebDriver().findElement(By.cssSelector("body"));
     ElementHandler.scrollIntoView(element, automationPageModel.checkbox, 50, 0);
   }
@@ -235,7 +234,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void executingScrolling() {
-    navigateToTestPage();
+    navigateToUrl();
     ElementHandler.executeScrolling(getWebDriver(), 50, 0);
   }
 
@@ -244,7 +243,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(expectedExceptions = NoSuchElementException.class, groups = TestCategories.SELENIUM)
   public void clickElementByJavascriptFromHoverDropdownNotFound() {
-    navigateToTestPage();
+    navigateToTestUrl();
     ElementHandler.clickElementByJavaScript(getWebDriver(), By.cssSelector(".NotPresent"));
   }
 
@@ -253,11 +252,10 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void slowTypeTest() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.slowType(getWebDriver(), automationPageModel.firstNameTextBox, "Test input slow type");
-    Assert.assertEquals(
-        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(automationPageModel.firstNameTextBox).getAttribute("value"),
-        "Test input slow type");
+    Assert.assertEquals(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(
+            automationPageModel.firstNameTextBox).getAttribute("value"), "Test input slow type");
   }
 
   /**
@@ -288,7 +286,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Ignore("This can be uncommented when the logger functions as expected.")
   @Test(groups = TestCategories.SELENIUM)
   public void sendSecretTextSuspendLoggingTest() throws IOException {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = this.navigateToUrl();
     this.getWebDriver().findElement(automationPageModel.firstNameTextBox).sendKeys("somethingTest");
     this.getWebDriver().findElement(automationPageModel.firstNameTextBox).clear();
     ElementHandler.sendSecretKeys(getWebDriver(), automationPageModel.firstNameTextBox, "secretKeys", this.getLogger());
@@ -308,7 +306,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Ignore("This can be uncommented when the logger functions as expected.")
   @Test(groups = TestCategories.SELENIUM)
   public void sendSecretTextContinueLoggingTest() throws IOException {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = this.navigateToUrl();
     ElementHandler.sendSecretKeys(getWebDriver(), automationPageModel.firstNameTextBox, "secretKeys", this.getLogger());
     this.getWebDriver().findElement(automationPageModel.firstNameTextBox).clear();
     this.getWebDriver().findElement(automationPageModel.firstNameTextBox).sendKeys("somethingTest");
@@ -330,5 +328,15 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   private static void verifyText(String actualValue, String expectedValue) {
     Assert.assertEquals(actualValue, expectedValue, "Values are not equal");
+  }
+
+  /**
+   * Navigate to test page url and wait for page to load.
+   */
+  private AutomationPageModel navigateToUrl() {
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+    return automationPageModel;
   }
 }

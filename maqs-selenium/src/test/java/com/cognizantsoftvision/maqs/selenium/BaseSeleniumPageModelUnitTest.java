@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.selenium.pagemodels.AutomationPageModel;
+import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -12,48 +12,34 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The base selenium page model unit tests.
+ * The Base Selenium Page Model unit test class.
  */
 public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
 
   /**
-   * the Automation page model.
-   */
-  private AutomationPageModel automationPageModel;
-
-  /**
-   * Sets up the page model to be tested.
-   */
-  public void setUp() {
-    automationPageModel = new AutomationPageModel(this.getTestObject());
-    automationPageModel.open();
-    automationPageModel.waitForPageLoad();
-  }
-
-  /**
-   * Tests getting the page model logger.
+   * Test getting the logger.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLogger() {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     Assert.assertNotNull(automationPageModel.getLogger());
   }
 
   /**
-   * Tests getting the page model's test object.
+   * Test getting the test object.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetTestObject() {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     Assert.assertNotNull(automationPageModel.getTestObject());
   }
 
   /**
-   * Tests getting the page model web driver.
+   * Test getting the web driver.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     Assert.assertNotNull(automationPageModel.getWebDriver());
   }
 
@@ -62,54 +48,60 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetPerfTimerCollection() {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     Assert.assertNotNull(automationPageModel.getPerfTimerCollection());
   }
 
   /**
-   * Tests setting the page model web driver
+   * Test setting the web driver.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriver() {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     int hashCode = automationPageModel.getWebDriver().hashCode();
     WebDriver drive = this.getBrowser();
 
     automationPageModel.setWebDriver(drive);
     int hashCode1 = automationPageModel.getWebDriver().hashCode();
+    Assert.assertNotEquals(hashCode, hashCode1);
     drive.quit();
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
   /**
-   * Tests if the page is loaded.
+   * Test if the page is loaded.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testIsPageLoaded() {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    automationPageModel.open();
     Assert.assertTrue(automationPageModel.isPageLoaded());
   }
 
   /**
-   * Tests getting the element called twice and returns the same element.
+   * Test getting the same element twice and returns the same element.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void testGetElementCalledTwiceReturnsTheSameElement() {
-    setUp();
+  public void testGetSameElementTwiceReturnsTheSameElement() {
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    automationPageModel.open();
+    automationPageModel.waitForPageLoad();
+
     LazyWebElement initElem = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
     LazyWebElement cachedElem = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
-
     Assert.assertSame(initElem, cachedElem);
   }
 
   /**
-   * Tests getting the lazy element with the By type.
-   * @throws TimeoutException if a timeout occurs
-   * @throws InterruptedException if an interruption occurs
+   * Test getting the lazy element with a By.
+   * @throws TimeoutException if a timeout exception is thrown
+   * @throws InterruptedException if an interrupted exception is thrown
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithBy() throws TimeoutException, InterruptedException {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    automationPageModel.open();
+    automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
         .get(automationPageModel.employeePageTitle.toString());
@@ -121,15 +113,17 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Tests getting the lazy element with By and its Name
-   * @throws TimeoutException if a Timeout occurs
-   * @throws InterruptedException if an interruption occurs
+   * Test getting the lazy element with By selector and its Name.
+   * @throws TimeoutException if a timeout exception occurs
+   * @throws InterruptedException if an interrupted exception occurs
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithByAndName() throws TimeoutException, InterruptedException {
-    setUp();
-    LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.employeePageTitle,
-        "Page Title");
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    automationPageModel.open();
+    automationPageModel.waitForPageLoad();
+    LazyWebElement lazyElement = automationPageModel.getLazyElement(
+        automationPageModel.employeePageTitle, "Page Title");
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
         .get(automationPageModel.employeePageTitle + "Page Title");
 
@@ -141,13 +135,15 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Tests getting the lazy element with parent element and the By value.
-   * @throws TimeoutException if a timeout occurs
-   * @throws InterruptedException if an interruption occurs
+   * Test getting the lazy element with parent element and a By.
+   * @throws TimeoutException if a timeout exception is thrown
+   * @throws InterruptedException if an interrupted exception is thrown
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementAndBy() throws TimeoutException, InterruptedException {
-    setUp();
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    automationPageModel.open();
+    automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.body,
         automationPageModel.employeePageTitle);
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
@@ -160,15 +156,17 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test getting the lazy element with the parent By and Name
-   * @throws TimeoutException if a timeout occurs
-   * @throws InterruptedException if an interruption occurs
+   * Test getting the lazy element with parent element By and its Name.
+   * @throws TimeoutException if a timeout exception is thrown
+   * @throws InterruptedException if an interrupted exception is thrown
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetLazyElementWithParentElementByAndName() throws TimeoutException, InterruptedException {
-    setUp();
-    LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.body,
-        automationPageModel.employeePageTitle, "Page Title");
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    automationPageModel.open();
+    automationPageModel.waitForPageLoad();
+    LazyWebElement lazyElement = automationPageModel.getLazyElement(
+        automationPageModel.body, automationPageModel.employeePageTitle, "Page Title");
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
         .get(automationPageModel.employeePageTitle + "Page Title");
 
