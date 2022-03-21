@@ -129,6 +129,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Fire Fox driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getFirefoxDriverTest() {
     FirefoxDriver driver = null;
@@ -145,6 +146,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Edge driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getEdgeDriverTest() {
     EdgeDriver driver = null;
