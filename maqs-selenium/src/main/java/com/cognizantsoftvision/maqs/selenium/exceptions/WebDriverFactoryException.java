@@ -4,12 +4,12 @@
 
 package com.cognizantsoftvision.maqs.selenium.exceptions;
 
-import com.cognizantsoftvision.maqs.base.exceptions.JMAQSRuntimeException;
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 
 /**
  * The type Web driver factory exception.
  */
-public class WebDriverFactoryException extends JMAQSRuntimeException {
+public class WebDriverFactoryException extends MAQSRuntimeException {
 
   /**
    * Instantiates a new Web driver factory exception.
