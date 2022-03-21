@@ -33,8 +33,8 @@ public class ScenarioContextUnitTest {
         Object secondObjectReturned = ScenarioContext.get(secondObjectName);
 
         // Validating types
-        Assert.assertTrue(firstObjectReturned.getClass().equals(firstObjectForTesting.getClass()));
-        Assert.assertTrue(secondObjectReturned.getClass().equals(secondObjectForTesting.getClass()));
+        Assert.assertEquals(firstObjectForTesting.getClass(), firstObjectReturned.getClass());
+        Assert.assertEquals(secondObjectForTesting.getClass(), secondObjectReturned.getClass());
 
         // Validate Values
         Assert.assertEquals(firstObjectReturned, firstObjectForTesting);
@@ -74,13 +74,13 @@ public class ScenarioContextUnitTest {
         Object secondObjectReturned = ScenarioContext.get(secondClassForObject);
 
         // Validating types
-        Assert.assertTrue(firstObjectReturned.getClass().equals(firstClassForObject));
-        Assert.assertTrue(secondObjectReturned.getClass().equals(secondClassForObject));
+        Assert.assertEquals(firstClassForObject, firstObjectReturned.getClass());
+        Assert.assertEquals(secondClassForObject, secondObjectReturned.getClass());
 
         // Updating and checking that value
         ScenarioContext.put(secondClassForObject, updatedObjectForTesting);
         Object updatedObjectReturned = ScenarioContext.get(secondClassForObject);
-        Assert.assertTrue(updatedObjectReturned.getClass().equals(updatedClassForSecondObject));
+        Assert.assertEquals(updatedClassForSecondObject, updatedObjectReturned.getClass());
 
         // Removes the second object
         ScenarioContext.remove(secondClassForObject);
@@ -118,7 +118,7 @@ public class ScenarioContextUnitTest {
         Object secondObjectReturned = ScenarioContext.get(secondObjectName, secondClassForObject);
 
         // Validating types
-        Assert.assertTrue(firstObjectReturned.getClass().equals(firstClassForObject));
-        Assert.assertTrue(secondObjectReturned.getClass().equals(secondClassForObject));
+        Assert.assertEquals(firstClassForObject, firstObjectReturned.getClass());
+        Assert.assertEquals(secondClassForObject, secondObjectReturned.getClass());
     }
 }
