@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 /**
+ * The Action Builder class.
  * Contains methods for interactions using Selenium Actions class.
  */
 public class ActionBuilder {

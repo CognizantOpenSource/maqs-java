@@ -21,6 +21,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 /**
+ * The Element Handler class.
  * Contains functions for interacting with WebElement objects.
  */
 public class ElementHandler {

@@ -7,7 +7,7 @@ package com.cognizantsoftvision.maqs.selenium.exceptions;
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 
 /**
- * The type Element handler exception.
+ * The Element Handler Exception class.
  */
 public class ElementHandlerException extends MAQSRuntimeException {
 

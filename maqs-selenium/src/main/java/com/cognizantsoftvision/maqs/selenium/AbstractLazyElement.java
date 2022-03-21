@@ -26,6 +26,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
 /**
+ * The Abstract Lazy Element class.
  * Abstract structure for dynamically finding and interacting with elements.
  */
 public abstract class AbstractLazyElement {

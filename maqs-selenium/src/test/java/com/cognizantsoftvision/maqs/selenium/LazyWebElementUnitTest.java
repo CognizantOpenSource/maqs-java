@@ -37,7 +37,7 @@ import org.testng.asserts.SoftAssert;
 
 
 /**
- * Unit test class for LazyElement
+ * The Lazy Web Element nit test class.
  */
 public class LazyWebElementUnitTest extends BaseSeleniumTest {
 

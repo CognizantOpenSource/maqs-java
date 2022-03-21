@@ -12,7 +12,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException
 import org.openqa.selenium.By;
 
 /**
- * The main site page model.
+ * The Main Site page model.
  */
 public class MainPageModel extends BaseSeleniumPageModel {
 

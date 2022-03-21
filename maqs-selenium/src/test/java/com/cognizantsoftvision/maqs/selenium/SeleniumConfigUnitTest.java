@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 /**
- * Selenium configuration tests.
+ * Selenium Configuration unit test class.
  */
 public class SeleniumConfigUnitTest extends BaseSeleniumTest {
 

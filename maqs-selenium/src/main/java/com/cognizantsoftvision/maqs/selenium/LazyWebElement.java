@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
+ * The Lazy Web Element class.
  * Driver for dynamically finding and interacting with elements.
  */
 public class LazyWebElement extends AbstractLazyElement {

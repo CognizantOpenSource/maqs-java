@@ -27,7 +27,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsDriver;
 
 /**
- * The type Selenium utilities.
+ * The Selenium Utilities class.
  */
 public class SeleniumUtilities {
 

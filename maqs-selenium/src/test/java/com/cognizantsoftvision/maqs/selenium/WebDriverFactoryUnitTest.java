@@ -28,7 +28,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
- * The WebDriverFactory test class.
+ * The Web Driver Factory test class.
  */
 public class WebDriverFactoryUnitTest extends BaseGenericTest {
 

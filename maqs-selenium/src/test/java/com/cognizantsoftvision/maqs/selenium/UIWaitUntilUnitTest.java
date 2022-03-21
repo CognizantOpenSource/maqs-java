@@ -35,9 +35,10 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void waitUntilIFrameToLoadException() {
-    setUp();
-    UIWait wait = navigateToTestSite(iframePageModel.testSiteIFrameUrl);
-    Assert.assertFalse(wait.waitUntilIframeToLoad(iframePageModel.notInPage));
+    IFramePageModel iFramePageModel = new IFramePageModel(this.getTestObject());
+    this.getWebDriver().navigate().to(iFramePageModel.testSiteIFrameUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    Assert.assertFalse(wait.waitUntilIframeToLoad(iFramePageModel.notInPage));
   }
 
   /**
@@ -45,9 +46,10 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void waitUntilIFrameToLoadWithTimeOut() {
-    setUp();
-    UIWait wait = navigateToTestSite(iframePageModel.testSiteIFrameUrl);
-    Assert.assertTrue(wait.waitUntilIframeToLoad(iframePageModel.iframeLocator, 10000, 500));
+    IFramePageModel iFramePageModel = new IFramePageModel(this.getTestObject());
+    this.getWebDriver().navigate().to(iFramePageModel.testSiteIFrameUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    Assert.assertTrue(wait.waitUntilIframeToLoad(iFramePageModel.iframeLocator, 10000, 500));
   }
 
   /**
@@ -57,9 +59,13 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
   public void waitUntilAttributeTextEquals() {
     AsyncPageModel asyncPageModel = new AsyncPageModel(this.getTestObject());
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
+
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncPageModel.asyncLoadingLabel, "style", "display: none;"));
-    Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncPageModel.asyncLoadingLabel, "style", "display: none;", 10000, 2000));
+    wait.waitUntilPageLoad();
+    Assert.assertTrue(wait.waitUntilAttributeTextEquals(
+        asyncPageModel.asyncLoadingLabel, "style", "display: none;"));
+    Assert.assertTrue(wait.waitUntilAttributeTextEquals(
+        asyncPageModel.asyncLoadingLabel, "style", "display: none;", 10000, 2000));
   }
 
   /**
@@ -269,9 +275,9 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
   public void waitUntilAttributeEquals() {
     AsyncPageModel asyncPageModel = new AsyncPageModel(this.getTestObject());
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    wait.waitUntilPageLoad();
     Assert.assertTrue(wait.waitUntilAttributeTextEquals(
         asyncPageModel.asyncLoadingLabel, "style", "display: none;"));
   }
@@ -283,9 +289,9 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
   public void waitUntilAttributeContains() {
     AsyncPageModel asyncPageModel = new AsyncPageModel(this.getTestObject());
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    wait.waitUntilPageLoad();
     Assert.assertTrue(wait.waitUntilAttributeTextContains(
         asyncPageModel.asyncLoadingLabel, "style", "none;"));
   }

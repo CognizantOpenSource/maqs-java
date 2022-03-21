@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 
 /**
- * Base Selenium Test class.
+ * The Base Selenium Test class.
  */
 public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 

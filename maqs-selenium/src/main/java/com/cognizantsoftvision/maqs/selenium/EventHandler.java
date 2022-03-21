@@ -16,7 +16,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverListener;
 
 /**
- * Event Handler Class implementing WebDriverEventListener.
+ * The Event Handler class.
+ * Event Handler class implementing WebDriverEventListener.
  */
 public class EventHandler implements WebDriverListener {
 

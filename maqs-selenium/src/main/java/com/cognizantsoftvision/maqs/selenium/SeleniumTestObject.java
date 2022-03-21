@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 
 /**
- * The SeleniumTestObject Class.
+ * The Selenium Test Object class.
  */
 public class SeleniumTestObject extends BaseTestObject {
 

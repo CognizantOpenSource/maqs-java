@@ -11,7 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Selenium test object test.
+ * The Selenium Test Object unit test class.
  */
 public class SeleniumTestObjectUnitTest extends BaseGenericTest {
 

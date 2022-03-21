@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
 /**
+ * The Fluent Wait Factory class.
  * Handles the creation of {@link org.openqa.selenium.support.ui.FluentWait FluentWait} objects.
  */
 public class FluentWaitFactory {

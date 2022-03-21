@@ -25,7 +25,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Selenium utilities test.
+ * The Selenium Utilities unit test class.
  */
 public class SeleniumUtilitiesUnitTest extends BaseSeleniumTest {
 

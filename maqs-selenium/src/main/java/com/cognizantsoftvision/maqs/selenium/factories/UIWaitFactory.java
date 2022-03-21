@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
+ * The UI Wait Factory class.
  * Factory class that is used for creating and maintaining a thread-safe collection of wait drivers.
  */
 public class UIWaitFactory {

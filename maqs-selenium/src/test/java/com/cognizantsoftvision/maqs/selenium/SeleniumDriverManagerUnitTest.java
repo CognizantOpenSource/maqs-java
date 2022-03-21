@@ -12,7 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Selenium driver manager test.
+ * The Selenium Driver manager unit test class.
  */
 public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
 

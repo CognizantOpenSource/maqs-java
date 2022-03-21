@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Selenium specific configuration class.
+ * The Selenium Configuration class.
  */
 public final class SeleniumConfig {
 

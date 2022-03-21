@@ -23,7 +23,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for ElementHandler class.
+ * The Element Handler unit tests class.
  */
 public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
@@ -67,7 +67,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementHandlerException.class)
   public void setTextBoxAndVerifyValueTestException() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     String expectedValue = "Tester";
     ElementHandler.setTextBox(getWebDriver(), automationPageModel.firstNameTextBox, expectedValue);
     String actualValue = ElementHandler.getElementAttribute(getWebDriver(), automationPageModel.firstNameTextBox);
@@ -243,7 +243,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(expectedExceptions = NoSuchElementException.class, groups = TestCategories.SELENIUM)
   public void clickElementByJavascriptFromHoverDropdownNotFound() {
-    navigateToTestUrl();
+    navigateToUrl();
     ElementHandler.clickElementByJavaScript(getWebDriver(), By.cssSelector(".NotPresent"));
   }
 
@@ -263,7 +263,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void sendSecretKeysTest() {
-    navigateToTestPage();
+    AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.sendSecretKeys(this.getWebDriver(), automationPageModel.firstNameTextBox, "Test Secret keys", this.getLogger());
     Assert.assertEquals(
         UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(automationPageModel.firstNameTextBox).getAttribute("value"),
@@ -275,7 +275,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM, expectedExceptions = Exception.class)
   public void sendSecretKeysErrorTest() {
-    navigateToTestPage();
+    navigateToUrl();
     ElementHandler.sendSecretKeys(
         this.getWebDriver(), By.cssSelector(""), "Test Secret keys", this.getLogger());
   }

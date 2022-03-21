@@ -34,7 +34,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
 /**
- * The type Web driver factory.
+ * The Web Driver Factory class.
  */
 public class WebDriverFactory {
 

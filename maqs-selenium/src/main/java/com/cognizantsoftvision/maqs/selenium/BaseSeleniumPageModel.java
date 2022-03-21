@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
- * The type Base selenium page model.
+ * The Base Selenium Page Model class.
  */
 public abstract class BaseSeleniumPageModel {
 

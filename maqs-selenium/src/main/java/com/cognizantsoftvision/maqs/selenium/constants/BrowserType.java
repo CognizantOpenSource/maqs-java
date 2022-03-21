@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.selenium.constants;
 
 /**
- * Known browser types.
+ * The enum browser types.
  */
 public enum BrowserType {
 

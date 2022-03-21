@@ -8,6 +8,7 @@ import com.cognizantsoftvision.maqs.selenium.UIFind;
 import org.openqa.selenium.SearchContext;
 
 /**
+ * The UI Find Factory class.
  * Factory class for creating UIFind objects for the test.
  */
 public class UIFindFactory {

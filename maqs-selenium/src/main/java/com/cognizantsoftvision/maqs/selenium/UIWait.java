@@ -28,7 +28,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Selenium waiter This is the tool-class used for waiting.
+ * The UI Wait class.
+ * This is the selenium tool-class used for waiting.
  * It can be used to wait for many circumstances:
  * element exist, not exist, be visible, to equal a desired value, etc...
  */

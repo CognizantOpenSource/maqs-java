@@ -5,9 +5,9 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.cognizantsoftvision.maqs.selenium.pagemodels.AsyncPageModel;
-import com.cognizantsoftvision.maqs.selenium.pagemodels.AutomationPageModel;
-import com.cognizantsoftvision.maqs.selenium.pagemodels.IFramePageModel;
+import com.cognizantsoftvision.maqs.selenium.pageModel.AsyncPageModel;
+import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
+import com.cognizantsoftvision.maqs.selenium.pageModel.IFramePageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.TimeoutException;
@@ -40,8 +40,12 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
   public void waitForAttributeTextEqualsFound() {
     AsyncPageModel asyncPageModel = new AsyncPageModel(this.getTestObject());
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
+
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    WebElement element = wait.waitForAttributeTextEquals(asyncPageModel.asyncLoadingTextDiv, "style", "display: block;");
+    wait.waitUntilPageLoad();
+
+    WebElement element = wait.waitForAttributeTextEquals(
+        asyncPageModel.asyncLoadingTextDiv, "style", "display: block;");
     Assert.assertNotNull(element);
     Assert.assertEquals(element.getText(), "Loaded");
   }
@@ -118,11 +122,12 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
   public void waitForVisibleElement() {
     AsyncPageModel asyncPageModel = new AsyncPageModel(this.getTestObject());
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    wait.waitForPageLoad();
     WebElement element = wait.waitForVisibleElement(asyncPageModel.asyncDropdownCssSelector);
     Assert.assertNotNull(element, "Null element was returned");
+
     element = wait.waitForVisibleElement(asyncPageModel.asyncDropdownCssSelector, 10000, 1000);
     Assert.assertNotNull(element, "Null element was returned");
   }
@@ -160,8 +165,10 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
   public void waitForContainsTextException() {
-    setUp();
-    UIWait wait = navigateToTestSite(automationPageModel.testSiteAutomationUrl);
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    this.getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    wait.waitForPageLoad();
     wait.waitForContainsText(automationPageModel.notInPage, "Name");
   }
 
@@ -230,9 +237,9 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
   public void waitForAttributeEqualsFound() {
     AsyncPageModel asyncPageModel = new AsyncPageModel(this.getTestObject());
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    wait.waitForPageLoad();
     Assert.assertNotNull(wait.waitForAttributeTextEquals(
         asyncPageModel.asyncLoadingTextDiv, "style", "display: block;"));
     Assert.assertNotNull(wait.waitForAttributeTextEquals(

@@ -18,7 +18,7 @@ import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
 
 /**
- * The type Selenium driver manager.
+ * The Selenium Driver Manager class.
  */
 public class SeleniumDriverManager extends DriverManager<WebDriver> {
 

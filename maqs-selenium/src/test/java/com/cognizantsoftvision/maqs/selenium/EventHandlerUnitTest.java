@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 /**
- * Unit tests for EventHandler class.
+ * The Event Handler unit test class.
  */
 public class EventHandlerUnitTest extends BaseSeleniumTest {
 
@@ -37,7 +37,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to click an element, then get the log text
-    webDriverWithHandler.findElement(checkbox).click();
+    webDriverWithHandler.findElement(automationPageModel.checkbox).click();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.

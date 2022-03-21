@@ -11,7 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
- * The type Base selenium test unit test.
+ * The Base Selenium Test unit test class.
  */
 public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
 

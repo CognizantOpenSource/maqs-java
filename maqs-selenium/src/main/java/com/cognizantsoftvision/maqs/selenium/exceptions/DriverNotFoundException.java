@@ -7,7 +7,7 @@ package com.cognizantsoftvision.maqs.selenium.exceptions;
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 
 /**
- * The type Driver not found exception.
+ * The Driver Not Found Exception class.
  */
 public class DriverNotFoundException extends MAQSRuntimeException {
   /**
