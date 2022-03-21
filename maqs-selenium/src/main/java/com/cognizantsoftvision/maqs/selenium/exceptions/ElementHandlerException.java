@@ -4,12 +4,12 @@
 
 package com.cognizantsoftvision.maqs.selenium.exceptions;
 
-import com.cognizantsoftvision.maqs.base.exceptions.JMAQSRuntimeException;
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 
 /**
  * The type Element handler exception.
  */
-public class ElementHandlerException extends JMAQSRuntimeException {
+public class ElementHandlerException extends MAQSRuntimeException {
 
   private static final long serialVersionUID = 1;
 

@@ -50,6 +50,11 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   private static final String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
 
+  public void setup(String url) {
+    this.getWebDriver().navigate().to(url);
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
+  }
+
   /**
    * Verify we can create and associate an accessibility HTML report.
    * @throws IOException if an exception is thrown
@@ -226,11 +231,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertFalse(filePath.isEmpty(), "Accessibility report is empty");
     deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
-  }
-
-  public void setup(String url) {
-    this.getWebDriver().navigate().to(url);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
 
   private void deleteFiles(List<String> files) {
