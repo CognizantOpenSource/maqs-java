@@ -11,7 +11,7 @@ import org.openqa.selenium.By;
 /**
  * The IFrame page model.
  */
-public class IFramePageModel extends MainPageModel {
+public class IFramePageModel extends HeaderPageModel {
 
   /**
    * Unit testing site URL - IFrame page.

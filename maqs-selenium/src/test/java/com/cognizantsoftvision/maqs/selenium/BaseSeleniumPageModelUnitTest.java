@@ -86,8 +86,8 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
 
-    LazyWebElement initElem = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
-    LazyWebElement cachedElem = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
+    LazyWebElement initElem = automationPageModel.getLazyElement(automationPageModel.automationPageHeader);
+    LazyWebElement cachedElem = automationPageModel.getLazyElement(automationPageModel.automationPageHeader);
     Assert.assertSame(initElem, cachedElem);
   }
 
@@ -143,8 +143,8 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
-    LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.body,
-        automationPageModel.automationPageHeader);
+    LazyWebElement lazyElement = automationPageModel.getLazyElement(
+        automationPageModel.body, automationPageModel.automationPageHeader);
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
         .get(automationPageModel.automationPageHeader.toString());
 

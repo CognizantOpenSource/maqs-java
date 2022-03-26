@@ -11,7 +11,7 @@ import org.openqa.selenium.By;
 /**
  * The Async page model.
  */
-public class AsyncPageModel extends MainPageModel {
+public class AsyncPageModel extends HeaderPageModel {
 
   /**
    * Unit testing site URL - Async page.
