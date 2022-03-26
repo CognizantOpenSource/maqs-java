@@ -34,9 +34,9 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
     this.navigateToUrl(automationPageModel.testSiteAutomationUrl);
     ActionBuilder.hoverOver(this.getWebDriver(), automationPageModel.manageDropdown);
     UIWaitFactory.getWaitDriver(
-        this.getWebDriver()).waitForClickableElement(automationPageModel.employeeButton).click();
+        this.getWebDriver()).waitForClickableElement(automationPageModel.iFrameDropDownButton).click();
     UIWaitFactory.getWaitDriver(
-        this.getWebDriver()).waitForExactText(automationPageModel.employeePageTitle, "Index");
+        this.getWebDriver()).waitForExactText(automationPageModel.iFramePageTitle, "Index");
   }
 
   /**

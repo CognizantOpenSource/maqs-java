@@ -101,9 +101,9 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
-    LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.employeePageTitle);
+    LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.automationPageHeader);
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
-        .get(automationPageModel.employeePageTitle.toString());
+        .get(automationPageModel.automationPageHeader.toString());
 
     Assert.assertNotNull(lazyElement);
     Assert.assertNotNull(storedElement);
@@ -122,9 +122,9 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(
-        automationPageModel.employeePageTitle, "Page Title");
+        automationPageModel.automationPageHeader, "Page Title");
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
-        .get(automationPageModel.employeePageTitle + "Page Title");
+        .get(automationPageModel.automationPageHeader + "Page Title");
 
     Assert.assertNotNull(lazyElement);
     Assert.assertNotNull(storedElement);
@@ -144,9 +144,9 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(automationPageModel.body,
-        automationPageModel.employeePageTitle);
+        automationPageModel.automationPageHeader);
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
-        .get(automationPageModel.employeePageTitle.toString());
+        .get(automationPageModel.automationPageHeader.toString());
 
     Assert.assertNotNull(lazyElement);
     Assert.assertNotNull(storedElement);
@@ -165,9 +165,9 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
     automationPageModel.open();
     automationPageModel.waitForPageLoad();
     LazyWebElement lazyElement = automationPageModel.getLazyElement(
-        automationPageModel.body, automationPageModel.employeePageTitle, "Page Title");
+        automationPageModel.body, automationPageModel.automationPageHeader, "Page Title");
     LazyWebElement storedElement = automationPageModel.getLazyElementStore()
-        .get(automationPageModel.employeePageTitle + "Page Title");
+        .get(automationPageModel.automationPageHeader + "Page Title");
 
     Assert.assertNotNull(lazyElement);
     Assert.assertNotNull(storedElement);

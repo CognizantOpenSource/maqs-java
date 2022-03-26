@@ -11,12 +11,12 @@ import org.openqa.selenium.By;
 /**
  * The Async page model.
  */
-public class AsyncPageModel extends MainPageModel{
+public class AsyncPageModel extends MainPageModel {
 
   /**
    * Unit testing site URL - Async page.
    */
-  public final String testSiteAsyncUrl = SeleniumConfig.getWebSiteBase() + "Automation/AsyncPage";
+  public final String testSiteAsyncUrl = SeleniumConfig.getWebSiteBase() + "async.html";
 
   /**
    * Dropdown selector.
@@ -31,7 +31,7 @@ public class AsyncPageModel extends MainPageModel{
   /**
    * Asynchronous div that loads after a delay on Async Testing Page.
    */
-  public final By asyncLoadingTextDiv = By.cssSelector("#loading-div-text");
+  public final By asyncLoadingTextDiv = By.cssSelector("div #loading-div-text");
 
   /**
    * Dropdown label - hidden once dropdown loads.

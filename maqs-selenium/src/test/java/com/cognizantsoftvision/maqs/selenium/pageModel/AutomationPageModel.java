@@ -19,7 +19,12 @@ public class AutomationPageModel extends MainPageModel {
   /**
    * Unit testing site URL - Automation page.
    */
-  public final String testSiteAutomationUrl = SeleniumConfig.getWebSiteBase() + "Automation/";
+  public final String testSiteAutomationUrl = SeleniumConfig.getWebSiteBase();
+
+  /**
+   * The automation Page Header.
+   */
+  public final By automationPageHeader = By.cssSelector("#ItemsToAutomate > h2");
 
   /**
    * First dialog button.
@@ -65,6 +70,11 @@ public class AutomationPageModel extends MainPageModel {
    * Swagger link.
    */
   public final By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
+
+  /**
+   * Error 500 link.
+   */
+  public final By errorLinkBy = By.cssSelector("#ErrorPageLink > a");
 
   /**
    * First name text box.
@@ -115,6 +125,16 @@ public class AutomationPageModel extends MainPageModel {
    * Employee page title.
    */
   public final By employeePageTitle = By.cssSelector("body > div.container.body-content > h2");
+
+  /**
+   * IFrame dropdown link button.
+   */
+  public final By iFrameDropDownButton = By.cssSelector("#iFrameButton");
+
+  /**
+   * Employee page title.
+   */
+  public final By iFramePageTitle = By.cssSelector("#iFrameButton > a");
 
   /**
    * The body selector.
@@ -176,9 +196,10 @@ public class AutomationPageModel extends MainPageModel {
   @Override
   public boolean isPageLoaded() {
     try {
-      new UIWait(this.getWebDriver()).waitForPageLoad();
-      return pageTitle.doesExist();
-    } catch (TimeoutException | InterruptedException e) {
+      UIWait wait = new UIWait(this.getWebDriver());
+      wait.waitForPageLoad();
+      return wait.waitUntilVisibleElement(automationPageHeader);
+    } catch (TimeoutException e) {
       e.printStackTrace();
     }
     return false;

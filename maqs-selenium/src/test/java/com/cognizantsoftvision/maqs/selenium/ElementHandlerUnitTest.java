@@ -89,10 +89,10 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getElementAttributeTest() {
-    String expectedText = "http://magenicautomation.azurewebsites.net/Swagger";
+    String expectedText = "https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/bad";
      AutomationPageModel automationPageModel =navigateToUrl();
     String actualText = ElementHandler.getElementAttribute(
-        getWebDriver(), automationPageModel.swaggerLinkBy, "href");
+        getWebDriver(), automationPageModel.errorLinkBy, "href");
     verifyText(actualText, expectedText);
   }
 
@@ -173,9 +173,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void clickElementByJavascriptFromHoverDropdown() {
     AutomationPageModel automationPageModel = navigateToUrl();
-    ElementHandler.clickElementByJavaScript(getWebDriver(), automationPageModel.employeeButton);
+    ElementHandler.clickElementByJavaScript(getWebDriver(), automationPageModel.iFrameDropDownButton);
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitForExactText(automationPageModel.employeePageTitle, "Index");
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForExactText(automationPageModel.iFramePageTitle, "Index");
   }
 
   /**

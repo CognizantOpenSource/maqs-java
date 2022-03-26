@@ -303,7 +303,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to get the text from an element, then get the log text
-    webDriverWithHandler.findElement(automationPageModel.swaggerLinkBy).getText();
+    webDriverWithHandler.findElement(automationPageModel.errorLinkBy).getText();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
