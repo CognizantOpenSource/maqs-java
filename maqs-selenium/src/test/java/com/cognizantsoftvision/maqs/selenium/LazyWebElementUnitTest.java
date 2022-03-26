@@ -105,8 +105,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 * @return The submit button
 	 */
 	private LazyWebElement getSubmitButton() {
-		return new LazyWebElement(this.getTestObject(), By.cssSelector("#submitButton"),
-				"Submit button");
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#submitButton"), "Submit button");
 	}
 
 	/**
@@ -490,14 +489,11 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSubmit() throws TimeoutException, InterruptedException, ExecutionFailedException {
-		UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
-
 		String newText = "Test";
 		this.getSubmitText().sendKeys(newText);
 		Assert.assertNotEquals(newText, getSubmittedValue().getText(), "Should not be set yet");
 
 		this.getSubmitButton().submit();
-		waitDriver.waitForPageLoad();
 		Assert.assertEquals(newText, getSubmittedValue().getText());
 	}
 
@@ -661,7 +657,6 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementToString() {
 		// Hard-coded userFriendlyName due to private access on LazyElement
 		String stringValue = this.getFlowerTableLazyElement().getBy().toString() + FLOWER_TABLE;
-
 		assertEquals(stringValue, this.getFlowerTableLazyElement().toString());
 	}
 
@@ -735,7 +730,6 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		LazyWebElement firstElement = this.getDivRoot().findElements(this.getDisabledItem().getBy()).get(0);
 
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
-		// this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
 
 		UIWaitFactory.setWaitDriver(this.getWebDriver(), new WebDriverWait(this.getWebDriver(), Duration.ofSeconds(1)));
 		firstElement.click();
