@@ -8,9 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import java.math.BigDecimal;
 
+
 public class Product {
     @JacksonXmlProperty(isAttribute = true)
-    private final String xmlns = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models";
+    private final String xmlns = "http://schemas.datacontract.org/2004/07/MainTestService.Models";
 
     @JsonProperty("Id")
     private int id;
@@ -31,7 +32,12 @@ public class Product {
         this.price = price;
     }
 
-    public Product() { }
+    public Product() {
+        this.id = 1;
+        this.name = "Milk";
+        this.category = "Dairy";
+        this.price = BigDecimal.TEN;
+    }
 
     public int getId() {
         return id;

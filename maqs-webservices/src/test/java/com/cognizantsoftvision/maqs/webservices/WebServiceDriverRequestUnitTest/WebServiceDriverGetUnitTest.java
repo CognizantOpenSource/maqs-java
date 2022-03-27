@@ -40,7 +40,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductXmlDeserialize() throws IOException, InterruptedException {
-    Product products = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetProduct/2", MediaType.APP_XML, true, Product.class);
+    Product products = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetProduct/2", MediaType.APP_XML, true, Product.class);
     Assert.assertEquals(products.getName(), "Yo-yo", "Expected 3 products to be returned");
   }
 
@@ -51,7 +52,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductsXmlDeserialize() throws IOException, InterruptedException {
-    Product[] products = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, false, Product[].class);
+    Product[] products = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, false, Product[].class);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
 
@@ -87,7 +89,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductsPlainText() throws IOException, InterruptedException {
-    HttpResponse<String> result = webServiceDriver.get(baseUrl + "/api/String/Get",  MediaType.PLAIN_TEXT, false);
+    HttpResponse<String> result = webServiceDriver.get(
+        baseUrl + "/api/String/Get",  MediaType.PLAIN_TEXT, false);
     Assert.assertTrue(result.body().contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + result);
     Assert.assertTrue(result.body().contains("Yo-yo"),
@@ -103,7 +106,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getStringById() throws IOException, InterruptedException {
-    HttpResponse<String> result = webServiceDriver.get(baseUrl + "/api/String/1",  MediaType.PLAIN_TEXT, false);
+    HttpResponse<String> result = webServiceDriver.get(
+        baseUrl + "/api/String/1",  MediaType.PLAIN_TEXT, false);
     Assert.assertTrue(result.body().contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + result);
   }
@@ -115,7 +119,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getStringByName() throws IOException, InterruptedException {
-    HttpResponse<String> result = webServiceDriver.get(baseUrl + "/api/String/Yo-yo",  MediaType.PLAIN_TEXT, false);
+    HttpResponse<String> result = webServiceDriver.get(
+        baseUrl + "/api/String/Yo-yo",  MediaType.PLAIN_TEXT, false);
     Assert.assertTrue(result.body().contains("Yo-yo"),
         "Was expecting a result with Yo-yo but instead got - " + result);
   }
@@ -127,8 +132,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeJson() throws IOException, InterruptedException {
-    HttpResponse<String> message = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
-       MediaType.APP_JSON, true  );
+    HttpResponse<String> message = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, true  );
     Product[] products = WebServiceUtilities.deserializeJson(message, Product[].class);
     Assert.assertNotNull(products);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
@@ -141,8 +146,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeXml() throws IOException, InterruptedException {
-    HttpResponse<String> message = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
-        MediaType.APP_XML, true);
+    HttpResponse<String> message = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, true);
     Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
     Assert.assertNotNull(products);
     Assert.assertEquals(products.length,3,"Expected 3 products to be returned");
@@ -155,8 +160,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeJsonExpectedStatus() throws IOException, InterruptedException {
-    HttpResponse<String> message = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
-        MediaType.APP_JSON, HttpStatus.OK);
+    HttpResponse<String> message = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, HttpStatus.OK);
     Product[] products = WebServiceUtilities.deserializeJson(message, Product[].class);
     Assert.assertNotNull(products);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
@@ -169,8 +174,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeXmlExpectedStatus() throws IOException, InterruptedException {
-    HttpResponse<String> message = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
-        MediaType.APP_XML, HttpStatus.OK);
+    HttpResponse<String> message = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, HttpStatus.OK);
     Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
     Assert.assertNotNull(products);
     Assert.assertEquals(products.length,3,"Expected 3 products to be returned");
@@ -183,8 +188,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getTypeParamWithExpectedStatus() throws IOException, InterruptedException {
-    Product[] res = webServiceDriver.get(baseUrl + "/api/XML_JSON/GetAllProducts",
-        MediaType.APP_JSON, HttpStatus.OK, Product[].class);
+    Product[] res = webServiceDriver.get(
+        baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, HttpStatus.OK, Product[].class);
     Assert.assertNotNull(res);
   }
 

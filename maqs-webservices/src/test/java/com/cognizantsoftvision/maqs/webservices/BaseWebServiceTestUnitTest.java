@@ -9,8 +9,6 @@ import java.net.URISyntaxException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.net.URISyntaxException;
-
 /**
  * Unit tests the Base Web Service Test functionality.
  */

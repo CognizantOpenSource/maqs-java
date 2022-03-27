@@ -280,8 +280,8 @@ public class WebServiceDriver {
    * @throws IOException          if exception is thrown
    * @throws InterruptedException if exception is thrown
    */
-  public <T> T post(String requestUri, MediaType responseMediaType, Object content,
-      Type type, boolean expectSuccess) throws IOException, InterruptedException {
+  public <T> T post(String requestUri, MediaType responseMediaType,
+      Object content, Type type, boolean expectSuccess) throws IOException, InterruptedException {
     HttpResponse<String> response = this.postContent(requestUri, responseMediaType, content, expectSuccess);
     return WebServiceUtilities.deserializeResponse(response, responseMediaType, type);
   }
@@ -300,8 +300,7 @@ public class WebServiceDriver {
    * @throws InterruptedException if exception is thrown
    */
   public <T> T post(String requestUri, MediaType responseMediaType,
-      Object content, Type type, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
+      Object content, Type type, HttpStatus expectedStatus) throws IOException, InterruptedException {
     HttpResponse<String> response = this.postContent(requestUri, responseMediaType, content, expectedStatus);
     return WebServiceUtilities.deserializeResponse(response, responseMediaType, type);
   }
@@ -317,8 +316,8 @@ public class WebServiceDriver {
    * @throws IOException          if exception is thrown
    * @throws InterruptedException if exception is thrown
    */
-  public HttpResponse<String> post(String requestUri, MediaType responseMediaType, Object content,
-      boolean expectSuccess) throws IOException, InterruptedException {
+  public HttpResponse<String> post(String requestUri, MediaType responseMediaType,
+      Object content, boolean expectSuccess) throws IOException, InterruptedException {
     return this.postContent(requestUri, responseMediaType, content, expectSuccess);
   }
 
@@ -353,8 +352,8 @@ public class WebServiceDriver {
       Object content, boolean expectSuccess) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
-        responseMediaType, createContent(content, responseMediaType));
+    HttpRequest httpRequest = buildHttpRequest(
+        requestUri, RequestMethod.POST, responseMediaType, createContent(content, responseMediaType));
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
@@ -379,8 +378,8 @@ public class WebServiceDriver {
       Object content, HttpStatus expectedStatus) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.POST,
-        responseMediaType, createContent(content, responseMediaType));
+    HttpRequest httpRequest = buildHttpRequest(
+        requestUri, RequestMethod.POST, responseMediaType, createContent(content, responseMediaType));
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status
@@ -471,10 +470,9 @@ public class WebServiceDriver {
       Object content, boolean expectSuccess) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PUT,
-        responseMediaType, createContent(content, responseMediaType));
-    HttpResponse<String> response = baseHttpClient
-        .send(httpRequest, HttpResponse.BodyHandlers.ofString());
+    HttpRequest httpRequest = buildHttpRequest(
+        requestUri, RequestMethod.PUT, responseMediaType, createContent(content, responseMediaType));
+    HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // Should we check for success
     if (expectSuccess) {
@@ -498,8 +496,8 @@ public class WebServiceDriver {
       Object content, HttpStatus expectedStatus) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PUT,
-        responseMediaType, createContent(content, responseMediaType));
+    HttpRequest httpRequest = buildHttpRequest(
+        requestUri, RequestMethod.PUT, responseMediaType, createContent(content, responseMediaType));
     HttpResponse<String> response = baseHttpClient
         .send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -593,8 +591,8 @@ public class WebServiceDriver {
       Object content, HttpStatus expectedStatus) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PATCH,
-        responseMediaType, createContent(content, responseMediaType));
+    HttpRequest httpRequest = buildHttpRequest(
+        requestUri, RequestMethod.PATCH, responseMediaType, createContent(content, responseMediaType));
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     ensureStatusCodesMatch(response, expectedStatus);
@@ -616,8 +614,8 @@ public class WebServiceDriver {
       Object content, boolean expectSuccess) throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(responseMediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.PATCH, responseMediaType,
-        createContent(content, responseMediaType));
+    HttpRequest httpRequest = buildHttpRequest(
+        requestUri, RequestMethod.PATCH, responseMediaType, createContent(content, responseMediaType));
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     if (expectSuccess) {
@@ -801,8 +799,7 @@ public class WebServiceDriver {
       MediaType mediaType, String content, Map<String, String> additionalHeaders) {
     HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
 
-    builder.header("Content-Type", mediaType.toString())
-        .uri(URI.create(requestUri));
+    builder.header("Content-Type", mediaType.toString()).uri(URI.create(requestUri));
 
     for (Map.Entry<String, String> header : additionalHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
@@ -833,9 +830,8 @@ public class WebServiceDriver {
 
     // Check if it was a success and if not create a user-friendly error message
     if (response.statusCode() != HttpStatus.OK.value()) {
-      throw new NotAcceptableStatusException(
-          String.format("Response did not indicate a success. %s Response code was: %d",
-              System.lineSeparator(), response.statusCode()));
+      throw new NotAcceptableStatusException(String.format(
+          "Response did not indicate a success. %s Response code was: %d", System.lineSeparator(), response.statusCode()));
     }
   }
 
