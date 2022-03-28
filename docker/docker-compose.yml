@@ -9,10 +9,6 @@ services:
     extends: 
       file: ./MAQSSQLServer/docker-compose.yml
       service: mssql
-  webservices:
-    extends:
-      file: ./MAQSService/MainTestService.sln
-      service: webservice
 #  mongo:
 #    extends:
 #      file: ./MAQSMongoDB/docker-compose.yml
