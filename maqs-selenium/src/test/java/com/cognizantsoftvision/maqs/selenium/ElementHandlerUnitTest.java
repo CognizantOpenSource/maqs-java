@@ -89,8 +89,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getElementAttributeTest() {
-    String expectedText = "https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/bad";
-     AutomationPageModel automationPageModel =navigateToUrl();
+    String expectedText = "https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/notError.html";
+     AutomationPageModel automationPageModel = navigateToUrl();
     String actualText = ElementHandler.getElementAttribute(
         getWebDriver(), automationPageModel.errorLinkBy, "href");
     verifyText(actualText, expectedText);
