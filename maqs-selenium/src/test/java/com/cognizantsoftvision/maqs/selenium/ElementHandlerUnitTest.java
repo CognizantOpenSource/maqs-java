@@ -27,15 +27,24 @@ import org.testng.annotations.Test;
 public class ElementHandlerUnitTest extends BaseSeleniumTest {
 
   /**
+   * Navigate to test page url and wait for page to load.
+   */
+  private AutomationPageModel navigateToUrl() {
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+    return automationPageModel;
+  }
+
+  /**
    * Unit Test for creating a sorted comma delimited String.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void createSortedCommaDelimitedStringFromWebElementsTest() {
     String expectedText = "Hard Drive, Keyboard, Monitor, Motherboard, Mouse, Power Supply";
     AutomationPageModel automationPageModel = navigateToUrl();
-    Assert.assertEquals(ElementHandler.createCommaDelimitedString(
-        getWebDriver(), automationPageModel.computerPartsListOptions, true),
-        expectedText, "Expected String does not match actual");
+    verifyText(ElementHandler.createCommaDelimitedString(
+        getWebDriver(), automationPageModel.computerPartsListOptions, true), expectedText);
   }
 
   /**
@@ -45,9 +54,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void createCommaDelimitedStringFromWebElementsTest() {
     String expectedText = "Motherboard, Power Supply, Hard Drive, Monitor, Mouse, Keyboard";
     AutomationPageModel automationPageModel = navigateToUrl();
-    Assert.assertEquals(
-        ElementHandler.createCommaDelimitedString(getWebDriver(), automationPageModel.computerPartsListOptions),
-        expectedText, "Expected String does not match actual");
+    verifyText(ElementHandler.createCommaDelimitedString(
+       getWebDriver(), automationPageModel.computerPartsListOptions), expectedText);
   }
 
   /**
@@ -89,8 +97,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getElementAttributeTest() {
-    String expectedText = "https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/notError.html";
-     AutomationPageModel automationPageModel = navigateToUrl();
+    AutomationPageModel automationPageModel = navigateToUrl();
+    String expectedText = automationPageModel.testSiteAutomationUrl + "notError.html";
     String actualText = ElementHandler.getElementAttribute(
         getWebDriver(), automationPageModel.errorLinkBy, "href");
     verifyText(actualText, expectedText);
@@ -292,17 +300,6 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    * @param expectedValue Expected text
    */
   private static void verifyText(String actualValue, String expectedValue) {
-    Assert.assertEquals(actualValue, expectedValue, "Values are not equal");
+    Assert.assertEquals(actualValue, expectedValue, "Expected String does not match actual");
   }
-
-  /**
-   * Navigate to test page url and wait for page to load.
-   */
-  private AutomationPageModel navigateToUrl() {
-    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
-    getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-    return automationPageModel;
-  }
-
 }
