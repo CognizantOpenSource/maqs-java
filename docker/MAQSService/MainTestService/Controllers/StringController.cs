@@ -107,7 +107,7 @@ namespace MainTestService.Controllers
             {
                 var message = new ReturnMessage
                 {
-                    Message = $"No product data provided for id = {id} "
+                    Message = $"No product data provided for id = {id}"
                 };
 
                 return StatusCode((int)HttpStatusCode.Conflict, message);

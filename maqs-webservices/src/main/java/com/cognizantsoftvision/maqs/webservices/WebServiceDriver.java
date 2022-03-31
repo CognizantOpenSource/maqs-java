@@ -798,7 +798,8 @@ public class WebServiceDriver {
   protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestMethod,
       MediaType mediaType, String content, Map<String, String> additionalHeaders) {
     HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
-    builder.header("Content-Type", mediaType.toString()).uri(URI.create(requestUri));
+    builder.header("Content-Type", mediaType.toString())
+        .header("Accept", mediaType.toString()).uri(URI.create(requestUri));
 
     for (Map.Entry<String, String> header : additionalHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());

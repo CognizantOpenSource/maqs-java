@@ -4,8 +4,6 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
-import com.cognizantsoftvision.maqs.webservices.models.ArrayOfProduct;
-import com.cognizantsoftvision.maqs.webservices.models.ArrayOfProductProduct;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -98,7 +96,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   public void testDeserializeXml() throws Exception {
     HttpResponse<String> response = this.getWebServiceDriver().getContent(
         baseUrl + "/api/XML_JSON/GetProduct/1", MediaType.APP_XML, true);
-    ArrayOfProductProduct product = WebServiceUtilities.deserializeXml(response, ArrayOfProduct.class);
+    Product product = WebServiceUtilities.deserializeXml(response, Product.class);
     Assert.assertNotNull(product);
   }
 
@@ -144,7 +142,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
         + "<id>1</id><name>Milk</name><category>Diary</category><price>10</price></Product>";
     String actualXml = WebServiceUtilities.serializeXml(this.product);
     Assert.assertEquals(actualXml, expectedXml,  String.format(
-        "the xml values compared aren't equal, expected was %s while actual was %s", expectedXml, actualXml));
+        "the xml values compared aren't equal: expected was %s while actual was %s", expectedXml, actualXml));
   }
 
   /**

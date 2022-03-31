@@ -6,24 +6,32 @@ package com.cognizantsoftvision.maqs.webservices.models;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 import java.math.BigDecimal;
 
 @JsonPropertyOrder({"id", "name", "category", "price"})
+@JacksonXmlRootElement(localName = "Product")
 public class Product {
 
     @JacksonXmlProperty(isAttribute = true)
     private final String xmlns = "http://schemas.datacontract.org/2004/07/MainTestService.Models";
 
+    @JacksonXmlProperty(localName = "Id")
     @JsonAlias({"Id", "id"})
     private int Id;
 
+    @JacksonXmlProperty(localName = "Name")
     @JsonAlias({"Name", "name"})
     private String Name;
 
+    @JacksonXmlProperty(localName = "Category")
     @JsonAlias({"Category", "category"})
     private String Category;
 
+    @JacksonXmlProperty(localName = "Price")
     @JsonAlias({"Price", "price"})
     private BigDecimal Price;
 

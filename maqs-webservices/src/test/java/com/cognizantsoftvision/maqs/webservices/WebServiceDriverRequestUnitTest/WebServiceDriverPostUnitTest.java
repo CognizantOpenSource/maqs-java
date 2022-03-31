@@ -114,7 +114,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   public void postXMLSerializedVerifyEmptyStringError() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
         MediaType.APP_XML, null, false);
-    Assert.assertTrue(result.body().contains("value is required"));
+    Assert.assertTrue(result.body().contains("An error occurred while deserializing input data."));
   }
 
   /**
