@@ -136,7 +136,7 @@ public class GenericWaitNotParallelUnitTest {
   public void passStringForTest() {
     int[] number = { 0 };
     try {
-      GenericWait.waitFor((p) -> p.equals(testString + number[0]++), testString + "3");
+     GenericWait.waitFor((p) -> p.equals(testString + number[0]++), testString + "3");
     } catch (Exception e) {
       Assert.fail("waitFor parameter test failed with exception", e);
     }

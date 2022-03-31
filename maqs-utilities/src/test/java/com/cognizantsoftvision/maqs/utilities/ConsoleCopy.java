@@ -8,9 +8,10 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 /**
- * The class to copy console output to a file.
+ * The Console Copy class to copy to a file.
  */
 public class ConsoleCopy implements AutoCloseable {
+
   /**
    * Used to Write to the log file.
    */

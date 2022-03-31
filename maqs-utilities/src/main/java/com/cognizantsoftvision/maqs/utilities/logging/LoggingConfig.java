@@ -17,7 +17,7 @@ public class LoggingConfig {
   public static final String TXT = "TXT";
 
   private LoggingConfig() {
-    //Hiding implicit constructor
+    // Hiding implicit constructor
   }
 
   /**

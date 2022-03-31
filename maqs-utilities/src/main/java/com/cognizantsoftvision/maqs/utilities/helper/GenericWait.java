@@ -292,7 +292,7 @@ public final class GenericWait {
       throw exception;
     }
 
-    // We timed out waiting for the function to return true
+    // We timed-out waiting for the function to return true
     return false;
   }
 
@@ -338,7 +338,7 @@ public final class GenericWait {
       throw exception;
     }
 
-    // We timed out waiting for the function to return true
+    // We timed-out waiting for the function to return true
     return false;
   }
 

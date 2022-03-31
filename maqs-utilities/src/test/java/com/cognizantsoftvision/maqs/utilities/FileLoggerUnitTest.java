@@ -23,18 +23,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-
-
 /**
- * Don't check for serial version unique IDs as we will never serialize the test
- * data
+ * The File Logger unit test class.
+ *
+ * Don't check for serial version unique IDs
+ * as we will never serialize the test data
  */
 @Test(singleThreaded = true)
 @SuppressWarnings("serial")
-
-/**
- * The File Logger unit test class.
- */
 public class FileLoggerUnitTest {
 
   public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY = LoggingConfig.getLogDirectory() + "/"
