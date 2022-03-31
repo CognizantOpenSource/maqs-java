@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.utilities.logging;
 
 /**
- * The Message Type class.
+ * The Message Type enum class.
  */
 public enum MessageType {
 

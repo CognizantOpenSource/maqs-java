@@ -11,7 +11,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 
 /**
- * The Property Manager Unit test class.
+ * The Property Manager unit test class.
  */
 public class PropertyManagerUnitTest {
 

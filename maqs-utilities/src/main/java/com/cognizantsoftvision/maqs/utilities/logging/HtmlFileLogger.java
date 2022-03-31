@@ -13,10 +13,12 @@ import java.util.Date;
 import org.apache.commons.text.StringEscapeUtils;
 
 /**
- * The HTML File Logger Class.
+ * The HTML File Logger class.
+ *
  * Helper class for adding logs to an HTML file. Allows configurable file path.
  */
 public class HtmlFileLogger extends FileLogger implements AutoCloseable {
+
   /**
    * The default log name.
    */

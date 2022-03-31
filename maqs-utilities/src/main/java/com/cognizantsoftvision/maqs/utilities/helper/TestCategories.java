@@ -5,9 +5,10 @@
 package com.cognizantsoftvision.maqs.utilities.helper;
 
 /**
- * The Test category type class.
+ * The Test Category class.
  */
 public class TestCategories {
+
   private TestCategories() {
   }
 

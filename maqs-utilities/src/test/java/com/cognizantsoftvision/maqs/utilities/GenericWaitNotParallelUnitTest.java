@@ -10,7 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Generic wait unit test class.
+ * The Generic Wait unit test class.
  * Tests running in serial.
  */
 @Test(singleThreaded = true)

@@ -8,6 +8,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 
 /**
  * The Console Logger class.
+ *
  * Helper class for logging to the console.
  */
 public class ConsoleLogger extends Logger {

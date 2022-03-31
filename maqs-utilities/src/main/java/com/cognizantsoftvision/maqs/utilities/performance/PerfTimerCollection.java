@@ -8,6 +8,7 @@ import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 
 /**
  * The Performance Timer Collection class.
+ *
  * Object to be owned by Test Class (Object),
  * and passed to page Constructors to insert Performance Timers.
  */

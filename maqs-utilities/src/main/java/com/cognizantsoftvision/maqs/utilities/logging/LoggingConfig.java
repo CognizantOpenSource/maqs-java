@@ -9,7 +9,9 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.io.File;
 
 /**
- * Get logging config data.
+ * The Logging Configuration class.
+ *
+ * Gets the logging config data.
  */
 public class LoggingConfig {
 

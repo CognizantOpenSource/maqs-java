@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
- * The Generic wait class.
+ * The Generic Wait class.
  */
 public final class GenericWait {
 
@@ -199,7 +199,7 @@ public final class GenericWait {
    */
   public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
       throws InterruptedException {
-    // Set start time and exception holder
+    // Set start time and exception holder+
     LocalDateTime start = LocalDateTime.now();
 
     // Checks if the two values are equal
