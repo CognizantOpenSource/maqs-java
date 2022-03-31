@@ -4,71 +4,49 @@
 
 package com.cognizantsoftvision.maqs.webservices.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import java.math.BigDecimal;
 
-
+@JsonPropertyOrder({"id", "name", "category", "price"})
 public class Product {
     @JacksonXmlProperty(isAttribute = true)
     private final String xmlns = "http://schemas.datacontract.org/2004/07/MainTestService.Models";
 
-    @JsonProperty("Id")
-    private int id;
+    @JsonAlias({"Id", "id"})
+    private final int Id;
 
-    @JsonProperty("Name")
-    private String name;
+    @JsonAlias({"Name", "name"})
+    private final String Name;
 
-    @JsonProperty("Category")
-    private String category;
+    @JsonAlias({"Category", "category"})
+    private final String Category;
 
-    @JsonProperty("Price")
-    private BigDecimal price;
+    @JsonAlias({"Price", "price"})
+    private final BigDecimal Price;
 
     public Product(int id, String name, String category, BigDecimal price) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.price = price;
-    }
-
-    public Product() {
-        this.id = 1;
-        this.name = "Milk";
-        this.category = "Dairy";
-        this.price = BigDecimal.TEN;
+        this.Id = id;
+        this.Name = name;
+        this.Category = category;
+        this.Price = price;
     }
 
     public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        return Id;
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return Name;
     }
 
     public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+        return Category;
     }
 
     public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+        return Price;
     }
 
     public String toString() {

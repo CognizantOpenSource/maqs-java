@@ -7,6 +7,7 @@ package com.cognizantsoftvision.maqs.webservices;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import java.math.BigDecimal;
 import java.net.http.HttpResponse;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   /**
   The web service object used for the test.
    */
-  private final Product product = new Product();
+  private final Product product = new Product(1, "Milk", "Diary", BigDecimal.TEN);
 
   /**
    * String to hold the URL.
@@ -125,9 +126,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeJson() throws JsonProcessingException {
-    String expectedJson = "{\"Id\":1,\"Name\":\"Milk\",\"Category\":\"Dairy\",\"Price\":10}";
+    String expectedJson = "{\"id\":1,\"name\":\"Milk\",\"category\":\"Diary\",\"price\":10}";
     String actualJson = WebServiceUtilities.serializeJson(this.product);
-    Assert.assertEquals(expectedJson, actualJson, String.format(
+    Assert.assertEquals(actualJson, expectedJson, String.format(
         "the json values compared aren't equal, expected was %s while actual was %s", expectedJson, actualJson));
   }
 
@@ -138,9 +139,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeXml() throws JsonProcessingException {
     String expectedXml = "<Product xmlns=\"http://schemas.datacontract.org/2004/07/MainTestService.Models\">"
-        + "<Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10</Price></Product>";
+        + "<id>1</id><name>Milk</name><category>Diary</category><price>10</price></Product>";
     String actualXml = WebServiceUtilities.serializeXml(this.product);
-    Assert.assertEquals(actualXml, expectedXml, String.format(
+    Assert.assertEquals(actualXml, expectedXml,  String.format(
         "the xml values compared aren't equal, expected was %s while actual was %s", expectedXml, actualXml));
   }
 
