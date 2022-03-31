@@ -4,6 +4,8 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
+import com.cognizantsoftvision.maqs.webservices.models.ArrayOfProduct;
+import com.cognizantsoftvision.maqs.webservices.models.ArrayOfProductProduct;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -96,7 +98,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   public void testDeserializeXml() throws Exception {
     HttpResponse<String> response = this.getWebServiceDriver().getContent(
         baseUrl + "/api/XML_JSON/GetProduct/1", MediaType.APP_XML, true);
-    Product product = WebServiceUtilities.deserializeXml(response, Product.class);
+    ArrayOfProductProduct product = WebServiceUtilities.deserializeXml(response, ArrayOfProduct.class);
     Assert.assertNotNull(product);
   }
 

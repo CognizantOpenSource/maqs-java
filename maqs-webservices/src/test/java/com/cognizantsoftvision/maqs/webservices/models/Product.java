@@ -11,20 +11,21 @@ import java.math.BigDecimal;
 
 @JsonPropertyOrder({"id", "name", "category", "price"})
 public class Product {
+
     @JacksonXmlProperty(isAttribute = true)
     private final String xmlns = "http://schemas.datacontract.org/2004/07/MainTestService.Models";
 
     @JsonAlias({"Id", "id"})
-    private final int Id;
+    private int Id;
 
     @JsonAlias({"Name", "name"})
-    private final String Name;
+    private String Name;
 
     @JsonAlias({"Category", "category"})
-    private final String Category;
+    private String Category;
 
     @JsonAlias({"Price", "price"})
-    private final BigDecimal Price;
+    private BigDecimal Price;
 
     public Product(int id, String name, String category, BigDecimal price) {
         this.Id = id;
@@ -33,12 +34,28 @@ public class Product {
         this.Price = price;
     }
 
+    // Used to populate the product class
+    public Product() {
+    }
+
+    public void setId(int id) {
+        this.Id = id;
+    }
+
     public int getId() {
         return Id;
     }
 
+    public void setName(String name) {
+        this.Name = name;
+    }
+
     public String getName() {
         return Name;
+    }
+
+    public void setCategory(String category) {
+        this.Category = category;
     }
 
     public String getCategory() {
@@ -47,6 +64,10 @@ public class Product {
 
     public BigDecimal getPrice() {
         return Price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.Price = price;
     }
 
     public String toString() {

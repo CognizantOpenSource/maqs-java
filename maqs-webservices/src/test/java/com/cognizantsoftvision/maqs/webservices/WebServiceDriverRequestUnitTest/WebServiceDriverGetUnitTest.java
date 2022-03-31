@@ -42,7 +42,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   public void getProductXmlDeserialize() throws IOException, InterruptedException {
     Product products = webServiceDriver.get(
         baseUrl + "/api/XML_JSON/GetProduct/2", MediaType.APP_XML, true, Product.class);
-    Assert.assertEquals(products.getName(), "Yo-yo", "Expected 3 products to be returned");
+    Assert.assertEquals(products.getName(), "Yo-yo", "Expected Yo-yo to be returned");
   }
 
   /**

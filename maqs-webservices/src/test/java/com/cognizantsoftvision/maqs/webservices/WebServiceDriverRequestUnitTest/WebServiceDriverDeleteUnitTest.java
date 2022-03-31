@@ -54,7 +54,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
       throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON, false);
-    Assert.assertEquals(result.statusCode(), HttpStatus.CONFLICT.value());
+    Assert.assertEquals(result.statusCode(), HttpStatus.UNAUTHORIZED.value());
   }
 
   /**
@@ -143,7 +143,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   public void deleteExpectError() throws IOException, InterruptedException {
    HttpResponse<String> result = webServiceDriver.delete(baseUrl + "/api/String/Delete/43",
         MediaType.PLAIN_TEXT, false);
-    Assert.assertEquals(result.body(), "{\"Message\":\"Resource was not found\"}");
+    Assert.assertEquals(result.body(), "{\"message\":\"Resource was not found\"}");
   }
 
   /**

@@ -195,8 +195,8 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchExpectStringError() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.patch(
-        baseUrl + "/api/String/Patch/", MediaType.PLAIN_TEXT, "", false);
-    String expected = "{\"Message\":\"The requested resource does not support http method 'PATCH'.\"}";
+        baseUrl + "/api/String/Patch/1", MediaType.PLAIN_TEXT, "", false);
+    String expected = "{\"message\":\"Value is required\"}";
     Assert.assertEquals(result.body(), expected);
   }
 

@@ -113,7 +113,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postXMLSerializedVerifyEmptyStringError() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
-        MediaType.APP_XML, "", false);
+        MediaType.APP_XML, null, false);
     Assert.assertTrue(result.body().contains("value is required"));
   }
 
@@ -191,7 +191,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   public void postExpectStringError() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
         MediaType.PLAIN_TEXT, "", false);
-    Assert.assertEquals(result.body(), "{\"Message\":\"No data\"}");
+    Assert.assertEquals(result.body(), "{\"message\":\"Value is required\"}");
   }
 
   /**
@@ -203,7 +203,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   public void postExpectStringErrorEmptyHttpContent() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
         MediaType.PLAIN_TEXT, "", false);
-    Assert.assertEquals(result.body(), "{\"Message\":\"No data\"}");
+    Assert.assertEquals(result.body(), "{\"message\":\"Value is required\"}");
   }
 
   /**

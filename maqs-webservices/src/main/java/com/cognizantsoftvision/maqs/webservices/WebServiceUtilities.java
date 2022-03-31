@@ -59,18 +59,14 @@ public class WebServiceUtilities {
    */
   public static <T> T getResponseBody(HttpResponse<String> response, MediaType contentType, Type type)
       throws IOException {
-    T responseBody;
-
     if (contentType.equals(MediaType.APP_JSON)) {
-      responseBody = deserializeJson(response, type);
+      return deserializeJson(response, type);
     } else if (contentType.equals(MediaType.APP_XML)) {
-      responseBody = deserializeXml(response, type);
+      return deserializeXml(response, type);
     } else {
       throw new IllegalArgumentException(
           StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
-
-    return responseBody;
   }
 
   /**
