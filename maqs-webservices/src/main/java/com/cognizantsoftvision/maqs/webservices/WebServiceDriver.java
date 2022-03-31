@@ -798,7 +798,6 @@ public class WebServiceDriver {
   protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestMethod,
       MediaType mediaType, String content, Map<String, String> additionalHeaders) {
     HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
-
     builder.header("Content-Type", mediaType.toString()).uri(URI.create(requestUri));
 
     for (Map.Entry<String, String> header : additionalHeaders.entrySet()) {
@@ -830,8 +829,9 @@ public class WebServiceDriver {
 
     // Check if it was a success and if not create a user-friendly error message
     if (response.statusCode() != HttpStatus.OK.value()) {
-      throw new NotAcceptableStatusException(String.format(
-          "Response did not indicate a success. %s Response code was: %d", System.lineSeparator(), response.statusCode()));
+      throw new NotAcceptableStatusException(
+          String.format("Response did not indicate a success. %s Response code was: %d",
+          System.lineSeparator(), response.statusCode()));
     }
   }
 
