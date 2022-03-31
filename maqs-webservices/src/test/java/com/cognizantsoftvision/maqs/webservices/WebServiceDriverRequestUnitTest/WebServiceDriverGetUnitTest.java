@@ -19,7 +19,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for web service gets.
+ * The Web Driver Service Driver Get unit test class.
  */
 public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
 

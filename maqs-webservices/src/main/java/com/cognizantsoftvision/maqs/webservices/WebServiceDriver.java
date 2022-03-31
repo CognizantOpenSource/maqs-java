@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.NotAcceptableStatusException;
 
 /**
- * The Web Service Driver.
+ * The Web Service Driver class.
  */
 public class WebServiceDriver {
 

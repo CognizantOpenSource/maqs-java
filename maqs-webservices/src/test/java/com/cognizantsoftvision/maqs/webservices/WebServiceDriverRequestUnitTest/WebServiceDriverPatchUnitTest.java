@@ -21,7 +21,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests the web service patches.
+ * The Web Driver Service Driver Patch Unit test class.
  */
 public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
 

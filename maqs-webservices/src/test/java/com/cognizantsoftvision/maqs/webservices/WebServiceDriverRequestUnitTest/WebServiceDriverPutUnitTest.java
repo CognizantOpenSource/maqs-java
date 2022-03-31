@@ -20,7 +20,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests the web service puts.
+ * The Web Driver Service Driver Put unit test class.
  */
 public class WebServiceDriverPutUnitTest {
   /**

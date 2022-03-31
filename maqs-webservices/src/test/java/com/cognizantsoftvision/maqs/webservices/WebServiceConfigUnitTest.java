@@ -11,7 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for the Web Service Config functionality.
+ * The Web Service Config unit test class.
  */
 public class WebServiceConfigUnitTest extends BaseGenericTest {
 

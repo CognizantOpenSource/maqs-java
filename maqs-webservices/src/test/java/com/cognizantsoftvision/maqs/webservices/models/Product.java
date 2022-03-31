@@ -6,40 +6,37 @@ package com.cognizantsoftvision.maqs.webservices.models;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import java.math.BigDecimal;
 
-@JsonPropertyOrder({"id", "name", "category", "price"})
-@JacksonXmlRootElement(localName = "Product")
+@JsonPropertyOrder({"Id", "Name", "Category", "Price"})
 public class Product {
 
     @JacksonXmlProperty(isAttribute = true)
     private final String xmlns = "http://schemas.datacontract.org/2004/07/MainTestService.Models";
 
-    @JacksonXmlProperty(localName = "Id")
     @JsonAlias({"Id", "id"})
-    private int Id;
+    @JacksonXmlProperty(localName = "Id")
+    private int id;
 
     @JacksonXmlProperty(localName = "Name")
     @JsonAlias({"Name", "name"})
-    private String Name;
+    private String name;
 
     @JacksonXmlProperty(localName = "Category")
     @JsonAlias({"Category", "category"})
-    private String Category;
+    private String category;
 
     @JacksonXmlProperty(localName = "Price")
     @JsonAlias({"Price", "price"})
-    private BigDecimal Price;
+    private BigDecimal price;
 
     public Product(int id, String name, String category, BigDecimal price) {
-        this.Id = id;
-        this.Name = name;
-        this.Category = category;
-        this.Price = price;
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.price = price;
     }
 
     // Used to populate the product class
@@ -47,35 +44,35 @@ public class Product {
     }
 
     public void setId(int id) {
-        this.Id = id;
+        this.id = id;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setCategory(String category) {
-        this.Category = category;
+        this.category = category;
     }
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
     public BigDecimal getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(BigDecimal price) {
-        this.Price = price;
+        this.price = price;
     }
 
     public String toString() {

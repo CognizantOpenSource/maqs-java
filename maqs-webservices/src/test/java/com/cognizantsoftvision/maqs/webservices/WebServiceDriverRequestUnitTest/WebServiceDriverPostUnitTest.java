@@ -12,6 +12,7 @@ import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
 import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
 import com.cognizantsoftvision.maqs.webservices.WebServiceUtilities;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.http.HttpRequest;
@@ -21,7 +22,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests the web service posts.
+ * The Web Driver Service Driver Post unit test class.
  */
 public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
 

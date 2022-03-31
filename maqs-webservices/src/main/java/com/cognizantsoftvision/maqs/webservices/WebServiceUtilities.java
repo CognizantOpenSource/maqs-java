@@ -13,9 +13,10 @@ import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
 
 /**
- * The type Web service utilities.
+ * The Web Service Utilities class.
  */
 public class WebServiceUtilities {
+
   /**
    * used to serialize and deserialize json properties.
    */
