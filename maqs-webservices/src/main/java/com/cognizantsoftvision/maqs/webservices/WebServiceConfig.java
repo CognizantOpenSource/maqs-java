@@ -9,8 +9,6 @@ import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 
 /**
  * The Web Service Configuration class.
- *
- * The specific configuration settings.
  */
 public final class WebServiceConfig {
 
