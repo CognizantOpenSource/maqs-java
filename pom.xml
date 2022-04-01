@@ -211,10 +211,17 @@
                         <version>${jacoco.version}</version>
                         <executions>
                             <execution>
+                              <id>report-aggregate</id>
+                              <phase>verify</phase>
+                              <goals>
+                                <goal>report-aggregate</goal>
+                              </goals>
+                            </execution>
+                            <execution>
                                 <goals>
                                     <goal>prepare-agent</goal>
                                 </goals>
-                            </execution>
+                            </execution>     
                         </executions>
                     </plugin>
                 </plugins>
@@ -267,6 +274,7 @@
         <edgedriver.version>5.16299</edgedriver.version>
         <sonar.organization>cognizantopensource</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report-aggregate/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.skip>true</sonar.skip>
     </properties>
 
