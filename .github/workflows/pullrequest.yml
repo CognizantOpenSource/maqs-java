@@ -55,7 +55,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B  -Dtesting verify package --file pom.xml -e -fae -T 1C -Djdk.version=${{matrix.jdk}}  org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CognizantOpenSource_maqs-java
+        run: mvn -B  -P integration-test -Dtesting verify package --file pom.xml -e -fae -T 1C -Djdk.version=${{matrix.jdk}}  org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CognizantOpenSource_maqs-java
       - name: Publish Unit Test Results Report
         uses: scacap/action-surefire-report@v1
         if: ${{ always() }}
