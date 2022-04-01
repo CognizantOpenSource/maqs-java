@@ -31,7 +31,7 @@ jobs:
             3.1.x
             6.x.x
       - name: Start test service
-        run: Start-Process -FilePath "dotnet" -ArgumentList "run --project Docker/MAQSService/MainTestService/MainTestService.csproj"
+        run: Start-Process -FilePath "dotnet" -ArgumentList "run --project docker/MAQSService/MainTestService/MainTestService.csproj"
         shell: pwsh
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
