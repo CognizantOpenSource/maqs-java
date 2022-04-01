@@ -50,11 +50,14 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Build and analyze
+      - name: Run Unit Tests
+        uses: GabrielBB/xvfb-action@v1.5
+        with:
+          run: mvn -B -Dtesting verify package --file pom.xml -e -fae -T 1C -Djdk.version=${{matrix.jdk}}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B  -Dtesting verify package --file pom.xml -e -fae -T 1C -Djdk.version=${{matrix.jdk}}  org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CognizantOpenSource_maqs-java
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run SonarCloud Analysis
+        run: mvn -Psonar -B sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
       - name: Publish Unit Test Results Report
         uses: scacap/action-surefire-report@v1
         if: ${{ always() }}
