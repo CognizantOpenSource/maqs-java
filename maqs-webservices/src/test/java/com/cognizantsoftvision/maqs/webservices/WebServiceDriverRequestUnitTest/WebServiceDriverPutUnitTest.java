@@ -176,18 +176,6 @@ public class WebServiceDriverPutUnitTest {
   }
 
   /**
-   * Test string response.
-   * @throws IOException if the exception is thrown
-   * @throws InterruptedException if the exception is thrown
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void putExpectStringError() throws IOException, InterruptedException {
-    HttpResponse<String> result = webServiceDriver.put(putUrl, MediaType.APP_JSON, "", false);
-    Assert.assertEquals(result.body(), "\"No product provided for id = 1 \"");
-  }
-
-
-  /**
    * Test type parameterized Put request with expected status.
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
