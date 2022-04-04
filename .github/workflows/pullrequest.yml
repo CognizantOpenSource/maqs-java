@@ -36,7 +36,7 @@ jobs:
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
         with:
-          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
+          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"cognizantopensource", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_TOKEN}}" }}]'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache SonarCloud packages
