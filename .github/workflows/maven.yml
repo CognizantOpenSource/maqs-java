@@ -1,4 +1,4 @@
-name: Build
+name: DevOps 2.0 Pipeline - non-docker
 on:
   schedule:
     - cron: "13 23 * * *"
