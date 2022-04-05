@@ -33,6 +33,7 @@ runs:
         restore-keys: |
             ${{ runner.os }}-maven-
     - name: Run Unit Tests
+      shell: bash
       run: xvfb mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
 #       uses: GabrielBB/xvfb-action@v1.5
 #       with:
