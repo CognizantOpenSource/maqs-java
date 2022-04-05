@@ -33,9 +33,10 @@ runs:
         restore-keys: |
             ${{ runner.os }}-maven-
     - name: Run Unit Tests
-      uses: GabrielBB/xvfb-action@v1.5
-      with:
-        run: mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
+      run: xvfb mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
+#       uses: GabrielBB/xvfb-action@v1.5
+#       with:
+#         run: mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
     - id: random-number-generator
       run: echo "::set-output name=random-id::123"
       shell: bash
