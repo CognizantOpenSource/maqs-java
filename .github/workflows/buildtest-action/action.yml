@@ -32,6 +32,10 @@ runs:
         key: ${{ runner.os }}-maven-${{inputs.version}}.${{github.run_number}}
         restore-keys: |
             ${{ runner.os }}-maven-${{inputs.version}}
+    - name: Build the docker-compose stack
+      if: '{{inputs.module-name == "maqs-database"}}'
+      shell: bash
+      run: docker-compose -f docker/MAQSSQLServer/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
     - name: Run Unit Tests
       shell: bash
       run: xvfb-run mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
