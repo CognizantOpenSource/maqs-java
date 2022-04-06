@@ -52,7 +52,8 @@ code --install-extension vscjava.vscode-java-pack
    **Language Support for Java(TM) by Red Hat**
    **Checkstyle for Java**
 
-8. VS Code is now ready, continue to set up the project
+
+9. VS Code is now ready, continue to set up the project
 
 ---
 
