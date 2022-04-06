@@ -26,9 +26,9 @@ runs:
       uses: actions/cache@v2.1.6
       with:
         path: ~/.m2
-        key:  ${{ runner.os }}-maven-${{ github.sha }}
+        key:  ${{ runner.os }}-maven-${{inputs.version}}.${{github.run_number}}
         restore-keys: |
-          ${{ runner.os }}-maven-
+          ${{ runner.os }}-maven-${{inputs.version}}
     - run: mvn -Drevision=${{inputs.version}} compile install ${{inputs.bt-param}} -Dtesting=multiple -Dmaven.test.skip=true
       shell: bash
     - id: random-number-generator
