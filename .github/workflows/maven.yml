@@ -107,7 +107,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module-name: [ maqs-utilities, maqs-base, maqs-appium, maqs-selenium, maqs-webservices, maqs-cucumber, maqs-accessibility ]
+        module-name: [ maqs-utilities, maqs-base, maqs-appium, maqs-selenium, maqs-webservices, maqs-cucumber, maqs-accessibility, maqs-database ]
     env:
       BUILD_NUMBER: ${{ needs.getVersion.outputs.buildNumber }}
     steps:

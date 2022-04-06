@@ -29,7 +29,7 @@ runs:
       uses: actions/cache@v2.1.6
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-maven-${{inputs.version}}
+        key: ${{ runner.os }}-maven-${{inputs.version}}.${{github.run_number}}
         restore-keys: |
             ${{ runner.os }}-maven-
     - name: Run Unit Tests
