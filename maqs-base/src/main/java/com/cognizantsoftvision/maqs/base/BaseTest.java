@@ -73,7 +73,7 @@ public abstract class BaseTest {
   /**
    * Initializes a new instance of the BaseTest class.
    */
-  public BaseTest() {
+  protected BaseTest() {
     this.loggedExceptions = new ConcurrentHashMap<>();
     this.baseTestObjects = new ConcurrentManagerHashMap();
   }
@@ -300,7 +300,7 @@ public abstract class BaseTest {
   }
 
   /**
-   * Steps to do before logging teardown results.
+   * Steps to take before logging teardown results.
    *
    * @param resultType The test result
    */
@@ -345,8 +345,6 @@ public abstract class BaseTest {
         return TestResultType.OTHER;
     }
   }
-
-  /* */
 
   /**
    * Get the test result type as text.

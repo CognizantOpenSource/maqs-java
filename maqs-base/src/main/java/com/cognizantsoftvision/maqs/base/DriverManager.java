@@ -16,7 +16,7 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
   /**
    * Base Test Object.
    */
-  private final BaseTestObject baseTestObject;
+  private final ITestObject testObject;
 
   /**
    * The Base driver.
@@ -32,10 +32,10 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
    * Instantiates a new Driver manager.
    *
    * @param getDriverFunction driver function supplier
-   * @param baseTestObject    the base test object
+   * @param testObject    the base test object
    */
-  protected DriverManager(Supplier<T> getDriverFunction, BaseTestObject baseTestObject) {
-    this.baseTestObject = baseTestObject;
+  protected DriverManager(Supplier<T> getDriverFunction, ITestObject testObject) {
+    this.testObject = testObject;
     this.getDriverSupplier = getDriverFunction;
   }
 
@@ -72,7 +72,7 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
    * @return the logger
    */
   public Logger getLogger() {
-    return this.baseTestObject.getLogger();
+    return this.testObject.getLogger();
   }
 
   /**
@@ -93,7 +93,7 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
    *
    * @return the test object
    */
-  public BaseTestObject getTestObject() {
-    return baseTestObject;
+  public ITestObject getTestObject() {
+    return testObject;
   }
 }

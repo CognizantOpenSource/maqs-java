@@ -6,6 +6,8 @@ package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
+
+import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -61,6 +63,12 @@ public interface ITestObject extends AutoCloseable {
    * @return the values
    */
   ConcurrentMap<String, String> getValues();
+
+  /**
+   * Gets associated files, by file path.
+   * @return list of associated files
+   */
+  List<String> getAssociatedFiles();
 
   /**
    * Checks if the file exists and if so attempts to add it to the associated files set.
@@ -133,4 +141,8 @@ public interface ITestObject extends AutoCloseable {
    * @param value The value to associate with the key
    */
   void setValue(String key, String value);
+
+  String getFullyQualifiedTestName();
+
+  boolean getIsClosed();
 }

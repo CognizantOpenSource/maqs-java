@@ -94,6 +94,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Chrome driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getChromeDriverTest() throws Exception {
     ChromeDriver driver = null;

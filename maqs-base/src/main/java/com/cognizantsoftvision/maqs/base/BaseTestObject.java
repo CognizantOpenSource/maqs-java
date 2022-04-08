@@ -11,6 +11,7 @@ import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -90,7 +91,7 @@ public class BaseTestObject implements ITestObject {
    *
    * @param baseTestObject An existing base test object
    */
-  public BaseTestObject(final BaseTestObject baseTestObject) {
+  public BaseTestObject(final ITestObject baseTestObject) {
     this.logger = baseTestObject.getLogger();
     this.perfTimerCollection = baseTestObject.getPerfTimerCollection();
     this.values = (ConcurrentHashMap<String, String>) baseTestObject.getValues();
@@ -98,7 +99,7 @@ public class BaseTestObject implements ITestObject {
     this.managerStore = baseTestObject.getManagerStore();
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = baseTestObject.getFullyQualifiedTestName();
-    this.isClosed = baseTestObject.isClosed;
+    this.isClosed = baseTestObject.getIsClosed();
 
     baseTestObject.getLogger().logMessage(MessageType.INFORMATION, "Setup test object");
   }
@@ -355,5 +356,15 @@ public class BaseTestObject implements ITestObject {
    */
   public boolean containsAssociatedFile(final String path) {
     return this.associatedFiles.contains(path);
+  }
+
+  @Override
+  public boolean getIsClosed() {
+    return this.isClosed;
+  }
+
+  @Override
+  public List<String> getAssociatedFiles() {
+    return this.associatedFiles;
   }
 }

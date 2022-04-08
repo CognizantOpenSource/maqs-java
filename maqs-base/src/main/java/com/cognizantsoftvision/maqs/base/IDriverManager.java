@@ -13,6 +13,11 @@ import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 public interface IDriverManager<T> extends AutoCloseable {
 
   /**
+   * Gets the testing object logger.
+   */
+  Logger getLogger();
+
+  /**
    * Gets base driver.
    */
   Object getBaseDriver();
@@ -26,15 +31,4 @@ public interface IDriverManager<T> extends AutoCloseable {
    * Is driver initialized boolean.
    */
   boolean isDriverInitialized();
-
-  /**
-   * Gets logger.
-   */
-  Logger getLogger();
-
-
-  /**
-   * Gets test object.
-   */
-  BaseTestObject getTestObject();
 }
