@@ -19,6 +19,7 @@ import java.util.concurrent.ConcurrentMap;
  * The BaseTestObject class.
  */
 public class BaseTestObject implements ITestObject {
+
   /**
    * The Logger.
    */
@@ -296,11 +297,6 @@ public class BaseTestObject implements ITestObject {
     return false;
   }
 
-  @Override
-  public void addDriverManager(String key, IDriverManager<?> driverManager) {
-    this.managerStore.put(key, driverManager);
-  }
-
   /**
    * Dispose of the driver store.
    *
@@ -311,32 +307,6 @@ public class BaseTestObject implements ITestObject {
     if (!closing) {
       this.close();
     }
-  }
-
-  /**
-   * Dispose of the driver store.
-   */
-  @Override
-  public void close() {
-    if (this.managerStore == null) {
-      return;
-    }
-
-    this.logger.logMessage(MessageType.VERBOSE, "Start dispose");
-
-    for (final IDriverManager<?> singleDriver : this.managerStore.values()) {
-      if (singleDriver != null) {
-        try {
-          singleDriver.close();
-        } catch (final Exception e) {
-          throw new DriverDisposalException(StringProcessor.safeFormatter("Unable to properly dispose of driver"), e);
-        }
-      }
-      this.managerStore = null;
-      this.logger.logMessage(MessageType.VERBOSE, "End dispose");
-    }
-
-    isClosed = true;
   }
 
   /**
@@ -368,11 +338,58 @@ public class BaseTestObject implements ITestObject {
     return this.associatedFiles.contains(path);
   }
 
+  /**
+   * Dispose of the driver store.
+   */
+  @Override
+  public void close() {
+    if (this.managerStore == null) {
+      return;
+    }
+
+    this.logger.logMessage(MessageType.VERBOSE, "Start dispose");
+
+    for (final IDriverManager<?> singleDriver : this.managerStore.values()) {
+      if (singleDriver != null) {
+        try {
+          singleDriver.close();
+        } catch (final Exception e) {
+          throw new DriverDisposalException(StringProcessor.safeFormatter("Unable to properly dispose of driver"), e);
+        }
+      }
+      this.managerStore = null;
+      this.logger.logMessage(MessageType.VERBOSE, "End dispose");
+    }
+
+    isClosed = true;
+  }
+
+  /**
+   * Adds a driver manager to the manager store.
+   *
+   * @param key Key for the new driver
+   * @param driverManager The new driver manager
+   */
+  @Override
+  public void addDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.put(key, driverManager);
+  }
+
+  /**
+   * Gets if the test object is closed.
+   *
+   * @return if the test object is closed
+   */
   @Override
   public boolean getIsClosed() {
     return this.isClosed;
   }
 
+  /**
+   * Gets the associated files.
+   *
+   * @return a list of associated files
+   */
   @Override
   public List<String> getAssociatedFiles() {
     return this.associatedFiles;
