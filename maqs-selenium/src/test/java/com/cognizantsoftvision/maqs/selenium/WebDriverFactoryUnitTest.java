@@ -182,7 +182,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   @Ignore
-  // TODO: Remote driver not being instatiated.
+  // TODO: Remote driver not being instantiated.
   public void getRemoteDriverTest() {
     RemoteWebDriver driver = null;
     try {
@@ -312,7 +312,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Tests getting headless Chrome window to maximum size string.
+   * Tests getting headless Chrome Window to maximum size string.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getHeadlessWindowSizeStringMaximizeTest() {
