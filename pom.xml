@@ -266,6 +266,8 @@
         <chromedriver.version>94.0.4606.41</chromedriver.version>
         <geckodriver.version>0.28.0</geckodriver.version>
         <edgedriver.version>5.16299</edgedriver.version>
+        <sonar.organization>cognizantopensource</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencyManagement>
