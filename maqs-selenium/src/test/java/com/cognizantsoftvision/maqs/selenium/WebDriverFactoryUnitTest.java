@@ -94,6 +94,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Chrome driver.
    */
+  // TODO: delete ignore tag later
   @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getChromeDriverTest() throws Exception {
@@ -439,8 +440,13 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
     Assert.assertEquals(driverLocation, "");
   }
 
+  /**
+   * Tests getting the chrome driver with default options.
+   */
+  // TODO: delete ignore tag later
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
-  public void testGetChromeDriver() {
+  public void testGetChromeDriverWithDefaultOptions() {
     final ChromeOptions defaultChromeOptions = WebDriverFactory.getDefaultChromeOptions();
     final WebDriver chromeDriver = WebDriverFactory.getChromeDriver(defaultChromeOptions);
 
