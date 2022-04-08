@@ -6,7 +6,6 @@ package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
-
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
