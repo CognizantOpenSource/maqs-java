@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.webservices;
 
 /**
- * The enum Media type.
+ * The Media Type enum class.
  */
 public enum MediaType {
 
