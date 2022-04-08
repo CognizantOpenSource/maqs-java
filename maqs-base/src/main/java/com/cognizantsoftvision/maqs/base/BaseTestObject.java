@@ -255,22 +255,6 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Add driver manager.
-   *
-   * @param key           the key
-   * @param driverManager the driver manager
-   */
-  @Override
-  public void addDriverManager(final String key, final DriverManager<?> driverManager) {
-    this.managerStore.put(key, driverManager);
-  }
-
-  @Override
-  public void overrideDriverManager(String key, IDriverManager<?> driverManager) {
-    this.managerStore.putOrOverride(key, driverManager);
-  }
-
-  /**
    * Override driver manager.
    *
    * @param key           the key
@@ -294,7 +278,6 @@ public class BaseTestObject implements ITestObject {
     if (new File(path).exists()) {
       return this.associatedFiles.add(path);
     }
-
     return false;
   }
 
@@ -374,6 +357,28 @@ public class BaseTestObject implements ITestObject {
   @Override
   public void addDriverManager(String key, IDriverManager<?> driverManager) {
     this.managerStore.put(key, driverManager);
+  }
+
+  /**
+   * Add driver manager.
+   *
+   * @param key           the key
+   * @param driverManager the driver manager
+   */
+  @Override
+  public void addDriverManager(final String key, final DriverManager<?> driverManager) {
+    this.managerStore.put(key, driverManager);
+  }
+
+  /**
+   * Override the driver manager.
+   *
+   * @param key the key to be used to search for the driver in the driver manager
+   * @param driverManager The new driver manager
+   */
+  @Override
+  public void overrideDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.putOrOverride(key, driverManager);
   }
 
   /**

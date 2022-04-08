@@ -100,6 +100,11 @@ public interface ITestObject extends AutoCloseable {
    */
   String[] getArrayOfAssociatedFiles();
 
+  /**
+   * Adds a driver manager.
+   * @param key the key
+   * @param driverManager the driver manager to be added
+   */
   void addDriverManager(String key, DriverManager<?> driverManager);
 
   /**
