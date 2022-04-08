@@ -260,6 +260,7 @@ public class BaseTestObject implements ITestObject {
    * @param key           the key
    * @param driverManager the driver manager
    */
+  @Override
   public void addDriverManager(final String key, final DriverManager<?> driverManager) {
     this.managerStore.put(key, driverManager);
   }

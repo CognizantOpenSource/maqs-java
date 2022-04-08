@@ -100,6 +100,8 @@ public interface ITestObject extends AutoCloseable {
    */
   String[] getArrayOfAssociatedFiles();
 
+  void addDriverManager(String key, DriverManager<?> driverManager);
+
   /**
    * Override a specific driver.
    *
@@ -132,7 +134,15 @@ public interface ITestObject extends AutoCloseable {
    */
   void setValue(String key, String value);
 
+  /**
+   * gets the fully qualified test name.
+   * @return returns the test name
+   */
   String getFullyQualifiedTestName();
 
+  /**
+   * gets if the test object is closed.
+   * @return boolean if the test object is closed
+   */
   boolean getIsClosed();
 }
