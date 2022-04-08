@@ -34,7 +34,7 @@
 
     <WebServiceMaqs>
         <!-- Web service root -->
-        <WebServiceUri>http://magenicautomation.azurewebsites.net</WebServiceUri>
+        <WebServiceUri>http://localhost:5026</WebServiceUri>
 
         <!-- Time-out in milliseconds -->
         <WebServiceTimeout>10000</WebServiceTimeout>

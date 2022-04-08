@@ -4,8 +4,8 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.math.BigDecimal;
 import java.net.http.HttpResponse;
@@ -13,14 +13,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for the Web Service Utilities functionality.
+ * The Web Service Utilities unit test class.
  */
 public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
 
   /**
-  The web service object used for the test.
+   The web service object used for the test.
    */
-  private final Product product = new Product(1, "Milk", "Dairy", BigDecimal.TEN);
+  private final Product product = new Product(1, "Milk", "Diary", BigDecimal.TEN);
+
 
   /**
    * String to hold the URL.
@@ -33,10 +34,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBody() throws Exception {
-    HttpResponse<String> response = this.getWebServiceDriver()
-        .getContent(baseUrl + "/api/String/1", MediaType.PLAIN_TEXT, true);
+    HttpResponse<String> response = this.getWebServiceDriver().getContent(
+        baseUrl + "/api/String/1", MediaType.PLAIN_TEXT, true);
     String responseString = WebServiceUtilities.getResponseBody(response);
-
     Assert.assertNotNull(responseString, "Response body did not deserialize string correctly");
   }
 
@@ -46,10 +46,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromJson() throws Exception {
-    HttpResponse<String> response = this.getWebServiceDriver()
-        .getContent(baseUrl +"/api/XML_JSON/GetProduct/1", MediaType.APP_JSON, true);
+    HttpResponse<String> response = this.getWebServiceDriver().getContent(
+        baseUrl +"/api/XML_JSON/GetProduct/1", MediaType.APP_JSON, true);
     Product jsonProduct = WebServiceUtilities.getResponseBody(response, MediaType.APP_JSON, Product.class);
-
     Assert.assertNotNull(jsonProduct, "Response body did not deserialize object from json correctly");
   }
 
@@ -59,10 +58,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromXml() throws Exception {
-    HttpResponse<String> response = this.getWebServiceDriver()
-        .getContent(baseUrl +"/api/XML_JSON/GetProduct/1", MediaType.APP_XML, true);
+    HttpResponse<String> response = this.getWebServiceDriver().getContent(
+        baseUrl +"/api/XML_JSON/GetProduct/1", MediaType.APP_XML, true);
     Product xmlProduct = WebServiceUtilities.getResponseBody(response, MediaType.APP_XML, Product.class);
-
     Assert.assertNotNull(xmlProduct, "Response body did not deserialize object from xml correctly");
   }
 
@@ -73,10 +71,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE, expectedExceptions = IllegalArgumentException.class)
   public void testGetResponseBodyAsObjectFromNeitherXmlOrJson() throws Exception {
-    HttpResponse<String> response = this.getWebServiceDriver()
-        .getContent(baseUrl +"/api/XML_JSON/GetProduct/1", MediaType.OCTET_STREAM, true);
+    HttpResponse<String> response = this.getWebServiceDriver().getContent(
+        baseUrl +"/api/XML_JSON/GetProduct/1", MediaType.OCTET_STREAM, true);
     WebServiceUtilities.getResponseBody(response, MediaType.OCTET_STREAM, Product.class);
-
     Assert.fail("Exception was not thrown for attempting to deserialize json to an object");
   }
 
@@ -86,10 +83,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testDeserializeJson() throws Exception {
-    HttpResponse<String> response = this.getWebServiceDriver()
-        .getContent(baseUrl + "/api/XML_JSON/GetProduct/1", MediaType.APP_JSON, true);
+    HttpResponse<String> response = this.getWebServiceDriver().getContent(
+        baseUrl + "/api/XML_JSON/GetProduct/1", MediaType.APP_JSON, true);
     Product product = WebServiceUtilities.deserializeJson(response, Product.class);
-
     Assert.assertNotNull(product);
   }
 
@@ -99,10 +95,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testDeserializeXml() throws Exception {
-    HttpResponse<String> response = this.getWebServiceDriver()
-        .getContent( baseUrl + "/api/XML_JSON/GetProduct/1", MediaType.APP_XML, true);
+    HttpResponse<String> response = this.getWebServiceDriver().getContent(
+        baseUrl + "/api/XML_JSON/GetProduct/1", MediaType.APP_XML, true);
     Product product = WebServiceUtilities.deserializeXml(response, Product.class);
-
     Assert.assertNotNull(product);
   }
 
@@ -111,8 +106,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    * @throws JsonProcessingException if there is an error in converting Json to a string
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void testCreateStringEntityJson()
-      throws JsonProcessingException {
+  public void testCreateStringEntityJson() throws JsonProcessingException {
     Object entity = WebServiceUtilities.createStringEntity(this.product, MediaType.APP_JSON);
     Assert.assertNotNull(entity, "string entity wasn't created using content type application/json");
   }
@@ -122,8 +116,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    * @throws JsonProcessingException if there is an error in converting Json to a string
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void testCreateStringEntityXml()
-      throws JsonProcessingException {
+  public void testCreateStringEntityXml() throws JsonProcessingException {
     Object entity = WebServiceUtilities.createStringEntity(this.product, MediaType.APP_XML);
     Assert.assertNotNull(entity, "string entity wasn't created using content type application/xml");
   }
@@ -134,12 +127,10 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeJson() throws JsonProcessingException {
-    String expectedJson = "{\"Id\":1,\"Name\":\"Milk\",\"Category\":\"Dairy\",\"Price\":10}";
+    String expectedJson = "{\"id\":1,\"name\":\"Milk\",\"category\":\"Diary\",\"price\":10}";
     String actualJson = WebServiceUtilities.serializeJson(this.product);
-
-    Assert.assertEquals(expectedJson, actualJson, String
-        .format("the json values compared aren't equal, expected was %s while actual was %s",
-            expectedJson, actualJson));
+    Assert.assertEquals(actualJson, expectedJson, String.format(
+        "the json values compared aren't equal, expected was %s while actual was %s", expectedJson, actualJson));
   }
 
   /**
@@ -148,11 +139,11 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeXml() throws JsonProcessingException {
-    String expectedXml = "<Product xmlns=\"http://schemas.datacontract.org/2004/07/AutomationTestSite.Models\">"
-        + "<Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10</Price></Product>";
+    String expectedXml = "<Product xmlns=\"http://schemas.datacontract.org/2004/07/MainTestService.Models\">"
+        + "<Id>1</Id><Name>Milk</Name><Category>Diary</Category><Price>10</Price></Product>";
     String actualXml = WebServiceUtilities.serializeXml(this.product);
-    Assert.assertEquals(actualXml, expectedXml, String
-        .format("the xml values compared aren't equal, expected was %s while actual was %s", expectedXml, actualXml));
+    Assert.assertEquals(actualXml, expectedXml,  String.format(
+        "the xml values compared aren't equal: expected was %s while actual was %s", expectedXml, actualXml));
   }
 
   /**
