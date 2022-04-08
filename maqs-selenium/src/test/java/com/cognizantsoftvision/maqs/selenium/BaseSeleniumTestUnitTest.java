@@ -60,7 +60,7 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
 
   /**
    * Verify issue is resolved with upcasting the BaseTestObject to one of
-   * it's concrete implementation when using TestNG Dataproviders.
+   * it's concrete implementation when using TestNG Data providers.
    *
    * @param data The data being provided for each test
    * @see <a href=https://github.com/Magenic/JMAQS/issues/314>JMAQS github issue 314</a>
