@@ -7,75 +7,53 @@ import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.microsoft.playwright.Page;
 import java.util.function.Supplier;
 
-/// <summary>
-/// Playwright test context data
-/// </summary>
+/**
+ * The Playwright Test Object class.
+ */
 public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightTestObject {
 
-  /// <summary>
-  /// Initializes a new instance of the <see cref="PlaywrightTestObject" /> class
-  /// </summary>
-  /// <param name="PageDriver">The test's Playwright page</param>
-  /// <param name="logger">The test's logger</param>
-  /// <param name="fullyQualifiedTestName">The test's fully qualified test name</param>
-  public PlaywrightTestObject(PageDriver PageDriver, Logger logger, String fullyQualifiedTestName) {
+  /**
+   * Initializes a new instance of the PlaywrightTestObject class.
+   * @param pageDriver The test's Playwright page
+   * @param logger The test's logger
+   * @param fullyQualifiedTestName The test's fully qualified test name
+   */
+  public PlaywrightTestObject(PageDriver pageDriver, Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
-    this.getManagerStore().put(instanceof(PlaywrightDriverManager).FullName, new PlaywrightDriverManager(() -> PageDriver, this));
-//    this.SoftAssert = new PlaywrightSoftAssert(this);
+    this.getManagerStore().put((PageDriverManager.class).getCanonicalName(),
+        new PageDriverManager(() -> pageDriver, this));
   }
 
-  /// <summary>
-  /// Initializes a new instance of the <see cref="PlaywrightTestObject" /> class
-  /// </summary>
-  /// <param name="getDriver">Function for getting a Playwright page</param>
-  /// <param name="logger">The test's logger</param>
-  /// <param name="fullyQualifiedTestName">The test's fully qualified test name</param>
+  /**
+   * Initializes a new instance of the PlaywrightTestObject class.
+   * @param getDriver Function for getting a Playwright page
+   * @param logger The test's logger
+   * @param fullyQualifiedTestName The test's fully qualified test name
+   */
   public PlaywrightTestObject(Supplier<PageDriver> getDriver, Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
-    this.ManagerStore.Add(typeof(PlaywrightDriverManager).FullName, new PlaywrightDriverManager(getDriver, this));
-//    this.getsSoftAssert = new PlaywrightSoftAssert(this);
+    this.getManagerStore().put((PageDriverManager.class).getCanonicalName(),
+        new PageDriverManager(getDriver, this));
   }
 
-  /// <summary>
-  /// Gets the Playwright driver manager
-  /// </summary>
-  public PageDriverManager pageManager;
+  /**
+   * the page driver manager.
+   */
+  private PageDriverManager pageManager;
 
   public PageDriverManager getPageManager() {
 //    return this.ManagerStore.GetManager<PlaywrightDriverManager>(typeof(PlaywrightDriverManager).FullName);
-    return this.getManagerStore().getOrDefault().getBaseDriver();
+    return (PageDriverManager) this.getManagerStore().get(PageDriverManager.class.getCanonicalName());
   }
 
   /// <summary>
   /// Gets the Playwright page
   /// </summary>
-  private PageDriver PageDriver;
-
-  @Override public PageDriver pageDriver() {
-    return null;
-  }
+  private PageDriver pageDriver;
 
   @Override
   public PageDriver getPageDriver() {
-    return this.getPageManager().getPageDriver();
-  }
-
-  @Override public PageDriverManager pageManager() {
-    return null;
-  }
-
-  @Override
-  public PageDriverManager getPageManager() {
-    return null;
-  }
-
-  /// <summary>
-  /// Override the the function for creating a new page
-  /// </summary>
-  /// <param name="getPage">New function for creating a page</param>
-  @Override
-  public void overridePageDriver(Supplier getPage) {
-    this.getPageManager().overrideDriver(getPage.get());
+    return this.pageDriver;
   }
 
   /// <summary>
@@ -84,7 +62,7 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
   /// <param name="page">The new page</param>
   @Override
   public void overridePageDriver(Page page) {
-    this.getPageManager().overrideDriver(() -> page);
+    this.getPageManager().overrideDriver(page);
   }
 
   /// <summary>

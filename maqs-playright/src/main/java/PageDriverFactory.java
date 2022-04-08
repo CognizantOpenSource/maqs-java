@@ -9,27 +9,28 @@ import com.microsoft.playwright.options.Proxy;
 import com.microsoft.playwright.options.ViewportSize;
 import java.io.File;
 
-/// <summary>
-/// Factory for creating page drivers
-/// </summary>
+/**
+ * The Page Driver Factory class.
+ * Factory for creating page drivers
+ */
 public class PageDriverFactory {
 
   private PageDriverFactory() {
   }
 
-  /// <summary>
-  /// Get the default page based on the test run configuration
-  /// </summary>
-  /// <returns>A page</returns>
+  /**
+   * Get the default page based on the test run configuration.
+   * @return the default page driver
+   */
   public static PageDriver getDefaultPageDriver() {
     return getPageDriverForBrowserWithDefaults(PlaywrightConfig.getBrowserType());
   }
 
-  /// <summary>
-  /// Get the default page (for the specified browser type) based on the test run configuration
-  /// </summary>
-  /// <param name="browser">The type of browser</param>
-  /// <returns>A page</returns>
+  /**
+   * Get the default page (for the specified browser type) based on the test run configuration.
+   * @param browser The type of browser
+   * @return the requested browser
+   */
   public static Browser getBrowserWithDefaults(PlaywrightBrowser browser) {
     Playwright playwright = Playwright.create();
     
@@ -48,21 +49,21 @@ public class PageDriverFactory {
     }
   }
 
-  /// <summary>
-  /// Get the default page (for the specified browser type) based on the test run configuration
-  /// </summary>
-  /// <param name="browser">The type of browser</param>
-  /// <returns>A page</returns>
+  /**
+   * Get the default page (for the specified browser type) based on the test run configuration.
+   * @param browser The type of browser
+   * @return the page browser
+   */
   public static PageDriver getPageDriverForBrowserWithDefaults(PlaywrightBrowser browser) {
     Browser asyncBrowser = getBrowserWithDefaults(browser);
     return getPageDriverFromBrowser(asyncBrowser);
   }
 
-  /// <summary>
-  ///
-  /// </summary>
-  /// <param name="browser">The current browser</param>
-  /// <returns>A page</returns>
+  /**
+   * Gets the page driver from the browser.
+   * @param browser the currect browser
+   * @return the page driver
+   */
   public static PageDriver getPageDriverFromBrowser(Browser browser) {
     BrowserContext context;
 
@@ -100,11 +101,11 @@ public class PageDriverFactory {
     return getNewPageDriverFromBrowserContext(context);
   }
 
-  /// <summary>
-  /// Get a new page driver for the given browser context
-  /// </summary>
-  /// <param name="context">The current browser's context</param>
-  /// <returns>A page</returns>
+  /**
+   * Get a new page driver for the given browser context.
+   * @param context The current browser's context
+   * @return the page driver
+   */
   public static PageDriver getNewPageDriverFromBrowserContext(BrowserContext context) {
     Page page = context.newPage();
     page.setDefaultTimeout(PlaywrightConfig.getTimeoutTime());
@@ -113,65 +114,63 @@ public class PageDriverFactory {
     return new PageDriver(page);
   }
 
-  /// <summary>
-  /// Get Chromium browser
-  /// </summary>
-  /// <param name="playwright">Playw</param>
-  /// <param name="options">Browser options</param>
-  /// <returns>A Chromium browser</returns>
+  /**
+   * Get the chromium based browser.
+   * @param playwright the playwright object
+   * @param options the browser options
+   * @return a chromium based browser
+   */
   public static Browser getChromiumBasedBrowser(Playwright playwright, BrowserType.LaunchOptions options) {
     return playwright.chromium().launch(options);
   }
 
-  /// <summary>
-  /// Get Firefox browser
-  /// </summary>
-  /// <param name="playwright">Playw</param>
-  /// <param name="options">Browser options</param>
-  /// <returns>A Firefox browser</returns>
+  /**
+   * Get the firefox browser.
+   * @param playwright the playwright object
+   * @param options the browser options
+   * @return a firefox based browser
+   */
   public static Browser getFirefoxBasedBrowser(Playwright playwright, BrowserType.LaunchOptions options) {
     return playwright.firefox().launch(options);
   }
 
-  /// <summary>
-  /// Get Webkit browser
-  /// </summary>
-  /// <param name="playwright">Playw</param>
-  /// <param name="options">Browser options</param>
-  /// <returns>A Webkit browser</returns>
+  /**
+   * Get the webkit browser.
+   * @param playwright the playwright object
+   * @param options the browser options
+   * @return a webkit based browser
+   */
   public static Browser getWebkitBasedBrowser(Playwright playwright, BrowserType.LaunchOptions options) {
     return playwright.webkit().launch(options);
   }
 
-  /// <summary>
-  /// Get the default Chrome options
-  /// </summary>
-  /// <returns>The default Chrome options</returns>
+  /**
+   * Get the default Chrome options.
+   * @return The default Chrome options
+   */
   public static BrowserType.LaunchOptions getDefaultChromeOptions() {
     BrowserType.LaunchOptions options = getDefaultOptions();
     options.channel = "chrome";
-
     return options;
   }
 
-  /// <summary>
-  /// Get the default Edge options
-  /// </summary>
-  /// <returns>The default Chrome options</returns>
+  /**
+   * Get the default Edge options.
+   * @return the default Edge options
+   */
   public static BrowserType.LaunchOptions getDefaultEdgeOptions() {
     BrowserType.LaunchOptions options = getDefaultOptions();
     options.channel = "msedge";
     return options;
   }
 
-
-  /// <summary>
-  /// Get the default options
-  /// </summary>
-  /// <returns>The default options</returns>
+  /**
+   * Get the default options.
+   * @return the default options
+   */
   public static BrowserType.LaunchOptions getDefaultOptions() {
     // Check if we should add proxy
-    if(PlaywrightConfig.getUseProxy()) {
+    if (PlaywrightConfig.getUseProxy()) {
       BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
       options.proxy = new Proxy(PlaywrightConfig.getProxyAddress());
       options.headless = PlaywrightConfig.getHeadless();

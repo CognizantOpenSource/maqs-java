@@ -3,7 +3,7 @@
  */
 
 /**
- * Known browser types.
+ * Known Playwright browser types.
  */
 public enum PlaywrightBrowser {
 

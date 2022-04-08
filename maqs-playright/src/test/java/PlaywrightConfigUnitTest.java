@@ -37,8 +37,8 @@ public class PlaywrightConfigUnitTest {
       [DataRow(null, PlaywrightBrowser.Chrome)]
       [DataRow("Chrome", PlaywrightBrowser.Chrome)]
   public void ConfigBrowserEnum(string browser, PlaywrightBrowser browserEnum) {
-    Config.AddTestSettingValue("Browser", browser, ConfigSection.PlaywrightMaqs);
-    Assert.AreEqual(browserEnum, PlaywrightConfig.GetBrowserType());
+    Config.AddTestSettingValue("Browser", browser, ConfigSection.PLAYWRIGHT_MAQS);
+    Assert.AreEqual(browserEnum, PlaywrightConfig.getBrowserType());
   }
 
   /// <summary>

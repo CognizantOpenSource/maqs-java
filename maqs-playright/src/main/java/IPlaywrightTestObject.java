@@ -4,33 +4,33 @@
 
 import com.cognizantsoftvision.maqs.base.ITestObject;
 import com.microsoft.playwright.Page;
-import java.util.function.Supplier;
 
+/**
+ * The Playwright Test Object interface.
+ */
 public interface IPlaywrightTestObject extends ITestObject {
 
+  /**
+   * Gets the page driver.
+   * @return the page driver
+   */
   PageDriver getPageDriver();
 
-  /// <summary>
-  /// Gets the Playwright page manager
-  /// </summary>
+  /**
+   * Gets the Playwright page manager.
+   * @return the playwright driver manager
+   */
   PageDriverManager getPageManager();
 
-
-  /// <summary>
-  /// Override the function for creating a Playwright page
-  /// </summary>
-  /// <param name="getPage">Function for creating a page</param>
-  void overridePageDriver(Supplier<Page> getPage);
-
-  /// <summary>
-  /// Override the Playwright page
-  /// </summary>
-  /// <param name="page">New page</param>
+  /**
+   * Override the Playwright page.
+   * @param page the new page
+   */
   void overridePageDriver(Page page);
 
-  /// <summary>
-  /// Override the Playwright page driver
-  /// </summary>
-  /// <param name="pageDriver">New page driver</param>
+  /**
+   * Override the Playwright page driver.
+   * @param pageDriver the new page driver
+   */
   void overridePageDriver(PageDriver pageDriver);
 }

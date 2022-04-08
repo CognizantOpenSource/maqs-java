@@ -9,7 +9,6 @@ import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.SelectOption;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -18,6 +17,9 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+/**
+ * The Page Driver class.
+ */
 public class PageDriver {
 
   public PageDriver(Page page) {
@@ -627,7 +629,7 @@ public class PageDriver {
   /// <summary>
   /// Gets the underlying async page object
   /// </summary>
-  public Browser ParentBrowser;
+  private Browser ParentBrowser;
 
   public Browser getParentBrowser() {
     return this.asyncPage.context().browser();
