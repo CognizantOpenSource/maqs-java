@@ -37,11 +37,11 @@ runs:
       shell: bash
       run: docker-compose -f docker/MAQSSQLServer/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
     - name: Run Unit Tests
-#      shell: bash
-#      run: xvfb-run mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
-      uses: GabrielBB/xvfb-action@v1.5
-      with:
-        run: mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
+      shell: bash
+      run: xvfb-run mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
+#      uses: GabrielBB/xvfb-action@v1.5
+#      with:
+#        run: mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
     - id: random-number-generator
       run: echo "::set-output name=random-id::123"
       shell: bash
