@@ -263,6 +263,11 @@ public class BaseTestObject implements ITestObject {
     this.managerStore.put(key, driverManager);
   }
 
+  @Override
+  public void overrideDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.putOrOverride(key, driverManager);
+  }
+
   /**
    * Override driver manager.
    *
@@ -291,6 +296,11 @@ public class BaseTestObject implements ITestObject {
     return false;
   }
 
+  @Override
+  public void addDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.put(key, driverManager);
+  }
+
   /**
    * Dispose of the driver store.
    *
@@ -314,7 +324,7 @@ public class BaseTestObject implements ITestObject {
 
     this.logger.logMessage(MessageType.VERBOSE, "Start dispose");
 
-    for (final DriverManager<?> singleDriver : this.managerStore.values()) {
+    for (final IDriverManager<?> singleDriver : this.managerStore.values()) {
       if (singleDriver != null) {
         try {
           singleDriver.close();

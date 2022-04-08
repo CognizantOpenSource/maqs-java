@@ -83,16 +83,7 @@ public interface ITestObject extends AutoCloseable {
    * @param key Key for the new driver
    * @param driverManager The new driver manager
    */
-  void addDriverManager(String key, final DriverManager<?> driverManager);
-
-  /**
-   * Add a new driver manager.
-   *
-   * @param driverManager The new driver manager
-   * @param overrideIfExists Should we override if this driver exists
-   * @param <T> The driver type
-   */
-  <T extends DriverManager<?>> void addDriverManager(final T driverManager, final boolean overrideIfExists);
+  void addDriverManager(String key, final IDriverManager<?> driverManager);
 
   /**
    * Returns an array of the file paths associated with the test object.
@@ -115,7 +106,7 @@ public interface ITestObject extends AutoCloseable {
    * @param key the key to be used to search for the driver in the driver manager
    * @param driverManager The new driver manager
    */
-  void overrideDriverManager(final String key, final DriverManager<?> driverManager);
+  void overrideDriverManager(final String key, final IDriverManager<?> driverManager);
 
   /**
    * Removes the file path from the associated file set.

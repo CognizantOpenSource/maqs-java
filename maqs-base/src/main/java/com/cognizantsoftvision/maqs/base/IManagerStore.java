@@ -14,14 +14,14 @@ public interface IManagerStore extends AutoCloseable {
    *
    * @param driverManager the driver manager
    */
-  void put(DriverManager<?> driverManager);
+  void put(IDriverManager<?> driverManager);
 
   /**
    * Put or override.
    *
    * @param driverManager the driver manager
    */
-  void putOrOverride(DriverManager<?> driverManager);
+  void putOrOverride(IDriverManager<?> driverManager);
 
   /**
    * Put or override.
@@ -29,7 +29,14 @@ public interface IManagerStore extends AutoCloseable {
    * @param key           the key
    * @param driverManager the driver manager
    */
-  void putOrOverride(String key, DriverManager<?> driverManager);
+  void putOrOverride(String key, IDriverManager<?> driverManager);
+
+  /**
+   * Put or override.
+   * @param key the key.
+   * @return the driver manager interface
+   */
+  IDriverManager<?> getManager(String key);
 
   /**
    * Remove boolean.

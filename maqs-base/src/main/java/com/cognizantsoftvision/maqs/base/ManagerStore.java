@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Driver manager dictionary.
  */
-public class ManagerStore extends HashMap<String, DriverManager<?>> implements IManagerStore {
+public class ManagerStore extends HashMap<String, IDriverManager<?>> implements IManagerStore {
 
   @Override
   public void close() {
@@ -20,7 +20,7 @@ public class ManagerStore extends HashMap<String, DriverManager<?>> implements I
 
   @Override
   public void clear() {
-    for (Map.Entry<String, DriverManager<?>> entry : this.entrySet()) {
+    for (Map.Entry<String, IDriverManager<?>> entry : this.entrySet()) {
       try {
         entry.getValue().close();
       } catch (Exception e) {
@@ -47,7 +47,8 @@ public class ManagerStore extends HashMap<String, DriverManager<?>> implements I
    *
    * @param driverManager the driver manager
    */
-  public void put(DriverManager<?> driverManager) {
+  @Override
+  public void put(IDriverManager<?> driverManager) {
     this.put(driverManager.getClass().getName(), driverManager);
   }
 
@@ -56,7 +57,8 @@ public class ManagerStore extends HashMap<String, DriverManager<?>> implements I
    *
    * @param driverManager the driver manager
    */
-  public void putOrOverride(DriverManager<?> driverManager) {
+  @Override
+  public void putOrOverride(IDriverManager<?> driverManager) {
     this.putOrOverride(driverManager.getClass().getName(), driverManager);
   }
 
@@ -66,9 +68,15 @@ public class ManagerStore extends HashMap<String, DriverManager<?>> implements I
    * @param key           the key
    * @param driverManager the driver manager
    */
-  public void putOrOverride(String key, DriverManager<?> driverManager) {
+  @Override
+  public void putOrOverride(String key, IDriverManager<?> driverManager) {
     this.remove(key);
     this.put(key, driverManager);
+  }
+
+  @Override
+  public IDriverManager<?> getManager(String key) {
+    return this.get(key);
   }
 
   /**
