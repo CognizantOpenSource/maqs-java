@@ -2,6 +2,8 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+package com.cognizantsoftvision.maqs.playwright;
+
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 
@@ -30,12 +32,12 @@ public abstract class BasePlaywrightPageModel {
   }
 
   /**
-   * the PageDriver from the test object.
+   * the com.cognizantsoftvision.maqs.playwright.PageDriver from the test object.
    */
   protected PageDriver pageDriver;
 
   /**
-   * Gets the PageDriver from the test object.
+   * Gets the com.cognizantsoftvision.maqs.playwright.PageDriver from the test object.
    * @return the page driver
    */
   public PageDriver getPageDriver() {
@@ -43,7 +45,7 @@ public abstract class BasePlaywrightPageModel {
   }
 
   /**
-   * Sets the PageDriver from the test object.
+   * Sets the com.cognizantsoftvision.maqs.playwright.PageDriver from the test object.
    * @param driver the page driver to be set
    */
   private void setPageDriver(PageDriver driver) {
@@ -98,8 +100,8 @@ public abstract class BasePlaywrightPageModel {
   }
 
   /**
-   * Override the PageDriver.
-   * This allows you to use something other than the default tests object PageDriver.
+   * Override the com.cognizantsoftvision.maqs.playwright.PageDriver.
+   * This allows you to use something other than the default tests object com.cognizantsoftvision.maqs.playwright.PageDriver.
    *
    * @param pageDriver the new page driver
    */

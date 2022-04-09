@@ -2,14 +2,14 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-import com.cognizantsoftvision.maqs.base.BaseTestObject;
+package com.cognizantsoftvision.maqs.playwright;
+
 import com.cognizantsoftvision.maqs.base.DriverManager;
 import com.cognizantsoftvision.maqs.base.ITestObject;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import com.microsoft.playwright.Page;
 import java.util.function.Supplier;
 
 /**
@@ -33,7 +33,7 @@ public class PageDriverManager extends DriverManager<PageDriver> {
    * @param getDriverFunction driver function supplier
    * @param baseTestObject    the base test object
    */
-  protected PageDriverManager(Supplier<PageDriver> getDriverFunction, ITestObject baseTestObject) {
+  public PageDriverManager(Supplier<PageDriver> getDriverFunction, ITestObject baseTestObject) {
     super(getDriverFunction, baseTestObject);
   }
 
@@ -41,25 +41,19 @@ public class PageDriverManager extends DriverManager<PageDriver> {
   /// Override the page
   /// </summary>
   /// <param name="overrideDriver">The new page</param>
-  public void overrideDriver(PageDriver overrideDriver) {
-    this.overrideDriver(() -> overrideDriver);
-  }
-
-  /// <summary>
-  /// Override the page
-  /// </summary>
-  /// <param name="overrideDriver">Function for getting a new page</param>
-  public void overrideDriver(PageDriver overrideDriver) {
-    this.overrideDriver(overrideDriver);
+  public void overrideDriver(Supplier<PageDriver> overrideDriver) {
+    this.setBaseDriver(overrideDriver.get());
   }
 
   /// <summary>
   /// Override the page
   /// </summary>
   /// <param name="overridePage">Function for getting a new page</param>
-  public void overrideDriver(Supplier<Page> overridePage) {
-    this.overrideDriverGet(() -> new PageDriver(overridePage.get()));
+  public void overrideDriver(PageDriver overridePage) {
+    this.overrideDriver(() -> overridePage);
   }
+
+
 
   /**
    * Get the page driver.
@@ -146,5 +140,10 @@ public class PageDriverManager extends DriverManager<PageDriver> {
       this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: " + e.getMessage());
       System.out.print("Failed to start driver because: " + e.getMessage());
     }
+  }
+
+  @Override
+  public void close() {
+    this.baseDriver.close();
   }
 }

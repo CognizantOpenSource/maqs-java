@@ -2,7 +2,10 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+package com.cognizantsoftvision.maqs.playwright;
+
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.microsoft.playwright.Page;
 import java.util.function.Supplier;
@@ -13,24 +16,24 @@ import java.util.function.Supplier;
 public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightTestObject {
 
   /**
-   * Initializes a new instance of the PlaywrightTestObject class.
+   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightTestObject class.
    * @param pageDriver The test's Playwright page
    * @param logger The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
-  public PlaywrightTestObject(PageDriver pageDriver, Logger logger, String fullyQualifiedTestName) {
+  public PlaywrightTestObject(PageDriver pageDriver, ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((PageDriverManager.class).getCanonicalName(),
         new PageDriverManager(() -> pageDriver, this));
   }
 
   /**
-   * Initializes a new instance of the PlaywrightTestObject class.
+   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightTestObject class.
    * @param getDriver Function for getting a Playwright page
    * @param logger The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
-  public PlaywrightTestObject(Supplier<PageDriver> getDriver, Logger logger, String fullyQualifiedTestName) {
+  public PlaywrightTestObject(Supplier<PageDriver> getDriver, ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((PageDriverManager.class).getCanonicalName(),
         new PageDriverManager(getDriver, this));
@@ -39,7 +42,7 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
   /**
    * the page driver manager.
    */
-  private PageDriverManager pageManager;
+  protected PageDriverManager pageManager;
 
   public PageDriverManager getPageManager() {
 //    return this.ManagerStore.GetManager<PlaywrightDriverManager>(typeof(PlaywrightDriverManager).FullName);
@@ -49,20 +52,10 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
   /// <summary>
   /// Gets the Playwright page
   /// </summary>
-  private PageDriver pageDriver;
+  protected PageDriver pageDriver;
 
-  @Override
   public PageDriver getPageDriver() {
-    return this.pageDriver;
-  }
-
-  /// <summary>
-  /// Override the the old page with a new page
-  /// </summary>
-  /// <param name="page">The new page</param>
-  @Override
-  public void overridePageDriver(Page page) {
-    this.getPageManager().overrideDriver(page);
+    return this.getPageManager().getPageDriver();
   }
 
   /// <summary>

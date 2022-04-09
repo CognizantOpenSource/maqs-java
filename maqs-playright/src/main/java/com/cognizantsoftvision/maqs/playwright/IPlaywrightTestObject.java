@@ -2,6 +2,8 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+package com.cognizantsoftvision.maqs.playwright;
+
 import com.cognizantsoftvision.maqs.base.ITestObject;
 import com.microsoft.playwright.Page;
 
@@ -26,7 +28,7 @@ public interface IPlaywrightTestObject extends ITestObject {
    * Override the Playwright page.
    * @param page the new page
    */
-  void overridePageDriver(Page page);
+//  void overridePageDriver(Page page);
 
   /**
    * Override the Playwright page driver.

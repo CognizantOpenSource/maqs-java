@@ -4,9 +4,8 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
-
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
@@ -20,14 +19,14 @@ public interface ITestObject extends AutoCloseable {
    *
    * @return The logger
    */
-  Logger getLogger();
+  ILogger getLogger();
 
   /**
    * Sets the logger.
    *
    * @param newLogger The logger to use
    */
-  void setLogger(final Logger newLogger);
+  void setLogger(final ILogger newLogger);
 
   /**
    * Gets the manager store.

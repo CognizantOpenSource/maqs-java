@@ -2,12 +2,15 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+package com.cognizantsoftvision.maqs.playwright;
+
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class PlaywrightConfigUnitTest {
+public class ConfigUnitTest {
 
   /// <summary>
   /// Get expected WebBase configuration
@@ -25,7 +28,7 @@ public class PlaywrightConfigUnitTest {
       [DataRow("Webkit")]
 
   public void ConfigBrowserName(String browserName) {
-    Config.addaddTestSettingValue("Browser", browserName, ConfigSection.PLAYWRIGHT_MAQS);
+    Config.addaddTestSettingValues("Browser", browserName, ConfigSection.PLAYWRIGHT_MAQS);
     Assert.assertEquals(PlaywrightConfig.getBrowserName(), browserName);
   }
 
@@ -44,7 +47,7 @@ public class PlaywrightConfigUnitTest {
   /// <summary>
   /// Make sure error correct error is thrown if we use a bad browser name
   /// </summary>
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(groups = TestCategories.PLAYWRIGHT, expectedExceptions = IllegalArgumentException.class)
   public void configBadBrowserName() {
     //Config.addAddTestSettingValue("Browser", "IE", ConfigSection.PlaywrightMaqs);
     PlaywrightBrowser type = PlaywrightConfig.getBrowserType();
@@ -54,7 +57,7 @@ public class PlaywrightConfigUnitTest {
   /// <summary>
   /// Get expected UseProxy configuration
   /// </summary>
-  @Test
+  @Test(groups = TestCategories.PLAYWRIGHT)
   public void getUseProxy() {
     Assert.assertFalse(PlaywrightConfig.getUseProxy());
   }
@@ -62,7 +65,8 @@ public class PlaywrightConfigUnitTest {
   /// <summary>
   /// Get expected proxy address configuration
   /// </summary>
-  public void GetProxyAddress() {
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void getProxyAddress() {
     Assert.assertEquals(PlaywrightConfig.getProxyAddress(), "http://localhost:8002");
   }
 }

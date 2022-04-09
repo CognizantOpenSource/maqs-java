@@ -1,4 +1,4 @@
-/*
+package com.cognizantsoftvision.maqs.playwright;/*
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 

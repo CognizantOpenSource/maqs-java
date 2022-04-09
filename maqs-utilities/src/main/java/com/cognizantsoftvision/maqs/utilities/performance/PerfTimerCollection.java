@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.utilities.performance;
 
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 
 /**
@@ -14,7 +15,7 @@ public class PerfTimerCollection implements IPerfTimerCollection {
   /**
    * The logger.
    */
-  protected Logger log;
+  protected ILogger log;
 
   /**
    * The Test Name.
@@ -26,7 +27,7 @@ public class PerfTimerCollection implements IPerfTimerCollection {
    *
    * @return The Logger
    */
-  protected Logger getLog() {
+  protected ILogger getLog() {
     return this.log;
   }
 
@@ -63,7 +64,7 @@ public class PerfTimerCollection implements IPerfTimerCollection {
    * @param logger                 Logger to use
    * @param fullyQualifiedTestName Test Name
    */
-  public PerfTimerCollection(Logger logger, String fullyQualifiedTestName) {
+  public PerfTimerCollection(ILogger logger, String fullyQualifiedTestName) {
     this.log = logger;
     this.testName = fullyQualifiedTestName;
   }

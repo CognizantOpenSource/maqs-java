@@ -1,4 +1,4 @@
-/*
+package com.cognizantsoftvision.maqs.playwright;/*
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
@@ -61,7 +61,7 @@ public class PageDriverFactory {
 
   /**
    * Gets the page driver from the browser.
-   * @param browser the currect browser
+   * @param browser the current browser
    * @return the page driver
    */
   public static PageDriver getPageDriverFromBrowser(Browser browser) {

@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.base.exceptions.DriverDisposalException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
@@ -22,7 +23,7 @@ public class BaseTestObject implements ITestObject {
   /**
    * The Logger.
    */
-  private Logger logger;
+  private ILogger logger;
 
   /**
    * The Performance Timer Collection.
@@ -74,7 +75,7 @@ public class BaseTestObject implements ITestObject {
    * @param logger                 The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
-  public BaseTestObject(final Logger logger, final String fullyQualifiedTestName) {
+  public BaseTestObject(final ILogger logger, final String fullyQualifiedTestName) {
     this.logger = logger;
     this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
     this.values = new ConcurrentHashMap<>();
@@ -109,7 +110,7 @@ public class BaseTestObject implements ITestObject {
    *
    * @return The logger
    */
-  public Logger getLogger() {
+  public ILogger getLogger() {
     return this.logger;
   }
 
@@ -118,7 +119,7 @@ public class BaseTestObject implements ITestObject {
    *
    * @param logger The logger to use
    */
-  public void setLogger(final Logger logger) {
+  public void setLogger(final ILogger logger) {
     this.logger = logger;
   }
 

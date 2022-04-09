@@ -2,6 +2,8 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+package com.cognizantsoftvision.maqs.playwright;
+
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Page;
@@ -57,8 +59,7 @@ public class PageDriver {
   }
 
   /// <inheritdoc cref = "IPage.CheckAsync" />
-  public void check(String selector, Page.CheckOptions options)
-  {
+  public void check(String selector, Page.CheckOptions options) {
 //    this.AsyncPage.check(selector, options).Wait();
     this.asyncPage.check(selector, options);
   }
@@ -226,6 +227,10 @@ public class PageDriver {
     this.asyncPage.setInputFiles(selector, Paths.get(files), options);
   }
 
+//  public Dimension getViewPortSize() {
+//    this.getAsyncPage().get
+//  }
+
   /// <inheritdoc cref = "IPage.SetViewportSizeAsync" />
   public void setViewportSize(int width, int height) {
 //    this.AsyncPage.setViewportSize(width, height).Wait();
@@ -330,7 +335,7 @@ public class PageDriver {
   }
 
   /// <inheritdoc cref = "IPage.IsDisabledAsync"  />
-  public boolean IsDisabled(String selector, Page.IsDisabledOptions options) {
+  public boolean isDisabled(String selector, Page.IsDisabledOptions options) {
 //    return this.AsyncPage.isDisabled(selector, options).Result;
     return this.asyncPage.isDisabled(selector, options);
   }

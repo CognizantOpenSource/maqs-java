@@ -2,6 +2,9 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+package com.cognizantsoftvision.maqs.playwright;
+
+import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -18,7 +21,7 @@ import java.util.List;
 public class PlaywrightSyncElement {
 
   /**
-   * Initializes a new instance of the PlaywrightSyncElement class.
+   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
    * @param page the playwright page to be set
    * @param selector the selector of the element
    */
@@ -28,7 +31,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the PlaywrightSyncElement class.
+   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
    * @param page The associated playwright page
    * @param selector Element selector
    * @param options Advanced locator options
@@ -40,7 +43,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the PlaywrightSyncElement class.
+   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
    * @param parent the parent Playwright sync element
    * @param selector Element selector
    */
@@ -50,7 +53,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the PlaywrightSyncElement class.
+   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
    * @param parent The parent playwright element
    * @param selector Sub element selector
    * @param options Advanced locator options
@@ -62,7 +65,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the PlaywrightSyncElement class.
+   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
    * @param testObject The associated playwright test object
    * @param selector Element selector
    * @param options Advanced locator options
@@ -72,7 +75,17 @@ public class PlaywrightSyncElement {
   }
 
   /// <summary>
-  /// Initializes a new instance of the <see cref="PlaywrightSyncElement" /> class
+  /// Initializes a new instance of the <see cref="com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement" /> class
+  /// </summary>
+  /// <param name="driver">The associated playwright page driver</param>
+  /// <param name="selector">Element selector</param>
+  /// <param name="options">Advanced locator options</param>
+  public PlaywrightSyncElement(PageDriver driver, String selector) {
+    super(driver.getAsyncPage(), selector);
+  }
+
+  /// <summary>
+  /// Initializes a new instance of the <see cref="com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement" /> class
   /// </summary>
   /// <param name="driver">The assoicated playwright page driver</param>
   /// <param name="selector">Element selector</param>

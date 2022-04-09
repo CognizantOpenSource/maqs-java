@@ -1,4 +1,4 @@
-/*
+package com.cognizantsoftvision.maqs.playwright;/*
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
@@ -49,7 +49,7 @@ public class PlaywrightConfig {
   }
 
   /**
-   * Get the browser type based on the provide browser name.
+   * Get the browser type based on the provided browser name.
    * @param browserName Name of the browser
    * @return The browser type
    */

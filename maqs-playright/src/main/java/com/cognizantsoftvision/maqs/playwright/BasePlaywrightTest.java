@@ -1,4 +1,4 @@
-/*
+package com.cognizantsoftvision.maqs.playwright;/*
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
@@ -9,10 +9,9 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Tracing;
-import org.testng.ITestResult;
-
 import java.io.File;
 import java.nio.file.Path;
+import org.testng.ITestResult;
 
 /**
  * The Base Playwright Test class.
@@ -20,7 +19,7 @@ import java.nio.file.Path;
 public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject> {
 
   /**
-   * Initializes a new instance of the BasePlaywrightTest class.
+   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.BasePlaywrightTest class.
    * Set up the page for each test class
    */
   public BasePlaywrightTest() {
@@ -28,7 +27,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
   }
 
   /**
-   * Gets the PageDriver.
+   * Gets the com.cognizantsoftvision.maqs.playwright.PageDriver.
    * @return the page driver
    */
   public PageDriver getPageDriver() {
@@ -36,11 +35,11 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
   }
 
   /**
-   * Sets the PageDriver.
+   * Sets the com.cognizantsoftvision.maqs.playwright.PageDriver.
    * @param pageDriver the new page driver to be set
    */
   public void setPageDriver(PageDriver pageDriver) {
-    this.getTestObject().setp = pageDriver;
+    this.getTestObject().overridePageDriver(pageDriver);
   }
 
   /**
@@ -52,7 +51,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
   }
 
 
-  protected IPlaywrightTestObject createNewTestObject(Logger log) {
+  protected IPlaywrightTestObject createNewTestObject(ILogger log) {
     return new PlaywrightTestObject(this::getBrowser, log, this.getFullyQualifiedTestClassName());
   }
 
@@ -72,7 +71,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
         return;
       }
 
-      // The test did not pass or we want it logged regardless
+      // The test did not pass, or we want it logged regardless
       if (this.getLoggingEnabledSetting() == LoggingEnabled.YES || resultType != TestResultType.PASS) {
         String fullPath = ((IFileLogger)this.getLogger()).getFilePath();
 //        String fileNameWithoutExtension = Path.combine(Path.GetDirectoryName(fullPath), Path.GetFileNameWithoutExtension(fullPath));
@@ -117,12 +116,10 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
    */
   private void attachTestFiles(Browser browser, String baseName) {
     int append = 0;
+
     for (var context : browser.contexts()) {
       String traceFilePath = baseName + "_" + append++ + ".zip";
       context.tracing().stop(new Tracing.StopOptions().setPath(new File(traceFilePath).toPath()));
-//      {
-//        Path = $"{traceFilePath}",
-//      }).Wait();
 
       for (Page page : context.pages()) {
         if (page.video() != null) {
