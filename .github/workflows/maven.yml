@@ -139,9 +139,9 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: ${{github.workspace}}/artifacts/
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: ${{github.workspace}}/artifacts/
+#      - name: Display structure of downloaded files
+#        run: ls -R
+#        working-directory: ${{github.workspace}}/artifacts/
       - name: Set up JDK
         uses: actions/setup-java@v2.3.1
         with:
@@ -154,7 +154,9 @@ jobs:
           key: ${{ runner.os }}-maven-${{inputs.version}}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - run: cd ../../ && mvn -Dtesting=multiple jacoco:merge
+      - name: sonarcloud analysis
+      - run: mvn -Psonar package sonar:sonar -Dsonar.projectKey=CognizantOpenSource_maqs-java -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
+        working-directory: ${{github.workspace}}
 #      - uses: cprudhom/jacoco-merge@v1
 #        with:
 #          exec-file: >
