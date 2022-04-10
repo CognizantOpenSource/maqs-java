@@ -25,6 +25,13 @@ runs:
       with:
         distribution: zulu
         java-version: 11
+    - name: Setup DotNet
+      if: inputs.module-name == 'maqs-webservices'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: |
+          3.1.x
+          6.x.x
     - name: Restore Local Maven Cache
       uses: actions/cache@v2.1.6
       with:
@@ -38,8 +45,9 @@ runs:
       run: docker-compose -f docker/MAQSSQLServer/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
     - name: Start MAQS test services container
       if: inputs.module-name == 'maqs-webservices'
-      shell: bash
-      run:  docker-compose -f docker/MAQSService/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
+      shell: pwsh
+      #run:  docker-compose -f docker/MAQSService/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
+      run: Start-Process -FilePath "dotnet" -ArgumentList "run --project docker/MAQSService/MainTestService/MainTestService.csproj"
     - name: Run Unit Tests
       shell: bash
       run: xvfb-run mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
