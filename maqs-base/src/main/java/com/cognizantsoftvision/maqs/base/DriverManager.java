@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import java.util.function.Supplier;
 
 /**
@@ -71,7 +71,7 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
    *
    * @return the logger
    */
-  public Logger getLogger() {
+  public ILogger getLogger() {
     return this.testObject.getLogger();
   }
 

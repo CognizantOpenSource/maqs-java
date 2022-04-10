@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
-import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
+import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
@@ -47,14 +47,14 @@ public interface ITestObject extends AutoCloseable {
    *
    * @return the performance timer collection
    */
-  PerfTimerCollection getPerfTimerCollection();
+  IPerfTimerCollection getPerfTimerCollection();
 
   /**
    * Sets the performance timer collection.
    *
    * @param perfTimerCollection the performance time collection to be set
    */
-  void setPerfTimerCollection(PerfTimerCollection perfTimerCollection);
+  void setPerfTimerCollection(IPerfTimerCollection perfTimerCollection);
 
   /**
    * Gets a dictionary of string key value pairs.
@@ -83,16 +83,7 @@ public interface ITestObject extends AutoCloseable {
    * @param key Key for the new driver
    * @param driverManager The new driver manager
    */
-  void addDriverManager(String key, final DriverManager<?> driverManager);
-
-  /**
-   * Add a new driver manager.
-   *
-   * @param driverManager The new driver manager
-   * @param overrideIfExists Should we override if this driver exists
-   * @param <T> The driver type
-   */
-  <T extends DriverManager<?>> void addDriverManager(final T driverManager, final boolean overrideIfExists);
+  void addDriverManager(String key, final IDriverManager<?> driverManager);
 
   /**
    * Returns an array of the file paths associated with the test object.
@@ -110,12 +101,19 @@ public interface ITestObject extends AutoCloseable {
   String[] getArrayOfAssociatedFiles();
 
   /**
+   * Adds a driver manager.
+   * @param key the key
+   * @param driverManager the driver manager to be added
+   */
+  void addDriverManager(String key, DriverManager<?> driverManager);
+
+  /**
    * Override a specific driver.
    *
    * @param key the key to be used to search for the driver in the driver manager
    * @param driverManager The new driver manager
    */
-  void overrideDriverManager(final String key, final DriverManager<?> driverManager);
+  void overrideDriverManager(final String key, final IDriverManager<?> driverManager);
 
   /**
    * Removes the file path from the associated file set.
@@ -141,7 +139,15 @@ public interface ITestObject extends AutoCloseable {
    */
   void setValue(String key, String value);
 
+  /**
+   * gets the fully qualified test name.
+   * @return returns the test name
+   */
   String getFullyQualifiedTestName();
 
+  /**
+   * gets if the test object is closed.
+   * @return boolean if the test object is closed
+   */
   boolean getIsClosed();
 }

@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.io.IOException;
@@ -83,7 +83,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void testSetLog() {
     BaseTestObject testObject = this.getTestObject();
-    final Logger logger = this.getLogger();
+    final ILogger logger = this.getLogger();
     testObject.setLogger(logger);
     Assert.assertEquals(testObject.getLogger(), logger, "Checking that logger set correctly.");
   }
@@ -302,9 +302,9 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
 
   private DriverManager<String> getDriverManager(BaseTestObject testObject, Supplier<String> supplier) {
-    return new DriverManager<String>(supplier, testObject) {
+    return new DriverManager<>(supplier, testObject) {
       @Override
-      public void close() throws Exception {
+      public void close() {
       }
     };
   }

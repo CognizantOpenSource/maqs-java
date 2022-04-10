@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 
 /**
  * The Driver Manager interface class.
@@ -15,7 +15,7 @@ public interface IDriverManager<T> extends AutoCloseable {
   /**
    * Gets the testing object logger.
    */
-  Logger getLogger();
+  ILogger getLogger();
 
   /**
    * Gets base driver.

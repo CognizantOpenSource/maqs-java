@@ -9,6 +9,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.concurrent.ConcurrentMap;
  * The BaseTestObject class.
  */
 public class BaseTestObject implements ITestObject {
+
   /**
    * The Logger.
    */
@@ -28,7 +30,7 @@ public class BaseTestObject implements ITestObject {
   /**
    * The Performance Timer Collection.
    */
-  private PerfTimerCollection perfTimerCollection;
+  private IPerfTimerCollection perfTimerCollection;
 
   /**
    * Concurrent Hash Map of string key value pairs.
@@ -128,7 +130,7 @@ public class BaseTestObject implements ITestObject {
    *
    * @return Performance Timer Collection
    */
-  public PerfTimerCollection getPerfTimerCollection() {
+  public IPerfTimerCollection getPerfTimerCollection() {
     return this.perfTimerCollection;
   }
 
@@ -137,7 +139,7 @@ public class BaseTestObject implements ITestObject {
    *
    * @param perfTimerCollection Performance Timer Collection
    */
-  public void setPerfTimerCollection(final PerfTimerCollection perfTimerCollection) {
+  public void setPerfTimerCollection(final IPerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
   }
 
@@ -288,7 +290,6 @@ public class BaseTestObject implements ITestObject {
     if (new File(path).exists()) {
       return this.associatedFiles.add(path);
     }
-
     return false;
   }
 
@@ -302,32 +303,6 @@ public class BaseTestObject implements ITestObject {
     if (!closing) {
       this.close();
     }
-  }
-
-  /**
-   * Dispose of the driver store.
-   */
-  @Override
-  public void close() {
-    if (this.managerStore == null) {
-      return;
-    }
-
-    this.logger.logMessage(MessageType.VERBOSE, "Start dispose");
-
-    for (final DriverManager<?> singleDriver : this.managerStore.values()) {
-      if (singleDriver != null) {
-        try {
-          singleDriver.close();
-        } catch (final Exception e) {
-          throw new DriverDisposalException(StringProcessor.safeFormatter("Unable to properly dispose of driver"), e);
-        }
-      }
-      this.managerStore = null;
-      this.logger.logMessage(MessageType.VERBOSE, "End dispose");
-    }
-
-    isClosed = true;
   }
 
   /**
@@ -359,11 +334,80 @@ public class BaseTestObject implements ITestObject {
     return this.associatedFiles.contains(path);
   }
 
+  /**
+   * Dispose of the driver store.
+   */
+  @Override
+  public void close() {
+    if (this.managerStore == null) {
+      return;
+    }
+
+    this.logger.logMessage(MessageType.VERBOSE, "Start dispose");
+
+    for (final IDriverManager<?> singleDriver : this.managerStore.values()) {
+      if (singleDriver != null) {
+        try {
+          singleDriver.close();
+        } catch (final Exception e) {
+          throw new DriverDisposalException(StringProcessor.safeFormatter("Unable to properly dispose of driver"), e);
+        }
+      }
+      this.managerStore = null;
+      this.logger.logMessage(MessageType.VERBOSE, "End dispose");
+    }
+
+    isClosed = true;
+  }
+
+  /**
+   * Adds a driver manager to the manager store.
+   *
+   * @param key Key for the new driver
+   * @param driverManager The new driver manager
+   */
+  @Override
+  public void addDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.put(key, driverManager);
+  }
+
+  /**
+   * Add driver manager.
+   *
+   * @param key           the key
+   * @param driverManager the driver manager
+   */
+  @Override
+  public void addDriverManager(final String key, final DriverManager<?> driverManager) {
+    this.managerStore.put(key, driverManager);
+  }
+
+  /**
+   * Override the driver manager.
+   *
+   * @param key the key to be used to search for the driver in the driver manager
+   * @param driverManager The new driver manager
+   */
+  @Override
+  public void overrideDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.putOrOverride(key, driverManager);
+  }
+
+  /**
+   * Gets if the test object is closed.
+   *
+   * @return if the test object is closed
+   */
   @Override
   public boolean getIsClosed() {
     return this.isClosed;
   }
 
+  /**
+   * Gets the associated files.
+   *
+   * @return a list of associated files
+   */
   @Override
   public List<String> getAssociatedFiles() {
     return this.associatedFiles;

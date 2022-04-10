@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.appium;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;
@@ -22,7 +22,7 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public AppiumTestObject(AppiumDriver<WebElement> appiumDriver, Logger logger,
+  public AppiumTestObject(AppiumDriver<WebElement> appiumDriver, ILogger logger,
       String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),
@@ -36,7 +36,7 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public AppiumTestObject(Supplier<AppiumDriver<WebElement>> appiumDriverSupplier, Logger logger,
+  public AppiumTestObject(Supplier<AppiumDriver<WebElement>> appiumDriverSupplier, ILogger logger,
       String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),

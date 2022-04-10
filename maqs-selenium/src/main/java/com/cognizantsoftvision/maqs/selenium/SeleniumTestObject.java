@@ -6,7 +6,7 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +23,7 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public SeleniumTestObject(Supplier<WebDriver> getDriverSupplier, Logger logger, String fullyQualifiedTestName) {
+  public SeleniumTestObject(Supplier<WebDriver> getDriverSupplier, ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore()
         .put((SeleniumDriverManager.class).getCanonicalName(), new SeleniumDriverManager(getDriverSupplier, this));
@@ -36,7 +36,7 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public SeleniumTestObject(WebDriver webDriver, Logger logger, String fullyQualifiedTestName) {
+  public SeleniumTestObject(WebDriver webDriver, ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore()
         .put((SeleniumDriverManager.class).getCanonicalName(), new SeleniumDriverManager((() -> webDriver), this));
@@ -66,7 +66,6 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
    * @param driver the driver
    */
   public void setWebDriver(WebDriver driver) {
-
     String name = SeleniumDriverManager.class.getCanonicalName();
     if (this.getManagerStore().containsKey(name)) {
       try {
@@ -76,7 +75,6 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
         getLogger().logMessage(MessageType.ERROR, "Failed to remove DriverManager: %s", e.getMessage());
         throw new MAQSRuntimeException(e.getMessage(), e);
       }
-
     }
 
     this.getManagerStore().put(name, new SeleniumDriverManager((() -> driver), this));
@@ -91,5 +89,4 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
     this.getManagerStore()
         .put(SeleniumDriverManager.class.getCanonicalName(), new SeleniumDriverManager(webDriverSupplier, this));
   }
-
 }
