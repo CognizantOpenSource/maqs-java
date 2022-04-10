@@ -36,6 +36,10 @@ runs:
       if: inputs.module-name == 'maqs-database'
       shell: bash
       run: docker-compose -f docker/MAQSSQLServer/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
+    - name: Start MAQS test services container
+      if: inputs.module-name == 'maqs-webservices'
+      shell: pwsh
+      run: Start-Process -FilePath "dotnet" -ArgumentList "run --project docker/MAQSService/MainTestService/MainTestService.csproj"
     - name: Run Unit Tests
       shell: bash
       run: xvfb-run mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
