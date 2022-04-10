@@ -4,8 +4,8 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
+import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
@@ -19,14 +19,14 @@ public interface ITestObject extends AutoCloseable {
    *
    * @return The logger
    */
-  Logger getLogger();
+  ILogger getLogger();
 
   /**
    * Sets the logger.
    *
    * @param newLogger The logger to use
    */
-  void setLogger(final Logger newLogger);
+  void setLogger(final ILogger newLogger);
 
   /**
    * Gets the manager store.
@@ -47,14 +47,14 @@ public interface ITestObject extends AutoCloseable {
    *
    * @return the performance timer collection
    */
-  PerfTimerCollection getPerfTimerCollection();
+  IPerfTimerCollection getPerfTimerCollection();
 
   /**
    * Sets the performance timer collection.
    *
    * @param perfTimerCollection the performance time collection to be set
    */
-  void setPerfTimerCollection(PerfTimerCollection perfTimerCollection);
+  void setPerfTimerCollection(IPerfTimerCollection perfTimerCollection);
 
   /**
    * Gets a dictionary of string key value pairs.

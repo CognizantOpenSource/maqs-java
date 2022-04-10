@@ -7,19 +7,19 @@ package com.cognizantsoftvision.maqs.cucumber.steps;
 import com.cognizantsoftvision.maqs.base.BaseTest;
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.cucumber.ScenarioContext;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 
 /**
  * Base generic cucumber step.
  */
-public abstract class BaseGenericStep {
+public abstract class BaseGenericStep implements IBaseGenericStep {
 
   /**
    * Get the logger.
    *
    * @return The logger
    */
-  public Logger getLogger() {
+  public ILogger getLogger() {
     return ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseTest.class).getLogger();
   }
 

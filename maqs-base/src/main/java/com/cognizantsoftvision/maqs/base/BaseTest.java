@@ -7,13 +7,8 @@ package com.cognizantsoftvision.maqs.base;
 import static java.lang.System.out;
 
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
+import com.cognizantsoftvision.maqs.utilities.logging.*;
+import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -58,7 +53,7 @@ public abstract class BaseTest {
   /**
    * The Performance Timer Collection.
    */
-  private PerfTimerCollection perfTimerCollection;
+  private IPerfTimerCollection perfTimerCollection;
 
   /**
    * The TestNG Test Context.
@@ -83,7 +78,7 @@ public abstract class BaseTest {
    *
    * @return Performance Timer Collection
    */
-  public PerfTimerCollection getPerfTimerCollection() {
+  public IPerfTimerCollection getPerfTimerCollection() {
     return this.perfTimerCollection;
   }
 
@@ -101,7 +96,7 @@ public abstract class BaseTest {
    *
    * @return Logger object
    */
-  public Logger getLogger() {
+  public ILogger getLogger() {
     return this.getTestObject().getLogger();
   }
 
@@ -110,7 +105,7 @@ public abstract class BaseTest {
    *
    * @param log The Logger object
    */
-  public void setLogger(Logger log) {
+  public void setLogger(ILogger log) {
     this.getTestObject().setLogger(log);
   }
 

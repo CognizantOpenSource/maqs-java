@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import java.net.http.HttpClient;
 import java.util.function.Supplier;
 
@@ -22,7 +22,7 @@ public class WebServiceTestObject extends BaseTestObject implements IWebServiceT
    * @param fullyQualifiedTestName the fully qualified test name.
    */
   public WebServiceTestObject(Supplier<HttpClient> getDriverSupplier,
-      Logger logger, String fullyQualifiedTestName) {
+      ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((WebServiceDriverManager.class).getCanonicalName(),
         new WebServiceDriverManager(getDriverSupplier, this));
@@ -36,7 +36,7 @@ public class WebServiceTestObject extends BaseTestObject implements IWebServiceT
    * @param fullyQualifiedTestName The fully qualified test name.
    */
   public WebServiceTestObject(WebServiceDriver driver,
-      Logger logger, String fullyQualifiedTestName) {
+      ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((WebServiceDriverManager.class).getCanonicalName(),
         new WebServiceDriverManager(driver, this));
