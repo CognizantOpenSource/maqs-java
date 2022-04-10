@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeMethod;
  *
  * @param <T> the type parameter
  */
-public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseTest {
+public abstract class BaseExtendableTest<T extends ITestObject> extends BaseTest {
 
   /**
    * Instantiates a new Base extendable test.

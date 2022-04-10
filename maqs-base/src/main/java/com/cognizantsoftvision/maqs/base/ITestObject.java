@@ -78,12 +78,20 @@ public interface ITestObject extends AutoCloseable {
   boolean addAssociatedFile(String path);
 
   /**
-   * Add a new driver manager.
+   * Adds a driver manager.
    *
-   * @param key Key for the new driver
-   * @param driverManager The new driver manager
+   * @param key the key
+   * @param driverManager the driver manager to be added
    */
-  void addDriverManager(String key, final IDriverManager<?> driverManager);
+  void addDriverManager(String key, IDriverManager<?> driverManager);
+
+  /**
+   * Adds a driver manager.
+   *
+   * @param key the key
+   * @param driverManager the driver manager to be added
+   */
+  void addDriverManager(String key, DriverManager<?> driverManager);
 
   /**
    * Returns an array of the file paths associated with the test object.
@@ -100,12 +108,6 @@ public interface ITestObject extends AutoCloseable {
    */
   String[] getArrayOfAssociatedFiles();
 
-  /**
-   * Adds a driver manager.
-   * @param key the key
-   * @param driverManager the driver manager to be added
-   */
-  void addDriverManager(String key, DriverManager<?> driverManager);
 
   /**
    * Override a specific driver.
