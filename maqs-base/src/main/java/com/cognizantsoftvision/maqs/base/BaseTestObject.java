@@ -62,15 +62,6 @@ public class BaseTestObject implements ITestObject {
   private boolean isClosed = false;
 
   /**
-   * Check if the object has been closed.
-   *
-   * @return True if the object is closed
-   */
-  public boolean getClosed() {
-    return this.isClosed;
-  }
-
-  /**
    * Initializes a new instance of the BaseTestObject class.
    *
    * @param logger                 The test's logger
@@ -236,7 +227,7 @@ public class BaseTestObject implements ITestObject {
    * @param <T>           the type parameter
    * @param driverManager the driver manager
    */
-  public <T extends DriverManager<?>> void addDriverManager(final T driverManager) {
+  public <T extends IDriverManager<?>> void addDriverManager(final T driverManager) {
     this.addDriverManager(driverManager, false);
   }
 
@@ -247,7 +238,7 @@ public class BaseTestObject implements ITestObject {
    * @param driverManager    the driver manager
    * @param overrideIfExists the override if exists
    */
-  public <T extends DriverManager<?>> void addDriverManager(final T driverManager, final boolean overrideIfExists) {
+  public <T extends IDriverManager<?>> void addDriverManager(final T driverManager, final boolean overrideIfExists) {
     if (overrideIfExists) {
       this.overrideDriverManager(driverManager.getClass().getTypeName(), driverManager);
     } else {
@@ -256,11 +247,23 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
+   * Adds a driver manager to the manager store.
+   *
+   * @param key Key for the new driver
+   * @param driverManager The new driver manager
+   */
+  @Override
+  public void addDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.put(key, driverManager);
+  }
+
+  /**
    * Add driver manager.
    *
    * @param key           the key
    * @param driverManager the driver manager
    */
+  @Override
   public void addDriverManager(final String key, final DriverManager<?> driverManager) {
     this.managerStore.put(key, driverManager);
   }
@@ -277,6 +280,17 @@ public class BaseTestObject implements ITestObject {
     } else {
       this.managerStore.put(key, driverManager);
     }
+  }
+
+  /**
+   * Override the driver manager.
+   *
+   * @param key the key to be used to search for the driver in the driver manager
+   * @param driverManager The new driver manager
+   */
+  @Override
+  public void overrideDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.putOrOverride(key, driverManager);
   }
 
   /**
@@ -302,35 +316,6 @@ public class BaseTestObject implements ITestObject {
     if (!closing) {
       this.close();
     }
-  }
-
-  /**
-   * Remove associated file boolean.
-   *
-   * @param path the path
-   * @return the boolean
-   */
-  public boolean removeAssociatedFile(final String path) {
-    return this.associatedFiles.remove(path);
-  }
-
-  /**
-   * Get array of associated files string [ ].
-   *
-   * @return the string [ ]
-   */
-  public String[] getArrayOfAssociatedFiles() {
-    return this.associatedFiles.toArray(new String[0]);
-  }
-
-  /**
-   * Contains associated file boolean.
-   *
-   * @param path the path
-   * @return the boolean
-   */
-  public boolean containsAssociatedFile(final String path) {
-    return this.associatedFiles.contains(path);
   }
 
   /**
@@ -360,25 +345,32 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Adds a driver manager to the manager store.
+   * Remove associated file boolean.
    *
-   * @param key Key for the new driver
-   * @param driverManager The new driver manager
+   * @param path the path
+   * @return the boolean
    */
-  @Override
-  public void addDriverManager(String key, IDriverManager<?> driverManager) {
-    this.managerStore.put(key, driverManager);
+  public boolean removeAssociatedFile(final String path) {
+    return this.associatedFiles.remove(path);
   }
 
   /**
-   * Override the driver manager.
+   * Get array of associated files string [ ].
    *
-   * @param key the key to be used to search for the driver in the driver manager
-   * @param driverManager The new driver manager
+   * @return the string [ ]
    */
-  @Override
-  public void overrideDriverManager(String key, IDriverManager<?> driverManager) {
-    this.managerStore.putOrOverride(key, driverManager);
+  public String[] getArrayOfAssociatedFiles() {
+    return this.associatedFiles.toArray(new String[0]);
+  }
+
+  /**
+   * Contains associated file boolean.
+   *
+   * @param path the path
+   * @return the boolean
+   */
+  public boolean containsAssociatedFile(final String path) {
+    return this.associatedFiles.contains(path);
   }
 
   /**

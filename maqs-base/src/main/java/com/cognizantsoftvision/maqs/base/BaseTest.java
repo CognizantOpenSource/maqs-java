@@ -7,7 +7,14 @@ package com.cognizantsoftvision.maqs.base;
 import static java.lang.System.out;
 
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.*;
+import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
@@ -183,7 +190,7 @@ public abstract class BaseTest {
    *
    * @return The BaseTestObject
    */
-  public BaseTestObject getTestObject() {
+  public ITestObject getTestObject() {
     if (!this.baseTestObjects.containsKey(this.fullyQualifiedTestClassName.get())) {
       this.createNewTestObject();
     }
@@ -239,7 +246,7 @@ public abstract class BaseTest {
    * Cleanup after a test.
    */
   @AfterMethod(alwaysRun = true)
-  public void teardown() {
+  public void teardown() throws Exception {
     try {
       this.beforeLoggingTeardown(testResult);
     } catch (Exception e) {
@@ -270,7 +277,7 @@ public abstract class BaseTest {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
 
-    try (BaseTestObject baseTestObject = this.getTestObject()) {
+    try (ITestObject baseTestObject = this.getTestObject()) {
       // Release logged messages
       this.loggedExceptions.remove(fullyQualifiedTestName);
 
