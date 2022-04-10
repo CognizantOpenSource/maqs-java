@@ -30,7 +30,9 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
 
   PageModel pageModel;
 
-
+  /**
+   * Sets up the page model.
+   */
   @BeforeTest
   public void setUp() {
     pageModel = new PageModel(this.getTestObject());
@@ -124,9 +126,9 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void CloseTest() {
-    Assert.assertFalse(this.getPageDriver().isClosed);
+    Assert.assertFalse(this.getPageDriver().getAsyncPage().isClosed());
     this.getPageDriver().close();
-    Assert.assertTrue(this.getPageDriver().IsClosed);
+    Assert.assertTrue(this.getPageDriver().getAsyncPage().isClosed());
   }
 
   /// <summary>
@@ -258,7 +260,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void IsEventuallyGoneTest() {
     Assert.assertTrue(this.getPageDriver().isEventuallyGone("NotReal"));
-    Assert.assertFalse(this.getPageDriver().IsEventuallyGone(elementPageModel.firstNameText));
+    Assert.assertFalse(this.getPageDriver().isEventuallyGone(elementPageModel.firstNameText));
   }
 
   /// <summary>
@@ -267,7 +269,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void IsEventuallyVisibleTest() {
     Assert.assertTrue(this.getPageDriver().isEventuallyVisible(elementPageModel.firstNameText));
-    Assert.assertFalse(this.getPageDriver().isEventualyVisible("NotReal"));
+    Assert.assertFalse(this.getPageDriver().isEventuallyVisible("NotReal"));
   }
 
   /// <summary>
@@ -295,8 +297,8 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void SetViewportSizeTest() {
     this.getPageDriver().setViewportSize(600, 300);
-    Assert.assertEquals(300, this.getPageDriver().getAsyncPage().ViewportSize.Height);
-    Assert.assertEquals(600, this.getPageDriver().getAsyncPage().ViewportSize.Width);
+    Assert.assertEquals(300, this.getPageDriver().getAsyncPage().viewportSize().height);
+    Assert.assertEquals(600, this.getPageDriver().getAsyncPage().viewportSize().width);
   }
 
   /// <summary>
@@ -405,7 +407,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   public void ReloadTest() {
     String asyncItemSelector = "#Label";
     this.getPageDriver().click(elementPageModel.asyncPageLink);
-    Assert.assertTrue(this.getPageDriver().isEventualyVisible(asyncItemSelector));
+    Assert.assertTrue(this.getPageDriver().isEventuallyVisible(asyncItemSelector));
     this.getPageDriver().reload();
     Assert.assertFalse(this.getPageDriver().isVisible(asyncItemSelector));
   }
@@ -418,7 +420,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     String guid = UUID.randomUUID().toString();
     this.getPageDriver().setContent("<html><body><div id='" + guid + "'>TEST</div></body></html>");
     this.getPageDriver().waitForTimeout(1000);
-    Assert.assertTrue(this.getPageDriver().isEventualyVisible("#" + guid));
+    Assert.assertTrue(this.getPageDriver().isEventuallyVisible("#" + guid));
   }
 
   /// <summary>
@@ -436,7 +438,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void EvalOnSelectorAllTest() {
     Assert.assertEquals(6, this.getPageDriver().evalOnSelectorAll(
-        elementPageModel.computerPartsAllOptions, "nodes => nodes.map(n => n.innerText)").);
+        elementPageModel.computerPartsAllOptions, "nodes => nodes.map(n => n.innerText)"));
   }
 
   /// <summary>
@@ -453,7 +455,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void DispatchEventTest() {
     this.getPageDriver().dispatchEvent(elementPageModel.asyncPageLink, "click");
-    Assert.assertTrue(this.getPageDriver().isEventualyVisible(elementPageModel.alwaysUpOnAsyncPage));
+    Assert.assertTrue(this.getPageDriver().isEventuallyVisible(elementPageModel.alwaysUpOnAsyncPage));
   }
 
   /// <summary>
@@ -493,7 +495,8 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void AddInitScriptTest() {
-    this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc);
+    // TODO
+    this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc, );
     this.getPageDriver().reload();
     this.getPageDriver().evaluate("changeMainHeaderName();");
 
@@ -507,7 +510,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   public void AddScriptTagTest() {
     this.getPageDriver().addScriptTag(new Page.AddScriptTagOptions().setContent(elementPageModel.renameHeaderFunc));
     this.getPageDriver().evaluate("changeMainHeaderName();");
-    Assert.assertEquals("NEWNAME", this.getPageDriver().innerText(elementPageModel.mainHeader));
+    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
   }
 
   /// <summary>
@@ -515,9 +518,9 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void AddStyleTagTest() {
-    Assert.assertTrue(this.getPageDriver().isEventualyVisible(elementPageModel.mainHeader));
+    Assert.assertTrue(this.getPageDriver().isEventuallyVisible(elementPageModel.mainHeader));
     this.getPageDriver().addStyleTag(new Page.AddStyleTagOptions().setContent("html {display: none;}"));
-    Assert.assertTrue(this.getPageDriver().IsEventualyGone(elementPageModel.mainHeader));
+    Assert.assertTrue(this.getPageDriver().isEventuallyGone(elementPageModel.mainHeader));
   }
 
   /// <summary>
@@ -526,9 +529,11 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void setExtraHTTPHeadersTest() {
     this.getPageDriver().setExtraHTTPHeaders(Collections.singletonMap("sample", "value"));
-    this.getPageDriver().getAsyncPage().reqRequestFinished += AsyncPage_RequestFinished;
+//    this.getPageDriver().getAsyncPage().RequestFinished += AsyncPage_RequestFinished;
+    Runnable
+    this.getPageDriver().getAsyncPage().waitForRequestFinished() += AsyncPage_RequestFinished;
 
     this.getPageDriver().click(elementPageModel.asyncPageLink);
-    this.getPageDriver().isEventualyVisible(elementPageModel.alwaysUpOnAsyncPage);
+    this.getPageDriver().isEventuallyVisible(elementPageModel.alwaysUpOnAsyncPage);
   }
 }

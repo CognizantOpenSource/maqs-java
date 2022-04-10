@@ -7,55 +7,55 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-/// <summary>
-/// Test the base Playwright page object model
-/// </summary>
+/**
+ * The Playwright Object unit test class.
+ */
 public class PageObjectUnitTest extends BasePlaywrightTest {
 
-  /// <summary>
-  /// Setup test Playwright page model
-  /// </summary>
+  /**
+   * Setup test Playwright page model.
+   */
   @BeforeTest
   public void createPlaywrightPageModel() {
     this.getPageDriver().navigateTo(PageModel.getUrl());
     this.getTestObject().setObject("pom", new PageModel(this.getTestObject()));
   }
 
-  /// <summary>
-  /// Verify test object is the same
-  /// </summary>
+  /**
+   * Verify test object is the same.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void PageModelTestObject() {
     Assert.assertEquals(this.getTestObject(), this.getPageModel().getTestObject());
   }
 
-  /// <summary>
-  /// Verify web driver is the same
-  /// </summary>
+  /**
+   * Verify web driver is the same.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void PageModelWebDriver() {
     Assert.assertEquals(this.getPageDriver(), this.getPageModel().getPageDriver());
   }
 
-  /// <summary>
-  /// Verify logger is the same
-  /// </summary>
+  /**
+   * Verify logger is the same.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void PageModelLogger() {
     Assert.assertEquals(this.getLogger(), this.getPageModel().getLogger());
   }
 
-  /// <summary>
-  /// Verify perf timer collection is the same
-  /// </summary>
+  /**
+   * Verify perf timer collection is the same.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void PageModelPerfTimerCollection() {
     Assert.assertEquals(this.getPerfTimerCollection(), this.getPageModel().getPerfTimerCollection());
   }
 
-  /// <summary>
-  /// Verify we can override the page object web driver
-  /// </summary>
+  /**
+   * Verify we can override the page object web driver.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void OverridePageObjectWebDriver() {
     try {
@@ -68,9 +68,9 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
     }
   }
 
-  /// <summary>
-  /// Do lazy elements respect overrides
-  /// </summary>
+  /**
+   * Do lazy elements respect overrides.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void LazyRespectOverride() {
     // Define new named driver
@@ -103,12 +103,12 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
     Assert.assertTrue(model2.getLoadedPlaywrightElement().isEventuallyVisible(), "Model two may not be on the right page");
   }
 
-  /// <summary>
-  /// Get the Selenium page object
-  /// </summary>
-  /// <returns>The page model</returns>
+  /**
+   * Get the Selenium page object.
+   * @return The page model
+   */
   private PageModel getPageModel() {
 //    return this.TestObject.Objects["pom"] as PageModel;
-    return this.getTestObject().getObjects().get("pom").getClass();
+    return (PageModel) this.getTestObject().getObjects().get("pom");
   }
 }

@@ -6,8 +6,6 @@ package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.microsoft.playwright.Page;
 import java.util.function.Supplier;
 
 /**
@@ -40,18 +38,16 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
   }
 
   /**
-   * the page driver manager.
+   * Gets the page driver manager.
    */
-  protected PageDriverManager pageManager;
-
   public PageDriverManager getPageManager() {
-//    return this.ManagerStore.GetManager<PlaywrightDriverManager>(typeof(PlaywrightDriverManager).FullName);
     return (PageDriverManager) this.getManagerStore().get(PageDriverManager.class.getCanonicalName());
   }
 
   /// <summary>
   /// Gets the Playwright page
   /// </summary>
+
   protected PageDriver pageDriver;
 
   public PageDriver getPageDriver() {

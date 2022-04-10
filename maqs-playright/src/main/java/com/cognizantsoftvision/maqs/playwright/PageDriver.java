@@ -8,9 +8,9 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
-import com.microsoft.playwright.options.FilePayload;
-import com.microsoft.playwright.options.LoadState;
-import com.microsoft.playwright.options.SelectOption;
+import com.microsoft.playwright.options.*;
+
+import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -227,9 +227,9 @@ public class PageDriver {
     this.asyncPage.setInputFiles(selector, Paths.get(files), options);
   }
 
-//  public Dimension getViewPortSize() {
-//    this.getAsyncPage().get
-//  }
+  public ViewportSize getViewPortSize() {
+    return this.getAsyncPage().viewportSize();
+  }
 
   /// <inheritdoc cref = "IPage.SetViewportSizeAsync" />
   public void setViewportSize(int width, int height) {
@@ -374,6 +374,72 @@ public class PageDriver {
   /// <inheritdoc cref = "IPage.IsVisibleAsync"  />
   public boolean isVisible(String selector, Page.IsVisibleOptions options) {
     return this.asyncPage.isVisible(selector, options);
+  }
+
+  /// <summary>
+  /// Check that the element is eventually visible
+  /// </summary>
+  /// <param name="selector">Element selector</param>
+  /// <param name="options">Visible check options</param>
+  /// <returns>True if the element becomes visible within the page timeout</returns>
+  public boolean isEventuallyVisible(String selector) {
+    try {
+      this.getAsyncPage().waitForSelector(selector);
+      return true;
+    } catch (Exception e){
+      return false;
+    }
+  }
+
+  /// <summary>
+  /// Check that the element is eventually visible
+  /// </summary>
+  /// <param name="selector">Element selector</param>
+  /// <param name="options">Visible check options</param>
+  /// <returns>True if the element becomes visible within the page timeout</returns>
+  public boolean isEventuallyVisible(String selector, Page.IsVisibleOptions options) {
+    try {
+      Page.WaitForSelectorOptions selectorOptions = new Page.WaitForSelectorOptions();
+      selectorOptions.setState(WaitForSelectorState.VISIBLE);
+      selectorOptions.strict = options != null && options.strict;
+      this.getAsyncPage().waitForSelector(selector, selectorOptions);
+      return true;
+    } catch (Exception e){
+      return false;
+    }
+  }
+
+  /// <summary>
+  /// Check that the element stops being visible
+  /// </summary>
+  /// <param name="selector">Element selector</param>
+  /// <param name="options">Visible check options</param>
+  /// <returns>True if the element becomes is hidden or gone within the page timeout</returns>
+  public boolean isEventuallyGone(String selector) {
+    try {
+      this.getAsyncPage().waitForSelector(selector);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  /// <summary>
+  /// Check that the element stops being visible
+  /// </summary>
+  /// <param name="selector">Element selector</param>
+  /// <param name="options">Visible check options</param>
+  /// <returns>True if the element becomes is hidden or gone within the page timeout</returns>
+  public boolean isEventuallyGone(String selector, Page.IsVisibleOptions options) {
+    try {
+      Page.WaitForSelectorOptions selectorOptions = new Page.WaitForSelectorOptions();
+      selectorOptions.setState(WaitForSelectorState.HIDDEN);
+      selectorOptions.strict = options != null && options.strict;
+      this.getAsyncPage().waitForSelector(selector, selectorOptions);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   public ElementHandle querySelector(String selector) {
@@ -654,8 +720,7 @@ public class PageDriver {
   /// <param name="disposing">Is the object being disposed</param>
   protected void dispose(boolean disposing) {
     // Make sure the connection exists and is open before trying to close it
-    if (disposing && !this.asyncPage.isClosed())
-    {
+    if (disposing && !this.asyncPage.isClosed()) {
       this.asyncPage.close();
     }
   }

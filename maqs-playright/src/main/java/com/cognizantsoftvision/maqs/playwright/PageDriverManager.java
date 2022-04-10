@@ -6,7 +6,6 @@ package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.base.DriverManager;
 import com.cognizantsoftvision.maqs.base.ITestObject;
-import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
@@ -85,48 +84,6 @@ public class PageDriverManager extends DriverManager<PageDriver> {
    */
   public Object getPage() {
     return this.getPageDriver();
-  }
-
-  /**
-   * Log a verbose message and include the automation specific call stack data.
-   * @param message The message text
-   * @param args String format arguments
-   */
-  protected void logVerbose(String message, Object[] args) {
-    StringBuilder messages = new StringBuilder();
-    messages.append(StringProcessor.safeFormatter(message, args));
-    String fullTestName = this.getTestObject().getFullyQualifiedTestName();
-
-    Thread thread = Thread.currentThread();
-    for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
-      String trim = stackTraceElement.toString().trim();
-      if (!trim.startsWith(fullTestName)) {
-        messages.append(stackTraceElement);
-      }
-    }
-
-    this.getLogger().logMessage(MessageType.VERBOSE, messages.toString());
-  }
-
-  /**
-   * Have the driver cleanup after itself.
-   */
-  protected void driverDispose() {
-    this.getLogger().logMessage(MessageType.VERBOSE, "Start dispose driver");
-
-    // If we never created the driver we don't have any cleanup to do
-    if (!this.isDriverInitialized()) {
-      return;
-    }
-
-    try {
-      PageDriver driver = this.getPageDriver();
-      driver.getAsyncPage().close();
-    } catch (Exception e) {
-      this.getLogger().logMessage(MessageType.ERROR, "Failed to close page because: " + e.getMessage());
-    }
-    this.setBaseDriver(null);
-    this.getLogger().logMessage(MessageType.VERBOSE, "End dispose driver");
   }
 
   /**

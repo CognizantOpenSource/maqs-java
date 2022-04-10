@@ -1,10 +1,15 @@
-package com.cognizantsoftvision.maqs.playwright;/*
+/*
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
+package com.cognizantsoftvision.maqs.playwright;
+
 import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.*;
+import com.cognizantsoftvision.maqs.utilities.logging.IFileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
@@ -72,7 +77,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
       }
 
       // The test did not pass, or we want it logged regardless
-      if (this.getLoggingEnabledSetting() == LoggingEnabled.YES || resultType != TestResultType.PASS) {
+      if (this.getLoggingEnabledSetting() == LoggingEnabled.YES || !resultType.isSuccess()) {
         String fullPath = ((IFileLogger)this.getLogger()).getFilePath();
 //        String fileNameWithoutExtension = Path.combine(Path.GetDirectoryName(fullPath), Path.GetFileNameWithoutExtension(fullPath));
         String fileNameWithoutExtension = Path.of(fullPath).getFileName().toString();
@@ -85,27 +90,6 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
       deleteTestFiles(this.getPageDriver().getParentBrowser());
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to attach (or cleanup) Playwright test files: " + e.getMessage());
-    }
-  }
-
-  /**
-   * Create a new test object.
-   */
-  @Override
-  protected void createNewTestObject() {
-    try {
-      this.setTestObject(
-          new PlaywrightTestObject(() -> {
-            try {
-              return getPageDriver();
-            } catch (Exception e) {
-              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
-              throw e;
-            }
-          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
-    } catch (Exception e) {
-      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
-      throw e;
     }
   }
 
@@ -143,5 +127,31 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
         }
       }
     }
+  }
+
+  /**
+   * Create a new test object.
+   */
+  @Override
+  protected void createNewTestObject() {
+    try {
+      this.setTestObject(
+          new PlaywrightTestObject(() -> {
+            try {
+              return getPageDriver();
+            } catch (Exception e) {
+              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
+              throw e;
+            }
+          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
+    } catch (Exception e) {
+      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+      throw e;
+    }
+  }
+
+  @Override
+  public getTestObject() {
+
   }
 }

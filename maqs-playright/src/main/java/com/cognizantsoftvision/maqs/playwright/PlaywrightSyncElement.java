@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.playwright;
 
-import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -58,7 +57,7 @@ public class PlaywrightSyncElement {
    * @param selector Sub element selector
    * @param options Advanced locator options
    */
-  public PlaywrightSyncElement(PlaywrightSyncElement parent, String selector, LocatorLocatorOptions options) {
+  public PlaywrightSyncElement(PlaywrightSyncElement parent, String selector, Locator.LocatorOptions options) {
     this.setParentLocator(parent.elementLocator());
     this.setSelector(selector);
     this.setLocatorOptions(options);

@@ -7,7 +7,6 @@ package com.cognizantsoftvision.maqs.base;
 import com.cognizantsoftvision.maqs.base.exceptions.DriverDisposalException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
@@ -368,17 +367,6 @@ public class BaseTestObject implements ITestObject {
    */
   @Override
   public void addDriverManager(String key, IDriverManager<?> driverManager) {
-    this.managerStore.put(key, driverManager);
-  }
-
-  /**
-   * Add driver manager.
-   *
-   * @param key           the key
-   * @param driverManager the driver manager
-   */
-  @Override
-  public void addDriverManager(final String key, final DriverManager<?> driverManager) {
     this.managerStore.put(key, driverManager);
   }
 
