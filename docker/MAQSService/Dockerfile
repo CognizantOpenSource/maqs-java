@@ -11,7 +11,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["MainTestService/MainTestService.csproj", "MainTestService/"]
 RUN dotnet restore "MainTestService/MainTestService.csproj"
-COPY . .
+COPY MainTestService .
 WORKDIR "/src/MainTestService"
 RUN dotnet build "MainTestService.csproj" -c Release -o /app/build
 

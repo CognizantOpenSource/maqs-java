@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jonathan.reding\\Documents\\GitHub\\maqs-java\\docker\\MAQSService\\MainTestService\\MainTestService.csproj": {}
+    "/Users/jasonedstrom/Developer/IdeaProjects/maqs-java/docker/MAQSService/MainTestService/MainTestService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jonathan.reding\\Documents\\GitHub\\maqs-java\\docker\\MAQSService\\MainTestService\\MainTestService.csproj": {
+    "/Users/jasonedstrom/Developer/IdeaProjects/maqs-java/docker/MAQSService/MainTestService/MainTestService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jonathan.reding\\Documents\\GitHub\\maqs-java\\docker\\MAQSService\\MainTestService\\MainTestService.csproj",
+        "projectUniqueName": "/Users/jasonedstrom/Developer/IdeaProjects/maqs-java/docker/MAQSService/MainTestService/MainTestService.csproj",
         "projectName": "MainTestService",
-        "projectPath": "C:\\Users\\jonathan.reding\\Documents\\GitHub\\maqs-java\\docker\\MAQSService\\MainTestService\\MainTestService.csproj",
-        "packagesPath": "C:\\Users\\jonathan.reding\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jonathan.reding\\Documents\\GitHub\\maqs-java\\docker\\MAQSService\\MainTestService\\obj\\",
+        "projectPath": "/Users/jasonedstrom/Developer/IdeaProjects/maqs-java/docker/MAQSService/MainTestService/MainTestService.csproj",
+        "packagesPath": "/Users/jasonedstrom/.nuget/packages/",
+        "outputPath": "/Users/jasonedstrom/Developer/IdeaProjects/maqs-java/docker/MAQSService/MainTestService/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\jonathan.reding\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/jasonedstrom/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -73,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
         }
       }
     }
