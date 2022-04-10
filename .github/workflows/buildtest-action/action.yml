@@ -39,7 +39,7 @@ runs:
     - name: Start MAQS test services container
       if: inputs.module-name == 'maqs-webservices'
       shell: bash
-      run:  docker-compose -f docker/MAQSWebServices/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
+      run:  docker-compose -f docker/MAQSService/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
     - name: Run Unit Tests
       shell: bash
       run: xvfb-run mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
