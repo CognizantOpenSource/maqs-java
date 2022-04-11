@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.playwright;
 
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 
 /**
@@ -55,13 +55,13 @@ public abstract class BasePlaywrightPageModel {
   /**
    * The log from the test object
    */
-  protected Logger log;
+  protected ILogger log;
 
   /**
    * Gets the log from the test object.
    * @return the logger
    */
-  public Logger getLogger() {
+  public ILogger getLogger() {
     return this.log;
   }
 

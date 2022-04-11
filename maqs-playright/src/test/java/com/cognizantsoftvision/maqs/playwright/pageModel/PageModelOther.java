@@ -10,51 +10,63 @@ import com.cognizantsoftvision.maqs.playwright.PageDriver;
 import com.cognizantsoftvision.maqs.playwright.PlaywrightConfig;
 import com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement;
 
-/// <summary>
-/// Playwright page model class for testing
-/// </summary>
+/**
+ * The Other Playwright page model class for testing.
+ */
 public class PageModelOther extends BasePlaywrightPageModel {
 
+  /**
+   * sets up the page model other class.
+   * @param testObject the test object to be used
+   */
   protected PageModelOther(IPlaywrightTestObject testObject) {
     super(testObject);
   }
 
+  /**
+   * sets up the page model other class.
+   * @param testObject the test object to be used
+   * @param otherDriver the page driver to be used
+   */
   public PageModelOther(IPlaywrightTestObject testObject, PageDriver otherDriver) {
     super(testObject, otherDriver);
   }
 
-  /// <summary>
-  /// Get page url
-  /// </summary>
+  /**
+   * gets the page url.
+    * @return the page url
+   */
   public static String getUrl(){
     return PlaywrightConfig.getWebBase() + "async.html";
   }
 
-  /// <summary>
-  /// Root body
-  /// </summary>
+  /**
+   * gets the root body element.
+   * @return the root body element
+   */
   private PlaywrightSyncElement getBody() {
     return new PlaywrightSyncElement(this.getPageDriver().getAsyncPage(), "BODY");
   }
 
-  /// <summary>
-  /// Get loaded label
-  /// </summary>
+  /**
+   * gets the loaded label element.
+    * @return the loaded label element
+   */
   public PlaywrightSyncElement getLoadedPlaywrightElement() {
     return new PlaywrightSyncElement(getBody(), "#loading-div-text[style='']");
   }
 
-  /// <summary>
-  /// Open the page
-  /// </summary>
+  /**
+   * navigates to the page url.
+   */
   public void openPage() {
     this.getPageDriver().navigateTo(getUrl());
   }
 
-  /// <summary>
-  /// Check if the page has been loaded
-  /// </summary>
-  /// <returns>True if the page was loaded</returns>
+  /**
+   * check if the page has been loaded.
+   * @return true if the page was loaded
+   */
   @Override
   public boolean isPageLoaded() {
     return this.getLoadedPlaywrightElement().isEventuallyVisible();

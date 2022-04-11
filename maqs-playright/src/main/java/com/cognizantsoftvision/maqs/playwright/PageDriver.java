@@ -8,9 +8,11 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
-import com.microsoft.playwright.options.*;
-
-import java.awt.*;
+import com.microsoft.playwright.options.FilePayload;
+import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.SelectOption;
+import com.microsoft.playwright.options.ViewportSize;
+import com.microsoft.playwright.options.WaitForSelectorState;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -42,10 +44,13 @@ public class PageDriver {
   }
 
   /// <inheritdoc cref = "IPage.AddInitScriptAsync" />
-  public void addInitScript(String script, String scriptPath) {
+  public void addInitScript(String script) {
 //    this.AsyncPage.AddInitScriptAsync(script, scriptPath).Wait();
     this.asyncPage.addInitScript(script);
-    this.asyncPage.addInitScript(scriptPath);
+  }
+
+  public void addInitScript(Path path) {
+    this.asyncPage.addInitScript(path);
   }
 
   /// <inheritdoc cref = "IPage.BringToFrontAsync" />
@@ -118,7 +123,7 @@ public class PageDriver {
   }
 
   public void fill(String selector, String value) {
-    fill(selector, value, null);
+    this.asyncPage.fill(selector, value);
   }
 
   /// <inheritdoc cref = "IPage.FillAsync" />
@@ -700,28 +705,9 @@ public class PageDriver {
   /// <summary>
   /// Gets the underlying async page object
   /// </summary>
-  private Browser ParentBrowser;
+  private Browser parentBrowser;
 
   public Browser getParentBrowser() {
     return this.asyncPage.context().browser();
-  }
-
-  /// <summary>
-  /// Dispose of the database connection
-  /// </summary>
-  public void dispose() {
-    this.dispose(true);
-//    GC.SuppressFinalize(this);
-  }
-
-  /// <summary>
-  /// Dispose of the database connection
-  /// </summary>
-  /// <param name="disposing">Is the object being disposed</param>
-  protected void dispose(boolean disposing) {
-    // Make sure the connection exists and is open before trying to close it
-    if (disposing && !this.asyncPage.isClosed()) {
-      this.asyncPage.close();
-    }
   }
 }

@@ -10,54 +10,67 @@ import com.cognizantsoftvision.maqs.playwright.PlaywrightConfig;
 import com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement;
 import com.microsoft.playwright.FrameLocator;
 
+/**
+ * The Playwright IFrame Page Model class for testing.
+ */
 public class PageModelIFrame extends BasePlaywrightPageModel {
 
-  /// <summary>
-  /// Initializes a new instance of the <see cref="PageModel"/> class
-  /// </summary>
-  /// <param name="testObject">The base Playwright test object</param>
-  /// <param name="otherDriver">Page driver to use instead of the default</param>
+  /**
+   * Initializes a new instance of the PageModel IFrame class
+   * @param testObject The base Playwright test object
+   */
   public PageModelIFrame(IPlaywrightTestObject testObject) {
     super(testObject);
   }
 
-  /// <summary>
-  /// Get page url
-  /// </summary>
+  /**
+   * holds the selector string values.
+   */
+  ElementPageModel elementPageModel = new ElementPageModel();
+
+  /**
+   * gets the page url.
+   * @return the page url
+   */
   public static String getUrl() {
     return PlaywrightConfig.getWebBase() + "iFrame.html";
   }
 
-
-  /// <summary>
-  /// Test frame
-  /// </summary>
+  /**
+   * gets the test frame locator.
+   * @return the test frame locator
+   */
   private FrameLocator getFrame() {
-    return this.getPageDriver().getAsyncPage().frameLocator("#frame");
+    return this.getPageDriver().getAsyncPage().frameLocator(elementPageModel.frame);
   }
 
-  /// <summary>
-  /// Get loaded label
-  /// </summary>
+  /**
+   * gets the loaded label.
+   * @return the loaded label
+   */
   public PlaywrightSyncElement getShowDialog() {
-    return new PlaywrightSyncElement(Frame, "#showDialog1");
+    return new PlaywrightSyncElement(getFrame(), elementPageModel.showDialog1);
   }
 
-  /// <summary>
-  /// Get loaded label
-  /// </summary>
+  /**
+   * gets the close dialog element.
+   * @return the close dialog element
+   */
   public PlaywrightSyncElement getCloseDialog() {
-    return new PlaywrightSyncElement(Frame, "#CloseButtonShowDialog");
+    return new PlaywrightSyncElement(getFrame(), elementPageModel.closeButtonShowDialog);
   }
 
-
-  /// <summary>
-  /// Open the page
-  /// </summary>
+  /**
+   * navigates to the page.
+   */
   public void openPage() {
     this.getPageDriver().navigateTo(getUrl());
   }
 
+  /**
+   * check if the page has been loaded.
+   * @return true if the page was loaded
+   */
   @Override
   public boolean isPageLoaded() {
     return getShowDialog().isEventuallyVisible();

@@ -108,18 +108,18 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void SelectMultipleOptionTest() {
     List<String> multipleOptions = this.getPageDriver().selectOption(elementPageModel.computerPartsSelection, new String[]{"one", "five"});
-    Assert.assertEquals(2, multipleOptions.size());
-    Assert.assertEquals("one", multipleOptions.get(0));
-    Assert.assertEquals("five", multipleOptions.get(1));
+    Assert.assertEquals( multipleOptions.size(), 2);
+    Assert.assertEquals(multipleOptions.get(0), "one");
+    Assert.assertEquals(multipleOptions.get(1), "five");
 
     ElementHandle second = this.getPageDriver().querySelector(elementPageModel.computerPartsSecond);
     ElementHandle fourth = this.getPageDriver().querySelector(elementPageModel.computerPartsFourth);
 
     multipleOptions = this.getPageDriver().selectOption(
         elementPageModel.computerPartsSelection, new ElementHandle[]{second, fourth});
-    Assert.assertEquals(2, multipleOptions.size());
-    Assert.assertEquals("two", multipleOptions.get(0));
-    Assert.assertEquals("four", multipleOptions.get(1));
+    Assert.assertEquals(multipleOptions.size(), 2);
+    Assert.assertEquals(multipleOptions.get(0), "two");
+    Assert.assertEquals(multipleOptions.get(1), "four");
   }
 
   /// <summary>
@@ -163,7 +163,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void FillTest() {
     this.getPageDriver().fill(elementPageModel.firstNameText, "Ted");
-    Assert.assertEquals("Ted", this.getPageDriver().inputValue(elementPageModel.firstNameText));
+    Assert.assertEquals(this.getPageDriver().inputValue(elementPageModel.firstNameText), "Ted");
   }
 
   /// <summary>
@@ -171,8 +171,8 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void GetAttributeTest() {
-    Assert.assertEquals("ShowProgressAnimation();",
-        this.getPageDriver().getAttribute(elementPageModel.showDialog1, "onclick"));
+    Assert.assertEquals(this.getPageDriver().getAttribute(elementPageModel.showDialog1, "onclick"),
+        "ShowProgressAnimation();");
   }
 
   /// <summary>
@@ -298,8 +298,8 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void SetViewportSizeTest() {
     this.getPageDriver().setViewportSize(600, 300);
-    Assert.assertEquals(300, this.getPageDriver().getAsyncPage().viewportSize().height);
-    Assert.assertEquals(600, this.getPageDriver().getAsyncPage().viewportSize().width);
+    Assert.assertEquals(this.getPageDriver().getAsyncPage().viewportSize().height, 300);
+    Assert.assertEquals(this.getPageDriver().getAsyncPage().viewportSize().width, 600);
   }
 
   /// <summary>
@@ -324,7 +324,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void TextContentTest() {
-    Assert.assertEquals("Show dialog", this.getPageDriver().textContent(elementPageModel.showDialog1));
+    Assert.assertEquals(this.getPageDriver().textContent(elementPageModel.showDialog1), "Show dialog");
   }
 
   /// <summary>
@@ -332,7 +332,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void TitleTest() {
-    Assert.assertEquals("Automation - Magenic Automation Test Site", this.getPageDriver().title());
+    Assert.assertEquals(this.getPageDriver().title(), "Automation - Magenic Automation Test Site");
   }
 
   /// <summary>
@@ -341,7 +341,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void TypeAndInputValueTest() {
     this.getPageDriver().type(elementPageModel.firstNameText, "Ted");
-    Assert.assertEquals("Ted", this.getPageDriver().inputValue(elementPageModel.firstNameText));
+    Assert.assertEquals(this.getPageDriver().inputValue(elementPageModel.firstNameText), "Ted");
   }
 
   /// <summary>
@@ -431,8 +431,8 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void EvalOnSelectorTest() {
-    Assert.assertEquals("Monitor", this.getPageDriver().evalOnSelector(
-        elementPageModel.computerPartsFourth, "node => node.innerText"));
+    Assert.assertEquals(this.getPageDriver().evalOnSelector(
+        elementPageModel.computerPartsFourth, "node => node.innerText"), "Monitor");
   }
 
   /// <summary>
@@ -440,8 +440,9 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void EvalOnSelectorAllTest() {
-    Assert.assertEquals(6, this.getPageDriver().evalOnSelectorAll(
-        elementPageModel.computerPartsAllOptions, "nodes => nodes.map(n => n.innerText)"));
+    Assert.assertEquals(this.getPageDriver().evalOnSelectorAll(
+        elementPageModel.computerPartsAllOptions, "nodes => nodes.map(n => n.innerText)"),
+        6);
   }
 
   /// <summary>
@@ -449,7 +450,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void EvaluateTest() {
-    Assert.assertEquals(3, Integer.parseInt(this.getPageDriver().evaluate("1 + 2").toString()));
+    Assert.assertEquals(Integer.parseInt(this.getPageDriver().evaluate("1 + 2").toString()), 3);
   }
 
   /// <summary>
@@ -498,12 +499,10 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void AddInitScriptTest() {
-    // TODO: finish up method
-    this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc, );
+    this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc);
     this.getPageDriver().reload();
     this.getPageDriver().evaluate("changeMainHeaderName();");
-
-    Assert.assertEquals("NEWNAME", this.getPageDriver().innerText(elementPageModel.mainHeader));
+    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
   }
 
   /// <summary>
@@ -534,7 +533,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     // TODO: Finish up method
     this.getPageDriver().setExtraHTTPHeaders(Collections.singletonMap("sample", "value"));
 //    this.getPageDriver().getAsyncPage().RequestFinished += AsyncPage_RequestFinished;
-    this.getPageDriver().getAsyncPage().waitForRequestFinished() += AsyncPage_RequestFinished;
+//    this.getPageDriver().getAsyncPage().waitForRequestFinished() += AsyncPage_RequestFinished;
 
     this.getPageDriver().click(elementPageModel.asyncPageLink);
     this.getPageDriver().isEventuallyVisible(elementPageModel.alwaysUpOnAsyncPage);

@@ -4,190 +4,220 @@
 
 package com.cognizantsoftvision.maqs.playwright.pageModel;
 
-import com.cognizantsoftvision.maqs.playwright.*;
-import com.cognizantsoftvision.maqs.playwright.pageModel.ElementPageModel;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.playwright.BasePlaywrightPageModel;
+import com.cognizantsoftvision.maqs.playwright.IPlaywrightTestObject;
+import com.cognizantsoftvision.maqs.playwright.PageDriver;
+import com.cognizantsoftvision.maqs.playwright.PlaywrightConfig;
+import com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 
-/// <summary>
-/// Playwright page model class for testing
-/// </summary>
+/**
+ * The Playwright Page Model class for testing.
+ */
 public class PageModel extends BasePlaywrightPageModel {
 
+  /**
+   * The element page model that holds all the elements as a string value.
+   */
   static ElementPageModel elementPageModel = new ElementPageModel();
 
-  /// <summary>
-  /// Initializes a new instance of the <see cref="PageModel"/> class
-  /// </summary>
-  /// <param name="testObject">The base Playwright test object</param>
+  /**
+   * Initializes a new instance of the PageModel class.
+   * @param testObject The base Playwright test object
+   */
   public PageModel(IPlaywrightTestObject testObject) {
     super(testObject);
   }
 
-  /// <summary>
-  /// Get page url
-  /// </summary>
+  /**
+   * Gets the page url.
+   * @return the page url string
+   */
   public static String getUrl() {
     return PlaywrightConfig.getWebBase();
   }
 
-  /// <summary>
-  /// Main
-  /// </summary>
+  /**
+   * gets the main header element.
+   * @return the main header element
+   */
   public PlaywrightSyncElement getMainHeader() {
     return new PlaywrightSyncElement(this.getPageDriver().getAsyncPage(), elementPageModel.mainHeader);
   }
 
-  /// <summary>
-  /// Should dialog button
-  /// </summary>
+  /**
+   * gets the show dialog button element.
+   * @return the show dialog button element
+   */
   public PlaywrightSyncElement getShowDialog1() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.showDialog1);
   }
 
-  /// <summary>
-  /// Close dialog
-  /// </summary>
+  /**
+   * gets the close dialog element.
+   * @return the close dialog element
+   */
   public PlaywrightSyncElement getCloseButtonShowDialog() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.closeButtonShowDialog);
   }
 
-  /// <summary>
-  /// Checkbox 1
-  /// </summary>
+  /**
+   * gets the checkbox 1 element.
+   * @return the checkbox 1 element
+   */
   public PlaywrightSyncElement getCheckbox1() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.checkbox1);
   }
 
-  /// <summary>
-  /// Checkbox 2
-  /// </summary>
+  /**
+   * gets the checkbox 2 element.
+   * @return the checkbox 2 element
+   */
   public PlaywrightSyncElement getCheckbox2() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.checkbox2);
   }
 
-  /// <summary>
-  /// First name input
-  /// </summary>
+  /**
+   * gets the first name input element.
+   * @return the first name input element
+   */
   public PlaywrightSyncElement getFirstNameText() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.firstNameText);
   }
 
-  /// <summary>
-  /// Main
-  /// </summary>
+  /**
+   * gets the disabled field element.
+   * @return the disabled field element
+   */
   public PlaywrightSyncElement getDisabledField() {
     return new PlaywrightSyncElement(this.getPageDriver(),elementPageModel.disabledField);
   }
 
-  /// <summary>
-  /// Async link
-  /// </summary>
+  /**
+   * gets the async page link element.
+   * @return the async page link element
+   */
   public PlaywrightSyncElement getAsyncPageLink() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.asyncPageLink);
   }
 
-  /// <summary>
-  /// Async element that load right away
-  /// </summary>
+  /**
+   * gets the async element that loads right away
+   * @return the async element that loads right away
+   */
   public PlaywrightSyncElement getAlwaysUpOnAsyncPage() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.alwaysUpOnAsyncPage);
   }
 
-  /// <summary>
-  /// Trainging dropdown
-  /// </summary>
+  /**
+   * gets the training dropdown element.
+   * @return the training dropdown element
+   */
   public PlaywrightSyncElement getTrainingDropdown() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.trainingDropdown);
   }
 
-  /// <summary>
-  /// Training link
-  /// </summary>
+  /**
+   * gets the training link element.
+   * @return the training link element
+   */
   public PlaywrightSyncElement getTrainingOneLink() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.trainingOneLink);
   }
 
-  /// <summary>
-  /// Footer
-  /// </summary>
+  /**
+   * gets the footer element.
+   * @return the footer element
+   */
   public PlaywrightSyncElement getFooter() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.footer);
   }
 
-  /// <summary>
-  /// Name dropdown
-  /// </summary>
+  /**
+   * gets the name dropdown element.
+   * @return the name dropdown element
+   */
   public PlaywrightSyncElement getNamesDropDown() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.namesDropDown);
   }
 
-  /// <summary>
-  /// Name option 1
-  /// </summary>
+  /**
+   * gets the name option 1 element.
+   * @return the name option 1 element
+   */
   public PlaywrightSyncElement getNamesDropDownFirstOption() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.namesDropDownFirstOption);
   }
 
-  /// <summary>
-  /// Computer parts select element
-  /// </summary>
+  /**
+   * gets the computer parts select element.
+   * @return the computer arts select element
+   */
   public PlaywrightSyncElement getComputerPartsSelection() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.computerPartsSelection);
   }
 
-  /// <summary>
-  /// Computer part 2
-  /// </summary>
+  /**
+   * gets the computer part 2 element.
+   * @return the computer part 2 element
+   */
   public PlaywrightSyncElement getComputerPartsSecond() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel .computerPartsSecond);
   }
 
-  /// <summary>
-  /// Computer part 4
-  /// </summary>
+  /**
+   * gets the computer part 4 element.
+   * @return the computer part 4 element
+   */
   public PlaywrightSyncElement getComputerPartsFourth() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.computerPartsFourth);
   }
 
-  /// <summary>
-  /// All computer parts options
-  /// </summary>
+  /**
+   * gets the all computer parts options element.
+   * @return the all computer parts options element
+   */
   public PlaywrightSyncElement getComputerPartsAllOptions() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.computerPartsAllOptions);
   }
 
-  /// <summary>
-  /// HTML 5 draggable image
-  /// </summary>
+  /**
+   * gets the HTML 5 draggable image element.
+   * @return the HTML 5 draggable image element
+   */
   public PlaywrightSyncElement getHtml5Draggable() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.html5Draggable);
   }
 
-  /// <summary>
-  /// HTML 5 drop location
-  /// </summary>
+  /**
+   * gets the HTML 5 drop location element
+   * @return the HTML 5 drop location element
+   */
   public PlaywrightSyncElement getHtml5Drop() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.html5Drop);
   }
 
-  /// <summary>
-  /// Upload link
-  /// </summary>
+  /**
+   * gets the upload link element.
+   * @return the upload link element
+   */
   public PlaywrightSyncElement getUpload() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.photo);
   }
 
-  /// <summary>
-  /// Date picker input
-  /// </summary>
+  /**
+   * gets the date picker input element.
+   * @return the date picker input element
+   */
   public PlaywrightSyncElement getDatePickerInput() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.datePickerInput);
   }
 
-  /// <summary>
-  /// Date picker days
-  /// </summary>
+  /**
+   * gets the date picker days element.
+    * @return the date picker days element
+   */
   public PlaywrightSyncElement getDatePickerDays() {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.datePickerDays);
   }
@@ -195,67 +225,74 @@ public class PageModel extends BasePlaywrightPageModel {
   /// <summary>
   /// Not a real element
   /// </summary>
+
+  /**
+   * gets the not real element.
+   * @return the not real element
+   */
   public PlaywrightSyncElement getNotReal() {
-    return new PlaywrightSyncElement(this.getPageDriver(), "#NotReal");
+    return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.notReal);
   }
 
-  /// <summary>
-  /// Gets a parent element
-  /// </summary>
+  /**
+   * gets the flower table parent element.
+   * @return the flower table parent element
+   */
   public PlaywrightSyncElement getFlowerTablePlaywrightElement() {
-    return new PlaywrightSyncElement(this.getPageDriver(), "#FlowerTable");
+    return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.flowerTable);
   }
 
-  /// <summary>
-  /// Gets a child element, the second table caption
-  /// </summary>
+  /**
+   * Gets a child element, the second table caption.
+   * @return a child element, the second table caption
+   */
   public PlaywrightSyncElement getFlowerTableCaptionWithParent() {
-    return new PlaywrightSyncElement(this.getFlowerTablePlaywrightElement(), "CAPTION > Strong");
+    return new PlaywrightSyncElement(this.getFlowerTablePlaywrightElement(), elementPageModel.captionStrong);
   }
 
-  /// <summary>
-  /// Open the page
-  /// </summary>
+  /**
+   * navigates to the open page.
+   */
   public void openPage() {
     this.getPageDriver().navigateTo(getUrl());
   }
 
-  /// <summary>
-  /// Get page driver
-  /// </summary>
-  /// <returns>The page driver</returns>
+  /**
+   * gets the page driver.
+   * @return the page driver
+   */
   public PageDriver getPageDriver() {
     return this.pageDriver;
   }
 
-  /// <summary>
-  /// Get logger
-  /// </summary>
-  /// <returns>The logger</returns>
-  public Logger getLogger() {
+  /**
+   * gets the logger.
+   * @return the logger
+   */
+  public ILogger getLogger() {
     return this.log;
   }
 
-  /// <summary>
-  /// Get test object
-  /// </summary>
-  /// <returns>The test object</returns>
+  /**
+   * gets the test object.
+   * @return the test object
+   */
   public IPlaywrightTestObject getTestObject() {
     return this.testObject;
   }
 
-  /// <summary>
-  /// Get performance timer collection
-  /// </summary>
-  /// <returns>The performance timer collection</returns>
+  /**
+   * get the performance timer collection.
+   * @return the performance timer collection
+   */
   public IPerfTimerCollection getPerfTimerCollection() {
     return this.perfTimerCollection;
   }
 
-  /// <summary>
-  /// Check if the page has been loaded
-  /// </summary>
-  /// <returns>True if the page was loaded</returns>
+  /**
+   * check if the page has been loaded.
+   * @return true if the page was loaded
+   */
   @Override
   public boolean isPageLoaded() {
     return getFlowerTableCaptionWithParent().isVisible();

@@ -60,7 +60,7 @@ public class PageDriverManager extends DriverManager<PageDriver> {
     PageDriver tempDriver;
 
     if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-      tempDriver = getPageDriver();
+      tempDriver = getBaseDriver();
       this.setBaseDriver(tempDriver);
 
       // Log the setup
@@ -72,7 +72,6 @@ public class PageDriverManager extends DriverManager<PageDriver> {
     if (tempDriver == null) {
       throw new NullPointerException("Base driver is null");
     }
-
     return tempDriver;
   }
 

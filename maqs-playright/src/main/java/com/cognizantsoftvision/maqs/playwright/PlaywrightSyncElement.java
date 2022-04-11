@@ -4,9 +4,7 @@
 
 package com.cognizantsoftvision.maqs.playwright;
 
-import com.microsoft.playwright.ElementHandle;
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.SelectOption;
 import com.microsoft.playwright.options.WaitForSelectorState;
@@ -47,7 +45,7 @@ public class PlaywrightSyncElement {
    * @param selector Element selector
    */
   public PlaywrightSyncElement(PlaywrightSyncElement parent, String selector) {
-    this.setParentLocator(parent.elementLocator());
+    this.setParentLocator(parent.getParentLocator());
     this.setSelector(selector);
   }
 
@@ -64,13 +62,23 @@ public class PlaywrightSyncElement {
   }
 
   /**
+   * Initializes a new instance of the PlaywrightSyncElement class.
+   * @param frame The associated playwright frame locator
+   * @param selector Element selector
+   */
+  public PlaywrightSyncElement(FrameLocator frame, String selector) {
+    this.setParentFrameLocator(frame);
+    this.setSelector(selector);
+  }
+
+  /**
    * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
    * @param testObject The associated playwright test object
    * @param selector Element selector
    * @param options Advanced locator options
    */
   public PlaywrightSyncElement(IPlaywrightTestObject testObject, String selector, Page.LocatorOptions options) {
-    super(testObject.getPageDriver().getAsyncPage(), selector, options);
+    this(testObject.getPageDriver().getAsyncPage(), selector, options);
   }
 
   /**
@@ -79,7 +87,7 @@ public class PlaywrightSyncElement {
    * @param selector Element selector
    */
   public PlaywrightSyncElement(PageDriver driver, String selector) {
-    super(driver.getAsyncPage(), selector);
+    this(driver.getAsyncPage(), selector);
   }
 
   /**
@@ -89,7 +97,7 @@ public class PlaywrightSyncElement {
    * @param options Advanced locator options
    */
   public PlaywrightSyncElement(PageDriver driver, String selector, Page.LocatorOptions options) {
-    super(driver.getAsyncPage(), selector, options);
+    this(driver.getAsyncPage(), selector, options);
   }
 
   /**
@@ -132,6 +140,27 @@ public class PlaywrightSyncElement {
    */
   private void setParentLocator(Locator newParentLocator) {
     this.parentLocator = newParentLocator;
+  }
+
+  /**
+   * The underlying async page object
+   */
+  private FrameLocator parentFrameLocator;
+
+  /**
+   * Gets the underlying async page object.
+   * @return the locator
+   */
+  public FrameLocator getParentFrameLocator() {
+    return this.parentFrameLocator;
+  }
+
+  /**
+   * Sets the underlying async page object
+   * @param newParentLocator the new parent locator
+   */
+  private void setParentFrameLocator(FrameLocator newParentLocator) {
+    this.parentFrameLocator = newParentLocator;
   }
 
   /// <summary>
@@ -187,10 +216,12 @@ public class PlaywrightSyncElement {
   /// <returns></returns>
   public Locator elementLocator() {
     if (this.getParentPage() != null) {
-//      return this.getParentPage().Locator(Selector, PageOptions);
-      return this.getParentPage().locator(getSelector());
-    } else if(this.getParentLocator() != null) {
-//      return this.getParentLocator().Locator(Selector, LocatorOptions);
+      return getPageOptions() != null ? this.getParentPage().locator(getSelector(), getPageOptions())
+          : this.getParentPage().locator(getSelector());
+    } else if (this.getParentLocator() != null) {
+      return getLocatorOptions() != null ? this.getParentLocator().locator(getSelector(), getLocatorOptions())
+          : this.getParentLocator().locator(getSelector());
+    } else if(this.getParentFrameLocator() != null) {
       return this.getParentLocator().locator(getSelector());
     }
 
@@ -240,12 +271,12 @@ public class PlaywrightSyncElement {
   }
 
   public void dragTo(Locator target) {
-    elementLocator().DragToAsync(target).Wait();
+    elementLocator().dragTo(target);
   }
 
   /// <inheritdoc cref = "ILocator.DragToAsync(ILocator, LocatorDragToOptions?)" />
   public void dragTo(Locator target, Locator.DragToOptions options) {
-    elementLocator().DragToAsync(target, options).Wait();
+    elementLocator().dragTo(target, options);
   }
 
   public void fill(String value) {

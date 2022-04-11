@@ -7,7 +7,10 @@ package com.cognizantsoftvision.maqs.playwright;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import java.util.Collections;
+
+import java.util.*;
+
+import org.apache.commons.collections.map.HashedMap;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -22,6 +25,8 @@ public class ConfigUnitTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void testGetBrowser() {
+    Config.addTestSettingValues(Collections.singletonMap("Browser", "Chrome"),
+        ConfigSection.PLAYWRIGHT_MAQS, true);
     Assert.assertEquals(PlaywrightConfig.getBrowserName(), "Chrome");
   }
 
@@ -30,41 +35,27 @@ public class ConfigUnitTest {
    * @return browser name data
    */
   @DataProvider (name = "browserType")
-  public Object[][] browserType() {
-    return new Object[][] {{"Chrome"}, {"Chromium"}, {"Firefox"}, {"Edge"}, {"Webkit"}};
+  public Object[] browserType() {
+     ArrayList<String> data = new ArrayList<>();
+     data.add("Chromium");
+     data.add("Firefox");
+     data.add("Edge");
+     data.add("Webkit");
+     data.add("Chrome");
+     return new Object[] {data};
   }
 
   /**
    * Test the config browser name.
-   * @param browserName the incoming browser name to test
+   * @param browserNames the incoming browser name to test
    */
   @Test(groups = TestCategories.PLAYWRIGHT, dataProvider = "browserType")
-  public void ConfigBrowserName(String browserName) {
-    Config.addTestSettingValues(Collections.singletonMap("Browser", browserName),
-        ConfigSection.PLAYWRIGHT_MAQS, true);
-    Assert.assertEquals(PlaywrightConfig.getBrowserName(), browserName);
-  }
-
-  /**
-   * Data provider for the playwright browser type test.
-   * @return browser name data
-   */
-  @DataProvider (name = "playwrightBrowserType")
-  public Object[][] playwrightBrowserType() {
-    return new Object[][] {{"Chrome", PlaywrightBrowser.CHROME}, {"Chromium", PlaywrightBrowser.CHROMIUM},
-        {"Firefox", PlaywrightBrowser.FIREFOX}, {"Edge", PlaywrightBrowser.EDGE},
-        {"Webkit", PlaywrightBrowser.WEBKIT}, {null, PlaywrightBrowser.CHROME} };
-  }
-
-  /**
-   * Test the config browser enums.
-   * @param browser the browser string
-   * @param browserEnum the browser enum
-   */
-  @Test(groups = TestCategories.PLAYWRIGHT, dataProvider = "playwrightBrowserType")
-  public void ConfigBrowserEnum(String browser, PlaywrightBrowser browserEnum) {
-    Config.addTestSettingValues(Collections.singletonMap("Browser", browser), ConfigSection.PLAYWRIGHT_MAQS, true);
-    Assert.assertEquals(browserEnum, PlaywrightConfig.getBrowserType());
+  public void ConfigBrowserName(List<String> browserNames) {
+    for (String browserName : browserNames) {
+      Config.addTestSettingValues(Collections.singletonMap("Browser", browserName),
+          ConfigSection.PLAYWRIGHT_MAQS, true);
+      Assert.assertEquals(PlaywrightConfig.getBrowserName(), browserName);
+    }
   }
 
   /**
@@ -75,6 +66,18 @@ public class ConfigUnitTest {
     Config.addTestSettingValues(Collections.singletonMap("Browser", "IE"), ConfigSection.PLAYWRIGHT_MAQS, true);
     PlaywrightBrowser type = PlaywrightConfig.getBrowserType();
     Assert.fail("IE returned type: " + type);
+  }
+
+  /**
+   * Test the config browser enums.
+   */
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void ConfigBrowserEnum() {
+    for (PlaywrightBrowser browser : PlaywrightBrowser.class.getEnumConstants()) {
+      Config.addTestSettingValues(Collections.singletonMap("Browser", browser.name()), ConfigSection.PLAYWRIGHT_MAQS, true);
+      Assert.assertEquals(browser, PlaywrightConfig.getBrowserType());
+    }
+
   }
 
   /**

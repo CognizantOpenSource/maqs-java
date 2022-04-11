@@ -18,7 +18,7 @@ public class ElementPageModel {
    * Rename header Javascript function.
    */
   // TODO:
-  public final String renameHeaderFunc = ""; //function changeMainHeaderName() " + document.querySelector('H2').innerHTML = 'NEWNAME';}";
+  public final String renameHeaderFunc = "function changeMainHeaderName() document.querySelector('H2').innerHTML = 'NEWNAME';}";
 
   /**
    * Should dialog button selector
@@ -120,4 +120,12 @@ public class ElementPageModel {
   public final String datePickerInput = "#datepicker INPUT";
 
   public final String datePickerDays = ".datepicker-days";
+
+  public final String notReal = "NotReal";
+
+  public final String flowerTable = "#FlowerTable";
+
+  public final String captionStrong = "CAPTION > Strong";
+
+  public final String frame = "#frame";
 }
