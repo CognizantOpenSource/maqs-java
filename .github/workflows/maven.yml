@@ -116,6 +116,12 @@ jobs:
           module-name: ${{matrix.module-name}}
           bt-param: '-fae -B -e -Dtesting=solo -T 1C'
           version: ${{ github.sha }}
+      - name: Publish Unit Test Results Report
+        uses: scacap/action-surefire-report@v1
+        if: ${{ always() }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          check_name: ${{inputs.module-name}} Unit Test Results
       - uses: actions/upload-artifact@v2
         if: always()
         name: "Upload test artifact"
@@ -133,7 +139,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test-modules, getVersion]
     env:
-      SONAR_ORG: ${{secrets.SONAR_ORG }}
+      SONAR_ORG: "jason-edstrom"
       SONAR_PROJECT: ${{secrets.SONAR_PROJECT }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
