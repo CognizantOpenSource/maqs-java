@@ -98,7 +98,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getElementAttributeTest() {
     AutomationPageModel automationPageModel = navigateToUrl();
-    String expectedText = automationPageModel.testSiteAutomationUrl + "bad";
+    String expectedText = automationPageModel.testSiteAutomationUrl + "notError.html";
     String actualText = ElementHandler.getElementAttribute(
         getWebDriver(), automationPageModel.errorLinkBy, "href");
     verifyText(actualText, expectedText);
