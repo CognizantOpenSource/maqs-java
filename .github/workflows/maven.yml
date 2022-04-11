@@ -135,7 +135,7 @@ jobs:
 
   sonarcloud:
     name: SonarCloud Analysis
-    if: github.actor != 'dependabot[bot]'
+    if: always() && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     needs: [test-modules, getVersion]
     env:
@@ -183,6 +183,12 @@ jobs:
         env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish Unit Test Results Report
+        uses: scacap/action-surefire-report@v1
+        if: ${{ always() }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          check_name: Unit Test Results
 
   checkstyle:
     name: Checkstyle Run
