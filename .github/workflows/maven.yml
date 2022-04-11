@@ -126,6 +126,7 @@ jobs:
           reporter: 'java-junit'
           list-tests: 'failed'
           list-suites: 'failed'
+          fail-on-error: 'false'
       - uses: actions/upload-artifact@v2
         if: always()
         name: "Upload test artifact"
