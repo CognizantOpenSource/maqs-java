@@ -140,6 +140,7 @@ jobs:
       SONAR_PROJECT: "jason-edstrom_maqs-java"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+      VERSION: ${{ needs.getVersion.outputs.buildNumber }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
@@ -168,7 +169,7 @@ jobs:
             ${{ runner.os }}-maven-
       - name: sonarcloud analysis
         shell: bash
-        run: mvn -Drevision=-Psonar package sonar:sonar -Dsonar.projectKey=${{env.SONAR_PROJECT}} -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
+        run: mvn -Drevision=${{env.VERSION}} -Psonar package sonar:sonar -Dsonar.projectKey=${{env.SONAR_PROJECT}} -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
         working-directory: ${{github.workspace}}
         env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
