@@ -96,6 +96,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    * Unit Test for get element attribute function.
    */
   @Test(groups = TestCategories.SELENIUM)
+  @Ignore
   public void getElementAttributeTest() {
     AutomationPageModel automationPageModel = navigateToUrl();
     automationPageModel.waitForPageLoad();
