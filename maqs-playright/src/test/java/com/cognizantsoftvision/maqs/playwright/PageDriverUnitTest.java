@@ -22,13 +22,20 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-/// <summary>
-/// Test page driver
-/// </summary>
+
+/**
+ * The Page Driver unit tests.
+ */
 public class PageDriverUnitTest extends BasePlaywrightTest {
 
+  /**
+   * the selector string class.
+   */
   ElementPageModel elementPageModel = new ElementPageModel();
 
+  /**
+   * the page model class.
+   */
   PageModel pageModel;
 
   /**
@@ -39,29 +46,29 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     pageModel = new PageModel(this.getTestObject());
   }
 
-  /// <summary>
-  /// Setup test and make sure we are on the correct test page
-  /// </summary>
+  /**
+   * Setup test and make sure we are on the correct test page.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void CreatePlaywrightPageModel() {
     this.getPageDriver().navigateTo(PageModel.getUrl());
   }
 
-  /// <summary>
-  /// Test check works as expected
-  /// </summary>
+  /**
+   * Test check works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void CheckTest() {
+  public void checkTest() {
     Assert.assertFalse(this.getPageDriver().isChecked(elementPageModel.checkbox1));
     this.getPageDriver().check(elementPageModel.checkbox1);
     Assert.assertTrue(this.getPageDriver().isChecked(elementPageModel.checkbox1));
   }
 
-  /// <summary>
-  /// Test set check works as expected
-  /// </summary>
+  /**
+   * Test set check works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void SetCheckTest() {
+  public void setCheckTest() {
     Assert.assertFalse(this.getPageDriver().isChecked(elementPageModel.checkbox2));
     this.getPageDriver().setChecked(elementPageModel.checkbox2, false);
     Assert.assertFalse(this.getPageDriver().isChecked(elementPageModel.checkbox2));
@@ -69,19 +76,19 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     Assert.assertTrue(this.getPageDriver().isChecked(elementPageModel.checkbox2));
   }
 
-  /// <summary>
-  /// Test click works as expected
-  /// </summary>
+  /**
+   * Test click works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void ClickTest() {
+  public void clickTest() {
     Assert.assertFalse(this.getPageDriver().isVisible(elementPageModel.closeButtonShowDialog));
     this.getPageDriver().click(elementPageModel.showDialog1);
     Assert.assertTrue(this.getPageDriver().isEnabled(elementPageModel.closeButtonShowDialog));
   }
 
-  /// <summary>
-  /// Test select option works as expected
-  /// </summary>
+  /**
+   * Test select option works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void SelectOptionTest() {
     List<String> singleOption = this.getPageDriver().selectOption(elementPageModel.namesDropDown, "5");
@@ -102,11 +109,11 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     Assert.assertEquals(singleOption.get(0), "1");
   }
 
-  /// <summary>
-  /// Test select single option works as expected
-  /// </summary>
+  /**
+   * Test select single option works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void SelectMultipleOptionTest() {
+  public void selectMultipleOptionTest() {
     List<String> multipleOptions = this.getPageDriver().selectOption(elementPageModel.computerPartsSelection, new String[]{"one", "five"});
     Assert.assertEquals( multipleOptions.size(), 2);
     Assert.assertEquals(multipleOptions.get(0), "one");
@@ -122,135 +129,135 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     Assert.assertEquals(multipleOptions.get(1), "four");
   }
 
-  /// <summary>
-  /// Test close works as expected
-  /// </summary>
+  /**
+   * Test close works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void CloseTest() {
+  public void closeTest() {
     Assert.assertFalse(this.getPageDriver().getAsyncPage().isClosed());
     this.getPageDriver().close();
     Assert.assertTrue(this.getPageDriver().getAsyncPage().isClosed());
   }
 
-  /// <summary>
-  /// Test content works as expected
-  /// </summary>
+  /**
+   * Test content works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void ContentTest() {
+  public void contentTest() {
     Assert.assertTrue(this.getPageDriver().content().contains("Softvision"));
   }
 
-  /// <summary>
-  /// Test double click works as expected
-  /// </summary>
+  /**
+   *  Test double-click works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void DoubleClickTest() {
+  public void doubleClickTest() {
     this.getPageDriver().doubleClick(elementPageModel.namesDropDown);
     Assert.assertFalse(this.getPageDriver().isVisible(elementPageModel.namesDropDownFirstOption));
   }
 
-  /// <summary>
-  /// Test drag and drop works as expected
-  /// </summary>
+  /**
+   * Test drag and drop works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void DragAndDropTest() {
+  public void dragAndDropTest() {
     this.getPageDriver().dragAndDrop(elementPageModel.html5Draggable, elementPageModel.html5Drop);
   }
 
-  /// <summary>
-  /// Test fill works as expected
-  /// </summary>
+  /**
+   * Test fill works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void FillTest() {
+  public void fillTest() {
     this.getPageDriver().fill(elementPageModel.firstNameText, "Ted");
     Assert.assertEquals(this.getPageDriver().inputValue(elementPageModel.firstNameText), "Ted");
   }
 
-  /// <summary>
-  /// Test get attribute works as expected
-  /// </summary>
+  /**
+   * Test get attribute works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void GetAttributeTest() {
+  public void getAttributeTest() {
     Assert.assertEquals(this.getPageDriver().getAttribute(elementPageModel.showDialog1, "onclick"),
         "ShowProgressAnimation();");
   }
 
-  /// <summary>
-  /// Test that the press action works
-  /// </summary>
+  /**
+   * Test that the press action works.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void PressTest() {
+  public void pressTest() {
     Assert.assertFalse(this.getPageDriver().isVisible(elementPageModel.closeButtonShowDialog));
     this.getPageDriver().press(elementPageModel.showDialog1, "Enter");
     Assert.assertTrue(this.getPageDriver().isEnabled(elementPageModel.closeButtonShowDialog));
   }
 
-  /// <summary>
-  /// Test query selector works as expected
-  /// </summary>
+  /**
+   * Test query selector works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void QuerySelectorTest() {
+  public void querySelectorTest() {
     ElementHandle queryResult = this.getPageDriver().querySelector(elementPageModel.showDialog1);
     Assert.assertTrue(queryResult.isVisible());
   }
 
-  /// <summary>
-  /// Test query select all works as expected
-  /// </summary>
+  /**
+   * Test query select all works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void QuerySelectorAllTest() {
+  public void querySelectorAllTest() {
     List<ElementHandle> results = this.getPageDriver().querySelectorAll("DIV");
     Assert.assertTrue(results.size() > 1, "Selector should have found multiple results");
   }
 
-  /// <summary>
-  /// Test hover works as expected
-  /// </summary>
+  /**
+   * Test hover works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void HoverTest() {
+  public void hoverTest() {
     this.getPageDriver().hover(elementPageModel.trainingDropdown);
     Assert.assertTrue(this.getPageDriver().isVisible(elementPageModel.trainingOneLink));
   }
 
-  /// <summary>
-  /// Test inner HTML works as expected
-  /// </summary>
+  /**
+   * Test inner HTML works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void InnerHTMLTest() {
+  public void innerHTMLTest() {
     Assert.assertTrue(this.getPageDriver().innerHTML(elementPageModel.footer).contains("Softvision"));
   }
 
-  /// <summary>
-  /// Test inner text works as expected
-  /// </summary>
+  /**
+   * Test inner text works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void InnerTextTest() {
+  public void innerTextTest() {
     Assert.assertTrue(this.getPageDriver().innerText(elementPageModel.footer).contains("Softvision"));
   }
 
-  /// <summary>
-  /// Test is disabled works as expected
-  /// </summary>
+  /**
+   * Test is disabled works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void IsDisabledTest() {
+  public void isDisabledTest() {
     Assert.assertTrue(this.getPageDriver().isDisabled(elementPageModel.disabledField));
     Assert.assertFalse(this.getPageDriver().isDisabled(elementPageModel.firstNameText));
   }
 
-  /// <summary>
-  /// Test is editable works as expected
-  /// </summary>
+  /**
+   * Test is editable works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void IsEditableTest() {
+  public void isEditableTest() {
     Assert.assertFalse(this.getPageDriver().isEditable(elementPageModel.disabledField));
     Assert.assertTrue(this.getPageDriver().isEditable(elementPageModel.firstNameText));
   }
 
-  /// <summary>
-  /// Test is enabled works as expected
-  /// </summary>
+  /**
+   * Test is enabled works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void IsEnabledTest() {
+  public void isEnabledTest() {
     Assert.assertFalse(this.getPageDriver().isEnabled(elementPageModel.disabledField));
     Assert.assertTrue(this.getPageDriver().isEnabled(elementPageModel.firstNameText));
   }
@@ -259,54 +266,54 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// Test eventually gone works as expected
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void IsEventuallyGoneTest() {
+  public void isEventuallyGoneTest() {
     Assert.assertTrue(this.getPageDriver().isEventuallyGone("NotReal"));
     Assert.assertFalse(this.getPageDriver().isEventuallyGone(elementPageModel.firstNameText));
   }
 
-  /// <summary>
-  /// Test eventually visible works as expected
-  /// </summary>
+  /**
+   * Test eventually visible works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void IsEventuallyVisibleTest() {
+  public void isEventuallyVisibleTest() {
     Assert.assertTrue(this.getPageDriver().isEventuallyVisible(elementPageModel.firstNameText));
     Assert.assertFalse(this.getPageDriver().isEventuallyVisible("NotReal"));
   }
 
-  /// <summary>
-  /// Test is hidden works as expected
-  /// </summary>
+  /**
+   * Test is hidden works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void IsHiddenTest() {
+  public void isHiddenTest() {
     Assert.assertFalse(this.getPageDriver().isHidden(elementPageModel.disabledField));
     Assert.assertTrue(this.getPageDriver().isHidden(elementPageModel.trainingOneLink));
     Assert.assertTrue(this.getPageDriver().isHidden("NotReal"));
   }
 
-  /// <summary>
-  /// Test is visible works as expected
-  /// </summary>
+  /**
+   * Test is visible works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void isVisibleTest() {
     Assert.assertTrue(this.getPageDriver().isVisible(elementPageModel.firstNameText));
     Assert.assertFalse(this.getPageDriver().isVisible("NotReal"));
   }
 
-  /// <summary>
-  /// Test set size works as expected
-  /// </summary>
+  /**
+   * Test set size works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void SetViewportSizeTest() {
+  public void setViewportSizeTest() {
     this.getPageDriver().setViewportSize(600, 300);
     Assert.assertEquals(this.getPageDriver().getAsyncPage().viewportSize().height, 300);
     Assert.assertEquals(this.getPageDriver().getAsyncPage().viewportSize().width, 600);
   }
 
-  /// <summary>
-  /// Test that the tap action works
-  /// </summary>
+  /**
+   * Test that the tap action works.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void TapTest() {
+  public void tapTest() {
     // Switch to a context that supports touch
     BrowserContext newBrowserContext = this.getPageDriver().getParentBrowser()
         .newContext(new Browser.NewContextOptions().setHasTouch(true));
@@ -319,63 +326,62 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     Assert.assertTrue(this.getPageDriver().isEnabled(elementPageModel.closeButtonShowDialog));
   }
 
-  /// <summary>
-  /// Test content works as expected
-  /// </summary>
+  /**
+   * Test content works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void TextContentTest() {
+  public void textContentTest() {
     Assert.assertEquals(this.getPageDriver().textContent(elementPageModel.showDialog1), "Show dialog");
   }
 
-  /// <summary>
-  /// Test title works as expected
-  /// </summary>
+  /**
+   *  Test title works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void TitleTest() {
+  public void titleTest() {
     Assert.assertEquals(this.getPageDriver().title(), "Automation - Magenic Automation Test Site");
   }
 
-  /// <summary>
-  /// Test type and input value work as expected
-  /// </summary>
+  /**
+   * Test type and input value work as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void TypeAndInputValueTest() {
+  public void typeAndInputValueTest() {
     this.getPageDriver().type(elementPageModel.firstNameText, "Ted");
     Assert.assertEquals(this.getPageDriver().inputValue(elementPageModel.firstNameText), "Ted");
   }
 
-  /// <summary>
-  /// Test uncheck works as expected
-  /// </summary>
+  /**
+   * Test uncheck works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void UncheckTest()
-  {
+  public void uncheckTest() {
     this.getPageDriver().uncheck(elementPageModel.checkbox2);
   }
 
-  /// <summary>
-  /// Test wait for load state works as expected
-  /// </summary>
+  /**
+   * Test wait for load state works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void WaitForLoadStateTest() {
+  public void waitForLoadStateTest() {
     this.getPageDriver().waitForLoadState(LoadState.LOAD);
     Assert.assertTrue(this.getPageDriver().isVisible(elementPageModel.checkbox2));
   }
 
-  /// <summary>
-  /// Test wait for selector works as expected
-  /// </summary>
+  /**
+   * Test wait for selector works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void WaitForSelectorTest() {
+  public void waitForSelectorTest() {
     this.getPageDriver().waitForSelector(elementPageModel.checkbox2);
     Assert.assertTrue(this.getPageDriver().isVisible(elementPageModel.checkbox2));
   }
 
-  /// <summary>
-  /// Test wait for timeout works as expected
-  /// </summary>
+  /**
+   * Test wait for timeout works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void WaitForTimeoutTest() {
+  public void waitForTimeoutTest() {
     LocalDateTime before = LocalDateTime.now();
     this.getPageDriver().waitForTimeout(1000);
     LocalDateTime afterWait = LocalDateTime.now();
@@ -386,11 +392,11 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
         "Sleep should have been about 1 second but was " + duration + " seconds");
   }
 
-  /// <summary>
-  /// Test wait for url works as expected
-  /// </summary>
+  /**
+   * Test wait for url works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void WaitForUrlAndNavigationTest() {
+  public void waitForUrlAndNavigationTest() {
     this.getPageDriver().click(elementPageModel.asyncPageLink);
     this.getPageDriver().waitForURL("**/async.html");
 
@@ -403,11 +409,11 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     Assert.assertEquals(PageModel.getUrl() + "async.html", this.getPageDriver().getAsyncPage().url());
   }
 
-  /// <summary>
-  /// Test reload works as expected
-  /// </summary>
+  /**
+   * Test reload works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void ReloadTest() {
+  public void reloadTest() {
     String asyncItemSelector = "#Label";
     this.getPageDriver().click(elementPageModel.asyncPageLink);
     Assert.assertTrue(this.getPageDriver().isEventuallyVisible(asyncItemSelector));
@@ -415,78 +421,78 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     Assert.assertFalse(this.getPageDriver().isVisible(asyncItemSelector));
   }
 
-  /// <summary>
-  /// Test set content works as expected
-  /// </summary>
+  /**
+   * Test set content works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void SetContentTest() {
+  public void setContentTest() {
     String guid = UUID.randomUUID().toString();
     this.getPageDriver().setContent("<html><body><div id='" + guid + "'>TEST</div></body></html>");
     this.getPageDriver().waitForTimeout(1000);
     Assert.assertTrue(this.getPageDriver().isEventuallyVisible("#" + guid));
   }
 
-  /// <summary>
-  /// Test eval on select works as expected
-  /// </summary>
+  /**
+   * Test eval on select works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void EvalOnSelectorTest() {
+  public void evalOnSelectorTest() {
     Assert.assertEquals(this.getPageDriver().evalOnSelector(
         elementPageModel.computerPartsFourth, "node => node.innerText"), "Monitor");
   }
 
-  /// <summary>
-  /// Test eval on selector all works as expected
-  /// </summary>
+  /**
+   * Test eval on selector all works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void EvalOnSelectorAllTest() {
+  public void evalOnSelectorAllTest() {
     Assert.assertEquals(this.getPageDriver().evalOnSelectorAll(
         elementPageModel.computerPartsAllOptions, "nodes => nodes.map(n => n.innerText)"),
         6);
   }
 
-  /// <summary>
-  /// Test eval works as expected
-  /// </summary>
+  /**
+   * Test eval works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void EvaluateTest() {
+  public void evaluateTest() {
     Assert.assertEquals(Integer.parseInt(this.getPageDriver().evaluate("1 + 2").toString()), 3);
   }
 
-  /// <summary>
-  /// Test dispatch works as expected
-  /// </summary>
+  /**
+   * Test dispatch works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void DispatchEventTest() {
+  public void dispatchEventTest() {
     this.getPageDriver().dispatchEvent(elementPageModel.asyncPageLink, "click");
     Assert.assertTrue(this.getPageDriver().isEventuallyVisible(elementPageModel.alwaysUpOnAsyncPage));
   }
 
-  /// <summary>
-  /// Test input file works as expected
-  /// </summary>
+  /**
+   * Test input file works as expected
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void SetInputFilesTest() {
+  public void setInputFilesTest() {
     FilePayload filePayload = new FilePayload("test.png", "image/png", this.getPageDriver().getAsyncPage().screenshot());
     this.getPageDriver().setInputFiles("#photo", filePayload);
     Assert.assertNotNull(filePayload);
   }
 
-  /// <summary>
-  /// Test focus works as expected
-  /// </summary>
+  /**
+   * Test focus works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void FocusTest() {
-    Assert.assertFalse(this.getPageDriver().isVisible(".datepicker-days"));
-    this.getPageDriver().focus("#datepicker INPUT");
-    Assert.assertTrue(this.getPageDriver().isVisible(".datepicker-days"));
+  public void focusTest() {
+    Assert.assertFalse(this.getPageDriver().isVisible(elementPageModel.datePickerDays));
+    this.getPageDriver().focus(elementPageModel.datePickerInput);
+    Assert.assertTrue(this.getPageDriver().isVisible(elementPageModel.datePickerDays));
   }
 
-  /// <summary>
-  /// Test bring to front works as expected
-  /// </summary>
+  /**
+   * Test bring to front works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void BringToFrontTest() {
+  public void bringToFrontTest() {
     // Switch to a context that supports touch
     PageDriver newBrowserContext = PageDriverFactory.getNewPageDriverFromBrowserContext(
         this.getPageDriver().getParentBrowser().contexts().get(0));
@@ -494,46 +500,47 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     Assert.assertFalse(newBrowserContext.getAsyncPage().isClosed());
   }
 
-  /// <summary>
-  /// Test add script works as expected
-  /// </summary>
+  /**
+   * Test add script works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void AddInitScriptTest() {
+  public void addInitScriptTest() {
     this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc);
     this.getPageDriver().reload();
     this.getPageDriver().evaluate("changeMainHeaderName();");
     Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
   }
 
-  /// <summary>
-  /// Test add script tag works as expected
-  /// </summary>
+  /**
+   * Test add script tag works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void AddScriptTagTest() {
+  public void addScriptTagTest() {
     this.getPageDriver().addScriptTag(new Page.AddScriptTagOptions().setContent(elementPageModel.renameHeaderFunc));
     this.getPageDriver().evaluate("changeMainHeaderName();");
     Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
   }
 
-  /// <summary>
-  /// Test add style works as expected
-  /// </summary>
+  /**
+   * Test add style works as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void AddStyleTagTest() {
+  public void addStyleTagTest() {
     Assert.assertTrue(this.getPageDriver().isEventuallyVisible(elementPageModel.mainHeader));
     this.getPageDriver().addStyleTag(new Page.AddStyleTagOptions().setContent("html {display: none;}"));
     Assert.assertTrue(this.getPageDriver().isEventuallyGone(elementPageModel.mainHeader));
   }
 
-  /// <summary>
-  /// Test set extra headers work as expected
-  /// </summary>
+
+  /**
+   * Test set extra headers work as expected.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void setExtraHTTPHeadersTest() {
     // TODO: Finish up method
     this.getPageDriver().setExtraHTTPHeaders(Collections.singletonMap("sample", "value"));
-//    this.getPageDriver().getAsyncPage().RequestFinished += AsyncPage_RequestFinished;
-//    this.getPageDriver().getAsyncPage().waitForRequestFinished() += AsyncPage_RequestFinished;
+    // this.getPageDriver().getAsyncPage().RequestFinished += AsyncPage_RequestFinished;
+    // this.getPageDriver().getAsyncPage().waitForRequestFinished() += AsyncPage_RequestFinished;
 
     this.getPageDriver().click(elementPageModel.asyncPageLink);
     this.getPageDriver().isEventuallyVisible(elementPageModel.alwaysUpOnAsyncPage);

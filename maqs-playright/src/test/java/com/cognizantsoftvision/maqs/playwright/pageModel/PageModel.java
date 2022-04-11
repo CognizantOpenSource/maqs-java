@@ -222,10 +222,6 @@ public class PageModel extends BasePlaywrightPageModel {
     return new PlaywrightSyncElement(this.getPageDriver(), elementPageModel.datePickerDays);
   }
 
-  /// <summary>
-  /// Not a real element
-  /// </summary>
-
   /**
    * gets the not real element.
    * @return the not real element

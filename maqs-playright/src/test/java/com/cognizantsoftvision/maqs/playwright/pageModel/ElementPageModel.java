@@ -111,21 +111,42 @@ public class ElementPageModel {
   public final String html5Draggable = "#draggablleImageHTML5";
 
   /**
-   * HTML 5 drop selector
+   * HTML 5 drop selector.
    */
   public final String html5Drop = "#div2";
 
+  /**
+   * the photo element.
+   */
   public final String photo = "#photo";
 
+  /**
+   * the date picker input.
+   */
   public final String datePickerInput = "#datepicker INPUT";
 
+  /**
+   * the date picker days.
+   */
   public final String datePickerDays = ".datepicker-days";
 
+  /**
+   * the not reach element.
+   */
   public final String notReal = "NotReal";
 
+  /**
+   * the flower table.
+   */
   public final String flowerTable = "#FlowerTable";
 
+  /**
+   * the caption strong element.
+   */
   public final String captionStrong = "CAPTION > Strong";
 
+  /**
+   * the frame element.
+   */
   public final String frame = "#frame";
 }

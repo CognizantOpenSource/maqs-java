@@ -163,28 +163,44 @@ public class PlaywrightSyncElement {
     this.parentFrameLocator = newParentLocator;
   }
 
-  /// <summary>
-  /// Gets the page locator options
-  /// </summary>
+  /**
+   * the page locator options.
+   */
   private Page.LocatorOptions pageOptions;
 
+  /**
+   * gets the page locator options.
+   * @return the page locator options
+   */
   public Page.LocatorOptions getPageOptions() {
     return this.pageOptions;
   }
 
+  /**
+   * sets the page locator options.
+   * @param newPageOptions the page locator options
+   */
   private void setPageOptions(Page.LocatorOptions newPageOptions) {
     this.pageOptions = newPageOptions;
   }
 
-  /// <summary>
-  /// Gets the page locator options
-  /// </summary>
+  /**
+   * the page locator options.
+   */
   private Locator.LocatorOptions locatorOptions;
 
+  /**
+   * gets the page locator options
+   * @return the locator options
+   */
   public Locator.LocatorOptions getLocatorOptions() {
     return this.locatorOptions;
   }
 
+  /**
+   * set the locator options.
+   * @param newLocatorOptions the locator options
+   */
   private void setLocatorOptions(Locator.LocatorOptions newLocatorOptions) {
     this.locatorOptions = newLocatorOptions;
   }
@@ -210,10 +226,10 @@ public class PlaywrightSyncElement {
     this.selector = newSelector;
   }
 
-  /// <summary>
-  /// ILocator for this element
-  /// </summary>
-  /// <returns></returns>
+  /**
+   * locator for this element.
+   * @return the locator of the element
+   */
   public Locator elementLocator() {
     if (this.getParentPage() != null) {
       return getPageOptions() != null ? this.getParentPage().locator(getSelector(), getPageOptions())
@@ -224,227 +240,400 @@ public class PlaywrightSyncElement {
     } else if(this.getParentFrameLocator() != null) {
       return this.getParentLocator().locator(getSelector());
     }
-
     throw new NullPointerException("Both parent IPage and PlaywrightElement are null");
   }
 
+  /**
+   * checks the element.
+   */
   public void check() {
     elementLocator().check();
   }
 
-  /// <inheritdoc cref = "ILocator.CheckAsync" />
+  /**
+   * checks the element.
+   * @param options the check options
+   */
   public void check(Locator.CheckOptions options) {
     elementLocator().check(options);
   }
 
+  /**
+   * click the element.
+   */
   public void click() {
     elementLocator().click();
   }
 
-  /// <inheritdoc cref = "ILocator.ClickAsync" />
+  /**
+   * click the element.
+   * @param options the click options
+   */
   public void click(Locator.ClickOptions options) {
     elementLocator().click(options);
   }
 
+  /**
+   * double click the element.
+   */
   public void doubleClick() {
     elementLocator().dblclick();
   }
 
-  /// <inheritdoc cref = "ILocator.DblClickAsync" />
+  /**
+   * double click the element.
+   * @param options the double click options
+   */
   public void doubleClick(Locator.DblclickOptions options) {
     elementLocator().dblclick(options);
   }
 
-  /// <inheritdoc cref = "ILocator.DispatchEventAsync" />
+  /**
+   * dispatch an event.
+   * @param type the type to be dispatched
+   */
   public void dispatchEvent(String type) {
     elementLocator().dispatchEvent(type);
   }
 
-  /// <inheritdoc cref = "ILocator.DispatchEventAsync" />
+  /**
+   * dispatch an event.
+   * @param type the type to be dispatched
+   * @param eventInit the event to be initialized
+   */
   public void dispatchEvent(String type, Object eventInit) {
     elementLocator().dispatchEvent(type, eventInit);
   }
 
-  /// <inheritdoc cref = "ILocator.DispatchEventAsync" />
+  /**
+   * dispatch an event.
+   * @param type the type to be dispatched
+   * @param eventInit the event to be initialized
+   * @param options the dispatch event options
+   */
   public void dispatchEvent(String type, Object eventInit, Locator.DispatchEventOptions options) {
     elementLocator().dispatchEvent(type, eventInit, options);
   }
 
+  /**
+   * drag to an element.
+   * @param target the element locator
+   */
   public void dragTo(Locator target) {
     elementLocator().dragTo(target);
   }
 
-  /// <inheritdoc cref = "ILocator.DragToAsync(ILocator, LocatorDragToOptions?)" />
+  /**
+   * drag to an element.
+   * @param target the element locator
+   * @param options the drag to options
+   */
   public void dragTo(Locator target, Locator.DragToOptions options) {
     elementLocator().dragTo(target, options);
   }
 
+  /**
+   * fill the element.
+   * @param value the value to be entered
+   */
   public void fill(String value) {
     elementLocator().fill(value);
   }
 
-  /// <inheritdoc cref = "ILocator.FillAsync" />
+  /**
+   * fill the element.
+   * @param value the value to be entered
+   * @param options the fill options
+   */
   public void fill(String value, Locator.FillOptions options) {
     elementLocator().fill(value, options);
   }
 
+  /**
+   * focus on an element.
+   */
   public void focus() {
     elementLocator().focus();
   }
 
-  /// <inheritdoc cref = "ILocator.FocusAsync" />
+  /**
+   * focus on an element.
+   * @param options the focus options
+   */
   public void focus(Locator.FocusOptions options) {
     elementLocator().focus(options);
   }
 
+  /**
+   * hover over.
+   */
   public void hover() {
     elementLocator().hover();
   }
 
-  /// <inheritdoc cref = "ILocator.HoverAsync" />
+  /**
+   * hover over.
+   * @param options the hover options
+   */
   public void hover(Locator.HoverOptions options) {
     elementLocator().hover(options);
   }
 
+  /**
+   * press a key.
+   * @param key the key to be pressed
+   */
   public void press(String key) {
     elementLocator().press(key);
   }
 
-  /// <inheritdoc cref = "ILocator.PressAsync" />
+  /**
+   * press a key.
+   * @param key the key to be pressed
+   * @param options the press options
+   */
   public void press(String key, Locator.PressOptions options) {
     elementLocator().press(key, options);
   }
 
+  /**
+   * set the element as checked.
+   * @param checkedState if the element should be checked
+   */
   public void setChecked(boolean checkedState) {
     elementLocator().setChecked(checkedState);
   }
 
-  /// <inheritdoc cref = "ILocator.SetCheckedAsync" />
+  /**
+   * set the element as checked.
+   * @param checkedState if the element should be checked
+   * @param options the set checked options
+   */
   public void setChecked(boolean checkedState, Locator.SetCheckedOptions options) {
     elementLocator().setChecked(checkedState, options);
   }
 
+  /**
+   * sets the input files.
+   * @param files the files to be inputted
+   */
   public void setInputFiles(FilePayload files) {
     elementLocator().setInputFiles(files);
   }
 
-  /// <inheritdoc cref = "ILocator.SetInputFilesAsync(FilePayload, LocatorSetInputFilesOptions)" />
+  /**
+   * sets the input files.
+   * @param files the files to be inputted
+   * @param options the set input files options
+   */
   public void setInputFiles(FilePayload files, Locator.SetInputFilesOptions options) {
     elementLocator().setInputFiles(files, options);
   }
 
+  /**
+   * sets the input files.
+   * @param files the files to be inputted
+   */
   public void setInputFiles(FilePayload[] files) {
     elementLocator().setInputFiles(files);
   }
 
-  /// <inheritdoc cref = "ILocator.SetInputFilesAsync(IEnumerable{FilePayload}, LocatorSetInputFilesOptions)" />
+  /**
+   * sets the input files.
+   * @param files the files to be inputted
+   * @param options the set input files options
+   */
   public void setInputFiles(FilePayload[] files, Locator.SetInputFilesOptions options) {
     elementLocator().setInputFiles(files, options);
   }
 
+  /**
+   * sets the input files.
+   * @param files the files to be inputted
+   */
   public void setInputFiles(Path[] files) {
     elementLocator().setInputFiles(files);
   }
 
-  /// <inheritdoc cref = "ILocator.SetInputFilesAsync(IEnumerable{string}, LocatorSetInputFilesOptions)" />
+  /**
+   * sets the input files.
+   * @param files the files to be inputted
+   * @param options the set input files options
+   */
   public void setInputFiles(Path[] files, Locator.SetInputFilesOptions options) {
     elementLocator().setInputFiles(files, options);
   }
 
+  /**
+   * sets the input files.
+   * @param files the files to be inputted
+   */
   public void setInputFiles(Path files) {
     elementLocator().setInputFiles(files);
   }
 
-  /// <inheritdoc cref = "ILocator.SetInputFilesAsync(string, LocatorSetInputFilesOptions)" />
+  /**
+   * sets the input files.
+   * @param files the files to be inputted
+   * @param options the set input files options
+   */
   public void setInputFiles(Path files, Locator.SetInputFilesOptions options) {
     elementLocator().setInputFiles(files, options);
   }
 
+  /**
+   * tap the element.
+   */
   public void tap() {
     elementLocator().tap();
   }
 
-  /// <inheritdoc cref = "ILocator.TapAsync" />
+  /**
+   * tap the element.
+   * @param options the tap options
+   */
   public void tap(Locator.TapOptions options) {
     elementLocator().tap(options);
   }
 
+  /**
+   * the typing text into the element.
+   * @param text the text of the type
+   */
   public void type(String text) {
     elementLocator().type(text);
   }
 
-  /// <inheritdoc cref = "ILocator.TypeAsync" />
+  /**
+   * the typing text into the element.
+   * @param text the text of the type
+   * @param options the type options
+   */
   public void type(String text, Locator.TypeOptions options) {
     elementLocator().type(text, options);
   }
 
+  /**
+   * uncheck an element.
+   */
   public void uncheck() {
     elementLocator().uncheck();
   }
 
-  /// <inheritdoc cref = "ILocator.UncheckAsync" />
+  /**
+   * uncheck an element.
+   * @param options the is checked options
+   */
   public void uncheck(Locator.UncheckOptions options) {
     elementLocator().uncheck(options);
   }
 
+  /**
+   * checks if an element is checked.
+   * @return true if element is checked
+   */
   public boolean isChecked() {
     return elementLocator().isChecked();
   }
 
-  /// <inheritdoc cref = "ILocator.IsCheckedAsync"  />
+  /**
+   * checks if an element is checked.
+   * @param options the is checked options
+   * @return true if element is checked
+   */
   public boolean isChecked(Locator.IsCheckedOptions options) {
     return elementLocator().isChecked(options);
   }
 
+  /**
+   * checks if an element is disabled.
+   * @return true if element is disabled
+   */
   public boolean isDisabled() {
     return elementLocator().isDisabled();
   }
 
-  /// <inheritdoc cref = "ILocator.IsDisabledAsync"  />
+  /**
+   * checks if an element is disabled.
+   * @param options the is disabled options
+   * @return true if element is disabled
+   */
   public boolean isDisabled(Locator.IsDisabledOptions options) {
     return elementLocator().isDisabled(options);
   }
 
+  /**
+   * checks if an element is editable.
+   * @return true if element is editable
+   */
   public boolean isEditable() {
     return elementLocator().isEditable();
   }
 
-  /// <inheritdoc cref = "ILocator.IsEditableAsync"  />
+  /**
+   * checks if an element is editable.
+   * @param options the is editable options
+   * @return true if element is editable
+   */
   public boolean isEditable(Locator.IsEditableOptions options) {
     return elementLocator().isEditable(options);
   }
 
+  /**
+   * checks if an element is enabled.
+   * @return true if element is enabled
+   */
   public boolean isEnabled() {
     return elementLocator().isEnabled();
   }
 
-  /// <inheritdoc cref = "ILocator.IsEnabledAsync"  />
+  /**
+   * checks if an element is enabled.
+   * @param options the is enabled options
+   * @return true if element is enabled
+   */
   public boolean isEnabled(Locator.IsEnabledOptions options) {
     return elementLocator().isEnabled(options);
   }
 
+  /**
+   * checks if an element is hidden.
+   * @return true if element is hidden
+   */
   public boolean isHidden() {
     return elementLocator().isHidden();
   }
 
-  /// <inheritdoc cref = "ILocator.IsHiddenAsync"  />
+  /**
+   * checks if an element is hidden.
+   * @param options the is hidden options
+   * @return true if element is hidden
+   */
   public boolean isHidden(Locator.IsHiddenOptions options) {
     return elementLocator().isHidden(options);
   }
 
+  /**
+   * checks if an element is visible.
+   * @return true if element is visible
+   */
   public boolean isVisible() {
     return elementLocator().isVisible();
   }
 
-  /// <inheritdoc cref = "ILocator.IsVisibleAsync"  />
+  /**
+   * checks if an element is visible.
+   * @param options the is visible options
+   * @return true if element is visible
+   */
   public boolean isVisible(Locator.IsVisibleOptions options) {
     return elementLocator().isVisible(options);
   }
 
-  /// <summary>
-  /// Check that the element is eventually visible
-  /// </summary>
-  /// <returns>True if the element becomes visible within the page timeout</returns>
+  /**
+   * Check that the element is eventually visible.
+   * @return True if the element becomes visible within the page timeout
+   */
   public boolean isEventuallyVisible() {
     try {
       Locator.WaitForOptions options = new Locator.WaitForOptions();
@@ -456,10 +645,10 @@ public class PlaywrightSyncElement {
     }
   }
 
-  /// <summary>
-  /// Check that the element stops being visible
-  /// </summary>
-  /// <returns>True if the element becomes is hidden or gone within the page timeout</returns>
+  /**
+   * Check that the element stops being visible.
+   * @return True if the element becomes is hidden or gone within the page timeout
+   */
   public boolean isEventuallyGone() {
     try {
       Locator.WaitForOptions options = new Locator.WaitForOptions();
@@ -471,129 +660,257 @@ public class PlaywrightSyncElement {
     }
   }
 
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @return a list of the selected options
+   */
   public List<String> selectOption(ElementHandle values) {
     return Collections.unmodifiableList(elementLocator().selectOption(values));
   }
 
-  /// <inheritdoc cref = "ILocator.SelectOptionAsync(IElementHandle, LocatorSelectOptionOptions)"  />
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the selected options
+   */
   public List<String> selectOption(ElementHandle values, Locator.SelectOptionOptions options) {
     return Collections.unmodifiableList(elementLocator().selectOption(values, options));
   }
 
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @return a list of the selected options
+   */
   public List<String> selectOption(ElementHandle[] values) {
     return Collections.unmodifiableList(elementLocator().selectOption(values));
   }
 
-  /// <inheritdoc cref = "ILocator.SelectOptionAsync(IEnumerable{IElementHandle}, LocatorSelectOptionOptions)"  />
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the selected options
+   */
   public List<String> selectOption(ElementHandle[] values, Locator.SelectOptionOptions options) {
     return Collections.unmodifiableList(elementLocator().selectOption(values, options));
   }
 
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @return a list of the selected options
+   */
   public List<String> selectOption(SelectOption values) {
     return Collections.unmodifiableList(elementLocator().selectOption(values));
   }
 
-  /// <inheritdoc cref = "ILocator.SelectOptionAsync(IEnumerable{SelectOptionValue}, LocatorSelectOptionOptions)"  />
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the selected options
+   */
   public List<String> selectOption(SelectOption values, Locator.SelectOptionOptions options) {
     return Collections.unmodifiableList(elementLocator().selectOption(values, options));
   }
 
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @return a list of the selected options
+   */
   public List<String> selectOption(String[] values) {
     return Collections.unmodifiableList(elementLocator().selectOption(values));
   }
 
-  /// <inheritdoc cref = "ILocator.SelectOptionAsync(IEnumerable{string}, LocatorSelectOptionOptions)"  />
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the selected options
+   */
   public List<String> selectOption(String[] values, Locator.SelectOptionOptions options) {
     return Collections.unmodifiableList(elementLocator().selectOption(values, options));
   }
 
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @return a list of the selected options
+   */
   public List<String> selectOption(SelectOption[] values) {
     return Collections.unmodifiableList(elementLocator().selectOption(values));
   }
 
-  /// <inheritdoc cref = "ILocator.SelectOptionAsync(SelectOptionValue, LocatorSelectOptionOptions)"  />
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the selected options
+   */
   public List<String> selectOption(SelectOption[] values, Locator.SelectOptionOptions options) {
     return Collections.unmodifiableList(elementLocator().selectOption(values, options));
   }
 
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @return a list of the selected options
+   */
   public List<String> selectOption(String values) {
     return Collections.unmodifiableList(elementLocator().selectOption(values));
   }
 
-  /// <inheritdoc cref = "ILocator.SelectOptionAsync(string, LocatorSelectOptionOptions)"  />
+  /**
+   * select an option of an element.
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the selected options
+   */
   public List<String> selectOption(String values, Locator.SelectOptionOptions options) {
     return Collections.unmodifiableList(elementLocator().selectOption(values, options));
   }
 
+  /**
+   * evaluate an expression on all selectors.
+   * @param expression the expression to be evaluated
+   * @return the object output of the evaluation
+   */
   public Object evalOnSelectorAll(String expression) {
     return elementLocator().evaluateAll(expression);
   }
 
-  /// <inheritdoc cref = "ILocator.EvaluateAllAsync"  />
+  /**
+   * evaluate an expression on all selectors.
+   * @param expression the expression to be evaluated
+   * @param arg the args to be used
+   * @return the object output of the evaluation
+   */
   public Object evalOnSelectorAll(String expression, Object arg) {
     return elementLocator().evaluateAll(expression, arg);
   }
 
+  /**
+   * evaluate an expression.
+   * @param expression the expression to be evaluated
+   * @return object from the evaluated element
+   */
   public Object evaluate(String expression) {
     return elementLocator().evaluate(expression);
   }
 
-  /// <inheritdoc cref = "ILocator.EvaluateAsync"  />
+  /**
+   * evaluate an expression.
+   * @param expression the expression to be evaluated
+   * @param arg the arg to be used
+   * @return object from the evaluated element
+   */
   public Object evaluate(String expression, Object arg) {
     return elementLocator().evaluate(expression, arg);
   }
 
+  /**
+   * get the attributes of an element.
+   * @param name the name of the element
+   * @return the attribute as a string
+   */
   public String getAttribute(String name) {
     return elementLocator().getAttribute(name);
   }
 
-  /// <inheritdoc cref = "ILocator.GetAttributeAsync"  />
+  /**
+   * get the attributes of an element.
+   * @param name the name of the element
+   * @param options the get attribute options
+   * @return the attribute as a string
+   */
   public String getAttribute(String name, Locator.GetAttributeOptions options) {
     return elementLocator().getAttribute(name, options);
   }
 
+  /**
+   * get the text content of the element.
+   * @return the text content
+   */
   public String textContent() {
     return elementLocator().textContent();
   }
 
-  /// <inheritdoc cref = "ILocator.TextContentAsync"  />
+  /**
+   * get the text content of the element.
+   * @param options the text content options
+   * @return the text content
+   */
   public String textContent(Locator.TextContentOptions options) {
     return elementLocator().textContent(options);
   }
 
-  /// <inheritdoc cref = "ILocator.AllTextContentsAsync"  />
+  /**
+   * the text contents of all elements in  list.
+   * @return a list of the text contents
+   */
   public List<String> allTextContents() {
     return elementLocator().allTextContents();
   }
 
-  /// <inheritdoc cref = "ILocator.AllInnerTextsAsync"  />
+  /**
+   * the inner text value of all elements in  list.
+   * @return a list of the inner text as a string
+   */
   public List<String> allInnerTexts() {
     return Collections.unmodifiableList(elementLocator().allInnerTexts());
   }
 
+  /**
+   * the inner html value.
+   * @return the inner html as a string
+   */
   public String innerHTML() {
     return elementLocator().innerHTML();
   }
 
-  /// <inheritdoc cref = "ILocator.InnerHTMLAsync"  />
+  /**
+   * the inner html value.
+   * @param options the inner html options
+   * @return the inner html as a string
+   */
   public String innerHTML(Locator.InnerHTMLOptions options) {
     return elementLocator().innerHTML(options);
   }
 
+  /**
+   * the inner text value.
+   * @return the inner text string
+   */
   public String innerText() {
     return elementLocator().innerText();
   }
 
-  /// <inheritdoc cref = "ILocator.InnerTextAsync"  />
+  /**
+   * the inner text value.
+   * @param options the inner text options
+   * @return the inner text string
+   */
   public String innerText(Locator.InnerTextOptions options) {
     return elementLocator().innerText(options);
   }
 
+  /**
+   * input value on the element locator.
+   * @return the string input value
+   */
   public String inputValue() {
     return elementLocator().inputValue();
   }
 
-  /// <inheritdoc cref = "ILocator.InputValueAsync"  />
+  /**
+   * input value on the element locator.
+   * @param options the input value options
+   * @return the string input value
+   */
   public String inputValue(Locator.InputValueOptions options) {
     return elementLocator().inputValue(options);
   }

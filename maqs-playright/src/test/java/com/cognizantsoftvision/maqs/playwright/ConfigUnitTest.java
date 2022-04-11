@@ -50,7 +50,7 @@ public class ConfigUnitTest {
    * @param browserNames the incoming browser name to test
    */
   @Test(groups = TestCategories.PLAYWRIGHT, dataProvider = "browserType")
-  public void ConfigBrowserName(List<String> browserNames) {
+  public void configBrowserName(List<String> browserNames) {
     for (String browserName : browserNames) {
       Config.addTestSettingValues(Collections.singletonMap("Browser", browserName),
           ConfigSection.PLAYWRIGHT_MAQS, true);
@@ -72,7 +72,7 @@ public class ConfigUnitTest {
    * Test the config browser enums.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void ConfigBrowserEnum() {
+  public void configBrowserEnum() {
     for (PlaywrightBrowser browser : PlaywrightBrowser.class.getEnumConstants()) {
       Config.addTestSettingValues(Collections.singletonMap("Browser", browser.name()), ConfigSection.PLAYWRIGHT_MAQS, true);
       Assert.assertEquals(browser, PlaywrightConfig.getBrowserType());

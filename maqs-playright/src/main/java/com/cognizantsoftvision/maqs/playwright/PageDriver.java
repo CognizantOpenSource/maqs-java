@@ -26,367 +26,620 @@ import java.util.regex.Pattern;
  */
 public class PageDriver {
 
+  /**
+   * the page driver initializer.
+   * @param page to be set for the page driver
+   */
   public PageDriver(Page page) {
     this.setAsyncPage(page);
   }
 
-  /// <summary>
-  /// Gets the underlying async page object
-  /// </summary>
+  /**
+   * the underlying async page object.
+   */
   private Page asyncPage;
 
+  /**
+   * gets the underlying async page object.
+   * @return the page of the async page
+   */
   public Page getAsyncPage() {
     return this.asyncPage;
   }
 
+  /**
+   * Sets the underlying async page object
+   * @param page the page to be set
+   */
   private void setAsyncPage(Page page) {
     this.asyncPage = page;
   }
 
-  /// <inheritdoc cref = "IPage.AddInitScriptAsync" />
+  /**
+   * adds an init script.
+   * @param script the script to be added
+   */
   public void addInitScript(String script) {
-//    this.AsyncPage.AddInitScriptAsync(script, scriptPath).Wait();
     this.asyncPage.addInitScript(script);
   }
 
+  /**
+   * adds an init script.
+   * @param path the path of the script
+   */
   public void addInitScript(Path path) {
     this.asyncPage.addInitScript(path);
   }
 
-  /// <inheritdoc cref = "IPage.BringToFrontAsync" />
+  /**
+   * brings the page to the front.
+   */
   public void bringToFront() {
-//    this.AsyncPage.BringToFrontAsync().Wait();
     this.asyncPage.bringToFront();
   }
 
+  /**
+   * check the element.
+   * @param selector the element to be checked
+   */
   public void check(String selector) {
-    check(selector, null);
+    this.asyncPage.check(selector);
   }
 
-  /// <inheritdoc cref = "IPage.CheckAsync" />
+  /**
+   * check the element.
+   * @param selector the element to be checked
+   * @param options the check options
+   */
   public void check(String selector, Page.CheckOptions options) {
-//    this.AsyncPage.check(selector, options).Wait();
     this.asyncPage.check(selector, options);
   }
 
-  /// <inheritdoc cref = "IPage.ClickAsync" />
+  /**
+   * click an element.
+   * @param selector the element selector
+   */
   public void click(String selector) {
-    click(selector, null);
+    this.asyncPage.click(selector);
   }
 
-  /// <inheritdoc cref = "IPage.ClickAsync" />
+  /**
+   * click an element.
+   * @param selector the element selector
+   * @param options the click options
+   */
   public void click(String selector, Page.ClickOptions options) {
-//    this.AsyncPage.click(selector, options).Wait();
     this.asyncPage.click(selector, options);
   }
 
-  /// <inheritdoc cref = "IPage.CloseAsync" />
+  /**
+   * close the page.
+   */
   public void close() {
     close(null);
   }
 
-  /// <inheritdoc cref = "IPage.CloseAsync" />
+  /**
+   * close the page.
+   * @param options the close options
+   */
   public void close(Page.CloseOptions options) {
-//    this.AsyncPage.CloseAsync(options).Wait();
     this.asyncPage.close(options);
   }
 
-  /// <inheritdoc cref = "IPage.DblClickAsync" />
+  /**
+   * double click an element.
+   * @param selector the element to be double-clicked
+   */
   public void doubleClick(String selector) {
     doubleClick(selector, null);
   }
 
-  /// <inheritdoc cref = "IPage.DblClickAsync" />
+  /**
+   * double click an element.
+   * @param selector the element to be double-clicked
+   * @param options the click options
+   */
   public void doubleClick(String selector, Page.ClickOptions options) {
-//    this.AsyncPage.click(selector, options).Wait();
     this.asyncPage.click(selector, options);
   }
 
+  /**
+   * dispatch an event on an element.
+   * @param selector the element to dispatch the event
+   * @param type the dispatch type
+   */
   public void dispatchEvent(String selector, String type) {
     dispatchEvent(selector, type, null, null);
   }
 
-  /// <inheritdoc cref = "IPage.DispatchEventAsync" />
+  /**
+   * dispatch an event on an element.
+   * @param selector the element to dispatch the event
+   * @param type the dispatch type
+   * @param eventInit the event to initiate
+   * @param options the dispatch event options
+   */
   public void dispatchEvent(String selector, String type, Object eventInit, Page.DispatchEventOptions options) {
-//    this.AsyncPage.dispatchEvent(selector, type, eventInit, options).Wait();
     this.asyncPage.dispatchEvent(selector, type, eventInit, options);
   }
 
+  /**
+   * drag and drop an element.
+   * @param source the source element to be clicked
+   * @param target the target to be dropped on
+   */
   public void dragAndDrop(String source, String target) {
-    dragAndDrop(source, target, null);
+    this.asyncPage.dragAndDrop(source, target);
   }
 
-  /// <inheritdoc cref = "IPage.DragAndDropAsync" />
+  /**
+   * drag and drop an element.
+   * @param source the source element to be clicked
+   * @param target the target to be dropped on
+   * @param options the drag and drop options
+   */
   public void dragAndDrop(String source, String target, Page.DragAndDropOptions options) {
-//    this.AsyncPage.dragAndDrop(source, target, options).Wait();
     this.asyncPage.dragAndDrop(source, target, options);
   }
 
+  /**
+   * fill an element with a string value.
+   * @param selector the element to be filled
+   * @param value the value to be inputted
+   */
   public void fill(String selector, String value) {
     this.asyncPage.fill(selector, value);
   }
 
-  /// <inheritdoc cref = "IPage.FillAsync" />
+  /**
+   * fill an element with a string value.
+   * @param selector the element to be filled
+   * @param value the value to be inputted
+   * @param options the fill options
+   */
   public void fill(String selector, String value, Page.FillOptions options) {
-//    this.AsyncPage.fill(selector, value, options).Wait();
     this.asyncPage.fill(selector, value, options);
   }
 
+  /**
+   * focus on an element.
+   * @param selector the selector to focus on
+   */
   public void focus(String selector) {
     focus(selector, null);
   }
 
-  /// <inheritdoc cref = "IPage.FocusAsync" />
+  /**
+   * focus on an element.
+   * @param selector the selector to focus on
+   * @param options the focus options
+   */
   public void focus(String selector, Page.FocusOptions options) {
-//    this.AsyncPage.focus(selector, options).Wait();
     this.asyncPage.focus(selector, options);
   }
 
+  /**
+   * mouse hover an element.
+   * @param selector the selector to hover over
+   */
   public void hover(String selector) {
-    //    this.AsyncPage.hover(selector, options).Wait();
     hover(selector, null);
   }
 
-  /// <inheritdoc cref = "IPage.HoverAsync" />
+  /**
+   * mouse hover an element.
+   * @param selector the selector to hover over
+   * @param options the hover options
+   */
   public void hover(String selector, Page.HoverOptions options) {
-//    this.AsyncPage.hover(selector, options).Wait();
     this.asyncPage.hover(selector, options);
   }
 
-  /// <inheritdoc cref = "IPage.PressAsync" />
+  /**
+   * key press a web element.
+   * @param selector the element selector
+   * @param key the key to be pressed
+   */
   public void press(String selector, String key) {
-    //    this.asyncPage.press(selector, key, options).Wait();
     press(selector, key, null);
   }
 
-  /// <inheritdoc cref = "IPage.PressAsync" />
+  /**
+   * key press a web element.
+   * @param selector the element selector
+   * @param key the key to be pressed
+   * @param options the press options
+   */
   public void press(String selector, String key, Page.PressOptions options) {
-//    this.asyncPage.press(selector, key, options).Wait();
     this.asyncPage.press(selector, key, options);
   }
 
+  /**
+   * set checked an element.
+   * @param selector the selector to be checked
+   * @param checkedState if the element should be checked
+   */
   public void setChecked(String selector, boolean checkedState) {
     setChecked(selector, checkedState, null);
   }
 
-  /// <inheritdoc cref = "IPage.SetCheckedAsync" />
+  /**
+   * set checked an element.
+   * @param selector the selector to be checked
+   * @param checkedState if the element should be checked
+   * @param options the set checked options
+   */
   public void setChecked(String selector, boolean checkedState, Page.SetCheckedOptions options) {
-//    this.asyncPage.setChecked(selector, checkedState, options).Wait();
     this.asyncPage.setChecked(selector, checkedState, options);
   }
 
-  /// <inheritdoc cref = "IPage.SetContentAsync" />
+  /**
+   * sets content on the page.
+   * @param html of the page
+   */
   public void setContent(String html) {
     setContent(html, null);
   }
 
-  /// <inheritdoc cref = "IPage.SetContentAsync" />
+  /**
+   * sets content on the page.
+   * @param html of the page
+   * @param options the set content options
+   */
   public void setContent(String html, Page.SetContentOptions options) {
-//    this.asyncPage.setContent(html, options).Wait();
     this.asyncPage.setContent(html, options);
   }
 
-  /// <inheritdoc cref = "IPage.SetExtraHTTPHeadersAsync" />
+  /**
+   * sets the extra http headers.
+   * @param headers the headers to be set
+   */
   public void setExtraHTTPHeaders(Map<String, String> headers) {
-//    this.AsyncPage.setExtraHTTPHeaders(headers).Wait();
     this.asyncPage.setExtraHTTPHeaders(headers);
   }
 
+  /**
+   * set the input files.
+   * @param selector the selector of the input of files
+   * @param files the files to be inputted
+   */
   public void setInputFiles(String selector, FilePayload files) {
     setInputFiles(selector, files, null);
   }
 
-  /// <inheritdoc cref = "IPage.SetInputFilesAsync(string, FilePayload, PageSetInputFilesOptions)" />
+  /**
+   * set the input files.
+   * @param selector the selector of the input of files
+   * @param files the files to be inputted
+   * @param options the set input files options
+   */
   public void setInputFiles(String selector, FilePayload files, Page.SetInputFilesOptions options) {
-//    this.asyncPage.setInputFiles(selector, files, options).Wait();
     this.asyncPage.setInputFiles(selector, files, options);
   }
 
+  /**
+   * set the input files.
+   * @param selector the selector of the input of files
+   * @param files the files to be inputted
+   */
   public void setInputFiles(String selector, FilePayload[] files) {
     setInputFiles(selector, files, null);
   }
 
-  /// <inheritdoc cref = "IPage.SetInputFilesAsync(string, IEnumerable{FilePayload}, PageSetInputFilesOptions)" />
+  /**
+   * set the input files.
+   * @param selector the selector of the input of files
+   * @param files the files to be inputted
+   * @param options the set input files options
+   */
   public void setInputFiles(String selector, FilePayload[] files, Page.SetInputFilesOptions options) {
-//    this.asyncPage.setInputFiles(selector, files, options).Wait();
     this.asyncPage.setInputFiles(selector, files, options);
   }
 
+  /**
+   * set the input files.
+   * @param selector the selector of the input of files
+   * @param files the files to be inputted
+   */
   public void setInputFiles(String selector, Path[] files) {
     setInputFiles(selector, files, null);
   }
 
-  /// <inheritdoc cref = "IPage.SetInputFilesAsync(string, IEnumerable{string}, PageSetInputFilesOptions)" />
+  /**
+   * set the input files.
+   * @param selector the selector of the input of files
+   * @param files the files to be inputted
+   * @param options the set input files options
+   */
   public void setInputFiles(String selector, Path[] files, Page.SetInputFilesOptions options) {
-//    this.asyncPage.setInputFiles(selector, files, options).Wait();
     this.asyncPage.setInputFiles(selector, files, options);
   }
 
+  /**
+   * set the input files.
+   * @param selector the selector of the input of files
+   * @param files the files to be inputted
+   */
   public void setInputFiles(String selector, String files) {
     setInputFiles(selector, files, null);
   }
 
-  /// <inheritdoc cref = "IPage.SetInputFilesAsync(string, String, PageSetInputFilesOptions)" />
+  /**
+   * set the input files.
+   * @param selector the selector of the input of files
+   * @param files the files to be inputted
+   * @param options the set input files options
+   */
   public void setInputFiles(String selector, String files, Page.SetInputFilesOptions options) {
-//    this.asyncPage.setInputFiles(selector, Paths.get(files), options).Wait();
     this.asyncPage.setInputFiles(selector, Paths.get(files), options);
   }
 
+  /**
+   * gets the viewport size.
+   * @return the viewport size that contains size variables
+   */
   public ViewportSize getViewPortSize() {
     return this.getAsyncPage().viewportSize();
   }
 
-  /// <inheritdoc cref = "IPage.SetViewportSizeAsync" />
+  /**
+   * sets the viewport size.
+   * @param width the viewport width
+   * @param height the viewport height
+   */
   public void setViewportSize(int width, int height) {
-//    this.AsyncPage.setViewportSize(width, height).Wait();
     this.asyncPage.setViewportSize(width, height);
   }
 
+  /**
+   * tap an element.
+   * @param selector the selector of the text box
+   */
   public void tap(String selector) {
-    //    this.AsyncPage.tap(selector, options).Wait();
     tap(selector, null);
   }
 
-  /// <inheritdoc cref = "IPage.TapAsync" />
+  /**
+   * tap an element.
+   * @param selector the selector of the text box
+   * @param options the type options
+   */
   public void tap(String selector, Page.TapOptions options) {
-//    this.asyncPage.tap(selector, options).Wait();
     this.asyncPage.tap(selector, options);
   }
 
+  /**
+   * type in a text box element.
+   * @param selector the selector of the text box
+   * @param text the text to be entered
+   */
   public void type(String selector, String text) {
-    //    this.AsyncPage.TypeAsync(selector, text, options).Wait();
     type(selector, text, null);
   }
 
-  /// <inheritdoc cref = "IPage.TypeAsync" />
+  /**
+   * type in a text box element.
+   * @param selector the selector of the text box
+   * @param text the text to be entered
+   * @param options the type options
+   */
   public void type(String selector, String text, Page.TypeOptions options) {
-//    this.AsyncPage.TypeAsync(selector, text, options).Wait();
     this.asyncPage.type(selector, text, options);
   }
 
+  /**
+   * uncheck a element.
+   * @param selector the selector to be unchecked
+   */
   public void uncheck(String selector) {
-    //    this.AsyncPage.uncheck(selector, options).Wait();
     uncheck(selector, null);
   }
 
-  /// <inheritdoc cref = "IPage.UncheckAsync" />
+  /**
+   * uncheck a element.
+   * @param selector the selector to be unchecked
+   * @param options the uncheck options
+   */
   public void uncheck(String selector, Page.UncheckOptions options) {
-//    this.AsyncPage.uncheck(selector, options).Wait();
     this.asyncPage.uncheck(selector, options);
   }
 
+  /**
+   * waits for a load state.
+   * @param state the state to be waited for
+   */
   public void waitForLoadState(LoadState state) {
-    //    this.AsyncPage.waitForLoadState(state, options).Wait();
     waitForLoadState(state, null);
   }
 
-  /// <inheritdoc cref = "IPage.WaitForLoadStateAsync" />
+  /**
+   * waits for a load state.
+   * @param state the state to be waited for
+   * @param options the wait for load state options
+   */
   public void waitForLoadState(LoadState state, Page.WaitForLoadStateOptions options) {
-//    this.AsyncPage.waitForLoadState(state, options).Wait();
     this.asyncPage.waitForLoadState(state, options);
   }
 
-  /// <inheritdoc cref = "IPage.WaitForTimeoutAsync" />
+  /**
+   * waits for a timeout.
+   * @param timeout the time to be waited for
+   */
   public void waitForTimeout(float timeout) {
-//    this.AsyncPage.waitForTimeout(timeout).Wait();
     this.asyncPage.waitForTimeout(timeout);
   }
 
+  /**
+   * waits for url.
+   * @param url the url to be waited for
+   */
   public void waitForURL(Predicate<String> url) {
-    //    this.AsyncPage.waitForURL(url, options).Wait();
     this.asyncPage.waitForURL(url);
   }
 
-  /// <inheritdoc cref = "IPage.WaitForURLAsync(Func{string, bool}, PageWaitForURLOptions)" />
+  /**
+   * waits for url.
+   * @param url the url to be waited for
+   * @param options the wait for url options
+   */
   public void waitForURL(Predicate<String> url, Page.WaitForURLOptions options) {
-//    this.AsyncPage.waitForURL(url, options).Wait();
     this.asyncPage.waitForURL(url, options);
   }
 
+  /**
+   * waits for url.
+   * @param url the url to be waited for
+   */
   public void waitForURL(Pattern url) {
-    waitForURL(url, null);
+    this.asyncPage.waitForURL(url);
   }
 
-  /// <inheritdoc cref = "IPage.WaitForURLAsync(Regex, PageWaitForURLOptions)" />
+  /**
+   * waits for url.
+   * @param url the url to be waited for
+   * @param options the wait for url options
+   */
   public void waitForURL(Pattern url, Page.WaitForURLOptions options) {
     this.asyncPage.waitForURL(url, options);
   }
 
+  /**
+   * waits for url.
+   * @param url the url to be waited for
+   */
   public void waitForURL(String url) {
-    //    this.AsyncPage.waitForURL(url, options).Wait();
     this.asyncPage.waitForURL(url);
   }
 
-  /// <inheritdoc cref = "IPage.WaitForURLAsync(string, PageWaitForURLOptions)" />
+  /**
+   * waits for url.
+   * @param url the url to be waited for
+   * @param options the wait for url options
+   */
   public void waitForURL(String url, Page.WaitForURLOptions options) {
-//    this.AsyncPage.waitForURL(url, options).Wait();
     this.asyncPage.waitForURL(url, options);
   }
 
+  /**
+   * checks if an element is checked.
+   * @param selector the element selector
+   * @return true if element is checked
+   */
   public boolean isChecked(String selector) {
-    //    return this.AsyncPage.isChecked(selector, options).Result;
     return this.asyncPage.isChecked(selector);
   }
 
-  /// <inheritdoc cref = "IPage.IsCheckedAsync"  />
+  /**
+   * checks if an element is checked.
+   * @param selector the element selector
+   * @param options the is checked options
+   * @return true if element is checked
+   */
   public boolean isChecked(String selector, Page.IsCheckedOptions options) {
-//    return this.AsyncPage.isChecked(selector, options).Result;
     return this.asyncPage.isChecked(selector, options);
   }
 
+  /**
+   * checks if an element is disabled.
+   * @param selector the element selector
+   * @return true if element is disabled
+   */
   public boolean isDisabled(String selector) {
-    //    return this.AsyncPage.isDisabled(selector, options).Result;
     return this.asyncPage.isDisabled(selector);
   }
 
-  /// <inheritdoc cref = "IPage.IsDisabledAsync"  />
+  /**
+   * checks if an element is disabled.
+   * @param selector the element selector
+   * @param options the is disabled options
+   * @return true if element is disabled
+   */
   public boolean isDisabled(String selector, Page.IsDisabledOptions options) {
-//    return this.AsyncPage.isDisabled(selector, options).Result;
     return this.asyncPage.isDisabled(selector, options);
   }
 
+  /**
+   * checks if an element is editable.
+   * @param selector the element selector
+   * @return true if element is editable
+   */
   public boolean isEditable(String selector) {
     return this.asyncPage.isEditable(selector);
   }
 
-  /// <inheritdoc cref = "IPage.IsEditableAsync"  />
+  /**
+   * checks if an element is editable.
+   * @param selector the element selector
+   * @param options the is editable options
+   * @return true if element is editable
+   */
   public boolean isEditable(String selector, Page.IsEditableOptions options) {
     return this.asyncPage.isEditable(selector, options);
   }
 
+  /**
+   * checks if an element is enabled.
+   * @param selector the element selector
+   * @return true if element is enabled
+   */
   public boolean isEnabled(String selector) {
     return this.asyncPage.isEnabled(selector);
   }
 
-  /// <inheritdoc cref = "IPage.IsEnabledAsync"  />
+  /**
+   * checks if an element is enabled.
+   * @param selector the element selector
+   * @param options the is enabled options
+   * @return true if element is enabled
+   */
   public boolean isEnabled(String selector, Page.IsEnabledOptions options) {
     return this.asyncPage.isEnabled(selector, options);
   }
 
+  /**
+   * checks if an element is hidden.
+   * @param selector the element selector
+   * @return true if element is hidden
+   */
   public boolean isHidden(String selector) {
     return this.asyncPage.isHidden(selector);
   }
 
-  /// <inheritdoc cref = "IPage.IsHiddenAsync"  />
+  /**
+   * checks if an element is hidden.
+   * @param selector the element selector
+   * @param options the is hidden options
+   * @return true if element is hidden
+   */
   public boolean isHidden(String selector, Page.IsHiddenOptions options) {
     return this.asyncPage.isHidden(selector, options);
   }
 
+  /**
+   * checks if an element is visible.
+   * @param selector the element selector
+   * @return true if element is visible
+   */
   public boolean isVisible(String selector) {
     return this.asyncPage.isVisible(selector);
   }
 
-  /// <inheritdoc cref = "IPage.IsVisibleAsync"  />
+  /**
+   * checks if an element is visible.
+   * @param selector the element selector
+   * @param options the is visible options
+   * @return true if element is visible
+   */
   public boolean isVisible(String selector, Page.IsVisibleOptions options) {
     return this.asyncPage.isVisible(selector, options);
   }
 
-  /// <summary>
-  /// Check that the element is eventually visible
-  /// </summary>
-  /// <param name="selector">Element selector</param>
-  /// <param name="options">Visible check options</param>
-  /// <returns>True if the element becomes visible within the page timeout</returns>
+  /**
+   * Check that the element is eventually visible.
+   * @param selector Element selector
+   * @return True if the element becomes visible within the page timeout
+   */
   public boolean isEventuallyVisible(String selector) {
     try {
       this.getAsyncPage().waitForSelector(selector);
@@ -396,12 +649,12 @@ public class PageDriver {
     }
   }
 
-  /// <summary>
-  /// Check that the element is eventually visible
-  /// </summary>
-  /// <param name="selector">Element selector</param>
-  /// <param name="options">Visible check options</param>
-  /// <returns>True if the element becomes visible within the page timeout</returns>
+  /**
+   * Check that the element is eventually visible.
+   * @param selector Element selector
+   * @param options Visible check options
+   * @return True if the element becomes visible within the page timeout
+   */
   public boolean isEventuallyVisible(String selector, Page.IsVisibleOptions options) {
     try {
       Page.WaitForSelectorOptions selectorOptions = new Page.WaitForSelectorOptions();
@@ -414,12 +667,11 @@ public class PageDriver {
     }
   }
 
-  /// <summary>
-  /// Check that the element stops being visible
-  /// </summary>
-  /// <param name="selector">Element selector</param>
-  /// <param name="options">Visible check options</param>
-  /// <returns>True if the element becomes is hidden or gone within the page timeout</returns>
+  /**
+   * Check that the element stops being visible.
+   * @param selector Element selector
+   * @return True if the element becomes is hidden or gone within the page timeout
+   */
   public boolean isEventuallyGone(String selector) {
     try {
       this.getAsyncPage().waitForSelector(selector);
@@ -429,12 +681,12 @@ public class PageDriver {
     }
   }
 
-  /// <summary>
-  /// Check that the element stops being visible
-  /// </summary>
-  /// <param name="selector">Element selector</param>
-  /// <param name="options">Visible check options</param>
-  /// <returns>True if the element becomes is hidden or gone within the page timeout</returns>
+  /**
+   * Check that the element stops being visible.
+   * @param selector Element selector
+   * @param options Visible check options
+   * @return True if the element becomes is hidden or gone within the page timeout
+   */
   public boolean isEventuallyGone(String selector, Page.IsVisibleOptions options) {
     try {
       Page.WaitForSelectorOptions selectorOptions = new Page.WaitForSelectorOptions();
@@ -447,266 +699,459 @@ public class PageDriver {
     }
   }
 
+  /**
+   * query the selector.
+   * @param selector the selector to be queried
+   * @return the element return handle
+   */
   public ElementHandle querySelector(String selector) {
     return this.asyncPage.querySelector(selector);
   }
 
-  /// <inheritdoc cref = "IPage.QuerySelectorAsync"  />
+  /**
+   * query the selector.
+   * @param selector the selector to be queried
+   * @param options the query selector options
+   * @return the element return handle
+   */
   public ElementHandle querySelector(String selector, Page.QuerySelectorOptions options) {
     return this.asyncPage.querySelector(selector, options);
   }
 
+  /**
+   * waits for a selector.
+   * @param selector the selector to be waited for
+   * @return the element handle of the wait for function
+   */
   public ElementHandle waitForSelector(String selector) {
-    //    return this.AsyncPage.WaitForSelectorAsync(selector, options).Result;
     return this.asyncPage.waitForSelector(selector);
   }
 
-  /// <inheritdoc cref = "IPage.WaitForSelectorAsync"  />
+  /**
+   * waits for a selector.
+   * @param selector the selector to be waited for
+   * @param options the wait for selector options
+   * @return the element handle of the wait for function
+   */
   public ElementHandle waitForSelector(String selector, Page.WaitForSelectorOptions options) {
-//    return this.AsyncPage.WaitForSelectorAsync(selector, options).Result;
     return this.asyncPage.waitForSelector(selector, options);
   }
 
+  /**
+   * adds a style tag.
+   * @return the element handle of the style tag
+   */
   public ElementHandle addScriptTag() {
-    //    return this.AsyncPage.AddScriptTagAsync(options).Result;
     return this.asyncPage.addScriptTag();
   }
 
-  /// <inheritdoc cref = "IPage.AddScriptTagAsync"  />
+  /**
+   * adds a script tag.
+   * @param options the add style tag options
+   * @return the element handle of the script tag
+   */
   public ElementHandle addScriptTag(Page.AddScriptTagOptions options) {
-//    return this.AsyncPage.AddScriptTagAsync(options).Result;
     return this.asyncPage.addScriptTag(options);
   }
 
+  /**
+   * adds a style tag.
+   * @return the element handle of the style tag
+   */
   public ElementHandle addStyleTag() {
     return this.asyncPage.addStyleTag();
   }
 
-  /// <inheritdoc cref = "IPage.AddStyleTagAsync"  />
+  /**
+   * adds a style tag.
+   * @param options the add style tag options
+   * @return the element handle of the style tag
+   */
   public ElementHandle addStyleTag(Page.AddStyleTagOptions options) {
     return this.asyncPage.addStyleTag(options);
   }
 
-  /// <inheritdoc cref = "IPage.QuerySelectorAllAsync"  />
+  /**
+   * query for all the selectors.
+   * @param selector the selector to be queried
+   * @return the list of element handles
+   */
   public List<ElementHandle> querySelectorAll(String selector) {
-//    return this.AsyncPage.QuerySelectorAllAsync(selector).Result;
     return Collections.unmodifiableList(this.asyncPage.querySelectorAll(selector));
   }
 
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, ElementHandle values) {
-    //    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return this.asyncPage.selectOption(selector, values);
   }
 
-  /// <inheritdoc cref = "IPage.SelectOptionAsync(String, IElementHandle, PageSelectOptionOptions)"  />
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, ElementHandle values, Page.SelectOptionOptions options) {
-//    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return this.asyncPage.selectOption(selector, values, options);
   }
 
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, ElementHandle[] values) {
-    //    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return this.asyncPage.selectOption(selector, values);
   }
 
-  /// <inheritdoc cref = "IPage.SelectOptionAsync(String, IEnumerable{IElementHandle}, PageSelectOptionOptions)"  />
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, ElementHandle[] values, Page.SelectOptionOptions options) {
-//    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return this.asyncPage.selectOption(selector, values, options);
   }
 
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, SelectOption[] values) {
-    //    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values));
   }
 
-  /// <inheritdoc cref = "IPage.SelectOptionAsync(String, IEnumerable{SelectOptionValue}, PageSelectOptionOptions)"  />
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, SelectOption[] values, Page.SelectOptionOptions options) {
-//    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values, options));
   }
 
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, String[] values) {
-    //    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values));
   }
 
-  /// <inheritdoc cref = "IPage.SelectOptionAsync(string, IEnumerable{string}, PageSelectOptionOptions)"  />
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, String[] values, Page.SelectOptionOptions options ) {
-//    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values, options));
   }
 
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, SelectOption values) {
-    //    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values));
   }
 
-  /// <inheritdoc cref = "IPage.SelectOptionAsync(String, SelectOptionValue, PageSelectOptionOptions)"  />
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, SelectOption values, Page.SelectOptionOptions options) {
-//    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values, options));
   }
 
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, String values) {
-    //    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values));
   }
 
-  /// <inheritdoc cref = "IPage.SelectOptionAsync(String, String, PageSelectOptionOptions)"  />
+  /**
+   * select options for an element.
+   * @param selector the selector that will have its option selected
+   * @param values the values to be selected
+   * @param options the select options
+   * @return a list of the options
+   */
   public List<String> selectOption(String selector, String values, Page.SelectOptionOptions options) {
-//    return this.AsyncPage.SelectOptionAsync(selector, values, options).Result;
     return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values, options));
   }
 
+  /**
+   * evaluates on all the selector.
+   * @param selector the selector to be evaluated
+   * @param expression the expression to be used
+   * @return the object of the evaluation
+   */
   public Object evalOnSelectorAll(String selector, String expression) {
-    //    return this.AsyncPage.EvalOnSelectorAllAsync(selector, expression, arg).Result;
     return this.asyncPage.evalOnSelector(selector, expression);
   }
 
-  /// <inheritdoc cref = "IPage.EvalOnSelectorAllAsync"  />
+  /**
+   * evaluates on all the selector.
+   * @param selector the selector to be evaluated
+   * @param expression the expression to be used
+   * @param arg the objects used in the evaluation
+   * @return the object of the evaluation
+   */
   public Object evalOnSelectorAll(String selector, String expression, Object arg) {
-//    return this.AsyncPage.EvalOnSelectorAllAsync(selector, expression, arg).Result;
     return this.asyncPage.evalOnSelector(selector, expression, arg);
   }
 
+  /**
+   * evaluates on a selector.
+   * @param selector the selector to be evaluated
+   * @param expression the expression to be used
+   * @return the object of the evaluation
+   */
   public Object evalOnSelector(String selector, String expression) {
-    //    return this.AsyncPage.EvalOnSelectorAsync(selector, expression, arg).Result;
     return this.asyncPage.evalOnSelector(selector, expression);
   }
 
-  /// <inheritdoc cref = "IPage.EvalOnSelectorAsync"  />
+  /**
+   * evaluates on a selector.
+   * @param selector the selector to be evaluated
+   * @param expression the expression to be used
+   * @param arg the objects used in the evaluation
+   * @return the object of the evaluation
+   */
   public Object evalOnSelector(String selector, String expression, Object arg) {
-//    return this.AsyncPage.EvalOnSelectorAsync(selector, expression, arg).Result;
     return this.asyncPage.evalOnSelector(selector, expression, arg);
   }
 
+  /**
+   * evaluates an expression.
+   * @param expression the expression to be evaluated
+   * @return the evaluated object
+   */
   public Object evaluate(String expression) {
-    //    return this.AsyncPage.EvaluateAsync(expression, arg).Result;
     return this.asyncPage.evaluate(expression);
   }
 
-  /// <inheritdoc cref = "IPage.EvaluateAsync"  />
+  /**
+   * evaluates an expression.
+   * @param expression the expression to be evaluated
+   * @param arg objects to be evaluated
+   * @return the evaluated object
+   */
   public Object evaluate(String expression, Object arg) {
-//    return this.AsyncPage.EvaluateAsync(expression, arg).Result;
     return this.asyncPage.evaluate(expression, arg);
   }
 
+  /**
+   * gets the attribute of a selector
+   * @param selector to get the attribute of
+   * @param name the name of the attribute
+   * @return the string value of the attribute
+   */
   public String getAttribute(String selector, String name) {
-    //    return this.AsyncPage.GetAttributeAsync(selector, name, options).Result;
     return this.asyncPage.getAttribute(selector, name);
   }
 
-  /// <inheritdoc cref = "IPage.GetAttributeAsync"  />
+  /**
+   * gets the attribute of a selector
+   * @param selector to get the attribute of
+   * @param name the name of the attribute
+   * @param options the get attribute options
+   * @return the string value of the attribute
+   */
   public String getAttribute(String selector, String name, Page.GetAttributeOptions options) {
-//    return this.AsyncPage.GetAttributeAsync(selector, name, options).Result;
     return this.asyncPage.getAttribute(selector, name, options);
   }
 
+  /**
+   * gets the text content of an element
+   * @param selector of the element to get the text content
+   * @return the text content as a string
+   */
   public String textContent(String selector) {
-    //    return this.AsyncPage.TextContentAsync(selector, options).Result;
     return this.asyncPage.textContent(selector);
   }
 
-  /// <inheritdoc cref = "IPage.TextContentAsync"  />
+  /**
+   * gets the text content of an element
+   * @param selector of the element to get the text content
+   * @param options the text content options
+   * @return the text content as a string
+   */
   public String textContent(String selector, Page.TextContentOptions options) {
-//    return this.AsyncPage.TextContentAsync(selector, options).Result;
     return this.asyncPage.textContent(selector, options);
   }
 
-  /// <inheritdoc cref = "IPage.ContentAsync"  />
+  /**
+   * gets the content of the element.
+   * @return the element content
+   */
   public String content() {
-//    return this.AsyncPage.ContentAsync().Result;
     return this.asyncPage.content();
   }
 
+  /**
+   * gets the inner html of an element.
+   * @param selector the selector for the element
+   * @return the inner html string of the object
+   */
   public String innerHTML(String selector) {
-    //    return this.AsyncPage.InnerHTMLAsync(selector, options).Result;
     return this.asyncPage.innerHTML(selector);
   }
 
-  /// <inheritdoc cref = "IPage.InnerHTMLAsync"  />
+  /**
+   * gets the inner html of an element.
+   * @param selector the selector for the element
+   * @param options the inner text options
+   * @return the inner html string of the object
+   */
   public String innerHTML(String selector, Page.InnerHTMLOptions options) {
-//    return this.AsyncPage.InnerHTMLAsync(selector, options).Result;
     return this.asyncPage.innerHTML(selector, options);
   }
 
+  /**
+   * gets the inner text of an element.
+   * @param selector the selector for the element
+   * @return the inner text string of the object
+   */
   public String innerText(String selector) {
-    //    return this.AsyncPage.innerText(selector, options).Result;
     return this.asyncPage.innerText(selector);
   }
 
-  /// <inheritdoc cref = "IPage.InnerTextAsync"  />
+  /**
+   * gets the inner text of an element.
+   * @param selector the selector for the element
+   * @param options the inner text options
+   * @return the inner text string of the object
+   */
   public String innerText(String selector, Page.InnerTextOptions options) {
-//    return this.AsyncPage.innerText(selector, options).Result;
     return this.asyncPage.innerText(selector, options);
   }
 
+  /**
+   * inputs value on an element.
+   * @param selector the selector to be inputted
+   * @return the string return of the input
+   */
   public String inputValue(String selector) {
-    //    return this.AsyncPage.InputValueAsync(selector, options).Result;
     return this.asyncPage.inputValue(selector);
   }
 
-  /// <inheritdoc cref = "IPage.InputValueAsync"  />
+  /**
+   * inputs value on an element.
+   * @param selector the selector to be inputted
+   * @param options the input options
+   * @return the string return of the input
+   */
   public String inputValue(String selector, Page.InputValueOptions options) {
-//    return this.AsyncPage.InputValueAsync(selector, options).Result;
     return this.asyncPage.inputValue(selector, options);
   }
 
-  /// <inheritdoc cref = "IPage.TitleAsync"  />
+  /**
+   * gets the title string.
+   * @return the title string
+   */
   public String title() {
-//    return this.AsyncPage.title().Result;
     return this.asyncPage.title();
   }
 
+  /**
+   * navigating to with the page.
+   * @return the response of going back
+   */
   public Response navigateTo(String url) {
-    //    return this.AsyncPage.navigate(url,options).Result;
     return this.asyncPage.navigate(url);
   }
 
-  /// <inheritdoc cref = "IPage.GotoAsync"  />
+  /**
+   * navigating to with the page.
+   * @param options the go to options
+   * @return the response of going back
+   */
   public Response navigateTo(String url, Page.NavigateOptions options) {
-//    return this.AsyncPage.navigate(url,options).Result;
     return this.asyncPage.navigate(url,options);
   }
 
-  /// <inheritdoc cref = "IPage.GoBackAsync"  />
+  /**
+   * navigating back with the page.
+   * @return the response of going back
+   */
   public Response goBack() {
     return this.asyncPage.goBack();
   }
 
-  /// <inheritdoc cref = "IPage.GoBackAsync"  />
+  /**
+   * navigating back with the page.
+   * @param options the go back options
+   * @return the response of going back
+   */
   public Response goBack(Page.GoBackOptions options) {
-//    return this.AsyncPage.GoBackAsync(options).Result;
     return this.asyncPage.goBack(options);
   }
 
+  /**
+   * navigating forward with the page.
+   * @return the response of going forward
+   */
   public Response goForward() {
-    //    return this.AsyncPage.goForward(options).Result;
     return this.asyncPage.goForward();
   }
 
-  /// <inheritdoc cref = "IPage.GoForwardAsync"  />
+  /**
+   * navigating forward with the page.
+   * @param options the go forward options
+   * @return the response of going forward
+   */
   public Response goForward(Page.GoForwardOptions options) {
-//    return this.AsyncPage.goForward(options).Result;
     return this.asyncPage.goForward(options);
   }
 
+  /**
+   * reloads the page.
+   * @return the response of reloading the page
+   */
   public Response reload() {
     return this.asyncPage.reload();
   }
 
-  /// <inheritdoc cref = "IPage.ReloadAsync"  />
+  /**
+   * reloads the page with options.
+   * @param options the reload options
+   * @return the response of reloading the page
+   */
   public Response reload(Page.ReloadOptions options) {
-//    return this.AsyncPage.reload(options).Result;
     return this.asyncPage.reload(options);
   }
 
-  /// <summary>
-  /// Gets the underlying async page object
-  /// </summary>
-  private Browser parentBrowser;
-
+  /**
+   * gets the parent browser.
+   * @return the parent browser
+   */
   public Browser getParentBrowser() {
     return this.asyncPage.context().browser();
   }

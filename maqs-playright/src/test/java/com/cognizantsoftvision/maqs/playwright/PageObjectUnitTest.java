@@ -25,7 +25,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    * Verify test object is the same.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void PageModelTestObject() {
+  public void pageModelTestObject() {
     Assert.assertEquals(this.getTestObject(), this.getPageModel().getTestObject());
   }
 
@@ -33,7 +33,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    * Verify web driver is the same.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void PageModelWebDriver() {
+  public void pageModelWebDriver() {
     Assert.assertEquals(this.getPageDriver(), this.getPageModel().getPageDriver());
   }
 
@@ -41,7 +41,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    * Verify logger is the same.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void PageModelLogger() {
+  public void pageModelLogger() {
     Assert.assertEquals(this.getLogger(), this.getPageModel().getLogger());
   }
 
@@ -49,7 +49,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    * Verify perf timer collection is the same.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void PageModelPerfTimerCollection() {
+  public void pageModelPerfTimerCollection() {
     Assert.assertEquals(this.getPerfTimerCollection(), this.getPageModel().getPerfTimerCollection());
   }
 
@@ -57,7 +57,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    * Verify we can override the page object web driver.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void OverridePageObjectWebDriver() {
+  public void overridePageObjectWebDriver() {
     try {
       PageDriver oldWebDriver = this.getPageModel().getPageDriver();
       this.getPageModel().overridePageDriver(PageDriverFactory.getDefaultPageDriver());
@@ -72,7 +72,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    * Do lazy elements respect overrides.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void LazyRespectOverride() {
+  public void lazyRespectOverride() {
     // Define new named driver
     this.getManagerStore().putOrOverride("OtherDriver",
         new PageDriverManager(PageDriverFactory::getDefaultPageDriver, this.getTestObject()));
