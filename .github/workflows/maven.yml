@@ -165,7 +165,7 @@ jobs:
         shell: bash
         run: mvn -Psonar package sonar:sonar -Dsonar.projectKey=CognizantOpenSource_maqs-java -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
         working-directory: ${{github.workspace}}
-        with:
+        env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      - uses: cprudhom/jacoco-merge@v1
