@@ -74,5 +74,6 @@
         <accessKey>80592d42-18a3-4303-9b65-b8f8181d0e67</accessKey>
         <deviceOrientation>portrait</deviceOrientation>
         <browserName>Chrome</browserName>
+        <w3c>true</w3c>
     </AppiumCapsMaqs>
 </configuration>
