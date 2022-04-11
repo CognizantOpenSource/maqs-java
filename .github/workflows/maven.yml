@@ -183,7 +183,7 @@ jobs:
             ${{ runner.os }}-maven-${{github.sha}}
       - name: Run SonarCloud Analysis
         shell: bash
-        run: mvn -B -e -fae -Drevision=${{env.VERSION}} -Psonar package sonar:sonar -Dsonar.projectKey=${{env.SONAR_PROJECT}} -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
+        run: mvn -B -e -fae -Drevision=${{env.VERSION}} -Psonar package sonar:sonar -Dsonar.java.checkstyle.reportPaths=$(find "$(pwd)" -path '*checkstyle-result.xml' | sed 's/.*/&/' | tr '\n' ',') -Dsonar.projectKey=${{env.SONAR_PROJECT}} -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
         working-directory: ${{github.workspace}}
         env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
