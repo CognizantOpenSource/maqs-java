@@ -157,7 +157,7 @@ jobs:
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
         with:
-          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{env.SONAR_ORG}}, "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_TOKEN}}" }}]'
+          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{env.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_TOKEN}}" }}]'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Restore Local Maven Cache
