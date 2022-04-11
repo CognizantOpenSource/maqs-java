@@ -117,6 +117,7 @@ jobs:
           bt-param: '-fae -B -e -Dtesting=solo -T 1C'
           version: ${{ github.sha }}
       - name: Test Reporting
+        if: always()
         id: test-report
         uses: phoenix-actions/test-reporting@v6
         with:
