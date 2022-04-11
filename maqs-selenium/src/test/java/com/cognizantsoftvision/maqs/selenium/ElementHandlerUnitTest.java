@@ -99,6 +99,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void getElementAttributeTest() {
     AutomationPageModel automationPageModel = navigateToUrl();
     automationPageModel.waitForPageLoad();
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForVisibleElement(automationPageModel.errorLinkBy);
     String expectedText = automationPageModel.testSiteAutomationUrl + "notError.html";
     String actualText = ElementHandler.getElementAttribute(
         getWebDriver(), automationPageModel.errorLinkBy, "href");
