@@ -12,7 +12,7 @@
 
     <groupId>com.cognizantsoftvision.maqs.playwright</groupId>
     <artifactId>maqs-playright</artifactId>
-    <name>MAQS Selenium Testing Module</name>
+    <name>MAQS Playwright Testing Module</name>
     <version>${revision}</version>
 
     <properties>
