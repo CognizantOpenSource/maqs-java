@@ -45,7 +45,7 @@ public class PageDriverManager extends DriverManager<PageDriver> {
   }
 
   /**
-   * Override the page
+   * Override the page.
    * @param overridePage Function for getting a new page
    */
   public void overrideDriver(PageDriver overridePage) {

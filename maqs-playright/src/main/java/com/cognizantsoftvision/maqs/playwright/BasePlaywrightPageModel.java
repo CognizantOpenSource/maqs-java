@@ -53,7 +53,7 @@ public abstract class BasePlaywrightPageModel {
   }
 
   /**
-   * The log from the test object
+   * The log from the test object.
    */
   protected ILogger log;
 
@@ -66,7 +66,7 @@ public abstract class BasePlaywrightPageModel {
   }
 
   /**
-   * The performance timer collection from the test object
+   * The performance timer collection from the test object.
    */
   protected IPerfTimerCollection perfTimerCollection;
 
