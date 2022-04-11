@@ -157,14 +157,20 @@ jobs:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{env.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_TOKEN}}" }}]'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~\.sonar
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
       - name: Restore Local Maven Cache
         uses: actions/cache@v2.1.6
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-maven-${{inputs.version}}
+          key: ${{ runner.os }}-maven-${{github.sha}}.${{github.run_number}}
           restore-keys: |
-            ${{ runner.os }}-maven-
-      - name: sonarcloud analysis
+            ${{ runner.os }}-maven-${{github.sha}}
+      - name: Run SonarCloud Analysis
         shell: bash
         run: mvn -B -e -fae -Drevision=${{env.VERSION}} -Psonar package sonar:sonar -Dsonar.projectKey=${{env.SONAR_PROJECT}} -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
         working-directory: ${{github.workspace}}
