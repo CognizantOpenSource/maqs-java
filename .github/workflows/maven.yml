@@ -125,6 +125,7 @@ jobs:
           path: '**/junitreports/TEST-**.xml'
           reporter: 'java-junit'
           list-tests: 'failed'
+          list-suites: 'failed'
       - uses: actions/upload-artifact@v2
         if: always()
         name: "Upload test artifact"
