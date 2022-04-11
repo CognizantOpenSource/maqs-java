@@ -179,9 +179,6 @@
             <id>sonar</id>
             <properties>
                 <maven.test.skip>true</maven.test.skip>
-                <sonar.coverage.jacoco.xmlReportPaths>
-                    ./target/site/jacoco-aggregate/jacoco.xml
-                </sonar.coverage.jacoco.xmlReportPaths>
             </properties>
             <build>
                 <plugins>
@@ -244,9 +241,15 @@
                         <configuration>
                             <parallel>methods</parallel>
                             <threadCount>5</threadCount>
-                            <!--                            <argLine>${argLine}</argLine>-->
-                            <!--                            <argLine>-javaagent @{maven.dependency.io.github.bonigarcia:webdrivermanager:jar:path}</argLine>-->
+                            <argLine>${argLine}</argLine>
                         </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.maven.surefire</groupId>
+                                <artifactId>surefire-testng</artifactId>
+                                <version>${surefire.plugin.version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -273,8 +276,6 @@
         <chromedriver.version>94.0.4606.41</chromedriver.version>
         <geckodriver.version>0.28.0</geckodriver.version>
         <edgedriver.version>5.16299</edgedriver.version>
-        <sonar.organization>jason-edstrom</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencyManagement>
