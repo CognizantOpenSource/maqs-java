@@ -9,14 +9,14 @@ services:
     extends: 
       file: ./MAQSSQLServer/docker-compose.yml
       service: mssql
-#  mongo:
-#    extends:
-#      file: ./MAQSMongoDB/docker-compose.yml
-#      service: mongo
-#  imap:
-#    extends:
-#      file: ./MAQSEmail/docker-compose.yml
-#      service: imap
+  mongo:
+    extends:
+      file: ./MAQSMongoDB/docker-compose.yml
+      service: mongo
+  imap:
+    extends:
+      file: ./MAQSEmail/docker-compose.yml
+      service: imap
   webservice:
     extends:
       service: webservice
