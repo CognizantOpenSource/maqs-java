@@ -264,7 +264,7 @@
         <puppycheckstyle.plugin.version>8.38</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.7</jacoco.version>
         <testng.version>7.3.0</testng.version>
-        <selenium.version>4.1.3</selenium.version>
+        <selenium.version>4.1.1</selenium.version>
         <!-- TODO: delete seleniumAppium.version when appium is updated with appium java client 8.0 -->
         <seleniumAppium.version>3.141.59</seleniumAppium.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
@@ -338,6 +338,11 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-remote-driver</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
                 <version>${selenium.version}</version>
             </dependency>
         </dependencies>
