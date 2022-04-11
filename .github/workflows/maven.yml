@@ -1,4 +1,4 @@
-name: DevOps 2.0 Pipeline - non-docker
+name: MAQS Java Pipeline
 on:
   schedule:
     - cron: "13 23 * * *"
@@ -88,7 +88,6 @@ jobs:
   install-modules:
     name: Pre-compile packages
     runs-on: ubuntu-latest
-    #needs: getVersion
     outputs:
       buildNumber: ${{ steps.ver.outputs.BUILD_NUMBER }}
     steps:
@@ -97,7 +96,7 @@ jobs:
         uses: ./.github/workflows/preinstall-action
         with:
           bt-param: '-fae -B -e -T 1C -Psonar'
-          version: ${{ github.sha }} #${{ needs.getVersion.outputs.buildNumber }}
+          version: ${{ github.sha }}
 
 
   test-modules:
@@ -107,9 +106,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module-name: [ maqs-utilities, maqs-base, maqs-webservices, maqs-cucumber, maqs-accessibility, maqs-database ] #maqs-appium, maqs-selenium,
-    env:
-      BUILD_NUMBER: ${{ needs.getVersion.outputs.buildNumber }}
+        module-name: [ maqs-utilities, maqs-base, maqs-appium, maqs-selenium, maqs-webservices, maqs-cucumber, maqs-accessibility, maqs-database ]
     steps:
       - uses: actions/checkout@v2
       - name: Build and Start Unit Tests
@@ -118,7 +115,7 @@ jobs:
         with:
           module-name: ${{matrix.module-name}}
           bt-param: '-fae -B -e -Dtesting=solo -T 1C'
-          version: ${{ github.sha }} #${{ needs.getVersion.outputs.buildNumber }}
+          version: ${{ github.sha }}
       - uses: actions/upload-artifact@v2
         if: always()
         name: "Upload test artifact"
@@ -146,9 +143,6 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: ${{github.workspace}}/artifacts/
-#      - name: Display structure of downloaded files
-#        run: ls -R
-#        working-directory: ${{github.workspace}}/artifacts/
       - name: Set up JDK
         uses: actions/setup-java@v2.3.1
         with:
@@ -169,24 +163,36 @@ jobs:
             ${{ runner.os }}-maven-
       - name: sonarcloud analysis
         shell: bash
-        run: mvn -B -e -fae -T 1C -Drevision=${{env.VERSION}} -Psonar package sonar:sonar -Dsonar.projectKey=${{env.SONAR_PROJECT}} -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
+        run: mvn -B -e -fae -Drevision=${{env.VERSION}} -Psonar package sonar:sonar -Dsonar.projectKey=${{env.SONAR_PROJECT}} -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
         working-directory: ${{github.workspace}}
         env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#      - uses: cprudhom/jacoco-merge@v1
-#        with:
-#          exec-file: >
-#            ./artifacts/jmaqs-utilities-results/jacoco.exec
-#            ./artifacts/jmaqs-base-results/jacoco.exec
-#            ./artifacts/jmaqs-appium-results/jacoco.exec
-#            ./artifacts/jmaqs-selenium-results/jacoco.exec
-#            ./artifacts/jmaqs-webservices-jdk8-results/jacoco.exec
-#            ./artifacts/jmaqs-webservices-jdk11-results/jacoco.exec
-#            ./artifacts/jmaqs-cucumber-results/jacoco.exec
-#            ./artifacts/jmaqs-accessibility-results/jacoco.exec
-#          dest-file:
-#            target/jacoco.exec
+  checkstyle:
+    name: Checkstyle Run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Restore Local Maven Cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: ~/.m2
+          key: ${{runner.os}}-m2
+      - name: Run Checkstyle
+        run: mvn -B validate --file pom.xml -e -fae
+  labels:
+    name: Pull Request Labels
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label Pull Request
+        uses: actions/labeler@v3
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
 
 
