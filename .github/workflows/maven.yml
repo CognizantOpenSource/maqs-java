@@ -122,8 +122,9 @@ jobs:
         uses: phoenix-actions/test-reporting@v6
         with:
           name: ${{matrix.module-name}} Test Results
-          path: '**/TEST-**.xml'
+          path: '**/junitreports/TEST-**.xml'
           reporter: 'java-junit'
+          list-tests: 'failed'
       - uses: actions/upload-artifact@v2
         if: always()
         name: "Upload test artifact"
