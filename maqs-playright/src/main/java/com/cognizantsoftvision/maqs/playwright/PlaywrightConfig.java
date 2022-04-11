@@ -24,14 +24,14 @@ public class PlaywrightConfig {
    * Ensure required fields are in the config.
    */
   private static void checkConfig() {
-//    var validator = new ConfigValidation()
-//    {
-//      RequiredFields = new List<string>()
-//      {
-//        "Timeout"
-//      }
-//    };
-//    Config.Validate(ConfigSection.PLAYWRIGHT_MAQS, validator);
+  //    var validator = new ConfigValidation()
+  //    {
+  //      RequiredFields = new List<string>()
+  //      {
+  //        "Timeout"
+  //      }
+  //    };
+  //    Config.Validate(ConfigSection.PLAYWRIGHT_MAQS, validator);
   }
 
   /**
@@ -98,7 +98,7 @@ public class PlaywrightConfig {
 
     try {
       return Integer.parseInt(value);
-    } catch(NumberFormatException e) {
+    } catch (NumberFormatException e) {
       throw new IllegalArgumentException(
           "PlaywrightCommandTimeout should be a number but the current value is: " + value);
     }

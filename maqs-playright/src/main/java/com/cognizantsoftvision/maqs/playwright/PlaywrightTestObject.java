@@ -60,7 +60,7 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
   }
 
   /**
-   * Override the old page driver with a new page
+   * Override the old page driver with a new page.
    *
    * @param pageDriver the new page driver
    */

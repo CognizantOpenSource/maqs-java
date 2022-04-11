@@ -5,13 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>maqs-java</artifactId>
         <groupId>com.cognizantsoftvision.maqs</groupId>
+        <artifactId>maqs-java</artifactId>
         <version>${revision}</version>
     </parent>
 
-
+    <groupId>com.cognizantsoftvision.maqs.playwright</groupId>
     <artifactId>maqs-playright</artifactId>
+    <name>MAQS Selenium Testing Module</name>
+    <version>${revision}</version>
 
     <properties>
         <playwright.version>1.20.1</playwright.version>

@@ -4,7 +4,10 @@
 
 package com.cognizantsoftvision.maqs.playwright;
 
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.FrameLocator;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.SelectOption;
 import com.microsoft.playwright.options.WaitForSelectorState;
@@ -101,7 +104,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * the underlying async page object
+   * the underlying async page object.
    */
   private Page parentPage;
 
@@ -122,7 +125,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * The underlying async page object
+   * The underlying async page object.
    */
   private Locator parentLocator;
 
@@ -135,7 +138,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Sets the underlying async page object
+   * Sets the underlying async page object.
    * @param newParentLocator the new parent locator
    */
   private void setParentLocator(Locator newParentLocator) {
@@ -143,7 +146,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * The underlying async page object
+   * The underlying async page object.
    */
   private FrameLocator parentFrameLocator;
 
@@ -156,7 +159,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Sets the underlying async page object
+   * Sets the underlying async page object.
    * @param newParentLocator the new parent locator
    */
   private void setParentFrameLocator(FrameLocator newParentLocator) {
@@ -190,7 +193,7 @@ public class PlaywrightSyncElement {
   private Locator.LocatorOptions locatorOptions;
 
   /**
-   * gets the page locator options
+   * gets the page locator options.
    * @return the locator options
    */
   public Locator.LocatorOptions getLocatorOptions() {
@@ -206,7 +209,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * The selector string
+   * The selector string.
    */
   private String selector;
 
@@ -237,7 +240,7 @@ public class PlaywrightSyncElement {
     } else if (this.getParentLocator() != null) {
       return getLocatorOptions() != null ? this.getParentLocator().locator(getSelector(), getLocatorOptions())
           : this.getParentLocator().locator(getSelector());
-    } else if(this.getParentFrameLocator() != null) {
+    } else if (this.getParentFrameLocator() != null) {
       return this.getParentLocator().locator(getSelector());
     }
     throw new NullPointerException("Both parent IPage and PlaywrightElement are null");

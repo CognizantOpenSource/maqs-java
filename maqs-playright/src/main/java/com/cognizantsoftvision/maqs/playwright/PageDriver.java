@@ -48,7 +48,7 @@ public class PageDriver {
   }
 
   /**
-   * Sets the underlying async page object
+   * Sets the underlying async page object.
    * @param page the page to be set
    */
   private void setAsyncPage(Page page) {
@@ -644,7 +644,7 @@ public class PageDriver {
     try {
       this.getAsyncPage().waitForSelector(selector);
       return true;
-    } catch (Exception e){
+    } catch (Exception e) {
       return false;
     }
   }
@@ -662,7 +662,7 @@ public class PageDriver {
       selectorOptions.strict = options != null && options.strict;
       this.getAsyncPage().waitForSelector(selector, selectorOptions);
       return true;
-    } catch (Exception e){
+    } catch (Exception e) {
       return false;
     }
   }
@@ -860,7 +860,7 @@ public class PageDriver {
    * @param options the select options
    * @return a list of the options
    */
-  public List<String> selectOption(String selector, String[] values, Page.SelectOptionOptions options ) {
+  public List<String> selectOption(String selector, String[] values, Page.SelectOptionOptions options) {
     return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values, options));
   }
 
@@ -968,7 +968,7 @@ public class PageDriver {
   }
 
   /**
-   * gets the attribute of a selector
+   * gets the attribute of a selector.
    * @param selector to get the attribute of
    * @param name the name of the attribute
    * @return the string value of the attribute
@@ -978,7 +978,7 @@ public class PageDriver {
   }
 
   /**
-   * gets the attribute of a selector
+   * gets the attribute of a selector.
    * @param selector to get the attribute of
    * @param name the name of the attribute
    * @param options the get attribute options
@@ -989,7 +989,7 @@ public class PageDriver {
   }
 
   /**
-   * gets the text content of an element
+   * gets the text content of an element.
    * @param selector of the element to get the text content
    * @return the text content as a string
    */
@@ -998,7 +998,7 @@ public class PageDriver {
   }
 
   /**
-   * gets the text content of an element
+   * gets the text content of an element.
    * @param selector of the element to get the text content
    * @param options the text content options
    * @return the text content as a string

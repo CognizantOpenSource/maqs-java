@@ -55,7 +55,11 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
     return PageDriverFactory.getDefaultPageDriver();
   }
 
-
+  /**
+   * create a new test object.
+   * @param log the logger to be set in the new test object
+   * @return the playwright test object interface
+   */
   protected IPlaywrightTestObject createNewTestObject(ILogger log) {
     return new PlaywrightTestObject(this::getBrowser, log, this.getFullyQualifiedTestClassName());
   }
@@ -66,8 +70,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
    */
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
-    // Try to take a screenshot
-
+    // Try to take a screenshot.
     try {
       // Just stop if we are not logging or the driver was not initialized or there is no browser
       if (this.getLoggingEnabledSetting() == LoggingEnabled.NO
@@ -79,9 +82,9 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
       // The test did not pass, or we want it logged regardless
       if (this.getLoggingEnabledSetting() == LoggingEnabled.YES || !resultType.isSuccess()) {
         String fullPath = ((IFileLogger)this.getLogger()).getFilePath();
-//        String fileNameWithoutExtension = Path.combine(Path.GetDirectoryName(fullPath), Path.GetFileNameWithoutExtension(fullPath));
+        //        String fileNameWithoutExtension = Path.combine(Path.GetDirectoryName(fullPath),
+        //        Path.GetFileNameWithoutExtension(fullPath));
         String fileNameWithoutExtension = Path.of(fullPath).getFileName().toString();
-
         attachTestFiles(this.getPageDriver().getParentBrowser(), fileNameWithoutExtension);
         return;
       }
@@ -89,7 +92,8 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
       // We are not logging these results so delete the recordings
       deleteTestFiles(this.getPageDriver().getParentBrowser());
     } catch (Exception e) {
-      this.tryToLog(MessageType.WARNING, "Failed to attach (or cleanup) Playwright test files: " + e.getMessage());
+      this.tryToLog(MessageType.WARNING,
+          "Failed to attach (or cleanup) Playwright test files: " + e.getMessage());
     }
   }
 
