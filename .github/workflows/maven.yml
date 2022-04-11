@@ -116,12 +116,13 @@ jobs:
           module-name: ${{matrix.module-name}}
           bt-param: '-fae -B -e -Dtesting=solo -T 1C'
           version: ${{ github.sha }}
-      - name: Publish Unit Test Results Report
-        uses: scacap/action-surefire-report@v1
-        if: ${{ always() }}
+      - name: Test Reporting
+        id: test-report
+        uses: phoenix-actions/test-reporting@v6
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          check_name: ${{inputs.module-name}} Unit Test Results
+          name: ${{matrix.module-name}} Test Results
+          path: '**/TEST-**.xml'
+          reporter: 'java-junit'
       - uses: actions/upload-artifact@v2
         if: always()
         name: "Upload test artifact"
