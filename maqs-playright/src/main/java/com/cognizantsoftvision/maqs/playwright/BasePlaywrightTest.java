@@ -149,9 +149,4 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
       throw e;
     }
   }
-
-  @Override
-  public getTestObject() {
-
-  }
 }

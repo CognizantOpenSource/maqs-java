@@ -39,25 +39,31 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
 
   /**
    * Gets the page driver manager.
+   * @return the page driver manager
    */
   public PageDriverManager getPageManager() {
     return (PageDriverManager) this.getManagerStore().get(PageDriverManager.class.getCanonicalName());
   }
 
-  /// <summary>
-  /// Gets the Playwright page
-  /// </summary>
-
+  /**
+   * the Playwright page driver.
+   */
   protected PageDriver pageDriver;
 
+  /**
+   * Gets the Playwright page driver.
+   *
+   * @return the playwright page driver
+   */
   public PageDriver getPageDriver() {
     return this.getPageManager().getPageDriver();
   }
 
-  /// <summary>
-  /// Override the the old page driver with a new page
-  /// </summary>
-  /// <param name="pageDriver">The new page drive</param>
+  /**
+   * Override the old page driver with a new page
+   *
+   * @param pageDriver the new page driver
+   */
   @Override
   public void overridePageDriver(PageDriver pageDriver) {
     this.getPageManager().overrideDriver(pageDriver);

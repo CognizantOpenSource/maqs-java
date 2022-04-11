@@ -1,6 +1,8 @@
-package com.cognizantsoftvision.maqs.playwright;/*
+/*
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
+
+package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
@@ -11,16 +13,16 @@ import java.awt.Dimension;
  */
 public class PlaywrightConfig {
 
-  /// <summary>
-  /// Loads when class is loaded
-  /// </summary>
+  /**
+   * Loads when class is loaded.
+   */
   PlaywrightConfig() {
     checkConfig();
   }
 
-  /// <summary>
-  /// Ensure required fields are in the config
-  /// </summary>
+  /**
+   * Ensure required fields are in the config.
+   */
   private static void checkConfig() {
 //    var validator = new ConfigValidation()
 //    {

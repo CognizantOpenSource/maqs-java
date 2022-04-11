@@ -1,6 +1,8 @@
-package com.cognizantsoftvision.maqs.playwright;/*
+/*
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
+
+package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;

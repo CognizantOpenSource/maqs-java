@@ -36,23 +36,21 @@ public class PageDriverManager extends DriverManager<PageDriver> {
     super(getDriverFunction, baseTestObject);
   }
 
-  /// <summary>
-  /// Override the page
-  /// </summary>
-  /// <param name="overrideDriver">The new page</param>
+  /**
+   * Override the page.
+   * @param overrideDriver The new page
+   */
   public void overrideDriver(Supplier<PageDriver> overrideDriver) {
     this.setBaseDriver(overrideDriver.get());
   }
 
-  /// <summary>
-  /// Override the page
-  /// </summary>
-  /// <param name="overridePage">Function for getting a new page</param>
+  /**
+   * Override the page
+   * @param overridePage Function for getting a new page
+   */
   public void overrideDriver(PageDriver overridePage) {
     this.overrideDriver(() -> overridePage);
   }
-
-
 
   /**
    * Get the page driver.
@@ -99,6 +97,9 @@ public class PageDriverManager extends DriverManager<PageDriver> {
     }
   }
 
+  /**
+   * Closes the page driver manaager.
+   */
   @Override
   public void close() {
     this.baseDriver.close();

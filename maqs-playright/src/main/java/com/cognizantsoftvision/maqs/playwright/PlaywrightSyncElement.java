@@ -73,22 +73,21 @@ public class PlaywrightSyncElement {
     super(testObject.getPageDriver().getAsyncPage(), selector, options);
   }
 
-  /// <summary>
-  /// Initializes a new instance of the <see cref="com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement" /> class
-  /// </summary>
-  /// <param name="driver">The associated playwright page driver</param>
-  /// <param name="selector">Element selector</param>
-  /// <param name="options">Advanced locator options</param>
+  /**
+   * Initializes a new instance of the PlaywrightSyncElement class.
+   * @param driver The associated playwright page driver
+   * @param selector Element selector
+   */
   public PlaywrightSyncElement(PageDriver driver, String selector) {
     super(driver.getAsyncPage(), selector);
   }
 
-  /// <summary>
-  /// Initializes a new instance of the <see cref="com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement" /> class
-  /// </summary>
-  /// <param name="driver">The assoicated playwright page driver</param>
-  /// <param name="selector">Element selector</param>
-  /// <param name="options">Advanced locator options</param>
+  /**
+   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
+   * @param driver The associated playwright page driver
+   * @param selector Element selector
+   * @param options Advanced locator options
+   */
   public PlaywrightSyncElement(PageDriver driver, String selector, Page.LocatorOptions options) {
     super(driver.getAsyncPage(), selector, options);
   }
@@ -311,19 +310,6 @@ public class PlaywrightSyncElement {
   public void setInputFiles(FilePayload[] files, Locator.SetInputFilesOptions options) {
     elementLocator().setInputFiles(files, options);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   public void setInputFiles(Path[] files) {
     elementLocator().setInputFiles(files);

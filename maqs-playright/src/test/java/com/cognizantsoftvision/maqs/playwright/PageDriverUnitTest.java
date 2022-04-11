@@ -14,6 +14,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.SelectOption;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -375,12 +376,14 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void WaitForTimeoutTest() {
-    var before = DateTime.Now;
+    LocalDateTime before = LocalDateTime.now();
     this.getPageDriver().waitForTimeout(1000);
-    var afterWait = DateTime.Now;
+    LocalDateTime afterWait = LocalDateTime.now();
 
-    Assert.assertTrue(afterWait > before.AddMilliseconds(800) && afterWait < before.AddMilliseconds(1200),
-        $"Sleep should have been about 1 second but was {(before - afterWait).TotalSeconds} seconds");
+    int duration = before.getSecond() - afterWait.getSecond();
+    //Assert.assertTrue(afterWait > before.AddMilliseconds(800) && afterWait < before.AddMilliseconds(1200),
+    Assert.assertTrue(afterWait.isAfter(before.plusSeconds(8)) && afterWait.isAfter(before.plusSeconds(12)),
+        "Sleep should have been about 1 second but was " + duration + " seconds");
   }
 
   /// <summary>
@@ -495,7 +498,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void AddInitScriptTest() {
-    // TODO
+    // TODO: finish up method
     this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc, );
     this.getPageDriver().reload();
     this.getPageDriver().evaluate("changeMainHeaderName();");
@@ -528,9 +531,9 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void setExtraHTTPHeadersTest() {
+    // TODO: Finish up method
     this.getPageDriver().setExtraHTTPHeaders(Collections.singletonMap("sample", "value"));
 //    this.getPageDriver().getAsyncPage().RequestFinished += AsyncPage_RequestFinished;
-    Runnable
     this.getPageDriver().getAsyncPage().waitForRequestFinished() += AsyncPage_RequestFinished;
 
     this.getPageDriver().click(elementPageModel.asyncPageLink);
