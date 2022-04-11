@@ -10,7 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit Tests for Web Service Driver.
+ * The Web Service Driver unit test class.
  */
 public class WebServiceDriverUnitTest {
 
