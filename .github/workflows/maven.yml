@@ -144,7 +144,7 @@ jobs:
     needs: [test-modules, getVersion]
     env:
       SONAR_ORG: "jason-edstrom"
-      SONAR_PROJECT: ${{secrets.SONAR_PROJECT }}
+      SONAR_PROJECT: "jason-edstrom_maqs-java"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
       VERSION: ${{ needs.getVersion.outputs.buildNumber }}
