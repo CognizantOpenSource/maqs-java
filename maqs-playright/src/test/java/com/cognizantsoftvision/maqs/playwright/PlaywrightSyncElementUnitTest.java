@@ -15,6 +15,7 @@ import com.microsoft.playwright.options.SelectOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -29,9 +30,8 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// <summary>
   /// Setup test and make sure we are on the correct test page
   /// </summary>
-  @BeforeTest
   public void createPlaywrightPageModel() {
-    var pageModel = new PageModel(this.getTestObject());
+    PageModel pageModel = new PageModel(this.getTestObject());
     pageModel.openPage();
     models.put(this.getTestObject(), pageModel);
   }
@@ -41,6 +41,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void CleanupPlaywrightPageModel() {
+    createPlaywrightPageModel();
     models.remove(this.getTestObject());
     Assert.assertNull(this.getTestObject());
   }
@@ -50,6 +51,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void CheckTest() {
+    createPlaywrightPageModel();
     Assert.assertFalse(models.get(this.getTestObject()).getCheckbox1().isChecked());
     models.get(this.getTestObject()).getCheckbox1().check();
     Assert.assertTrue(models.get(this.getTestObject()).getCheckbox1().isChecked());
@@ -60,6 +62,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void SetCheckTest() {
+    createPlaywrightPageModel();
     Assert.assertFalse(models.get(this.getTestObject()).getCheckbox2().isChecked());
     models.get(this.getTestObject()).getCheckbox2().setChecked(false);
     Assert.assertFalse(models.get(this.getTestObject()).getCheckbox2().isChecked());
@@ -72,6 +75,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void ClickTest() {
+    createPlaywrightPageModel();
     Assert.assertFalse(models.get(this.getTestObject()).getCloseButtonShowDialog().isVisible());
     models.get(this.getTestObject()).getShowDialog1().click();
     Assert.assertTrue(models.get(this.getTestObject()).getCloseButtonShowDialog().isEnabled());
@@ -82,6 +86,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void SelectOptionTest() {
+    createPlaywrightPageModel();
     List<String> singleOption = models.get(this.getTestObject()).getNamesDropDown().selectOption("5");
     Assert.assertEquals(singleOption.size(), 1);
     Assert.assertEquals(singleOption.get(0), "5");
@@ -103,6 +108,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void SelectMultipleOptionTest() {
+    createPlaywrightPageModel();
     List<String> multipleOptions = models.get(this.getTestObject()).getComputerPartsSelection()
         .selectOption(new String[]{"one", "five"});
     Assert.assertEquals(multipleOptions.size(), 2);
@@ -126,6 +132,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void DoubleClickTest() {
+    createPlaywrightPageModel();
     models.get(this.getTestObject()).getNamesDropDown().doubleClick();
     Assert.assertFalse(models.get(this.getTestObject()).getNamesDropDownFirstOption().isVisible());
   }
@@ -135,6 +142,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void DragAndDropTest() {
+    createPlaywrightPageModel();
     models.get(this.getTestObject()).getHtml5Draggable()
         .dragTo(models.get(this.getTestObject()).getHtml5Drop().elementLocator());
   }
@@ -144,6 +152,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void FillTest() {
+    createPlaywrightPageModel();
     models.get(this.getTestObject()).getFirstNameText().fill("Ted");
     Assert.assertEquals(models.get(this.getTestObject()).getFirstNameText().inputValue(), "Ted");
   }
@@ -153,6 +162,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void GetAttributeTest() {
+    createPlaywrightPageModel();
     Assert.assertEquals(models.get(this.getTestObject()).getShowDialog1().getAttribute("onclick"),
         "ShowProgressAnimation();");
   }
@@ -174,6 +184,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void HoverTest() {
+    createPlaywrightPageModel();
     models.get(this.getTestObject()).getTrainingDropdown().hover();
     Assert.assertTrue(models.get(this.getTestObject()).getTrainingOneLink().isVisible());
   }
@@ -183,6 +194,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void InnerHTMLTest() {
+    createPlaywrightPageModel();
     Assert.assertTrue(models.get(this.getTestObject()).getFooter().innerHTML().contains("Softvision"));
   }
 
@@ -191,6 +203,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void InnerTextTest() {
+    createPlaywrightPageModel();
     Assert.assertTrue(models.get(this.getTestObject()).getFooter().innerText().contains("Softvision"));
   }
 
@@ -198,8 +211,8 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// Test is disabled works as expected
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void IsDisabledTest()
-  {
+  public void IsDisabledTest() {
+    createPlaywrightPageModel();
     Assert.assertTrue(models.get(this.getTestObject()).getDisabledField().isDisabled());
     Assert.assertFalse(models.get(this.getTestObject()).getFirstNameText().isDisabled());
   }
@@ -209,6 +222,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void IsEditableTest() {
+    createPlaywrightPageModel();
     Assert.assertFalse(models.get(this.getTestObject()).getDisabledField().isEditable());
     Assert.assertTrue(models.get(this.getTestObject()).getFirstNameText().isEditable());
   }
@@ -217,8 +231,8 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// Test is enabled works as expected
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void IsEnabledTest()
-  {
+  public void IsEnabledTest() {
+    createPlaywrightPageModel();
     Assert.assertFalse(models.get(this.getTestObject()).getDisabledField().isEnabled());
     Assert.assertTrue(models.get(this.getTestObject()).getFirstNameText().isEnabled());
   }
@@ -228,6 +242,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void IsEventuallyGoneTest() {
+    createPlaywrightPageModel();
     Assert.assertTrue(models.get(this.getTestObject()).getNotReal().isEventuallyGone());
     Assert.assertFalse(models.get(this.getTestObject()).getFirstNameText().isEventuallyGone());
   }
@@ -237,6 +252,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void IsEventuallyVisibleTest() {
+    createPlaywrightPageModel();
     Assert.assertTrue(models.get(this.getTestObject()).getFirstNameText().isEventuallyVisible());
     Assert.assertFalse(models.get(this.getTestObject()).getNotReal().isEventuallyVisible());
   }
@@ -246,6 +262,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void IsHiddenTest() {
+    createPlaywrightPageModel();
     Assert.assertFalse(models.get(this.getTestObject()).getDisabledField().isHidden());
     Assert.assertTrue(models.get(this.getTestObject()).getTrainingOneLink().isHidden());
     Assert.assertTrue(models.get(this.getTestObject()).getNotReal().isHidden());
@@ -256,6 +273,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void IsVisibleTest() {
+    createPlaywrightPageModel();
     Assert.assertTrue(models.get(this.getTestObject()).getFirstNameText().isVisible());
     Assert.assertFalse(models.get(this.getTestObject()).getNotReal().isVisible());
   }
@@ -267,6 +285,8 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void TapTest() {
+    createPlaywrightPageModel();
+
     // Switch to a context that supports touch
     BrowserContext newBrowserContext = this.getPageDriver().getParentBrowser()
         .newContext(new Browser.NewContextOptions().setHasTouch(true));
@@ -285,6 +305,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void TextContentTest() {
+    createPlaywrightPageModel();
     Assert.assertEquals(models.get(this.getTestObject()).getShowDialog1().textContent(), "Show dialog");
   }
 
@@ -293,6 +314,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void TypeAndInputValueTest() {
+    createPlaywrightPageModel();
     models.get(this.getTestObject()).getFirstNameText().type("Ted");
     Assert.assertEquals(models.get(this.getTestObject()).getFirstNameText().inputValue(), "Ted");
   }
@@ -302,6 +324,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void UncheckTest() {
+    createPlaywrightPageModel();
     models.get(this.getTestObject()).getCheckbox2().uncheck();
   }
 
@@ -311,6 +334,8 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void EvalOnSelectorAllTest() {
+    createPlaywrightPageModel();
+
     Object results  = models.get(
         this.getTestObject()).getComputerPartsAllOptions().evalOnSelectorAll(
             "nodes -> nodes.map(n -> n.innerText)");
@@ -322,6 +347,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void EvaluateTest() {
+    createPlaywrightPageModel();
     Assert.assertEquals(Integer.parseInt(models.get(
         this.getTestObject()).getShowDialog1().evaluate("1 + 2").toString()), 3);
   }
@@ -331,6 +357,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void DispatchEventTest() {
+    createPlaywrightPageModel();
     models.get(this.getTestObject()).getAsyncPageLink().dispatchEvent("click");
     Assert.assertTrue(models.get(this.getTestObject()).getAlwaysUpOnAsyncPage().isEventuallyVisible());
   }
@@ -340,6 +367,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void SetInputFilesTest() {
+    createPlaywrightPageModel();
     FilePayload filePayload = new FilePayload(
         "test.png", "image/png", this.getPageDriver().getAsyncPage().screenshot());
     models.get(this.getTestObject()).getUpload().setInputFiles(filePayload);
@@ -351,6 +379,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void FocusTest() {
+    createPlaywrightPageModel();
     Assert.assertFalse(models.get(this.getTestObject()).getDatePickerDays().isVisible());
     models.get(this.getTestObject()).getDatePickerInput().focus();
     Assert.assertTrue(models.get(this.getTestObject()).getDatePickerDays().isVisible());
