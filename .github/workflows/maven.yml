@@ -112,7 +112,8 @@ jobs:
       BUILD_NUMBER: ${{ needs.getVersion.outputs.buildNumber }}
     steps:
       - uses: actions/checkout@v2
-      - id: builder
+      - name: Build and Start Unit Tests
+        id: builder
         uses: ./.github/workflows/buildtest-action
         with:
           module-name: ${{matrix.module-name}}
