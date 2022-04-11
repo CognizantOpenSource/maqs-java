@@ -101,7 +101,8 @@ public abstract class BasePlaywrightPageModel {
 
   /**
    * Override the com.cognizantsoftvision.maqs.playwright.PageDriver.
-   * This allows you to use something other than the default tests object com.cognizantsoftvision.maqs.playwright.PageDriver.
+   * This allows you to use something other than the default tests
+   * object com.cognizantsoftvision.maqs.playwright.PageDriver.
    *
    * @param pageDriver the new page driver
    */

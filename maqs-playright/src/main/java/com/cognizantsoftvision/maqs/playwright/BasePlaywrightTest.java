@@ -65,6 +65,27 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
   }
 
   /**
+   * Create a new test object.
+   */
+  @Override
+  protected void createNewTestObject() {
+    try {
+      this.setTestObject(
+          new PlaywrightTestObject(() -> {
+            try {
+              return getPageDriver();
+            } catch (Exception e) {
+              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
+              throw e;
+            }
+          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
+    } catch (Exception e) {
+      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+      throw e;
+    }
+  }
+
+  /**
    * Attach or delete Playwright testing artifacts.
    * @param resultType The test result
    */
@@ -130,27 +151,6 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
           page.video().delete();
         }
       }
-    }
-  }
-
-  /**
-   * Create a new test object.
-   */
-  @Override
-  protected void createNewTestObject() {
-    try {
-      this.setTestObject(
-          new PlaywrightTestObject(() -> {
-            try {
-              return getPageDriver();
-            } catch (Exception e) {
-              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
-              throw e;
-            }
-          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
-    } catch (Exception e) {
-      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
-      throw e;
     }
   }
 }
