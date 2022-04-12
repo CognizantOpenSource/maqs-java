@@ -20,7 +20,7 @@ runs:
     - name: Set up JDK
       uses: actions/setup-java@v2.3.1
       with:
-        distribution: zulu
+        distribution: jdk
         java-version: 11
     - name: Restore Local Maven Cache
       uses: actions/cache@v2.1.6

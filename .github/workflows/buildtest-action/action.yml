@@ -23,7 +23,7 @@ runs:
     - name: Set up JDK
       uses: actions/setup-java@v2.3.1
       with:
-        distribution: zulu
+        distribution: jdk
         java-version: 11
     - name: Restore Local Maven Cache
       uses: actions/cache@v2.1.6
@@ -40,9 +40,7 @@ runs:
     - name: Run Unit Tests
       shell: bash
       run: xvfb-run mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
-#      uses: GabrielBB/xvfb-action@v1.5
-#      with:
-#        run: mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
+
     - id: random-number-generator
       run: echo "::set-output name=random-id::123"
       shell: bash
