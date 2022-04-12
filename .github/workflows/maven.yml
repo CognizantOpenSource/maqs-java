@@ -144,8 +144,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test-modules, getVersion]
     env:
-      SONAR_ORG: "jason-edstrom"
-      SONAR_PROJECT: "jason-edstrom_maqs-java"
+      SONAR_ORG: "cognizantopensource"
+      SONAR_PROJECT: "cognizantopensource_maqs-java"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
       VERSION: ${{ needs.getVersion.outputs.buildNumber }}

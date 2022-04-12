@@ -180,7 +180,7 @@
             <properties>
                 <maven.test.skip>true</maven.test.skip>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-                <sonar.organization>jason-edstrom</sonar.organization>
+                <sonar.organization>cognizantopensource</sonar.organization>
             </properties>
             <build>
                 <plugins>
