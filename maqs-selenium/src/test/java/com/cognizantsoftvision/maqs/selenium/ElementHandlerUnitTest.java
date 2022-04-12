@@ -98,7 +98,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getElementAttributeTest() {
     AutomationPageModel automationPageModel = navigateToUrl();
-    automationPageModel.waitForPageLoad();
+    new UIWait(this.getWebDriver()).waitUntilPageLoad();
 
     String expectedText = automationPageModel.testSiteAutomationUrl + "notError.html";
     String actualText = ElementHandler.getElementAttribute(
