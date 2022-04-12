@@ -6,27 +6,30 @@ package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.base.exceptions.DriverDisposalException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
  * The BaseTestObject class.
  */
-public class BaseTestObject implements AutoCloseable {
+public class BaseTestObject implements ITestObject {
+
   /**
    * The Logger.
    */
-  private Logger logger;
+  private ILogger logger;
 
   /**
    * The Performance Timer Collection.
    */
-  private PerfTimerCollection perfTimerCollection;
+  private IPerfTimerCollection perfTimerCollection;
 
   /**
    * Concurrent Hash Map of string key value pairs.
@@ -41,7 +44,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * Dictionary of String key and driver value pairs.
    */
-  private ManagerDictionary managerStore;
+  private ManagerStore managerStore;
 
   /**
    * ArrayList of Strings for associated files.
@@ -59,26 +62,17 @@ public class BaseTestObject implements AutoCloseable {
   private boolean isClosed = false;
 
   /**
-   * Check if the object has been closed.
-   *
-   * @return True if the object is closed
-   */
-  public boolean getClosed() {
-    return this.isClosed;
-  }
-
-  /**
    * Initializes a new instance of the BaseTestObject class.
    *
    * @param logger                 The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
-  public BaseTestObject(final Logger logger, final String fullyQualifiedTestName) {
+  public BaseTestObject(final ILogger logger, final String fullyQualifiedTestName) {
     this.logger = logger;
     this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
     this.values = new ConcurrentHashMap<>();
     this.objects = new ConcurrentHashMap<>();
-    this.managerStore = new ManagerDictionary();
+    this.managerStore = new ManagerStore();
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = fullyQualifiedTestName;
 
@@ -90,7 +84,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param baseTestObject An existing base test object
    */
-  public BaseTestObject(final BaseTestObject baseTestObject) {
+  public BaseTestObject(final ITestObject baseTestObject) {
     this.logger = baseTestObject.getLogger();
     this.perfTimerCollection = baseTestObject.getPerfTimerCollection();
     this.values = (ConcurrentHashMap<String, String>) baseTestObject.getValues();
@@ -98,6 +92,7 @@ public class BaseTestObject implements AutoCloseable {
     this.managerStore = baseTestObject.getManagerStore();
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = baseTestObject.getFullyQualifiedTestName();
+    this.isClosed = baseTestObject.getIsClosed();
 
     baseTestObject.getLogger().logMessage(MessageType.INFORMATION, "Setup test object");
   }
@@ -107,7 +102,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @return The logger
    */
-  public Logger getLogger() {
+  public ILogger getLogger() {
     return this.logger;
   }
 
@@ -116,7 +111,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param logger The logger to use
    */
-  public void setLogger(final Logger logger) {
+  public void setLogger(final ILogger logger) {
     this.logger = logger;
   }
 
@@ -125,7 +120,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @return Performance Timer Collection
    */
-  public PerfTimerCollection getPerfTimerCollection() {
+  public IPerfTimerCollection getPerfTimerCollection() {
     return this.perfTimerCollection;
   }
 
@@ -134,7 +129,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param perfTimerCollection Performance Timer Collection
    */
-  public void setPerfTimerCollection(final PerfTimerCollection perfTimerCollection) {
+  public void setPerfTimerCollection(final IPerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
   }
 
@@ -184,7 +179,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @return Concurrent Hash Map of string key and driver value pairs
    */
-  public ManagerDictionary getManagerStore() {
+  public ManagerStore getManagerStore() {
     return this.managerStore;
   }
 
@@ -194,7 +189,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param managerStore Concurrent Hash Map of string key and driver value pairs
    *                     to use.
    */
-  protected void setManagerStore(final ManagerDictionary managerStore) {
+  protected void setManagerStore(final ManagerStore managerStore) {
     this.managerStore = managerStore;
   }
 
@@ -232,7 +227,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param <T>           the type parameter
    * @param driverManager the driver manager
    */
-  public <T extends DriverManager<?>> void addDriverManager(final T driverManager) {
+  public <T extends IDriverManager<?>> void addDriverManager(final T driverManager) {
     this.addDriverManager(driverManager, false);
   }
 
@@ -243,7 +238,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param driverManager    the driver manager
    * @param overrideIfExists the override if exists
    */
-  public <T extends DriverManager<?>> void addDriverManager(final T driverManager, final boolean overrideIfExists) {
+  public <T extends IDriverManager<?>> void addDriverManager(final T driverManager, final boolean overrideIfExists) {
     if (overrideIfExists) {
       this.overrideDriverManager(driverManager.getClass().getTypeName(), driverManager);
     } else {
@@ -252,11 +247,23 @@ public class BaseTestObject implements AutoCloseable {
   }
 
   /**
+   * Adds a driver manager to the manager store.
+   *
+   * @param key Key for the new driver
+   * @param driverManager The new driver manager
+   */
+  @Override
+  public void addDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.put(key, driverManager);
+  }
+
+  /**
    * Add driver manager.
    *
    * @param key           the key
    * @param driverManager the driver manager
    */
+  @Override
   public void addDriverManager(final String key, final DriverManager<?> driverManager) {
     this.managerStore.put(key, driverManager);
   }
@@ -276,6 +283,17 @@ public class BaseTestObject implements AutoCloseable {
   }
 
   /**
+   * Override the driver manager.
+   *
+   * @param key the key to be used to search for the driver in the driver manager
+   * @param driverManager The new driver manager
+   */
+  @Override
+  public void overrideDriverManager(String key, IDriverManager<?> driverManager) {
+    this.managerStore.putOrOverride(key, driverManager);
+  }
+
+  /**
    * Add associated file boolean.
    *
    * @param path the path
@@ -285,7 +303,6 @@ public class BaseTestObject implements AutoCloseable {
     if (new File(path).exists()) {
       return this.associatedFiles.add(path);
     }
-
     return false;
   }
 
@@ -312,7 +329,7 @@ public class BaseTestObject implements AutoCloseable {
 
     this.logger.logMessage(MessageType.VERBOSE, "Start dispose");
 
-    for (final DriverManager<?> singleDriver : this.managerStore.values()) {
+    for (final IDriverManager<?> singleDriver : this.managerStore.values()) {
       if (singleDriver != null) {
         try {
           singleDriver.close();
@@ -354,5 +371,25 @@ public class BaseTestObject implements AutoCloseable {
    */
   public boolean containsAssociatedFile(final String path) {
     return this.associatedFiles.contains(path);
+  }
+
+  /**
+   * Gets if the test object is closed.
+   *
+   * @return if the test object is closed
+   */
+  @Override
+  public boolean getIsClosed() {
+    return this.isClosed;
+  }
+
+  /**
+   * Gets the associated files.
+   *
+   * @return a list of associated files
+   */
+  @Override
+  public List<String> getAssociatedFiles() {
+    return this.associatedFiles;
   }
 }

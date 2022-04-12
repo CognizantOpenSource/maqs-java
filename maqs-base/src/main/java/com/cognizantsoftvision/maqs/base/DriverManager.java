@@ -4,19 +4,19 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import java.util.function.Supplier;
 
 /**
  * The type Driver manager.
  * @param <T>  Manager of type T
  */
-public abstract class DriverManager<T> implements AutoCloseable {
+public abstract class DriverManager<T> implements IDriverManager<T> {
 
   /**
    * Base Test Object.
    */
-  private final BaseTestObject baseTestObject;
+  private final ITestObject testObject;
 
   /**
    * The Base driver.
@@ -32,10 +32,10 @@ public abstract class DriverManager<T> implements AutoCloseable {
    * Instantiates a new Driver manager.
    *
    * @param getDriverFunction driver function supplier
-   * @param baseTestObject    the base test object
+   * @param testObject    the base test object
    */
-  public DriverManager(Supplier<T> getDriverFunction, BaseTestObject baseTestObject) {
-    this.baseTestObject = baseTestObject;
+  protected DriverManager(Supplier<T> getDriverFunction, ITestObject testObject) {
+    this.testObject = testObject;
     this.getDriverSupplier = getDriverFunction;
   }
 
@@ -71,8 +71,8 @@ public abstract class DriverManager<T> implements AutoCloseable {
    *
    * @return the logger
    */
-  public Logger getLogger() {
-    return this.baseTestObject.getLogger();
+  public ILogger getLogger() {
+    return this.testObject.getLogger();
   }
 
   /**
@@ -93,7 +93,7 @@ public abstract class DriverManager<T> implements AutoCloseable {
    *
    * @return the test object
    */
-  public BaseTestObject getTestObject() {
-    return baseTestObject;
+  public ITestObject getTestObject() {
+    return testObject;
   }
 }

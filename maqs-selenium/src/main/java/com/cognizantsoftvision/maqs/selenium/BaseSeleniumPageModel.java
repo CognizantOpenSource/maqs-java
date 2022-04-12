@@ -5,8 +5,8 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
+import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import java.util.HashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -47,7 +47,7 @@ public abstract class BaseSeleniumPageModel {
    *
    * @return the logger
    */
-  protected Logger getLogger() {
+  protected ILogger getLogger() {
     return this.testObject.getLogger();
   }
 
@@ -92,7 +92,7 @@ public abstract class BaseSeleniumPageModel {
    *
    * @return The perf timer colection
    */
-  public PerfTimerCollection getPerfTimerCollection() {
+  public IPerfTimerCollection getPerfTimerCollection() {
     return this.testObject.getPerfTimerCollection();
   }
 

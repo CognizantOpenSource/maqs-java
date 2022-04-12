@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Driver manager dictionary.
  */
-public class ManagerDictionary extends HashMap<String, DriverManager<?>> implements AutoCloseable {
+public class ManagerStore extends HashMap<String, IDriverManager<?>> implements IManagerStore {
 
   @Override
   public void close() {
@@ -20,7 +20,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
 
   @Override
   public void clear() {
-    for (Map.Entry<String, DriverManager<?>> entry : this.entrySet()) {
+    for (Map.Entry<String, IDriverManager<?>> entry : this.entrySet()) {
       try {
         entry.getValue().close();
       } catch (Exception e) {
@@ -38,7 +38,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
    * @return the driver
    */
   @SuppressWarnings("unchecked")
-  public <T extends Object> T getDriver(String key) {
+  public <T> T getDriver(String key) {
     return (T) this.get(key);
   }
 
@@ -47,7 +47,8 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
    *
    * @param driverManager the driver manager
    */
-  public void put(DriverManager<?> driverManager) {
+  @Override
+  public void put(IDriverManager<?> driverManager) {
     this.put(driverManager.getClass().getName(), driverManager);
   }
 
@@ -56,7 +57,8 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
    *
    * @param driverManager the driver manager
    */
-  public void putOrOverride(DriverManager<?> driverManager) {
+  @Override
+  public void putOrOverride(IDriverManager<?> driverManager) {
     this.putOrOverride(driverManager.getClass().getName(), driverManager);
   }
 
@@ -66,9 +68,15 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
    * @param key           the key
    * @param driverManager the driver manager
    */
-  public void putOrOverride(String key, DriverManager<?> driverManager) {
+  @Override
+  public void putOrOverride(String key, IDriverManager<?> driverManager) {
     this.remove(key);
     this.put(key, driverManager);
+  }
+
+  @Override
+  public IDriverManager<?> getManager(String key) {
+    return this.get(key);
   }
 
   /**
@@ -85,9 +93,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
         throw new ManagerDisposalException(e);
       }
     }
-
     super.remove(key);
     return !this.containsKey(key);
-
   }
 }

@@ -6,7 +6,7 @@ package com.cognizantsoftvision.maqs.accessibility;
 
 import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.deque.html.axecore.results.AxeRuntimeException;
 import com.deque.html.axecore.results.Results;
@@ -52,7 +52,7 @@ public class AccessibilityUtilities {
    * @param logger Where you want the check logged to
    * @param throwOnViolation Should violations cause and exception to be thrown
    */
-  public static void checkAccessibility(WebDriver webDriver, Logger logger, boolean throwOnViolation) {
+  public static void checkAccessibility(WebDriver webDriver, ILogger logger, boolean throwOnViolation) {
     MessageType type = logger.getLoggingLevel();
 
     // Look at passed
@@ -85,7 +85,7 @@ public class AccessibilityUtilities {
    *                     this gets used if the check doesn't throw an exception
    * @param throwOnResults Throw error if any results are found
    */
-  public static void checkAccessibility(WebDriver webDriver, Logger logger, String checkType,
+  public static void checkAccessibility(WebDriver webDriver, ILogger logger, String checkType,
       Supplier<List<Rule>> getResults, MessageType loggingLevel, boolean throwOnResults) {
     logger.logMessage(MessageType.INFORMATION, "Running accessibility check");
 
@@ -103,7 +103,7 @@ public class AccessibilityUtilities {
    * @param loggingLevel What level should the logging check take,
    *                     this gets used if the check doesn't throw an exception
    */
-  public static void checkAccessibilityPasses(WebDriver webDriver, Logger logger, MessageType loggingLevel) {
+  public static void checkAccessibilityPasses(WebDriver webDriver, ILogger logger, MessageType loggingLevel) {
     checkAccessibility(webDriver, logger, ResultType.Passes.getKey(),
         () -> new AxeBuilder().analyze(webDriver).getPasses(), loggingLevel, false);
   }
@@ -116,7 +116,7 @@ public class AccessibilityUtilities {
    *                     this gets used if the check doesn't throw an exception
    * @param throwOnInapplicable Should inapplicable cause an exception to be thrown
    */
-  public static void checkAccessibilityInapplicable(WebDriver webDriver, Logger logger,
+  public static void checkAccessibilityInapplicable(WebDriver webDriver, ILogger logger,
       MessageType loggingLevel, boolean throwOnInapplicable) {
     checkAccessibility(webDriver, logger, ResultType.Inapplicable.getKey(),
         () -> new AxeBuilder().analyze(webDriver).getInapplicable(), loggingLevel, throwOnInapplicable);
@@ -130,7 +130,7 @@ public class AccessibilityUtilities {
    *                     this gets used if the check doesn't throw an exception
    * @param throwOnIncomplete Should incomplete cause an exception to be thrown
    */
-  public static void checkAccessibilityIncomplete(WebDriver webDriver, Logger logger,
+  public static void checkAccessibilityIncomplete(WebDriver webDriver, ILogger logger,
       MessageType loggingLevel, boolean throwOnIncomplete) {
     checkAccessibility(webDriver, logger, ResultType.Incomplete.getKey(),
         () -> new AxeBuilder().analyze(webDriver).getIncomplete(), loggingLevel, throwOnIncomplete);
@@ -144,7 +144,7 @@ public class AccessibilityUtilities {
    *                     this gets used if the check doesn't throw an exception
    * @param throwOnViolation Should violations cause an exception to be thrown
    */
-  public static void checkAccessibilityViolations(WebDriver webDriver, Logger logger,
+  public static void checkAccessibilityViolations(WebDriver webDriver, ILogger logger,
       MessageType loggingLevel, boolean throwOnViolation) {
     checkAccessibility(webDriver, logger, ResultType.Violations.getKey(),
         () -> new AxeBuilder().analyze(webDriver).getViolations(), loggingLevel, throwOnViolation);
