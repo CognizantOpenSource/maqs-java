@@ -90,6 +90,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Label Pull Request
-        uses: actions/labeler@v3
+        uses: actions/labeler@v4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
