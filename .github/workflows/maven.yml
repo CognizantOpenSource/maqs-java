@@ -157,11 +157,12 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: ${{github.workspace}}/artifacts/
-      - name: Set up JDK
+      - name: Set up JDK 11
         uses: actions/setup-java@v3.1.1
         with:
-          distribution: openjdk
+          distribution: zulu
           java-version: 11
+          cache: maven
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
         with:
@@ -197,8 +198,9 @@ jobs:
       - name: Set up JDK 11
         uses: actions/setup-java@v3.1.1
         with:
-          distribution: openjdk
+          distribution: zulu
           java-version: 11
+          cache: maven
       - name: Restore Local Maven Cache
         uses: actions/cache@v3.0.2
         with:
