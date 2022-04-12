@@ -7,10 +7,9 @@ package com.cognizantsoftvision.maqs.playwright;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-
-import java.util.*;
-
-import org.apache.commons.collections.map.HashedMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -77,7 +76,6 @@ public class ConfigUnitTest {
       Config.addTestSettingValues(Collections.singletonMap("Browser", browser.name()), ConfigSection.PLAYWRIGHT_MAQS, true);
       Assert.assertEquals(browser, PlaywrightConfig.getBrowserType());
     }
-
   }
 
   /**
