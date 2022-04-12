@@ -508,7 +508,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc);
     this.getPageDriver().reload();
     this.getPageDriver().evaluate("changeMainHeaderName();");
-    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
+    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NewName");
   }
 
   /**
@@ -518,7 +518,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   public void addScriptTagTest() {
     this.getPageDriver().addScriptTag(new Page.AddScriptTagOptions().setContent(elementPageModel.renameHeaderFunc));
     this.getPageDriver().evaluate("changeMainHeaderName();");
-    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
+    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NewName");
   }
 
   /**

@@ -56,20 +56,15 @@ public class PlaywrightConfig {
    * @return The browser type
    */
   public static PlaywrightBrowser getBrowserType(String browserName) {
-    switch (browserName.toUpperCase()) {
-      case "CHROME":
-        return PlaywrightBrowser.CHROME;
-      case "CHROMIUM":
-        return PlaywrightBrowser.CHROMIUM;
-      case "FIREFOX":
-        return PlaywrightBrowser.FIREFOX;
-      case "EDGE":
-        return PlaywrightBrowser.EDGE;
-      case "WEBKIT":
-        return PlaywrightBrowser.WEBKIT;
-      default:
-        throw new IllegalArgumentException("Browser type '" + browserName + "' is not supported");
-    }
+    return switch (browserName.toUpperCase()) {
+      case "CHROME" -> PlaywrightBrowser.CHROME;
+      case "CHROMIUM" -> PlaywrightBrowser.CHROMIUM;
+      case "FIREFOX" -> PlaywrightBrowser.FIREFOX;
+      case "EDGE" -> PlaywrightBrowser.EDGE;
+      case "WEBKIT" -> PlaywrightBrowser.WEBKIT;
+      default -> throw new IllegalArgumentException(
+          "Browser type '" + browserName + "' is not supported");
+    };
   }
 
   /**

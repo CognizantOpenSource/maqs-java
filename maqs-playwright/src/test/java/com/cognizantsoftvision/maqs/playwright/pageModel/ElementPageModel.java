@@ -18,7 +18,7 @@ public class ElementPageModel {
    * Rename header Javascript function.
    */
   // TODO:
-  public final String renameHeaderFunc = "function changeMainHeaderName() document.querySelector('H2').innerHTML = 'NEWNAME';}";
+  public final String renameHeaderFunc = "function changeMainHeaderName() document.querySelector('H2').innerHTML = 'NewName'}";
 
   /**
    * Should dialog button selector

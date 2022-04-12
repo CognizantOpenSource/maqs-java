@@ -40,20 +40,13 @@ public class PageDriverFactory {
    */
   public static Browser getBrowserWithDefaults(PlaywrightBrowser browser) {
     Playwright playwright = Playwright.create();
-    
-    switch (browser) {
-      case CHROMIUM:
-      case CHROME:
-        return getChromiumBasedBrowser(playwright, getDefaultChromeOptions());
-      case EDGE:
-        return getChromiumBasedBrowser(playwright, getDefaultEdgeOptions());
-      case FIREFOX:
-        return getFirefoxBasedBrowser(playwright, getDefaultOptions());
-      case WEBKIT:
-        return getWebkitBasedBrowser(playwright, getDefaultOptions());
-      default:
-        throw new IllegalArgumentException("Browser type '" + browser + "' is not supported");
-    }
+
+    return switch (browser) {
+      case CHROMIUM, CHROME -> getChromiumBasedBrowser(playwright, getDefaultChromeOptions());
+      case EDGE -> getChromiumBasedBrowser(playwright, getDefaultEdgeOptions());
+      case FIREFOX -> getFirefoxBasedBrowser(playwright, getDefaultOptions());
+      case WEBKIT -> getWebkitBasedBrowser(playwright, getDefaultOptions());
+    };
   }
 
   /**

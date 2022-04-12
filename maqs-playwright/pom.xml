@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.cognizantsoftvision.maqs.playwright</groupId>
-    <artifactId>maqs-playright</artifactId>
+    <artifactId>maqs-playwright</artifactId>
     <name>MAQS Playwright Testing Module</name>
     <version>${revision}</version>
 
