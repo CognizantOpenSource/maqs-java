@@ -175,7 +175,7 @@ jobs:
 #          key: ${{ runner.os }}-sonar
 #          restore-keys: ${{ runner.os }}-sonar
       - name: Restore Local Maven Cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-maven-${{github.sha}}.${{github.run_number}}
@@ -199,7 +199,7 @@ jobs:
         with:
           java-version: 11
       - name: Restore Local Maven Cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.2
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
