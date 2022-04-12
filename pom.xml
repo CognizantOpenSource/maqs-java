@@ -179,6 +179,7 @@
             <id>sonar</id>
             <properties>
                 <maven.test.skip>true</maven.test.skip>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
             </properties>
             <build>
                 <plugins>
