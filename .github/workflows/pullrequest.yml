@@ -24,19 +24,38 @@ jobs:
           path: ~/.m2
           key: ${{runner.os}}-m2
       - name: Build the docker-compose stack
-        run: docker-compose -f docker/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
+        run: docker-compose -f docker/MAQSSQLServer/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: |
+            3.1.x
+            6.x.x
+      - name: Start test service
+        run: Start-Process -FilePath "dotnet" -ArgumentList "run --project docker/MAQSService/MainTestService/MainTestService.csproj"
+        shell: pwsh
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
         with:
-          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
-      - name: Run Unit Tests
-        uses: GabrielBB/xvfb-action@v1.5
-        with:
-          run: mvn -B -Dtesting verify package --file pom.xml -e -fae -T 1C -Djdk.version=${{matrix.jdk}}
+          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"cognizantopensource", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_TOKEN}}" }}]'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Run SonarCloud Analysis
-        run: mvn -Psonar -B sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B  -P integration-test -Dtesting verify package --file pom.xml -e -fae -T 1C -Djdk.version=${{matrix.jdk}}  org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CognizantOpenSource_maqs-java
       - name: Publish Unit Test Results Report
         uses: scacap/action-surefire-report@v1
         if: ${{ always() }}

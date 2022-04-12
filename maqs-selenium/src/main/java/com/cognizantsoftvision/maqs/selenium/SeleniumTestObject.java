@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
-import com.cognizantsoftvision.maqs.base.exceptions.JMAQSRuntimeException;
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.util.function.Supplier;
@@ -64,7 +64,6 @@ public class SeleniumTestObject extends BaseTestObject {
    * Sets web driver.
    *
    * @param driver the driver
-   * @throws Exception exception
    */
   public void setWebDriver(WebDriver driver) {
 
@@ -75,7 +74,7 @@ public class SeleniumTestObject extends BaseTestObject {
         this.getManagerStore().remove(name);
       } catch (Exception e) {
         getLogger().logMessage(MessageType.ERROR, "Failed to remove DriverManager: %s", e.getMessage());
-        throw new JMAQSRuntimeException(e.getMessage(), e);
+        throw new MAQSRuntimeException(e.getMessage(), e);
       }
 
     }
