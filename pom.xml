@@ -11,38 +11,36 @@
         automation efforts
     </description>
     <packaging>pom</packaging>
-    <url>https://github.com/Magenic/JMAQS</url>
+    <url>https://github.com/CognizantOpenSource/maqs-java</url>
     <inceptionYear>2017</inceptionYear>
     <organization>
-        <name>Magenic Technologies</name>
-        <url>https://www.magenic.com</url>
+        <name>Cognizant Softvision</name>
+        <url>https://www.cognizantsoftvision.com/</url>
     </organization>
-
     <developers>
         <developer>
-            <organization>Magenic Technologies</organization>
-            <organizationUrl>https://www.magenic.com</organizationUrl>
+            <organization>Cognizant Softvision</organization>
+            <organizationUrl>https://www.cognizantsoftvision.com/</organizationUrl>
         </developer>
     </developers>
-
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/Magenic/JMAQS/issues</url>
+        <url>https://github.com/CognizantOpenSource/maqs-java/issues</url>
     </issueManagement>
     <ciManagement>
         <system>GitHub Actions</system>
-        <url>https://github.com/Magenic/JMAQS/actions</url>
+        <url>https://github.com/CognizantOpenSource/maqs-java/actions</url>
     </ciManagement>
     <licenses>
         <license>
             <name>MIT</name>
-            <url>https://github.com/Magenic/JMAQS/blob/master/LICENSE</url>
+            <url>https://github.com/CognizantOpenSource/maqs-java/blob/main/LICENSE</url>
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git://github.com/Magenic/JMAQS.git</connection>
-        <developerConnection>scm:git:git@github.com:Magenic/JMAQS.git</developerConnection>
-        <url>https://github.com/Magenic/JMAQS</url>
+        <connection>scm:git:git://github.com/CognizantOpenSource/maqs-java.git</connection>
+        <developerConnection>scm:git:git@github.com:CognizantOpenSource/maqs-java.git</developerConnection>
+        <url>https://github.com/CognizantOpenSource/maqs-java</url>
         <tag>HEAD</tag>
     </scm>
 
