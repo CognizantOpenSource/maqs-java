@@ -92,7 +92,8 @@ jobs:
       buildNumber: ${{ steps.ver.outputs.BUILD_NUMBER }}
     steps:
       - uses: actions/checkout@v2
-      - id: builder
+      - name: Preload packages into cache
+        id: builder
         uses: ./.github/workflows/preinstall-action
         with:
           bt-param: '-fae -B -e -T 1C -Psonar'
