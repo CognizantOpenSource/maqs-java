@@ -160,7 +160,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3.1.1
         with:
-          distribution: zulu
+          distribution: jdk
           java-version: 11
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
