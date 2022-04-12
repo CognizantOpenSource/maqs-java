@@ -62,7 +62,7 @@ public abstract class BasePlaywrightPageModel {
    * @return the logger
    */
   public ILogger getLogger() {
-    return this.log;
+    return this.getTestObject().getLogger();
   }
 
   /**
@@ -75,7 +75,7 @@ public abstract class BasePlaywrightPageModel {
    * @return the perf timer collection
    */
   public IPerfTimerCollection getPerfTimerCollection() {
-    return this.perfTimerCollection;
+    return this.getTestObject().getPerfTimerCollection();
   }
 
   /**
@@ -95,7 +95,7 @@ public abstract class BasePlaywrightPageModel {
    * Sets the Playwright test object.
    * @param testObject the playwright test object
    */
-  public void setTestObject(IPlaywrightTestObject testObject) {
+  protected void setTestObject(IPlaywrightTestObject testObject) {
     this.testObject = testObject;
   }
 

@@ -29,6 +29,6 @@ public abstract class BaseGenericStep implements IBaseGenericStep {
    * @return The generic test object
    */
   public BaseTestObject getTestObject() {
-    return ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseTest.class).getTestObject();
+    return (BaseTestObject) ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseTest.class).getTestObject();
   }
 }

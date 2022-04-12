@@ -6,8 +6,6 @@ package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.base.DriverManager;
 import com.cognizantsoftvision.maqs.base.ITestObject;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.util.function.Supplier;
 
@@ -16,15 +14,7 @@ import java.util.function.Supplier;
  */
 public class PageDriverManager extends DriverManager<PageDriver> {
 
-  /**
-   * Initializes a new instance of the PlaywrightDriverManager class.
-   *
-   * @param getDriver Function for getting a Playwright page
-   * @param testObject The associated test object
-   */
-  public PageDriverManager(PageDriver getDriver, ITestObject testObject) {
-    super(() -> new PageDriver(getDriver.getAsyncPage()), testObject);
-  }
+  private PageDriver pageDriver;
 
   /**
    * Instantiates a new Driver manager.
@@ -57,22 +47,28 @@ public class PageDriverManager extends DriverManager<PageDriver> {
    * @return The page driver
    */
   public PageDriver getPageDriver() {
-    PageDriver tempDriver;
-
-    if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-      tempDriver = getBaseDriver();
-      this.setBaseDriver(tempDriver);
-
-      // Log the setup
-      this.loggingStartup(tempDriver);
+    if (this.pageDriver == null) {
+      this.pageDriver = new PageDriver(getBase().getAsyncPage());
     }
 
-    tempDriver = getBase();
+    return this.pageDriver;
 
-    if (tempDriver == null) {
-      throw new NullPointerException("Base driver is null");
-    }
-    return tempDriver;
+//    PageDriver tempDriver;
+//
+//    if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
+//      tempDriver = getBaseDriver();
+//      this.setBaseDriver(tempDriver);
+//
+//      // Log the setup
+//      this.loggingStartup(tempDriver);
+//    }
+//
+//    tempDriver = getBase();
+//
+//    if (tempDriver == null) {
+//      throw new NullPointerException("Base driver is null");
+//    }
+//    return tempDriver;
   }
 
   /**

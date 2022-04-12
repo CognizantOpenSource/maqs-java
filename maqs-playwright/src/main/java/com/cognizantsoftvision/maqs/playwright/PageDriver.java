@@ -56,11 +56,35 @@ public class PageDriver {
   }
 
   /**
+   * gets the parent browser.
+   * @return the parent browser
+   */
+  public Browser getParentBrowser() {
+    return this.asyncPage.context().browser();
+  }
+
+  /**
    * adds an init script.
    * @param script the script to be added
    */
   public void addInitScript(String script) {
     this.asyncPage.addInitScript(script);
+  }
+
+  /**
+   * gets the page url.
+   * @return the url string
+   */
+  public String getUrl() {
+    return this.asyncPage.url();
+  }
+
+  /**
+   * checks if the page is closed.
+   * @return true if the page is closed
+   */
+  public boolean isClosed() {
+    return this.asyncPage.isClosed();
   }
 
   /**
@@ -1146,13 +1170,5 @@ public class PageDriver {
    */
   public Response reload(Page.ReloadOptions options) {
     return this.asyncPage.reload(options);
-  }
-
-  /**
-   * gets the parent browser.
-   * @return the parent browser
-   */
-  public Browser getParentBrowser() {
-    return this.asyncPage.context().browser();
   }
 }

@@ -12,8 +12,8 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.Tracing;
-import com.microsoft.playwright.options.Proxy;
 import com.microsoft.playwright.options.ViewportSize;
+import java.awt.Dimension;
 import java.io.File;
 
 /**
@@ -75,8 +75,8 @@ public class PageDriverFactory {
     BrowserContext context;
 
     // Get resolution
-    ViewportSize size = new ViewportSize(
-        PlaywrightConfig.getBrowserSize().width, PlaywrightConfig.getBrowserSize().height);
+    Dimension resolution = PlaywrightConfig.getBrowserSize();
+    ViewportSize size = new ViewportSize(resolution.width, resolution.height);
 
     // Default to the first context, if at least one context exists
     if (!browser.contexts().isEmpty()) {
@@ -179,7 +179,7 @@ public class PageDriverFactory {
     // Check if we should add proxy
     if (PlaywrightConfig.getUseProxy()) {
       BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
-      options.proxy = new Proxy(PlaywrightConfig.getProxyAddress());
+      options.proxy.server = PlaywrightConfig.getProxyAddress();
       options.headless = PlaywrightConfig.getHeadless();
       options.timeout = PlaywrightConfig.getCommandTimeout();
       return options;

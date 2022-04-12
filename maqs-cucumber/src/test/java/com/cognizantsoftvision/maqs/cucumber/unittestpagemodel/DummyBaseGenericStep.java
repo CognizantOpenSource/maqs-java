@@ -10,4 +10,5 @@ import com.cognizantsoftvision.maqs.cucumber.steps.BaseGenericStep;
  * A Dummy DummyBaseGenericStep class for testing
  */
 public class DummyBaseGenericStep extends BaseGenericStep {
+
 }

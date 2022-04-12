@@ -28,7 +28,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
    * Set up the page for each test class
    */
   public BasePlaywrightTest() {
-    // TODO document why this constructor is empty
+    // Empty class setup
   }
 
   /**
@@ -48,20 +48,12 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
   }
 
   /**
-   * The default get page function.
-   * @return the page driver
-   */
-  protected PageDriver getBrowser() {
-    return PageDriverFactory.getDefaultPageDriver();
-  }
-
-  /**
    * create a new test object.
    * @param log the logger to be set in the new test object
    * @return the playwright test object interface
    */
   protected IPlaywrightTestObject createNewTestObject(ILogger log) {
-    return new PlaywrightTestObject(this::getBrowser, log, this.getFullyQualifiedTestClassName());
+    return new PlaywrightTestObject(this::getPageDriver, log, this.getFullyQualifiedTestClassName());
   }
 
   /**

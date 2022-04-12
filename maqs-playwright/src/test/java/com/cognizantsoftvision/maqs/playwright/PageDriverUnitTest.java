@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -41,7 +42,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /**
    * Sets up the page model.
    */
-  @BeforeTest
+  @BeforeClass
   public void setUp() {
     pageModel = new PageModel(this.getTestObject());
   }
