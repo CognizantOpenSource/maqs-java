@@ -168,12 +168,12 @@ jobs:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{env.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_TOKEN}}" }}]'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-          path: ~\.sonar
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+#      - name: Cache SonarCloud packages
+#        uses: actions/cache@v1
+#        with:
+#          path: ~\.sonar
+#          key: ${{ runner.os }}-sonar
+#          restore-keys: ${{ runner.os }}-sonar
       - name: Restore Local Maven Cache
         uses: actions/cache@v2.1.6
         with:
