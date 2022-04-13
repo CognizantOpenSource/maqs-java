@@ -23,7 +23,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testBaseTestObject1() {
-    final BaseTestObject testObject = this.getTestObject();
+    final ITestObject testObject = this.getTestObject();
 
     // final String methodName = this.method.getName();
     BaseTestObject baseTestObject = new BaseTestObject(testObject.getLogger(), "FakeTestName");
@@ -35,10 +35,9 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testBaseTestObject2() {
-    final BaseTestObject testObject = this.getTestObject();
+    final BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     BaseTestObject baseTestObject = new BaseTestObject(testObject);
     Assert.assertNotNull(baseTestObject, "Checking that Base Test Object instantiated correctly");
-
   }
 
   /**
@@ -46,7 +45,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testSetValue() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final String key = "SetKey";
     final String value = "SetKey Value";
     testObject.setValue(key, value);
@@ -60,7 +59,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void testSetObject() {
 
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final String key = "SetObject";
     final Object object = new Object();
     testObject.setObject(key, object);
@@ -73,7 +72,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetLog() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     Assert.assertNotNull(testObject.getLogger(), "Checking that logger is not null.");
   }
 
@@ -82,7 +81,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testSetLog() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final ILogger logger = this.getLogger();
     testObject.setLogger(logger);
     Assert.assertEquals(testObject.getLogger(), logger, "Checking that logger set correctly.");
@@ -93,7 +92,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetPerfTimerCollectionNotNull() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     Assert.assertNotNull(testObject.getPerfTimerCollection(), "Checking that logger is not null.");
   }
 
@@ -102,7 +101,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testSetPerfTimerCollectionGetSet() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final PerfTimerCollection perfTimerCollection = new PerfTimerCollection(testObject.getLogger(), "FakeTestName");
     testObject.setPerfTimerCollection(perfTimerCollection);
     Assert.assertEquals(testObject.getPerfTimerCollection(), perfTimerCollection,
@@ -114,7 +113,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetValues() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     Assert.assertNotNull(testObject.getValues(), "Checking that values is not null.");
   }
 
@@ -123,7 +122,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetObjects() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     Assert.assertNotNull(testObject.getObjects(), "Checking that objects is not null.");
   }
 
@@ -132,7 +131,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetManagerStoreNotNull() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     Assert.assertNotNull(testObject.getManagerStore(), "Checking that objects is not null.");
   }
 
@@ -141,7 +140,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testAddDriverManager() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final Supplier<String> supplier = () -> null;
     DriverManager<String> driverManager = getDriverManager(testObject, supplier);
     Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
@@ -155,7 +154,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testAddDriverManagerTrue() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final Supplier<String> supplier = () -> null;
     final DriverManager<String> driverManager = getDriverManager(testObject, supplier);
     final DriverManager<String> driverManager2 = getDriverManager(testObject, supplier);
@@ -171,7 +170,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testAddDriverManagerFalse() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final Supplier<String> supplier = () -> null;
     final DriverManager<String> driverManager = getDriverManager(testObject, supplier);
 
@@ -185,7 +184,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testAddDriverManager2() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final Supplier<String> supplier = () -> null;
     final DriverManager<String> driverManager = getDriverManager(testObject, supplier);
     final String key = "DriverManager1";
@@ -200,7 +199,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testClose() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final Supplier<String> supplier = () -> null;
     final DriverManager<String> driverManager = getDriverManager(testObject, supplier);
     final String key = "DriverManager1";
@@ -216,7 +215,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testAddAssociatedFile() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     File temp = null;
     try {
       temp = File.createTempFile("tempfile", ".tmp");
@@ -235,7 +234,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testRemoveAssociatedFile() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     File temp = null;
     try {
       temp = File.createTempFile("tempfile", ".tmp");
@@ -254,7 +253,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetArrayOfAssociatedFiles() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     File temp = null;
     try {
       temp = File.createTempFile("tempfile", ".tmp");
@@ -273,7 +272,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testContainsAssociatedFile() {
-    BaseTestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     File temp = null;
     try {
       temp = File.createTempFile("tempfile", ".tmp");
