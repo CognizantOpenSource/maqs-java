@@ -30,6 +30,6 @@ devops:
   - .github/*
   - .github/**/*
  
- accessibility:
+accessibility:
   - maqs-accessibility/*
   - maqs-accessibility/**/*
