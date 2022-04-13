@@ -146,7 +146,7 @@ jobs:
     needs: [test-modules, getVersion]
     env:
       SONAR_ORG: "cognizantopensource"
-      SONAR_PROJECT: "cognizantopensource_maqs-java"
+      SONAR_PROJECT: "CognizantOpenSource_maqs-java"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
       VERSION: ${{ needs.getVersion.outputs.buildNumber }}
