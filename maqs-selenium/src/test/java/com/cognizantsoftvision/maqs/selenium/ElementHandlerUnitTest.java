@@ -112,7 +112,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     String expectedSelection = "Emily";
     AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectDropDownOption(getWebDriver(), automationPageModel.nameDropdown, expectedSelection);
-    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), automationPageModel.nameDropdown);
+    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(),
+        automationPageModel.nameDropdown);
     verifyText(actualSelection, expectedSelection);
   }
 
@@ -125,7 +126,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     String expectedSelection = "Jack";
     AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectDropDownOptionByValue(getWebDriver(), automationPageModel.nameDropdown, "two");
-    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), automationPageModel.nameDropdown);
+    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(),
+        automationPageModel.nameDropdown);
     verifyText(actualSelection, expectedSelection);
   }
 
@@ -142,7 +144,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("Keyboard");
 
     AutomationPageModel automationPageModel = navigateToUrl();
-    ElementHandler.selectMultipleElementsFromListBox(getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
+    ElementHandler.selectMultipleElementsFromListBox(getWebDriver(), automationPageModel.computerPartsList,
+        itemsToSelect);
     ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(
         getWebDriver(), automationPageModel.computerPartsList);
     ListProcessor.listOfStringsComparer(itemsToSelect, selectedItems, results, false);
@@ -164,7 +167,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("five");
 
     AutomationPageModel automationPageModel = navigateToUrl();
-    ElementHandler.selectMultipleElementsFromListBoxByValue(getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
+    ElementHandler.selectMultipleElementsFromListBoxByValue(
+        getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
     ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(
         getWebDriver(), automationPageModel.computerPartsList);
 
