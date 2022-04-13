@@ -45,9 +45,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserName() {
-
     String driverName = SeleniumConfig.getBrowserName();
-
     Assert.assertTrue(driverName.equalsIgnoreCase("HEADLESSCHROME"));
   }
 
@@ -56,10 +54,9 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWebsiteBase() {
-
     String website = SeleniumConfig.getWebSiteBase();
-
-    Assert.assertTrue(website.equalsIgnoreCase("http://magenicautomation.azurewebsites.net/"));
+    Assert.assertTrue(website.equalsIgnoreCase(
+        "https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/"));
   }
 
   /**
@@ -67,9 +64,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getHubUrl() {
-
     String hubUrl = SeleniumConfig.getHubUrl();
-
     Assert.assertTrue(hubUrl.equalsIgnoreCase("http://ondemand.saucelabs.com:80/wd/hub"));
   }
 
@@ -78,9 +73,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM, enabled = false)
   public void getDriverHintPath() {
-
     String path = SeleniumConfig.getDriverHintPath();
-
     Assert.assertEquals(path, "./src/test/resources/drivers");
   }
 
@@ -89,9 +82,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteBrowserName() {
-
     String browser = SeleniumConfig.getRemoteBrowserName();
-
     Assert.assertEquals(browser, "Chrome");
   }
 
@@ -100,9 +91,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemotePlatform() {
-
     String platform = SeleniumConfig.getRemotePlatform();
-
     Assert.assertEquals(platform, "OS X 10.11");
   }
 
@@ -111,9 +100,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteBrowserVersion() {
-
     String version = SeleniumConfig.getRemoteBrowserVersion();
-
     Assert.assertEquals(version, "54.0");
   }
 
@@ -165,7 +152,6 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getSavePagesourceOnFail() {
     boolean value = SeleniumConfig.getSavePagesourceOnFail();
-
     Assert.assertTrue(value);
   }
 
@@ -175,7 +161,6 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getSoftAssertScreenshot() {
     boolean value = SeleniumConfig.getSoftAssertScreenshot();
-
     Assert.assertTrue(value);
   }
 
@@ -185,7 +170,6 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getWaitTime() {
     Duration value = SeleniumConfig.getWaitTime();
-
     Assert.assertEquals(value.toMillis(), 1000);
   }
 
@@ -195,7 +179,6 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getTimeoutTime() {
     Duration value = SeleniumConfig.getTimeoutTime();
-
     Assert.assertEquals(value.toMillis(), 20000);
   }
 
@@ -205,7 +188,6 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserSize() {
     String value = SeleniumConfig.getBrowserSize();
-
     Assert.assertNotNull(value);
   }
 

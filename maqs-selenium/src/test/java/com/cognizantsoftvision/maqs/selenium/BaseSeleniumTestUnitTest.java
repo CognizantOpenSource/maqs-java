@@ -68,6 +68,7 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
   @Test(dataProvider = "data", groups = TestCategories.SELENIUM)
   public void testUpcastingToSeleniumTestObjectAfterDataProviderIteration(String data) {
     Assert.assertNotNull(data);
+    Assert.assertNotNull(this.getTestObject());
     Assert.assertTrue(this.getTestObject() instanceof SeleniumTestObject);
   }
 }

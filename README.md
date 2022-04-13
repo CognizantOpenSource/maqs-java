@@ -1,4 +1,4 @@
-![JMAQS Logo](https://repository-images.githubusercontent.com/203866145/054b2500-5a6c-11ea-9980-20c7f30a12f8)
+![MAQS Logo](https://repository-images.githubusercontent.com/203866145/054b2500-5a6c-11ea-9980-20c7f30a12f8)
 
 | Check | Status |
 |-------|--------|
@@ -11,21 +11,22 @@
 [![Testing Powered By Sauce Labs](https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-white.png?sanitize=true "Testing Powered By Sauce Labs")](https://saucelabs.com)
 
 ## Introduction 
-JMAQS stands for Magenic's Automation Quick Start - Java Edtion.
+MAQS stands for Modular Automation Quick Start - Java Edition.
 
 It …
  - is a modular test automation framework
  - can be used as the base for your automation project or individual pieces can be used to enhance existing frameworks
- - is maintained/extended by Magenic volunteers
+ - is maintained/extended by Cognizant Softvision volunteers
 
-The main idea behind JMAQS is to avoid **reinventing the wheel**. Most automation engagements have you doing the same basic steps to get a functioning framework implemented. Utilizing project templates, Maven, and utility libraries we are able to have a functioning framework up and running in minutes, almost entirely removing on the initial time investment on implementating an automation solution.
+The main idea behind MAQS is to avoid **reinventing the wheel**. 
+Most automation engagements have you doing the same basic steps to get a functioning framework implemented. 
+Utilizing project templates, Maven, and utility libraries we are able to have a functioning framework up and running in minutes, almost entirely removing on the initial time investment on implementating an automation solution.
 
 ## Documentation
-[JMAQS docs](https://magenic.github.io/JMAQS/#/)
+[MAQS docs](https://github.com/CognizantOpenSource/maqs-java/tree/main/docs/MAQS_1)
 
 ## License
-The MIT License (MIT)
-Copyright (c) 2021 Magenic
+The MIT License (MIT) Copyright (c) 2022 Cognizant
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
