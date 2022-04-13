@@ -22,14 +22,22 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Accessibility Unit Tests.
+ * THe Accessibility Unit test class.
  */
 public class AccessibilityUnitTest extends BaseSeleniumTest {
 
   /**
-   * Unit testing site URL - Login page.
+   * Unit testing accessibility site URL - Login page.
    */
-  private static final String TestSiteUrl = SeleniumConfig.getWebSiteBase();
+  private static final String testSiteAccessibilityUrl = SeleniumConfig.getWebSiteBase() + "../Training1/LoginPage.html";
+
+  /**
+   * Navigates and sets up the login page for scanning.
+   */
+  public void setup() {
+    this.getWebDriver().navigate().to(testSiteAccessibilityUrl);
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+  }
 
   /**
    * Verify we get verbose message back.
@@ -42,11 +50,10 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     String logContent = Files.lines(Paths.get(filePath),
         StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
 
-    Assert.assertTrue(logContent.contains("Found 20 items"), "Expected to find 20 pass matches.");
-    Assert.assertTrue(logContent.contains("Found 62 items"), "Expected to find 62 inapplicable matches.");
+    Assert.assertTrue(logContent.contains("Found 15 items"), "Expected to find 15 pass matches.");
+    Assert.assertTrue(logContent.contains("Found 66 items"), "Expected to find 66 inapplicable matches.");
     Assert.assertTrue(logContent.contains("Found 6 items"), "Expected to find 6 violations matches.");
-    Assert.assertTrue(logContent.contains("INCOMPLETE check for"), "Expected to find any incomplete matches.");
-
+    Assert.assertTrue(logContent.contains("Found 0 items"), "Expected to find 0 incomplete matches.");
     deleteFile(filePath);
   }
 
@@ -90,8 +97,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
     try {
-      AccessibilityUtilities
-          .checkAccessibilityInapplicable(getTestObject().getWebDriver(), fileLogger, MessageType.WARNING, false);
+      AccessibilityUtilities.checkAccessibilityInapplicable(
+          getTestObject().getWebDriver(), fileLogger, MessageType.WARNING, false);
       String logContent = Files.lines(Paths.get(fileLogger.getFilePath()),
           StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
 
@@ -116,8 +123,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
     try {
-      AccessibilityUtilities
-          .checkAccessibilityIncomplete(getTestObject().getWebDriver(), fileLogger, MessageType.WARNING, false);
+      AccessibilityUtilities.checkAccessibilityIncomplete(
+          getTestObject().getWebDriver(), fileLogger, MessageType.WARNING, false);
       String logContent = Files.lines(Paths.get(fileLogger.getFilePath()),
           StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
 
@@ -217,11 +224,6 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
 
     Assert.assertTrue(messages.contains("TEST check for"), "Expected header.");
     Assert.assertTrue(messages.contains("Found 6 items"), "Expected to find 6 violations matches.");
-  }
-
-  public void setup() {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
   }
 
   private void deleteFile(String filePath) {
