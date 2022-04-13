@@ -13,7 +13,7 @@ import org.bson.Document;
 /**
  * The Mongo Test Object class.
  */
-public class MongoTestObject extends BaseTestObject {
+public class MongoTestObject extends BaseTestObject implements IMongoTestObject {
 
   /**
    * Initializes a new instance of the MongoTestObject class.
@@ -61,13 +61,15 @@ public class MongoTestObject extends BaseTestObject {
    * @param driver New Mongo driver
    */
   public void overrideMongoDBDriver(MongoDBDriver driver) {
-    this.getMongoDBManager().overrideDriver(driver);
+    this.getManagerStore().put(MongoDriverManager.class.getCanonicalName(),
+        new MongoDriverManager(() -> driver, this));
   }
 
   /**
    * Override the Mongo driver a collection function.
    * @param overrideCollectionConnection The collection function
    */
+  @Override
   public void overrideMongoDBDriver(Supplier<MongoCollection<Document>> overrideCollectionConnection) {
     this.getMongoDBManager().overrideDriver(overrideCollectionConnection);
   }

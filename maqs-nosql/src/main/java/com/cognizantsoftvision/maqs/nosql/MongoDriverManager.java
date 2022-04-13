@@ -19,7 +19,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
   /**
    * Cached copy of the connection driver.
    */
-  private MongoDBDriver driver;
+  private MongoDBDriver mongoDBDriver;
 
   /**
    * Initializes a new instance of the MongoDriverManager class.
@@ -43,13 +43,12 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
     super(getCollection, testObject);
   }
 
-
   /**
    * Override the Mongo driver.
    * @param overrideDriver The new Mongo driver
    */
   public void overrideDriver(MongoDBDriver overrideDriver) {
-    driver = overrideDriver;
+    mongoDBDriver = overrideDriver;
     this.setBaseDriver(new MongoDBDriver(overrideDriver.getCollection()));
   }
 
@@ -60,8 +59,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param collectionString Collection string to use
    */
   public void overrideDriver(String connectionString, String databaseString, String collectionString) {
-    driver = null;
-    this.overrideDriverGet(() -> MongoFactory.getCollection(connectionString, databaseString, collectionString));
+    mongoDBDriver = null;
     this.overrideDriverGet(() -> MongoFactory.getCollection(connectionString, databaseString, collectionString));
   }
 
@@ -70,7 +68,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param overrideCollectionConnection The new collection connection
    */
   public void overrideDriver(Supplier<MongoCollection<Document>> overrideCollectionConnection) {
-    driver = null;
+    mongoDBDriver = null;
     this.overrideDriverGet(overrideCollectionConnection);
   }
 
@@ -79,7 +77,11 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @return The Mongo driver
    */
   public MongoDBDriver getMongoDriver() {
-    return this.getBase();
+    // Create default Web Service Driver if null.
+    if (this.mongoDBDriver == null) {
+      this.mongoDBDriver = new MongoDBDriver(getBase().getCollection());
+    }
+    return this.mongoDBDriver;
   }
 
   protected void overrideDriverGet(Supplier<MongoCollection<Document>> driverGet) {
@@ -90,7 +92,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
     if (!this.isDriverInitialized()) {
       return;
     }
-    MongoDBDriver mongoDBDriver = this.getMongoDriver();
+
     mongoDBDriver.getMongoClient().close();
     this.baseDriver = null;
   }

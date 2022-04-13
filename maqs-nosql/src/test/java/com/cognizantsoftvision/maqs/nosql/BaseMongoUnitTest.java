@@ -45,7 +45,8 @@ public class BaseMongoUnitTest extends BaseMongoTest {
   public void testOverrideConnectionDriverWithMongoDBDriver() {
     overrideConnectionDriver(this.getMongoDBDriver());
     Assert.assertNotNull(getMongoDBDriver());
-    overrideConnectionDriver(this.getBaseConnectionString(), this.getBaseDatabaseString(), this.getBaseCollectionString());
+    overrideConnectionDriver(this.getBaseConnectionString(),
+        this.getBaseDatabaseString(), this.getBaseCollectionString());
     Assert.assertNotNull(getMongoDBDriver());
   }
 
