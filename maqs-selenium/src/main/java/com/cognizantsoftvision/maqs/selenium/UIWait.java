@@ -608,8 +608,8 @@ public class UIWait {
    * @param wait      int version of the timeout in seconds
    * @return WebElement of the selector that is found
    */
-  public WebElement waitForAttributeTextEquals(final By by, final String attribute, final String text,
-      WebDriverWait wait) {
+  public WebElement waitForAttributeTextEquals(final By by, final String attribute,
+      final String text, WebDriverWait wait) {
     if (this.waitUntilAttribute(by, attribute, text, wait, false)) {
       return this.driver.findElement(by);
     }
@@ -876,7 +876,6 @@ public class UIWait {
    * @param by The frame locator
    */
   public boolean waitUntilIframeToLoad(By by, WebDriverWait wait) {
-
     try {
       waitForIframeToLoad(by, wait);
       return true;
