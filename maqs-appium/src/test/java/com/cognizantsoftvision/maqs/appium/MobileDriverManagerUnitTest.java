@@ -4,8 +4,6 @@
 
 package com.cognizantsoftvision.maqs.appium;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
-
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;
@@ -15,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * The type Mobile driver manager unit test.
  */
-public class MobileDriverManagerUnitTest extends BaseGenericTest {
+public class MobileDriverManagerUnitTest extends BaseAppiumTest {
   /**
    * Test get mobile driver.
    */
