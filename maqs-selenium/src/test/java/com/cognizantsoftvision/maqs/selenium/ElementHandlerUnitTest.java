@@ -98,12 +98,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getElementAttributeTest() {
     AutomationPageModel automationPageModel = navigateToUrl();
-    automationPageModel.waitForPageLoad();
-
-    String expectedText = automationPageModel.testSiteAutomationUrl + "notError.html";
     String actualText = ElementHandler.getElementAttribute(
-        getWebDriver(), automationPageModel.errorLinkBy, "href");
-    verifyText(actualText, expectedText);
+        this.getWebDriver(), automationPageModel.firstNameTextBox, "type");
+    verifyText(actualText, "text");
   }
 
   /**
@@ -115,7 +112,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     String expectedSelection = "Emily";
     AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectDropDownOption(getWebDriver(), automationPageModel.nameDropdown, expectedSelection);
-    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), automationPageModel.nameDropdown);
+    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(),
+        automationPageModel.nameDropdown);
     verifyText(actualSelection, expectedSelection);
   }
 
@@ -128,7 +126,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     String expectedSelection = "Jack";
     AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectDropDownOptionByValue(getWebDriver(), automationPageModel.nameDropdown, "two");
-    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), automationPageModel.nameDropdown);
+    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(),
+        automationPageModel.nameDropdown);
     verifyText(actualSelection, expectedSelection);
   }
 
@@ -145,7 +144,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("Keyboard");
 
     AutomationPageModel automationPageModel = navigateToUrl();
-    ElementHandler.selectMultipleElementsFromListBox(getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
+    ElementHandler.selectMultipleElementsFromListBox(
+        getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
     ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(
         getWebDriver(), automationPageModel.computerPartsList);
     ListProcessor.listOfStringsComparer(itemsToSelect, selectedItems, results, false);
@@ -167,7 +167,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("five");
 
     AutomationPageModel automationPageModel = navigateToUrl();
-    ElementHandler.selectMultipleElementsFromListBoxByValue(getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
+    ElementHandler.selectMultipleElementsFromListBoxByValue(
+        getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
     ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(
         getWebDriver(), automationPageModel.computerPartsList);
 
@@ -251,8 +252,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void slowTypeTest() {
     AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.slowType(getWebDriver(), automationPageModel.firstNameTextBox, "Test input slow type");
-    Assert.assertEquals(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(
-            automationPageModel.firstNameTextBox).getAttribute("value"), "Test input slow type");
+    Assert.assertEquals(
+        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(automationPageModel.firstNameTextBox)
+            .getAttribute("value"), "Test input slow type");
   }
 
   /**

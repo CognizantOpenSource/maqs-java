@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.appium;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
@@ -18,12 +17,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
  * Appium Utilities Unit Test class.
  */
-public class AppiumUtilitiesUnitTest extends BaseGenericTest {
+@Ignore
+public class AppiumUtilitiesUnitTest extends BaseAppiumTest {
   /**
    * Test capture screenshot no append.
    */

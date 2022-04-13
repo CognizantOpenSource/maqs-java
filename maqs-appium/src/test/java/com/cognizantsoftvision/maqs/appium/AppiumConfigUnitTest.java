@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.appium;
 
 import com.cognizantsoftvision.maqs.appium.constants.PlatformType;
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -19,7 +18,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * The type Appium config unit test.
  */
-public class AppiumConfigUnitTest extends BaseGenericTest {
+public class AppiumConfigUnitTest extends BaseAppiumTest {
 
   /**
    * The Username.

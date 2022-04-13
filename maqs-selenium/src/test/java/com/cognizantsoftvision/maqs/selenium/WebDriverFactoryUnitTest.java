@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.WebDriverFile;
@@ -29,12 +28,12 @@ import org.testng.annotations.Test;
 /**
  * The WebDriverFactory test class.
  */
-public class WebDriverFactoryUnitTest extends BaseGenericTest {
+public class WebDriverFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Tests getting the default browser.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void getDefaultBrowserTest() throws Exception {
+  public void getDefaultBrowserTest() {
     WebDriver driver = null;
     try {
       driver = WebDriverFactory.getDefaultBrowser();

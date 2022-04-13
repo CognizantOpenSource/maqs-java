@@ -11,38 +11,36 @@
         automation efforts
     </description>
     <packaging>pom</packaging>
-    <url>https://github.com/Magenic/JMAQS</url>
+    <url>https://github.com/CognizantOpenSource/maqs-java</url>
     <inceptionYear>2017</inceptionYear>
     <organization>
-        <name>Magenic Technologies</name>
-        <url>https://www.magenic.com</url>
+        <name>Cognizant Softvision</name>
+        <url>https://www.cognizantsoftvision.com/</url>
     </organization>
-
     <developers>
         <developer>
-            <organization>Magenic Technologies</organization>
-            <organizationUrl>https://www.magenic.com</organizationUrl>
+            <organization>Cognizant Softvision</organization>
+            <organizationUrl>https://www.cognizantsoftvision.com/</organizationUrl>
         </developer>
     </developers>
-
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/Magenic/JMAQS/issues</url>
+        <url>https://github.com/CognizantOpenSource/maqs-java/issues</url>
     </issueManagement>
     <ciManagement>
         <system>GitHub Actions</system>
-        <url>https://github.com/Magenic/JMAQS/actions</url>
+        <url>https://github.com/CognizantOpenSource/maqs-java/actions</url>
     </ciManagement>
     <licenses>
         <license>
             <name>MIT</name>
-            <url>https://github.com/Magenic/JMAQS/blob/master/LICENSE</url>
+            <url>https://github.com/CognizantOpenSource/maqs-java/blob/main/LICENSE</url>
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git://github.com/Magenic/JMAQS.git</connection>
-        <developerConnection>scm:git:git@github.com:Magenic/JMAQS.git</developerConnection>
-        <url>https://github.com/Magenic/JMAQS</url>
+        <connection>scm:git:git://github.com/CognizantOpenSource/maqs-java.git</connection>
+        <developerConnection>scm:git:git@github.com:CognizantOpenSource/maqs-java.git</developerConnection>
+        <url>https://github.com/CognizantOpenSource/maqs-java</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -180,9 +178,8 @@
             <id>sonar</id>
             <properties>
                 <maven.test.skip>true</maven.test.skip>
-                <sonar.coverage.jacoco.xmlReportPaths>
-                    ./target/site/jacoco-aggregate/jacoco.xml
-                </sonar.coverage.jacoco.xmlReportPaths>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+                <sonar.organization>cognizantopensource</sonar.organization>
             </properties>
             <build>
                 <plugins>
@@ -212,8 +209,16 @@
                         <version>${jacoco.version}</version>
                         <executions>
                             <execution>
+                                <id>prepare-agent</id>
                                 <goals>
                                     <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>coverage-report</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>report</goal>
                                 </goals>
                             </execution>
                         </executions>
@@ -237,9 +242,15 @@
                         <configuration>
                             <parallel>methods</parallel>
                             <threadCount>5</threadCount>
-                            <!--                            <argLine>${argLine}</argLine>-->
-                            <!--                            <argLine>-javaagent @{maven.dependency.io.github.bonigarcia:webdrivermanager:jar:path}</argLine>-->
+                            <argLine>${argLine}</argLine>
                         </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.maven.surefire</groupId>
+                                <artifactId>surefire-testng</artifactId>
+                                <version>${surefire.plugin.version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -266,8 +277,6 @@
         <chromedriver.version>94.0.4606.41</chromedriver.version>
         <geckodriver.version>0.28.0</geckodriver.version>
         <edgedriver.version>5.16299</edgedriver.version>
-        <sonar.organization>cognizantopensource</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencyManagement>
@@ -276,7 +285,6 @@
                 <groupId>io.github.bonigarcia</groupId>
                 <artifactId>webdrivermanager</artifactId>
                 <version>5.1.0</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.testng</groupId>
@@ -336,6 +344,11 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-remote-driver</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
                 <version>${selenium.version}</version>
             </dependency>
         </dependencies>

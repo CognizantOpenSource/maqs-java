@@ -4,18 +4,11 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import java.io.File;
-import java.nio.file.Paths;
-import java.time.Clock;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,11 +17,17 @@ import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.io.File;
+import java.nio.file.Paths;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * The type Selenium utilities test.
  */
-public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
+public class SeleniumUtilitiesUnitTest extends BaseSeleniumTest {
 
         /**
          * Test capture screenshot no append.

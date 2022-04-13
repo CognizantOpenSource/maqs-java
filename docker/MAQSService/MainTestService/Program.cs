@@ -5,7 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddXmlDataContractSerializerFormatters();
 builder.Services.AddMvc().AddXmlDataContractSerializerFormatters();
 builder.Services.AddMvc().AddXmlSerializerFormatters();
-builder.Services.AddControllersWithViews().AddXmlSerializerFormatters().AddXmlDataContractSerializerFormatters();
+builder.Services.AddControllersWithViews().AddXmlSerializerFormatters()
+    .AddXmlDataContractSerializerFormatters();
 
 
 builder.Services.AddControllers(options => { options.AllowEmptyInputInBodyModelBinding = true; });

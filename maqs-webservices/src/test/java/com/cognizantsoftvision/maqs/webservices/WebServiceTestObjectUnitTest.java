@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -16,14 +15,14 @@ import org.testng.annotations.Test;
 /**
  * The Web Service Test Object unit test class.
  */
-public class WebServiceTestObjectUnitTest extends BaseGenericTest {
+public class WebServiceTestObjectUnitTest extends BaseWebServiceTest {
 
   /**
    * Test object creation with driver.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testWebServiceTestObjectCreationWithDriver() {
-    WebServiceDriver defaultBrowser = getWebServiceDriver();
+    WebServiceDriver defaultBrowser = getWebServiceDriverWithURI();
     WebServiceTestObject testObject = new WebServiceTestObject(
         defaultBrowser, this.getLogger(), this.getFullyQualifiedTestClassName());
     Assert.assertNotNull(testObject, "Checking that the Web service test object via driver is not null");
@@ -45,7 +44,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetWebServiceDriver() {
-    WebServiceDriver testObject = getWebServiceDriver();
+    WebServiceDriver testObject = getWebServiceDriverWithURI();
     Assert.assertNotNull(testObject, "Checking that the Web service test object via driver is null");
   }
 
@@ -54,7 +53,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetWebServiceDriverManager() {
-    WebServiceDriver defaultBrowser = getWebServiceDriver();
+    WebServiceDriver defaultBrowser = getWebServiceDriverWithURI();
     try (WebServiceTestObject testObject = new WebServiceTestObject(
         defaultBrowser, this.getLogger(), this.getFullyQualifiedTestClassName())) {
       Assert.assertNotNull(testObject.getWebServiceDriverManager(),
@@ -67,13 +66,13 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSetWebServiceDriverWithDriver() {
-    WebServiceDriver serviceDriver = getWebServiceDriver();
+    WebServiceDriver serviceDriver = getWebServiceDriverWithURI();
     try (WebServiceTestObject testObject = new WebServiceTestObject(
         serviceDriver, this.getLogger(), this.getFullyQualifiedTestClassName())) {
       testObject.setWebServiceDriver(serviceDriver);
       Assert.assertNotNull(testObject.getWebServiceDriver(), "the web service driver is null");
       int hashCode = testObject.getWebServiceDriver().hashCode();
-      testObject.setWebServiceDriver(getWebServiceDriver());
+      testObject.setWebServiceDriver(getWebServiceDriverWithURI());
       int hashCode1 = testObject.getWebServiceDriver().hashCode();
       Assert.assertNotEquals(hashCode, hashCode1);
     }
@@ -84,7 +83,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSetWebServiceDriverWithHttpClient() {
-    WebServiceDriver serviceDriver = getWebServiceDriver();
+    WebServiceDriver serviceDriver = getWebServiceDriverWithURI();
     HttpClient client = HttpClient.newBuilder().build();
     try (WebServiceTestObject testObject = new WebServiceTestObject(
         serviceDriver, this.getLogger(), this.getFullyQualifiedTestClassName())) {
@@ -128,7 +127,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    *
    * @return a web service driver.
    */
-  private WebServiceDriver getWebServiceDriver() {
+  private WebServiceDriver getWebServiceDriverWithURI() {
     return new WebServiceDriver(HttpRequest.newBuilder(URI.create(WebServiceConfig.getWebServiceUri())));
   }
 }
