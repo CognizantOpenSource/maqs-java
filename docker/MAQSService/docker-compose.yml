@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  webservice:
+    build: .
+    command:
+      - pwsh Start-Process -FilePath "dotnet" -ArgumentList "run --project docker/MAQSService/MainTestService/MainTestService.csproj"
+    restart: always
+    ports:
+      - "5026:5026"
