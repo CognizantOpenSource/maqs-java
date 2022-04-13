@@ -4,24 +4,32 @@
 
 package com.cognizantsoftvision.maqs.webservices.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.math.BigDecimal;
 
+@JsonPropertyOrder({"Id", "Name", "Category", "Price"})
 public class Product {
-    @JacksonXmlProperty(isAttribute = true)
-    private final String xmlns = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models";
 
-    @JsonProperty("Id")
+    @JacksonXmlProperty(isAttribute = true)
+    private final String xmlns = "http://schemas.datacontract.org/2004/07/MainTestService.Models";
+
+    @JsonAlias({"Id", "id"})
+    @JacksonXmlProperty(localName = "Id")
     private int id;
 
-    @JsonProperty("Name")
+    @JacksonXmlProperty(localName = "Name")
+    @JsonAlias({"Name", "name"})
     private String name;
 
-    @JsonProperty("Category")
+    @JacksonXmlProperty(localName = "Category")
+    @JsonAlias({"Category", "category"})
     private String category;
 
-    @JsonProperty("Price")
+    @JacksonXmlProperty(localName = "Price")
+    @JsonAlias({"Price", "price"})
     private BigDecimal price;
 
     public Product(int id, String name, String category, BigDecimal price) {
@@ -31,30 +39,32 @@ public class Product {
         this.price = price;
     }
 
-    public Product() { }
-
-    public int getId() {
-        return id;
+    // Used to populate the product class
+    public Product() {
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public BigDecimal getPrice() {
