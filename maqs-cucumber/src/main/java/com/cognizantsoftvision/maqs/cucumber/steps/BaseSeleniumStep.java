@@ -30,7 +30,8 @@ public class BaseSeleniumStep extends BaseGenericStep {
    */
   @Override
   public SeleniumTestObject getTestObject() {
-    return (SeleniumTestObject) ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseSeleniumTest.class).getTestObject();
+    return (SeleniumTestObject) ScenarioContext.get(
+        ScenarioContext.JMAQS_HOLDER, BaseSeleniumTest.class).getTestObject();
   }
 }
 
