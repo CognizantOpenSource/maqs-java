@@ -1,0 +1,223 @@
+name: MAQS Java Pipeline
+on:
+  schedule:
+    - cron: "13 23 * * *"
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      override:
+        description: 'Version Number'
+        required: true
+        default: '0.0.0'
+
+jobs:
+
+  waitOld:
+    name: Wait For Older Runs To Complete
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait
+        id: wait
+        shell: pwsh
+        run: |
+          $runID = ${{ github.run_id }}
+          $endPoint = "https://api.github.com/repos/${{github.repository}}/actions/runs"
+
+          $timeout = New-TimeSpan -Minutes 60
+          $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+
+          do {
+              $result = Invoke-RestMethod -Uri $endPoint
+              $builds = $result.workflow_runs | Where-Object {$_.name -eq  "Build" -and ($_.status -eq "in_progress" -or $_.status -eq "queued") -and $_.id -lt  $runID}
+
+              # Check if there were any older build runs still going, if not we waited long enough
+              if (!$builds)
+              {
+                Write-Host "Are now top of the run queue"
+                return
+              }
+
+              Start-Sleep -s 60
+              Write-Host "Waited so far $($stopwatch.elapsed)"
+
+          } while ($stopwatch.elapsed -lt $timeout)
+
+           Write-Host "Waited more than an hour for earlier runs to complete, continuing action pipeline"
+
+  draftRelease:
+    name: Draft release
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  getVersion:
+    name: Get package version
+    runs-on: ubuntu-latest
+    needs: draftRelease
+    if: ${{ always() }}
+    outputs:
+      buildNumber: ${{ steps.ver.outputs.BUILD_NUMBER }}
+    steps:
+      - name: GetVersion
+        id: ver
+        shell: pwsh
+        run: |
+          if ("${{github.event.inputs.override}}")
+          {
+            Write-Host "Using manually entered override version"
+            $version = "${{ github.event.inputs.override}}"
+          }
+          else
+          {
+            $header = @{Authorization = 'Bearer ${{ secrets.GITHUB_TOKEN }}' }
+            $endPoint = "https://api.github.com/repos/${{github.repository}}/releases"
+            $info = Invoke-RestMethod -Uri $endPoint -Headers $header
+            $version = $info.name[0].Trim("v")
+          }
+
+          Write-Host "::set-output name=BUILD_NUMBER::$($version)"
+
+  install-modules:
+    name: Pre-compile packages
+    runs-on: ubuntu-latest
+    outputs:
+      buildNumber: ${{ steps.ver.outputs.BUILD_NUMBER }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Preload packages into cache
+        id: builder
+        uses: ./.github/workflows/preinstall-action
+        with:
+          bt-param: '-fae -B -e -T 1C -Psonar'
+          version: ${{ github.sha }}
+
+
+  test-modules:
+    name: Test Modules
+    needs: [ waitOld, install-modules ]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        module-name: [ maqs-utilities, maqs-base, maqs-appium, maqs-selenium, maqs-webservices, maqs-cucumber, maqs-accessibility, maqs-database ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and Start Unit Tests
+        id: builder
+        uses: ./.github/workflows/buildtest-action
+        with:
+          module-name: ${{matrix.module-name}}
+          bt-param: '-fae -B -e -Dtesting=solo -T 1C'
+          version: ${{ github.sha }}
+      - name: Test Reporting
+        if: always()
+        id: test-report
+        uses: phoenix-actions/test-reporting@v6
+        with:
+          name: ${{matrix.module-name}} Test Results
+          path: '**/junitreports/TEST-**.xml'
+          reporter: 'java-junit'
+          list-tests: 'failed'
+          list-suites: 'failed'
+          fail-on-error: 'false'
+      - uses: actions/upload-artifact@v2
+        if: always()
+        name: "Upload test artifact"
+        with:
+          name: ${{matrix.module-name}}-results
+          path: |
+            ${{matrix.module-name}}/target/**/*.xml
+            ${{matrix.module-name}}/target/logs
+            ${{matrix.module-name}}/target/**/*.exec
+            ${{matrix.module-name}}/target/**/*.jar
+
+  sonarcloud:
+    name: SonarCloud Analysis
+    if: always() && github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    needs: [test-modules, getVersion]
+    env:
+      SONAR_ORG: "cognizantopensource"
+      SONAR_PROJECT: "cognizantopensource_maqs-java"
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+      VERSION: ${{ needs.getVersion.outputs.buildNumber }}
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v2
+        with:
+          path: ${{github.workspace}}/artifacts/
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3.1.1
+        with:
+          distribution: zulu
+          java-version: 11
+          cache: maven
+      - name: Create settings file
+        uses: InstaCode/maven-settings-xml-action@v9
+        with:
+          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{env.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_TOKEN}}" }}]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Cache SonarCloud packages
+#        uses: actions/cache@v1
+#        with:
+#          path: ~\.sonar
+#          key: ${{ runner.os }}-sonar
+#          restore-keys: ${{ runner.os }}-sonar
+      - name: Restore Local Maven Cache
+        uses: actions/cache@v3.0.2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{github.sha}}.${{github.run_number}}
+          restore-keys: |
+            ${{ runner.os }}-maven-${{github.sha}}
+      - name: Run SonarCloud Analysis
+        shell: bash
+        run: mvn -B -e -fae -Drevision=${{env.VERSION}} -Psonar package sonar:sonar -Dsonar.projectKey=${{env.SONAR_PROJECT}} -Dsonar.coverage.jacoco.xmlReportPaths=$(find "$(pwd)" -path '*jacoco.xml' | sed 's/.*/&/' | tr '\n' ',')
+        working-directory: ${{github.workspace}}
+        env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  checkstyle:
+    name: Checkstyle Run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3.1.1
+        with:
+          distribution: zulu
+          java-version: 11
+          cache: maven
+      - name: Restore Local Maven Cache
+        uses: actions/cache@v3.0.2
+        with:
+          path: ~/.m2
+          key: ${{runner.os}}-m2
+      - name: Run Checkstyle
+        run: mvn -B validate --file pom.xml -e -fae
+  labels:
+    name: Pull Request Labels
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label Pull Request
+        uses: actions/labeler@v4
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
+
+
