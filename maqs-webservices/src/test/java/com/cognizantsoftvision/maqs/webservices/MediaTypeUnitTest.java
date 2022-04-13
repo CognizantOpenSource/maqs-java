@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
+import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * The Media Type unit test class.
  */
-public class MediaTypeUnitTest extends BaseGenericTest {
+public class MediaTypeUnitTest extends BaseWebServiceTest {
 
   /**
    * Tests the string value of App_Json

@@ -4,11 +4,7 @@
 
 package com.cognizantsoftvision.maqs.webservices.WebServiceDriverRequestUnitTest;
 
-import com.cognizantsoftvision.maqs.webservices.HttpClientFactory;
-import com.cognizantsoftvision.maqs.webservices.MediaType;
-import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
-import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
-import com.cognizantsoftvision.maqs.webservices.WebServiceUtilities;
+import com.cognizantsoftvision.maqs.webservices.*;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.io.IOException;
@@ -22,7 +18,7 @@ import org.testng.annotations.Test;
 /**
  * The Web Driver Service Driver Put unit test class.
  */
-public class WebServiceDriverPutUnitTest {
+public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
   /**
    * String to hold the URL.
    */

@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * The Web Service Driver Manager unit test class.
  */
-public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
+public class WebServiceDriverManagerUnitTest extends BaseWebServiceTest {
 
   /**
    * Test for Getting Web Service Driver using Supplier in constructor.
