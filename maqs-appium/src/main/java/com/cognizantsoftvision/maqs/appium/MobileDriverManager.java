@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.appium;
 
-import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.ITestObject;
 import com.cognizantsoftvision.maqs.base.DriverManager;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
@@ -22,7 +22,7 @@ public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>>
    * @param getDriverFunction Function that specifies how to get the driver.
    * @param baseTestObject    The Base Test Object.
    */
-  public MobileDriverManager(Supplier<AppiumDriver<WebElement>> getDriverFunction, BaseTestObject baseTestObject) {
+  public MobileDriverManager(Supplier<AppiumDriver<WebElement>> getDriverFunction, ITestObject baseTestObject) {
     super(getDriverFunction, baseTestObject);
   }
 
@@ -32,7 +32,7 @@ public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>>
    * @param driver         Appium Driver
    * @param baseTestObject The Base Test Object.
    */
-  public MobileDriverManager(AppiumDriver<WebElement> driver, BaseTestObject baseTestObject) {
+  public MobileDriverManager(AppiumDriver<WebElement> driver, ITestObject baseTestObject) {
     super(() -> driver, baseTestObject);
     this.baseDriver = driver;
   }
@@ -57,7 +57,6 @@ public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>>
 
     try {
       AppiumDriver<WebElement> driver = this.getMobileDriver();
-      //driver.close();
       driver.quit();
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR,

@@ -4,17 +4,17 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import java.net.URI;
 import java.net.http.HttpRequest;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * The Web Service Driver Manager unit test class.
  */
-public class WebServiceDriverManagerUnitTest extends BaseWebServiceTest {
+public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
 
   /**
    * Test for Getting Web Service Driver using Supplier in constructor.

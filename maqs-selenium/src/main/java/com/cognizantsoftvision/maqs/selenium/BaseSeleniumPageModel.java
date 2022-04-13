@@ -24,7 +24,7 @@ public abstract class BaseSeleniumPageModel {
   /**
    * The selenium test object.
    */
-  private final SeleniumTestObject testObject;
+  private final ISeleniumTestObject testObject;
 
   /**
    * The web driver.
@@ -36,7 +36,7 @@ public abstract class BaseSeleniumPageModel {
    *
    * @param testObject the test object
    */
-  protected BaseSeleniumPageModel(SeleniumTestObject testObject) {
+  protected BaseSeleniumPageModel(ISeleniumTestObject testObject) {
     this.testObject = testObject;
     this.webDriver = testObject.getWebDriver();
     this.lazyElementStore = new HashMap<>();
@@ -65,7 +65,7 @@ public abstract class BaseSeleniumPageModel {
    *
    * @return the test object
    */
-  public SeleniumTestObject getTestObject() {
+  public ISeleniumTestObject getTestObject() {
     return testObject;
   }
 
