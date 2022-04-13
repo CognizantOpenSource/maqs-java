@@ -42,10 +42,9 @@
         <Browser>HEADLESSCHROME</Browser>
 
         <!--Remote browser settings-->
-        <!--<Browser>REMOTE</Browser>-->
         <RemoteBrowser>Chrome</RemoteBrowser>
         <HubUrl>http://ondemand.saucelabs.com:80/wd/hub</HubUrl>
-        <WebSiteBase>http://magenicautomation.azurewebsites.net/</WebSiteBase>
+        <WebSiteBase>https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/</WebSiteBase>
         <BrowserWaitTime>1000</BrowserWaitTime>
         <BrowserTimeout>20000</BrowserTimeout>
         <RemoteBrowserName>Chrome</RemoteBrowserName>
