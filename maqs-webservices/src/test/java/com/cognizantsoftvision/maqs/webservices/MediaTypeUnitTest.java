@@ -4,8 +4,6 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
-import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.base;
 
 import java.lang.reflect.Method;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeMethod;
 
 /**
@@ -34,5 +35,13 @@ public abstract class BaseExtendableTest<T extends ITestObject> extends BaseTest
   }
 
   @Override
-  protected abstract void createNewTestObject();
+  protected void beforeLoggingTeardown(ITestResult resultType) {
+    // Before logging steps are not needed in this scenario
+  }
+
+  @Override
+  protected void createNewTestObject() {
+    this.setTestObject(
+        new BaseTestObject(this.createLogger(), this.getFullyQualifiedTestClassName()));
+  }
 }

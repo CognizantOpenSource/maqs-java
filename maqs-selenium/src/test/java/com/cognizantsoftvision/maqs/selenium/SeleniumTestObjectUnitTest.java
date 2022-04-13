@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -13,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * The type Selenium test object test.
  */
-public class SeleniumTestObjectUnitTest extends BaseGenericTest {
+public class SeleniumTestObjectUnitTest extends BaseSeleniumTest {
 
   /**
    * Test appium test object creation with driver.

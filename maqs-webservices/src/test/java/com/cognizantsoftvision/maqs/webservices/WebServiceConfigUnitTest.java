@@ -5,7 +5,6 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
