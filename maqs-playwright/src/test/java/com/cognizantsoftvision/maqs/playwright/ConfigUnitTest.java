@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.playwright;
 
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -17,7 +18,7 @@ import org.testng.annotations.Test;
 /**
  * The Config Unit tests for playwright config content.
  */
-public class ConfigUnitTest {
+public class ConfigUnitTest extends BaseGenericTest {
 
   /**
    * Get expected WebBase configuration.

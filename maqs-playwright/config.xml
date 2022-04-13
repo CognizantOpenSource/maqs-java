@@ -48,14 +48,14 @@
         <add key="Timeout" value="20000" />
         <add key="CommandTimeout" value="200000" />
 
+        <!--Browser Resize settings - The Default is 1280x720
+        <add key="BrowserSize" value="DEFAULT" />-->
+        <add key="BrowserSize" value="300x300" />
+
         <!--Playwright specific logging options-->
         <add key="CaptureVideo" value="Yes" />
         <add key="CaptureScreenshots" value="No" />
         <add key="CaptureSnapshots" value="Yes" />
-
-        <!--Browser Resize settings - The Default is 1280x720
-        <add key="BrowserSize" value="DEFAULT" />
-        <add key="BrowserSize" value="300x300" />-->
 
         <!--Proxy  settings-->
         <add key="UseProxy" value="No" />

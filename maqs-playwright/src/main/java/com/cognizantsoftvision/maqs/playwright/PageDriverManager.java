@@ -52,23 +52,6 @@ public class PageDriverManager extends DriverManager<PageDriver> {
     }
 
     return this.pageDriver;
-
-//    PageDriver tempDriver;
-//
-//    if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-//      tempDriver = getBaseDriver();
-//      this.setBaseDriver(tempDriver);
-//
-//      // Log the setup
-//      this.loggingStartup(tempDriver);
-//    }
-//
-//    tempDriver = getBase();
-//
-//    if (tempDriver == null) {
-//      throw new NullPointerException("Base driver is null");
-//    }
-//    return tempDriver;
   }
 
   /**
@@ -93,7 +76,7 @@ public class PageDriverManager extends DriverManager<PageDriver> {
   }
 
   /**
-   * Closes the page driver manaager.
+   * Closes the page driver manager.
    */
   @Override
   public void close() {

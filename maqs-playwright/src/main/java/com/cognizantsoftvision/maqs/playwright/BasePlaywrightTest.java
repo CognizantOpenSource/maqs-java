@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
-import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.IFileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
@@ -61,20 +60,24 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
    */
   @Override
   protected void createNewTestObject() {
-    try {
-      this.setTestObject(
-          new PlaywrightTestObject(() -> {
-            try {
-              return getPageDriver();
-            } catch (Exception e) {
-              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
-              throw e;
-            }
-          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
-    } catch (Exception e) {
-      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
-      throw e;
-    }
+    PlaywrightTestObject playwrightTestObject = new PlaywrightTestObject(
+        this.getPageDriver(), this.createLogger(), this.getFullyQualifiedTestClassName());
+    this.setTestObject(playwrightTestObject);
+
+//    try {
+//      this.setTestObject(
+//          new PlaywrightTestObject(() -> {
+//            try {
+//              return getPageDriver();
+//            } catch (Exception e) {
+//              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
+//              throw e;
+//            }
+//          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
+//    } catch (Exception e) {
+//      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+//      throw e;
+//    }
   }
 
   /**
