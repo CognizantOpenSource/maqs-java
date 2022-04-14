@@ -40,11 +40,13 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
   }
 
   /** {@inheritdoc} */
+  @Override
   public T getBaseDriver() {
     return baseDriver;
   }
 
   /** {@inheritdoc} */
+  @Override
   public void setBaseDriver(T baseDriver) {
     this.baseDriver = baseDriver;
   }

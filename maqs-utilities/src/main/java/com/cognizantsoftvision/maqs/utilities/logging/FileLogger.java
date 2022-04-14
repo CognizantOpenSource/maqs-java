@@ -240,31 +240,37 @@ public class FileLogger extends Logger implements IFileLogger {
     }
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   public String getFilePath() {
     return this.filePath;
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   public void setFilePath(String path) {
     this.filePath = path;
   }
 
   /**
-   * Gets the Message Type value.
-   *
-   * @return The Message Type.
+   * {@inheritdoc}
    */
   public MessageType getMessageType() {
     return this.messageType;
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   public String getDirectory() {
     return this.directory;
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   public String getFileName() {
     return this.fileName;
   }
@@ -279,13 +285,17 @@ public class FileLogger extends Logger implements IFileLogger {
   }
 
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   @Override
   public void logMessage(String message, Object... args) {
     this.logMessage(MessageType.INFORMATION, message, args);
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
     // If the message level is greater than the

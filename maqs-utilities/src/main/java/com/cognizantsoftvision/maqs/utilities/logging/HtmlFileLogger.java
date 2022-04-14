@@ -187,13 +187,17 @@ public class HtmlFileLogger extends FileLogger implements IFileLogger {
     }
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   @Override
   public void logMessage(String message, Object... args) {
     this.logMessage(MessageType.INFORMATION, message, args);
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
     // If the message level is greater that the current log level then do not log it.
