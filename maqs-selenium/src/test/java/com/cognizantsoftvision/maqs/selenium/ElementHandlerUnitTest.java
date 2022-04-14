@@ -111,11 +111,10 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getElementAttributeTest() {
-    String expectedText = "http://magenicautomation.azurewebsites.net/Swagger";
      AutomationPageModel automationPageModel =navigateToUrl();
     String actualText = ElementHandler.getElementAttribute(
-        getWebDriver(), automationPageModel.swaggerLinkBy, "href");
-    verifyText(actualText, expectedText);
+        getWebDriver(), automationPageModel.firstNameTextBox, "type");
+    verifyText(actualText, "text");
   }
 
   /**
@@ -198,10 +197,10 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void clickElementByJavascriptFromHoverDropdown() {
     AutomationPageModel automationPageModel = navigateToUrl();
-    ElementHandler.clickElementByJavaScript(getWebDriver(), automationPageModel.employeeButton);
+    ElementHandler.clickElementByJavaScript(getWebDriver(), automationPageModel.trainingLink);
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
     UIWaitFactory.getWaitDriver(
-        getWebDriver()).waitForExactText(automationPageModel.employeePageTitle, "Index");
+        getWebDriver()).waitForExactText(By.cssSelector("#Login"), "Login");
   }
 
   /**

@@ -24,8 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
-
-import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
@@ -210,7 +208,6 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	public void lazyWithParentAndWithoutDoNotMatch() throws TimeoutException, InterruptedException {
 		navigateToTestPage();
 
-	public void lazyWithParentAndWithoutDoNotMatch() throws TimeoutException, InterruptedException {
 		// Make sure we got the table caption we are looking for
 		assertEquals(this.getFlowerTableCaptionWithParent().getText(), FLOWER_TABLE);
 
@@ -565,7 +562,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementText() throws TimeoutException, InterruptedException {
-		assertEquals("Show dialog", this.getDialogOneButton().getText());
+		assertEquals(this.getDialogOneButton().getText(), "Show dialog");
 	}
 
 	/**
@@ -623,7 +620,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementTagName() throws TimeoutException, InterruptedException {
-		assertEquals("input", this.getFirstNameInputBox().getTagName());
+		assertEquals(this.getFirstNameInputBox().getTagName(), "input");
 	}
 
 	/**
@@ -631,7 +628,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementTagNameWithParent() throws TimeoutException, InterruptedException {
-		assertEquals("strong", this.getFlowerTableCaptionWithParent().getTagName());
+		assertEquals(this.getFlowerTableCaptionWithParent().getTagName(), "strong");
 			assertEquals(this.getFlowerTableCaptionWithParent().getTagName(), "strong");
 	}
 
@@ -640,7 +637,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetVisibleElement() {
-		assertNotEquals(null, this.getFirstNameInputBox().getRawVisibleElement());
+		assertNotEquals(this.getFirstNameInputBox().getRawVisibleElement(), null);
 			assertNotEquals(this.getFirstNameInputBox().getRawVisibleElement(), null);
 	}
 
@@ -688,7 +685,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElement() throws TimeoutException, InterruptedException {
 		WebElement firstElement = this.getFlowerTableLazyElement().findRawElement(By.cssSelector(THREAD));
-		assertEquals("Flowers", firstElement.getText());
+		assertEquals(firstElement.getText(), "Flowers");
 	}
 
 	/**
@@ -706,8 +703,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElements() throws TimeoutException, InterruptedException {
 		List<WebElement> elements = this.getFlowerTableLazyElement().findRawElements(By.cssSelector(THREAD));
-		assertEquals("Color", elements.get(4).getText());
-			assertEquals(elements.get(4).getText(), "Color");
+		assertEquals(elements.get(4).getText(), "Color");
 	}
 
 	/**

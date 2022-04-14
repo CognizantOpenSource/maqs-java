@@ -293,7 +293,6 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    wait.waitUntilPageLoad();
     Assert.assertTrue(wait.waitUntilAttributeTextContains(
         asyncPageModel.asyncLoadingLabel, "style", "none;"));
   }

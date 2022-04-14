@@ -119,7 +119,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "Sauce_Labs_Username");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
-    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_Accesskey");
+    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_AccessKey");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(platform));
@@ -140,7 +140,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "Sauce_Labs_Username");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
-    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_Accesskey");
+    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_AccessKey");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(platform));

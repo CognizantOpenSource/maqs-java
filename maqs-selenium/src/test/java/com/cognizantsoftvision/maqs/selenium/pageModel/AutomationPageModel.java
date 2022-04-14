@@ -141,6 +141,11 @@ public class AutomationPageModel extends HeaderPageModel {
    */
   public final By rightClickContextSaveText = By.cssSelector("#RightClickSaveText");
 
+  /// <summary>
+  /// Training 1 login link
+  /// </summary>
+  public final By trainingLink = By.cssSelector("A[href='../Training1/LoginPage.html']");
+
   /**
    * Instantiates a new Automation page model.
    *
