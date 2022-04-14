@@ -5,14 +5,12 @@
 package com.cognizantsoftvision.maqs.webservices.WebServiceDriverRequestUnitTest;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import com.cognizantsoftvision.maqs.webservices.BaseWebServiceTest;
 import com.cognizantsoftvision.maqs.webservices.HttpClientFactory;
 import com.cognizantsoftvision.maqs.webservices.MediaType;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
 import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
 import com.cognizantsoftvision.maqs.webservices.WebServiceUtilities;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.http.HttpRequest;
@@ -24,7 +22,7 @@ import org.testng.annotations.Test;
 /**
  * The Web Driver Service Driver Post unit test class.
  */
-public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
+public class WebServiceDriverPostUnitTest {
 
   /**
    * String to hold the URL.

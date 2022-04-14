@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 /**
  * The Media Type unit test class.
  */
-public class MediaTypeUnitTest extends BaseWebServiceTest {
+public class MediaTypeUnitTest {
 
   /**
    * Tests the string value of App_Json

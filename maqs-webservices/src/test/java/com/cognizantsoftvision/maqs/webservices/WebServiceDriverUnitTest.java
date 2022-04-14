@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * The Web Service Driver unit test class.
  */
-public class WebServiceDriverUnitTest extends BaseWebServiceTest {
+public class WebServiceDriverUnitTest {
 
   /**
    * Verifies that basic setting the Http Client works
