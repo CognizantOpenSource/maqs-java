@@ -192,6 +192,7 @@ public abstract class AbstractLazyElement {
 
   /**
    * Gets the lazy element's location.
+   * 
    *
    * @return the location as a Point
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -274,8 +275,8 @@ public abstract class AbstractLazyElement {
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public void submit() throws InterruptedException {
-    this.getTestObject().getLogger()
-        .logMessage(MessageType.INFORMATION, String.format("Submit '%s'", this.userFriendlyName));
+    this.getTestObject().getLogger().logMessage(
+        MessageType.INFORMATION, String.format("Submit '%s'", this.userFriendlyName));
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement));
     this.executeEvent(element::submit, "Submit");
   }

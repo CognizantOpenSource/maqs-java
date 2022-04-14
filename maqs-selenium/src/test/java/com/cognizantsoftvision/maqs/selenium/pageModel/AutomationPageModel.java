@@ -14,12 +14,17 @@ import org.openqa.selenium.By;
 /**
  * The Automation page model.
  */
-public class AutomationPageModel extends MainPageModel {
+public class AutomationPageModel extends HeaderPageModel {
 
   /**
    * Unit testing site URL - Automation page.
    */
-  public final String testSiteAutomationUrl = SeleniumConfig.getWebSiteBase() + "Automation/";
+  public final String testSiteAutomationUrl = SeleniumConfig.getWebSiteBase();
+
+  /**
+   * The automation Page Header.
+   */
+  public final By automationPageHeader = By.cssSelector("#ItemsToAutomate > h2");
 
   /**
    * First dialog button.
@@ -62,9 +67,9 @@ public class AutomationPageModel extends MainPageModel {
   public final By alertWithConfirm = By.id("javascriptConfirmAlertButton");
 
   /**
-   * Swagger link.
+   * Error 500 link.
    */
-  public final By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
+  public final By errorLinkBy = By.cssSelector("#ErrorPageLink > a");
 
   /**
    * First name text box.
@@ -105,16 +110,6 @@ public class AutomationPageModel extends MainPageModel {
    * Name dropdown list.
    */
   public final By nameDropdown = By.cssSelector("#namesDropdown");
-  
-  /**
-   * Employee link.
-   */
-  public final By employeeButton = By.cssSelector("#EmployeeButton > a");
-
-  /**
-   * Employee page title.
-   */
-  public final By employeePageTitle = By.cssSelector("body > div.container.body-content > h2");
 
   /**
    * The body selector.
@@ -125,11 +120,6 @@ public class AutomationPageModel extends MainPageModel {
    *  The body lazy element.
    */
   public LazyWebElement body = new LazyWebElement(getTestObject(), bodyLocator, "Body");
-
-  /**
-   * The page model lazy element.
-   */
-  public LazyWebElement pageTitle = new LazyWebElement(getTestObject(), employeePageTitle , "Page Title");
 
   /**
    * Slider element.
@@ -176,9 +166,10 @@ public class AutomationPageModel extends MainPageModel {
   @Override
   public boolean isPageLoaded() {
     try {
-      new UIWait(this.getWebDriver()).waitForPageLoad();
-      return pageTitle.doesExist();
-    } catch (TimeoutException | InterruptedException e) {
+      UIWait wait = new UIWait(this.getWebDriver());
+      wait.waitForPageLoad();
+      return wait.waitUntilVisibleElement(automationPageHeader);
+    } catch (TimeoutException e) {
       e.printStackTrace();
     }
     return false;

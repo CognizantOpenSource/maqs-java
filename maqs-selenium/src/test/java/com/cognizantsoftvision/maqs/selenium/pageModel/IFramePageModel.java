@@ -11,17 +11,17 @@ import org.openqa.selenium.By;
 /**
  * The IFrame page model.
  */
-public class IFramePageModel extends MainPageModel {
+public class IFramePageModel extends HeaderPageModel {
 
   /**
    * Unit testing site URL - IFrame page.
    */
-  public final String testSiteIFrameUrl = SeleniumConfig.getWebSiteBase() + "Automation/iFramePage";
+  public final String testSiteIFrameUrl = SeleniumConfig.getWebSiteBase() + "iFrame.html";
 
   /**
    * The Iframe locator.
    */
-  public By iframeLocator = By.id("mageniciFrame");
+  public By iframeLocator = By.cssSelector("#frame");
 
   /**
    * Instantiates a new IFrame page model.

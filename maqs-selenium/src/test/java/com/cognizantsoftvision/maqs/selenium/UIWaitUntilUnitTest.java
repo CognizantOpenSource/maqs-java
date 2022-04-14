@@ -160,6 +160,8 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
   public void resetWaitDriver() {
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertNotNull(wait.resetWaitDriver());
+    Assert.assertNotNull(wait.getNewWaitDriver(20000));
+
   }
 
   /**

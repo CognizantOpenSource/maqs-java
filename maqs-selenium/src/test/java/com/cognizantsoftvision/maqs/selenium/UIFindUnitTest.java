@@ -58,14 +58,12 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findElementsFound() {
     UIFind find = setUp();
     List<WebElement> list = find.findElements(automationPageModel.dropdownToggleClassSelector);
-    Assert.assertEquals(list.size(),3, "There are 3 elements with dropdown classes");
+    Assert.assertEquals(list.size(),2, "There are 2 elements with dropdown classes");
 
-    Assert.assertEquals(list.get(0).getText(), "Manage");
+    Assert.assertEquals(list.get(0).getText(), "Automation");
     Assert.assertTrue(list.get(0).isDisplayed());
-    Assert.assertEquals(list.get(1).getText(), "Automation");
+    Assert.assertEquals(list.get(1).getText(), "Training");
     Assert.assertTrue(list.get(1).isDisplayed());
-    Assert.assertEquals(list.get(2).getText(), "Training");
-    Assert.assertTrue(list.get(2).isDisplayed());
 
     List<WebElement> elements = find.findElements(automationPageModel.flowerTable);
     Assert.assertEquals(elements.size(), 20);

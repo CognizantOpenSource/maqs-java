@@ -10,7 +10,7 @@ import java.net.http.HttpClient;
 import java.util.function.Supplier;
 
 /**
- * Web service test object class.
+ * The Web Service Test Object class.
  */
 public class WebServiceTestObject extends BaseTestObject {
   /**

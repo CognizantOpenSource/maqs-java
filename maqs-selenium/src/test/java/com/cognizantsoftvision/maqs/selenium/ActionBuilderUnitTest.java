@@ -32,11 +32,11 @@ public class ActionBuilderUnitTest extends BaseSeleniumTest {
   public void hoverOverTest() {
     AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     this.navigateToUrl(automationPageModel.testSiteAutomationUrl);
-    ActionBuilder.hoverOver(this.getWebDriver(), automationPageModel.manageDropdown);
+    ActionBuilder.hoverOver(this.getWebDriver(), automationPageModel.automationDropDown);
     UIWaitFactory.getWaitDriver(
-        this.getWebDriver()).waitForClickableElement(automationPageModel.employeeButton).click();
+        this.getWebDriver()).waitForClickableElement(automationPageModel.iFrameDropDownButton).click();
     UIWaitFactory.getWaitDriver(
-        this.getWebDriver()).waitForExactText(automationPageModel.employeePageTitle, "Index");
+        this.getWebDriver()).waitForExactText(automationPageModel.iFramePageTitle, "Index");
   }
 
   /**

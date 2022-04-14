@@ -42,10 +42,9 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    wait.waitUntilPageLoad();
-
+    wait.waitForVisibleElement(asyncPageModel.asyncLoadingTextDiv);
     WebElement element = wait.waitForAttributeTextEquals(
-        asyncPageModel.asyncLoadingTextDiv, "style", "display: block;");
+        asyncPageModel.asyncLoadingTextDiv, "style", "");
     Assert.assertNotNull(element);
     Assert.assertEquals(element.getText(), "Loaded");
   }
@@ -122,12 +121,11 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
   public void waitForVisibleElement() {
     AsyncPageModel asyncPageModel = new AsyncPageModel(this.getTestObject());
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    wait.waitForPageLoad();
     WebElement element = wait.waitForVisibleElement(asyncPageModel.asyncDropdownCssSelector);
     Assert.assertNotNull(element, "Null element was returned");
-
     element = wait.waitForVisibleElement(asyncPageModel.asyncDropdownCssSelector, 10000, 1000);
     Assert.assertNotNull(element, "Null element was returned");
   }
@@ -237,12 +235,13 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
   public void waitForAttributeEqualsFound() {
     AsyncPageModel asyncPageModel = new AsyncPageModel(this.getTestObject());
     this.getWebDriver().navigate().to(asyncPageModel.testSiteAsyncUrl);
-
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     wait.waitForPageLoad();
+    wait.waitForVisibleElement(asyncPageModel.asyncLoadingTextDiv);
+
     Assert.assertNotNull(wait.waitForAttributeTextEquals(
-        asyncPageModel.asyncLoadingTextDiv, "style", "display: block;"));
+        asyncPageModel.asyncLoadingTextDiv, "style", ""));
     Assert.assertNotNull(wait.waitForAttributeTextEquals(
-        asyncPageModel.asyncLoadingTextDiv, "style", "display: block;", 10000, 1000));
+        asyncPageModel.asyncLoadingTextDiv, "style", "", 10000, 1000));
   }
 }

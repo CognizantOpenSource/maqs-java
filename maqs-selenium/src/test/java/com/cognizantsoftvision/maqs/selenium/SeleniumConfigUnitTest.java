@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -16,7 +17,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * Selenium Configuration unit test class.
  */
-public class SeleniumConfigUnitTest extends BaseSeleniumTest {
+public class SeleniumConfigUnitTest extends BaseGenericTest {
 
   /**
    * Remote capabilities username identifier.
@@ -58,7 +59,8 @@ public class SeleniumConfigUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getWebsiteBase() {
     String website = SeleniumConfig.getWebSiteBase();
-    Assert.assertTrue(website.equalsIgnoreCase("http://magenicautomation.azurewebsites.net/"));
+    Assert.assertTrue(website.equalsIgnoreCase(
+        "https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/"));
   }
 
   /**
@@ -117,7 +119,7 @@ public class SeleniumConfigUnitTest extends BaseSeleniumTest {
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "Sauce_Labs_Username");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
-    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_AccessKey");
+    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_Accesskey");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(platform));
@@ -138,7 +140,7 @@ public class SeleniumConfigUnitTest extends BaseSeleniumTest {
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "Sauce_Labs_Username");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
-    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_AccessKey");
+    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_Accesskey");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(platform));
