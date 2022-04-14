@@ -25,9 +25,9 @@ public class BaseCucumberTestNGUnitTest extends BaseGenericTest {
         DummyBaseCucumberTestNG dummyCucumber = new DummyBaseCucumberTestNG();
         String[] dummyArgs = {"Dummy Arg 1", "Dummy Arg 2"};
 
-        Assert.assertNull(ScenarioContext.get(ScenarioContext.JMAQS_HOLDER));
+        Assert.assertNull(ScenarioContext.get(ScenarioContext.MAQS_HOLDER));
         dummyCucumber.beforeMethod(null, dummyArgs, this.getTestContext());
-        Assert.assertNotNull(ScenarioContext.get(ScenarioContext.JMAQS_HOLDER));
+        Assert.assertNotNull(ScenarioContext.get(ScenarioContext.MAQS_HOLDER));
     }
 
     /**
@@ -43,7 +43,7 @@ public class BaseCucumberTestNGUnitTest extends BaseGenericTest {
         DummyTestResult dummyResult = new DummyTestResult(dummyTest.getTestContext());
         dummyCucumber.tearDown(dummyResult);
 
-        Assert.assertNull(ScenarioContext.get(ScenarioContext.JMAQS_HOLDER));
+        Assert.assertNull(ScenarioContext.get(ScenarioContext.MAQS_HOLDER));
     }
 
     /**
