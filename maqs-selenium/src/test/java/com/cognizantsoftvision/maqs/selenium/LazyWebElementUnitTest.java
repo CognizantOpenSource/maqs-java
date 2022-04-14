@@ -31,6 +31,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -45,8 +46,9 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	private static final String FLOWER_TABLE_BY = "#FlowerTable";
 	private static final String FLOWER_TABLE = "Flower Table";
 	private static final String FLOWER_TABLE_CAPTION = "Flower table caption";
-	private static final String FOOTER_PARAGRAPH_BY = "FOOTER P";
+	private static final String FOOTER_PARAGRAPH_BY = "footer > p";
 	private static final String FOOTER = "Footer";
+	private static final String THREAD = "THEAD TH";
 
 	private LazyWebElement getDivRoot() {
 		return new LazyWebElement(this.getTestObject(), By.cssSelector("#ItemsToAutomate"), "Div Root");
@@ -103,8 +105,23 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 * @return The submit button
 	 */
 	private LazyWebElement getSubmitButton() {
-		return new LazyWebElement(this.getTestObject(), By.cssSelector("[class='btn btn-default'][type='submit']"),
-				"Submit button");
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#submitButton"), "Submit button");
+	}
+
+	/**
+	 * Gets the submittable text box.
+	 * @return submit text ox web element
+	 */
+	private LazyWebElement getSubmitText() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#submitMe"), "Submit text box");
+	}
+
+	/**
+	 * Gets the submitted value.
+	 * @return the submitted value
+	 */
+	private LazyWebElement getSubmittedValue() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#submitVal"), "Submitted value");
 	}
 
 	/**
@@ -176,7 +193,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@BeforeMethod
 	public void navigateToTestPage() {
-		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
+		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
 		UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 	}
 
@@ -184,11 +201,11 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 * Verify Lazy Element search respects the parent find by finding mismatch
 	 */
 	@Test(groups = TestCategories.SELENIUM)
-	public void lazyWithParentAndWithoutDontMatch() throws TimeoutException, InterruptedException {
+	public void lazyWithParentAndWithoutDoNotMatch() throws TimeoutException, InterruptedException {
 		// Make sure we got the table caption we are looking for
 		assertEquals(FLOWER_TABLE, this.getFlowerTableCaptionWithParent().getText());
 
-		// Make sure the the first found was not the the flower table
+		// Make sure the first found was not the flower table
 		assertNotEquals(this.getFlowerTableCaptionWithParent().getText(), this.getFirstTableCaption().getText());
 	}
 
@@ -265,7 +282,6 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyCaching() throws TimeoutException, InterruptedException {
-
 		// Create the lazy element and use it
 		LazyWebElement footer = new LazyWebElement(this.getTestObject(), By.cssSelector(FOOTER_PARAGRAPH_BY), FOOTER);
 
@@ -276,9 +292,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		// Do the event again and save off the changed element
 		footer.getText();
 
-		// Go to another page so the old element will be stale, this will force us to
-		// get a new one
-		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation/AsyncPage");
+		// Go to another page so the old element will be stale, this will force us to get a new one
+		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "async.html");
 
 		// Trigger a new find, this should be new because the cached element is stale
 		footer.getText();
@@ -474,14 +489,12 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSubmit() throws TimeoutException, InterruptedException, ExecutionFailedException {
-		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Employees");
-		UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
-
-		waitDriver.waitForClickableElement(By.cssSelector("A[href^='/Employees/Edit/']")).click();
-		waitDriver.waitForPageLoad();
+		String newText = "Test";
+		this.getSubmitText().sendKeys(newText);
+		Assert.assertNotEquals(newText, getSubmittedValue().getText(), "Should not be set yet");
 
 		this.getSubmitButton().submit();
-		assertTrue(waitDriver.waitUntilAbsentElement(By.cssSelector("#[type='submit']")), "Submit did not go away");
+		Assert.assertEquals(newText, getSubmittedValue().getText());
 	}
 
 	/**
@@ -644,7 +657,6 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementToString() {
 		// Hard-coded userFriendlyName due to private access on LazyElement
 		String stringValue = this.getFlowerTableLazyElement().getBy().toString() + FLOWER_TABLE;
-
 		assertEquals(stringValue, this.getFlowerTableLazyElement().toString());
 	}
 
@@ -665,7 +677,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElement() throws TimeoutException, InterruptedException {
-		WebElement firstElement = this.getFlowerTableLazyElement().findRawElement(By.cssSelector("THEAD TH"));
+		WebElement firstElement = this.getFlowerTableLazyElement().findRawElement(By.cssSelector(THREAD));
 		assertEquals("Flowers", firstElement.getText());
 	}
 
@@ -674,7 +686,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElements() throws TimeoutException, InterruptedException {
-		List<WebElement> elements = this.getFlowerTableLazyElement().findRawElements(By.cssSelector("THEAD TH"));
+		List<WebElement> elements = this.getFlowerTableLazyElement().findRawElements(By.cssSelector(THREAD));
 		assertEquals("Color", elements.get(4).getText());
 	}
 
@@ -685,12 +697,10 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementFindElementsStackedWithStale() throws TimeoutException, InterruptedException {
 		LazyWebElement lazyRoot = this.getDivRoot();
 		LazyWebElement secondTable = lazyRoot.findElements(By.cssSelector("TABLE")).get(1);
-		LazyWebElement lastTableHeader = secondTable.findElements(By.cssSelector("THEAD TH")).get(4);
+		LazyWebElement lastTableHeader = secondTable.findElements(By.cssSelector(THREAD)).get(4);
 
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
-		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
-
-		assertEquals("Color", lastTableHeader.getText());
+		assertEquals(lastTableHeader.getText(), "Color");
 	}
 
 	/**
@@ -699,7 +709,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElementsAreLazy() throws TimeoutException, InterruptedException {
 		SoftAssert softAssertion = new SoftAssert();
-		for (LazyWebElement element : this.getFlowerTableLazyElement().findElements(By.cssSelector("THEAD TH"))) {
+		for (LazyWebElement element : this.getFlowerTableLazyElement().findElements(By.cssSelector(THREAD))) {
 			Predicate<LazyWebElement> predicate = e -> {
 				assertTrue(e instanceof LazyWebElement);
 				return true;
@@ -720,7 +730,6 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		LazyWebElement firstElement = this.getDivRoot().findElements(this.getDisabledItem().getBy()).get(0);
 
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
-		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
 
 		UIWaitFactory.setWaitDriver(this.getWebDriver(), new WebDriverWait(this.getWebDriver(), Duration.ofSeconds(1)));
 		firstElement.click();

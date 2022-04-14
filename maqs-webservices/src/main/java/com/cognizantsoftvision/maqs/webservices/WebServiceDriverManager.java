@@ -10,9 +10,10 @@ import java.net.http.HttpClient;
 import java.util.function.Supplier;
 
 /**
- * Web Service Driver Manager Class.
+ * The Web Service Driver Manager class.
  */
 public class WebServiceDriverManager extends DriverManager<HttpClient> {
+
   /**
    * Web Service Driver variable.
    */
