@@ -4,9 +4,9 @@
 
 package com.cognizantsoftvision.maqs.selenium.pageModel;
 
+import com.cognizantsoftvision.maqs.selenium.ISeleniumTestObject;
 import com.cognizantsoftvision.maqs.selenium.LazyWebElement;
 import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
-import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
 import com.cognizantsoftvision.maqs.selenium.UIWait;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.By;
@@ -146,7 +146,7 @@ public class AutomationPageModel extends HeaderPageModel {
    *
    * @param testObject the test object
    */
-  public AutomationPageModel(SeleniumTestObject testObject) {
+  public AutomationPageModel(ISeleniumTestObject testObject) {
     super(testObject);
   }
 

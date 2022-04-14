@@ -48,7 +48,7 @@ public abstract class BaseCucumberTestNG extends AbstractTestNGCucumberTests imp
    * @param result The result of the test run
    */
   @AfterMethod
-  public void tearDown(ITestResult result) {
+  public void tearDown(ITestResult result) throws Exception {
     // Get the test object and set the result
     BaseTest test = ScenarioContext.get(ScenarioContext.MAQS_HOLDER, BaseTest.class);
     test.setTestResult(result);

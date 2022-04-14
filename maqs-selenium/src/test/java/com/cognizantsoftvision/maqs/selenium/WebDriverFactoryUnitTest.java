@@ -34,7 +34,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the default browser.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void getDefaultBrowserTest() throws Exception {
+  public void getDefaultBrowserTest() {
     WebDriver driver = null;
     try {
       driver = WebDriverFactory.getDefaultBrowser();

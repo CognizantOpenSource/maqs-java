@@ -6,7 +6,7 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * The SeleniumTestObject Class.
  */
-public class SeleniumTestObject extends BaseTestObject {
+public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestObject {
 
   /**
    * Instantiates a new Selenium test object.
@@ -23,7 +23,7 @@ public class SeleniumTestObject extends BaseTestObject {
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public SeleniumTestObject(Supplier<WebDriver> getDriverSupplier, Logger logger, String fullyQualifiedTestName) {
+  public SeleniumTestObject(Supplier<WebDriver> getDriverSupplier, ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore()
         .put((SeleniumDriverManager.class).getCanonicalName(), new SeleniumDriverManager(getDriverSupplier, this));
@@ -36,37 +36,23 @@ public class SeleniumTestObject extends BaseTestObject {
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public SeleniumTestObject(WebDriver webDriver, Logger logger, String fullyQualifiedTestName) {
+  public SeleniumTestObject(WebDriver webDriver, ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore()
         .put((SeleniumDriverManager.class).getCanonicalName(), new SeleniumDriverManager((() -> webDriver), this));
   }
 
   /**
-   * Get the WebDriver Object.
-   *
-   * @return A WebDriver Object
+   * {@inheritDoc}
    */
   public WebDriver getWebDriver() {
     return this.getWebManager().getWebDriver();
   }
 
   /**
-   * Gets the Selenium driver manager.
-   *
-   * @return the web manager
-   */
-  public SeleniumDriverManager getWebManager() {
-    return (SeleniumDriverManager) this.getManagerStore().get(SeleniumDriverManager.class.getCanonicalName());
-  }
-
-  /**
-   * Sets web driver.
-   *
-   * @param driver the driver
+   * {@inheritDoc}
    */
   public void setWebDriver(WebDriver driver) {
-
     String name = SeleniumDriverManager.class.getCanonicalName();
     if (this.getManagerStore().containsKey(name)) {
       try {
@@ -76,20 +62,23 @@ public class SeleniumTestObject extends BaseTestObject {
         getLogger().logMessage(MessageType.ERROR, "Failed to remove DriverManager: %s", e.getMessage());
         throw new MAQSRuntimeException(e.getMessage(), e);
       }
-
     }
 
     this.getManagerStore().put(name, new SeleniumDriverManager((() -> driver), this));
   }
 
   /**
-   * Sets web driver using Supplier.
-   *
-   * @param webDriverSupplier the web driver supplier
+   * {@inheritDoc}
    */
   public void setWebDriver(Supplier<WebDriver> webDriverSupplier) {
     this.getManagerStore()
         .put(SeleniumDriverManager.class.getCanonicalName(), new SeleniumDriverManager(webDriverSupplier, this));
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public SeleniumDriverManager getWebManager() {
+    return (SeleniumDriverManager) this.getManagerStore().get(SeleniumDriverManager.class.getCanonicalName());
+  }
 }
