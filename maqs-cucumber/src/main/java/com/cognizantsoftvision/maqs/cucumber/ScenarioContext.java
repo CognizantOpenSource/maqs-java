@@ -20,9 +20,9 @@ public class ScenarioContext {
   }
 
   /**
-   * The default string for context of a JMAQS cucumber test.
+   * The default string for context of a MAQS cucumber test.
    */
-  public static final String MAQS_HOLDER = "BASE_JMAQS_TEST";
+  public static final String MAQS_HOLDER = "BASE_MAQS_TEST";
 
   /**
    * Field context.

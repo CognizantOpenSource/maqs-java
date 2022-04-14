@@ -10,8 +10,7 @@ import io.cucumber.java.en.When;
 public class SeleniumSteps2  extends BaseSeleniumStep {
 
     @When("Selenium Step2")
-    public void Step2() throws Throwable {
+    public void Step2() {
         this.getLogger().logMessage("Step2");
     }
-
 }
