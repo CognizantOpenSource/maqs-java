@@ -128,7 +128,7 @@ jobs:
           list-tests: 'failed'
           list-suites: 'failed'
           fail-on-error: 'false'
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: always()
         name: "Upload test artifact"
         with:
