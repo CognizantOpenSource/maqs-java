@@ -44,6 +44,7 @@ public abstract class Logger implements ILogger {
   /**
    * {@inheritdoc}
    */
+  @Override
   public MessageType getLoggingLevel() {
     return this.logLevel;
   }
@@ -51,6 +52,7 @@ public abstract class Logger implements ILogger {
   /**
    * {@inheritdoc}
    */
+  @Override
   public void setLoggingLevel(MessageType level) {
     this.logLevel = level;
   }
@@ -58,6 +60,7 @@ public abstract class Logger implements ILogger {
   /**
    * {@inheritdoc}
    */
+  @Override
   public void suspendLogging() {
     if (this.logLevel != MessageType.SUSPENDED) {
       this.logLevelSaved = this.logLevel;
@@ -69,6 +72,7 @@ public abstract class Logger implements ILogger {
   /**
    * {@inheritdoc}
    */
+  @Override
   public void continueLogging() {
     // Check if the logging was suspended
     if (this.logLevelSaved != MessageType.SUSPENDED) {
