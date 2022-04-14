@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightTestObject {
 
   /**
-   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightTestObject class.
+   * Initializes a new instance of the PlaywrightTestObject class.
    * @param pageDriver The test's Playwright page
    * @param logger The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name
@@ -26,7 +26,7 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
   }
 
   /**
-   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightTestObject class.
+   * Initializes a new instance of the PlaywrightTestObject class.
    * @param getDriver Function for getting a Playwright page
    * @param logger The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name

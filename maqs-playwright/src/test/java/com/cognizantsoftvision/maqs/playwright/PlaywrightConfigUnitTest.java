@@ -18,14 +18,19 @@ import org.testng.annotations.Test;
 /**
  * The Config Unit tests for playwright config content.
  */
-public class ConfigUnitTest extends BaseGenericTest {
+public class PlaywrightConfigUnitTest extends BaseGenericTest {
+
+  /**
+   * String placeholder for "Browser".
+   */
+  private static final String browser = "Browser";
 
   /**
    * Get expected WebBase configuration.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void testGetBrowser() {
-    Config.addTestSettingValues(Collections.singletonMap("Browser", "Chrome"),
+    Config.addTestSettingValues(Collections.singletonMap(browser, "Chrome"),
         ConfigSection.PLAYWRIGHT_MAQS, true);
     Assert.assertEquals(PlaywrightConfig.getBrowserName(), "Chrome");
   }
@@ -52,7 +57,7 @@ public class ConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.PLAYWRIGHT, dataProvider = "browserType")
   public void configBrowserName(List<String> browserNames) {
     for (String browserName : browserNames) {
-      Config.addTestSettingValues(Collections.singletonMap("Browser", browserName),
+      Config.addTestSettingValues(Collections.singletonMap(browser, browserName),
           ConfigSection.PLAYWRIGHT_MAQS, true);
       Assert.assertEquals(PlaywrightConfig.getBrowserName(), browserName);
     }
@@ -63,7 +68,7 @@ public class ConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT, expectedExceptions = IllegalArgumentException.class)
   public void configBadBrowserName() {
-    Config.addTestSettingValues(Collections.singletonMap("Browser", "IE"), ConfigSection.PLAYWRIGHT_MAQS, true);
+    Config.addTestSettingValues(Collections.singletonMap(browser, "IE"), ConfigSection.PLAYWRIGHT_MAQS, true);
     PlaywrightBrowser type = PlaywrightConfig.getBrowserType();
     Assert.fail("IE returned type: " + type);
   }
@@ -73,9 +78,9 @@ public class ConfigUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void configBrowserEnum() {
-    for (PlaywrightBrowser browser : PlaywrightBrowser.class.getEnumConstants()) {
-      Config.addTestSettingValues(Collections.singletonMap("Browser", browser.name()), ConfigSection.PLAYWRIGHT_MAQS, true);
-      Assert.assertEquals(browser, PlaywrightConfig.getBrowserType());
+    for (PlaywrightBrowser currentBrowser : PlaywrightBrowser.class.getEnumConstants()) {
+      Config.addTestSettingValues(Collections.singletonMap(browser, currentBrowser.name()), ConfigSection.PLAYWRIGHT_MAQS, true);
+      Assert.assertEquals(currentBrowser, PlaywrightConfig.getBrowserType());
     }
   }
 

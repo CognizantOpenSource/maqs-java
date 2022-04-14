@@ -23,7 +23,7 @@ import org.testng.ITestResult;
 public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject> {
 
   /**
-   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.BasePlaywrightTest class.
+   * Initializes a new instance of the BasePlaywrightTest class.
    * Set up the page for each test class
    */
   public BasePlaywrightTest() {
@@ -31,7 +31,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
   }
 
   /**
-   * Gets the com.cognizantsoftvision.maqs.playwright.PageDriver.
+   * Gets the PageDriver.
    * @return the page driver
    */
   public PageDriver getPageDriver() {
@@ -39,7 +39,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
   }
 
   /**
-   * Sets the com.cognizantsoftvision.maqs.playwright.PageDriver.
+   * Sets the PageDriver.
    * @param pageDriver the new page driver to be set
    */
   public void setPageDriver(PageDriver pageDriver) {
