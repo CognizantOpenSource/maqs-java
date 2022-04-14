@@ -5,6 +5,7 @@
 package com.cognizantsoftvision.maqs.appium;
 
 import com.cognizantsoftvision.maqs.appium.constants.PlatformType;
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -24,7 +25,7 @@ import org.testng.annotations.Test;
 /**
  * The type Appium driver factory test.
  */
-public class AppiumDriverFactoryUnitTest extends BaseAppiumTest {
+public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
 
   /**
    * The Sauce labs config.
