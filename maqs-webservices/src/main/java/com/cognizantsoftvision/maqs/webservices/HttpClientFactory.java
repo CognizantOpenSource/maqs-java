@@ -10,9 +10,10 @@ import java.net.http.HttpClient;
 import java.time.Duration;
 
 /**
- * Http client factory.
+ * The Http Client Factory class.
  */
 public class HttpClientFactory {
+
   /**
    * private constructor.
    */
