@@ -39,24 +39,32 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
     this.getDriverSupplier = getDriverFunction;
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   @Override
   public T getBaseDriver() {
     return baseDriver;
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   @Override
   public void setBaseDriver(T baseDriver) {
     this.baseDriver = baseDriver;
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   public boolean isDriverInitialized() {
     return this.baseDriver != null;
   }
 
-  /** {@inheritdoc} */
+  /**
+   * {@inheritdoc}
+   */
   public ILogger getLogger() {
     return this.testObject.getLogger();
   }
