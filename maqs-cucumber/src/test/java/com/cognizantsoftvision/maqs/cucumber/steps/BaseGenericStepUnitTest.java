@@ -22,7 +22,7 @@ public class BaseGenericStepUnitTest extends BaseGenericTest {
     @Test(groups = TestCategories.CUCUMBER)
     public void testGetLogger() {
         DummyBaseGenericStep stepClass = new DummyBaseGenericStep();
-        ScenarioContext.put(ScenarioContext.JMAQS_HOLDER, this);
+        ScenarioContext.put(ScenarioContext.MAQS_HOLDER, this);
         Assert.assertNotNull(stepClass.getLogger(), "Checking that Logger is not null through BaseGenericStep");
     }
 
@@ -32,7 +32,7 @@ public class BaseGenericStepUnitTest extends BaseGenericTest {
     @Test(groups = TestCategories.CUCUMBER)
     public void testGetTestObject() {
         DummyBaseGenericStep stepClass = new DummyBaseGenericStep();
-        ScenarioContext.put(ScenarioContext.JMAQS_HOLDER, this);
+        ScenarioContext.put(ScenarioContext.MAQS_HOLDER, this);
         Assert.assertNotNull(stepClass.getTestObject(), "Checking that Test Object is not null through BaseGenericStep");
     }
 }
