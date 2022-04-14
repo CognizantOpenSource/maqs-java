@@ -17,12 +17,12 @@ public class BaseSteps extends BaseGenericStep {
         this.getLogger().logMessage("Base step");
     }
     @When("Base Step2")
-    public void Step2() throws Throwable {
+    public void Step2() {
         this.getLogger().logMessage("Base step2");
     }
 
     @Then("Base Step3")
-    public void Step3() throws Throwable {
+    public void Step3() {
         this.getLogger().logMessage("Base step3");
     }
 }
