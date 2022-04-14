@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * The BaseTestObject class.
+ * The Base Test Object class.
  */
 public class BaseTestObject implements ITestObject {
 
