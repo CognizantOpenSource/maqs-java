@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for Media Type functionality.
+ * The Media Type unit test class.
  */
 public class MediaTypeUnitTest extends BaseGenericTest {
 
