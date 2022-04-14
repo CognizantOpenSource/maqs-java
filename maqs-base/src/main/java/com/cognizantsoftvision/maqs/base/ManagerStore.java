@@ -42,32 +42,19 @@ public class ManagerStore extends HashMap<String, IDriverManager<?>> implements 
     return (T) this.get(key);
   }
 
-  /**
-   * Put.
-   *
-   * @param driverManager the driver manager
-   */
+  /** {@inheritdoc} */
   @Override
   public void put(IDriverManager<?> driverManager) {
     this.put(driverManager.getClass().getName(), driverManager);
   }
 
-  /**
-   * Put or override.
-   *
-   * @param driverManager the driver manager
-   */
+  /** {@inheritdoc} */
   @Override
   public void putOrOverride(IDriverManager<?> driverManager) {
     this.putOrOverride(driverManager.getClass().getName(), driverManager);
   }
 
-  /**
-   * Put or override.
-   *
-   * @param key           the key
-   * @param driverManager the driver manager
-   */
+  /** {@inheritdoc} */
   @Override
   public void putOrOverride(String key, IDriverManager<?> driverManager) {
     this.remove(key);
@@ -79,12 +66,7 @@ public class ManagerStore extends HashMap<String, IDriverManager<?>> implements 
     return this.get(key);
   }
 
-  /**
-   * Remove boolean.
-   *
-   * @param key the key
-   * @return the boolean
-   */
+  /** {@inheritdoc} */
   public boolean remove(String key) {
     if (this.containsKey(key)) {
       try {

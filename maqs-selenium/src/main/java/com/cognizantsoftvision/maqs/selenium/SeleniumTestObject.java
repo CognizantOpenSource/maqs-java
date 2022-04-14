@@ -42,29 +42,12 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
         .put((SeleniumDriverManager.class).getCanonicalName(), new SeleniumDriverManager((() -> webDriver), this));
   }
 
-  /**
-   * Get the WebDriver Object.
-   *
-   * @return A WebDriver Object
-   */
+  /** {@inheritdoc} */
   public WebDriver getWebDriver() {
     return this.getWebManager().getWebDriver();
   }
 
-  /**
-   * Gets the Selenium driver manager.
-   *
-   * @return the web manager
-   */
-  public SeleniumDriverManager getWebManager() {
-    return (SeleniumDriverManager) this.getManagerStore().get(SeleniumDriverManager.class.getCanonicalName());
-  }
-
-  /**
-   * Sets web driver.
-   *
-   * @param driver the driver
-   */
+  /** {@inheritdoc} */
   public void setWebDriver(WebDriver driver) {
     String name = SeleniumDriverManager.class.getCanonicalName();
     if (this.getManagerStore().containsKey(name)) {
@@ -80,13 +63,14 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
     this.getManagerStore().put(name, new SeleniumDriverManager((() -> driver), this));
   }
 
-  /**
-   * Sets web driver using Supplier.
-   *
-   * @param webDriverSupplier the web driver supplier
-   */
+  /** {@inheritdoc} */
   public void setWebDriver(Supplier<WebDriver> webDriverSupplier) {
     this.getManagerStore()
         .put(SeleniumDriverManager.class.getCanonicalName(), new SeleniumDriverManager(webDriverSupplier, this));
+  }
+
+  /** {@inheritdoc} */
+  public SeleniumDriverManager getWebManager() {
+    return (SeleniumDriverManager) this.getManagerStore().get(SeleniumDriverManager.class.getCanonicalName());
   }
 }

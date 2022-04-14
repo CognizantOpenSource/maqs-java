@@ -17,18 +17,18 @@ public interface IFileLogger extends ILogger {
   String getFilePath();
 
   /**
-   * Gets the Directory Path.
-   *
-   * @return Returns the Directory
-   */
-  String getDirectory();
-
-  /**
    * Sets the FilePath value.
    *
    * @param path sets the file path
    */
   void setFilePath(String path);
+
+  /**
+   * Gets the Directory Path.
+   *
+   * @return Returns the Directory
+   */
+  String getDirectory();
 
   /**
    * Gets the File Name value.

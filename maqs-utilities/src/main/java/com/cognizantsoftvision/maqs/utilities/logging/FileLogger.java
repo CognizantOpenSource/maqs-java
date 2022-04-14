@@ -240,13 +240,14 @@ public class FileLogger extends Logger implements IFileLogger {
     }
   }
 
-  /**
-   * Gets the FilePath value.
-   *
-   * @return returns the file path
-   */
+  /** {@inheritdoc} */
   public String getFilePath() {
     return this.filePath;
+  }
+
+  /** {@inheritdoc} */
+  public void setFilePath(String path) {
+    this.filePath = path;
   }
 
   /**
@@ -258,29 +259,12 @@ public class FileLogger extends Logger implements IFileLogger {
     return this.messageType;
   }
 
-  /**
-   * Gets the Directory Path.
-   *
-   * @return Returns the Directory
-   */
+  /** {@inheritdoc} */
   public String getDirectory() {
     return this.directory;
   }
 
-  /**
-   * Sets the FilePath value.
-   *
-   * @param path sets the file path
-   */
-  public void setFilePath(String path) {
-    this.filePath = path;
-  }
-
-  /**
-   * Gets the File Name value.
-   *
-   * @return Returns the File Name.
-   */
+  /** {@inheritdoc} */
   public String getFileName() {
     return this.fileName;
   }
@@ -294,24 +278,14 @@ public class FileLogger extends Logger implements IFileLogger {
     return TXT;
   }
 
-  /**
-   * Logs a message to the log file.
-   *
-   * @param message The message text
-   * @param args String format arguments
-   */
+
+  /** {@inheritdoc} */
   @Override
   public void logMessage(String message, Object... args) {
     this.logMessage(MessageType.INFORMATION, message, args);
   }
 
-  /**
-   * Logs a message to the log file.
-   *
-   * @param messageType The type of message
-   * @param message The message text
-   * @param args String format arguments
-   */
+  /** {@inheritdoc} */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
     // If the message level is greater than the

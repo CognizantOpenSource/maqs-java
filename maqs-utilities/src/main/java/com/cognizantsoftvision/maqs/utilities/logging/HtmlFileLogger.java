@@ -187,22 +187,15 @@ public class HtmlFileLogger extends FileLogger implements IFileLogger {
     }
   }
 
-  /**
-   * Logs the message to the log file.
-   * @param message the string message to be logged
-   * @param args the object in addition to the string message
-   */
-  @Override public void logMessage(String message, Object... args) {
+  /** {@inheritdoc} */
+  @Override
+  public void logMessage(String message, Object... args) {
     this.logMessage(MessageType.INFORMATION, message, args);
   }
 
-  /**
-   * Logs the message to the log file.
-   * @param messageType the message type that is being logged
-   * @param message the string message to be logged
-   * @param args the object in addition to the string message
-   */
-  @Override public void logMessage(MessageType messageType, String message, Object... args) {
+  /** {@inheritdoc} */
+  @Override
+  public void logMessage(MessageType messageType, String message, Object... args) {
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
       // Log the message
@@ -242,7 +235,8 @@ public class HtmlFileLogger extends FileLogger implements IFileLogger {
    *
    * @return File Extension
    */
-  @Override protected String getExtension() {
+  @Override
+  protected String getExtension() {
     return ".html";
   }
 
