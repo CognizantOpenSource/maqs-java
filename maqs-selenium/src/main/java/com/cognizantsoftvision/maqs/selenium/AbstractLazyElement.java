@@ -54,7 +54,7 @@ public abstract class AbstractLazyElement {
   /**
    * The test object for the element.
    */
-  protected SeleniumTestObject testObject;
+  protected ISeleniumTestObject testObject;
 
   /**
    * Cached copy of the element or null if we haven't already found the element.
@@ -68,7 +68,7 @@ public abstract class AbstractLazyElement {
    * @param locator          The by locator to search on
    * @param userFriendlyName The user-friendly name of the lazy element
    */
-  protected AbstractLazyElement(SeleniumTestObject testObject, By locator, String userFriendlyName) {
+  protected AbstractLazyElement(ISeleniumTestObject testObject, By locator, String userFriendlyName) {
     this.testObject = testObject;
     this.by = locator;
     this.userFriendlyName = userFriendlyName;
@@ -160,7 +160,7 @@ public abstract class AbstractLazyElement {
    *
    * @return the test object
    */
-  public SeleniumTestObject getTestObject() {
+  public ISeleniumTestObject getTestObject() {
     return this.testObject;
   }
 

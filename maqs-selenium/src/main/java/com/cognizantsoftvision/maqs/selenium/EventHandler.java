@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -34,14 +34,14 @@ public class EventHandler implements WebDriverListener {
   /**
    * The Event Handler Logger.
    */
-  private final Logger logger;
+  private final ILogger logger;
 
   /**
    * Initializes a new instance of the EventHandler class.
    *
    * @param logger The Logger
    */
-  public EventHandler(Logger logger) {
+  public EventHandler(ILogger logger) {
     this.logger = logger;
   }
 

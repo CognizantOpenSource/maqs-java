@@ -23,7 +23,7 @@ public class LazyWebElement extends AbstractLazyElement {
    * @param locator          The by locator to search on
    * @param userFriendlyName The User Friendly name of the lazy element
    */
-  public LazyWebElement(SeleniumTestObject testObject, By locator, String userFriendlyName) {
+  public LazyWebElement(ISeleniumTestObject testObject, By locator, String userFriendlyName) {
     super(testObject, locator, userFriendlyName);
   }
 

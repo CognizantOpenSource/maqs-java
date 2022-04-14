@@ -197,10 +197,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void clickElementByJavascriptFromHoverDropdown() {
     AutomationPageModel automationPageModel = navigateToUrl();
-    ElementHandler.clickElementByJavaScript(getWebDriver(), automationPageModel.trainingLink);
+    ElementHandler.clickElementByJavaScript(getWebDriver(), automationPageModel.iFrameDropDownButton);
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-    UIWaitFactory.getWaitDriver(
-        getWebDriver()).waitForExactText(By.cssSelector("#Login"), "Login");
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForExactText(automationPageModel.iFramePageTitle, "Index");
   }
 
   /**

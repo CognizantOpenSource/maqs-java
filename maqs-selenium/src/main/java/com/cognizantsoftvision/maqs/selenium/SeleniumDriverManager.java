@@ -4,8 +4,8 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.base.DriverManager;
+import com.cognizantsoftvision.maqs.base.ITestObject;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
@@ -28,7 +28,7 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @param getDriver  the get driver
    * @param testObject the test object
    */
-  public SeleniumDriverManager(Supplier<WebDriver> getDriver, BaseTestObject testObject) {
+  public SeleniumDriverManager(Supplier<WebDriver> getDriver, ITestObject testObject) {
     super(getDriver, testObject);
   }
 
@@ -38,7 +38,7 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @param driver     the Selenium web driver
    * @param testObject the test object
    */
-  public SeleniumDriverManager(WebDriver driver, BaseTestObject testObject) {
+  public SeleniumDriverManager(WebDriver driver, ITestObject testObject) {
     super(() -> driver, testObject);
   }
 
@@ -88,7 +88,7 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
   protected void logVerbose(String message, Object... args) {
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args));
-    String fullTestName = getTestObject().getFullyQualifiedTestName();
+    String fullTestName = this.getTestObject().getFullyQualifiedTestName();
 
     Thread thread = Thread.currentThread();
     for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
