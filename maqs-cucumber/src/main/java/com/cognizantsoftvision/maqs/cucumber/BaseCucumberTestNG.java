@@ -39,7 +39,7 @@ public abstract class BaseCucumberTestNG extends AbstractTestNGCucumberTests imp
     BaseTest test = createSpecificBaseTest();
     test.customSetup(testNameTest, context);
 
-    ScenarioContext.put(ScenarioContext.JMAQS_HOLDER, test);
+    ScenarioContext.put(ScenarioContext.MAQS_HOLDER, test);
   }
 
   /**
@@ -50,7 +50,7 @@ public abstract class BaseCucumberTestNG extends AbstractTestNGCucumberTests imp
   @AfterMethod
   public void tearDown(ITestResult result) {
     // Get the test object and set the result
-    BaseTest test = ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseTest.class);
+    BaseTest test = ScenarioContext.get(ScenarioContext.MAQS_HOLDER, BaseTest.class);
     test.setTestResult(result);
 
     // If there was a failure log it
@@ -60,7 +60,7 @@ public abstract class BaseCucumberTestNG extends AbstractTestNGCucumberTests imp
 
     test.teardown();
     testName.remove();
-    ScenarioContext.remove(ScenarioContext.JMAQS_HOLDER);
+    ScenarioContext.remove(ScenarioContext.MAQS_HOLDER);
   }
 
   /**
@@ -97,6 +97,6 @@ public abstract class BaseCucumberTestNG extends AbstractTestNGCucumberTests imp
    * @return The base test
    */
   protected BaseTest getBaseTest() {
-    return ScenarioContext.get(ScenarioContext.JMAQS_HOLDER, BaseTest.class);
+    return ScenarioContext.get(ScenarioContext.MAQS_HOLDER, BaseTest.class);
   }
 }
