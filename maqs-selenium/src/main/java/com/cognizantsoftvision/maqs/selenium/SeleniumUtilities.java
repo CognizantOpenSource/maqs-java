@@ -45,7 +45,7 @@ public class SeleniumUtilities {
    * @param testObject the test object
    * @return the boolean
    */
-  public static boolean captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject) {
+  public static boolean captureScreenshot(WebDriver webDriver, ISeleniumTestObject testObject) {
     return captureScreenshot(webDriver, testObject, "");
   }
 
@@ -57,7 +57,7 @@ public class SeleniumUtilities {
    * @param appendName the appended name
    * @return the boolean
    */
-  public static boolean captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
+  public static boolean captureScreenshot(WebDriver webDriver, ISeleniumTestObject testObject,
       String appendName) {
     try {
       // Check if we are using a file logger. If not, return false.
@@ -94,7 +94,7 @@ public class SeleniumUtilities {
    * @param fileNameWithoutExtension the file name without extension
    * @return the string
    */
-  public static String captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
+  public static String captureScreenshot(WebDriver webDriver, ISeleniumTestObject testObject,
       String directory, String fileNameWithoutExtension) {
     File tempFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
     String path = calculateFileName(directory, fileNameWithoutExtension, ".png");
@@ -207,7 +207,7 @@ public class SeleniumUtilities {
     return Paths.get(directory, fileNameWithoutExtension + fileExtension).normalize().toString();
   }
 
-  private static void validateDirectoryStructure(SeleniumTestObject testObject, String directory) {
+  private static void validateDirectoryStructure(ISeleniumTestObject testObject, String directory) {
     try {
       Path path = new File(directory).toPath();
       if (!path.toFile().isDirectory()) {
@@ -255,7 +255,7 @@ public class SeleniumUtilities {
    * @param testObject the test object to be used
    * @param windowName the name of the window being switched to
    */
-  public static void switchToWindow(SeleniumTestObject testObject, String windowName) {
+  public static void switchToWindow(ISeleniumTestObject testObject, String windowName) {
     testObject.getLogger().logMessage(MessageType.VERBOSE, "Before switching to window: %s", windowName);
 
     try {

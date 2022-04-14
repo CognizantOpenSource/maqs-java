@@ -23,7 +23,7 @@ import java.util.Collections;
 /**
  * The Web Driver Service Driver Delete unit test class.
  */
-public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
+public class WebServiceDriverDeleteUnitTest {
 
   /**
    * String to hold the URL.

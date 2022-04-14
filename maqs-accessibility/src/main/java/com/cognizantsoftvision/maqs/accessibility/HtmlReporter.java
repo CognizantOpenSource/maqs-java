@@ -443,7 +443,7 @@ public class HtmlReporter {
   /**
    * Adds the issues in the Any category in the list of Checks.
    * @param htmlAndSelectorWrapper The element that all the content will be appended to
-   * @param anyCheckResults A list of the any check results
+   * @param anyCheckResults A list of the Any check results
    */
   private static void fixAnyIssues(Element htmlAndSelectorWrapper, List<Check> anyCheckResults) {
     Element htmlAndSelector = new Element("p");
