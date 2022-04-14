@@ -42,7 +42,7 @@ public abstract class Logger implements ILogger {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public MessageType getLoggingLevel() {
@@ -50,7 +50,7 @@ public abstract class Logger implements ILogger {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void setLoggingLevel(MessageType level) {
@@ -58,7 +58,7 @@ public abstract class Logger implements ILogger {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void suspendLogging() {
@@ -70,7 +70,7 @@ public abstract class Logger implements ILogger {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void continueLogging() {

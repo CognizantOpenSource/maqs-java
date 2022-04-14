@@ -241,35 +241,35 @@ public class FileLogger extends Logger implements IFileLogger {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public String getFilePath() {
     return this.filePath;
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public void setFilePath(String path) {
     this.filePath = path;
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public MessageType getMessageType() {
     return this.messageType;
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public String getDirectory() {
     return this.directory;
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public String getFileName() {
     return this.fileName;
@@ -286,7 +286,7 @@ public class FileLogger extends Logger implements IFileLogger {
 
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void logMessage(String message, Object... args) {
@@ -294,7 +294,7 @@ public class FileLogger extends Logger implements IFileLogger {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {

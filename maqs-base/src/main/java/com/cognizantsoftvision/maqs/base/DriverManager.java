@@ -40,7 +40,7 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public T getBaseDriver() {
@@ -48,7 +48,7 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void setBaseDriver(T baseDriver) {
@@ -56,14 +56,14 @@ public abstract class DriverManager<T> implements IDriverManager<T> {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public boolean isDriverInitialized() {
     return this.baseDriver != null;
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public ILogger getLogger() {
     return this.testObject.getLogger();

@@ -43,7 +43,7 @@ public class ManagerStore extends HashMap<String, IDriverManager<?>> implements 
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void put(IDriverManager<?> driverManager) {
@@ -51,7 +51,7 @@ public class ManagerStore extends HashMap<String, IDriverManager<?>> implements 
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void putOrOverride(IDriverManager<?> driverManager) {
@@ -59,7 +59,7 @@ public class ManagerStore extends HashMap<String, IDriverManager<?>> implements 
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void putOrOverride(String key, IDriverManager<?> driverManager) {
@@ -73,7 +73,7 @@ public class ManagerStore extends HashMap<String, IDriverManager<?>> implements 
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public boolean remove(String key) {
     if (this.containsKey(key)) {

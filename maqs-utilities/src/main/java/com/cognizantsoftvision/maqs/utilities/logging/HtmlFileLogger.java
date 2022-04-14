@@ -188,7 +188,7 @@ public class HtmlFileLogger extends FileLogger implements IFileLogger {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void logMessage(String message, Object... args) {
@@ -196,7 +196,7 @@ public class HtmlFileLogger extends FileLogger implements IFileLogger {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {

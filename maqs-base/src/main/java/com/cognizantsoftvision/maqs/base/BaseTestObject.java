@@ -98,77 +98,77 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public ILogger getLogger() {
     return this.logger;
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public void setLogger(final ILogger logger) {
     this.logger = logger;
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public IPerfTimerCollection getPerfTimerCollection() {
     return this.perfTimerCollection;
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public void setPerfTimerCollection(final IPerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public String getFullyQualifiedTestName() {
     return this.fullyQualifiedTestName;
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public ConcurrentMap<String, String> getValues() {
     return this.values;
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   protected void setValues(final ConcurrentHashMap<String, String> values) {
     this.values = values;
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public ConcurrentMap<String, Object> getObjects() {
     return this.objects;
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   protected void setObjects(final ConcurrentHashMap<String, Object> objects) {
     this.objects = objects;
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public ManagerStore getManagerStore() {
     return this.managerStore;
   }
 
   /**
-   *  {@inheritdoc}
+   *  {@inheritDoc}
    */
   public void setValue(final String key, final String value) {
     if (this.values.containsKey(key)) {
@@ -179,7 +179,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public void setObject(final String key, final Object value) {
     if (this.objects.containsKey(key)) {
@@ -190,7 +190,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   @Override
   public <T extends IDriverManager<?>> void addDriverManager(final T driverManager) {
@@ -198,7 +198,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public <T extends IDriverManager<?>> void addDriverManager(final T driverManager, final boolean overrideIfExists) {
@@ -210,7 +210,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   @Override
   public void addDriverManager(String key, IDriverManager<?> driverManager) {
@@ -218,7 +218,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   @Override
   public void addDriverManager(final String key, final DriverManager<?> driverManager) {
@@ -226,7 +226,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void overrideDriverManager(final String key, final DriverManager<?> driverManager) {
@@ -238,7 +238,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public void overrideDriverManager(String key, IDriverManager<?> driverManager) {
@@ -246,7 +246,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public boolean addAssociatedFile(final String path) {
     if (new File(path).exists()) {
@@ -294,28 +294,28 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public boolean removeAssociatedFile(final String path) {
     return this.associatedFiles.remove(path);
   }
 
   /**
-   * {@inheritdoc} 
+   * {@inheritDoc} 
    */
   public String[] getArrayOfAssociatedFiles() {
     return this.associatedFiles.toArray(new String[0]);
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public boolean containsAssociatedFile(final String path) {
     return this.associatedFiles.contains(path);
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public boolean getIsClosed() {
@@ -323,7 +323,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   @Override
   public List<String> getAssociatedFiles() {
