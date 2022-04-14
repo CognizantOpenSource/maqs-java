@@ -15,7 +15,7 @@ import org.apache.commons.text.StringEscapeUtils;
 /**
  * Helper class for adding logs to an HTML file. Allows configurable file path.
  */
-public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
+public class HtmlFileLogger extends FileLogger implements IFileLogger {
 
   /**
    * The default log name.
