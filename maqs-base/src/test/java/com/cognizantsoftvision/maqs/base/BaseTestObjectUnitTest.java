@@ -35,7 +35,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testBaseTestObject2() {
-    final BaseTestObject testObject = (BaseTestObject) this.getTestObject();
+    final ITestObject testObject = this.getTestObject();
     BaseTestObject baseTestObject = new BaseTestObject(testObject);
     Assert.assertNotNull(baseTestObject, "Checking that Base Test Object instantiated correctly");
   }
