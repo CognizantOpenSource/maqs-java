@@ -59,7 +59,7 @@ public class ManagerStoreUnitTest extends BaseGenericTest {
 
   private TestDriverManager getTestDriverManager() {
     Supplier<Object> supplier = () -> null;
-    return new TestDriverManager(supplier, getTestObject());
+    return new TestDriverManager(supplier, (BaseTestObject) getTestObject());
   }
 
   @Test(groups = TestCategories.FRAMEWORK)

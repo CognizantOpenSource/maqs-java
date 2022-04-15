@@ -21,13 +21,6 @@ public interface ISeleniumTestObject extends ITestObject {
   WebDriver getWebDriver();
 
   /**
-   * Gets the Selenium driver manager.
-   *
-   * @return the web manager
-   */
-  SeleniumDriverManager getWebManager();
-
-  /**
    * Sets web driver.
    *
    * @param driver the driver
@@ -40,4 +33,11 @@ public interface ISeleniumTestObject extends ITestObject {
    * @param webDriverSupplier the web driver supplier
    */
   void setWebDriver(Supplier<WebDriver> webDriverSupplier);
+
+  /**
+   * Gets the Selenium driver manager.
+   *
+   * @return the web manager
+   */
+  SeleniumDriverManager getWebManager();
 }

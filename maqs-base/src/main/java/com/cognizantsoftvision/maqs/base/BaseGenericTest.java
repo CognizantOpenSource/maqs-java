@@ -9,7 +9,7 @@ import org.testng.ITestResult;
 /**
  * Base Generic Test class for Unit Tests and Other testing scenarios.
  */
-public class BaseGenericTest extends BaseExtendableTest<BaseTestObject> {
+public class BaseGenericTest extends BaseExtendableTest<ITestObject> {
 
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {

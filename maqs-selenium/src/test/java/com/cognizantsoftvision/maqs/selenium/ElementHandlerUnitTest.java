@@ -88,9 +88,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void checkCheckBoxTest() {
     AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.checkCheckBox(getWebDriver(), automationPageModel.checkbox, true);
-    Assert.assertTrue(
-        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(automationPageModel.checkbox).isSelected(),
-        "Checkbox was not enabled");
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(
+        automationPageModel.checkbox).isSelected(), "Checkbox was not enabled");
   }
 
   /**
@@ -147,8 +146,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectMultipleElementsFromListBox(
         getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
-    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(getWebDriver(),
-        automationPageModel.computerPartsList);
+    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(
+        getWebDriver(), automationPageModel.computerPartsList);
     ListProcessor.listOfStringsComparer(itemsToSelect, selectedItems, results, false);
 
     if (results.length() > 0) {
@@ -170,8 +169,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.selectMultipleElementsFromListBoxByValue(
         getWebDriver(), automationPageModel.computerPartsList, itemsToSelect);
-    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(getWebDriver(),
-        automationPageModel.computerPartsList);
+    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(
+        getWebDriver(), automationPageModel.computerPartsList);
 
     if (selectedItems.size() != 3) {
       Assert.fail("Does not contain 3 elements: " + selectedItems);
@@ -253,8 +252,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void slowTypeTest() {
     AutomationPageModel automationPageModel = navigateToUrl();
     ElementHandler.slowType(getWebDriver(), automationPageModel.firstNameTextBox, "Test input slow type");
-    Assert.assertEquals(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(
-            automationPageModel.firstNameTextBox).getAttribute("value"), "Test input slow type");
+    Assert.assertEquals(
+        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(automationPageModel.firstNameTextBox)
+            .getAttribute("value"), "Test input slow type");
   }
 
   /**

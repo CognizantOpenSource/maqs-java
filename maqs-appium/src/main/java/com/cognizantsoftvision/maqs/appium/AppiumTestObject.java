@@ -44,18 +44,14 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
   }
 
   /**
-   * Gets the appium driver.
-   *
-   * @return the appium driver
+   * {@inheritDoc}
    */
   public AppiumDriver<WebElement> getAppiumDriver() {
     return this.getAppiumManager().getMobileDriver();
   }
 
   /**
-   * Gets appium manager.
-   *
-   * @return the appium manager
+   * {@inheritDoc}
    */
   public MobileDriverManager getAppiumManager() {
     return (MobileDriverManager) this.getManagerStore()
@@ -63,9 +59,7 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
   }
 
   /**
-   * Sets appium driver.
-   *
-   * @param appiumDriver the appium driver
+   * {@inheritDoc}
    */
   public void setAppiumDriver(AppiumDriver<WebElement> appiumDriver) {
     this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),
@@ -73,9 +67,7 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
   }
 
   /**
-   * Sets appium driver.
-   *
-   * @param appiumDriverSupplier the appium driver supplier
+   * {@inheritDoc}
    */
   public void setAppiumDriver(Supplier<AppiumDriver<WebElement>> appiumDriverSupplier) {
     this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),

@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * The BaseTestObject class.
+ * The Base Test Object class.
  */
 public class BaseTestObject implements ITestObject {
 
@@ -98,106 +98,77 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Gets the logger.
-   *
-   * @return The logger
+   * {@inheritDoc} 
    */
   public ILogger getLogger() {
     return this.logger;
   }
 
   /**
-   * Sets the logger.
-   *
-   * @param logger The logger to use
+   * {@inheritDoc} 
    */
   public void setLogger(final ILogger logger) {
     this.logger = logger;
   }
 
   /**
-   * Gets the Performance Timer Collection.
-   *
-   * @return Performance Timer Collection
+   * {@inheritDoc} 
    */
   public IPerfTimerCollection getPerfTimerCollection() {
     return this.perfTimerCollection;
   }
 
   /**
-   * Sets the Performance Timer Collection.
-   *
-   * @param perfTimerCollection Performance Timer Collection
+   * {@inheritDoc} 
    */
   public void setPerfTimerCollection(final IPerfTimerCollection perfTimerCollection) {
     this.perfTimerCollection = perfTimerCollection;
   }
 
+  /**
+   * {@inheritDoc} 
+   */
   public String getFullyQualifiedTestName() {
     return this.fullyQualifiedTestName;
   }
 
   /**
-   * Gets the Concurrent Hash Map of string key value pairs.
-   *
-   * @return Concurrent Hash Map of string key value pairs
+   * {@inheritDoc} 
    */
   public ConcurrentMap<String, String> getValues() {
     return this.values;
   }
 
   /**
-   * Sets the Concurrent Hash Map of string key and object value pairs.
-   *
-   * @param values Concurrent Hash Map of string key value pairs to use
+   * {@inheritDoc} 
    */
   protected void setValues(final ConcurrentHashMap<String, String> values) {
     this.values = values;
   }
 
   /**
-   * Gets the Concurrent Hash Map of string key and object value pairs.
-   *
-   * @return Concurrent Hash Map of string key and object value pairs
+   * {@inheritDoc} 
    */
   public ConcurrentMap<String, Object> getObjects() {
     return this.objects;
   }
 
   /**
-   * Sets the Concurrent Hash Map of string key and object value pairs.
-   *
-   * @param objects Concurrent Hash Map of string key and object value pairs to
-   *                use
+   * {@inheritDoc} 
    */
   protected void setObjects(final ConcurrentHashMap<String, Object> objects) {
     this.objects = objects;
   }
 
   /**
-   * Gets the Concurrent Hash Map of string key and driver value pairs.
-   *
-   * @return Concurrent Hash Map of string key and driver value pairs
+   * {@inheritDoc}
    */
   public ManagerStore getManagerStore() {
     return this.managerStore;
   }
 
   /**
-   * Sets the Concurrent Hash Map of string key and driver value pairs.
-   *
-   * @param managerStore Concurrent Hash Map of string key and driver value pairs
-   *                     to use.
-   */
-  protected void setManagerStore(final ManagerStore managerStore) {
-    this.managerStore = managerStore;
-  }
-
-  /**
-   * Sets a string value, will replace if the key already exists.
-   *
-   * @param key   The key
-   * @param value The value to associate with the key
+   *  {@inheritDoc}
    */
   public void setValue(final String key, final String value) {
     if (this.values.containsKey(key)) {
@@ -208,10 +179,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Sets an object value, will replace if the key already exists.
-   *
-   * @param key   The key
-   * @param value The value to associate with the key
+   * {@inheritDoc} 
    */
   public void setObject(final String key, final Object value) {
     if (this.objects.containsKey(key)) {
@@ -222,22 +190,17 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Add driver manager.
-   *
-   * @param <T>           the type parameter
-   * @param driverManager the driver manager
+   * {@inheritDoc} 
    */
+  @Override
   public <T extends IDriverManager<?>> void addDriverManager(final T driverManager) {
     this.addDriverManager(driverManager, false);
   }
 
   /**
-   * Add driver manager.
-   *
-   * @param <T>              the type parameter
-   * @param driverManager    the driver manager
-   * @param overrideIfExists the override if exists
+   * {@inheritDoc}
    */
+  @Override
   public <T extends IDriverManager<?>> void addDriverManager(final T driverManager, final boolean overrideIfExists) {
     if (overrideIfExists) {
       this.overrideDriverManager(driverManager.getClass().getTypeName(), driverManager);
@@ -247,10 +210,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Adds a driver manager to the manager store.
-   *
-   * @param key Key for the new driver
-   * @param driverManager The new driver manager
+   * {@inheritDoc} 
    */
   @Override
   public void addDriverManager(String key, IDriverManager<?> driverManager) {
@@ -258,10 +218,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Add driver manager.
-   *
-   * @param key           the key
-   * @param driverManager the driver manager
+   * {@inheritDoc} 
    */
   @Override
   public void addDriverManager(final String key, final DriverManager<?> driverManager) {
@@ -269,11 +226,9 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Override driver manager.
-   *
-   * @param key           the key
-   * @param driverManager the driver manager
+   * {@inheritDoc}
    */
+  @Override
   public void overrideDriverManager(final String key, final DriverManager<?> driverManager) {
     if (this.managerStore.containsKey(key)) {
       this.managerStore.putOrOverride(key, driverManager);
@@ -283,10 +238,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Override the driver manager.
-   *
-   * @param key the key to be used to search for the driver in the driver manager
-   * @param driverManager The new driver manager
+   * {@inheritDoc}
    */
   @Override
   public void overrideDriverManager(String key, IDriverManager<?> driverManager) {
@@ -294,10 +246,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Add associated file boolean.
-   *
-   * @param path the path
-   * @return the boolean
+   * {@inheritDoc}
    */
   public boolean addAssociatedFile(final String path) {
     if (new File(path).exists()) {
@@ -345,38 +294,28 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Remove associated file boolean.
-   *
-   * @param path the path
-   * @return the boolean
+   * {@inheritDoc} 
    */
   public boolean removeAssociatedFile(final String path) {
     return this.associatedFiles.remove(path);
   }
 
   /**
-   * Get array of associated files string [ ].
-   *
-   * @return the string [ ]
+   * {@inheritDoc} 
    */
   public String[] getArrayOfAssociatedFiles() {
     return this.associatedFiles.toArray(new String[0]);
   }
 
   /**
-   * Contains associated file boolean.
-   *
-   * @param path the path
-   * @return the boolean
+   * {@inheritDoc}
    */
   public boolean containsAssociatedFile(final String path) {
     return this.associatedFiles.contains(path);
   }
 
   /**
-   * Gets if the test object is closed.
-   *
-   * @return if the test object is closed
+   * {@inheritDoc}
    */
   @Override
   public boolean getIsClosed() {
@@ -384,9 +323,7 @@ public class BaseTestObject implements ITestObject {
   }
 
   /**
-   * Gets the associated files.
-   *
-   * @return a list of associated files
+   * {@inheritDoc}
    */
   @Override
   public List<String> getAssociatedFiles() {

@@ -17,11 +17,11 @@ public interface IFileLogger extends ILogger {
   String getFilePath();
 
   /**
-   * Gets the Message Type value.
+   * Sets the FilePath value.
    *
-   * @return The Message Type.
+   * @param path sets the file path
    */
-  MessageType getMessageType();
+  void setFilePath(String path);
 
   /**
    * Gets the Directory Path.
@@ -31,31 +31,9 @@ public interface IFileLogger extends ILogger {
   String getDirectory();
 
   /**
-   * Sets the FilePath value.
-   *
-   * @param path sets the file path
-   */
-  void setFilePath(String path);
-
-  /**
    * Gets the File Name value.
    *
    * @return Returns the File Name.
    */
   String getFileName();
-
-  /**
-   * Logs the message.
-   * @param message The message text.
-   * @param args String format arguments
-   */
-  void logMessage(String message, Object... args);
-
-  /**
-   * Logs the message.
-   * @param messageType The type of message
-   * @param message The message text
-   * @param args String format arguments
-   */
-  void logMessage(MessageType messageType, String message, Object... args);
 }

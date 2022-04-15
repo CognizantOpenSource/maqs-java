@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -17,7 +16,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * Selenium configuration tests.
  */
-public class SeleniumConfigUnitTest extends BaseGenericTest {
+public class SeleniumConfigUnitTest {
 
   /**
    * Remote capabilities username identifier.
