@@ -18,13 +18,9 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-
-import org.junit.Before;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 
 /**
  * The Page Driver unit tests.
@@ -44,9 +40,10 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /**
    * Sets up the page model.
    */
-  @BeforeTest
+  @BeforeMethod
   public void setUp() {
     pageModel = new PageModel(this.getTestObject());
+    pageModel.openPage();
   }
 
   /**
@@ -386,12 +383,12 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void waitForTimeoutTest() {
     LocalDateTime before = LocalDateTime.now();
-    this.getPageDriver().waitForTimeout(1000);
+    this.getPageDriver().waitForTimeout(1001);
     LocalDateTime afterWait = LocalDateTime.now();
 
     int duration = before.getSecond() - afterWait.getSecond();
     //Assert.assertTrue(afterWait > before.AddMilliseconds(800) && afterWait < before.AddMilliseconds(1200),
-    Assert.assertTrue(afterWait.isAfter(before.plusSeconds(8)) && afterWait.isAfter(before.plusSeconds(12)),
+    Assert.assertTrue(afterWait.isAfter(before.plusSeconds(1)) && afterWait.isBefore(before.plusSeconds(2)),
         "Sleep should have been about 1 second but was " + duration + " seconds");
   }
 
@@ -429,7 +426,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void setContentTest() {
-    String guid = UUID.randomUUID().toString();
+    String guid = "a" + UUID.randomUUID().toString();
     this.getPageDriver().setContent("<html><body><div id='" + guid + "'>TEST</div></body></html>");
     this.getPageDriver().waitForTimeout(1000);
     Assert.assertTrue(this.getPageDriver().isEventuallyVisible("#" + guid));
@@ -511,7 +508,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc);
     this.getPageDriver().reload();
     this.getPageDriver().evaluate("changeMainHeaderName();");
-    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NewName");
+    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
   }
 
   /**
@@ -521,7 +518,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   public void addScriptTagTest() {
     this.getPageDriver().addScriptTag(new Page.AddScriptTagOptions().setContent(elementPageModel.renameHeaderFunc));
     this.getPageDriver().evaluate("changeMainHeaderName();");
-    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NewName");
+    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
   }
 
   /**
@@ -529,9 +526,10 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void addStyleTagTest() {
-    Assert.assertTrue(this.getPageDriver().isEventuallyVisible(elementPageModel.mainHeader));
+    Assert.assertTrue(this.getPageDriver().isEventuallyVisible(elementPageModel.checkbox1));
     this.getPageDriver().addStyleTag(new Page.AddStyleTagOptions().setContent("html {display: none;}"));
-    Assert.assertTrue(this.getPageDriver().isEventuallyGone(elementPageModel.mainHeader));
+    this.getPageDriver().waitForTimeout(1001);
+    Assert.assertTrue(this.getPageDriver().isEventuallyGone(elementPageModel.checkbox1));
   }
 
 

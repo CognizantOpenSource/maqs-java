@@ -33,7 +33,7 @@
     </GlobalMaqs>
     <PlaywrightMaqs>
         <!--Default base web url-->
-        <WebBase>value="https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/"</WebBase>
+        <WebBase>https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/</WebBase>
 
         <!--Local browser settings
         <add key="Browser" value="Chrome"/>
@@ -42,7 +42,7 @@
         <add key="Browser" value="Edge"/>
         <add key="Browser" value="Webkit"/>-->
         <Browser>Chrome</Browser>
-        <Headless>yes</Headless>
+        <Headless>YES</Headless>
 
         <!--Playwright specific timeouts in milliseconds-->
         <Timeout> 20000</Timeout>
@@ -50,7 +50,7 @@
 
         <!--Browser Resize settings - The Default is 1280x720
         <add key="BrowserSize" value="DEFAULT" />-->
-        <BrowserSize>300x300</BrowserSize>
+        <BrowserSize>DEFAULT</BrowserSize>
 
         <!--Playwright specific logging options-->
         <CaptureVideo>Yes</CaptureVideo>

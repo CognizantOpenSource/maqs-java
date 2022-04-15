@@ -40,6 +40,14 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
   }
 
   /**
+   * Gets a new PageDriver.
+   * @return the page driver
+   */
+  protected PageDriver getPage() {
+    return PageDriverFactory.getDefaultPageDriver();
+  }
+
+  /**
    * Sets the PageDriver.
    * @param pageDriver the new page driver to be set
    */
@@ -56,10 +64,6 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
     return new PlaywrightTestObject(this::getPageDriver, log, this.getFullyQualifiedTestClassName());
   }
 
-  protected PageDriver getBrowser() {
-    return PageDriverFactory.getDefaultPageDriver();
-  }
-
   /**
    * Create a new test object.
    */
@@ -69,7 +73,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
       this.setTestObject(
           new PlaywrightTestObject(() -> {
             try {
-              return getBrowser();
+              return getPage();
             } catch (Exception e) {
               getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
               throw e;

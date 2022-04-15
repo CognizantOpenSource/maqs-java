@@ -72,6 +72,14 @@ public class PageDriver {
   }
 
   /**
+   * adds an init script.
+   * @param path the path of the script
+   */
+  public void addInitScript(Path path) {
+    this.asyncPage.addInitScript(path);
+  }
+
+  /**
    * gets the page url.
    * @return the url string
    */
@@ -85,14 +93,6 @@ public class PageDriver {
    */
   public boolean isClosed() {
     return this.asyncPage.isClosed();
-  }
-
-  /**
-   * adds an init script.
-   * @param path the path of the script
-   */
-  public void addInitScript(Path path) {
-    this.asyncPage.addInitScript(path);
   }
 
   /**
