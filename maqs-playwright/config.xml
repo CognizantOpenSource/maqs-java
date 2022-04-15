@@ -33,7 +33,7 @@
     </GlobalMaqs>
     <PlaywrightMaqs>
         <!--Default base web url-->
-        <add key="WebBase" value="https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/" />
+        <WebBase>value="https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/"</WebBase>
 
         <!--Local browser settings
         <add key="Browser" value="Chrome"/>
@@ -41,24 +41,24 @@
         <add key="Browser" value="Firefox"/>
         <add key="Browser" value="Edge"/>
         <add key="Browser" value="Webkit"/>-->
-        <add key="Browser" value="Chrome" />
-        <add key="Headless" value="yes" />
+        <Browser>Chrome</Browser>
+        <Headless>yes</Headless>
 
         <!--Playwright specific timeouts in milliseconds-->
-        <add key="Timeout" value="20000" />
-        <add key="CommandTimeout" value="200000" />
+        <Timeout> 20000</Timeout>
+        <CommandTimeout>200000</CommandTimeout>
 
         <!--Browser Resize settings - The Default is 1280x720
         <add key="BrowserSize" value="DEFAULT" />-->
-        <add key="BrowserSize" value="300x300" />
+        <BrowserSize>300x300</BrowserSize>
 
         <!--Playwright specific logging options-->
-        <add key="CaptureVideo" value="Yes" />
-        <add key="CaptureScreenshots" value="No" />
-        <add key="CaptureSnapshots" value="Yes" />
+        <CaptureVideo>Yes</CaptureVideo>
+        <CaptureScreenshots>No</CaptureScreenshots>
+        <CaptureSnapshots>Yes</CaptureSnapshots>
 
         <!--Proxy  settings-->
-        <add key="UseProxy" value="No" />
-        <add key="ProxyAddress" value="http://localhost:8002" />
+        <UseProxy>No</UseProxy>
+        <ProxyAddress>http://localhost:8002</ProxyAddress>
     </PlaywrightMaqs>
 </configuration>
