@@ -44,7 +44,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /**
    * Sets up the page model.
    */
-  @BeforeTest
+  @BeforeClass
   public void setUp() {
     pageModel = new PageModel(this.getTestObject());
   }

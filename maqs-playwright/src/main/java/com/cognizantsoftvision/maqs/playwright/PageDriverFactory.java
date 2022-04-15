@@ -117,7 +117,6 @@ public class PageDriverFactory {
     Page page = context.newPage();
     page.setDefaultTimeout(PlaywrightConfig.getTimeoutTime());
     page.setDefaultNavigationTimeout(PlaywrightConfig.getTimeoutTime());
-
     return new PageDriver(page);
   }
 

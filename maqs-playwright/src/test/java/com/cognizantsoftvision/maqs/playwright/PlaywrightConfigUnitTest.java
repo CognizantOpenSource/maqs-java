@@ -10,6 +10,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -23,6 +24,12 @@ public class PlaywrightConfigUnitTest {
    * String placeholder for "Browser".
    */
   private static final String browser = "Browser";
+
+  @Test
+  public void getPlaywrightSection() {
+    Map<String, String> config = Config.getSection(ConfigSection.PLAYWRIGHT_MAQS);
+    Assert.assertNotNull(config);
+  }
 
   /**
    * Get expected WebBase configuration.

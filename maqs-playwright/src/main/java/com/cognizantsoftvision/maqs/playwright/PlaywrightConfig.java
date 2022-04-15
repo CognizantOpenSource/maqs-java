@@ -17,21 +17,6 @@ public class PlaywrightConfig {
    * Loads when class is loaded.
    */
   PlaywrightConfig() {
-    checkConfig();
-  }
-
-  /**
-   * Ensure required fields are in the config.
-   */
-  private static void checkConfig() {
-  //    var validator = new ConfigValidation()
-  //    {
-  //      RequiredFields = new List<string>()
-  //      {
-  //        "Timeout"
-  //      }
-  //    };
-  //    Config.Validate(ConfigSection.PLAYWRIGHT_MAQS, validator);
   }
 
   /**
@@ -109,8 +94,8 @@ public class PlaywrightConfig {
    * Get the timeout in milliseconds.
    * @return The timeout in milliseconds
    */
-  public static int getTimeoutTime() {
-    return Integer.parseInt(Config.getValueForSection(ConfigSection.PLAYWRIGHT_MAQS.toString(), "Timeout"));
+  public static double getTimeoutTime() {
+    return Integer.parseInt(Config.getValueForSection(ConfigSection.PLAYWRIGHT_MAQS.toString(), "Timeout", "0"));
   }
 
   /**

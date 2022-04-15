@@ -71,7 +71,20 @@ public class PageDriverManager extends DriverManager<PageDriver> {
    */
   @Override
   public void close() {
-    this.baseDriver.close();
+    getLogger().logMessage(MessageType.VERBOSE, "Start dispose driver");
+
+    // If we never created the driver we don't have any cleanup to do
+    if (!this.isDriverInitialized()) {
+      return;
+    }
+
+    try {
+      PageDriver driver = this.getPageDriver();
+      driver.close();
+    } catch (Exception e) {
+      getLogger().logMessage(MessageType.ERROR,
+          StringProcessor.safeFormatter("Failed to close web driver because: %s", e.getMessage()));
+    }
   }
 
 
