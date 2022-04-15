@@ -31,34 +31,28 @@ public class MongoTestObject extends BaseTestObject implements IMongoTestObject 
   }
 
   /**
-   * Gets the Mongo driver manager.
-   * @return the mongo driver manager
-   */
-  public MongoDriverManager getMongoDBManager() {
-    return this.getManagerStore().getDriver(MongoDriverManager.class.getCanonicalName());
-  }
-
-  /**
-   * Gets the Mongo driver.
-   * @return the stored mongoDB driver.
+   * {@inheritDoc}
    */
   public MongoDBDriver getMongoDBDriver() {
     return this.getMongoDBManager().getMongoDriver();
   }
 
   /**
-   * Override the Mongo driver settings.
-   * @param connectionString Client connection string
-   * @param databaseString Database connection string
-   * @param collectionString Mongo collection string
+   * {@inheritDoc}
+   */
+  public MongoDriverManager getMongoDBManager() {
+    return this.getManagerStore().getDriver(MongoDriverManager.class.getCanonicalName());
+  }
+
+  /**
+   * {@inheritDoc}
    */
   public void overrideMongoDBDriver(String connectionString, String databaseString, String collectionString) {
     this.getMongoDBManager().overrideDriver(connectionString, databaseString, collectionString);
   }
 
   /**
-   * Override the Mongo driver settings.
-   * @param driver New Mongo driver
+   * {@inheritDoc}
    */
   public void overrideMongoDBDriver(MongoDBDriver driver) {
     this.getManagerStore().put(MongoDriverManager.class.getCanonicalName(),
@@ -66,8 +60,7 @@ public class MongoTestObject extends BaseTestObject implements IMongoTestObject 
   }
 
   /**
-   * Override the Mongo driver a collection function.
-   * @param overrideCollectionConnection The collection function
+   * {@inheritDoc}
    */
   @Override
   public void overrideMongoDBDriver(Supplier<MongoCollection<Document>> overrideCollectionConnection) {

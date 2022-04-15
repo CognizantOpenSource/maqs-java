@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * The Mongo Database Config unit test class.
  */
-public class MongoDBConfigUnitTest extends BaseMongoTest {
+public class MongoDBConfigUnitTest {
 
   /**
    * Test getting the connection string.

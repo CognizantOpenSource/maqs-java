@@ -9,38 +9,40 @@ import com.mongodb.client.MongoCollection;
 import java.util.function.Supplier;
 import org.bson.Document;
 
-/// <summary>
-/// Mongo test object interface
-/// </summary>
+/**
+ * The Mongo Test Object interface.
+ */
 public interface IMongoTestObject extends ITestObject {
 
-  /// <summary>
-  /// Gets the Mongo driver
-  /// </summary>
+  /**
+   * Gets the Mongo driver.
+   * @return the mongo database driver
+   */
   MongoDBDriver getMongoDBDriver();
 
-  /// <summary>
-  /// Gets the Mongo driver manager
-  /// </summary>
+  /**
+   * Gets the Mongo driver manager.
+   * @return the mongo database manager
+   */
   MongoDriverManager getMongoDBManager();
 
-  /// <summary>
-  /// Override the Mongo driver a collection function
-  /// </summary>
-  /// <param name="overrideCollectionConnection">The collection function</param>
+  /**
+   * Override the Mongo driver a collection function.
+    * @param overrideCollectionConnection The collection function
+   */
   void overrideMongoDBDriver(Supplier<MongoCollection<Document>> overrideCollectionConnection);
 
-  /// <summary>
-  /// Override the Mongo driver settings
-  /// </summary>
-  /// <param name="driver">New Mongo driver</param>
+  /**
+   * Override the Mongo driver settings.
+   * @param driver New Mongo driver
+   */
   void overrideMongoDBDriver(MongoDBDriver driver);
 
-  /// <summary>
-  /// Override the Mongo driver settings
-  /// </summary>
-  /// <param name="connectionString">Client connection string</param>
-  /// <param name="databaseString">Database connection string</param>
-  /// <param name="collectionString">Mongo collection string</param>
+  /**
+   * Override the Mongo driver settings.
+   * @param connectionString Client connection string
+   * @param databaseString Database connection string
+   * @param collectionString Mongo collection string
+   */
   void overrideMongoDBDriver(String connectionString, String databaseString, String collectionString);
 }

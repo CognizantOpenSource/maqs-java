@@ -33,3 +33,7 @@ devops:
 accessibility:
   - maqs-accessibility/*
   - maqs-accessibility/**/*
+
+noSQL:
+  -maqs-nosql/*
+  -maqs-nosql/**/*

@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * The Mongo Database Functional unit test class.
  */
-public class MongoDBFunctionalUnitTest extends BaseMongoTest{
+public class MongoDBFunctionalUnitTest extends BaseMongoTest {
 
   /**
    * Test the collection works as expected when getting the login id.
