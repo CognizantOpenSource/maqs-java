@@ -5,8 +5,8 @@
 package com.cognizantsoftvision.maqs.selenium.pageModel;
 
 import com.cognizantsoftvision.maqs.selenium.BaseSeleniumPageModel;
+import com.cognizantsoftvision.maqs.selenium.ISeleniumTestObject;
 import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
-import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
 import com.cognizantsoftvision.maqs.selenium.UIWait;
 import org.openqa.selenium.By;
 
@@ -56,7 +56,7 @@ public class HeaderPageModel extends BaseSeleniumPageModel {
    *
    * @param testObject the test object
    */
-  public HeaderPageModel(SeleniumTestObject testObject) {
+  public HeaderPageModel(ISeleniumTestObject testObject) {
     super(testObject);
   }
 

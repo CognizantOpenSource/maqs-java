@@ -7,7 +7,7 @@ package com.cognizantsoftvision.maqs.selenium;
 import com.cognizantsoftvision.maqs.selenium.exceptions.ElementHandlerException;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.cognizantsoftvision.maqs.utilities.helper.ListProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -363,7 +363,7 @@ public class ElementHandler {
    * @param textToEnter The text to send
    * @param logger      The logging object
    */
-  public static void sendSecretKeys(WebDriver webDriver, By by, String textToEnter, Logger logger) {
+  public static void sendSecretKeys(WebDriver webDriver, By by, String textToEnter, ILogger logger) {
     try {
       WebElement secretElement = UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by);
       logger.suspendLogging();

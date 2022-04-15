@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.database;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import java.util.function.Supplier;
 
 /**
@@ -19,7 +19,7 @@ public class DatabaseTestObject extends BaseTestObject {
    * @param logger                 of type Logger
    * @param fullyQualifiedTestName of type String
    */
-  public DatabaseTestObject(DatabaseDriver driver, Logger logger, String fullyQualifiedTestName) {
+  public DatabaseTestObject(DatabaseDriver driver, ILogger logger, String fullyQualifiedTestName) {
     this(() -> driver, logger, fullyQualifiedTestName);
   }
 
@@ -30,7 +30,7 @@ public class DatabaseTestObject extends BaseTestObject {
    * @param logger                 of type Logger
    * @param fullyQualifiedTestName of type String
    */
-  public DatabaseTestObject(Supplier<DatabaseDriver> getDriverSupplier, Logger logger, String fullyQualifiedTestName) {
+  public DatabaseTestObject(Supplier<DatabaseDriver> getDriverSupplier, ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((DatabaseDriverManager.class).getCanonicalName(),
         new DatabaseDriverManager(getDriverSupplier, this));

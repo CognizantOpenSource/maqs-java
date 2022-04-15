@@ -11,7 +11,7 @@ import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DatabaseDriverUnitTest extends BaseGenericTest {
+public class DatabaseDriverUnitTest extends BaseDatabaseTest {
 
   /**
    * Field INFORMATION_SCHEMAS_QUERY

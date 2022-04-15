@@ -17,7 +17,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class ConnectionFactoryUnitTest extends BaseGenericTest {
+public class ConnectionFactoryUnitTest extends BaseDatabaseTest {
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetEntityManagerFactory() {
