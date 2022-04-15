@@ -18,10 +18,18 @@ public interface IPlaywrightTestObject extends ITestObject {
   PageDriver getPageDriver();
 
   /**
+   * Sets the page driver.
+   * @param driver the new page driver to be set
+   */
+  void setPageDriver(PageDriver driver);
+
+  /**
    * Gets the Playwright page manager.
    * @return the playwright driver manager
    */
   PageDriverManager getPageManager();
+
+
 
   /**
    * Override the Playwright page driver.

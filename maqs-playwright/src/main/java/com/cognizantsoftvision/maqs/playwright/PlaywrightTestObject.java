@@ -5,7 +5,10 @@
 package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+
 import java.util.function.Supplier;
 
 /**
@@ -27,42 +30,51 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
 
   /**
    * Initializes a new instance of the PlaywrightTestObject class.
-   * @param getDriver Function for getting a Playwright page
+   * @param getDriverSupplier Function for getting a Playwright page
    * @param logger The test's logger
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
-  public PlaywrightTestObject(Supplier<PageDriver> getDriver, ILogger logger, String fullyQualifiedTestName) {
+  public PlaywrightTestObject(Supplier<PageDriver> getDriverSupplier, ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((PageDriverManager.class).getCanonicalName(),
-        new PageDriverManager(getDriver, this));
+        new PageDriverManager(getDriverSupplier, this));
   }
 
   /**
-   * Gets the page driver manager.
-   * @return the page driver manager
+   * {@inheritDoc}
    */
   public PageDriverManager getPageManager() {
     return (PageDriverManager) this.getManagerStore().get(PageDriverManager.class.getCanonicalName());
   }
 
   /**
-   * the Playwright page driver.
+   * {@inheritDoc}
    */
-  protected PageDriver pageDriver;
-
-  /**
-   * Gets the Playwright page driver.
-   *
-   * @return the playwright page driver
-   */
+  @Override
   public PageDriver getPageDriver() {
     return this.getPageManager().getPageDriver();
   }
 
   /**
-   * Override the old page driver with a new page.
-   *
-   * @param pageDriver the new page driver
+   * {@inheritDoc}
+   */
+  @Override
+  public void setPageDriver(PageDriver driver) {
+    String name = PageDriverManager.class.getCanonicalName();
+    if (this.getManagerStore().containsKey(name)) {
+      try {
+        this.getManagerStore().get(name).close();
+        this.getManagerStore().remove(name);
+      } catch (Exception e) {
+        getLogger().logMessage(MessageType.ERROR, "Failed to remove DriverManager: %s", e.getMessage());
+        throw new MAQSRuntimeException(e.getMessage(), e);
+      }
+    }
+    this.getManagerStore().put(name, new PageDriverManager((() -> driver), this));
+  }
+
+  /**
+   * {@inheritDoc}
    */
   @Override
   public void overridePageDriver(PageDriver pageDriver) {

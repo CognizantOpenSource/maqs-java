@@ -53,7 +53,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    * Setup test and make sure we are on the correct test page.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void CreatePlaywrightPageModel() {
+  public void createPlaywrightPageModel() {
     this.getPageDriver().navigateTo(PageModel.getUrl());
   }
 

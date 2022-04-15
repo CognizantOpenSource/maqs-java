@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.base.DriverManager;
 import com.cognizantsoftvision.maqs.base.ITestObject;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.util.function.Supplier;
 
@@ -49,6 +50,9 @@ public class PageDriverManager extends DriverManager<PageDriver> {
   public PageDriver getPageDriver() {
     if (this.pageDriver == null) {
       this.pageDriver = new PageDriver(getBase().getAsyncPage());
+
+      // Log the setup
+      this.loggingStartup(this.baseDriver);
     }
 
     return this.pageDriver;
@@ -63,6 +67,36 @@ public class PageDriverManager extends DriverManager<PageDriver> {
   }
 
   /**
+   * Closes the page driver manager.
+   */
+  @Override
+  public void close() {
+    this.baseDriver.close();
+  }
+
+
+  /**
+   * Log verbose.
+   *
+   * @param message the message
+   * @param args    the args
+   */
+  protected void logVerbose(String message, Object... args) {
+    StringBuilder messages = new StringBuilder();
+    messages.append(StringProcessor.safeFormatter(message, args));
+    String fullTestName = this.getTestObject().getFullyQualifiedTestName();
+
+    Thread thread = Thread.currentThread();
+    for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
+      String trim = stackTraceElement.toString().trim();
+      if (!trim.startsWith(fullTestName)) {
+        messages.append(stackTraceElement);
+      }
+    }
+    getLogger().logMessage(MessageType.VERBOSE, messages.toString());
+  }
+
+  /**
    * Log that the page setup.
    * @param pageDriver the new page
    */
@@ -73,13 +107,5 @@ public class PageDriverManager extends DriverManager<PageDriver> {
       this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: " + e.getMessage());
       System.out.print("Failed to start driver because: " + e.getMessage());
     }
-  }
-
-  /**
-   * Closes the page driver manager.
-   */
-  @Override
-  public void close() {
-    this.baseDriver.close();
   }
 }

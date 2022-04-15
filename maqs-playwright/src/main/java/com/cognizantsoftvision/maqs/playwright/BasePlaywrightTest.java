@@ -5,6 +5,7 @@
 package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
+import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.IFileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
@@ -43,7 +44,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
    * @param pageDriver the new page driver to be set
    */
   public void setPageDriver(PageDriver pageDriver) {
-    this.getTestObject().overridePageDriver(pageDriver);
+    this.getTestObject().setPageDriver(pageDriver);
   }
 
   /**
@@ -55,29 +56,29 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
     return new PlaywrightTestObject(this::getPageDriver, log, this.getFullyQualifiedTestClassName());
   }
 
+  protected PageDriver getBrowser() {
+    return PageDriverFactory.getDefaultPageDriver();
+  }
+
   /**
    * Create a new test object.
    */
   @Override
   protected void createNewTestObject() {
-    PlaywrightTestObject playwrightTestObject = new PlaywrightTestObject(
-        this.getPageDriver(), this.createLogger(), this.getFullyQualifiedTestClassName());
-    this.setTestObject(playwrightTestObject);
-
-//    try {
-//      this.setTestObject(
-//          new PlaywrightTestObject(() -> {
-//            try {
-//              return getPageDriver();
-//            } catch (Exception e) {
-//              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
-//              throw e;
-//            }
-//          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
-//    } catch (Exception e) {
-//      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
-//      throw e;
-//    }
+    try {
+      this.setTestObject(
+          new PlaywrightTestObject(() -> {
+            try {
+              return getBrowser();
+            } catch (Exception e) {
+              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
+              throw e;
+            }
+          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
+    } catch (Exception e) {
+      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+      throw e;
+    }
   }
 
   /**
