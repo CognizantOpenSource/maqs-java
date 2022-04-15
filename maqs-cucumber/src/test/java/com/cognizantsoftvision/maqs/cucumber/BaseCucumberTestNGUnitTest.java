@@ -34,7 +34,7 @@ public class BaseCucumberTestNGUnitTest extends BaseGenericTest {
      * Verifies the tear down process correctly cleans up the Scenario Context
      */
     @Test(groups = TestCategories.CUCUMBER)
-    public void testTearDown() {
+    public void testTearDown() throws Exception {
         DummyBaseCucumberTestNG dummyCucumber = new DummyBaseCucumberTestNG();
         BaseTest dummyTest = dummyCucumber.createSpecificBaseTest();
         String[] dummyArgs = {"Dummy Arg 1", "Dummy Arg 2"};

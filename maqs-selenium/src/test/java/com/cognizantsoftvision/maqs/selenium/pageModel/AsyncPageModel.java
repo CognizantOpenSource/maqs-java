@@ -4,8 +4,8 @@
 
 package com.cognizantsoftvision.maqs.selenium.pageModel;
 
+import com.cognizantsoftvision.maqs.selenium.ISeleniumTestObject;
 import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
-import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.By;
 
 /**
@@ -43,7 +43,7 @@ public class AsyncPageModel extends HeaderPageModel {
    *
    * @param testObject the test object
    */
-  public AsyncPageModel(SeleniumTestObject testObject) {
+  public AsyncPageModel(ISeleniumTestObject testObject) {
     super(testObject);
   }
 }

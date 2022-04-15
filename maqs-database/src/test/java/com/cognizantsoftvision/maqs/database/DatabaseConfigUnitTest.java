@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 /**
  * The type Database config unit test.
  */
-public class DatabaseConfigUnitTest extends BaseGenericTest {
+public class DatabaseConfigUnitTest extends BaseDatabaseTest {
 
   /**
    * Test get connection string.
