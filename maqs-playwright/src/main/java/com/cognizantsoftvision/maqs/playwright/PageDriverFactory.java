@@ -52,8 +52,9 @@ public class PageDriverFactory {
         return getFirefoxBasedBrowser(playwright, getDefaultOptions());
       case WEBKIT:
         return getWebkitBasedBrowser(playwright, getDefaultOptions());
+      default:
+        throw new UnsupportedOperationException("Browser type '" + browser + "' is not supported");
     }
-    throw new UnsupportedOperationException("Browser type '" + browser + "' is not supported");
   }
 
   /**
