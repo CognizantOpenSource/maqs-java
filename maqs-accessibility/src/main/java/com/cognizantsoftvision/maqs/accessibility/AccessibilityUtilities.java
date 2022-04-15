@@ -4,7 +4,7 @@
 
 package com.cognizantsoftvision.maqs.accessibility;
 
-import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
+import com.cognizantsoftvision.maqs.selenium.ISeleniumTestObject;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
@@ -42,7 +42,7 @@ public class AccessibilityUtilities {
    * @param testObject The test object which contains the web driver and logger you wish to use
    * @param throwOnViolation Should violations cause and exception to be thrown
    */
-  public static void checkAccessibility(SeleniumTestObject testObject, boolean throwOnViolation) {
+  public static void checkAccessibility(ISeleniumTestObject testObject, boolean throwOnViolation) {
     checkAccessibility(testObject.getWebDriver(), testObject.getLogger(), throwOnViolation);
   }
 
@@ -157,7 +157,7 @@ public class AccessibilityUtilities {
    * @throws IOException If an IO exception is thrown
    * @throws ParseException If a parse exception is thrown
    */
-  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
+  public static void createAccessibilityHtmlReport(ISeleniumTestObject testObject,
       boolean throwOnViolation) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject,
         () -> new AxeBuilder().analyze(testObject.getWebDriver()), throwOnViolation, EnumSet.allOf(ResultType.class));
@@ -170,7 +170,7 @@ public class AccessibilityUtilities {
    * @throws IOException If an IO exception is thrown
    * @throws ParseException If a parse exception is thrown
    */
-  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
+  public static void createAccessibilityHtmlReport(ISeleniumTestObject testObject,
       boolean throwOnViolation, Set<ResultType> requestedResult) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject,
         () -> new AxeBuilder().analyze(testObject.getWebDriver()), throwOnViolation, requestedResult);
@@ -183,7 +183,7 @@ public class AccessibilityUtilities {
    * @throws IOException If an IO exception is thrown
    * @throws ParseException If a parse exception is thrown
    */
-  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
+  public static void createAccessibilityHtmlReport(ISeleniumTestObject testObject,
       WebElement element, boolean throwOnViolation) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject,
         () -> new AxeBuilder().analyze(testObject.getWebDriver(), element),
@@ -197,7 +197,7 @@ public class AccessibilityUtilities {
    * @throws IOException If an IO exception is thrown
    * @throws ParseException If a parse exception is thrown
    */
-  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
+  public static void createAccessibilityHtmlReport(ISeleniumTestObject testObject,
       WebElement element, boolean throwOnViolation, Set<ResultType> resultRequested)
       throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject,
@@ -212,7 +212,7 @@ public class AccessibilityUtilities {
    * @throws IOException If an IO exception is thrown
    * @throws ParseException If a parse exception is thrown
    */
-  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, Results result,
+  public static void createAccessibilityHtmlReport(ISeleniumTestObject testObject, Results result,
       boolean throwOnViolation) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject, result, throwOnViolation, EnumSet.allOf(ResultType.class));
   }
@@ -226,7 +226,7 @@ public class AccessibilityUtilities {
    * @throws IOException If an IO exception is thrown
    * @throws ParseException If a parse exception is thrown
    */
-  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, Results result,
+  public static void createAccessibilityHtmlReport(ISeleniumTestObject testObject, Results result,
       boolean throwOnViolation, Set<ResultType> resultRequested) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject, () -> result, throwOnViolation, resultRequested);
   }
@@ -239,7 +239,7 @@ public class AccessibilityUtilities {
    * @throws IOException If an IO exception is thrown
    * @throws ParseException If a parse exception is thrown
    */
-  public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
+  public static void createAccessibilityHtmlReport(ISeleniumTestObject testObject,
       Supplier<Results> getResults, boolean throwOnViolation,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     // Check to see if the logger is not verbose and not already suspended
@@ -288,7 +288,7 @@ public class AccessibilityUtilities {
    * @param testObject The TestObject to associate the report with
    * @return A unique HTML file name, includes full path
    */
-  private static String getAccessibilityReportPath(SeleniumTestObject testObject) {
+  private static String getAccessibilityReportPath(ISeleniumTestObject testObject) {
     String reportBaseName = testObject.getLogger() instanceof FileLogger ? FilenameUtils
         .removeExtension((((FileLogger)testObject.getLogger()).getFilePath())) + "_Axe" : "AxeReport";
 

@@ -18,7 +18,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * The type Appium config unit test.
  */
-public class AppiumConfigUnitTest extends BaseAppiumTest {
+public class AppiumConfigUnitTest {
 
   /**
    * The Username.

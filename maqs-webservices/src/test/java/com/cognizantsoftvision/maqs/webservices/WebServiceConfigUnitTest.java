@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * The Web Service Config unit test class.
  */
-public class WebServiceConfigUnitTest extends BaseWebServiceTest {
+public class WebServiceConfigUnitTest {
 
   /**
    * gets if proxy can be used.

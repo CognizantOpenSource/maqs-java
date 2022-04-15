@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * The type Selenium driver manager test.
  */
-public class SeleniumDriverManagerUnitTest extends BaseSeleniumTest {
+public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
 
   /**
    * The Get driver.

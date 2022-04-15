@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.appium;
 
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * The type Appium test object test.
  */
-public class AppiumTestObjectUnitTest extends BaseAppiumTest {
+public class AppiumTestObjectUnitTest extends BaseGenericTest {
 
     /**
      * Test appium test object creation with driver.

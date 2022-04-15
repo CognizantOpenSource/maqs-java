@@ -241,45 +241,35 @@ public class FileLogger extends Logger implements IFileLogger {
   }
 
   /**
-   * Gets the FilePath value.
-   *
-   * @return returns the file path
+   * {@inheritDoc}
    */
   public String getFilePath() {
     return this.filePath;
   }
 
   /**
-   * Gets the Message Type value.
-   *
-   * @return The Message Type.
-   */
-  public MessageType getMessageType() {
-    return this.messageType;
-  }
-
-  /**
-   * Gets the Directory Path.
-   *
-   * @return Returns the Directory
-   */
-  public String getDirectory() {
-    return this.directory;
-  }
-
-  /**
-   * Sets the FilePath value.
-   *
-   * @param path sets the file path
+   * {@inheritDoc}
    */
   public void setFilePath(String path) {
     this.filePath = path;
   }
 
   /**
-   * Gets the File Name value.
-   *
-   * @return Returns the File Name.
+   * {@inheritDoc}
+   */
+  public MessageType getMessageType() {
+    return this.messageType;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String getDirectory() {
+    return this.directory;
+  }
+
+  /**
+   * {@inheritDoc}
    */
   public String getFileName() {
     return this.fileName;
@@ -294,11 +284,9 @@ public class FileLogger extends Logger implements IFileLogger {
     return TXT;
   }
 
+
   /**
-   * Logs a message to the log file.
-   *
-   * @param message The message text
-   * @param args String format arguments
+   * {@inheritDoc}
    */
   @Override
   public void logMessage(String message, Object... args) {
@@ -306,11 +294,7 @@ public class FileLogger extends Logger implements IFileLogger {
   }
 
   /**
-   * Logs a message to the log file.
-   *
-   * @param messageType The type of message
-   * @param message The message text
-   * @param args String format arguments
+   * {@inheritDoc}
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {

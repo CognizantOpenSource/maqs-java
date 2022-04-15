@@ -15,7 +15,7 @@ import org.testng.ITestResult;
 /**
  * Base Selenium Test class.
  */
-public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
+public class BaseSeleniumTest extends BaseExtendableTest<ISeleniumTestObject> {
 
   /**
    * Initialize a new instance of the BaseSeleniumTest class.

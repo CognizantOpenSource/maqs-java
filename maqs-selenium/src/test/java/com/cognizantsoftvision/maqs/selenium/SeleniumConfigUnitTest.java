@@ -16,7 +16,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * Selenium configuration tests.
  */
-public class SeleniumConfigUnitTest extends BaseSeleniumTest {
+public class SeleniumConfigUnitTest {
 
   /**
    * Remote capabilities username identifier.

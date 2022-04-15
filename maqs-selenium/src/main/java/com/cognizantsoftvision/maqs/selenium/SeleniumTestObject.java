@@ -43,27 +43,14 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
   }
 
   /**
-   * Get the WebDriver Object.
-   *
-   * @return A WebDriver Object
+   * {@inheritDoc}
    */
   public WebDriver getWebDriver() {
     return this.getWebManager().getWebDriver();
   }
 
   /**
-   * Gets the Selenium driver manager.
-   *
-   * @return the web manager
-   */
-  public SeleniumDriverManager getWebManager() {
-    return (SeleniumDriverManager) this.getManagerStore().get(SeleniumDriverManager.class.getCanonicalName());
-  }
-
-  /**
-   * Sets web driver.
-   *
-   * @param driver the driver
+   * {@inheritDoc}
    */
   public void setWebDriver(WebDriver driver) {
     String name = SeleniumDriverManager.class.getCanonicalName();
@@ -81,12 +68,17 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
   }
 
   /**
-   * Sets web driver using Supplier.
-   *
-   * @param webDriverSupplier the web driver supplier
+   * {@inheritDoc}
    */
   public void setWebDriver(Supplier<WebDriver> webDriverSupplier) {
     this.getManagerStore()
         .put(SeleniumDriverManager.class.getCanonicalName(), new SeleniumDriverManager(webDriverSupplier, this));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public SeleniumDriverManager getWebManager() {
+    return (SeleniumDriverManager) this.getManagerStore().get(SeleniumDriverManager.class.getCanonicalName());
   }
 }

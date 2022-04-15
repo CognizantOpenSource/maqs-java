@@ -36,13 +36,6 @@ public interface ITestObject extends AutoCloseable {
   ManagerStore getManagerStore();
 
   /**
-   * Gets a dictionary of string key and object value pairs.
-   *
-   * @return the objects in the map
-   */
-  ConcurrentMap<String, Object> getObjects();
-
-  /**
    * Gets or sets the performance timer collection.
    *
    * @return the performance timer collection
@@ -57,13 +50,6 @@ public interface ITestObject extends AutoCloseable {
   void setPerfTimerCollection(IPerfTimerCollection perfTimerCollection);
 
   /**
-   * Gets a dictionary of string key value pairs.
-   *
-   * @return the values
-   */
-  ConcurrentMap<String, String> getValues();
-
-  /**
    * Gets associated files, by file path.
    * @return list of associated files
    */
@@ -76,6 +62,21 @@ public interface ITestObject extends AutoCloseable {
    * @return boolean value if the associated file is added
    */
   boolean addAssociatedFile(String path);
+
+  /**
+   * Adds a driver manager.
+   * @param driverManager the driver manager to be added
+   * @param <T> the object
+   */
+  <T extends IDriverManager<?>> void addDriverManager(T driverManager);
+
+  /**
+   * Adds a driver manager.
+   * @param driverManager the driver manager to be added
+   * @param overrideIfExists override if the manager exists
+   * @param <T> the object
+   */
+  <T extends IDriverManager<?>> void addDriverManager(T driverManager, boolean overrideIfExists);
 
   /**
    * Adds a driver manager.
@@ -108,6 +109,7 @@ public interface ITestObject extends AutoCloseable {
    */
   String[] getArrayOfAssociatedFiles();
 
+  void overrideDriverManager(String key, DriverManager<?> driverManager);
 
   /**
    * Override a specific driver.
@@ -126,12 +128,26 @@ public interface ITestObject extends AutoCloseable {
   boolean removeAssociatedFile(String path);
 
   /**
+   * Gets a dictionary of string key and object value pairs.
+   *
+   * @return the objects in the map
+   */
+  ConcurrentMap<String, Object> getObjects();
+
+  /**
    * Sets an object value, will replace if the key already exists.
    *
    * @param key The key
    * @param value The value to associate with the key
    */
   void setObject(String key, Object value);
+
+  /**
+   * Gets a dictionary of string key value pairs.
+   *
+   * @return the values
+   */
+  ConcurrentMap<String, String> getValues();
 
   /**
    * Sets a string value, will replace if the key already exists.

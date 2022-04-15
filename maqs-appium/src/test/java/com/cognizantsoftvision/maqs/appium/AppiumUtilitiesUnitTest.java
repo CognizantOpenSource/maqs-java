@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.appium;
 
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
@@ -24,7 +25,7 @@ import org.testng.annotations.Test;
  * Appium Utilities Unit Test class.
  */
 @Ignore
-public class AppiumUtilitiesUnitTest extends BaseAppiumTest {
+public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot no append.
    */
