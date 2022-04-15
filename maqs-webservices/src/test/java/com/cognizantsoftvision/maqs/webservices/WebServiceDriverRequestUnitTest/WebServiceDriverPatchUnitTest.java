@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.webservices.WebServiceDriverRequestUnitTest;
 
-import com.cognizantsoftvision.maqs.webservices.BaseWebServiceTest;
 import com.cognizantsoftvision.maqs.webservices.HttpClientFactory;
 import com.cognizantsoftvision.maqs.webservices.MediaType;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
@@ -23,7 +22,7 @@ import org.testng.annotations.Test;
 /**
  * The Web Driver Service Driver Patch Unit test class.
  */
-public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
+public class WebServiceDriverPatchUnitTest {
 
   /**
    * String to hold the URL.
