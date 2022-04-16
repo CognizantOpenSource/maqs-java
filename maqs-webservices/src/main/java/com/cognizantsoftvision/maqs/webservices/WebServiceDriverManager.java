@@ -4,8 +4,8 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
-import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.base.DriverManager;
+import com.cognizantsoftvision.maqs.base.ITestObject;
 import java.net.http.HttpClient;
 import java.util.function.Supplier;
 
@@ -25,7 +25,7 @@ public class WebServiceDriverManager extends DriverManager<HttpClient> {
    * @param getDriverFunction Function that specifies how to get the driver.
    * @param baseTestObject    The Base Test Object.
    */
-  public WebServiceDriverManager(Supplier<HttpClient> getDriverFunction, BaseTestObject baseTestObject) {
+  public WebServiceDriverManager(Supplier<HttpClient> getDriverFunction, ITestObject baseTestObject) {
     super(getDriverFunction, baseTestObject);
   }
 
@@ -35,7 +35,7 @@ public class WebServiceDriverManager extends DriverManager<HttpClient> {
    * @param driver         Web Service Driver
    * @param baseTestObject The Base Test Object.
    */
-  public WebServiceDriverManager(WebServiceDriver driver, BaseTestObject baseTestObject) {
+  public WebServiceDriverManager(WebServiceDriver driver, ITestObject baseTestObject) {
     super(driver::getHttpClient, baseTestObject);
     this.webServiceDriver = driver;
   }
