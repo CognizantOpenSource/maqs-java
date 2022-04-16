@@ -49,7 +49,7 @@ public class PageDriverFactoryUnitTest {
    * Test set check works as expected.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void BrowserWithNoContext() {
+  public void browserWithNoContext() {
     Browser browser = PageDriverFactory.getBrowserWithDefaults(PlaywrightBrowser.CHROMIUM);
     Assert.assertEquals(0, browser.contexts().size());
 

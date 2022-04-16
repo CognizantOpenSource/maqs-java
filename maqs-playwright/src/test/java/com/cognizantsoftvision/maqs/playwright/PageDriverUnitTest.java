@@ -90,7 +90,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    * Test select option works as expected.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void SelectOptionTest() {
+  public void selectOptionTest() {
     List<String> singleOption = this.getPageDriver().selectOption(elementPageModel.namesDropDown, "5");
     Assert.assertEquals(singleOption.size(), 1);
     Assert.assertEquals(singleOption.get(0), "5");
@@ -426,7 +426,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void setContentTest() {
-    String guid = "a" + UUID.randomUUID().toString();
+    String guid = "a" + UUID.randomUUID();
     this.getPageDriver().setContent("<html><body><div id='" + guid + "'>TEST</div></body></html>");
     this.getPageDriver().waitForTimeout(1000);
     Assert.assertTrue(this.getPageDriver().isEventuallyVisible("#" + guid));
@@ -447,7 +447,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void evalOnSelectorAllTest() {
     Assert.assertEquals(this.getPageDriver().evalOnSelectorAll(
-        elementPageModel.computerPartsAllOptions, "nodes => nodes.map(n => n.innerText)"),
+        elementPageModel.computerPartsAllOptions, "nodes -> nodes.map(n -> n.innerText)"),
         6);
   }
 
