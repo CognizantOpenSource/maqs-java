@@ -15,7 +15,7 @@ import org.testng.ITestResult;
 /**
  * The Base Web Service Test class.
  */
-public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject> {
+public class BaseWebServiceTest extends BaseExtendableTest<IWebServiceTestObject> {
 
   /**
    * Get the Web Service Driver.
