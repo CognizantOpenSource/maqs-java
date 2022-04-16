@@ -538,11 +538,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void setExtraHTTPHeadersTest() {
-    // TODO: Finish up method
     this.getPageDriver().setExtraHTTPHeaders(Collections.singletonMap("sample", "value"));
-    // this.getPageDriver().getAsyncPage().RequestFinished += AsyncPage_RequestFinished;
-    // this.getPageDriver().getAsyncPage().waitForRequestFinished() += AsyncPage_RequestFinished;
-
     this.getPageDriver().click(elementPageModel.asyncPageLink);
     this.getPageDriver().isEventuallyVisible(elementPageModel.alwaysUpOnAsyncPage);
   }
