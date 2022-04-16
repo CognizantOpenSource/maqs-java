@@ -25,6 +25,9 @@ public class PlaywrightConfigUnitTest {
    */
   private static final String browser = "Browser";
 
+  /**
+   * Get playwright section.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void getPlaywrightSection() {
     Map<String, String> config = Config.getSection(ConfigSection.PLAYWRIGHT_MAQS);

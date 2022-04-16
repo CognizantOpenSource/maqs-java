@@ -114,7 +114,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
         .selectOption(new String[]{"one", "five"});
     Assert.assertEquals(multipleOptions.size(), 2);
     Assert.assertEquals(multipleOptions.get(0), "one");
-    Assert.assertEquals(multipleOptions.get(0), "five");
+    Assert.assertEquals(multipleOptions.get(1), "five");
 
     ElementHandle second = models.get(this.getTestObject())
         .getComputerPartsSecond().elementLocator().elementHandle();

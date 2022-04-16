@@ -267,7 +267,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   /// </summary>
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void isEventuallyGoneTest() {
-    Assert.assertTrue(this.getPageDriver().isEventuallyGone("NotReal"));
+    Assert.assertTrue(this.getPageDriver().isEventuallyGone(elementPageModel.notReal));
     Assert.assertFalse(this.getPageDriver().isEventuallyGone(elementPageModel.firstNameText));
   }
 
@@ -447,8 +447,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void evalOnSelectorAllTest() {
     Assert.assertEquals(this.getPageDriver().evalOnSelectorAll(
-        elementPageModel.computerPartsAllOptions, "nodes -> nodes.map(n -> n.innerText)"),
-        6);
+        elementPageModel.computerPartsAllOptions, "nodes -> nodes.map(n -> n.innerText)"), 6);
   }
 
   /**
@@ -473,7 +472,8 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void setInputFilesTest() {
-    FilePayload filePayload = new FilePayload("test.png", "image/png", this.getPageDriver().getAsyncPage().screenshot());
+    FilePayload filePayload = new FilePayload(
+        "test.png", "image/png", this.getPageDriver().getAsyncPage().screenshot());
     this.getPageDriver().setInputFiles("#photo", filePayload);
     Assert.assertNotNull(filePayload);
   }
