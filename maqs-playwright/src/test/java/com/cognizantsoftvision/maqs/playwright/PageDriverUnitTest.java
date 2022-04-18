@@ -51,7 +51,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void createPlaywrightPageModel() {
-    this.getPageDriver().navigateTo(PageModel.getUrl());
+    Assert.assertNotNull(this.getPageDriver().navigateTo(PageModel.getUrl()));
   }
 
   /**
@@ -107,6 +107,10 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     singleOption = this.getPageDriver().selectOption(elementPageModel.namesDropDown, joe);
     Assert.assertEquals(singleOption.size(), 1);
     Assert.assertEquals(singleOption.get(0), "1");
+
+    singleOption = this.getPageDriver().selectOption(elementPageModel.namesDropDown,  new SelectOption[]{options});
+    Assert.assertEquals(singleOption.size(), 1);
+    Assert.assertEquals(singleOption.get(0), "3");
   }
 
   /**
@@ -373,7 +377,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void waitForSelectorTest() {
-    this.getPageDriver().waitForSelector(elementPageModel.checkbox2);
+    Assert.assertNotNull(this.getPageDriver().waitForSelector(elementPageModel.checkbox2));
     Assert.assertTrue(this.getPageDriver().isVisible(elementPageModel.checkbox2));
   }
 
@@ -400,11 +404,11 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     this.getPageDriver().click(elementPageModel.asyncPageLink);
     this.getPageDriver().waitForURL("**/async.html");
 
-    this.getPageDriver().goBack();
+    Assert.assertNotNull(this.getPageDriver().goBack());
     this.getPageDriver().waitForURL("**/Static/Automation/");
     Assert.assertEquals(PageModel.getUrl(), this.getPageDriver().getAsyncPage().url());
 
-    this.getPageDriver().goForward();
+    Assert.assertNotNull(this.getPageDriver().goForward());
     this.getPageDriver().waitForURL("**/async.html");
     Assert.assertEquals(PageModel.getUrl() + "async.html", this.getPageDriver().getAsyncPage().url());
   }
@@ -417,7 +421,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     String asyncItemSelector = "#Label";
     this.getPageDriver().click(elementPageModel.asyncPageLink);
     Assert.assertTrue(this.getPageDriver().isEventuallyVisible(asyncItemSelector));
-    this.getPageDriver().reload();
+    Assert.assertNotNull(this.getPageDriver().reload());
     Assert.assertFalse(this.getPageDriver().isVisible(asyncItemSelector));
   }
 
@@ -447,7 +451,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void evalOnSelectorAllTest() {
     Assert.assertEquals(this.getPageDriver().evalOnSelectorAll(
-        elementPageModel.computerPartsAllOptions, "nodes -> nodes.map(n -> n.innerText)"), 6);
+        elementPageModel.computerPartsAllOptions, "nodes => nodes.map(n => n.innerText)"), 6);
   }
 
   /**
@@ -476,6 +480,9 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
         "test.png", "image/png", this.getPageDriver().getAsyncPage().screenshot());
     this.getPageDriver().setInputFiles("#photo", filePayload);
     Assert.assertNotNull(filePayload);
+
+    this.getPageDriver().setInputFiles("#photo", new FilePayload[]{filePayload});
+    Assert.assertNotNull(filePayload);
   }
 
   /**
@@ -486,6 +493,18 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
     Assert.assertFalse(this.getPageDriver().isVisible(elementPageModel.datePickerDays));
     this.getPageDriver().focus(elementPageModel.datePickerInput);
     Assert.assertTrue(this.getPageDriver().isVisible(elementPageModel.datePickerDays));
+  }
+
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void getUrlTest() {
+    Assert.assertEquals(this.getPageDriver().getUrl(),
+        "https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/");
+  }
+
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void isClosedTest() {
+    this.getPageDriver().close();
+    Assert.assertTrue(this.getPageDriver().isClosed());
   }
 
   /**

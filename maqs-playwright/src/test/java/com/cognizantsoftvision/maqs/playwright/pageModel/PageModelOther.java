@@ -15,6 +15,8 @@ import com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement;
  */
 public class PageModelOther extends BasePlaywrightPageModel {
 
+  static ElementPageModel pageModel;
+
   /**
    * sets up the page model other class.
    * @param testObject the test object to be used
@@ -45,7 +47,7 @@ public class PageModelOther extends BasePlaywrightPageModel {
    * @return the root body element
    */
   private PlaywrightSyncElement getBody() {
-    return new PlaywrightSyncElement(this.getPageDriver().getAsyncPage(), "BODY");
+    return new PlaywrightSyncElement(this.getPageDriver().getAsyncPage(), pageModel.body);
   }
 
   /**
@@ -53,7 +55,7 @@ public class PageModelOther extends BasePlaywrightPageModel {
     * @return the loaded label element
    */
   public PlaywrightSyncElement getLoadedPlaywrightElement() {
-    return new PlaywrightSyncElement(getBody(), "#loading-div-text[style='']");
+    return new PlaywrightSyncElement(getBody(), pageModel.loadedAsyncText);
   }
 
   /**

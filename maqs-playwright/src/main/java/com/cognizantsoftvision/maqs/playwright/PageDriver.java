@@ -107,7 +107,7 @@ public class PageDriver {
    * @param selector the element to be checked
    */
   public void check(String selector) {
-    this.asyncPage.check(selector);
+    this.check(selector, null);
   }
 
   /**
@@ -124,7 +124,7 @@ public class PageDriver {
    * @param selector the element selector
    */
   public void click(String selector) {
-    this.asyncPage.click(selector);
+    this.click(selector, null);
   }
 
   /**
@@ -140,7 +140,7 @@ public class PageDriver {
    * close the page.
    */
   public void close() {
-    close(null);
+    this.close(null);
   }
 
   /**
@@ -156,7 +156,7 @@ public class PageDriver {
    * @param selector the element to be double-clicked
    */
   public void doubleClick(String selector) {
-    doubleClick(selector, null);
+    this.doubleClick(selector, null);
   }
 
   /**
@@ -174,7 +174,7 @@ public class PageDriver {
    * @param type the dispatch type
    */
   public void dispatchEvent(String selector, String type) {
-    dispatchEvent(selector, type, null, null);
+    this.dispatchEvent(selector, type, null, null);
   }
 
   /**
@@ -194,7 +194,7 @@ public class PageDriver {
    * @param target the target to be dropped on
    */
   public void dragAndDrop(String source, String target) {
-    this.asyncPage.dragAndDrop(source, target);
+    this.dragAndDrop(source, target, null);
   }
 
   /**
@@ -213,7 +213,7 @@ public class PageDriver {
    * @param value the value to be inputted
    */
   public void fill(String selector, String value) {
-    this.asyncPage.fill(selector, value);
+    this.fill(selector, value, null);
   }
 
   /**
@@ -231,7 +231,7 @@ public class PageDriver {
    * @param selector the selector to focus on
    */
   public void focus(String selector) {
-    focus(selector, null);
+    this.focus(selector, null);
   }
 
   /**
@@ -248,7 +248,7 @@ public class PageDriver {
    * @param selector the selector to hover over
    */
   public void hover(String selector) {
-    hover(selector, null);
+    this.hover(selector, null);
   }
 
   /**
@@ -266,7 +266,7 @@ public class PageDriver {
    * @param key the key to be pressed
    */
   public void press(String selector, String key) {
-    press(selector, key, null);
+    this.press(selector, key, null);
   }
 
   /**
@@ -285,7 +285,7 @@ public class PageDriver {
    * @param checkedState if the element should be checked
    */
   public void setChecked(String selector, boolean checkedState) {
-    setChecked(selector, checkedState, null);
+    this.setChecked(selector, checkedState, null);
   }
 
   /**
@@ -329,7 +329,7 @@ public class PageDriver {
    * @param files the files to be inputted
    */
   public void setInputFiles(String selector, FilePayload files) {
-    setInputFiles(selector, files, null);
+    this.setInputFiles(selector, files, null);
   }
 
   /**
@@ -348,7 +348,7 @@ public class PageDriver {
    * @param files the files to be inputted
    */
   public void setInputFiles(String selector, FilePayload[] files) {
-    setInputFiles(selector, files, null);
+    this.setInputFiles(selector, files, null);
   }
 
   /**
@@ -367,7 +367,7 @@ public class PageDriver {
    * @param files the files to be inputted
    */
   public void setInputFiles(String selector, Path[] files) {
-    setInputFiles(selector, files, null);
+    this.setInputFiles(selector, files, null);
   }
 
   /**
@@ -386,7 +386,7 @@ public class PageDriver {
    * @param files the files to be inputted
    */
   public void setInputFiles(String selector, String files) {
-    setInputFiles(selector, files, null);
+    this.setInputFiles(selector, files, null);
   }
 
   /**
@@ -421,7 +421,7 @@ public class PageDriver {
    * @param selector the selector of the text box
    */
   public void tap(String selector) {
-    tap(selector, null);
+    this.tap(selector, null);
   }
 
   /**
@@ -439,7 +439,7 @@ public class PageDriver {
    * @param text the text to be entered
    */
   public void type(String selector, String text) {
-    type(selector, text, null);
+    this.type(selector, text, null);
   }
 
   /**
@@ -499,7 +499,7 @@ public class PageDriver {
    * @param url the url to be waited for
    */
   public void waitForURL(Predicate<String> url) {
-    this.asyncPage.waitForURL(url);
+    this.waitForURL(url, null);
   }
 
   /**
@@ -516,7 +516,7 @@ public class PageDriver {
    * @param url the url to be waited for
    */
   public void waitForURL(Pattern url) {
-    this.asyncPage.waitForURL(url);
+    this.waitForURL(url, null);
   }
 
   /**
@@ -533,7 +533,7 @@ public class PageDriver {
    * @param url the url to be waited for
    */
   public void waitForURL(String url) {
-    this.asyncPage.waitForURL(url);
+    this.waitForURL(url, null);
   }
 
   /**
@@ -551,7 +551,7 @@ public class PageDriver {
    * @return true if element is checked
    */
   public boolean isChecked(String selector) {
-    return this.asyncPage.isChecked(selector);
+    return this.isChecked(selector, null);
   }
 
   /**
@@ -570,7 +570,7 @@ public class PageDriver {
    * @return true if element is disabled
    */
   public boolean isDisabled(String selector) {
-    return this.asyncPage.isDisabled(selector);
+    return this.isDisabled(selector, null);
   }
 
   /**
@@ -589,7 +589,7 @@ public class PageDriver {
    * @return true if element is editable
    */
   public boolean isEditable(String selector) {
-    return this.asyncPage.isEditable(selector);
+    return this.isEditable(selector, null);
   }
 
   /**
@@ -608,7 +608,7 @@ public class PageDriver {
    * @return true if element is enabled
    */
   public boolean isEnabled(String selector) {
-    return this.asyncPage.isEnabled(selector);
+    return this.isEnabled(selector, null);
   }
 
   /**
@@ -627,7 +627,7 @@ public class PageDriver {
    * @return true if element is hidden
    */
   public boolean isHidden(String selector) {
-    return this.asyncPage.isHidden(selector);
+    return this.isHidden(selector, null);
   }
 
   /**
@@ -646,7 +646,7 @@ public class PageDriver {
    * @return true if element is visible
    */
   public boolean isVisible(String selector) {
-    return this.asyncPage.isVisible(selector);
+    return this.isVisible(selector, null);
   }
 
   /**
@@ -665,12 +665,7 @@ public class PageDriver {
    * @return True if the element becomes visible within the page timeout
    */
   public boolean isEventuallyVisible(String selector) {
-    try {
-      this.getAsyncPage().waitForSelector(selector);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
+    return this.isEventuallyVisible(selector, null);
   }
 
   /**
@@ -697,12 +692,7 @@ public class PageDriver {
    * @return True if the element becomes is hidden or gone within the page timeout
    */
   public boolean isEventuallyGone(String selector) {
-    try {
-      this.getAsyncPage().waitForSelector(selector);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
+    return this.isEventuallyGone(selector, null);
   }
 
   /**
@@ -729,7 +719,7 @@ public class PageDriver {
    * @return the element return handle
    */
   public ElementHandle querySelector(String selector) {
-    return this.asyncPage.querySelector(selector);
+    return this.querySelector(selector, null);
   }
 
   /**
@@ -748,7 +738,7 @@ public class PageDriver {
    * @return the element handle of the wait for function
    */
   public ElementHandle waitForSelector(String selector) {
-    return this.asyncPage.waitForSelector(selector);
+    return this.waitForSelector(selector, null);
   }
 
   /**
@@ -766,7 +756,7 @@ public class PageDriver {
    * @return the element handle of the style tag
    */
   public ElementHandle addScriptTag() {
-    return this.asyncPage.addScriptTag();
+    return this.addScriptTag(null);
   }
 
   /**
@@ -783,7 +773,7 @@ public class PageDriver {
    * @return the element handle of the style tag
    */
   public ElementHandle addStyleTag() {
-    return this.asyncPage.addStyleTag();
+    return this.addStyleTag(null);
   }
 
   /**
@@ -811,7 +801,7 @@ public class PageDriver {
    * @return a list of the options
    */
   public List<String> selectOption(String selector, ElementHandle values) {
-    return this.asyncPage.selectOption(selector, values);
+    return this.selectOption(selector, values, null);
   }
 
   /**
@@ -832,7 +822,7 @@ public class PageDriver {
    * @return a list of the options
    */
   public List<String> selectOption(String selector, ElementHandle[] values) {
-    return this.asyncPage.selectOption(selector, values);
+    return this.selectOption(selector, values, null);
   }
 
   /**
@@ -853,7 +843,7 @@ public class PageDriver {
    * @return a list of the options
    */
   public List<String> selectOption(String selector, SelectOption[] values) {
-    return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values));
+    return Collections.unmodifiableList(this.selectOption(selector, values, null));
   }
 
   /**
@@ -874,7 +864,7 @@ public class PageDriver {
    * @return a list of the options
    */
   public List<String> selectOption(String selector, String[] values) {
-    return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values));
+    return Collections.unmodifiableList(this.selectOption(selector, values, null));
   }
 
   /**
@@ -895,7 +885,7 @@ public class PageDriver {
    * @return a list of the options
    */
   public List<String> selectOption(String selector, SelectOption values) {
-    return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values));
+    return Collections.unmodifiableList(this.selectOption(selector, values, null));
   }
 
   /**
@@ -916,7 +906,7 @@ public class PageDriver {
    * @return a list of the options
    */
   public List<String> selectOption(String selector, String values) {
-    return Collections.unmodifiableList(this.asyncPage.selectOption(selector, values));
+    return Collections.unmodifiableList(this.selectOption(selector, values, null));
   }
 
   /**
@@ -937,7 +927,7 @@ public class PageDriver {
    * @return the object of the evaluation
    */
   public Object evalOnSelectorAll(String selector, String expression) {
-    return this.asyncPage.evalOnSelector(selector, expression);
+    return this.evalOnSelectorAll(selector, expression, null);
   }
 
   /**
@@ -958,7 +948,7 @@ public class PageDriver {
    * @return the object of the evaluation
    */
   public Object evalOnSelector(String selector, String expression) {
-    return this.asyncPage.evalOnSelector(selector, expression);
+    return this.evalOnSelector(selector, expression, null);
   }
 
   /**
@@ -978,7 +968,7 @@ public class PageDriver {
    * @return the evaluated object
    */
   public Object evaluate(String expression) {
-    return this.asyncPage.evaluate(expression);
+    return this.evaluate(expression, null);
   }
 
   /**
@@ -998,7 +988,7 @@ public class PageDriver {
    * @return the string value of the attribute
    */
   public String getAttribute(String selector, String name) {
-    return this.asyncPage.getAttribute(selector, name);
+    return this.getAttribute(selector, name, null);
   }
 
   /**
@@ -1018,7 +1008,7 @@ public class PageDriver {
    * @return the text content as a string
    */
   public String textContent(String selector) {
-    return this.asyncPage.textContent(selector);
+    return this.textContent(selector, null);
   }
 
   /**
@@ -1045,7 +1035,7 @@ public class PageDriver {
    * @return the inner html string of the object
    */
   public String innerHTML(String selector) {
-    return this.asyncPage.innerHTML(selector);
+    return this.innerHTML(selector, null);
   }
 
   /**
@@ -1064,7 +1054,7 @@ public class PageDriver {
    * @return the inner text string of the object
    */
   public String innerText(String selector) {
-    return this.asyncPage.innerText(selector);
+    return this.innerText(selector, null);
   }
 
   /**
@@ -1083,7 +1073,7 @@ public class PageDriver {
    * @return the string return of the input
    */
   public String inputValue(String selector) {
-    return this.asyncPage.inputValue(selector);
+    return this.inputValue(selector, null);
   }
 
   /**
@@ -1109,12 +1099,12 @@ public class PageDriver {
    * @return the response of going back
    */
   public Response navigateTo(String url) {
-    return this.asyncPage.navigate(url);
+    return this.navigateTo(url, null);
   }
 
   /**
    * navigating to with the page.
-   * @param options the go to options
+   * @param options the go-to options
    * @return the response of going back
    */
   public Response navigateTo(String url, Page.NavigateOptions options) {
@@ -1126,7 +1116,7 @@ public class PageDriver {
    * @return the response of going back
    */
   public Response goBack() {
-    return this.asyncPage.goBack();
+    return this.goBack(null);
   }
 
   /**
@@ -1143,7 +1133,7 @@ public class PageDriver {
    * @return the response of going forward
    */
   public Response goForward() {
-    return this.asyncPage.goForward();
+    return this.goForward(null);
   }
 
   /**
@@ -1160,7 +1150,7 @@ public class PageDriver {
    * @return the response of reloading the page
    */
   public Response reload() {
-    return this.asyncPage.reload();
+    return this.reload(null);
   }
 
   /**

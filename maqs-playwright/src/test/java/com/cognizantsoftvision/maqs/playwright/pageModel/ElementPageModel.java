@@ -149,4 +149,14 @@ public class ElementPageModel {
    * the frame element.
    */
   public final String frame = "#frame";
+
+  /**
+   * the Async page loaded text.
+   */
+  public final String loadedAsyncText = "#loading-div-text[style='']";
+
+  /**
+   * The body selector.
+   */
+  public final String body = "BODY";
 }

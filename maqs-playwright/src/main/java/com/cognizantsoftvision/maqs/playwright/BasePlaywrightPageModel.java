@@ -32,12 +32,12 @@ public abstract class BasePlaywrightPageModel {
   }
 
   /**
-   * the com.cognizantsoftvision.maqs.playwright.PageDriver from the test object.
+   * the playwright PageDriver from the test object.
    */
   protected PageDriver pageDriver;
 
   /**
-   * Gets the com.cognizantsoftvision.maqs.playwright.PageDriver from the test object.
+   * Gets the playwright PageDriver from the test object.
    * @return the page driver
    */
   public PageDriver getPageDriver() {
@@ -45,7 +45,7 @@ public abstract class BasePlaywrightPageModel {
   }
 
   /**
-   * Sets the com.cognizantsoftvision.maqs.playwright.PageDriver from the test object.
+   * Sets the playwright PageDriver from the test object.
    * @param driver the page driver to be set
    */
   private void setPageDriver(PageDriver driver) {
@@ -100,9 +100,9 @@ public abstract class BasePlaywrightPageModel {
   }
 
   /**
-   * Override the com.cognizantsoftvision.maqs.playwright.PageDriver.
+   * Override the playwright PageDriver.
    * This allows you to use something other than the default tests
-   * object com.cognizantsoftvision.maqs.playwright.PageDriver.
+   * object playwright PageDriver.
    *
    * @param pageDriver the new page driver
    */

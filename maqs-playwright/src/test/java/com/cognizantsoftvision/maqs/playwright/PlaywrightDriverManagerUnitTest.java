@@ -10,14 +10,14 @@ import com.microsoft.playwright.Page;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-/// <summary>
-/// Test driver manager
-/// </summary>
+/**
+ * Test driver manager.
+ */
 public class PlaywrightDriverManagerUnitTest extends BaseGenericTest {
 
-  /// <summary>
-  /// Make we can update the store with a new manager using an IPage
-  /// </summary>
+  /**
+   * Make we can update the store with a new manager using a Page.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void respectsNewPageViaManager() {
     Page newPage = getNewPage();
@@ -26,32 +26,32 @@ public class PlaywrightDriverManagerUnitTest extends BaseGenericTest {
     Assert.assertEquals(newPage, manager.getPageDriver().getAsyncPage());
   }
 
-  /// <summary>
-  /// Make we can update the drive with a IPage object
-  /// </summary>
+  /**
+   * Make we can update the drive with a Page object.
+   */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void respectsNewPageViaOverride() {
     Page newPage = getNewPage();
-    this.getTestObject().overrideDriverManager(
-        "playwrightDriver", new PageDriverManager(() -> new PageDriver(newPage) , this.getTestObject()));
+    this.getTestObject().overrideDriverManager("playwrightDriver",
+        new PageDriverManager(() -> new PageDriver(newPage) , this.getTestObject()));
     PageDriverManager manager = (PageDriverManager) this.getManagerStore().getManager("playwrightDriver");
     Assert.assertEquals(newPage, manager.getPageDriver().getAsyncPage());
   }
 
-  /// <summary>
-  /// Make we can update the drive with a IPage function
-  /// </summary>
+//  /**
+//   * Make we can update the drive with a Page function.
+//   */
 //  @Test(groups = TestCategories.PLAYWRIGHT)
 //  public void respectsNewPageViaOverrideFunc() {
 //    Page newPage = getNewPage();
-//    this.getTestObject().overrideDriverManager(() -> newPage);
-//    Assert.assertEquals(newPage, this.getPageDriver().getAsyncPage());
+//    this.getTestObject().overrideDriverManager("Playwright driver", () -> new PageDriver(newPage));
+//    Assert.assertEquals(newPage, this.getsTestObject().getPageDriver().getAsyncPage());
 //  }
 
-  /// <summary>
-  /// Get a new IPage
-  /// </summary>
-  /// <returns>A new IPAge</returns>
+  /**
+   * Get a new Page.
+   * @return A new Page
+   */
   private static Page getNewPage() {
     return PageDriverFactory.getPageDriverForBrowserWithDefaults(PlaywrightBrowser.WEBKIT).getAsyncPage();
   }

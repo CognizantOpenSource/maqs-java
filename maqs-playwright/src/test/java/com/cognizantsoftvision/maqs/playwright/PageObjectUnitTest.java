@@ -4,8 +4,7 @@ import com.cognizantsoftvision.maqs.playwright.pageModel.PageModel;
 import com.cognizantsoftvision.maqs.playwright.pageModel.PageModelOther;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -16,7 +15,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
   /**
    * Setup test Playwright page model.
    */
-  @BeforeClass
+  @BeforeMethod
   public void createPlaywrightPageModel() {
     this.setPageDriver(new PageDriver(this.getPageModel().getPageDriver().getAsyncPage()));
     this.getPageDriver().navigateTo(PageModel.getUrl());

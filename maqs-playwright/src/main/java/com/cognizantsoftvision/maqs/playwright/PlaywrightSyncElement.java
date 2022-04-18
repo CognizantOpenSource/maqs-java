@@ -4,10 +4,7 @@
 
 package com.cognizantsoftvision.maqs.playwright;
 
-import com.microsoft.playwright.ElementHandle;
-import com.microsoft.playwright.FrameLocator;
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.SelectOption;
 import com.microsoft.playwright.options.WaitForSelectorState;
@@ -21,7 +18,7 @@ import java.util.List;
 public class PlaywrightSyncElement {
 
   /**
-   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
+   * Initializes a new instance of the Playwright Sync Element class.
    * @param page the playwright page to be set
    * @param selector the selector of the element
    */
@@ -31,7 +28,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
+   * Initializes a new instance of the Playwright Sync Element class.
    * @param page The associated playwright page
    * @param selector Element selector
    * @param options Advanced locator options
@@ -43,7 +40,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
+   * Initializes a new instance of the Playwright Sync Element class.
    * @param parent the parent Playwright sync element
    * @param selector Element selector
    */
@@ -53,7 +50,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
+   * Initializes a new instance of the Playwright Sync Element class.
    * @param parent The parent playwright element
    * @param selector Sub element selector
    * @param options Advanced locator options
@@ -65,7 +62,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the PlaywrightSyncElement class.
+   * Initializes a new instance of the Playwright Sync Element class.
    * @param frame The associated playwright frame locator
    * @param selector Element selector
    */
@@ -75,7 +72,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
+   * Initializes a new instance of the Playwright Sync Element class.
    * @param testObject The associated playwright test object
    * @param selector Element selector
    * @param options Advanced locator options
@@ -85,7 +82,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the PlaywrightSyncElement class.
+   * Initializes a new instance of the Playwright Sync Element class.
    * @param driver The associated playwright page driver
    * @param selector Element selector
    */
@@ -94,7 +91,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * Initializes a new instance of the com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement class.
+   * Initializes a new instance of the Playwright Sync Element class.
    * @param driver The associated playwright page driver
    * @param selector Element selector
    * @param options Advanced locator options
@@ -250,7 +247,7 @@ public class PlaywrightSyncElement {
    * checks the element.
    */
   public void check() {
-    elementLocator().check();
+    this.check(null);
   }
 
   /**
@@ -265,7 +262,7 @@ public class PlaywrightSyncElement {
    * click the element.
    */
   public void click() {
-    elementLocator().click();
+    this.click(null);
   }
 
   /**
@@ -280,7 +277,7 @@ public class PlaywrightSyncElement {
    * double click the element.
    */
   public void doubleClick() {
-    elementLocator().dblclick();
+    this.doubleClick(null);
   }
 
   /**
@@ -296,7 +293,7 @@ public class PlaywrightSyncElement {
    * @param type the type to be dispatched
    */
   public void dispatchEvent(String type) {
-    elementLocator().dispatchEvent(type);
+    this.dispatchEvent(type, null);
   }
 
   /**
@@ -305,7 +302,7 @@ public class PlaywrightSyncElement {
    * @param eventInit the event to be initialized
    */
   public void dispatchEvent(String type, Object eventInit) {
-    elementLocator().dispatchEvent(type, eventInit);
+    this.dispatchEvent(type, eventInit, null);
   }
 
   /**
@@ -323,7 +320,7 @@ public class PlaywrightSyncElement {
    * @param target the element locator
    */
   public void dragTo(Locator target) {
-    elementLocator().dragTo(target);
+    this.dragTo(target, null);
   }
 
   /**
@@ -340,7 +337,7 @@ public class PlaywrightSyncElement {
    * @param value the value to be entered
    */
   public void fill(String value) {
-    elementLocator().fill(value);
+    this.fill(value,null);
   }
 
   /**
@@ -356,7 +353,7 @@ public class PlaywrightSyncElement {
    * focus on an element.
    */
   public void focus() {
-    elementLocator().focus();
+    this.focus(null);
   }
 
   /**
@@ -371,7 +368,7 @@ public class PlaywrightSyncElement {
    * hover over.
    */
   public void hover() {
-    elementLocator().hover();
+    this.hover(null);
   }
 
   /**
@@ -387,7 +384,7 @@ public class PlaywrightSyncElement {
    * @param key the key to be pressed
    */
   public void press(String key) {
-    elementLocator().press(key);
+    this.press(key, null);
   }
 
   /**
@@ -404,7 +401,7 @@ public class PlaywrightSyncElement {
    * @param checkedState if the element should be checked
    */
   public void setChecked(boolean checkedState) {
-    elementLocator().setChecked(checkedState);
+    this.setChecked(checkedState, null);
   }
 
   /**
@@ -421,7 +418,7 @@ public class PlaywrightSyncElement {
    * @param files the files to be inputted
    */
   public void setInputFiles(FilePayload files) {
-    elementLocator().setInputFiles(files);
+    this.setInputFiles(files, null);
   }
 
   /**
@@ -438,7 +435,7 @@ public class PlaywrightSyncElement {
    * @param files the files to be inputted
    */
   public void setInputFiles(FilePayload[] files) {
-    elementLocator().setInputFiles(files);
+    this.setInputFiles(files, null);
   }
 
   /**
@@ -455,7 +452,7 @@ public class PlaywrightSyncElement {
    * @param files the files to be inputted
    */
   public void setInputFiles(Path[] files) {
-    elementLocator().setInputFiles(files);
+    this.setInputFiles(files, null);
   }
 
   /**
@@ -472,7 +469,7 @@ public class PlaywrightSyncElement {
    * @param files the files to be inputted
    */
   public void setInputFiles(Path files) {
-    elementLocator().setInputFiles(files);
+    this.setInputFiles(files, null);
   }
 
   /**
@@ -488,7 +485,7 @@ public class PlaywrightSyncElement {
    * tap the element.
    */
   public void tap() {
-    elementLocator().tap();
+    this.tap(null);
   }
 
   /**
@@ -504,7 +501,7 @@ public class PlaywrightSyncElement {
    * @param text the text of the type
    */
   public void type(String text) {
-    elementLocator().type(text);
+    this.type(text, null);
   }
 
   /**
@@ -520,7 +517,7 @@ public class PlaywrightSyncElement {
    * uncheck an element.
    */
   public void uncheck() {
-    elementLocator().uncheck();
+    this.uncheck(null);
   }
 
   /**
@@ -536,7 +533,7 @@ public class PlaywrightSyncElement {
    * @return true if element is checked
    */
   public boolean isChecked() {
-    return elementLocator().isChecked();
+    return this.isChecked(null);
   }
 
   /**
@@ -553,7 +550,7 @@ public class PlaywrightSyncElement {
    * @return true if element is disabled
    */
   public boolean isDisabled() {
-    return elementLocator().isDisabled();
+    return this.isDisabled(null);
   }
 
   /**
@@ -570,7 +567,7 @@ public class PlaywrightSyncElement {
    * @return true if element is editable
    */
   public boolean isEditable() {
-    return elementLocator().isEditable();
+    return this.isEditable(null);
   }
 
   /**
@@ -587,7 +584,7 @@ public class PlaywrightSyncElement {
    * @return true if element is enabled
    */
   public boolean isEnabled() {
-    return elementLocator().isEnabled();
+    return this.isEnabled(null);
   }
 
   /**
@@ -604,7 +601,7 @@ public class PlaywrightSyncElement {
    * @return true if element is hidden
    */
   public boolean isHidden() {
-    return elementLocator().isHidden();
+    return this.isHidden(null);
   }
 
   /**
@@ -621,7 +618,7 @@ public class PlaywrightSyncElement {
    * @return true if element is visible
    */
   public boolean isVisible() {
-    return elementLocator().isVisible();
+    return this.isVisible(null);
   }
 
   /**
@@ -643,7 +640,7 @@ public class PlaywrightSyncElement {
       options.setState(WaitForSelectorState.VISIBLE);
       this.elementLocator().waitFor(options);
       return true;
-    } catch (NullPointerException e) {
+    } catch (NullPointerException | TimeoutError e) {
       return false;
     }
   }
@@ -658,7 +655,7 @@ public class PlaywrightSyncElement {
       options.setState(WaitForSelectorState.HIDDEN);
       this.elementLocator().waitFor(options);
       return true;
-    } catch (NullPointerException e) {
+    } catch (NullPointerException | TimeoutError e) {
       return false;
     }
   }
@@ -669,7 +666,7 @@ public class PlaywrightSyncElement {
    * @return a list of the selected options
    */
   public List<String> selectOption(ElementHandle values) {
-    return Collections.unmodifiableList(elementLocator().selectOption(values));
+    return Collections.unmodifiableList(this.selectOption(values, null));
   }
 
   /**
@@ -688,7 +685,7 @@ public class PlaywrightSyncElement {
    * @return a list of the selected options
    */
   public List<String> selectOption(ElementHandle[] values) {
-    return Collections.unmodifiableList(elementLocator().selectOption(values));
+    return Collections.unmodifiableList(this.selectOption(values, null));
   }
 
   /**
@@ -707,7 +704,7 @@ public class PlaywrightSyncElement {
    * @return a list of the selected options
    */
   public List<String> selectOption(SelectOption values) {
-    return Collections.unmodifiableList(elementLocator().selectOption(values));
+    return Collections.unmodifiableList(this.selectOption(values, null));
   }
 
   /**
@@ -726,7 +723,7 @@ public class PlaywrightSyncElement {
    * @return a list of the selected options
    */
   public List<String> selectOption(String[] values) {
-    return Collections.unmodifiableList(elementLocator().selectOption(values));
+    return Collections.unmodifiableList(this.selectOption(values, null));
   }
 
   /**
@@ -745,7 +742,7 @@ public class PlaywrightSyncElement {
    * @return a list of the selected options
    */
   public List<String> selectOption(SelectOption[] values) {
-    return Collections.unmodifiableList(elementLocator().selectOption(values));
+    return this.selectOption(values, null);
   }
 
   /**
@@ -764,7 +761,7 @@ public class PlaywrightSyncElement {
    * @return a list of the selected options
    */
   public List<String> selectOption(String values) {
-    return Collections.unmodifiableList(elementLocator().selectOption(values));
+    return this.selectOption(values, null);
   }
 
   /**
@@ -783,7 +780,7 @@ public class PlaywrightSyncElement {
    * @return the object output of the evaluation
    */
   public Object evalOnSelectorAll(String expression) {
-    return elementLocator().evaluateAll(expression);
+    return this.evalOnSelectorAll(expression, null);
   }
 
   /**
@@ -802,7 +799,7 @@ public class PlaywrightSyncElement {
    * @return object from the evaluated element
    */
   public Object evaluate(String expression) {
-    return elementLocator().evaluate(expression);
+    return this.evaluate(expression, null);
   }
 
   /**
@@ -821,7 +818,7 @@ public class PlaywrightSyncElement {
    * @return the attribute as a string
    */
   public String getAttribute(String name) {
-    return elementLocator().getAttribute(name);
+    return this.getAttribute(name, null);
   }
 
   /**
@@ -839,7 +836,7 @@ public class PlaywrightSyncElement {
    * @return the text content
    */
   public String textContent() {
-    return elementLocator().textContent();
+    return this.textContent(null);
   }
 
   /**
@@ -860,7 +857,7 @@ public class PlaywrightSyncElement {
   }
 
   /**
-   * the inner text value of all elements in  list.
+   * the inner text value of all elements in the list.
    * @return a list of the inner text as a string
    */
   public List<String> allInnerTexts() {
@@ -872,7 +869,7 @@ public class PlaywrightSyncElement {
    * @return the inner html as a string
    */
   public String innerHTML() {
-    return elementLocator().innerHTML();
+    return this.innerHTML(null);
   }
 
   /**
@@ -889,7 +886,7 @@ public class PlaywrightSyncElement {
    * @return the inner text string
    */
   public String innerText() {
-    return elementLocator().innerText();
+    return this.innerText(null);
   }
 
   /**
@@ -906,7 +903,7 @@ public class PlaywrightSyncElement {
    * @return the string input value
    */
   public String inputValue() {
-    return elementLocator().inputValue();
+    return this.inputValue(null);
   }
 
   /**

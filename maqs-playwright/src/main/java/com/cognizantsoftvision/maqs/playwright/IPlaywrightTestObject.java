@@ -29,8 +29,6 @@ public interface IPlaywrightTestObject extends ITestObject {
    */
   PageDriverManager getPageManager();
 
-
-
   /**
    * Override the Playwright page driver.
    * @param pageDriver the new page driver

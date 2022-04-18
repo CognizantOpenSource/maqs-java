@@ -103,8 +103,6 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
       // The test did not pass, or we want it logged regardless
       if (this.getLoggingEnabledSetting() == LoggingEnabled.YES || !resultType.isSuccess()) {
         String fullPath = ((IFileLogger)this.getLogger()).getFilePath();
-        //        String fileNameWithoutExtension = Path.combine(Path.GetDirectoryName(fullPath),
-        //        Path.GetFileNameWithoutExtension(fullPath));
         String fileNameWithoutExtension = Path.of(fullPath).getFileName().toString();
         attachTestFiles(this.getPageDriver().getParentBrowser(), fileNameWithoutExtension);
         return;
