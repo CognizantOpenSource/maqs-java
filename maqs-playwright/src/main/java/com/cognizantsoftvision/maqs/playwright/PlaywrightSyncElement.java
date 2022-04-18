@@ -4,7 +4,11 @@
 
 package com.cognizantsoftvision.maqs.playwright;
 
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.FrameLocator;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.TimeoutError;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.SelectOption;
 import com.microsoft.playwright.options.WaitForSelectorState;
