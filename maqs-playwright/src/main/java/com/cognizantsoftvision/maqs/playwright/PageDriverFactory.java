@@ -158,6 +158,7 @@ public class PageDriverFactory {
   public static BrowserType.LaunchOptions getDefaultChromeOptions() {
     BrowserType.LaunchOptions options = getDefaultOptions();
     options.channel = "chrome";
+    options.headless = PlaywrightConfig.getHeadless();
     return options;
   }
 
@@ -168,6 +169,7 @@ public class PageDriverFactory {
   public static BrowserType.LaunchOptions getDefaultEdgeOptions() {
     BrowserType.LaunchOptions options = getDefaultOptions();
     options.channel = "msedge";
+    options.headless = PlaywrightConfig.getHeadless();
     return options;
   }
 

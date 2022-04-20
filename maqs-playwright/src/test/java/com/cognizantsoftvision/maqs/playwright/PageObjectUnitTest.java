@@ -1,7 +1,7 @@
 package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.playwright.pageModel.PageModel;
-import com.cognizantsoftvision.maqs.playwright.pageModel.PageModelOther;
+import com.cognizantsoftvision.maqs.playwright.pageModel.OtherPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -42,7 +42,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void pageModelLogger() {
-    Assert.assertNotNull(this.getPageModel().getLogger());
+    Assert.assertNotNull(this.getTestObject().getLogger());
   }
 
   /**
@@ -77,10 +77,10 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
     this.getManagerStore().putOrOverride("OtherDriver",
         new PageDriverManager(PageDriverFactory::getDefaultPageDriver, this.getTestObject()));
 
-    PageDriver otherDriver = this.getManagerStore().getDriver("OtherDriver");
+    PageDriver otherDriver = (PageDriver) this.getManagerStore().getManager("OtherDriver");
 
     PageModel model1 = this.getPageModel();
-    PageModelOther model2 = new PageModelOther(this.getTestObject(), otherDriver);
+    OtherPageModel model2 = new OtherPageModel(this.getTestObject(), otherDriver);
     model2.openPage();
 
     // Make sure the page are properly loading using the different web drivers

@@ -13,7 +13,7 @@ import com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement;
 /**
  * The Other Playwright page model class for testing.
  */
-public class PageModelOther extends BasePlaywrightPageModel {
+public class OtherPageModel extends BasePlaywrightPageModel {
 
   static ElementPageModel pageModel;
 
@@ -21,7 +21,7 @@ public class PageModelOther extends BasePlaywrightPageModel {
    * sets up the page model other class.
    * @param testObject the test object to be used
    */
-  protected PageModelOther(IPlaywrightTestObject testObject) {
+  protected OtherPageModel(IPlaywrightTestObject testObject) {
     super(testObject);
   }
 
@@ -30,7 +30,7 @@ public class PageModelOther extends BasePlaywrightPageModel {
    * @param testObject the test object to be used
    * @param otherDriver the page driver to be used
    */
-  public PageModelOther(IPlaywrightTestObject testObject, PageDriver otherDriver) {
+  public OtherPageModel(IPlaywrightTestObject testObject, PageDriver otherDriver) {
     super(testObject, otherDriver);
   }
 

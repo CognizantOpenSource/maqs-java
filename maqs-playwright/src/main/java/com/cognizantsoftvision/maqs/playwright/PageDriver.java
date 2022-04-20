@@ -938,7 +938,7 @@ public class PageDriver {
    * @return the object of the evaluation
    */
   public Object evalOnSelectorAll(String selector, String expression, Object arg) {
-    return this.asyncPage.evalOnSelector(selector, expression, arg);
+    return this.asyncPage.evalOnSelectorAll(selector, expression, arg);
   }
 
   /**

@@ -26,7 +26,6 @@ public class PageDriverFactoryUnitTest {
     ArrayList<PlaywrightBrowser> data = new ArrayList<>();
     data.add(PlaywrightBrowser.CHROMIUM);
     data.add(PlaywrightBrowser.FIREFOX);
-    data.add(PlaywrightBrowser.EDGE);
     data.add(PlaywrightBrowser.WEBKIT);
     data.add(PlaywrightBrowser.CHROME);
     return new Object[] {data};

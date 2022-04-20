@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.playwright.pageModel;
 
-import com.cognizantsoftvision.maqs.playwright.BasePlaywrightPageModel;
 import com.cognizantsoftvision.maqs.playwright.IPlaywrightTestObject;
 import com.cognizantsoftvision.maqs.playwright.PlaywrightConfig;
 import com.cognizantsoftvision.maqs.playwright.PlaywrightSyncElement;
@@ -13,13 +12,13 @@ import com.microsoft.playwright.FrameLocator;
 /**
  * The Playwright IFrame Page Model class for testing.
  */
-public class PageModelIFrame extends BasePlaywrightPageModel {
+public class IFramePageModel extends PageModel {
 
   /**
    * Initializes a new instance of the PageModel IFrame class
    * @param testObject The base Playwright test object
    */
-  public PageModelIFrame(IPlaywrightTestObject testObject) {
+  public IFramePageModel(IPlaywrightTestObject testObject) {
     super(testObject);
   }
 

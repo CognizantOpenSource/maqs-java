@@ -15,6 +15,7 @@ import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.SelectOption;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -444,8 +445,9 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void evalOnSelectorAllTest() {
-    Assert.assertEquals(this.getPageDriver().evalOnSelectorAll(
-        elementPageModel.computerPartsAllOptions, "nodes => nodes.map(n => n.innerText)"), 6);
+     Object results = this.getPageDriver().evalOnSelectorAll(
+        elementPageModel.computerPartsAllOptions, "nodes => nodes.map(n => n.innerText)");
+    Assert.assertEquals(((ArrayList<?>) results).size(), 6);
   }
 
   /**
