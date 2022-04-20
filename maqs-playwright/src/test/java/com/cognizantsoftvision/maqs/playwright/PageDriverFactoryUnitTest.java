@@ -55,6 +55,5 @@ public class PageDriverFactoryUnitTest {
 
     PageDriver pageDriver = PageDriverFactory.getPageDriverFromBrowser(browser);
     Assert.assertFalse(pageDriver.getAsyncPage().isClosed());
-
   }
 }

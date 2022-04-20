@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -42,10 +43,10 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /**
    * Setup test and make sure we are on the correct test page
    */
-  @Test(groups = TestCategories.PLAYWRIGHT)
+  @AfterMethod
   public void cleanupPlaywrightPageModel() {
     models.remove(this.getTestObject());
-    Assert.assertNull(this.getTestObject());
+    Assert.assertTrue(models.isEmpty());
 
   }
 

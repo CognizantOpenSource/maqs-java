@@ -33,17 +33,11 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   ElementPageModel elementPageModel = new ElementPageModel();
 
   /**
-   * the page model class.
-   */
-  PageModel pageModel;
-
-  /**
    * Sets up the page model.
    */
   @BeforeMethod
   public void setUp() {
-    pageModel = new PageModel(this.getTestObject());
-    pageModel.openPage();
+    this.getPageDriver().navigateTo(PageModel.getUrl());
   }
 
   /**

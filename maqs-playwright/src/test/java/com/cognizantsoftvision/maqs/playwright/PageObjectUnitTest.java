@@ -1,6 +1,5 @@
 package com.cognizantsoftvision.maqs.playwright;
 
-import com.cognizantsoftvision.maqs.base.ManagerStore;
 import com.cognizantsoftvision.maqs.playwright.pageModel.PageModel;
 import com.cognizantsoftvision.maqs.playwright.pageModel.PageModelOther;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
