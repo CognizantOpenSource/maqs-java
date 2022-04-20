@@ -1,5 +1,6 @@
 package com.cognizantsoftvision.maqs.playwright;
 
+import com.cognizantsoftvision.maqs.base.ManagerStore;
 import com.cognizantsoftvision.maqs.playwright.pageModel.PageModel;
 import com.cognizantsoftvision.maqs.playwright.pageModel.PageModelOther;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -17,7 +18,6 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    */
   @BeforeMethod
   public void createPlaywrightPageModel() {
-    this.setPageDriver(new PageDriver(this.getPageModel().getPageDriver().getAsyncPage()));
     this.getPageDriver().navigateTo(PageModel.getUrl());
     this.getTestObject().setObject("pom", new PageModel(this.getTestObject()));
   }
@@ -43,7 +43,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void pageModelLogger() {
-    Assert.assertEquals(this.getLogger(), this.getPageModel().getLogger());
+    Assert.assertNotNull(this.getPageModel().getLogger());
   }
 
   /**
@@ -77,6 +77,7 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
     // Define new named driver
     this.getManagerStore().putOrOverride("OtherDriver",
         new PageDriverManager(PageDriverFactory::getDefaultPageDriver, this.getTestObject()));
+
     PageDriver otherDriver = this.getManagerStore().getDriver("OtherDriver");
 
     PageModel model1 = this.getPageModel();

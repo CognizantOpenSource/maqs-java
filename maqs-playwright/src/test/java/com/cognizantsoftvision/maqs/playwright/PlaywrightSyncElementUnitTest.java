@@ -95,7 +95,8 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
     Assert.assertEquals(singleOption.size(), 1);
     Assert.assertEquals(singleOption.get(0), "3");
 
-    ElementHandle joe = this.getPageDriver().querySelector(models.get(this.getTestObject()).getNamesDropDown().getSelector());
+    ElementHandle joe = this.getPageDriver().querySelector(models.get(
+        this.getTestObject()).getNamesDropDownFirstOption().getSelector());
 
     singleOption = models.get(this.getTestObject()).getNamesDropDown().selectOption(joe);
     Assert.assertEquals(singleOption.size(), 1);
