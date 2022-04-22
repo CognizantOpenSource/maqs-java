@@ -1,7 +1,7 @@
 package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.playwright.pageModel.PageModel;
-import com.cognizantsoftvision.maqs.playwright.pageModel.OtherPageModel;
+import com.cognizantsoftvision.maqs.playwright.pageModel.AsyncPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -77,10 +77,11 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
     this.getManagerStore().putOrOverride("OtherDriver",
         new PageDriverManager(PageDriverFactory::getDefaultPageDriver, this.getTestObject()));
 
-    PageDriver otherDriver = (PageDriver) this.getManagerStore().getManager("OtherDriver");
+    PageDriverManager manager = (PageDriverManager) this.getManagerStore().getManager("OtherDriver");
+    PageDriver otherDriver = manager.getPageDriver();
 
     PageModel model1 = this.getPageModel();
-    OtherPageModel model2 = new OtherPageModel(this.getTestObject(), otherDriver);
+    AsyncPageModel model2 = new AsyncPageModel(this.getTestObject(), otherDriver);
     model2.openPage();
 
     // Make sure the page are properly loading using the different web drivers
