@@ -240,8 +240,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    *
    * @return File Extension
    */
-  @Override
-  protected String getExtension() {
+  @Override protected String getExtension() {
     return ".html";
   }
 
