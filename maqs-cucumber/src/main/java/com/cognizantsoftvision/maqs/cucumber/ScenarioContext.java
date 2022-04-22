@@ -15,7 +15,7 @@ public class ScenarioContext {
   /**
    * Initializes an instance of the ScenarioContext class.
    */
-  public ScenarioContext() {
+  private ScenarioContext() {
     // This constructor is intentionally left empty
   }
 
