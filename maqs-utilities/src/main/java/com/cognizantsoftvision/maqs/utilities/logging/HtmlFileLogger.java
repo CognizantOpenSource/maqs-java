@@ -14,7 +14,6 @@ import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * The HTML File Logger class.
- *
  * Helper class for adding logs to an HTML file. Allows configurable file path.
  */
 public class HtmlFileLogger extends FileLogger implements AutoCloseable {

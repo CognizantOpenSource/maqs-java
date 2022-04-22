@@ -6,7 +6,6 @@ package com.cognizantsoftvision.maqs.utilities.helper;
 
 /**
  * The Property Manager class.
- *
  * Handles the management of System properties from Maven at compile time.
  */
 public class PropertyManager {

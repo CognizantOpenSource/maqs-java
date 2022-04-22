@@ -6,7 +6,6 @@ package com.cognizantsoftvision.maqs.utilities.helper;
 
 /**
  * The String Processor class.
- *
  * Initializes a new instance of the StringProcessor class.
  */
 public final class StringProcessor {

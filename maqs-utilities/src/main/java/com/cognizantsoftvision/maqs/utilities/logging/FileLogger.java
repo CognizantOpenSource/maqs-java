@@ -15,7 +15,6 @@ import java.nio.file.Paths;
 
 /**
  * The File Logger class.
- *
  * Helper class for adding logs to a plain text file.
  * Allows configurable file path.
  */

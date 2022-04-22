@@ -10,7 +10,6 @@ import java.io.File;
 
 /**
  * The Logging Configuration class.
- *
  * Gets the logging config data.
  */
 public class LoggingConfig {
