@@ -94,7 +94,7 @@ public class UIWait {
   }
 
   /**
-   * Get the WebDriverWait for use outside of this instance class.
+   * Get the WebDriverWait for use outside this instance class.
    *
    * @return The WebDriverWait
    */
@@ -291,7 +291,7 @@ public class UIWait {
       try {
         return obj.isEnabled();
       } catch (NoSuchElementException | StaleElementReferenceException e) {
-        // Do not throw these exceptions here. Instead return false and let the fluent wait try again.
+        // Do not throw these exceptions here. Instead, return false and let the fluent wait try again.
         return false;
       }
     };
@@ -383,7 +383,7 @@ public class UIWait {
         try {
           return !obj.isDisplayed();
         } catch (NoSuchElementException | StaleElementReferenceException e) {
-          // Do not throw these exceptions here. Instead return true as the element has disappeared.
+          // Do not throw these exceptions here. Instead, return true as the element has disappeared.
           return true;
         }
       };
@@ -577,7 +577,7 @@ public class UIWait {
    * @param by        Selector to look for
    * @param attribute String value of the attribute to look at on the specified selector
    * @param text      String value of the text to look for in the attribute
-   * @return Webelement of the selector that is found
+   * @return Web element of the selector that is found
    */
   public WebElement waitForAttributeTextEquals(final By by, final String attribute, final String text) {
     return this.waitForAttributeTextEquals(by, attribute, text, getWaitDriver());
@@ -653,7 +653,7 @@ public class UIWait {
    * @param attribute String value of the attribute to look at on the specified selector
    * @param text      String value of the text to look for in the attribute
    * @param wait      The wait driver
-   * @param contains  boolean true if checking if contains, false if exact match
+   * @param contains  boolean true if checking contains, false if exact match
    * @return true if the attribute with the specified text value is found, else false
    */
   public boolean waitUntilAttribute(final By by, final String attribute, final String text, WebDriverWait wait,
@@ -994,8 +994,8 @@ public class UIWait {
       System.err.print(error);
     }
 
-    Coordinates coord = ((Locatable) element).getCoordinates();
-    while (coord.inViewPort().getY() < HEADER_SIZE && counter < max) {
+    Coordinates coordinates = ((Locatable) element).getCoordinates();
+    while (coordinates.inViewPort().getY() < HEADER_SIZE && counter < max) {
       waitForVisibleElement(BODY_BY).sendKeys(Keys.ARROW_UP);
       counter++;
     }
