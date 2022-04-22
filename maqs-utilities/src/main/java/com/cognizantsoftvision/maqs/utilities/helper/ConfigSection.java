@@ -5,6 +5,8 @@
 package com.cognizantsoftvision.maqs.utilities.helper;
 
 /**
+ * The Config Section enum class.
+ *
  * Enumeration values for default configuration sections.
  */
 public enum ConfigSection {

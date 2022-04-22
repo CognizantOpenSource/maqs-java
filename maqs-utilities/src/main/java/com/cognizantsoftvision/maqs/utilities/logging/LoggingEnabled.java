@@ -5,9 +5,12 @@
 package com.cognizantsoftvision.maqs.utilities.logging;
 
 /**
- * The type of message.
+ * The Logging Enabled enum class.
+ *
+ * Sets when and if to log the message.
  */
 public enum LoggingEnabled {
+
   /**
    * Yes log.
    */

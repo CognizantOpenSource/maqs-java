@@ -13,9 +13,11 @@ import java.util.Date;
 import org.apache.commons.text.StringEscapeUtils;
 
 /**
+ * The HTML File Logger class.
+ *
  * Helper class for adding logs to an HTML file. Allows configurable file path.
  */
-public class HtmlFileLogger extends FileLogger implements IFileLogger {
+public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * The default log name.
@@ -25,8 +27,7 @@ public class HtmlFileLogger extends FileLogger implements IFileLogger {
   /**
    * Default header for the HTML file, this gives us our colored text.
    */
-  private static final String DEFAULT_HTML_HEADER =
-      "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
+  private static final String DEFAULT_HTML_HEADER = "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
   private static final String LOG_ERROR_MESSAGE = "Failed to write to event log because: %s";
 
   /**

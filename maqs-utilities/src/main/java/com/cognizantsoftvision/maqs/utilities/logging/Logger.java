@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.utilities.logging;
 
 /**
- * Abstract logging interface base class.
+ * The Logging class.
  */
 public abstract class Logger implements ILogger {
 

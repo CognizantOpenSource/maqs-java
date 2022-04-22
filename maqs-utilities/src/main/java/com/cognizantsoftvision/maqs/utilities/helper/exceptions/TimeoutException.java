@@ -5,8 +5,9 @@
 package com.cognizantsoftvision.maqs.utilities.helper.exceptions;
 
 /**
- * Custom TimeoutException, as the built in one does not allow for a passed in
- * inner exception.
+ * The Custom Timeout Exception.
+ *
+ * The built-in one does not allow for a passed in inner exception.
  */
 public class TimeoutException extends RuntimeException {
 

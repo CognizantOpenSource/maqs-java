@@ -14,10 +14,12 @@ import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 /**
- * Helper class for adding logs to a plain text file. Allows configurable file
- * path.
+ * The File Logger class.
+ *
+ * Helper class for adding logs to a plain text file.
+ * Allows configurable file path.
  */
-public class FileLogger extends Logger implements IFileLogger {
+public class FileLogger extends Logger {
 
   /**
    * Default extension type.
@@ -241,35 +243,45 @@ public class FileLogger extends Logger implements IFileLogger {
   }
 
   /**
-   * {@inheritDoc}
+   * Gets the FilePath value.
+   *
+   * @return returns the file path
    */
   public String getFilePath() {
     return this.filePath;
   }
 
   /**
-   * {@inheritDoc}
-   */
-  public void setFilePath(String path) {
-    this.filePath = path;
-  }
-
-  /**
-   * {@inheritDoc}
+   * Gets the Message Type value.
+   *
+   * @return The Message Type.
    */
   public MessageType getMessageType() {
     return this.messageType;
   }
 
   /**
-   * {@inheritDoc}
+   * Gets the Directory Path.
+   *
+   * @return Returns the Directory
    */
   public String getDirectory() {
     return this.directory;
   }
 
   /**
-   * {@inheritDoc}
+   * Sets the FilePath value.
+   *
+   * @param path sets the file path
+   */
+  public void setFilePath(String path) {
+    this.filePath = path;
+  }
+
+  /**
+   * Gets the File Name value.
+   *
+   * @return Returns the File Name.
    */
   public String getFileName() {
     return this.fileName;
@@ -283,7 +295,6 @@ public class FileLogger extends Logger implements IFileLogger {
   protected String getExtension() {
     return TXT;
   }
-
 
   /**
    * {@inheritDoc}
