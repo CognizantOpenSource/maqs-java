@@ -281,7 +281,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
       case WARNING:
         return "<p style=\"color:orange\">";
       default:
-        this.logMessage(this.unknownMessageTypeMessage(type));
+        System.out.println(this.unknownMessageTypeMessage(type));
         return "<p style=\"color:hotpink\">";
     }
   }
