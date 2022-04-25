@@ -46,6 +46,7 @@ public class ScenarioContext {
    * @param type the class type
    * @return the typed object
    */
+  @SuppressWarnings("unchecked")
   public static <T> T get(final Class<T> type) {
     final Object obj = get(type.toString());
     return (T) obj;
@@ -61,7 +62,7 @@ public class ScenarioContext {
    */
   @SuppressWarnings("unchecked")
   public static <T> T get(final String name, final Class<T> type) {
-    final Object obj = get(name);
+    final Object obj = get(name) != null ? get(name) : get(type.toString());
     return (T) obj;
   }
 
