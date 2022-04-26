@@ -69,7 +69,6 @@ public class LoggingConfigUnitTest {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "INVALIDVALUE");
         Config.addGeneralTestSettingValues(newValueMap, true);
-
         LoggingConfig.getLoggingEnabledSetting();
     }
 
@@ -166,7 +165,6 @@ public class LoggingConfigUnitTest {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INVALIDVALUE");
         Config.addGeneralTestSettingValues(newValueMap, true);
-
         LoggingConfig.getLoggingLevelSetting();
     }
 
@@ -215,7 +213,8 @@ public class LoggingConfigUnitTest {
     }
 
     /**
-     * Test getting Log Directory. Config value not defined - Compare to Default Path.
+     * Test getting Log Directory.
+     * Config value not defined - Compare to Default Path.
      */
     @Test
     public void getLogDirectoryTest() {
