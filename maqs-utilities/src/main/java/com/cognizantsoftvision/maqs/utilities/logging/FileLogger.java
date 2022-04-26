@@ -242,55 +242,49 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Gets the FilePath value.
-   *
-   * @return returns the file path
+   * {@inheritDoc}
    */
+  @Override
   public String getFilePath() {
     return this.filePath;
   }
 
   /**
-   * Gets the Message Type value.
-   *
-   * @return The Message Type.
+   * {@inheritDoc}
    */
+  @Override
   public MessageType getMessageType() {
     return this.messageType;
   }
 
   /**
-   * Gets the Directory Path.
-   *
-   * @return Returns the Directory
+   * {@inheritDoc}
    */
+  @Override
   public String getDirectory() {
     return this.directory;
   }
 
   /**
-   * Sets the FilePath value.
-   *
-   * @param path sets the file path
+   * {@inheritDoc}
    */
+  @Override
   public void setFilePath(String path) {
     this.filePath = path;
   }
 
   /**
-   * Gets the File Name value.
-   *
-   * @return Returns the File Name.
+   * {@inheritDoc}
    */
+  @Override
   public String getFileName() {
     return this.fileName;
   }
 
   /**
-   * Gets the file extension.
-   *
-   * @return File Extension
+   * {@inheritDoc}
    */
+  @Override
   protected String getExtension() {
     return TXT;
   }

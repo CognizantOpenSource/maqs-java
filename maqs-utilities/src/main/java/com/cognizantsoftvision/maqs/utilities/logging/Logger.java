@@ -95,4 +95,16 @@ public abstract class Logger implements ILogger {
     // The message should be logged if it's level is less than or equal to the current logging level
     return messageType.getValue() <= this.logLevel.getValue();
   }
+
+  public abstract String getFilePath();
+
+  public abstract MessageType getMessageType();
+
+  public abstract String getDirectory();
+
+  public abstract void setFilePath(String path);
+
+  public abstract String getFileName();
+
+  protected abstract String getExtension();
 }
