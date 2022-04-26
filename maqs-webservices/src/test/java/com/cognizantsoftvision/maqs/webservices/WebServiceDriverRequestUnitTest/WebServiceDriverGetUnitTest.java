@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 /**
  * The Web Driver Service Driver Get unit test class.
  */
-public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
+public class WebServiceDriverGetUnitTest {
 
   /**
    * String to hold the URL.

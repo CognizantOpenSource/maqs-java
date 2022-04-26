@@ -4,8 +4,8 @@
 
 package com.cognizantsoftvision.maqs.selenium.pageModel;
 
+import com.cognizantsoftvision.maqs.selenium.ISeleniumTestObject;
 import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
-import com.cognizantsoftvision.maqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.By;
 
 /**
@@ -28,7 +28,7 @@ public class IFramePageModel extends HeaderPageModel {
    *
    * @param testObject the test object
    */
-  public IFramePageModel(SeleniumTestObject testObject) {
+  public IFramePageModel(ISeleniumTestObject testObject) {
     super(testObject);
   }
 

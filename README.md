@@ -1,13 +1,13 @@
-![MAQS Logo](https://repository-images.githubusercontent.com/203866145/054b2500-5a6c-11ea-9980-20c7f30a12f8)
+![MAQS Logo](https://github.com/CognizantOpenSource/maqs-java/blob/main/docs/resources/maqsfull.png?raw=true)
 
 | Check | Status |
 |-------|--------|
-|**Latest Release**|[![Maven Central](https://img.shields.io/maven-central/v/com.magenic.jmaqs/jmaqs-framework.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.magenic.jmaqs%22%20AND%20a:%22jmaqs-framework%22)|
-|**Release**|![Release Pipeline](https://github.com/Magenic/JMAQS/workflows/Release%20Pipeline/badge.svg)|
-|**SnapShot**|![SnapShot Pipeline](https://github.com/Magenic/JMAQS/workflows/SnapShot%20Pipeline/badge.svg)|
-|**Code Quality**|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.magenic.jmaqs%3Ajmaqs-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.magenic.jmaqs%3Ajmaqs-framework)|
-|**License**|[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://raw.githubusercontent.com/Magenic/JMAQS/master/LICENSE)| 
-
+|**Pipeline**|[![MAQS Java Pipeline](https://img.shields.io/github/workflow/status/CognizantOpenSource/maqs-java/MAQS%20Java%20Pipeline?event=push&label=Build&logo=github)](https://github.com/CognizantOpenSource/maqs-java/actions/workflows/maven.yml)|
+|**Code Quality**|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=CognizantOpenSource_maqs-java&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=CognizantOpenSource_maqs-java)|
+|**License**|[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://raw.githubusercontent.com/CognizantOpenSource/maqs-java/main/LICENSE)|
+|**Latest Release**|Coming soon|
+|**Release**|Coming soon|
+|**SnapShot**|Coming soon|
 [![Testing Powered By Sauce Labs](https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-white.png?sanitize=true "Testing Powered By Sauce Labs")](https://saucelabs.com)
 
 ## Introduction 
@@ -23,7 +23,7 @@ Most automation engagements have you doing the same basic steps to get a functio
 Utilizing project templates, Maven, and utility libraries we are able to have a functioning framework up and running in minutes, almost entirely removing on the initial time investment on implementating an automation solution.
 
 ## Documentation
-[MAQS docs](https://github.com/CognizantOpenSource/maqs-java/tree/main/docs/MAQS_1)
+[MAQS docs](https://cognizantopensource.github.io/maqs-java//#/)
 
 ## License
 The MIT License (MIT) Copyright (c) 2022 Cognizant
