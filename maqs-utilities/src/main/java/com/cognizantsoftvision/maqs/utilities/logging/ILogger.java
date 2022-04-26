@@ -49,4 +49,9 @@ public interface ILogger {
    * @param args String format arguments
    */
   void logMessage(String message, Object... args);
+
+  /**
+   * {@inheritDoc}
+   */
+  String getFilePath();
 }

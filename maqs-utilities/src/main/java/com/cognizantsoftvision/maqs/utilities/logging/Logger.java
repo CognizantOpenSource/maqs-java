@@ -96,15 +96,28 @@ public abstract class Logger implements ILogger {
     return messageType.getValue() <= this.logLevel.getValue();
   }
 
-  public abstract String getFilePath();
-
+  /**
+   * {@inheritDoc}
+   */
   public abstract MessageType getMessageType();
 
+  /**
+   * {@inheritDoc}
+   */
   public abstract String getDirectory();
 
+  /**
+   * {@inheritDoc}
+   */
   public abstract void setFilePath(String path);
 
+  /**
+   * {@inheritDoc}
+   */
   public abstract String getFileName();
 
+  /**
+   * {@inheritDoc}
+   */
   protected abstract String getExtension();
 }
