@@ -12,12 +12,10 @@ import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import org.testng.Assert;
-import org.testng.annotations.Ignore;
-import org.testng.annotations.Test;
-
 import java.io.File;
 import java.util.HashMap;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * The Logging Configuration unit test class.
