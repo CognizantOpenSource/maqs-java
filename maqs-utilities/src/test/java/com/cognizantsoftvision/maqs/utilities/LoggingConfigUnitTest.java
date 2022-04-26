@@ -218,12 +218,10 @@ public class LoggingConfigUnitTest {
 
     /**
      * Test getting Log Directory. Config value not defined - Compare to Default Path.
-     * FIXME: Commenting out test until repaired. Expected result does not make sense.
      */
-    @Ignore
     @Test
     public void getLogDirectoryTest() {
-        String defaultPath = new File("").getAbsolutePath().concat("\\Logs");
+        String defaultPath = new File("").getAbsolutePath().concat("\\target\\logs");
         Assert.assertEquals(defaultPath, LoggingConfig.getLogDirectory(),
         StringProcessor.safeFormatter( "Expected Default Path '{0)'.", defaultPath));
     }
