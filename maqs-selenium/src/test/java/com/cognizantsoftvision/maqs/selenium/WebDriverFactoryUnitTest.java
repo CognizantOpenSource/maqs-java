@@ -93,8 +93,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Chrome driver.
    */
-  // TODO: delete ignore tag later
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getChromeDriverTest() {
     ChromeDriver driver = null;
