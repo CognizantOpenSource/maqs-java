@@ -200,6 +200,7 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
         automationPageModel.automationShowDialog1), "Failed to find element");
     Assert.assertTrue(wait.waitUntilVisibleElement(
         automationPageModel.automationShowDialog1, 10000, 1000), "Failed to find element");
+    Assert.assertFalse(wait.waitUntilVisibleElement(automationPageModel.notInPage), "Failed to find element");
   }
 
   /**

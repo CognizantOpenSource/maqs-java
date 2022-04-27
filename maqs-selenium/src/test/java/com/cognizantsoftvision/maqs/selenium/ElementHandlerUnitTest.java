@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.selenium.exceptions.ElementHandlerException;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.ListProcessor;
@@ -68,6 +69,16 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     ElementHandler.setTextBox(getWebDriver(), automationPageModel.firstNameTextBox, expectedValue);
     String actualValue = ElementHandler.getElementAttribute(getWebDriver(), automationPageModel.firstNameTextBox);
     verifyText(actualValue, expectedValue);
+  }
+
+  /**
+   * Unit test for entering nothing into the text box and getting the exception.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementHandlerException.class)
+  public void setTextBoxException() {
+    String expectedValue = "";
+    AutomationPageModel automationPageModel = navigateToUrl();
+    ElementHandler.setTextBox(getWebDriver(), automationPageModel.firstNameTextBox, expectedValue);
   }
 
   /**
