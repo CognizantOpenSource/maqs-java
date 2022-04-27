@@ -143,6 +143,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Edge driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getEdgeDriverTest() {
     EdgeDriver driver = null;
@@ -354,8 +355,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the chrome driver with default options.
    */
-  // TODO: delete ignore tag later
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void testGetChromeDriverWithDefaultOptions() {
     final ChromeOptions defaultChromeOptions = WebDriverFactory.getDefaultChromeOptions();
