@@ -374,7 +374,6 @@ public class UIWait {
    * @return boolean - true if not displayed
    */
   public boolean waitUntilAbsentElement(By by, final int timeOutInMillis, final int sleepInMillis) {
-
     try {
       WebElement element = this.driver.findElement(by);
       FluentWait<WebElement> fluentWait = FluentWaitFactory

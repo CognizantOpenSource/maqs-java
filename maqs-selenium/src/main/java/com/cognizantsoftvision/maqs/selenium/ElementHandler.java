@@ -138,7 +138,6 @@ public class ElementHandler {
    * @return Returns a comma delimited String
    */
   public static String createCommaDelimitedString(WebDriver webDriver, By by) {
-
     return createCommaDelimitedString(webDriver, by, false);
   }
 
@@ -243,7 +242,6 @@ public class ElementHandler {
    * @param textToEnter Text to enter into the text box
    */
   public static void setTextBox(WebDriver webDriver, By by, String textToEnter) {
-
     setTextBox(webDriver, by, textToEnter, true);
   }
 

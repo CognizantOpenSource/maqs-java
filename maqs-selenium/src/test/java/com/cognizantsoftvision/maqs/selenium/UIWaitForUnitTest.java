@@ -27,6 +27,10 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
     wait.waitForPageLoad();
     WebDriverFactory.setBrowserSize(this.getWebDriver(), "Maximize");
     wait.waitForIframeToLoad(iFramePageModel.iframeLocator);
+
+    this.getWebDriver().navigate().to(iFramePageModel.testSiteIFrameUrl);
+    wait.waitForPageLoad();
+    wait.waitForIframeToLoad(iFramePageModel.iframeLocator, 5000, 1000);
   }
 
   /**

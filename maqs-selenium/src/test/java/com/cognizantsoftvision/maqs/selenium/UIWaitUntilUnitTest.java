@@ -28,6 +28,11 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
     wait.waitUntilPageLoad();
     WebDriverFactory.setBrowserSize(this.getWebDriver(), "Maximize");
     Assert.assertTrue(wait.waitUntilIframeToLoad(iFramePageModel.iframeLocator));
+
+    this.getWebDriver().navigate().to(iFramePageModel.testSiteIFrameUrl);
+    wait.waitUntilPageLoad();
+    Assert.assertTrue(wait.waitUntilIframeToLoad(iFramePageModel.iframeLocator, 5000, 1000));
+
   }
 
   /**
@@ -227,6 +232,8 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
         automationPageModel.automationShowDialog1, "dialog"), "Failed to find element");
     Assert.assertTrue(wait.waitUntilContainsText(automationPageModel.automationShowDialog1,
             "dialog", 10000, 1000), "Failed to find element");
+    Assert.assertFalse(wait.waitUntilContainsText(
+        automationPageModel.notInPage, "notInPage"), "Failed to find element");
   }
 
   /**
