@@ -217,7 +217,6 @@ public class WebDriverFactory {
     WebDriverManager.firefoxdriver().setup();
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
-
     return driver;
   }
 
@@ -246,7 +245,6 @@ public class WebDriverFactory {
     WebDriverManager.iedriver().setup();
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
-
     return driver;
   }
 
@@ -260,7 +258,6 @@ public class WebDriverFactory {
     String remotePlatform = SeleniumConfig.getRemotePlatform();
     String remoteBrowserVersion = SeleniumConfig.getRemoteBrowserVersion();
     HashMap<String, Object> capabilities = (HashMap<String, Object>) SeleniumConfig.getRemoteCapabilitiesAsObjects();
-
     return getRemoteOptions(remoteBrowser, remotePlatform, remoteBrowserVersion, capabilities);
   }
 
