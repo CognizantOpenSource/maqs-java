@@ -39,8 +39,8 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
   public void setUp() {
     Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
     sauceLabsConfig = new DesiredCapabilities();
-    sauceLabsConfig.setCapability("username", capabilitiesAsObjects.containsKey("username"));
-    sauceLabsConfig.setCapability("accessKey", capabilitiesAsObjects.containsKey("accessKey"));
+    sauceLabsConfig.setCapability("username", capabilitiesAsObjects.get("username"));
+    sauceLabsConfig.setCapability("accessKey", capabilitiesAsObjects.get("accessKey"));
     sauceLabsConfig.setCapability("deviceOrientation", "portrait");
   }
 
