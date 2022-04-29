@@ -15,7 +15,7 @@ public class ConsoleLogger extends Logger {
    * Initializes a new instance of the ConsoleLogger class.
    */
   public ConsoleLogger() {
-    this(MessageType.INFORMATION);
+    super(MessageType.INFORMATION);
   }
 
   /**
@@ -32,47 +32,8 @@ public class ConsoleLogger extends Logger {
    * {@inheritDoc}
    */
   @Override
-  public String getFilePath() {
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public MessageType getMessageType() {
     return this.getLoggingLevel();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getDirectory() {
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setFilePath(String path) {
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getFileName() {
-    return null;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected String getExtension() {
-    return null;
   }
 
   /**

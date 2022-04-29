@@ -50,8 +50,4 @@ public interface ILogger {
    */
   void logMessage(String message, Object... args);
 
-  /**
-   * {@inheritDoc}
-   */
-  String getFilePath();
 }

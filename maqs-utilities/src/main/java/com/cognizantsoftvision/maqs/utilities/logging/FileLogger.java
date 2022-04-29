@@ -18,7 +18,7 @@ import java.nio.file.Paths;
  * Helper class for adding logs to a plain text file.
  * Allows configurable file path.
  */
-public class FileLogger extends Logger {
+public class FileLogger extends Logger implements IFileLogger {
 
   /**
    * Default extension type.
@@ -284,7 +284,6 @@ public class FileLogger extends Logger {
   /**
    * {@inheritDoc}
    */
-  @Override
   protected String getExtension() {
     return TXT;
   }

@@ -218,7 +218,7 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLogDirectoryTest() {
-        String defaultPath = new File("").getAbsolutePath().concat("/target/logs");
+        String defaultPath = new File("").getAbsolutePath().concat("\\target\\logs");
         Assert.assertEquals(defaultPath, LoggingConfig.getLogDirectory(),
         StringProcessor.safeFormatter( "Expected Default Path '{0)'.", defaultPath));
     }

@@ -100,24 +100,4 @@ public abstract class Logger implements ILogger {
    * {@inheritDoc}
    */
   public abstract MessageType getMessageType();
-
-  /**
-   * {@inheritDoc}
-   */
-  public abstract String getDirectory();
-
-  /**
-   * {@inheritDoc}
-   */
-  public abstract void setFilePath(String path);
-
-  /**
-   * {@inheritDoc}
-   */
-  public abstract String getFileName();
-
-  /**
-   * {@inheritDoc}
-   */
-  protected abstract String getExtension();
 }
