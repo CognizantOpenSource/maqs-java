@@ -7,6 +7,7 @@ package com.cognizantsoftvision.maqs.selenium;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
+import com.cognizantsoftvision.maqs.selenium.exceptions.WebDriverFactoryException;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import org.openqa.selenium.Dimension;
@@ -190,6 +191,15 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
         driver.quit();
       }
     }
+  }
+
+  /**
+   * Tests if the requested browser is null it catches the issue.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = WebDriverFactoryException.class)
+  public void getDriverCatchNullTest() {
+    WebDriver driver = WebDriverFactory.getBrowserWithDefaultConfiguration(null);
+      Assert.assertNotNull(driver);
   }
 
   /**

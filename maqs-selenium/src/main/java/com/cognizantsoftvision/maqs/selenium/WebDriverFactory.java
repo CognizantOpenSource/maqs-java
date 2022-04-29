@@ -77,13 +77,12 @@ public class WebDriverFactory {
               StringProcessor.safeFormatter("Browser type '%s' is not supported", browser));
       }
     } catch (IllegalArgumentException e) {
-      throw e;
+      throw new WebDriverFactoryException(e.getMessage(), e);
     } catch (Exception e) {
       // Log that something went wrong
       String message = "Failed to initial web driver because: %s %s"
           + "This likely means your web driver is missing, unsupported or out of date.";
       message = StringProcessor.safeFormatter(message, e.getMessage(), System.lineSeparator());
-
       throw new WebDriverFactoryException(message, e);
     }
   }

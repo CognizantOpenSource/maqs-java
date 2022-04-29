@@ -311,7 +311,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Verify Send Secret throws exception if element is not intractable.
    */
-  @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementNotInteractableException.class)
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementHandlerException.class)
   public void sendSecretTextCatchException() {
     AutomationPageModel automationPageModel = this.navigateToUrl();
     this.getWebDriver().findElement(automationPageModel.firstNameTextBox).sendKeys("somethingTest");

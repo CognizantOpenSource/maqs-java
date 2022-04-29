@@ -374,7 +374,7 @@ public class ElementHandler {
       String stackTrace = sw.toString();
       logger.logMessage(MessageType.ERROR,
           "Exception during sending secret keys: " + e.getMessage() + System.lineSeparator() + stackTrace);
-      throw e;
+      throw new ElementHandlerException( e.getMessage(), e);
     }
   }
 }
