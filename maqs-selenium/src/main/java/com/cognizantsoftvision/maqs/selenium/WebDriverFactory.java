@@ -7,14 +7,10 @@ package com.cognizantsoftvision.maqs.selenium;
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.OperatingSystem;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
-import com.cognizantsoftvision.maqs.selenium.exceptions.DriverNotFoundException;
 import com.cognizantsoftvision.maqs.selenium.exceptions.WebDriverFactoryException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import java.io.File;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import org.openqa.selenium.Dimension;
@@ -81,14 +77,12 @@ public class WebDriverFactory {
               StringProcessor.safeFormatter("Browser type '%s' is not supported", browser));
       }
     } catch (IllegalArgumentException e) {
-      throw e;
+      throw new WebDriverFactoryException(e.getMessage(), e);
     } catch (Exception e) {
-
       // Log that something went wrong
       String message = "Failed to initial web driver because: %s %s"
           + "This likely means your web driver is missing, unsupported or out of date.";
       message = StringProcessor.safeFormatter(message, e.getMessage(), System.lineSeparator());
-
       throw new WebDriverFactoryException(message, e);
     }
   }
@@ -222,7 +216,6 @@ public class WebDriverFactory {
     WebDriverManager.firefoxdriver().setup();
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
-
     return driver;
   }
 
@@ -243,7 +236,7 @@ public class WebDriverFactory {
   /**
    * Gets internet explorer driver.
    *
-   * @param internetExplorerOptions the internet explorer options
+   * @param internetExplorerOptions the Internet Explorer options
    * @param size                    the size
    * @return the internet explorer driver
    */
@@ -251,7 +244,6 @@ public class WebDriverFactory {
     WebDriverManager.iedriver().setup();
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
-
     return driver;
   }
 
@@ -265,7 +257,6 @@ public class WebDriverFactory {
     String remotePlatform = SeleniumConfig.getRemotePlatform();
     String remoteBrowserVersion = SeleniumConfig.getRemoteBrowserVersion();
     HashMap<String, Object> capabilities = (HashMap<String, Object>) SeleniumConfig.getRemoteCapabilitiesAsObjects();
-
     return getRemoteOptions(remoteBrowser, remotePlatform, remoteBrowserVersion, capabilities);
   }
 
@@ -329,7 +320,7 @@ public class WebDriverFactory {
             StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
     }
 
-    // Make sure the remote capabilities dictionary exists
+    // Make sure the remote capabilities' dictionary exists
     if (remoteCapabilities == null) {
       remoteCapabilities = new HashMap<>();
     }
@@ -421,106 +412,5 @@ public class WebDriverFactory {
     } catch (NumberFormatException e) {
       throw new NumberFormatException("Length and Width must be a string that is an integer value: 400x400");
     }
-  }
-
-  /**
-   * Gets driver location.
-   *
-   * @param driverFile the driver file
-   * @return the driver location
-   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
-   */
-  @Deprecated(forRemoval = true)
-  public static String getDriverLocation(String driverFile) {
-    return getDriverLocation(driverFile, "", true);
-  }
-
-  /**
-   * Gets driver location.
-   *
-   * @param driverFile      the driver file
-   * @param defaultHintPath the default hint path
-   * @return the driver location
-   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
-   */
-  @Deprecated(forRemoval = true)
-  public static String getDriverLocation(String driverFile, String defaultHintPath) {
-    return getDriverLocation(driverFile, defaultHintPath, true);
-  }
-
-  /**
-   * Gets driver location.
-   *
-   * @param driverFile      the driver file
-   * @param defaultHintPath the default hint path
-   * @param mustExist       the must exist
-   * @return the driver location
-   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
-   */
-  @Deprecated(forRemoval = true)
-  public static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {
-    // Get the hint path from the config
-    String hintPath = SeleniumConfig.getDriverHintPath();
-
-    // Try the hint path first
-    if (!hintPath.isEmpty() && Paths.get(hintPath, driverFile).toFile().exists()) {
-      return hintPath;
-    }
-
-    // Try the default hint path next
-    if (!defaultHintPath.isEmpty() && Paths.get(defaultHintPath, driverFile).toFile().exists()) {
-      return Paths.get(defaultHintPath).toString();
-    }
-
-    // Try the test location
-    Path path = Paths.get(new File("").getAbsolutePath());
-    String testLocation = path.getParent().toString();
-    if (Paths.get(testLocation, driverFile).toFile().exists()) {
-      return testLocation;
-    }
-
-    // Try resources
-    ClassLoader classLoader = WebDriverFactory.class.getClassLoader();
-    URL url = classLoader.getResource(driverFile);
-    if (url != null) {
-      File file = new File(url.getPath());
-      return file.getParent();
-    }
-
-    // We didn't find the web driver so throw an error if we need to know where it is
-    if (mustExist) {
-      throw new DriverNotFoundException(StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
-    }
-
-    return "";
-  }
-
-  /**
-   * Gets windows edge driver location.
-   *
-   * @param file the file
-   * @return the windows edge driver location
-   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
-   */
-  @Deprecated(forRemoval = true)
-  static String getWindowsEdgeDriverLocation(String file) {
-    String edgeDriverFolder = "Microsoft Web Driver";
-
-    Path path = Paths.get(System.getenv("ProgramW6432"), edgeDriverFolder, file);
-    if (path.toFile().isFile()) {
-      return path.getParent().toString();
-    }
-
-    path = Paths.get(System.getenv("ProgramFiles(x86)"), edgeDriverFolder, file);
-    if (path.toFile().isFile()) {
-      return path.getParent().toString();
-    }
-
-    path = Paths.get(System.getenv("ProgramFiles"), edgeDriverFolder, file);
-    if (path.toFile().isFile()) {
-      return path.getParent().toString();
-    }
-
-    return "";
   }
 }

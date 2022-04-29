@@ -8,6 +8,8 @@ import com.cognizantsoftvision.maqs.selenium.factories.UIFindFactory;
 import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.List;
+
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -49,6 +51,15 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findElementNotFound() {
     UIFind find = setUp();
     Assert.assertNull(find.findElement(automationPageModel.notInPage, false));
+  }
+
+  /**
+   * Verify findElement throws exception if element is not found.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
+  public void findElementCatchException() {
+    UIFind find = setUp();
+    find.findElement(automationPageModel.notInPage, true);
   }
 
   /**
@@ -163,6 +174,16 @@ public class UIFindUnitTest extends BaseSeleniumTest {
     UIFind find = setUp();
     Assert.assertEquals(find.findIndexOfElementWithText(
         find.findElements(automationPageModel.flowerTable), "10 in"), 0);
+  }
+
+  /**
+   * Verify FindIndexOfElementWithText throws an error if the index is not found.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
+  public void findIndexOfElementInCollectionThrowException() {
+    UIFind find = setUp();
+    Assert.assertEquals(find.findIndexOfElementWithText(
+        find.findElements(automationPageModel.notInPage), "not In page"), 0);
   }
 
   /**

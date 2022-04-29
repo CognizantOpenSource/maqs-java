@@ -32,7 +32,7 @@ public class UIWaitFactory {
   }
 
   /**
-   * Creates a  {@link UIWait} object using it's cached WebDriverWait if the search context.
+   * Creates a {@link UIWait} object using it's cached WebDriverWait if the search context.
    * already exists in the wait collection. If none exist, then a new
    * one is created and cached using the driver provided.
    *
