@@ -25,7 +25,19 @@ runs:
       with:
         distribution: zulu
         java-version: 11
-        cache: maven
+        cache: maven 
+    - name: Update configuration
+      shell: pwsh
+      run: |     
+            $filePathToTask = "./${{inputs.module-name}}/config.xml"
+            $xml = New-Object XML
+            $xml.Load($filePathToTask)
+            $element =  $xml.SelectSingleNode("//configuration/AppiumCapsMaqs/accessKey")
+            if($element)
+            {
+              $element.InnerText = "${{env.SAUCE}}"
+              $xml.Save($filePathToTask)
+            }
     - name: Restore Local Maven Cache
       uses: actions/cache@v2.1.6
       with:
