@@ -42,7 +42,7 @@
         <add key="Browser" value="Edge"/>
         <add key="Browser" value="Webkit"/>-->
         <Browser>Chrome</Browser>
-        <Headless>YES</Headless>
+        <Headless>Yes</Headless>
 
         <!--Playwright specific timeouts in milliseconds-->
         <Timeout>20000</Timeout>

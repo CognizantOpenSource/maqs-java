@@ -131,7 +131,7 @@ public class PlaywrightConfig {
    */
   public static Dimension getBrowserSize() {
     String size = Config.getValueForSection(
-        ConfigSection.PLAYWRIGHT_MAQS.toString(), "BrowserSize", "DEFAULT").toUpperCase();
+        ConfigSection.PLAYWRIGHT_MAQS.toString(), "BrowserSize", "MAXIMIZE".toUpperCase());
     Dimension dimension = new Dimension();
 
     if (size.equals("DEFAULT")) {
