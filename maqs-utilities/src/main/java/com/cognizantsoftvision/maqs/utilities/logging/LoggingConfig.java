@@ -99,7 +99,8 @@ public class LoggingConfig {
    * @return String of file path
    */
   public static String getLogDirectory() {
-    String path = new File("").getAbsolutePath().concat("/target/logs");
+    String path = new File("").getAbsolutePath()
+        .concat(File.separator + "target" + File.separator + "logs");
     return new File(Config.getGeneralValue("FileLoggerPath", path)).getAbsolutePath();
   }
 }
