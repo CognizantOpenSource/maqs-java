@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -271,7 +272,6 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Verify Send Secret Keys suspends logging.
    */
-  @Ignore("This can be uncommented when the logger functions as expected.")
   @Test(groups = TestCategories.SELENIUM)
   public void sendSecretTextSuspendLoggingTest() throws IOException {
     AutomationPageModel automationPageModel = this.navigateToUrl();
@@ -291,7 +291,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Verify Send Secret Keys re-enables after suspending logging.
    */
-  @Ignore("This can be uncommented when the logger functions as expected.")
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void sendSecretTextContinueLoggingTest() throws IOException {
     AutomationPageModel automationPageModel = this.navigateToUrl();
@@ -309,11 +309,22 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Verify two Strings are equal. If not fail test.
-   *
-   * @param actualValue   Actual displayed text
-   * @param expectedValue Expected text
+   * Verify Send Secret throws exception if element is not intractable.
    */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementNotInteractableException.class)
+  public void sendSecretTextCatchException() {
+    AutomationPageModel automationPageModel = this.navigateToUrl();
+    this.getWebDriver().findElement(automationPageModel.firstNameTextBox).sendKeys("somethingTest");
+    this.getWebDriver().findElement(automationPageModel.firstNameTextBox).clear();
+    ElementHandler.sendSecretKeys(getWebDriver(), automationPageModel.flowerTableTitle, "secretKeys", this.getLogger());
+  }
+
+    /**
+     * Verify two Strings are equal. If not fail test.
+     *
+     * @param actualValue   Actual displayed text
+     * @param expectedValue Expected text
+     */
   private static void verifyText(String actualValue, String expectedValue) {
     Assert.assertEquals(actualValue, expectedValue, "Expected String does not match actual");
   }

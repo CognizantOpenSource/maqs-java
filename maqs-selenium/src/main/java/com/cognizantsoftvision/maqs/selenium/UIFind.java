@@ -155,6 +155,17 @@ public class UIFind {
   /**
    * Find the Index of the Specified Web Element Collection.
    *
+   * @param list ICollection of Web Elements
+   * @param text Text to search the Web Element Collection
+   * @return The index of the Web Element in the inputted WebElement Collection
+   */
+  public int findIndexOfElementWithText(List<WebElement> list, String text) {
+    return findIndexOfElementWithText(list, text, true);
+  }
+
+  /**
+   * Find the Index of the Specified Web Element Collection.
+   *
    * @param list           ICollection of Web Elements
    * @param text           Text to search the Web Element Collection
    * @param throwException optional assert parameter - throws an exception if no element is found
@@ -183,18 +194,6 @@ public class UIFind {
 
     throw new NotFoundException(StringProcessor
         .safeFormatter("Text did not match any element in collection %s", list.toString()));
-  }
-
-  /**
-   * Find the Index of the Specified Web Element Collection.
-   *
-   * @param list ICollection of Web Elements
-   * @param text Text to search the Web Element Collection
-   * @return The index of the Web Element in the inputted WebElement Collection
-   */
-  public int findIndexOfElementWithText(List<WebElement> list, String text) {
-    return findIndexOfElementWithText(list, text, true);
-
   }
 
   /**

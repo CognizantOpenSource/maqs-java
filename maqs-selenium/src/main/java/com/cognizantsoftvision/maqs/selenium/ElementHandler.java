@@ -369,11 +369,9 @@ public class ElementHandler {
       logger.continueLogging();
     } catch (Exception e) {
       logger.continueLogging();
-
       StringWriter sw = new StringWriter();
       e.printStackTrace(new PrintWriter(sw));
       String stackTrace = sw.toString();
-
       logger.logMessage(MessageType.ERROR,
           "Exception during sending secret keys: " + e.getMessage() + System.lineSeparator() + stackTrace);
       throw e;
