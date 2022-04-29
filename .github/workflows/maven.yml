@@ -112,7 +112,7 @@ jobs:
         module-name: [ maqs-utilities, maqs-base, maqs-appium, maqs-selenium, maqs-webservices, maqs-cucumber, maqs-accessibility, maqs-database ]
     steps:
       - name: Check if tests can be run
-        if: (github.actor == 'dependabot[bot]') && (${{matrix.module-name}} == 'maqs-appium')
+        if: github.actor == 'dependabot[bot]' && ${{matrix.module-name}} == 'maqs-appium'
         run: |
           echo Cannot run Appium tests when build was triggered by dependabot
           exit 1
