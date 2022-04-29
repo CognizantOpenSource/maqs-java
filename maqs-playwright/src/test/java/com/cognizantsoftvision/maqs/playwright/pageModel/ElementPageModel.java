@@ -153,7 +153,7 @@ public class ElementPageModel {
   /**
    * the Async page loaded text.
    */
-  public final String loadedAsyncText = "#loading-div-text[style='']";
+  public final String loadedAsyncText = "#loading-div-text > p";
 
   /**
    * The body selector.

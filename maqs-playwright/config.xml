@@ -45,7 +45,7 @@
         <Headless>YES</Headless>
 
         <!--Playwright specific timeouts in milliseconds-->
-        <Timeout> 20000</Timeout>
+        <Timeout>20000</Timeout>
         <CommandTimeout>200000</CommandTimeout>
 
         <!--Browser Resize settings - The Default is 1280x720

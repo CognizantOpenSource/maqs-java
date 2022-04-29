@@ -27,8 +27,7 @@ public class PlaywrightSyncElement {
    * @param selector the selector of the element
    */
   public PlaywrightSyncElement(Page page, String selector) {
-    this.setParentPage(page);
-    this.setSelector(selector);
+    this(page, selector, null);
   }
 
   /**
@@ -49,8 +48,7 @@ public class PlaywrightSyncElement {
    * @param selector Element selector
    */
   public PlaywrightSyncElement(PlaywrightSyncElement parent, String selector) {
-    this.setParentLocator(parent.getParentLocator());
-    this.setSelector(selector);
+    this(parent, selector, null);
   }
 
   /**
@@ -91,7 +89,7 @@ public class PlaywrightSyncElement {
    * @param selector Element selector
    */
   public PlaywrightSyncElement(PageDriver driver, String selector) {
-    this(driver.getAsyncPage(), selector);
+    this(driver, selector, null);
   }
 
   /**
@@ -242,7 +240,7 @@ public class PlaywrightSyncElement {
       return getLocatorOptions() != null ? this.getParentLocator().locator(getSelector(), getLocatorOptions())
           : this.getParentLocator().locator(getSelector());
     } else if (this.getParentFrameLocator() != null) {
-      return this.getParentLocator().locator(getSelector());
+      return this.getParentFrameLocator().locator(getSelector());
     }
     throw new NullPointerException("Both parent IPage and PlaywrightElement are null");
   }
