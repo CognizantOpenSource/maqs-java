@@ -104,7 +104,6 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
   private void loggingStartup(WebDriver webDriver) {
     try {
       WebDriver driver = ((WrapsDriver) webDriver).getWrappedDriver();
-
       String browserType = ((RemoteWebDriver) driver).getCapabilities().toString();
 
       if (SeleniumConfig.getBrowserName().equalsIgnoreCase("Remote")) {

@@ -7,7 +7,7 @@ package com.cognizantsoftvision.maqs.selenium;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
-import com.cognizantsoftvision.maqs.selenium.constants.WebDriverFile;
+import com.cognizantsoftvision.maqs.selenium.exceptions.WebDriverFactoryException;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import org.openqa.selenium.Dimension;
@@ -94,8 +94,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Chrome driver.
    */
-  // TODO: delete ignore tag later
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getChromeDriverTest() {
     ChromeDriver driver = null;
@@ -146,8 +144,8 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Edge driver.
    */
-  @Test(groups = TestCategories.SELENIUM)
   @Ignore
+  @Test(groups = TestCategories.SELENIUM)
   public void getEdgeDriverTest() {
     EdgeDriver driver = null;
     try {
@@ -193,6 +191,22 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
         driver.quit();
       }
     }
+  }
+
+  /**
+   * Tests if the requested browser is null it catches the issue.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = WebDriverFactoryException.class)
+  public void getNullDriverCatchExceptionTest() {
+    WebDriverFactory.getBrowserWithDefaultConfiguration(null);
+  }
+
+  /**
+   * Tests if the requested browser is null it catches the issue.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = WebDriverFactoryException.class)
+  public void getInvalidDriverCatchExceptionTest() {
+    WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.NONE);
   }
 
   /**
@@ -356,73 +370,8 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Tests getting the driver location.
-   */
-  @Test(groups = TestCategories.SELENIUM, enabled = false)
-  public void getDriverLocationTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
-    Assert.assertFalse(driverLocation.isEmpty());
-  }
-
-  /**
-   * Tests getting the driver location default hint path.
-   */
-  @Test(groups = TestCategories.SELENIUM, enabled = false)
-  public void getDriverLocationDefaultHintPathTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName(), "");
-    Assert.assertFalse(driverLocation.isEmpty());
-    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
-        "Checking that driver location and default hint path are the same.");
-
-    driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
-    Assert.assertFalse(driverLocation.isEmpty());
-    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
-        "Checking that driver location and default hint path are the same.");
-  }
-
-  /**
-   * Tests getting the driver location and its resource test.
-   */
-  @Test(groups = TestCategories.SELENIUM, enabled = false)
-  public void getDriverLocationTestResourcesLocationTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
-    Assert.assertFalse(driverLocation.isEmpty());
-    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
-        "Checking that driver location and config hint path are the same.");
-  }
-
-  /**
-   * Tests getting the driver location when it does not exist.
-   */
-  @Test(groups = TestCategories.SELENIUM, enabled = false)
-  public void getDriverLocationDoesNotExistTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", false);
-    Assert.assertEquals(driverLocation, "");
-  }
-
-  /**
-   * Tests getting the driver location when it must exist.
-   */
-  @Test(expectedExceptions = RuntimeException.class, groups = TestCategories.SELENIUM, enabled = false)
-  public void getDriverLocationMustExistTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", true);
-    Assert.assertEquals(driverLocation, "");
-  }
-
-  /**
-   * Tests getting the edge driver location.
-   */
-  @Test(groups = TestCategories.SELENIUM, enabled = false)
-  public void getWindowsEdgeDriverLocationTest() {
-    String driverLocation = WebDriverFactory.getWindowsEdgeDriverLocation("testFile");
-    Assert.assertEquals(driverLocation, "");
-  }
-
-  /**
    * Tests getting the chrome driver with default options.
    */
-  // TODO: delete ignore tag later
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void testGetChromeDriverWithDefaultOptions() {
     final ChromeOptions defaultChromeOptions = WebDriverFactory.getDefaultChromeOptions();
