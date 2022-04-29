@@ -138,7 +138,6 @@ public class ElementHandler {
    * @return Returns a comma delimited String
    */
   public static String createCommaDelimitedString(WebDriver webDriver, By by) {
-
     return createCommaDelimitedString(webDriver, by, false);
   }
 
@@ -243,7 +242,6 @@ public class ElementHandler {
    * @param textToEnter Text to enter into the text box
    */
   public static void setTextBox(WebDriver webDriver, By by, String textToEnter) {
-
     setTextBox(webDriver, by, textToEnter, true);
   }
 
@@ -371,14 +369,12 @@ public class ElementHandler {
       logger.continueLogging();
     } catch (Exception e) {
       logger.continueLogging();
-
       StringWriter sw = new StringWriter();
       e.printStackTrace(new PrintWriter(sw));
       String stackTrace = sw.toString();
-
       logger.logMessage(MessageType.ERROR,
           "Exception during sending secret keys: " + e.getMessage() + System.lineSeparator() + stackTrace);
-      throw e;
+      throw new ElementHandlerException(e.getMessage(), e);
     }
   }
 }

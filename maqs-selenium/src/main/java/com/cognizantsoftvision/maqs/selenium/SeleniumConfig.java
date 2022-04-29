@@ -121,18 +121,6 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the hint path for the web driver.
-   *
-   * @return The hint path for the web driver
-   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
-   */
-  @Deprecated(forRemoval = true)
-  public static String getDriverHintPath() {
-    String defaultPath = new java.io.File("Resources").getAbsolutePath();
-    return Config.getValueForSection(SELENIUM_SECTION, "WebDriverHintPath", defaultPath);
-  }
-
-  /**
    * Get the remote browser type name.
    *
    * @return The browser type being used on grid
@@ -169,9 +157,9 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the web site base url.
+   * Get the website base url.
    *
-   * @return The web site base url
+   * @return The website base url
    */
   public static String getWebSiteBase() {
     return Config.getValueForSection(SELENIUM_SECTION, "WebSiteBase");
@@ -182,7 +170,7 @@ public final class SeleniumConfig {
    *
    * @return True if the flag is set to "Yes"
    */
-  public static boolean getSavePagesourceOnFail() {
+  public static boolean getSavePageSourceOnFail() {
     return Config.getValueForSection(SELENIUM_SECTION, "SavePagesourceOnFail")
         .equalsIgnoreCase("Yes");
   }
