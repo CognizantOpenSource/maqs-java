@@ -197,9 +197,16 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests if the requested browser is null it catches the issue.
    */
   @Test(groups = TestCategories.SELENIUM, expectedExceptions = WebDriverFactoryException.class)
-  public void getDriverCatchNullTest() {
-    WebDriver driver = WebDriverFactory.getBrowserWithDefaultConfiguration(null);
-      Assert.assertNotNull(driver);
+  public void getNullDriverCatchExceptionTest() {
+    WebDriverFactory.getBrowserWithDefaultConfiguration(null);
+  }
+
+  /**
+   * Tests if the requested browser is null it catches the issue.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = WebDriverFactoryException.class)
+  public void getInvalidDriverCatchExceptionTest() {
+    WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.NONE);
   }
 
   /**
