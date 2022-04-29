@@ -36,6 +36,10 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
     // Error string templates for assertion failures.
     String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
     Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
+
+    waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver(), 5000, 1000);
+    assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
+    Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
   }
 
   /**

@@ -19,9 +19,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -495,33 +493,6 @@ public abstract class AbstractLazyElement {
     this.getTestObject().getLogger().logMessage(MessageType.INFORMATION,
         String.format("Check to see if the lazy element %s is displayed", this.userFriendlyName));
     return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::isDisplayed);
-  }
-
-  /**
-   * Gets the rectangle value that highlights the lazy element location.
-   *
-   * @return The location and size of the element
-   * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
-   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
-   * @deprecated due to getRect method being handled in web driver/web element class
-   */
-  @Deprecated
-  public Rectangle getRect() throws InterruptedException {
-    return new Rectangle(this.getLocation(), this.getSize());
-  }
-
-  /**
-   * Gets the screenshot as the target type.
-   *
-   * @param target The target output type
-   * @return The type to get the screenshot as
-   * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
-   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
-   * @deprecated due to getScreenshotAs method being handled in web driver class
-   */
-  @Deprecated
-  public <X> X getScreenshotAs(OutputType<X> target) throws InterruptedException {
-    return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getScreenshotAs(target));
   }
 
   /**
