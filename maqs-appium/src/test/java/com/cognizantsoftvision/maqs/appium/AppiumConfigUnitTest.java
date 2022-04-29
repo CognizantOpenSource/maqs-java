@@ -82,7 +82,7 @@ public class AppiumConfigUnitTest {
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "JMAQS");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsStrings.get(accessKey), "80592d42-18a3-4303-9b65-b8f8181d0e67");
+        .assertNotEquals(capabilitiesAsStrings.get(accessKey), "");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(deviceOrientation));
@@ -102,7 +102,7 @@ public class AppiumConfigUnitTest {
     softAssert.assertEquals(capabilitiesAsObjects.get(username), "JMAQS");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsObjects.get(accessKey), "80592d42-18a3-4303-9b65-b8f8181d0e67");
+        .assertNotEquals(capabilitiesAsObjects.get(accessKey), "");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsObjects.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(deviceOrientation));
