@@ -23,9 +23,9 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
   public PlaywrightTestObject(Supplier<PageDriver> getDriverSupplier, ILogger logger, String fullyQualifiedTestName) {
-    super(logger, fullyQualifiedTestName);
-    this.getManagerStore().put((PageDriverManager.class).getCanonicalName(),
-        new PageDriverManager(getDriverSupplier, this));
+    this(getDriverSupplier.get(), logger, fullyQualifiedTestName);
+    this.getManagerStore().put((PlaywrightDriverManager.class).getCanonicalName(),
+        new PlaywrightDriverManager(getDriverSupplier, this));
   }
 
   /**
@@ -36,8 +36,8 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
    */
   public PlaywrightTestObject(PageDriver pageDriver, ILogger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
-    this.getManagerStore().put((PageDriverManager.class).getCanonicalName(),
-        new PageDriverManager(() -> pageDriver, this));
+    this.getManagerStore().put((PlaywrightDriverManager.class).getCanonicalName(),
+        new PlaywrightDriverManager(() -> pageDriver, this));
   }
 
   /**
@@ -51,7 +51,7 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
    * {@inheritDoc}
    */
   public void setPageDriver(PageDriver driver) {
-    String name = PageDriverManager.class.getCanonicalName();
+    String name = PlaywrightDriverManager.class.getCanonicalName();
     if (this.getManagerStore().containsKey(name)) {
       try {
         this.getManagerStore().get(name).close();
@@ -61,12 +61,12 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
         throw new MAQSRuntimeException(e.getMessage(), e);
       }
     }
-    this.getManagerStore().put(name, new PageDriverManager((() -> driver), this));
+    this.getManagerStore().put(name, new PlaywrightDriverManager((() -> driver), this));
   }
 
   public void setPageDriver(Supplier<PageDriver> pageDriverSupplier) {
     this.getManagerStore().put(
-        PageDriverManager.class.getCanonicalName(), new PageDriverManager(pageDriverSupplier, this));
+        PlaywrightDriverManager.class.getCanonicalName(), new PlaywrightDriverManager(pageDriverSupplier, this));
   }
 
   /**
@@ -80,7 +80,7 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
   /**
    * {@inheritDoc}
    */
-  public PageDriverManager getPageManager() {
-    return (PageDriverManager) this.getManagerStore().get(PageDriverManager.class.getCanonicalName());
+  public PlaywrightDriverManager getPageManager() {
+    return (PlaywrightDriverManager) this.getManagerStore().get(PlaywrightDriverManager.class.getCanonicalName());
   }
 }

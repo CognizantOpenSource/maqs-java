@@ -75,9 +75,9 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
   public void lazyRespectOverride() {
     // Define new named driver
     this.getManagerStore().putOrOverride("OtherDriver",
-        new PageDriverManager(PageDriverFactory::getDefaultPageDriver, this.getTestObject()));
+        new PlaywrightDriverManager(PageDriverFactory::getDefaultPageDriver, this.getTestObject()));
 
-    PageDriverManager manager = (PageDriverManager) this.getManagerStore().getManager("OtherDriver");
+    PlaywrightDriverManager manager = (PlaywrightDriverManager) this.getManagerStore().getManager("OtherDriver");
     PageDriver otherDriver = manager.getPageDriver();
 
     PageModel model1 = this.getPageModel();

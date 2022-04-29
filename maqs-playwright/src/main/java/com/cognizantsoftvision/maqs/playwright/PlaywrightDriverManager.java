@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 /**
  * The Playwright Driver Manager class.
  */
-public class PageDriverManager extends DriverManager<PageDriver> {
+public class PlaywrightDriverManager extends DriverManager<PageDriver> {
 
   private PageDriver pageDriver;
 
@@ -23,7 +23,7 @@ public class PageDriverManager extends DriverManager<PageDriver> {
    * @param getDriverFunction driver function supplier
    * @param baseTestObject    the base test object
    */
-  public PageDriverManager(Supplier<PageDriver> getDriverFunction, ITestObject baseTestObject) {
+  public PlaywrightDriverManager(Supplier<PageDriver> getDriverFunction, ITestObject baseTestObject) {
     super(getDriverFunction, baseTestObject);
   }
 
@@ -87,28 +87,6 @@ public class PageDriverManager extends DriverManager<PageDriver> {
     }
   }
 
-
-  /**
-   * Log verbose.
-   *
-   * @param message the message
-   * @param args    the args
-   */
-  protected void logVerbose(String message, Object... args) {
-    StringBuilder messages = new StringBuilder();
-    messages.append(StringProcessor.safeFormatter(message, args));
-    String fullTestName = this.getTestObject().getFullyQualifiedTestName();
-
-    Thread thread = Thread.currentThread();
-    for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
-      String trim = stackTraceElement.toString().trim();
-      if (!trim.startsWith(fullTestName)) {
-        messages.append(stackTraceElement);
-      }
-    }
-    getLogger().logMessage(MessageType.VERBOSE, messages.toString());
-  }
-
   /**
    * Log that the page setup.
    * @param pageDriver the new page
@@ -118,7 +96,6 @@ public class PageDriverManager extends DriverManager<PageDriver> {
       this.getLogger().logMessage(MessageType.INFORMATION, "Driver: " + pageDriver.getParentBrowser());
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: " + e.getMessage());
-      System.out.print("Failed to start driver because: " + e.getMessage());
     }
   }
 }

@@ -22,8 +22,9 @@ public class PlaywrightDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void respectsNewPageViaManager() {
     Page newPage = getNewPage();
-    this.getManagerStore().putOrOverride(new PageDriverManager(() -> new PageDriver(newPage) , this.getTestObject()));
-    PageDriverManager manager = (PageDriverManager) this.getManagerStore().getManager(PageDriverManager.class.getName());
+    this.getManagerStore().putOrOverride(new PlaywrightDriverManager(() -> new PageDriver(newPage) , this.getTestObject()));
+    PlaywrightDriverManager manager = (PlaywrightDriverManager) this.getManagerStore().getManager(
+        PlaywrightDriverManager.class.getName());
     Assert.assertEquals(newPage, manager.getPageDriver().getAsyncPage());
   }
 
@@ -34,8 +35,8 @@ public class PlaywrightDriverManagerUnitTest extends BaseGenericTest {
   public void respectsNewPageViaOverride() {
     Page newPage = getNewPage();
     this.getTestObject().overrideDriverManager("playwrightDriver",
-        new PageDriverManager(() -> new PageDriver(newPage) , this.getTestObject()));
-    PageDriverManager manager = (PageDriverManager) this.getManagerStore().getManager("playwrightDriver");
+        new PlaywrightDriverManager(() -> new PageDriver(newPage) , this.getTestObject()));
+    PlaywrightDriverManager manager = (PlaywrightDriverManager) this.getManagerStore().getManager("playwrightDriver");
     Assert.assertEquals(newPage, manager.getPageDriver().getAsyncPage());
   }
 
