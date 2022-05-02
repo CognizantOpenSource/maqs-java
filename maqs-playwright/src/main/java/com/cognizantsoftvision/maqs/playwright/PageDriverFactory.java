@@ -117,7 +117,7 @@ public class PageDriverFactory {
   public static PageDriver getNewPageDriverFromBrowserContext(BrowserContext context) {
     Page page = context.newPage();
     
-    /// TODO: Reenable
+    /// 2 DO Reenable
     //// page.setDefaultTimeout(PlaywrightConfig.getTimeoutTime());
     //// page.setDefaultNavigationTimeout(PlaywrightConfig.getTimeoutTime());
     return new PageDriver(page);
