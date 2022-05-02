@@ -54,7 +54,10 @@ runs:
      #### TESTING
     - name: Compile
       shell: bash
-      run: xvfb-run mvn compile -Drevision=${{inputs.version}} -f ./${{inputs.pom-file}}
+      run: |
+        xvfb-run mvn compile -Drevision=${{inputs.version}} -f ./${{inputs.pom-file}}
+        npm install
+        npx playwright install
     ##### Testing
          
     - name: Run Unit Tests
