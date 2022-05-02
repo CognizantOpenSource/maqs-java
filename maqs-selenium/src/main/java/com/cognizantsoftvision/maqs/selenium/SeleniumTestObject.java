@@ -37,9 +37,7 @@ public class SeleniumTestObject extends BaseTestObject implements ISeleniumTestO
    * @param fullyQualifiedTestName the fully qualified test name
    */
   public SeleniumTestObject(WebDriver webDriver, ILogger logger, String fullyQualifiedTestName) {
-    super(logger, fullyQualifiedTestName);
-    this.getManagerStore()
-        .put((SeleniumDriverManager.class).getCanonicalName(), new SeleniumDriverManager((() -> webDriver), this));
+    this(() -> webDriver, logger, fullyQualifiedTestName);
   }
 
   /**

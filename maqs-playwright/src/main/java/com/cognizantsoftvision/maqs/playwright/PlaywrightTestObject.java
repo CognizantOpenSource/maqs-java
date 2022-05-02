@@ -23,7 +23,7 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
   public PlaywrightTestObject(Supplier<PageDriver> getDriverSupplier, ILogger logger, String fullyQualifiedTestName) {
-    this(getDriverSupplier.get(), logger, fullyQualifiedTestName);
+    super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((PlaywrightDriverManager.class).getCanonicalName(),
         new PlaywrightDriverManager(getDriverSupplier, this));
   }
@@ -35,9 +35,7 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
   public PlaywrightTestObject(PageDriver pageDriver, ILogger logger, String fullyQualifiedTestName) {
-    super(logger, fullyQualifiedTestName);
-    this.getManagerStore().put((PlaywrightDriverManager.class).getCanonicalName(),
-        new PlaywrightDriverManager(() -> pageDriver, this));
+    this(() -> pageDriver,  logger,  fullyQualifiedTestName);
   }
 
   /**

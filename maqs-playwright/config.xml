@@ -41,8 +41,8 @@
         <add key="Browser" value="Firefox"/>
         <add key="Browser" value="Edge"/>
         <add key="Browser" value="Webkit"/>-->
-        <Browser>Chrome</Browser>
-        <Headless>Yes</Headless>
+        <Browser>Chromium</Browser>
+        <Headless>YES</Headless>
 
         <!--Playwright specific timeouts in milliseconds-->
         <Timeout>20000</Timeout>
@@ -53,9 +53,9 @@
         <BrowserSize>DEFAULT</BrowserSize>
 
         <!--Playwright specific logging options-->
-        <CaptureVideo>Yes</CaptureVideo>
-        <CaptureScreenshots>No</CaptureScreenshots>
-        <CaptureSnapshots>Yes</CaptureSnapshots>
+        <CaptureVideo>NO</CaptureVideo>
+        <CaptureScreenshots>NO</CaptureScreenshots>
+        <CaptureSnapshots>YES</CaptureSnapshots>
 
         <!--Proxy  settings-->
         <UseProxy>No</UseProxy>
