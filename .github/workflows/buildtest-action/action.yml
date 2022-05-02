@@ -56,7 +56,7 @@ runs:
       shell: bash
       run: |
         xvfb-run mvn compile -Drevision=${{inputs.version}} -f ./${{inputs.pom-file}}
-        npm install
+        npm install @playwright/test
         npx playwright install
     ##### Testing
          
