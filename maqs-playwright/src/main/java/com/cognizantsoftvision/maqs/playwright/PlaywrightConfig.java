@@ -63,7 +63,7 @@ public class PlaywrightConfig {
    * @return True if we want to run Playwright headless
    */
   public static boolean getHeadless() {
-    return Config.getValueForSection(ConfigSection.PLAYWRIGHT_MAQS.toString(), "Headless").equals("Yes");
+    return Config.getValueForSection(ConfigSection.PLAYWRIGHT_MAQS.toString(), "Headless").equalsIgnoreCase("Yes");
   }
 
   /**
@@ -104,7 +104,7 @@ public class PlaywrightConfig {
    */
   public static boolean getCaptureVideo() {
     return Config.getValueForSection(
-        ConfigSection.PLAYWRIGHT_MAQS.toString(), "CaptureVideo", "NO").equals("Yes");
+        ConfigSection.PLAYWRIGHT_MAQS.toString(), "CaptureVideo", "NO").equalsIgnoreCase("Yes");
   }
 
   /**
@@ -113,7 +113,7 @@ public class PlaywrightConfig {
    */
   public static boolean getCaptureScreenshots() {
     return Config.getValueForSection(
-        ConfigSection.PLAYWRIGHT_MAQS.toString(), "CaptureScreenshots", "NO").equals("Yes");
+        ConfigSection.PLAYWRIGHT_MAQS.toString(), "CaptureScreenshots", "NO").equalsIgnoreCase("Yes");
   }
 
   /**
@@ -122,7 +122,7 @@ public class PlaywrightConfig {
    */
   public static boolean getCaptureSnapshots() {
     return Config.getValueForSection(
-        ConfigSection.PLAYWRIGHT_MAQS.toString(), "CaptureSnapshots", "NO").equals("Yes");
+        ConfigSection.PLAYWRIGHT_MAQS.toString(), "CaptureSnapshots", "NO").equalsIgnoreCase("Yes");
   }
 
   /**
@@ -147,7 +147,7 @@ public class PlaywrightConfig {
    */
   public static boolean getUseProxy() {
     return Config.getValueForSection(
-        ConfigSection.PLAYWRIGHT_MAQS.toString(), "UseProxy", "NO").equals("Yes");
+        ConfigSection.PLAYWRIGHT_MAQS.toString(), "UseProxy", "NO").equalsIgnoreCase("Yes");
   }
 
   /**
