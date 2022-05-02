@@ -87,8 +87,8 @@ public class PageDriverFactory {
     if (LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
       if (PlaywrightConfig.getCaptureVideo()) {
         Browser.NewContextOptions options = new Browser.NewContextOptions();
-        options.setRecordVideoDir(new File(LoggingConfig.getLogDirectory() + "/videos/").toPath());
-        options.viewportSize = java.util.Optional.of(size);
+        ////options.setRecordVideoDir(new File(LoggingConfig.getLogDirectory() + "/videos/").toPath());
+        //// options.viewportSize = java.util.Optional.of(size);
         context = browser.newContext(options);
       } else {
         Browser.NewContextOptions options = new Browser.NewContextOptions();
@@ -97,10 +97,10 @@ public class PageDriverFactory {
       }
 
       // Start tracing before creating / navigating a page.
-      Tracing.StartOptions options = new Tracing.StartOptions();
-      options.setScreenshots(PlaywrightConfig.getCaptureScreenshots());
-      options.setSnapshots(PlaywrightConfig.getCaptureSnapshots());
-      context.tracing().start(options);
+      //// Tracing.StartOptions options = new Tracing.StartOptions();
+      //// options.setScreenshots(PlaywrightConfig.getCaptureScreenshots());
+      //// options.setSnapshots(PlaywrightConfig.getCaptureSnapshots());
+      //// context.tracing().start(options);
     } else {
       Browser.NewContextOptions options = new Browser.NewContextOptions();
       options.setViewportSize(size);
