@@ -120,9 +120,6 @@ jobs:
         if: matrix.module-name == 'maqs-playwright'
         with:
           node-version: '14.x'
-      - name: Install dependencies
-        if: matrix.module-name == 'maqs-playwright'
-        run: npm ci
       - name: Install Playwright
         if: matrix.module-name == 'maqs-playwright'
         run: npx playwright install --with-deps  
