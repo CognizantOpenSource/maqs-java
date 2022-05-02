@@ -115,15 +115,18 @@ jobs:
         if: matrix.module-name == 'maqs-appium' && github.actor == 'dependabot[bot]'
         run: |
           echo Cannot run Appium tests when build was triggered by dependabot
-          exit 1
+          exit 1  
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         if: matrix.module-name == 'maqs-playwright'
         with:
           node-version: '14.x'
       - name: Install Playwright
         if: matrix.module-name == 'maqs-playwright'
-        run: npx playwright install --with-deps  
-      - uses: actions/checkout@v2
+        run: npx playwright install --with-deps    
+      - name: Install Playwright 2
+        if: matrix.module-name == 'maqs-playwright'
+        run: npx playwright install
       - name: Build and Start Unit Tests
         id: builder
         uses: ./.github/workflows/buildtest-action
