@@ -41,7 +41,7 @@
         <add key="Browser" value="Firefox"/>
         <add key="Browser" value="Edge"/>
         <add key="Browser" value="Webkit"/>-->
-        <Browser>Chromium</Browser>
+        <Browser>Chrome</Browser>
         <Headless>YES</Headless>
 
         <!--Playwright specific timeouts in milliseconds-->
