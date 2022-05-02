@@ -21,7 +21,7 @@ import java.io.File;
  * Factory for creating page drivers
  */
 public class PageDriverFactory {
-  private static Playwright playwright = Playwright.create();
+  private static final Playwright playwright = Playwright.create();
 
   private PageDriverFactory() {
   }

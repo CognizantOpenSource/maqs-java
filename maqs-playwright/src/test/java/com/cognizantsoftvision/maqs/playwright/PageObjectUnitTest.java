@@ -110,7 +110,6 @@ public class PageObjectUnitTest extends BasePlaywrightTest {
    * @return The page model
    */
   private PageModel getPageModel() {
-//    return this.TestObject.Objects["pom"] as PageModel;
     return (PageModel) this.getTestObject().getObjects().get("pom");
   }
 }

@@ -390,8 +390,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   public void inlineFrameTest() {
     IFramePageModel frameModel = new IFramePageModel(this.getTestObject());
     frameModel.openPage();
-
-    PlaywrightSyncElement element = frameModel.getCloseDialog();
+    frameModel.getCloseDialog();
 
     Assert.assertFalse(frameModel.getCloseDialog().isVisible());
     frameModel.getShowDialog().click();
