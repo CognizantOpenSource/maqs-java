@@ -57,6 +57,7 @@ runs:
       run: |
         xvfb-run mvn compile -Drevision=${{inputs.version}} -f ./${{inputs.pom-file}}
         npm install @playwright/test
+        PLAYWRIGHT_BROWSERS_PATH=$HOME/pw-browsers 
         npx playwright install
     ##### Testing
          
