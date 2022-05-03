@@ -14,9 +14,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.SelectOption;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
