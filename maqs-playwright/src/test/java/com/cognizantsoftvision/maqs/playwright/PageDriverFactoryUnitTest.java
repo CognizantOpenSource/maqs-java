@@ -66,7 +66,7 @@ public class PageDriverFactoryUnitTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void tempTestingRemove() {
 
-    Browser browser = PageDriverFactory.playwright.chromium().launch();
+    Browser browser = Playwright.create().chromium().launch();
     Page page = browser.newPage();
 
     //// You may want to do this: Page page = PageDriverFactory.getDefaultPageDriver().getAsyncPage();
