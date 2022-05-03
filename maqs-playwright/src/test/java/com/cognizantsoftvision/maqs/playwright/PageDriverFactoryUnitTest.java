@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
@@ -64,7 +65,11 @@ public class PageDriverFactoryUnitTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void tempTestingRemove() {
-    Page page = PageDriverFactory.getDefaultPageDriver().getAsyncPage();
+
+    Browser browser = PageDriverFactory.getBrowserWithDefaults(PlaywrightBrowser.CHROMIUM);
+    Page page = browser.newPage();
+    
+    //// You may want to do this: Page page = PageDriverFactory.getDefaultPageDriver().getAsyncPage();
     page.navigate("http://playwright.dev");
     System.out.println(page.title());
     Assert.assertNotEquals(page.title(), "Other Title");
