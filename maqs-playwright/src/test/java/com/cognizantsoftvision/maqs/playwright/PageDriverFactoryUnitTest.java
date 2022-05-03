@@ -66,9 +66,9 @@ public class PageDriverFactoryUnitTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void tempTestingRemove() {
 
-    Browser browser = PageDriverFactory.getBrowserWithDefaults(PlaywrightBrowser.CHROMIUM);
+    Browser browser = PageDriverFactory.playwright.chromium().launch();
     Page page = browser.newPage();
-    
+
     //// You may want to do this: Page page = PageDriverFactory.getDefaultPageDriver().getAsyncPage();
     page.navigate("http://playwright.dev");
     System.out.println(page.title());
