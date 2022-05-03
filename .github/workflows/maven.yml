@@ -117,6 +117,13 @@ jobs:
           echo Cannot run Appium tests when build was triggered by dependabot
           exit 1  
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        if: matrix.module-name == 'maqs-playwright'
+        with:
+          node-version: '14.x'
+      - name: Install Playwright
+        if: matrix.module-name == 'maqs-playwright'
+        run: npx playwright install --with-deps  
       - name: Build and Start Unit Tests
         id: builder
         uses: ./.github/workflows/buildtest-action
