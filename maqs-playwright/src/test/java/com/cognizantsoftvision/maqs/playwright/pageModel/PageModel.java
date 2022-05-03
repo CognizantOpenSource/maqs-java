@@ -30,10 +30,6 @@ public class PageModel extends BasePlaywrightPageModel {
     super(testObject);
   }
 
-  public PageModel(IPlaywrightTestObject testObject, PageDriver driver) {
-    super(testObject, driver);
-  }
-
   /**
    * Gets the page url.
    * @return the page url string

@@ -62,6 +62,9 @@ public class PlaywrightTestObject extends BaseTestObject implements IPlaywrightT
     this.getManagerStore().put(name, new PlaywrightDriverManager((() -> driver), this));
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public void setPageDriver(Supplier<PageDriver> pageDriverSupplier) {
     this.getManagerStore().put(
         PlaywrightDriverManager.class.getCanonicalName(), new PlaywrightDriverManager(pageDriverSupplier, this));

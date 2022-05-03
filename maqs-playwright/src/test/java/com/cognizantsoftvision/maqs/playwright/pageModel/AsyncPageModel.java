@@ -19,14 +19,6 @@ public class AsyncPageModel extends BasePlaywrightPageModel {
   /**
    * sets up the page model other class.
    * @param testObject the test object to be used
-   */
-  protected AsyncPageModel(IPlaywrightTestObject testObject) {
-    super(testObject);
-  }
-
-  /**
-   * sets up the page model other class.
-   * @param testObject the test object to be used
    * @param otherDriver the page driver to be used
    */
   public AsyncPageModel(IPlaywrightTestObject testObject, PageDriver otherDriver) {

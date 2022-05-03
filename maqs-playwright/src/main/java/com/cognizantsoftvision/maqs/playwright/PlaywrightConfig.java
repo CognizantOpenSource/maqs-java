@@ -14,9 +14,9 @@ import java.awt.Dimension;
 public class PlaywrightConfig {
 
   /**
-   * Loads when class is loaded.
+   * Private playwright constructor.
    */
-  PlaywrightConfig() {
+  protected PlaywrightConfig() {
   }
 
   /**

@@ -10,6 +10,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.SelectOption;
 import java.util.ArrayList;
@@ -149,6 +150,19 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
     createPlaywrightPageModel();
     models.get(this.getTestObject()).getHtml5Draggable()
         .dragTo(models.get(this.getTestObject()).getHtml5Drop().elementLocator());
+  }
+
+  /// <summary>
+  /// Test page locator options work as expected
+  /// </summary>
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void PageLocatorOptionsTest() {
+    Page.LocatorOptions locator = new Page.LocatorOptions();
+    locator.setHasText("Elements");
+
+    var element = new PlaywrightSyncElement(this.getTestObject(),
+        models.get(this.getTestObject()).getMainHeader().getSelector(), locator);
+    Assert.assertTrue(element.isVisible());
   }
 
   /**

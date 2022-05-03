@@ -108,4 +108,15 @@ public class PlaywrightConfigUnitTest {
   public void getProxyAddress() {
     Assert.assertEquals(PlaywrightConfig.getProxyAddress(), "http://localhost:8002");
   }
+
+  /**
+   * Get expected proxy address configuration.
+   */
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void getWindowSize() {
+    Config.addTestSettingValues(Collections.singletonMap("BrowserSize", "600x900"),
+        ConfigSection.PLAYWRIGHT_MAQS, true);
+    Assert.assertEquals(PlaywrightConfig.getBrowserSize().getHeight(), 900);
+    Assert.assertEquals(PlaywrightConfig.getBrowserSize().getWidth(), 600);
+  }
 }
