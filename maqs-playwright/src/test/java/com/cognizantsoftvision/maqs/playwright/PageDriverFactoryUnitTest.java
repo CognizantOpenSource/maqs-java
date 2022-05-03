@@ -6,6 +6,9 @@ package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -54,5 +57,18 @@ public class PageDriverFactoryUnitTest {
 
     PageDriver pageDriver = PageDriverFactory.getPageDriverFromBrowser(browser);
     Assert.assertFalse(pageDriver.getAsyncPage().isClosed());
+  }
+
+  /**
+   * Test set check works as expected.
+   */
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void tempTestingRemove() {
+    Playwright playwright = Playwright.create();
+    Browser browser = playwright.chromium().launch();
+    Page page = browser.newPage();
+    page.navigate("http://playwright.dev");
+    System.out.println(page.title());
+    Assert.assertNotEquals(page.title(), "Other Title");
   }
 }
