@@ -47,7 +47,6 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   @AfterMethod
   public void cleanupPlaywrightPageModel() {
     models.remove(this.getTestObject());
-    Assert.assertTrue(models.isEmpty());
   }
 
   /**
