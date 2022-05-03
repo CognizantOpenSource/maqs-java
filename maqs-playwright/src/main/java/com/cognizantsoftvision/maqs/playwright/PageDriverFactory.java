@@ -12,6 +12,7 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.Tracing;
+import com.microsoft.playwright.options.Proxy;
 import com.microsoft.playwright.options.ViewportSize;
 import java.awt.Dimension;
 import java.io.File;
@@ -180,16 +181,14 @@ public class PageDriverFactory {
    */
   public static BrowserType.LaunchOptions getDefaultOptions() {
     // Check if we should add proxy
+    BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
+
+    // set proxy address
     if (PlaywrightConfig.getUseProxy()) {
-      BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
-      options.proxy.server = PlaywrightConfig.getProxyAddress();
-      options.headless = PlaywrightConfig.getHeadless();
-      options.timeout = PlaywrightConfig.getCommandTimeout();
-      return options;
+      options.proxy = new Proxy(PlaywrightConfig.getProxyAddress());
     }
 
     // Return options without proxy
-    BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
     options.headless = PlaywrightConfig.getHeadless();
     options.timeout = PlaywrightConfig.getCommandTimeout();
     return options;

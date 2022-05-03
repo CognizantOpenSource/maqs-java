@@ -14,6 +14,9 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.SelectOption;
+
+import java.io.File;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -521,6 +524,18 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void addInitScriptTest() {
     this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc);
+    this.getPageDriver().reload();
+    this.getPageDriver().evaluate("changeMainHeaderName();");
+    Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
+  }
+
+  /**
+   * Test add script works as expected.
+   */
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void addInitScriptFromFileTest() {
+    File renameHeaderFile = new File("src/test/resources/renameHeaderFunction.js");
+    this.getPageDriver().addInitScript(Paths.get(renameHeaderFile.getAbsolutePath()));
     this.getPageDriver().reload();
     this.getPageDriver().evaluate("changeMainHeaderName();");
     Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");

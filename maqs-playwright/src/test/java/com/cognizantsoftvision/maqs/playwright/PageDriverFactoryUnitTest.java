@@ -4,9 +4,12 @@
 
 package com.cognizantsoftvision.maqs.playwright;
 
+import com.cognizantsoftvision.maqs.utilities.helper.Config;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.microsoft.playwright.Browser;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Assert;
 import org.testng.annotations.DataProvider;
@@ -25,6 +28,7 @@ public class PageDriverFactoryUnitTest {
   public Object[] browserType() {
     ArrayList<PlaywrightBrowser> data = new ArrayList<>();
     data.add(PlaywrightBrowser.CHROMIUM);
+    data.add(PlaywrightBrowser.EDGE);
     data.add(PlaywrightBrowser.FIREFOX);
     data.add(PlaywrightBrowser.WEBKIT);
     data.add(PlaywrightBrowser.CHROME);
@@ -55,4 +59,11 @@ public class PageDriverFactoryUnitTest {
     PageDriver pageDriver = PageDriverFactory.getPageDriverFromBrowser(browser);
     Assert.assertFalse(pageDriver.getAsyncPage().isClosed());
   }
+
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void defaultOptionsUseProxy() {
+    Config.addTestSettingValues(Collections.singletonMap("UseProxy", "Yes"),
+        ConfigSection.PLAYWRIGHT_MAQS, true);
+    Assert.assertEquals(PageDriverFactory.getDefaultOptions().proxy.server, PlaywrightConfig.getProxyAddress());
+    }
 }
