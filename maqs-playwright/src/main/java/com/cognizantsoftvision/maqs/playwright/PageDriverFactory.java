@@ -21,7 +21,6 @@ import java.io.File;
  * Factory for creating page drivers
  */
 public class PageDriverFactory {
-  private static final Playwright playwright = Playwright.create();
 
   private PageDriverFactory() {
   }
@@ -40,6 +39,7 @@ public class PageDriverFactory {
    * @return the requested browser
    */
   public static Browser getBrowserWithDefaults(PlaywrightBrowser browser) {
+    Playwright playwright = Playwright.create();
 
     switch  (browser) {
       case CHROMIUM:
@@ -116,6 +116,7 @@ public class PageDriverFactory {
    */
   public static PageDriver getNewPageDriverFromBrowserContext(BrowserContext context) {
     Page page = context.newPage();
+
     page.setDefaultTimeout(PlaywrightConfig.getTimeoutTime());
     page.setDefaultNavigationTimeout(PlaywrightConfig.getTimeoutTime());
     return new PageDriver(page);

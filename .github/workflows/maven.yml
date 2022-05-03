@@ -123,10 +123,7 @@ jobs:
           node-version: '14.x'
       - name: Install Playwright
         if: matrix.module-name == 'maqs-playwright'
-        run: npx playwright install --with-deps    
-      - name: Install Playwright 2
-        if: matrix.module-name == 'maqs-playwright'
-        run: npx playwright install
+        run: npx playwright install --with-deps  
       - name: Build and Start Unit Tests
         id: builder
         uses: ./.github/workflows/buildtest-action
@@ -158,7 +155,6 @@ jobs:
 
   sonarcloud:
     name: SonarCloud Analysis
-    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     needs: [test-modules, getVersion]
     env:

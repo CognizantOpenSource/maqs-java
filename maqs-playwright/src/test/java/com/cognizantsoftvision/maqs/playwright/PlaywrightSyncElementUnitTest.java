@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -33,6 +34,7 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   /**
    * Setup test and make sure we are on the correct test page.
    */
+  @BeforeMethod
   public void createPlaywrightPageModel() {
     PageModel pageModel = new PageModel(this.getTestObject());
     pageModel.openPage();
@@ -45,7 +47,6 @@ public class PlaywrightSyncElementUnitTest extends BasePlaywrightTest {
   @AfterMethod
   public void cleanupPlaywrightPageModel() {
     models.remove(this.getTestObject());
-    Assert.assertTrue(models.isEmpty());
   }
 
   /**

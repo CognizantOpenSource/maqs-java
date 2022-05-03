@@ -50,16 +50,6 @@ runs:
       uses: ./.github/workflows/startdeps-action
       with:
         module-name: ${{inputs.module-name}}
-     
-     #### TESTING
-    - name: Compile
-      shell: bash
-      run: |
-        xvfb-run mvn compile -Drevision=${{inputs.version}} -f ./${{inputs.pom-file}}
-        npm install
-        npx playwright install
-    ##### Testing
-         
     - name: Run Unit Tests
       shell: bash
       run: xvfb-run mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
