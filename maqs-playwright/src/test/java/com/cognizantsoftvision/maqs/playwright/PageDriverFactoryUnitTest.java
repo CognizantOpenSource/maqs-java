@@ -64,9 +64,7 @@ public class PageDriverFactoryUnitTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void tempTestingRemove() {
-    Playwright playwright = Playwright.create();
-    Browser browser = playwright.chromium().launch();
-    Page page = browser.newPage();
+    Page page = PageDriverFactory.getDefaultPageDriver().getAsyncPage();
     page.navigate("http://playwright.dev");
     System.out.println(page.title());
     Assert.assertNotEquals(page.title(), "Other Title");
