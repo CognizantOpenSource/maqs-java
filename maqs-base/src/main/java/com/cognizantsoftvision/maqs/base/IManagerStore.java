@@ -36,7 +36,7 @@ public interface IManagerStore extends AutoCloseable {
    * @param key the key.
    * @return the driver manager interface
    */
-  IDriverManager<?> getManager(String key);
+  <T> IDriverManager<DriverManager<T>> getManager(String key);
 
   /**
    * Remove boolean.

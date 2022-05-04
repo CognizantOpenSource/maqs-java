@@ -142,7 +142,8 @@ public class BaseTestObject implements ITestObject {
   /**
    * {@inheritDoc} 
    */
-  protected void setValues(final ConcurrentHashMap<String, String> values) {
+  @Override
+  public void setValues(final ConcurrentHashMap<String, String> values) {
     this.values = values;
   }
 
@@ -156,13 +157,15 @@ public class BaseTestObject implements ITestObject {
   /**
    * {@inheritDoc} 
    */
-  protected void setObjects(final ConcurrentHashMap<String, Object> objects) {
+  @Override
+  public void setObjects(final ConcurrentHashMap<String, Object> objects) {
     this.objects = objects;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public ManagerStore getManagerStore() {
     return this.managerStore;
   }
@@ -170,6 +173,7 @@ public class BaseTestObject implements ITestObject {
   /**
    *  {@inheritDoc}
    */
+  @Override
   public void setValue(final String key, final String value) {
     if (this.values.containsKey(key)) {
       this.values.replace(key, value);
@@ -181,6 +185,7 @@ public class BaseTestObject implements ITestObject {
   /**
    * {@inheritDoc} 
    */
+  @Override
   public void setObject(final String key, final Object value) {
     if (this.objects.containsKey(key)) {
       this.objects.replace(key, value);
@@ -248,6 +253,7 @@ public class BaseTestObject implements ITestObject {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean addAssociatedFile(final String path) {
     if (new File(path).exists()) {
       return this.associatedFiles.add(path);
@@ -296,6 +302,7 @@ public class BaseTestObject implements ITestObject {
   /**
    * {@inheritDoc} 
    */
+  @Override
   public boolean removeAssociatedFile(final String path) {
     return this.associatedFiles.remove(path);
   }
@@ -303,6 +310,7 @@ public class BaseTestObject implements ITestObject {
   /**
    * {@inheritDoc} 
    */
+  @Override
   public String[] getArrayOfAssociatedFiles() {
     return this.associatedFiles.toArray(new String[0]);
   }
@@ -310,6 +318,7 @@ public class BaseTestObject implements ITestObject {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean containsAssociatedFile(final String path) {
     return this.associatedFiles.contains(path);
   }

@@ -16,7 +16,7 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.configuration2.sync.ReadWriteSynchronizer;
 
 /**
- * Configuration class.
+ * The Configuration class.
  */
 public final class Config {
 
@@ -47,21 +47,18 @@ public final class Config {
   /**
    * The configuration containing values that were added to the configuration.
    */
-  private static XMLConfiguration overrideConfig;
+  private static final XMLConfiguration overrideConfig;
 
   /**
    * The base configs object.
    */
-  private static Configurations configs = new Configurations();
+  private static final Configurations configs = new Configurations();
 
-  /**
-   * initialize config object.
-   */
+  // initialize the config object.
   static {
     try {
       if ((new File(CONFIG_FILE).exists())) {
         FileBasedConfigurationBuilder<XMLConfiguration> builder = configs.xmlBuilder(CONFIG_FILE);
-
         configValues = builder.getConfiguration();
         configValues.setSynchronizer(new ReadWriteSynchronizer());
       }
@@ -69,8 +66,8 @@ public final class Config {
       overrideConfig = new XMLConfiguration();
       overrideConfig.setSynchronizer(new ReadWriteSynchronizer());
     } catch (ConfigurationException exception) {
-      throw new FrameworkConfigurationException(StringProcessor
-          .safeFormatter("Exception creating the xml configuration object from the file : %s", exception));
+      throw new FrameworkConfigurationException(StringProcessor.safeFormatter(
+          "Exception creating the xml configuration object from the file : %s", exception));
     }
   }
 
@@ -105,11 +102,8 @@ public final class Config {
     while (configValuePaths.hasNext()) {
       String key = configValuePaths.next();
       String editedKey = key.replaceFirst(section + "\\.", "");
-      if (!sectionValues.containsKey(editedKey)) {
-        sectionValues.put(editedKey, configValues.getString(key));
-      }
+      sectionValues.computeIfAbsent(editedKey, k -> configValues.getString(key));
     }
-
     return sectionValues;
   }
 
