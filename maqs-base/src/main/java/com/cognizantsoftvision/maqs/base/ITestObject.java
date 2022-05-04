@@ -7,6 +7,7 @@ package com.cognizantsoftvision.maqs.base;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -27,6 +28,8 @@ public interface ITestObject extends AutoCloseable {
    * @param newLogger The logger to use
    */
   void setLogger(final ILogger newLogger);
+
+  void setObjects(ConcurrentHashMap<String, Object> objects);
 
   /**
    * Gets the manager store.
@@ -126,6 +129,8 @@ public interface ITestObject extends AutoCloseable {
    * @return True if the file path was successfully removed, false if the file wasn't in the set
    */
   boolean removeAssociatedFile(String path);
+
+  void setValues(ConcurrentHashMap<String, String> values);
 
   /**
    * Gets a dictionary of string key and object value pairs.

@@ -53,6 +53,7 @@
         <module>maqs-database</module>
         <module>maqs-cucumber</module>
         <module>maqs-accessibility</module>
+        <module>maqs-playwright</module>
     </modules>
 
     <profiles>
@@ -264,7 +265,7 @@
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
         <mvncheckstyle.plugin.version>3.1.2</mvncheckstyle.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <puppycheckstyle.plugin.version>8.38</puppycheckstyle.plugin.version>
+        <puppycheckstyle.plugin.version>9.2.1</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.7</jacoco.version>
         <testng.version>7.3.0</testng.version>
         <selenium.version>4.1.1</selenium.version>
@@ -328,6 +329,11 @@
             <dependency>
                 <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
                 <artifactId>maqs-webservices</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.playwright</groupId>
+                <artifactId>maqs-playwright</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
