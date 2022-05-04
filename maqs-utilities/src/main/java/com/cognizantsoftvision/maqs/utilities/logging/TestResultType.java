@@ -5,9 +5,10 @@
 package com.cognizantsoftvision.maqs.utilities.logging;
 
 /**
- * The type of result.
+ * The Test Result Type enum class.
  */
 public enum TestResultType {
+
   /**
    * The test passed.
    */

@@ -9,7 +9,8 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.io.File;
 
 /**
- * Get logging config data.
+ * The Logging Configuration class.
+ * Gets the logging config data.
  */
 public class LoggingConfig {
 
@@ -17,7 +18,7 @@ public class LoggingConfig {
   public static final String TXT = "TXT";
 
   private LoggingConfig() {
-    //Hiding implicit contructor
+    // Hiding implicit constructor
   }
 
   /**
@@ -73,9 +74,7 @@ public class LoggingConfig {
    * @return The logger
    */
   public static Logger getLogger(String fileName) {
-    /**
-     * Disable logging means we just send any logged messages to the console
-     */
+    // Disable logging means we just send any logged messages to the console
     if (getLoggingEnabledSetting() == LoggingEnabled.NO) {
       return new ConsoleLogger();
     }
@@ -100,7 +99,8 @@ public class LoggingConfig {
    * @return String of file path
    */
   public static String getLogDirectory() {
-    String path = new File("").getAbsolutePath().concat("\\Logs");
-    return Config.getGeneralValue("FileLoggerPath", path);
+    String path = new File("").getAbsolutePath()
+        .concat(File.separator + "target" + File.separator + "logs");
+    return new File(Config.getGeneralValue("FileLoggerPath", path)).getAbsolutePath();
   }
 }

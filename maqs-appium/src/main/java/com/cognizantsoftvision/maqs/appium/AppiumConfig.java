@@ -94,7 +94,7 @@ public class AppiumConfig {
    * @return the mobile hub url
    */
   public static URL getMobileHubUrl() {
-    URL url = null;
+    URL url;
     try {
       url = new URL(getMobileHubUrlString());
     } catch (MalformedURLException e) {
@@ -110,7 +110,7 @@ public class AppiumConfig {
    */
   public static Duration getCommandTimeout() {
     String value = Config.getValueForSection(APPIUM_SECTION, "MobileCommandTimeout", "60000");
-    int timeoutValue = 0;
+    int timeoutValue;
     try {
       timeoutValue = Integer.parseInt(value);
     } catch (NumberFormatException ex) {
@@ -118,7 +118,7 @@ public class AppiumConfig {
           "MobileCommandTimeout in " + APPIUM_SECTION + " should be a number, but the current value is: " + value);
     }
 
-    return Duration.ofMillis((long) timeoutValue);
+    return Duration.ofMillis(timeoutValue);
   }
 
   /**

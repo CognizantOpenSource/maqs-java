@@ -4,6 +4,9 @@
 
 package com.cognizantsoftvision.maqs.utilities.helper.exceptions;
 
+/**
+ * The Execution Failed Exception class.
+ */
 public class ExecutionFailedException extends RuntimeException {
 
   private static final long serialVersionUID = 1;

@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.utilities.logging;
 
 /**
- * Abstract logging interface base class.
+ * The Logging class.
  */
 public abstract class Logger implements ILogger {
 
@@ -95,4 +95,9 @@ public abstract class Logger implements ILogger {
     // The message should be logged if it's level is less than or equal to the current logging level
     return messageType.getValue() <= this.logLevel.getValue();
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  public abstract MessageType getMessageType();
 }

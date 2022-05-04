@@ -7,6 +7,7 @@ package com.cognizantsoftvision.maqs.utilities.logging;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 
 /**
+ * The Console Logger class.
  * Helper class for logging to the console.
  */
 public class ConsoleLogger extends Logger {
@@ -14,7 +15,7 @@ public class ConsoleLogger extends Logger {
    * Initializes a new instance of the ConsoleLogger class.
    */
   public ConsoleLogger() {
-    this(MessageType.INFORMATION);
+    super(MessageType.INFORMATION);
   }
 
   /**
@@ -25,6 +26,14 @@ public class ConsoleLogger extends Logger {
    */
   public ConsoleLogger(MessageType level) {
     super(level);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public MessageType getMessageType() {
+    return this.getLoggingLevel();
   }
 
   /**
@@ -115,7 +124,7 @@ public class ConsoleLogger extends Logger {
    * @param type
    *          The type of message
    * @param line
-   *          Is this a write-line command, else it is just a write
+   *          Is this a write-line command, else it is just to write
    * @param message
    *          The log message
    * @param args
