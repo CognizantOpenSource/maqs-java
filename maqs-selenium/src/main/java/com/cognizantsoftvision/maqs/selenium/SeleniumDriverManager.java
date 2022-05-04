@@ -114,7 +114,6 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
     } catch (Exception e) {
       getLogger().logMessage(MessageType.ERROR,
           StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
-      getLogger().logMessage((StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage())));
     }
   }
 }
