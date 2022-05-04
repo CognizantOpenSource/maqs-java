@@ -18,7 +18,6 @@ import com.microsoft.playwright.Tracing;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.testng.ITestResult;
 
 /**
@@ -128,7 +127,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
     int append = 0;
 
     for (var context : browser.contexts()) {
-      String traceFilePath =  Paths.get(LoggingConfig.getLogDirectory(),  baseName + "_" + append++ + ".zip").toString();
+      String traceFilePath = Paths.get(LoggingConfig.getLogDirectory(),  baseName + "_" + append++ + ".zip").toString();
       context.tracing().stop(new Tracing.StopOptions().setPath(new File(traceFilePath).toPath()));
 
       for (Page page : context.pages()) {
