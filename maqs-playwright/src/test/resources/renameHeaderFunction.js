@@ -1,0 +1,1 @@
+function changeMainHeaderName() {document.querySelector('H2').innerHTML = 'NEWNAME';}

@@ -33,3 +33,7 @@ devops:
 accessibility:
   - maqs-accessibility/*
   - maqs-accessibility/**/*
+
+playwright:
+  - maqs-playwright/*
+  - maqs-playwright/**/*
