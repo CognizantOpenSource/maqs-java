@@ -183,12 +183,11 @@ public class PageDriverFactory {
     // Check if we should add proxy
     BrowserType.LaunchOptions options = new BrowserType.LaunchOptions();
 
-    // set proxy address
+    // set proxy address, if set to Yes in config
     if (PlaywrightConfig.getUseProxy()) {
       options.proxy = new Proxy(PlaywrightConfig.getProxyAddress());
     }
 
-    // Return options without proxy
     options.headless = PlaywrightConfig.getHeadless();
     options.timeout = PlaywrightConfig.getCommandTimeout();
     return options;
