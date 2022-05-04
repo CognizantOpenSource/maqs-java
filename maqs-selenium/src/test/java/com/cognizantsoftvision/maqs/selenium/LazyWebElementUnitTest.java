@@ -203,7 +203,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyWithParentAndWithoutDoNotMatch() throws TimeoutException, InterruptedException {
 		// Make sure we got the table caption we are looking for
-		assertEquals(FLOWER_TABLE, this.getFlowerTableCaptionWithParent().getText());
+		assertEquals(this.getFlowerTableCaptionWithParent().getText(), FLOWER_TABLE);
 
 		// Make sure the first found was not the flower table
 		assertNotEquals(this.getFlowerTableCaptionWithParent().getText(), this.getFirstTableCaption().getText());
