@@ -56,8 +56,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void createCommaDelimitedStringFromWebElementsTest() {
     String expectedText = "Motherboard, Power Supply, Hard Drive, Monitor, Mouse, Keyboard";
     AutomationPageModel automationPageModel = navigateToUrl();
-    verifyText(ElementHandler.createCommaDelimitedString(getWebDriver(), automationPageModel.computerPartsListOptions),
-        expectedText);
+    verifyText(ElementHandler.createCommaDelimitedString(
+       getWebDriver(), automationPageModel.computerPartsListOptions), expectedText);
   }
 
   /**

@@ -40,6 +40,11 @@ public enum ConfigSection {
   GLOBAL_MAQS("GlobalMaqs"),
 
   /**
+   * The default playwright maqs section.
+   */
+  PLAYWRIGHT_MAQS("PlaywrightMaqs"),
+
+  /**
    * The default remote selenium capabilities section.
    */
   REMOTE_SELENIUM_CAPS_MAQS("RemoteSeleniumCapsMaqs"),

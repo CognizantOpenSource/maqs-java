@@ -42,6 +42,11 @@ public class TestCategories {
   public static final String FRAMEWORK = "Base Framework Unit Tests";
 
   /**
+   * String for playwright unit test category.
+   */
+  public static final String PLAYWRIGHT = "Base Framework Unit Tests";
+
+  /**
    * String for Selenium unit test category.
    */
   public static final String SELENIUM = "Selenium Unit Tests";
