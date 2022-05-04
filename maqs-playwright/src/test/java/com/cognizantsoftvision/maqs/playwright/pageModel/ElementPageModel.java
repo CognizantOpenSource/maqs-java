@@ -4,6 +4,9 @@
 
 package com.cognizantsoftvision.maqs.playwright.pageModel;
 
+import java.io.File;
+import java.nio.file.Path;
+
 /**
  * The Test Page Model class.
  */
@@ -15,11 +18,10 @@ public class ElementPageModel {
   public final String mainHeader = "H2";
 
   /**
-   * Rename header Javascript function.
+   * Rename header Javascript function file path.
    */
-  // TODO:
-  public final String renameHeaderFunc = "function changeMainHeaderName() {document.querySelector('H2').innerHTML = 'NEWNAME';}";
-
+  public final Path renameHeaderFunctionFile = new File(
+      "src/test/resources/renameHeaderFunction.js").toPath().toAbsolutePath();
   /**
    * Should dialog button selector
    */

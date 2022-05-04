@@ -14,9 +14,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.FilePayload;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.SelectOption;
-
-import java.io.File;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -522,8 +521,9 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    * Test add script works as expected.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void addInitScriptTest() {
-    this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunc);
+  public void addInitScriptTest() throws IOException {
+    this.getPageDriver().addInitScript(
+        Files.readString(elementPageModel.renameHeaderFunctionFile));
     this.getPageDriver().reload();
     this.getPageDriver().evaluate("changeMainHeaderName();");
     Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
@@ -534,8 +534,7 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void addInitScriptFromFileTest() {
-    File renameHeaderFile = new File("src/test/resources/renameHeaderFunction.js");
-    this.getPageDriver().addInitScript(Paths.get(renameHeaderFile.getAbsolutePath()));
+    this.getPageDriver().addInitScript(elementPageModel.renameHeaderFunctionFile);
     this.getPageDriver().reload();
     this.getPageDriver().evaluate("changeMainHeaderName();");
     Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
@@ -545,8 +544,9 @@ public class PageDriverUnitTest extends BasePlaywrightTest {
    * Test add script tag works as expected.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
-  public void addScriptTagTest() {
-    this.getPageDriver().addScriptTag(new Page.AddScriptTagOptions().setContent(elementPageModel.renameHeaderFunc));
+  public void addScriptTagTest() throws IOException {
+    this.getPageDriver().addScriptTag(new Page.AddScriptTagOptions().setContent(
+        Files.readString(elementPageModel.renameHeaderFunctionFile)));
     this.getPageDriver().evaluate("changeMainHeaderName();");
     Assert.assertEquals(this.getPageDriver().innerText(elementPageModel.mainHeader), "NEWNAME");
   }

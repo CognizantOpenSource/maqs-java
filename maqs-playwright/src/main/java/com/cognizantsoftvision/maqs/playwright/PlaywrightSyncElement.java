@@ -242,7 +242,7 @@ public class PlaywrightSyncElement {
     } else if (this.getParentFrameLocator() != null) {
       return this.getParentFrameLocator().locator(getSelector());
     }
-    throw new NullPointerException("Both parent IPage and PlaywrightElement are null");
+    throw new NullPointerException("Both parent Page and PlaywrightElement are null");
   }
 
   /**

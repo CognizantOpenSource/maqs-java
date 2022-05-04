@@ -63,14 +63,11 @@ public class PageDriverFactoryUnitTest {
   public void defaultOptionsUseProxy() {
     String oldProxyValue = Config.getValueForSection(ConfigSection.PLAYWRIGHT_MAQS, "UseProxy");
 
-    try
-    {
+    try {
       Config.addTestSettingValues(Collections.singletonMap("UseProxy", "Yes"),
           ConfigSection.PLAYWRIGHT_MAQS, true);
       Assert.assertEquals(PageDriverFactory.getDefaultOptions().proxy.server, PlaywrightConfig.getProxyAddress());
-    }
-    finally
-    {
+    } finally {
       Config.addTestSettingValues(Collections.singletonMap("UseProxy", oldProxyValue),
         ConfigSection.PLAYWRIGHT_MAQS, true);
     }
