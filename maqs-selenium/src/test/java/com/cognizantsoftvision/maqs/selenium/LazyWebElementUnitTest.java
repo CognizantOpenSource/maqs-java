@@ -12,7 +12,6 @@ import static org.testng.Assert.assertNotSame;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
-import com.google.common.base.Predicate;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.ExecutionFailedException;
@@ -21,6 +20,7 @@ import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
@@ -471,16 +471,17 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		this.getFirstNameInputBox().sendKeys("continueTest");
 
 		FileLogger logger = (FileLogger) this.getTestObject().getLogger();
-		String filepath = logger.getFilePath();
-		String logFile = Files.readAllLines(Paths.get(filepath)).stream()
+		String filePathString = logger.getFilePath();
+		Path filePath = Paths.get(filePathString);
+		String logFile = Files.readAllLines(filePath).stream()
 				.reduce((x, y) -> x + y + System.lineSeparator()).orElseThrow(() -> new FileNotFoundException(
-						String.format("The log file %s was not found at path %s", logger.getFileName(), filepath)));
+						String.format("The log file %s was not found at path %s", logger.getFileName(), filePathString)));
 
 		assertTrue(logFile.contains("beforeSuspendTest"), "log file did not contain text 'beforeSuspendTest'.");
 		assertFalse(logFile.contains("secretKeys"), "log file did contain text 'secretKeys' when it shouldn't have.");
 		assertTrue(logFile.contains("continueTest"), "log file did not contain text 'continueTest'.");
 
-		Files.delete(Paths.get(filepath));
+		Files.delete(filePath);
 	}
 
 	/**
@@ -708,12 +709,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementFindElementsAreLazy() throws TimeoutException, InterruptedException {
 		SoftAssert softAssertion = new SoftAssert();
 		for (LazyWebElement element : this.getFlowerTableLazyElement().findElements(By.cssSelector(THREAD))) {
-			Predicate<LazyWebElement> predicate = e -> {
-				assertTrue(e instanceof LazyWebElement);
-				return true;
-			};
-
-			softAssertion.assertTrue(predicate.test(element));
+			softAssertion.assertTrue(element != null);
 		}
 
 		softAssertion.assertAll();
