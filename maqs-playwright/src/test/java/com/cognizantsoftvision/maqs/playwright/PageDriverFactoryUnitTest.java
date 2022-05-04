@@ -28,7 +28,6 @@ public class PageDriverFactoryUnitTest {
   public Object[] browserType() {
     ArrayList<PlaywrightBrowser> data = new ArrayList<>();
     data.add(PlaywrightBrowser.CHROMIUM);
-    data.add(PlaywrightBrowser.EDGE);
     data.add(PlaywrightBrowser.FIREFOX);
     data.add(PlaywrightBrowser.WEBKIT);
     data.add(PlaywrightBrowser.CHROME);
@@ -60,10 +59,20 @@ public class PageDriverFactoryUnitTest {
     Assert.assertFalse(pageDriver.getAsyncPage().isClosed());
   }
 
-  @Test(groups = TestCategories.PLAYWRIGHT)
+  @Test(groups = TestCategories.PLAYWRIGHT, singleThreaded = true)
   public void defaultOptionsUseProxy() {
-    Config.addTestSettingValues(Collections.singletonMap("UseProxy", "Yes"),
-        ConfigSection.PLAYWRIGHT_MAQS, true);
-    Assert.assertEquals(PageDriverFactory.getDefaultOptions().proxy.server, PlaywrightConfig.getProxyAddress());
+    String oldProxyValue = Config.getValueForSection(ConfigSection.PLAYWRIGHT_MAQS, "UseProxy");
+
+    try
+    {
+      Config.addTestSettingValues(Collections.singletonMap("UseProxy", "Yes"),
+          ConfigSection.PLAYWRIGHT_MAQS, true);
+      Assert.assertEquals(PageDriverFactory.getDefaultOptions().proxy.server, PlaywrightConfig.getProxyAddress());
     }
+    finally
+    {
+      Config.addTestSettingValues(Collections.singletonMap("UseProxy", oldProxyValue),
+        ConfigSection.PLAYWRIGHT_MAQS, true);
+    }
+  }
 }
