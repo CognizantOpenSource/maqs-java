@@ -11,7 +11,7 @@
         <Log>YES</Log>
         <Log>NO</Log>
         <Log>OnFail</Log>-->
-        <Log>YES</Log>
+        <Log>OnFail</Log>
 
         <!--Logging Levels
         <LogLevel>VERBOSE</LogLevel>
