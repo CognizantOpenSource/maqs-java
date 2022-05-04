@@ -8,6 +8,7 @@ import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.IFileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.microsoft.playwright.Browser;
@@ -16,6 +17,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Tracing;
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.testng.ITestResult;
 
 /**
@@ -125,7 +127,7 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
     int append = 0;
 
     for (var context : browser.contexts()) {
-      String traceFilePath = baseName + "_" + append++ + ".zip";
+      String traceFilePath = Paths.get(LoggingConfig.getLogDirectory(),  baseName + "_" + append++ + ".zip").toString();
       context.tracing().stop(new Tracing.StopOptions().setPath(new File(traceFilePath).toPath()));
 
       for (Page page : context.pages()) {
