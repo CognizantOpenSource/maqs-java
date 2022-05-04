@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <GlobalMaqs>
+        <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
+        <WaitTime>100</WaitTime>
+
+        <!-- Generic time-out in milliseconds -->
+        <Timeout>10000</Timeout>
+
+        <!-- Do you want to create logs for your tests
+        <Log>YES</Log>
+        <Log>NO</Log>
+        <Log>OnFail</Log>-->
+        <Log>YES</Log>
+
+        <!--Logging Levels
+        <LogLevel>VERBOSE</LogLevel>
+        <LogLevel>INFORMATION</LogLevel>
+        <LogLevel>GENERIC</LogLevel>
+        <LogLevel>SUCCESS</LogLevel>
+        <LogLevel>WARNING</LogLevel>
+        <LogLevel>ERROR</LogLevel>-->
+        <LogLevel>VERBOSE</LogLevel>
+
+        <!-- Logging Types
+        <LogType>CONSOLE</LogType>
+        <LogType>TXT</LogType>
+        <LogType>HTML</LogType>-->
+        <LogType>TXT</LogType>
+
+        <!-- Log file path - Defaults to build location if no value is defined -->
+        <FileLoggerPath>./target/logs</FileLoggerPath>
+    </GlobalMaqs>
+    <PlaywrightMaqs>
+        <!--Default base web url-->
+        <WebBase>https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/</WebBase>
+
+        <!--Local browser settings
+        <add key="Browser" value="Chrome"/>
+        <add key="Browser" value="Chromium"/>
+        <add key="Browser" value="Firefox"/>
+        <add key="Browser" value="Edge"/>
+        <add key="Browser" value="Webkit"/>-->
+        <Browser>Chrome</Browser>
+        <Headless>YES</Headless>
+
+        <!--Playwright specific timeouts in milliseconds-->
+        <Timeout>20000</Timeout>
+        <CommandTimeout>200000</CommandTimeout>
+
+        <!--Browser Resize settings - The Default is 1280x720
+        <add key="BrowserSize" value="DEFAULT" />-->
+        <BrowserSize>DEFAULT</BrowserSize>
+
+        <!--Playwright specific logging options-->
+        <CaptureVideo>NO</CaptureVideo>
+        <CaptureScreenshots>NO</CaptureScreenshots>
+        <CaptureSnapshots>YES</CaptureSnapshots>
+
+        <!--Proxy  settings-->
+        <UseProxy>No</UseProxy>
+        <ProxyAddress>http://localhost:8002</ProxyAddress>
+    </PlaywrightMaqs>
+</configuration>
