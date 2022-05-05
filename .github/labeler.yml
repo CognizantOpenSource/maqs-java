@@ -34,6 +34,10 @@ accessibility:
   - maqs-accessibility/*
   - maqs-accessibility/**/*
 
+playwright:
+  - maqs-playwright/*
+  - maqs-playwright/**/*
+
 noSQL:
   -maqs-nosql/*
   -maqs-nosql/**/*

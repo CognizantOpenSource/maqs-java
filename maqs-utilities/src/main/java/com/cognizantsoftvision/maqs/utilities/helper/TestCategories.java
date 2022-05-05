@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.utilities.helper;
 
 /**
- * Test category type.
+ * The Test Category class.
  */
 public class TestCategories {
 
@@ -41,6 +41,11 @@ public class TestCategories {
    * String for base framework unit test category.
    */
   public static final String FRAMEWORK = "Base Framework Unit Tests";
+
+  /**
+   * String for playwright unit test category.
+   */
+  public static final String PLAYWRIGHT = "Base Framework Unit Tests";
 
   /**
    * String for Selenium unit test category.

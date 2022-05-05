@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.selenium.exceptions.ElementHandlerException;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.ListProcessor;
@@ -15,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -54,8 +56,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void createCommaDelimitedStringFromWebElementsTest() {
     String expectedText = "Motherboard, Power Supply, Hard Drive, Monitor, Mouse, Keyboard";
     AutomationPageModel automationPageModel = navigateToUrl();
-    verifyText(ElementHandler.createCommaDelimitedString(getWebDriver(), automationPageModel.computerPartsListOptions),
-        expectedText);
+    verifyText(ElementHandler.createCommaDelimitedString(
+       getWebDriver(), automationPageModel.computerPartsListOptions), expectedText);
   }
 
   /**
@@ -68,6 +70,16 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     ElementHandler.setTextBox(getWebDriver(), automationPageModel.firstNameTextBox, expectedValue);
     String actualValue = ElementHandler.getElementAttribute(getWebDriver(), automationPageModel.firstNameTextBox);
     verifyText(actualValue, expectedValue);
+  }
+
+  /**
+   * Unit test for entering nothing into the text box and getting the exception.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementHandlerException.class)
+  public void setTextBoxException() {
+    String expectedValue = "";
+    AutomationPageModel automationPageModel = navigateToUrl();
+    ElementHandler.setTextBox(getWebDriver(), automationPageModel.firstNameTextBox, expectedValue);
   }
 
   /**
@@ -260,7 +272,6 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Verify Send Secret Keys suspends logging.
    */
-  @Ignore("This can be uncommented when the logger functions as expected.")
   @Test(groups = TestCategories.SELENIUM)
   public void sendSecretTextSuspendLoggingTest() throws IOException {
     AutomationPageModel automationPageModel = this.navigateToUrl();
@@ -280,7 +291,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Verify Send Secret Keys re-enables after suspending logging.
    */
-  @Ignore("This can be uncommented when the logger functions as expected.")
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void sendSecretTextContinueLoggingTest() throws IOException {
     AutomationPageModel automationPageModel = this.navigateToUrl();
@@ -298,11 +309,22 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Verify two Strings are equal. If not fail test.
-   *
-   * @param actualValue   Actual displayed text
-   * @param expectedValue Expected text
+   * Verify Send Secret throws exception if element is not intractable.
    */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementHandlerException.class)
+  public void sendSecretTextCatchException() {
+    AutomationPageModel automationPageModel = this.navigateToUrl();
+    this.getWebDriver().findElement(automationPageModel.firstNameTextBox).sendKeys("somethingTest");
+    this.getWebDriver().findElement(automationPageModel.firstNameTextBox).clear();
+    ElementHandler.sendSecretKeys(getWebDriver(), automationPageModel.flowerTableTitle, "secretKeys", this.getLogger());
+  }
+
+    /**
+     * Verify two Strings are equal. If not fail test.
+     *
+     * @param actualValue   Actual displayed text
+     * @param expectedValue Expected text
+     */
   private static void verifyText(String actualValue, String expectedValue) {
     Assert.assertEquals(actualValue, expectedValue, "Expected String does not match actual");
   }

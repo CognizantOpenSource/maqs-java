@@ -13,27 +13,27 @@ import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 /**
- * Unit test class for FileLogger.java
+ * The File Logger unit test class.
+ *
+ * Don't check for serial version unique IDs
+ * as we will never serialize the test data
  */
 @Test(singleThreaded = true)
-
-/**
- * Don't check for serial version unique IDs as we will never serialize the test
- * data
- */
-@SuppressWarnings("serial")
-
 public class FileLoggerUnitTest {
 
   public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY = LoggingConfig.getLogDirectory() + "/"
@@ -254,29 +254,30 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Verify FileLogger constructor creates the correct directory if it does not
-   * already exist. Delete Directory after each run.
+   * Verify FileLogger constructor creates the correct directory if it does not already exist.
+   * Delete Directory after each run.
    * 
-   * @throws IOException
+   * @throws IOException if an exception is thrown
    */
-  /*
-   * @Test public void FileLoggerConstructorCreateDirectory() throws IOException {
-   * String message =
-   * "Test to ensure that the file in the created directory can be written to.";
-   * FileLogger logger = new FileLogger(true,
-   * Paths.get(LoggingConfig.getLogDirectory(),
-   * "FileLoggerCreateDirectoryDelete").toString(), "FileLoggerCreateDirectory",
-   * MessageType.GENERIC);
-   * 
-   * logger.logMessage(MessageType.WARNING,
-   * "Test to ensure that the file in the created directory can be written to.");
-   * 
-   * File file = new File(logger.getFilePath()); String actualMessage =
-   * this.readTextFile(file.getCanonicalPath());
-   * Assert.assertTrue(actualMessage.contains(message), "Expected '" + message +
-   * "' but got '" + actualMessage + "' for: " + file.getCanonicalPath());
-   * file.delete(); }
-   */
+    @Ignore
+    @Test
+    public void FileLoggerConstructorCreateDirectory() throws IOException {
+      String message = "Test to ensure that the file in the created directory can be written to.";
+      FileLogger logger = new FileLogger(true,
+      Paths.get(LoggingConfig.getLogDirectory(), "FileLoggerCreateDirectoryDelete").toString(),
+          "FileLoggerCreateDirectory", MessageType.GENERIC);
+
+      logger.logMessage(MessageType.WARNING,
+      "Test to ensure that the file in the created directory can be written to.");
+
+      File file = new File(logger.getFilePath()); String actualMessage =
+      this.readTextFile(file.getCanonicalPath());
+      Assert.assertTrue(actualMessage.contains(message), "Expected '" + message +
+      "' but got '" + actualMessage + "' for: " + file.getCanonicalPath());
+      file.delete();
+   }
+
+
 
   /**
    * Verify that File Logger can log message without defining a Message Type
@@ -661,9 +662,9 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.WARNING, logLine, MessageType.WARNING);
     logger.logMessage(MessageType.ERROR, logLine, MessageType.ERROR);
 
-    // Give the write time
+    // Gives the writing time
     try {
-      Thread.sleep(250);
+      TimeUnit.MILLISECONDS.sleep(250);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }

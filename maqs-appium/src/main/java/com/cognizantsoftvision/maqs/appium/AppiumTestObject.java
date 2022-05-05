@@ -24,9 +24,7 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
    */
   public AppiumTestObject(AppiumDriver<WebElement> appiumDriver, ILogger logger,
       String fullyQualifiedTestName) {
-    super(logger, fullyQualifiedTestName);
-    this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),
-        new MobileDriverManager((() -> appiumDriver), this));
+    this(() -> appiumDriver, logger, fullyQualifiedTestName);
   }
 
   /**

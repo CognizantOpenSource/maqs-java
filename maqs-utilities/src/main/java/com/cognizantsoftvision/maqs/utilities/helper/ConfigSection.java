@@ -5,6 +5,7 @@
 package com.cognizantsoftvision.maqs.utilities.helper;
 
 /**
+ * The Config Section enum class.
  * Enumeration values for default configuration sections.
  */
 public enum ConfigSection {
@@ -43,6 +44,11 @@ public enum ConfigSection {
    * The default mongoDB maqs section.
    */
   MONGO_MAQS("MongoMaqs"),
+
+  /**
+   * The default playwright maqs section.
+   */
+  PLAYWRIGHT_MAQS("PlaywrightMaqs"),
 
   /**
    * The default remote selenium capabilities section.

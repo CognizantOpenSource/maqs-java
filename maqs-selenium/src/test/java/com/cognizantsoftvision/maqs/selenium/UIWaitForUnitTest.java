@@ -5,6 +5,7 @@ import com.cognizantsoftvision.maqs.selenium.pageModel.AsyncPageModel;
 import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.selenium.pageModel.IFramePageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -27,6 +28,10 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
     wait.waitForPageLoad();
     WebDriverFactory.setBrowserSize(this.getWebDriver(), "Maximize");
     wait.waitForIframeToLoad(iFramePageModel.iframeLocator);
+
+    this.getWebDriver().navigate().to(iFramePageModel.testSiteIFrameUrl);
+    wait.waitForPageLoad();
+    wait.waitForIframeToLoad(iFramePageModel.iframeLocator, 5000, 1000);
   }
 
   /**

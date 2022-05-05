@@ -11,16 +11,17 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for the StringProcessor class.
+ * The String Processor unit test class.
  */
 public class StringProcessorUnitTest {
+
   /**
    * Test method for checking strings that contain brackets.
    */
   @Test(groups = TestCategories.UTILITIES)
   public void stringFormatterCheckForBrackets() {
     String message = StringProcessor.safeFormatter("{This is a test for JSON}");
-    Assert.assertEquals("{This is a test for JSON}", message);
+    Assert.assertEquals(message, "{This is a test for JSON}");
   }
 
   /**
@@ -29,7 +30,7 @@ public class StringProcessorUnitTest {
   @Test(groups = TestCategories.UTILITIES)
   public void stringFormatterCheckForStringFormat() {
     String message = StringProcessor.safeFormatter("This %s should return %s", "Test", "Test");
-    Assert.assertEquals("This Test should return Test", message);
+    Assert.assertEquals( message, "This Test should return Test");
   }
 
   /**
