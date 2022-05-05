@@ -4,6 +4,8 @@
 
 package com.cognizantsoftvision.maqs.nosql;
 
+import static com.mongodb.client.MongoClients.create;
+
 import com.mongodb.MongoClientException;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoException;
@@ -11,8 +13,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-
-import static com.mongodb.client.MongoClients.create;
 
 /**
  * The Mongo Factory Class.
