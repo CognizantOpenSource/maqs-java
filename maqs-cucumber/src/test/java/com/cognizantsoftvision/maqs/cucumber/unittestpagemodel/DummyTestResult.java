@@ -19,9 +19,9 @@ public class DummyTestResult implements ITestResult {
      * Test ID string
      */
     @Override
-    private String id()
+    public String id()
     {
-        return UUID.randomUUID().toString();
+        return "";
     }
 
     /**
