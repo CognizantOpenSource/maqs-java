@@ -20,7 +20,7 @@ public class BaseCucumberTestNGUnitTest extends BaseGenericTest {
     /**
      * Verifies the before method properly sets the Scenario Context
      */
-    @Test(groups = TestCategories.CUCUMBER, singleThreaded = true)
+    @Test(groups = TestCategories.CUCUMBER, singleThreaded = true, priority = 0)
     public void testBeforeMethod() {
         DummyBaseCucumberTestNG dummyCucumber = new DummyBaseCucumberTestNG();
         String[] dummyArgs = {"Dummy Arg 1", "Dummy Arg 2"};

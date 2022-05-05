@@ -8,12 +8,11 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -91,12 +90,9 @@ public class HtmlFileLoggerUnitTest {
       File file = new File(logger.getFilePath());
       Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains(
       "Test to ensure that the file in the created directory can be written to."));
+      logger.close();
       Assert.assertTrue(file.delete());
-
-      file = new File(logger.getDirectory());
-      FileUtils.delete(file);
    }
-
 
   /**
    * Verify that HtmlFileLogger can log message without defining a Message Type
