@@ -15,11 +15,14 @@ import java.util.Set;
  * A dummy test result class for unit testing
  */
 public class DummyTestResult implements ITestResult {
-    
     /**
      * Test ID string
      */
-    private final String id = UUID.randomUUID().toString();
+    @Override
+    protected String id()
+    {
+        return UUID.randomUUID().toString();
+    }
 
     /**
      * The test context
