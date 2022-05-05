@@ -63,6 +63,8 @@ public class HtmlReporter {
    */
   private static final String RESOURCES_FILE = "../maqs-accessibility/src/main/resources/";
 
+  private static final String DATA_SOURCE = "data:image/png;base64,";
+
   /**
    * Class constructor.
    */
@@ -535,10 +537,11 @@ public class HtmlReporter {
   private static String getDataElementString(SearchContext webDriver, By by) {
     WebElement webElement = webDriver.findElement(by);
     String base64bytes = Base64.getEncoder().encodeToString(webElement.getScreenshotAs(OutputType.BYTES));
-    return "data:image/png;base64," + base64bytes;
+    return DATA_SOURCE + base64bytes;
   }
 
-  private static String getDataElementString(TakesScreenshot screenshot, SearchContext webDriver, By by) throws IOException {
+  private static String getDataElementString(
+      TakesScreenshot screenshot, SearchContext webDriver, By by) throws IOException {
     // Get screenshot as a file
     File screenshotFile = screenshot.getScreenshotAs(OutputType.FILE);
 
@@ -556,7 +559,7 @@ public class HtmlReporter {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     ImageIO.write(bufferedImage, "PNG", out);
     String base64bytes = Base64.getEncoder().encodeToString(out.toByteArray());
-    return "data:image/png;base64," + base64bytes;
+    return DATA_SOURCE + base64bytes;
   }
 
   /**
@@ -648,7 +651,7 @@ public class HtmlReporter {
    */
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
-    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
+    return DATA_SOURCE + newScreen.getScreenshotAs(OutputType.BASE64);
   }
 
   /**
