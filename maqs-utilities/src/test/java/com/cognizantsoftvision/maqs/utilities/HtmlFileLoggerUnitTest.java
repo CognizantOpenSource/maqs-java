@@ -80,7 +80,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify HtmlFileLogger constructor creates the correct directory if it does
    * not already exist. Delete Directory after each run.
    */
-   @Test
+   @Test(singleThreaded = true)
    public void HtmlFileLoggerConstructorCreateDirectory() throws IOException {
       HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
          "HtmlFileLoggerCreateDirectoryDelete").toString(),
