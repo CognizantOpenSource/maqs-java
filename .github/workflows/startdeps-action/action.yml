@@ -1,0 +1,26 @@
+name: 'Start Testing Dependencies'
+description: 'Starting testing dependencies based on module name'
+inputs:
+  module-name:
+    description: 'Module name'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup DotNet
+      if: inputs.module-name == 'maqs-webservices'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: |
+          3.1.x
+          6.x.x
+    - name: Start MAQS test services container
+      if: inputs.module-name == 'maqs-webservices'
+      shell: pwsh
+      #run:  docker-compose -f docker/MAQSService/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
+      run: Start-Process -FilePath "dotnet" -ArgumentList "run --project docker/MAQSService/MainTestService/MainTestService.csproj"
+    - name: Build the docker-compose stack
+      if: inputs.module-name == 'maqs-database'
+      shell: bash
+      run: docker-compose -f docker/MAQSSQLServer/docker-compose.yml -p CognizantOpenSource/maqs-java up -d
