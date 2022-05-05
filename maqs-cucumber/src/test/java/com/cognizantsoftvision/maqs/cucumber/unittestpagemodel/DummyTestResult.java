@@ -19,7 +19,7 @@ public class DummyTestResult implements ITestResult {
      * Test ID string
      */
     @Override
-    String id()
+    private String id()
     {
         return UUID.randomUUID().toString();
     }
