@@ -8,10 +8,11 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import org.apache.tools.ant.util.FileUtils;
+import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import java.io.IOException;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -80,7 +81,7 @@ public class HtmlFileLoggerUnitTest {
    * not already exist. Delete Directory after each run.
    */
    @Test
-   public void HtmlFileLoggerConstructorCreateDirectory() {
+   public void HtmlFileLoggerConstructorCreateDirectory() throws IOException {
       HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
          "HtmlFileLoggerCreateDirectoryDelete").toString(),
       "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
