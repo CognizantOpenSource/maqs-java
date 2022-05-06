@@ -15,14 +15,14 @@ public class ScenarioContext {
   /**
    * Initializes an instance of the ScenarioContext class.
    */
-  public ScenarioContext() {
+  private ScenarioContext() {
     // This constructor is intentionally left empty
   }
 
   /**
-   * The default string for context of a JMAQS cucumber test.
+   * The default string for context of a MAQS cucumber test.
    */
-  public static final String JMAQS_HOLDER = "BASE_JMAQS_TEST";
+  public static final String MAQS_HOLDER = "BASE_MAQS_TEST";
 
   /**
    * Field context.
@@ -46,6 +46,7 @@ public class ScenarioContext {
    * @param type the class type
    * @return the typed object
    */
+  @SuppressWarnings("unchecked")
   public static <T> T get(final Class<T> type) {
     final Object obj = get(type.toString());
     return (T) obj;
@@ -61,7 +62,7 @@ public class ScenarioContext {
    */
   @SuppressWarnings("unchecked")
   public static <T> T get(final String name, final Class<T> type) {
-    final Object obj = get(name);
+    final Object obj = get(name) != null ? get(name) : get(type.toString());
     return (T) obj;
   }
 

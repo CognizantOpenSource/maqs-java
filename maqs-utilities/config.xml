@@ -11,7 +11,7 @@
         <Log>YES</Log>
         <Log>NO</Log>
         <Log>OnFail</Log>-->
-        <Log>YES</Log>
+        <Log>OnFail</Log>
 
         <!--Logging Levels
         <LogLevel>VERBOSE</LogLevel>
@@ -29,7 +29,7 @@
         <LogType>TXT</LogType>
 
         <!-- Log file path - Defaults to build location if no value is defined -->
-        <FileLoggerPath>./target/logs</FileLoggerPath>
+        <FileLoggerPath>target/logs</FileLoggerPath>
 
         <!-- CONFIG TEST VALUES -->
         <TestKey>testValue</TestKey>

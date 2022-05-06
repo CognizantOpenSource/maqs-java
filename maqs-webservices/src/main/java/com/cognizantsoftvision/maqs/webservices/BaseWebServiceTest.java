@@ -13,9 +13,9 @@ import java.net.http.HttpRequest;
 import org.testng.ITestResult;
 
 /**
- * Base web service test class.
+ * The Base Web Service Test class.
  */
-public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject> {
+public class BaseWebServiceTest extends BaseExtendableTest<IWebServiceTestObject> {
 
   /**
    * Get the Web Service Driver.

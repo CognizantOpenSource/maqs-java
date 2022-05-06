@@ -5,15 +5,14 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests for the Web Service Config functionality.
+ * The Web Service Config unit test class.
  */
-public class WebServiceConfigUnitTest extends BaseGenericTest {
+public class WebServiceConfigUnitTest {
 
   /**
    * gets if proxy can be used.
@@ -21,7 +20,7 @@ public class WebServiceConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceUri() {
     Assert.assertEquals(WebServiceConfig.getWebServiceUri(),
-        "http://magenicautomation.azurewebsites.net", "the web service URI does not match");
+        "http://localhost:5026", "the web service URI does not match");
   }
 
   /**

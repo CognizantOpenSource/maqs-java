@@ -9,22 +9,21 @@
         <version>${revision}</version>
     </parent>
 
-
     <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
     <artifactId>maqs-utilities</artifactId>
-    <name>MAQS Testing Utilities Module</name>
+    <name>MAQS Utilities Testing Module</name>
     <version>${revision}</version>
 
-
     <properties>
-        <commonsconfiguration2.version>2.7</commonsconfiguration2.version>
-        <commonsbeanutils.version>1.9.4</commonsbeanutils.version>
+        <commons.configuration2.version>2.7</commons.configuration2.version>
+        <commons.bean-utils.version>1.9.4</commons.bean-utils.version>
+        <apache.commons-text.version>1.9</apache.commons-text.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-configuration2</artifactId>
-            <version>${commonsconfiguration2.version}</version>
+            <version>${commons.configuration2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -33,12 +32,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.9</version>
+            <version>${apache.commons-text.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>${commonsbeanutils.version}</version>
+            <version>${commons.bean-utils.version}</version>
         </dependency>
     </dependencies>
 </project>

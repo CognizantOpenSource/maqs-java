@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.webservices.WebServiceDriverRequestUnitTest;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import com.cognizantsoftvision.maqs.webservices.BaseWebServiceTest;
 import com.cognizantsoftvision.maqs.webservices.HttpClientFactory;
 import com.cognizantsoftvision.maqs.webservices.MediaType;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
@@ -21,9 +20,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests the web service posts.
+ * The Web Driver Service Driver Post unit test class.
  */
-public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
+public class WebServiceDriverPostUnitTest {
 
   /**
    * String to hold the URL.
@@ -113,8 +112,8 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void postXMLSerializedVerifyEmptyStringError() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/XML_JSON/Post",
-        MediaType.APP_XML, "", false);
-    Assert.assertTrue(result.body().contains("value is required"));
+        MediaType.APP_XML, null, false);
+    Assert.assertTrue(result.body().contains("An error occurred while deserializing input data."));
   }
 
   /**
@@ -191,7 +190,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   public void postExpectStringError() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
         MediaType.PLAIN_TEXT, "", false);
-    Assert.assertEquals(result.body(), "{\"Message\":\"No data\"}");
+    Assert.assertEquals(result.body(), "{\"message\":\"Value is required\"}");
   }
 
   /**
@@ -203,7 +202,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   public void postExpectStringErrorEmptyHttpContent() throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.post(baseUrl + "/api/String",
         MediaType.PLAIN_TEXT, "", false);
-    Assert.assertEquals(result.body(), "{\"Message\":\"No data\"}");
+    Assert.assertEquals(result.body(), "{\"message\":\"Value is required\"}");
   }
 
   /**

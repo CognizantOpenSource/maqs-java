@@ -5,8 +5,8 @@
 package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
+import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import java.util.HashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +24,7 @@ public abstract class BaseSeleniumPageModel {
   /**
    * The selenium test object.
    */
-  private final SeleniumTestObject testObject;
+  private final ISeleniumTestObject testObject;
 
   /**
    * The web driver.
@@ -36,7 +36,7 @@ public abstract class BaseSeleniumPageModel {
    *
    * @param testObject the test object
    */
-  protected BaseSeleniumPageModel(SeleniumTestObject testObject) {
+  protected BaseSeleniumPageModel(ISeleniumTestObject testObject) {
     this.testObject = testObject;
     this.webDriver = testObject.getWebDriver();
     this.lazyElementStore = new HashMap<>();
@@ -47,7 +47,7 @@ public abstract class BaseSeleniumPageModel {
    *
    * @return the logger
    */
-  protected Logger getLogger() {
+  protected ILogger getLogger() {
     return this.testObject.getLogger();
   }
 
@@ -65,7 +65,7 @@ public abstract class BaseSeleniumPageModel {
    *
    * @return the test object
    */
-  public SeleniumTestObject getTestObject() {
+  public ISeleniumTestObject getTestObject() {
     return testObject;
   }
 
@@ -90,9 +90,9 @@ public abstract class BaseSeleniumPageModel {
   /**
    * Gets the per timer collection.
    *
-   * @return The perf timer colection
+   * @return The perf timer collection
    */
-  public PerfTimerCollection getPerfTimerCollection() {
+  public IPerfTimerCollection getPerfTimerCollection() {
     return this.testObject.getPerfTimerCollection();
   }
 
@@ -126,7 +126,7 @@ public abstract class BaseSeleniumPageModel {
    *
    * @param parent           the parent
    * @param by               the by
-   * @param userFriendlyName the user friendly name
+   * @param userFriendlyName the user-friendly name
    * @return the lazy element
    */
   protected LazyWebElement getLazyElement(LazyWebElement parent, By by, String userFriendlyName) {
@@ -149,7 +149,7 @@ public abstract class BaseSeleniumPageModel {
    * Gets lazy element.
    *
    * @param by               the by
-   * @param userFriendlyName the user friendly name
+   * @param userFriendlyName the user-friendly name
    * @return the lazy element
    */
   protected LazyWebElement getLazyElement(By by, String userFriendlyName) {

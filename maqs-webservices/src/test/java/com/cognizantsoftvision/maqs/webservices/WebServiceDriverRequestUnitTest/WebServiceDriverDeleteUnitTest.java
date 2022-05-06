@@ -11,19 +11,19 @@ import com.cognizantsoftvision.maqs.webservices.MediaType;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
 import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.net.http.HttpResponse;
-import java.util.Collections;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.http.HttpResponse;
+import java.util.Collections;
 
 /**
- * Unit tests for web service Deletes.
+ * The Web Driver Service Driver Delete unit test class.
  */
-public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
+public class WebServiceDriverDeleteUnitTest {
 
   /**
    * String to hold the URL.
@@ -54,7 +54,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
       throws IOException, InterruptedException {
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON, false);
-    Assert.assertEquals(result.statusCode(), HttpStatus.CONFLICT.value());
+    Assert.assertEquals(result.statusCode(), HttpStatus.UNAUTHORIZED.value());
   }
 
   /**
@@ -143,7 +143,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   public void deleteExpectError() throws IOException, InterruptedException {
    HttpResponse<String> result = webServiceDriver.delete(baseUrl + "/api/String/Delete/43",
         MediaType.PLAIN_TEXT, false);
-    Assert.assertEquals(result.body(), "{\"Message\":\"Resource was not found\"}");
+    Assert.assertEquals(result.body(), "{\"message\":\"Resource was not found\"}");
   }
 
   /**

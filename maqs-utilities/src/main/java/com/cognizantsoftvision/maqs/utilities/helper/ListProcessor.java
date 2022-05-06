@@ -9,17 +9,17 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * The List Processor class.
  * Contains methods for processing lists.
  */
-
 public class ListProcessor {
 
   private ListProcessor() {
-    //Private Constructor
+    // Private Constructor
   }
 
   /**
-   * Create a comma delimited string from a ArrayList of strings.
+   * Create a comma delimited string from an ArrayList of strings.
    *
    * @param stringList ArrayList of strings
    * @param sort       True to create an alphabetically sorted comma delimited string False to create comma

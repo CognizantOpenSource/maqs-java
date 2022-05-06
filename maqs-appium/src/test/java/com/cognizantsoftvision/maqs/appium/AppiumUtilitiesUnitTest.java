@@ -18,11 +18,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
  * Appium Utilities Unit Test class.
  */
+@Ignore
 public class AppiumUtilitiesUnitTest extends BaseGenericTest {
 
   /**

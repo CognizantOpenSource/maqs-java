@@ -19,9 +19,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -36,7 +34,7 @@ public abstract class AbstractLazyElement {
   private final Integer elementIndex;
 
   /**
-   * A user friendly name, for logging purposes.
+   * A user-friendly name, for logging purposes.
    */
   protected final String userFriendlyName;
 
@@ -53,7 +51,7 @@ public abstract class AbstractLazyElement {
   /**
    * The test object for the element.
    */
-  protected SeleniumTestObject testObject;
+  protected ISeleniumTestObject testObject;
 
   /**
    * Cached copy of the element or null if we haven't already found the element.
@@ -65,9 +63,9 @@ public abstract class AbstractLazyElement {
    *
    * @param testObject       The selenium test object
    * @param locator          The by locator to search on
-   * @param userFriendlyName The user friendly name of the lazy element
+   * @param userFriendlyName The user-friendly name of the lazy element
    */
-  protected AbstractLazyElement(SeleniumTestObject testObject, By locator, String userFriendlyName) {
+  protected AbstractLazyElement(ISeleniumTestObject testObject, By locator, String userFriendlyName) {
     this.testObject = testObject;
     this.by = locator;
     this.userFriendlyName = userFriendlyName;
@@ -79,7 +77,7 @@ public abstract class AbstractLazyElement {
    *
    * @param parent           The parent lazy element
    * @param locator          The by locator to search on
-   * @param userFriendlyName The user friendly name of the lazy element
+   * @param userFriendlyName The user-friendly name of the lazy element
    */
   protected AbstractLazyElement(LazyWebElement parent, By locator, String userFriendlyName) {
     this.testObject = parent.getTestObject();
@@ -94,7 +92,7 @@ public abstract class AbstractLazyElement {
    *
    * @param parent           The parent lazy element
    * @param locator          THe by locator to search on
-   * @param userFriendlyName The user friendly name of the lazy element
+   * @param userFriendlyName The user-friendly name of the lazy element
    * @param elementIndex     The index of the cached element
    * @param cachedElement    The cached element
    */
@@ -137,7 +135,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the user friendly name.
+   * Gets the user-friendly name.
    *
    * @return the userFriendlyName
    */
@@ -159,7 +157,7 @@ public abstract class AbstractLazyElement {
    *
    * @return the test object
    */
-  public SeleniumTestObject getTestObject() {
+  public ISeleniumTestObject getTestObject() {
     return this.testObject;
   }
 
@@ -191,6 +189,7 @@ public abstract class AbstractLazyElement {
 
   /**
    * Gets the lazy element's location.
+   * 
    *
    * @return the location as a Point
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -273,8 +272,8 @@ public abstract class AbstractLazyElement {
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public void submit() throws InterruptedException {
-    this.getTestObject().getLogger()
-        .logMessage(MessageType.INFORMATION, String.format("Submit '%s'", this.userFriendlyName));
+    this.getTestObject().getLogger().logMessage(
+        MessageType.INFORMATION, String.format("Submit '%s'", this.userFriendlyName));
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement));
     this.executeEvent(element::submit, "Submit");
   }
@@ -357,8 +356,8 @@ public abstract class AbstractLazyElement {
    * @return The click-able web element
    */
   public WebElement getRawClickableElement() {
-
     Supplier<WebElement> elementSupplier;
+
     if (this.elementIndex == null) {
       if (this.parent == null) {
         elementSupplier = () -> {
@@ -386,7 +385,6 @@ public abstract class AbstractLazyElement {
    * @return The existing web element
    */
   public WebElement getRawExistingElement() {
-
     Supplier<WebElement> elementSupplier;
 
     if (this.elementIndex == null) {
@@ -498,29 +496,6 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the rectangle value that highlights the lazy element location.
-   *
-   * @return The location and size of the element
-   * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
-   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
-   */
-  public Rectangle getRect() throws InterruptedException {
-    return new Rectangle(this.getLocation(), this.getSize());
-  }
-
-  /**
-   * Gets the screenshot as the target type.
-   *
-   * @param target The target output type
-   * @return The type to get the screenshot as
-   * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
-   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
-   */
-  public <X> X getScreenshotAs(OutputType<X> target) throws InterruptedException {
-    return GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement).getScreenshotAs(target));
-  }
-
-  /**
    * Returns a string that represents the current object.
    *
    * @return the lazy element string
@@ -553,7 +528,7 @@ public abstract class AbstractLazyElement {
         return this.getCachedElement();
       } catch (Exception e) {
         this.getTestObject().getLogger()
-            .logMessage(MessageType.VERBOSE, "Refinding element because: " + e.getMessage());
+            .logMessage(MessageType.VERBOSE, "Finding element again because: " + e.getMessage());
       }
     }
 
@@ -562,14 +537,12 @@ public abstract class AbstractLazyElement {
           .logMessage(MessageType.VERBOSE, "Performing lazy driver find on: " + this.getBy());
       this.setCachedElement(getElement);
       return this.getCachedElement();
-    } catch (NoSuchElementException nsee) {
-      StringBuilder messageBuilder = new StringBuilder();
-
-      messageBuilder.append("Failed to find: " + this.userFriendlyName + System.lineSeparator());
-      messageBuilder.append("Locator: " + this.getBy() + System.lineSeparator());
-      messageBuilder.append("Because: " + nsee.getMessage() + System.lineSeparator());
-
-      throw new NoSuchElementException(messageBuilder.toString(), nsee);
+    } catch (NoSuchElementException noSuchElementException) {
+      String exceptionReason =
+          "Failed to find: " + this.userFriendlyName + System.lineSeparator()
+              + "Locator: " + this.getBy() + System.lineSeparator()
+              + "Because: " + noSuchElementException.getMessage() + System.lineSeparator();
+      throw new NoSuchElementException(exceptionReason, noSuchElementException);
     }
   }
 
@@ -585,13 +558,11 @@ public abstract class AbstractLazyElement {
       this.getTestObject().getLogger().logMessage(MessageType.VERBOSE, "Performing lazy driver action: " + caller);
       elementAction.invoke();
     } catch (Exception e) {
-      StringBuilder messageBuilder = new StringBuilder();
-
-      messageBuilder.append("Failed to " + caller + ": " + this.userFriendlyName + System.lineSeparator());
-      messageBuilder.append("Locator: " + this.getBy() + System.lineSeparator());
-      messageBuilder.append("Because: " + e.getMessage() + System.lineSeparator());
-
-      throw new ExecutionFailedException(messageBuilder.toString(), e);
+      String messageBuilder =
+          "Failed to " + caller + ": " + this.userFriendlyName + System.lineSeparator()
+              + "Locator: " + this.getBy() + System.lineSeparator() + "Because: " + e.getMessage()
+              + System.lineSeparator();
+      throw new ExecutionFailedException(messageBuilder, e);
     }
   }
 
@@ -603,7 +574,6 @@ public abstract class AbstractLazyElement {
    * @param expectedState The expected state to be logged if the matchesState function returns false
    * @return The WebElement at the indexed value
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
-   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   private WebElement getRawIndexed(Predicate<WebElement> matchesState, String expectedState) {
     List<WebElement> elements = (this.parent == null)

@@ -9,6 +9,11 @@ package com.cognizantsoftvision.maqs.selenium.constants;
  */
 public enum BrowserType {
   /**
+   * None Web Browser.
+   */
+  NONE,
+
+  /**
    * Chrome web browser.
    */
   CHROME,

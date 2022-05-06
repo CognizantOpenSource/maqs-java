@@ -4,16 +4,18 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
-import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.base.DriverManager;
+import com.cognizantsoftvision.maqs.base.ITestObject;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 
 /**
  * The type Selenium driver manager.
@@ -26,7 +28,7 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @param getDriver  the get driver
    * @param testObject the test object
    */
-  public SeleniumDriverManager(Supplier<WebDriver> getDriver, BaseTestObject testObject) {
+  public SeleniumDriverManager(Supplier<WebDriver> getDriver, ITestObject testObject) {
     super(getDriver, testObject);
   }
 
@@ -36,7 +38,7 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @param driver     the Selenium web driver
    * @param testObject the test object
    */
-  public SeleniumDriverManager(WebDriver driver, BaseTestObject testObject) {
+  public SeleniumDriverManager(WebDriver driver, ITestObject testObject) {
     super(() -> driver, testObject);
   }
 
@@ -67,16 +69,12 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @return the web driver
    */
   public WebDriver getWebDriver() {
-
     if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-      WebDriver tempDriver = this.getBase();
-      EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(tempDriver);
-      eventFiringWebDriver.register(new EventHandler(getTestObject().getLogger()));
-      tempDriver = eventFiringWebDriver;
-      this.baseDriver = tempDriver;
+      WebDriverListener listener = new EventHandler(this.getLogger());
+      this.baseDriver = new EventFiringDecorator(listener).decorate(this.getBase());
 
       // Log the setup
-      this.loggingStartup(tempDriver);
+      this.loggingStartup(this.baseDriver);
     }
 
     return getBase();
@@ -89,16 +87,15 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @param args    the args
    */
   protected void logVerbose(String message, Object... args) {
-
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args));
-    String fullTestName = getTestObject().getFullyQualifiedTestName();
+    String fullTestName = this.getTestObject().getFullyQualifiedTestName();
 
     Thread thread = Thread.currentThread();
     for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
       String trim = stackTraceElement.toString().trim();
       if (!trim.startsWith(fullTestName)) {
-        messages.append(stackTraceElement.toString());
+        messages.append(stackTraceElement);
       }
     }
     getLogger().logMessage(MessageType.VERBOSE, messages.toString());
@@ -106,8 +103,7 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
 
   private void loggingStartup(WebDriver webDriver) {
     try {
-      WebDriver driver = ((EventFiringWebDriver) webDriver).getWrappedDriver();
-
+      WebDriver driver = ((WrapsDriver) webDriver).getWrappedDriver();
       String browserType = ((RemoteWebDriver) driver).getCapabilities().toString();
 
       if (SeleniumConfig.getBrowserName().equalsIgnoreCase("Remote")) {
@@ -115,11 +111,9 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
       } else {
         getLogger().logMessage(MessageType.INFORMATION, StringProcessor.safeFormatter("Local driver: " + browserType));
       }
-
     } catch (Exception e) {
       getLogger().logMessage(MessageType.ERROR,
           StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
-      System.out.println(StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
     }
   }
 }
