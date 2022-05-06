@@ -1,129 +1,160 @@
-<!--
-  ~ Copyright 2020 (C) Magenic, All rights Reserved
-  -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.magenic.jmaqs</groupId>
-    <artifactId>jmaqs-framework</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
-    <name>JMAQS Framework</name>
-    <description>A collection of testing libraries and conveince classes to accelerate startup
+    <groupId>com.cognizantsoftvision.maqs</groupId>
+    <artifactId>maqs-java</artifactId>
+    <version>${revision}</version>
+    <name>MAQS Framework</name>
+    <description>A collection of testing libraries and convenience classes to accelerate startup
         automation efforts
     </description>
     <packaging>pom</packaging>
-    <url>https://github.com/Magenic/JMAQS</url>
+    <url>https://github.com/CognizantOpenSource/maqs-java</url>
     <inceptionYear>2017</inceptionYear>
     <organization>
-        <name>Magenic Technologies</name>
-        <url>https://www.magenic.com</url>
+        <name>Cognizant Softvision</name>
+        <url>https://www.cognizantsoftvision.com/</url>
     </organization>
-
     <developers>
         <developer>
-            <organization>Magenic Technologies</organization>
-            <organizationUrl>https://www.magenic.com</organizationUrl>
+            <organization>Cognizant Softvision</organization>
+            <organizationUrl>https://www.cognizantsoftvision.com/</organizationUrl>
         </developer>
     </developers>
-
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/Magenic/JMAQS/issues</url>
+        <url>https://github.com/CognizantOpenSource/maqs-java/issues</url>
     </issueManagement>
     <ciManagement>
-        <system>Azure Pipelines</system>
-        <url>https://dev.azure.com/magenicOpen/JMAQS/_build</url>
+        <system>GitHub Actions</system>
+        <url>https://github.com/CognizantOpenSource/maqs-java/actions</url>
     </ciManagement>
     <licenses>
         <license>
             <name>MIT</name>
-            <url>https://github.com/Magenic/JMAQS/blob/master/LICENSE</url>
+            <url>https://github.com/CognizantOpenSource/maqs-java/blob/main/LICENSE</url>
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git://github.com/Magenic/JMAQS.git</connection>
-        <developerConnection>scm:git:git@github.com:Magenic/JMAQS.git</developerConnection>
-        <url>https://github.com/Magenic/JMAQS</url>
+        <connection>scm:git:git://github.com/CognizantOpenSource/maqs-java.git</connection>
+        <developerConnection>scm:git:git@github.com:CognizantOpenSource/maqs-java.git</developerConnection>
+        <url>https://github.com/CognizantOpenSource/maqs-java</url>
         <tag>HEAD</tag>
     </scm>
 
-
     <modules>
-        <module>jmaqs-utilities</module>
-        <module>jmaqs-base</module>
-        <module>jmaqs-selenium</module>
-        <module>jmaqs-webservices-jdk8</module>
-        <module>jmaqs-appium</module>
-        <module>jmaqs-database</module>
+        <module>maqs-utilities</module>
+        <module>maqs-base</module>
+        <module>maqs-selenium</module>
+        <module>maqs-appium</module>
+        <module>maqs-webservices</module>
+        <module>maqs-database</module>
+        <module>maqs-cucumber</module>
+        <module>maqs-accessibility</module>
+        <module>maqs-playwright</module>
     </modules>
-
-    <distributionManagement>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <profiles>
         <profile>
-            <id>WIP</id>
+            <id>deploy</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>jmaqs-webservices-jdk11</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>jacoco</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>deploy</name>
+                </property>
             </activation>
             <properties>
-                <sonar.coverage.jacoco.xmlReportPaths>./target/site/jacoco-aggregate/jacoco.xml
-                </sonar.coverage.jacoco.xmlReportPaths>
+                <maven.test.skip>true</maven.test.skip>
             </properties>
-            <modules>
-                <module>jmaqs-jacoco-reporting</module>
-            </modules>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>${jacoco.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>prepare-agent</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>3.0.0-M2</version>
+                        <configuration>
+                            <deployAtEnd>true</deployAtEnd>
+                            <uniqueVersion>true</uniqueVersion>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
         <profile>
-            <id>release-sign-artifacts</id>
+            <id>github</id>
             <activation>
                 <property>
-                    <name>performRelease</name>
-                    <value>true</value>
+                    <name>deploy</name>
+                    <value>github</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
+                </repository>
+                <snapshotRepository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
+                    <uniqueVersion>true</uniqueVersion>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>ossrh</id>
+            <activation>
+                <property>
+                    <name>deploy</name>
+                    <value>ossrh</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <uniqueVersion>true</uniqueVersion>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>release-github</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                    <value>github</value>
+                </property>
+            </activation>
+        </profile>
+        <profile>
+            <id>release-ossrh</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                    <value>ossrh</value>
                 </property>
             </activation>
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -143,29 +174,182 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>sonar</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+                <sonar.organization>cognizantopensource</sonar.organization>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>3.9.1.2184</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jacoco</id>
+            <activation>
+                <property>
+                    <name>testing</name>
+                </property>
+            </activation>
+            <modules>
+                <module>maqs-jacoco-reporting</module>
+            </modules>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${jacoco.version}</version>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>coverage-report</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>testing</id>
+            <activation>
+                <property>
+                    <name>testing</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${surefire.plugin.version}</version>
+                        <configuration>
+                            <parallel>methods</parallel>
+                            <threadCount>5</threadCount>
+                            <argLine>${argLine}</argLine>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.maven.surefire</groupId>
+                                <artifactId>surefire-testng</artifactId>
+                                <version>${surefire.plugin.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <properties>
+        <revision>3.0.0-SNAPSHOT</revision>
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
-        <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
+        <javadoc.plugin.version>3.3.1</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
-        <surefire.plugin.version>3.0.0-M4</surefire.plugin.version>
-        <mvncheckstyle.plugin.version>3.1.1</mvncheckstyle.plugin.version>
+        <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
+        <mvncheckstyle.plugin.version>3.1.2</mvncheckstyle.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <puppycheckstyle.plugin.version>8.29</puppycheckstyle.plugin.version>
-        <jacoco.version>0.8.5</jacoco.version>
-        <testng.version>7.1.0</testng.version>
-        <selenium.version>3.141.59</selenium.version>
+        <puppycheckstyle.plugin.version>9.2.1</puppycheckstyle.plugin.version>
+        <jacoco.version>0.8.7</jacoco.version>
+        <testng.version>7.3.0</testng.version>
+        <selenium.version>4.1.1</selenium.version>
+        <!-- TODO: delete seleniumAppium.version when appium is updated with appium java client 8.0 -->
+        <seleniumAppium.version>3.141.59</seleniumAppium.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
+        <jdk.version>11</jdk.version>
+        <chromedriver.version>94.0.4606.41</chromedriver.version>
+        <geckodriver.version>0.28.0</geckodriver.version>
+        <edgedriver.version>5.16299</edgedriver.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>5.1.0</version>
+            </dependency>
+            <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.accessibility</groupId>
+                <artifactId>maqs-accessibility</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.appium</groupId>
+                <artifactId>maqs-appium</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.base</groupId>
+                <artifactId>maqs-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.cucumber</groupId>
+                <artifactId>maqs-cucumber</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.database</groupId>
+                <artifactId>maqs-database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.selenium</groupId>
+                <artifactId>maqs-selenium</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
+                <artifactId>maqs-utilities</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.webservices</groupId>
+                <artifactId>maqs-webservices</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cognizantsoftvision.maqs.playwright</groupId>
+                <artifactId>maqs-playwright</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-api</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-remote-driver</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${selenium.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -173,50 +357,39 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
+                <!--<plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin.version}</version>
-                </plugin>
+                </plugin>-->
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
-                <extensions>true</extensions>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.2.7</version>
                 <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <localCheckout>true</localCheckout>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <pushChanges>false</pushChanges>
-                    <mavenExecutorId>forked-path</mavenExecutorId>
-                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.11.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-api</artifactId>
-                        <version>1.11.2</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -224,8 +397,8 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showDeprecation>false</showDeprecation>
-                    <source>8</source>
-                    <target>8</target>
+                    <!--<multiReleaseOutput>true</multiReleaseOutput>-->
+                    <release>${jdk.version}</release>
                     <workingDirectory>target/</workingDirectory>
                 </configuration>
             </plugin>
@@ -241,7 +414,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <source>8</source>
+                            <source>${jdk.version}</source>
                             <doclint>none</doclint>
                             <additionalparam>-Xdoclint:none</additionalparam>
                             <workingDirectory>target/</workingDirectory>
@@ -260,26 +433,36 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                        <configuration>
-
-                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.plugin.version}</version>
+                <version>3.0.0-M5</version>
                 <configuration>
                     <parallel>methods</parallel>
-                    <threadCount>6</threadCount>
-                    <argLine>${argLine}</argLine>
+                    <threadCount>5</threadCount>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven-deploy-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-testng</artifactId>
+                        <version>3.0.0-M5</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -289,7 +472,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.29</version>
+                        <version>${puppycheckstyle.plugin.version}</version>
                     </dependency>
                 </dependencies>
                 <executions>

@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: JMAQS
+    Checkstyle-Configuration: MAQS
     Description: none
 -->
 <module name="Checker">
@@ -118,7 +118,7 @@
       <property name="caseIndent" value="2"/>
     </module>
     <module name="AbbreviationAsWordInName">
-      <property name="allowedAbbreviationLength" value="3"/>
+      <property name="allowedAbbreviationLength" value="5"/>
       <property name="ignoreFinal" value="false"/>
     </module>
     <module name="OverloadMethodsDeclarationOrder"/>
@@ -156,9 +156,11 @@
     </module>
     <module name="JavadocMethod">
       <property name="allowedAnnotations" value="Override, Test"/>
-      <property name="scope" value="public"/>
       <property name="allowMissingParamTags" value="true"/>
       <property name="allowMissingReturnTag" value="true"/>
+    </module>
+    <module name="JavadocStyle">
+      <property name="scope" value="public"/>
     </module>
     <module name="MethodName">
       <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9_]*$"/>
@@ -187,6 +189,6 @@
     <property name="eachLine" value="true"/>
   </module>
   <module name="Header">
-    <property name="header" value="/*\n * Copyright 2020 (C) Magenic, All rights Reserved\n */\n"/>
+    <property name="header" value="/*\n * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved\n */\n"/>
   </module>
 </module>

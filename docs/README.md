@@ -2,6 +2,8 @@
 
 ### Version - Select the Version of MAQS
 
-* [JMAQS 1](JMAQS_1/Introduction.md)
+* [MAQS 1](MAQS_1/Introduction.md)
+* [MAQS 2](MAQS_1/Introduction.md)
+* [MAQS 3](MAQS_3/Introduction.md)
 
-![MAQS](resources/maqsfull.jpg)
+![MAQS](resources/maqsfull.png)
