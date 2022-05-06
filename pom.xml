@@ -259,21 +259,27 @@
 
     <properties>
         <revision>3.0.0-SNAPSHOT</revision>
+        <jdk.version>11</jdk.version>
+
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+        <puppycheckstyle.plugin.version>9.2.1</puppycheckstyle.plugin.version>
+        <checkstyle.version>8.29</checkstyle.version>
+
         <javadoc.plugin.version>3.3.1</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
         <mvncheckstyle.plugin.version>3.1.2</mvncheckstyle.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <puppycheckstyle.plugin.version>9.2.1</puppycheckstyle.plugin.version>
+
         <jacoco.version>0.8.7</jacoco.version>
         <testng.version>7.3.0</testng.version>
+
+        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+
         <selenium.version>4.1.1</selenium.version>
         <!-- TODO: delete seleniumAppium.version when appium is updated with appium java client 8.0 -->
         <seleniumAppium.version>3.141.59</seleniumAppium.version>
-        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
-        <checkstyle.version>8.29</checkstyle.version>
-        <jdk.version>11</jdk.version>
+
         <chromedriver.version>94.0.4606.41</chromedriver.version>
         <geckodriver.version>0.28.0</geckodriver.version>
         <edgedriver.version>5.16299</edgedriver.version>

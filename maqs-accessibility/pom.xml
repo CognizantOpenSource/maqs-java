@@ -11,8 +11,9 @@
 
     <groupId>com.cognizantsoftvision.maqs.accessibility</groupId>
     <artifactId>maqs-accessibility</artifactId>
-    <version>${revision}</version>
     <name>MAQS Accessibility Testing Module</name>
+    <version>${revision}</version>
+
     <packaging>jar</packaging>
 
     <properties>
