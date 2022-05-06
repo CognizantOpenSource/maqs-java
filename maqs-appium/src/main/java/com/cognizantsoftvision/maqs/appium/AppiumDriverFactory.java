@@ -24,7 +24,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
- * The type Appium driver factory.
+ * The Appium Driver Factory class.
  */
 public class AppiumDriverFactory {
 

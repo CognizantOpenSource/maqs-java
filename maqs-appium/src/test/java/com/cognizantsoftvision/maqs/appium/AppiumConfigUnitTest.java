@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 /**
- * The type Appium config unit test.
+ * The Appium Config unit test class.
  */
 public class AppiumConfigUnitTest {
 

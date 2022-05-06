@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.appium.constants;
 
 /**
- * The enum Platform type.
+ * The Platform Type enum class.
  */
 public enum PlatformType {
 

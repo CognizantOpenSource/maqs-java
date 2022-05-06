@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;
 
 /**
- * Class AppiumTestObject.
+ * The Appium Test Object class.
  */
 public class AppiumTestObject extends BaseTestObject implements IAppiumTestObject {
 

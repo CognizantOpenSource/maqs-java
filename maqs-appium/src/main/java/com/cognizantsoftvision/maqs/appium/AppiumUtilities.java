@@ -24,7 +24,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 
 /**
- * Appium Utilities class.
+ * The Appium Utilities class.
  */
 public class AppiumUtilities {
 

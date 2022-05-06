@@ -12,7 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Appium test object test.
+ * The Appium Test Object unit test class.
  */
 public class AppiumTestObjectUnitTest extends BaseGenericTest {
 

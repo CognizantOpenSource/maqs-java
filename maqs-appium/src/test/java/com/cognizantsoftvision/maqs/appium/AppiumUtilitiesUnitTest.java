@@ -22,7 +22,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
- * Appium Utilities Unit Test class.
+ * The Appium Utilities unit test class.
  */
 @Ignore
 public class AppiumUtilitiesUnitTest extends BaseGenericTest {

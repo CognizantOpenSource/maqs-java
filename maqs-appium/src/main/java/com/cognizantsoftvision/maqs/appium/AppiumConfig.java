@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class AppiumConfig.
+ * The Appium Config class.
  */
 public class AppiumConfig {
 

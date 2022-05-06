@@ -12,9 +12,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Mobile driver manager unit test.
+ * The Mobile Driver Manager unit test class.
  */
 public class MobileDriverManagerUnitTest extends BaseGenericTest {
+
   /**
    * Test get mobile driver.
    */

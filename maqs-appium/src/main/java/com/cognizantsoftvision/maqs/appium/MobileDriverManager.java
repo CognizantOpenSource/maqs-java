@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;
 
 /**
- * Mobile Driver Manager Class.
+ * The Mobile Driver Manager class.
  */
 public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>> {
   /**

@@ -23,7 +23,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
- * The type Appium driver factory test.
+ * The Appium Driver Factory unit test class.
  */
 public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
 
