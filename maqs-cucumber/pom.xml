@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.cognizantsoftvision.maqs</groupId>
+        <artifactId>maqs-java</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <groupId>com.cognizantsoftvision.maqs.cucumber</groupId>
+    <artifactId>maqs-cucumber</artifactId>
+    <version>${revision}</version>
+    <name>MAQS Cucumber Module</name>
+
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <commonsio.version>2.6</commonsio.version>
+		<cucumber.version>7.2.1</cucumber.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.cognizantsoftvision.maqs.selenium</groupId>
+            <artifactId>maqs-selenium</artifactId>
+        </dependency>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-gherkin</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+    </dependencies>
+</project>
