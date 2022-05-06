@@ -7,6 +7,8 @@ package com.cognizantsoftvision.maqs.base;
 import static java.lang.System.out;
 
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
+import com.cognizantsoftvision.maqs.base.interfaces.TestResult;
+import com.cognizantsoftvision.maqs.base.watcher.JunitTestWatcher;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
@@ -356,7 +358,7 @@ public abstract class BaseTest {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
 
-    try (BaseTestObject baseTestObject = this.getTestObject()) {
+    try (BaseTestObject baseTestObject = (BaseTestObject) this.getTestObject()) {
       // Release logged messages
       this.loggedExceptions.remove(fullyQualifiedTestName);
 

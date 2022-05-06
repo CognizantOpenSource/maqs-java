@@ -15,6 +15,10 @@
     <version>${revision}</version>
     <packaging>jar</packaging>
 
+    <properties>
+        <junit.version>5.8.1</junit.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
@@ -23,6 +27,16 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
         </dependency>
     </dependencies>
 </project>
