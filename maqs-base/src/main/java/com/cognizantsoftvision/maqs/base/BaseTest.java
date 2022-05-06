@@ -6,14 +6,17 @@ package com.cognizantsoftvision.maqs.base;
 
 import static java.lang.System.out;
 
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
+import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -58,7 +61,7 @@ public abstract class BaseTest {
   /**
    * The Performance Timer Collection.
    */
-  private PerfTimerCollection perfTimerCollection;
+  private IPerfTimerCollection perfTimerCollection;
 
   /**
    * The TestNG Test Context.
@@ -73,7 +76,7 @@ public abstract class BaseTest {
   /**
    * Initializes a new instance of the BaseTest class.
    */
-  public BaseTest() {
+  protected BaseTest() {
     this.loggedExceptions = new ConcurrentHashMap<>();
     this.baseTestObjects = new ConcurrentManagerHashMap();
   }
@@ -83,7 +86,7 @@ public abstract class BaseTest {
    *
    * @return Performance Timer Collection
    */
-  public PerfTimerCollection getPerfTimerCollection() {
+  public IPerfTimerCollection getPerfTimerCollection() {
     return this.perfTimerCollection;
   }
 
@@ -101,7 +104,7 @@ public abstract class BaseTest {
    *
    * @return Logger object
    */
-  public Logger getLogger() {
+  public ILogger getLogger() {
     return this.getTestObject().getLogger();
   }
 
@@ -110,7 +113,7 @@ public abstract class BaseTest {
    *
    * @param log The Logger object
    */
-  public void setLogger(Logger log) {
+  public void setLogger(ILogger log) {
     this.getTestObject().setLogger(log);
   }
 
@@ -161,7 +164,7 @@ public abstract class BaseTest {
    *
    * @return The Driver Store
    */
-  public ManagerDictionary getManagerStore() {
+  public ManagerStore getManagerStore() {
     return this.getTestObject().getManagerStore();
   }
 
@@ -188,7 +191,7 @@ public abstract class BaseTest {
    *
    * @return The BaseTestObject
    */
-  public BaseTestObject getTestObject() {
+  public ITestObject getTestObject() {
     if (!this.baseTestObjects.containsKey(this.fullyQualifiedTestClassName.get())) {
       this.createNewTestObject();
     }
@@ -275,12 +278,15 @@ public abstract class BaseTest {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
 
-    try (BaseTestObject baseTestObject = this.getTestObject()) {
+    try {
+      ITestObject baseTestObject = this.getTestObject();
       // Release logged messages
       this.loggedExceptions.remove(fullyQualifiedTestName);
 
       // Release the Base Test Object
       this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
+    } catch (Exception e) {
+      throw new MAQSRuntimeException("there was an issue cleaning up", e);
     }
 
     // Create console logger to log subsequent messages
@@ -300,7 +306,7 @@ public abstract class BaseTest {
   }
 
   /**
-   * Steps to do before logging teardown results.
+   * Steps to take before logging teardown results.
    *
    * @param resultType The test result
    */
@@ -345,8 +351,6 @@ public abstract class BaseTest {
         return TestResultType.OTHER;
     }
   }
-
-  /* */
 
   /**
    * Get the test result type as text.
@@ -409,12 +413,13 @@ public abstract class BaseTest {
    */
   protected void logVerbose(String message, Object... args) {
     StringBuilder messages = new StringBuilder();
-    messages.append(StringProcessor.safeFormatter(message, args) + System.lineSeparator());
+    messages.append(StringProcessor.safeFormatter(message, args)).append(System.lineSeparator());
 
     for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-      // If the stack trace element is from the com.magenic package (excluding this method) append the stack trace line 
-      if (element.toString().startsWith("com.magenic") && !element.toString().contains("BaseTest.logVerbose")) {
-        messages.append(element.toString() + System.lineSeparator());
+      // If the stack trace element is from this package (excluding this method) append the stack trace line
+      if (element.toString().startsWith("com.cognizantsoftvision")
+          && !element.toString().contains("BaseTest.logVerbose")) {
+        messages.append(element).append(System.lineSeparator());
       }
     }
 

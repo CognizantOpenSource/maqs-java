@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.database;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.database.constants.DataProviderType;
 import com.cognizantsoftvision.maqs.database.providers.IDataSourceProvider;
 import com.cognizantsoftvision.maqs.database.providers.SQLProvider;
@@ -15,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * The type Database config unit test.
  */
-public class DatabaseConfigUnitTest extends BaseGenericTest {
+public class DatabaseConfigUnitTest extends BaseDatabaseTest {
 
   /**
    * Test get connection string.

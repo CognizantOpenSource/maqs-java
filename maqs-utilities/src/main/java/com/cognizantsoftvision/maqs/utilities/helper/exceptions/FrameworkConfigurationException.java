@@ -5,7 +5,7 @@
 package com.cognizantsoftvision.maqs.utilities.helper.exceptions;
 
 /**
- * The type Framework configuration exception.
+ * The Framework Configuration Exception class.
  */
 public class FrameworkConfigurationException extends RuntimeException {
 

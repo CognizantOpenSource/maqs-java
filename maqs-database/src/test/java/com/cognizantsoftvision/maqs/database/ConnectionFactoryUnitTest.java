@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.database;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +16,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class ConnectionFactoryUnitTest extends BaseGenericTest {
+public class ConnectionFactoryUnitTest extends BaseDatabaseTest {
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetEntityManagerFactory() {

@@ -5,6 +5,7 @@
 package com.cognizantsoftvision.maqs.utilities.helper.functionalinterfaces;
 
 /**
+ * The Action interface.
  * No param, no output functional interface.
  */
 @FunctionalInterface

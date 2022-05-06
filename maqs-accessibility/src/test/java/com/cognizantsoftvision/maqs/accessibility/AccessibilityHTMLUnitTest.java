@@ -41,14 +41,14 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   private static final File axeResultWithErrorFile = new File("src/test/resources/testFiles/sampleResults.json");
 
   /**
-   * Unit testing site URL - Login page.
-   */
-  private static final String TestSiteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
    * Unit testing site URL - Automation page.
    */
-  private static final String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
+  private static final String testSiteAutomationUrl = SeleniumConfig.getWebSiteBase();
+
+  public void setup(String url) {
+    this.getWebDriver().navigate().to(url);
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
+  }
 
   /**
    * Verify we can create and associate an accessibility HTML report.
@@ -56,7 +56,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityHtmlReport() throws IOException, ParseException {
-    setup(TestSiteUrl);
+    setup(testSiteAutomationUrl);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
         new AxeBuilder().analyze(this.getWebDriver()), false);
 
@@ -72,7 +72,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityMultipleHtmlReports() throws IOException, ParseException {
-    setup(TestSiteUrl);
+    setup(testSiteAutomationUrl);
 
     // Create 3 reports
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
@@ -91,7 +91,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void accessibilityHtmlReportWithError() throws IOException, ParseException {
-    setup(TestSiteUrl);
+    setup(testSiteAutomationUrl);
     String axeResultWithError = FileUtils.readFileToString(axeResultWithErrorFile, StandardCharsets.UTF_8);
     Results results = new ObjectMapper().readValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), results, false);
@@ -107,7 +107,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void accessibilityHtmlReportWithErrorFromLazyElement() throws IOException, ParseException {
-    setup(TestSiteAutomationUrl);
+    setup(testSiteAutomationUrl);
     String axeResultWithError = FileUtils.readFileToString(axeResultWithErrorFile, StandardCharsets.UTF_8);
     Results error = new ObjectMapper().readValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), error,false);
@@ -125,7 +125,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = RuntimeException.class)
   public void accessibilityHtmlReportWithViolation() throws IOException, ParseException {
-    setup(TestSiteUrl);
+    setup(testSiteAutomationUrl);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), true);
     deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
@@ -136,7 +136,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityHtmlReportWithLazyElement() throws IOException, ParseException {
-    setup(TestSiteAutomationUrl);
+    setup(testSiteAutomationUrl);
     LazyWebElement foodTable = new LazyWebElement(this.getTestObject(),
         By.id("FoodTable"), "Food Table");
 
@@ -155,7 +155,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityHtmlReportWithElement() throws IOException, ParseException {
-    setup(TestSiteAutomationUrl);
+    setup(testSiteAutomationUrl);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
         this.getWebDriver().findElement(By.id("FoodTable")), false);
 
@@ -176,7 +176,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     // Make sure we are not using verbose logging
     this.getLogger().setLoggingLevel(MessageType.INFORMATION);
 
-    setup(TestSiteAutomationUrl);
+    setup(testSiteAutomationUrl);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
 
     // The script executed message should be suppressed when we run the accessibility check
@@ -194,7 +194,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityHtmlReportViolationsOnly() throws IOException, ParseException {
-    setup(TestSiteUrl);
+    setup(testSiteAutomationUrl);
 
     // Make sure we are not using verbose logging
     this.getLogger().setLoggingLevel(MessageType.INFORMATION);
@@ -217,7 +217,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityHtmlViolationsReportWithElement() throws IOException, ParseException {
-    setup(TestSiteAutomationUrl);
+    setup(testSiteAutomationUrl);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
         this.getWebDriver().findElement(By.id("FoodTable")),
         false, EnumSet.of(ResultType.Violations));
@@ -226,11 +226,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertFalse(filePath.isEmpty(), "Accessibility report is empty");
     deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
-  }
-
-  public void setup(String url) {
-    this.getWebDriver().navigate().to(url);
-    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
   }
 
   private void deleteFiles(List<String> files) {

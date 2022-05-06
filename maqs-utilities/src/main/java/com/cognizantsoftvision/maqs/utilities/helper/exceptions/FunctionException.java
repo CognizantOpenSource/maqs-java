@@ -5,7 +5,8 @@
 package com.cognizantsoftvision.maqs.utilities.helper.exceptions;
 
 /**
- * Custom FunctionException, as you can't throw a generic exception.
+ * The Custom Function Exception class.
+ * UThe built-in one does not allow for throwing a generic exception.
  */
 public class FunctionException extends RuntimeException {
   private static final long serialVersionUID = 1;

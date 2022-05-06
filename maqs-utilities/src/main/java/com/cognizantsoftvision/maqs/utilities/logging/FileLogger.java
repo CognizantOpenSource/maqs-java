@@ -14,10 +14,11 @@ import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 /**
- * Helper class for adding logs to a plain text file. Allows configurable file
- * path.
+ * The File Logger class.
+ * Helper class for adding logs to a plain text file.
+ * Allows configurable file path.
  */
-public class FileLogger extends Logger {
+public class FileLogger extends Logger implements IFileLogger {
 
   /**
    * Default extension type.
@@ -27,17 +28,17 @@ public class FileLogger extends Logger {
   /**
    * The default log file save location.
    */
-  private static final String DEFAULTLOGFOLDER = System.getProperty("java.io.tmpdir");
+  private static final String DEFAULT_LOG_FOLDER = System.getProperty("java.io.tmpdir");
 
   /**
    * Initializes a new instance of the FileLogger class.
    */
-  private static final String DEFAULTLOGNAME = "FileLog.txt";
+  private static final String DEFAULT_LOG_NAME = "FileLog.txt";
 
   /**
    * Creates a private string for the name of the file.
    */
-  private String fileName;
+  private final String fileName;
 
   /**
    * Create a private string for the path of the file.
@@ -47,18 +48,18 @@ public class FileLogger extends Logger {
   /**
    * Creates a private Message Type.
    */
-  private MessageType messageType;
+  private final MessageType messageType;
 
   /**
    * Creates a private string for the directory of the folder.
    */
-  private String directory;
+  private final String directory;
 
   /**
    * Initializes a new instance of the FileLogger class.
    */
   public FileLogger() {
-    this(false, "", DEFAULTLOGNAME, MessageType.INFORMATION);
+    this(false, "", DEFAULT_LOG_NAME, MessageType.INFORMATION);
   }
 
   /**
@@ -67,7 +68,7 @@ public class FileLogger extends Logger {
    * @param append Append document if true
    */
   public FileLogger(boolean append) {
-    this(append, "", DEFAULTLOGNAME, MessageType.INFORMATION);
+    this(append, "", DEFAULT_LOG_NAME, MessageType.INFORMATION);
   }
 
   /**
@@ -76,7 +77,7 @@ public class FileLogger extends Logger {
    * @param name File name
    */
   public FileLogger(String name) {
-    this(false, DEFAULTLOGFOLDER, name, MessageType.INFORMATION);
+    this(false, DEFAULT_LOG_FOLDER, name, MessageType.INFORMATION);
   }
 
   /**
@@ -85,7 +86,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(MessageType messageLevel) {
-    this(false, DEFAULTLOGFOLDER, DEFAULTLOGNAME, messageLevel);
+    this(false, DEFAULT_LOG_FOLDER, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -95,7 +96,7 @@ public class FileLogger extends Logger {
    * @param name   File name
    */
   public FileLogger(boolean append, String name) {
-    this(append, DEFAULTLOGFOLDER, name, MessageType.INFORMATION);
+    this(append, DEFAULT_LOG_FOLDER, name, MessageType.INFORMATION);
   }
 
   /**
@@ -105,7 +106,7 @@ public class FileLogger extends Logger {
    * @param append    Append document if true
    */
   public FileLogger(String logFolder, boolean append) {
-    this(append, logFolder, DEFAULTLOGNAME, MessageType.INFORMATION);
+    this(append, logFolder, DEFAULT_LOG_NAME, MessageType.INFORMATION);
   }
 
   /**
@@ -125,7 +126,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(String logFolder, MessageType messageLevel) {
-    this(false, logFolder, DEFAULTLOGNAME, messageLevel);
+    this(false, logFolder, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -135,7 +136,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(boolean append, MessageType messageLevel) {
-    this(append, DEFAULTLOGFOLDER, DEFAULTLOGNAME, messageLevel);
+    this(append, DEFAULT_LOG_FOLDER, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -145,7 +146,7 @@ public class FileLogger extends Logger {
    * @param name         File Name
    */
   public FileLogger(MessageType messageLevel, String name) {
-    this(false, DEFAULTLOGFOLDER, name, messageLevel);
+    this(false, DEFAULT_LOG_FOLDER, name, messageLevel);
   }
 
   /**
@@ -167,7 +168,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(boolean append, String logFolder, MessageType messageLevel) {
-    this(append, logFolder, DEFAULTLOGNAME, messageLevel);
+    this(append, logFolder, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -178,7 +179,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(String name, boolean append, MessageType messageLevel) {
-    this(append, DEFAULTLOGFOLDER, name, messageLevel);
+    this(append, DEFAULT_LOG_FOLDER, name, messageLevel);
   }
 
   /**
@@ -206,7 +207,7 @@ public class FileLogger extends Logger {
     super(messageLevel);
 
     if (logFolder == null || logFolder.isEmpty()) {
-      this.directory = DEFAULTLOGFOLDER;
+      this.directory = DEFAULT_LOG_FOLDER;
     } else {
       this.directory = logFolder;
     }
@@ -241,80 +242,67 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Gets the FilePath value.
-   *
-   * @return returns the file path
+   * {@inheritDoc}
    */
+  @Override
   public String getFilePath() {
     return this.filePath;
   }
 
   /**
-   * Gets the Message Type value.
-   *
-   * @return The Message Type.
+   * {@inheritDoc}
    */
+  @Override
   public MessageType getMessageType() {
     return this.messageType;
   }
 
   /**
-   * Gets the Directory Path.
-   *
-   * @return Returns the Directory
+   * {@inheritDoc}
    */
+  @Override
   public String getDirectory() {
     return this.directory;
   }
 
   /**
-   * Sets the FilePath value.
-   *
-   * @param path sets the file path
+   * {@inheritDoc}
    */
+  @Override
   public void setFilePath(String path) {
     this.filePath = path;
   }
 
   /**
-   * Gets the File Name value.
-   *
-   * @return Returns the File Name.
+   * {@inheritDoc}
    */
+  @Override
   public String getFileName() {
     return this.fileName;
   }
 
   /**
-   * Gets the file extension.
-   *
-   * @return File Extension
+   * {@inheritDoc}
    */
   protected String getExtension() {
     return TXT;
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(java.lang.String,
-   * java.lang.Object[])
+  /**
+   * {@inheritDoc}
    */
   @Override
   public void logMessage(String message, Object... args) {
     this.logMessage(MessageType.INFORMATION, message, args);
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(com.magenic.jmaqs.
-   * utilities. Logging.MessageType, java.lang.String, java.lang.Object[])
+  /**
+   * {@inheritDoc}
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
-    // If the message level is greater that the current log level then do not log
-    // it.
+    // If the message level is greater than the
+    // current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
       try (FileWriter fw = new FileWriter(this.filePath, true);
           BufferedWriter bw = new BufferedWriter(fw);
@@ -337,7 +325,7 @@ public class FileLogger extends Logger {
   /**
    * Take a name sting and make it a valid file name.
    *
-   * @param name The string to cleanup
+   * @param name The string to clean up
    * @return returns the string of a valid filename
    */
   private static String makeValidFileName(String name) {
@@ -348,7 +336,7 @@ public class FileLogger extends Logger {
     // Replace invalid characters
     String replacedName = name;
     try {
-      replacedName = name.replaceAll("[^a-zA-Z0-9\\._\\- ]+", "~");
+      replacedName = name.replaceAll("[^a-zA-Z0-9._\\- ]+", "~");
     } catch (NullPointerException e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR,

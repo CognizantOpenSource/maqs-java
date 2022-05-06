@@ -4,14 +4,13 @@
 
 package com.cognizantsoftvision.maqs.database;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.database.entities.StatesEntity;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DatabaseDriverUnitTest extends BaseGenericTest {
+public class DatabaseDriverUnitTest extends BaseDatabaseTest {
 
   /**
    * Field INFORMATION_SCHEMAS_QUERY

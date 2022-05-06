@@ -4,12 +4,11 @@
 
 package com.cognizantsoftvision.maqs.database;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DatabaseTestObjectUnitTest extends BaseGenericTest {
+public class DatabaseTestObjectUnitTest extends BaseDatabaseTest {
 
   @Test(groups = TestCategories.DATABASE)
   public void testDatabaseTestObject() {

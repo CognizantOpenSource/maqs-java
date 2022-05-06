@@ -16,11 +16,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commonsio.version>2.6</commonsio.version>
-        <selenium.version>3.141.59</selenium.version>
-		<cucumber.version>6.9.1</cucumber.version>
+		<cucumber.version>7.2.1</cucumber.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.cognizantsoftvision.maqs.selenium</groupId>
+            <artifactId>maqs-selenium</artifactId>
+        </dependency>
         <dependency>
             <scope>compile</scope>
             <groupId>io.cucumber</groupId>
@@ -40,55 +43,16 @@
             <version>${cucumber.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.cognizantsoftvision.maqs.base</groupId>
-            <artifactId>maqs-base</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cognizantsoftvision.maqs.selenium</groupId>
-            <artifactId>maqs-selenium</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
-            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-remote-driver</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-firefox-driver</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-ie-driver</artifactId>
-            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
-            <artifactId>maqs-utilities</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-edge-driver</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-safari-driver</artifactId>
-            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -96,5 +60,4 @@
             <version>${selenium.version}</version>
         </dependency>
     </dependencies>
-
 </project>

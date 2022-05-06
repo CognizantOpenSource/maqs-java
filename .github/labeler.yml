@@ -14,10 +14,8 @@ selenium:
   - maqs-selenium/**/*
 
 webservices:
-  - maqs-webservices-jdk8/*
-  - maqs-webservices-jdk8/**/*
-  - maqs-webservices-jdk11/*
-  - maqs-webservices-jdk11/**/*
+  - maqs-webservices/*
+  - maqs-webservices/**/*
 
 utilities:
   - maqs-utilities/*
@@ -31,11 +29,11 @@ devops:
   - .dependabot/*
   - .github/*
   - .github/**/*
+ 
+accessibility:
+  - maqs-accessibility/*
+  - maqs-accessibility/**/*
 
-JDK11:
-  - maqs-webservices-jdk11/*
-  - maqs-webservices-jdk11/**/*
-
-JDK8:
-  - maqs-webservices-jdk8/*
-  - maqs-webservices-jdk8/**/*
+playwright:
+  - maqs-playwright/*
+  - maqs-playwright/**/*
