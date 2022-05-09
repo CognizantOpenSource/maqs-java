@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Base appium test test.
+ * The Base Appium Test unit test class.
  */
 public class BaseAppiumTestUnitTest extends BaseAppiumTest {
 

@@ -19,21 +19,21 @@ public interface IAppiumTestObject extends ITestObject {
    *
    * @return the appium driver
    */
-  AppiumDriver<WebElement> getAppiumDriver();
+  AppiumDriver getAppiumDriver();
 
   /**
    * Sets appium driver.
    *
    * @param appiumDriver the appium driver
    */
-  void setAppiumDriver(AppiumDriver<WebElement> appiumDriver);
+  void setAppiumDriver(AppiumDriver appiumDriver);
 
   /**
    * Sets appium driver.
    *
    * @param appiumDriverSupplier the appium driver supplier
    */
-  void setAppiumDriver(Supplier<AppiumDriver<WebElement>> appiumDriverSupplier);
+  void setAppiumDriver(Supplier<AppiumDriver> appiumDriverSupplier);
 
   /**
    * Gets appium manager.

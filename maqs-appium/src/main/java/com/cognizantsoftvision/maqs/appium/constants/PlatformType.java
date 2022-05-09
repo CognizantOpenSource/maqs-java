@@ -22,5 +22,4 @@ public enum PlatformType {
    * Windows application.
    */
   WINDOWS
-
 }

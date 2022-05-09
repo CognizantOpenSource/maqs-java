@@ -9,7 +9,6 @@ import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
 
 /**
@@ -29,7 +28,7 @@ public class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
    *
    * @return the appium driver
    */
-  public AppiumDriver<WebElement> getAppiumDriver() {
+  public AppiumDriver getAppiumDriver() {
     return this.getTestObject().getAppiumDriver();
   }
 
@@ -38,7 +37,7 @@ public class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
    *
    * @param mobileDriver the mobile driver
    */
-  public void setAppiumDriver(AppiumDriver<WebElement> mobileDriver) {
+  public void setAppiumDriver(AppiumDriver mobileDriver) {
     this.getTestObject().setAppiumDriver(mobileDriver);
   }
 
@@ -47,7 +46,7 @@ public class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
    *
    * @return the mobile driver
    */
-  protected AppiumDriver<WebElement> getMobileDriver() {
+  protected AppiumDriver getMobileDriver() {
     return AppiumDriverFactory.getDefaultMobileDriver();
   }
 

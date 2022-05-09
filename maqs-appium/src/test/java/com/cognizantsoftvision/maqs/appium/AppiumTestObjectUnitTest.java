@@ -7,7 +7,6 @@ package com.cognizantsoftvision.maqs.appium;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,7 +20,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
      */
     @Test(groups = TestCategories.APPIUM)
     public void testAppiumTestObjectCreationWithDriver() {
-        AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+        AppiumDriver defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
         AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),
                 this.getFullyQualifiedTestClassName());
         Assert.assertNotNull(appiumTestObject, "Checking that appium test object via driver is not null");
@@ -42,10 +41,10 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
      */
     @Test(groups = TestCategories.APPIUM)
     public void testGetAppiumDriver() {
-        AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+        AppiumDriver defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
         try (AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),
                 this.getFullyQualifiedTestClassName())) {
-            AppiumDriver<WebElement> appiumDriver = appiumTestObject.getAppiumDriver();
+            AppiumDriver appiumDriver = appiumTestObject.getAppiumDriver();
             Assert.assertNotNull(appiumDriver, "Checking that appium driver can be retrieved from test object");
         }
     }
@@ -55,7 +54,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
      */
     @Test(groups = TestCategories.APPIUM)
     public void testGetAppiumManager() {
-        AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+        AppiumDriver defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
 
         try (AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),
                 this.getFullyQualifiedTestClassName())) {
@@ -69,7 +68,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
      */
     @Test(groups = TestCategories.APPIUM)
     public void testSetAppiumDriverWithDriver() {
-        AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+        AppiumDriver defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
         try (AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),
                 this.getFullyQualifiedTestClassName())) {
             int hashCode = appiumTestObject.getAppiumDriver().hashCode();
@@ -83,11 +82,11 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
     }
 
     /**
-     * Test test set appium driver.
+     * Test setting the appium driver.
      */
     @Test(groups = TestCategories.APPIUM)
     public void testSetAppiumDriverWithSupplier() {
-        AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+        AppiumDriver defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
         try (AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),
                 this.getFullyQualifiedTestClassName())) {
             int hashCode = appiumTestObject.getAppiumDriver().hashCode();

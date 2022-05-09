@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -49,7 +48,7 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.APPIUM)
   public void testGetDefaultMobileDriver() {
-    AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
+    AppiumDriver defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     Assert.assertNotNull(defaultMobileDriver, "Checking if default driver is null");
   }
 
@@ -58,7 +57,7 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.APPIUM)
   public void testTestGetDefaultMobileDriverAndroid() {
-    AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver(PlatformType.ANDROID);
+    AppiumDriver defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver(PlatformType.ANDROID);
     Assert.assertNotNull(defaultMobileDriver, "Checking if default driver is null");
   }
 
@@ -106,7 +105,7 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "6.0");
     capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android GoogleAPI Emulator");
     capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
-    AppiumDriver<WebElement> androidDriver = AppiumDriverFactory.getAndroidDriver(AppiumConfig.getMobileHubUrl(),
+    AppiumDriver androidDriver = AppiumDriverFactory.getAndroidDriver(AppiumConfig.getMobileHubUrl(),
         capabilities, AppiumConfig.getMobileTimeout());
     Assert.assertNotNull(androidDriver, "Checking if android driver is null");
   }
@@ -122,7 +121,7 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.2");
     capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone X Simulator");
     capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
-    AppiumDriver<WebElement> iosDriver = AppiumDriverFactory.getIosDriver(AppiumConfig.getMobileHubUrl(), capabilities,
+    AppiumDriver iosDriver = AppiumDriverFactory.getIosDriver(AppiumConfig.getMobileHubUrl(), capabilities,
         AppiumConfig.getMobileTimeout());
     Assert.assertNotNull(iosDriver, "Checking if ios driver is null");
   }
@@ -136,7 +135,8 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
     DesiredCapabilities appCapabilities = new DesiredCapabilities();
     appCapabilities.setCapability("app", "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
     appCapabilities.setCapability(MobileCapabilityType.UDID, "0C0E26E7-966B-4C89-A765-32C5C997A456");
-    AppiumDriver<WebElement> windowsDriver = null;
+    AppiumDriver windowsDriver = null;
+
     try {
       windowsDriver = AppiumDriverFactory.getWindowsDriver(new URL("http://127.0.0.1:4723"), appCapabilities,
           AppiumConfig.getMobileTimeout());
@@ -151,18 +151,15 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.APPIUM, expectedExceptions = WebDriverException.class)
   public void testCreateDriverException() {
-    Supplier<AppiumDriver<WebElement>> appiumDriverSupplier = () -> {
+    Supplier<AppiumDriver> appiumDriverSupplier = () -> {
       try {
-        AppiumDriver<WebElement> driver = new AppiumDriver<WebElement>(new URL("http://127.0.0.1:4723"),
+        return new AppiumDriver(new URL("http://127.0.0.1:4723"),
             new DesiredCapabilities());
-        return driver;
       } catch (MalformedURLException e) {
         e.printStackTrace();
       }
       return null;
     };
-
     AppiumDriverFactory.createDriver(appiumDriverSupplier);
   }
-
 }
