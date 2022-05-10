@@ -32,7 +32,7 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(iFramePageModel.testSiteIFrameUrl);
     wait.waitUntilPageLoad();
     Assert.assertTrue(wait.waitUntilIframeToLoad(iFramePageModel.iframeLocator, 5000, 1000));
-
+    Assert.assertFalse(wait.waitUntilIframeToLoad(iFramePageModel.notInPage));
   }
 
   /**
@@ -118,6 +118,7 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilEnabledElement(automationPageModel.flowerTableTitle));
     Assert.assertTrue(wait.waitUntilEnabledElement(automationPageModel.flowerTableTitle, 10000, 1000));
+    Assert.assertFalse(wait.waitUntilEnabledElement(automationPageModel.disabledField));
   }
 
   /**
@@ -184,6 +185,8 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
         automationPageModel.automationShowDialog1), "Failed to find element");
     Assert.assertTrue(wait.waitUntilClickableElement(
         automationPageModel.automationShowDialog1, 10000, 1000), "Failed to find element");
+    Assert.assertFalse(wait.waitUntilClickableElement(
+        automationPageModel.notInPage), "Failed to find element");
   }
 
   /**
@@ -248,8 +251,8 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilAbsentElement(automationPageModel.notInPage));
-    Assert.assertTrue(wait.waitUntilAbsentElement(
-        automationPageModel.notInPage, 10000, 1000));
+    Assert.assertTrue(wait.waitUntilAbsentElement(automationPageModel.notInPage, 10000, 1000));
+    Assert.assertFalse(wait.waitUntilAbsentElement(automationPageModel.automationPageHeader));
   }
 
   /**

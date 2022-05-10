@@ -100,6 +100,17 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
   }
 
   /**
+   * Tests the functionality that throws an exception if the enabled element is not found.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementNotInteractableException.class)
+  public void waitForEnabledElementException() {
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    this.getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
+    UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    Assert.assertNotNull(wait.waitForEnabledElement(automationPageModel.disabledField));
+  }
+
+  /**
    * Verify WaitForClickableElement wait works.
    */
   @Test(groups = TestCategories.SELENIUM)
@@ -156,6 +167,19 @@ public class UIWaitForUnitTest extends BaseSeleniumTest {
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     WebElement element = wait.waitForContainsText(automationPageModel.automationNamesLabel, "Name");
     Assert.assertNotNull(element, "Null element was returned");
+  }
+
+  /**
+   * Verify WaitForContainsText wait throws an exception if the method fails.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
+  public void waitForContainsTextException() {
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    this.getWebDriver().navigate().to(automationPageModel.testSiteAutomationUrl);
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
+
+    UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    wait.waitForContainsText(automationPageModel.notInPage, "Names");
   }
 
   /**
