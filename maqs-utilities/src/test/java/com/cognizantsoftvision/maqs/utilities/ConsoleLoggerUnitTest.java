@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.utilities;
 
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -30,6 +31,15 @@ public class ConsoleLoggerUnitTest {
   public void consoleLoggerLogMessageSelectType() {
     ConsoleLogger console = new ConsoleLogger();
     console.logMessage(MessageType.GENERIC, "Test String %s", "args1");
+  }
+
+  /**
+   * Log message to a new console logger using defined message type
+   */
+  @Test
+  public void consoleLoggerGetMessageType() {
+    ConsoleLogger console = new ConsoleLogger();
+    Assert.assertEquals(console.getMessageType(), MessageType.INFORMATION);
   }
 
   /**
