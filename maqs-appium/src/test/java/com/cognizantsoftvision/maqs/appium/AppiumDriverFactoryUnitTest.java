@@ -68,10 +68,9 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   public void testGetDefaultMobileOptions() {
     final DesiredCapabilities defaultMobileOptions = AppiumDriverFactory.getDefaultMobileOptions();
-    // Consumer is used by the iterator for bulk processing and verification of the
-    // keys in the Map.
+    // Consumer is used by the iterator for bulk processing and verification of the keys in the Map.
     // More elegant solution oppose to a for each.
-    Consumer<String> assertionConsumer = (String s) -> Assert.assertNotNull(defaultMobileOptions.is(s), String.format("Checking if capability key %s is not null", s));
+    Consumer<String> assertionConsumer = defaultMobileOptions::is;
     defaultMobileOptions.getCapabilityNames().forEach(assertionConsumer);
   }
 
@@ -86,7 +85,7 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
     // keys in the Map.
     // More elegant solution oppose to a for each.
     Consumer<String> assertionConsumer = (String s) -> {
-      Assert.assertNotNull(capabilities.is(s), String.format("Checking if capability key %s is not null", s));
+      capabilities.is(s);
       Assert.assertEquals(capabilities.getCapability(s), capabilitiesAsObjects.get(s),
           String.format("Checking if capability value for key %s matches", s));
     };
