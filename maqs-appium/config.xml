@@ -70,8 +70,8 @@
     </AppiumMaqs>
 
     <AppiumCapsMaqs>
-        <username>MAQS</username>
-        <accessKey>NEVER_CHECK_IN_A_REAL_KEY</accessKey>
+        <username>JMAQS</username>
+        <accessKey>NEVER_CHECKIN_A_REAL_KEY</accessKey>
         <deviceOrientation>portrait</deviceOrientation>
         <browserName>Chrome</browserName>
         <w3c>true</w3c>
