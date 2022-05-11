@@ -4,8 +4,6 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import static java.lang.System.out;
-
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
@@ -248,18 +246,21 @@ public abstract class BaseTest {
    */
   @AfterMethod(alwaysRun = true)
   public void teardown() {
+    TestResultType resultType = TestResultType.OTHER;
+
     try {
+      resultType = this.getResultType();
       this.beforeLoggingTeardown(testResult);
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
     }
 
     // Log the test result
-    if (testResult.getStatus() == ITestResult.SUCCESS) {
+    if (resultType == TestResultType.PASS) {
       this.tryToLog(MessageType.SUCCESS, "Test Passed");
-    } else if (testResult.getStatus() == ITestResult.FAILURE) {
+    } else if (resultType == TestResultType.FAIL) {
       this.tryToLog(MessageType.ERROR, "Test Failed");
-    } else if (testResult.getStatus() == ITestResult.SKIP) {
+    } else if (resultType == TestResultType.SKIP) {
       this.tryToLog(MessageType.INFORMATION, "Test was skipped");
     } else {
       this.tryToLog(MessageType.WARNING, "Test had an unexpected result.");
@@ -394,14 +395,14 @@ public abstract class BaseTest {
       // Write to the log
       this.getLogger().logMessage(messageType, formattedMessage);
 
-      // If this was an error and written to a file, add it to the console
-      // output as well
+      // If this was an error and written to a file,
+      // add it to the console output as well
       if (messageType == MessageType.ERROR && !(this.getLogger() instanceof ConsoleLogger)) {
-        out.println(formattedMessage);
+        this.getLogger().logMessage(formattedMessage);
       }
     } catch (Exception e) {
-      out.println(formattedMessage);
-      out.println("Logging failed because: " + e.getMessage());
+      this.getLogger().logMessage(formattedMessage);
+      this.getLogger().logMessage("Logging failed because: " + e.getMessage());
     }
   }
 
