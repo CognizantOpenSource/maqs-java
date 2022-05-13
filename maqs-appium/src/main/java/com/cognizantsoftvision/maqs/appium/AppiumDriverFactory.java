@@ -8,7 +8,9 @@ import com.cognizantsoftvision.maqs.appium.constants.PlatformType;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.mac.options.Mac2Options;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.windows.WindowsDriver;
 import java.net.URL;
@@ -17,6 +19,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+
+import io.appium.java_client.windows.options.WindowsOptions;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -51,17 +55,16 @@ public class AppiumDriverFactory {
     AppiumDriver appiumDriver;
     URL mobileHubUrl = AppiumConfig.getMobileHubUrl();
     Duration duration = AppiumConfig.getCommandTimeout();
-    DesiredCapabilities capabilities = getDefaultMobileOptions();
 
     switch (deviceType) {
       case ANDROID:
-        appiumDriver = getAndroidDriver(mobileHubUrl, capabilities, duration);
+        appiumDriver = getAndroidDriver(mobileHubUrl, getDefaultUIAutomator2Options(), duration);
         break;
       case IOS:
-        appiumDriver = getIosDriver(mobileHubUrl, capabilities, duration);
+        appiumDriver = getIosDriver(mobileHubUrl, getDefaultMac2Options(), duration);
         break;
       case WINDOWS:
-        appiumDriver = getWindowsDriver(mobileHubUrl, capabilities, duration);
+        appiumDriver = getWindowsDriver(mobileHubUrl, getDefaultWindowsOptions(), duration);
         break;
       default:
         throw new IllegalStateException(
@@ -99,6 +102,28 @@ public class AppiumDriverFactory {
     return new DesiredCapabilities(capabilities);
   }
 
+  public static WindowsOptions getDefaultWindowsOptions() {
+    WindowsOptions options = new WindowsOptions();
+    options.setCapability(MobileCapabilityType.DEVICE_NAME, AppiumConfig.getDeviceName());
+    options.setPlatformName(AppiumConfig.getPlatformName());
+    options.setPlatformVersion(AppiumConfig.getPlatformVersion());
+    return options;
+  }
+
+  public static Mac2Options getDefaultMac2Options() {
+    Mac2Options options = new Mac2Options();
+    options.setCapability(MobileCapabilityType.DEVICE_NAME, AppiumConfig.getDeviceName());
+    options.setPlatformName(AppiumConfig.getPlatformName());
+    options.setPlatformVersion(AppiumConfig.getPlatformVersion());
+    return options;
+  }
+
+  public static UiAutomator2Options getDefaultUIAutomator2Options() {
+    UiAutomator2Options options = new UiAutomator2Options();
+    options.setDeviceName(AppiumConfig.getDeviceName());
+    return options;
+  }
+
   /**
    * Gets android driver.
    *
@@ -107,9 +132,7 @@ public class AppiumDriverFactory {
    * @param timeout   the timeout
    * @return the android driver
    */
-  public static AppiumDriver getAndroidDriver(URL mobileHub, DesiredCapabilities options,
-      Duration timeout) {
-
+  public static AppiumDriver getAndroidDriver(URL mobileHub,UiAutomator2Options options, Duration timeout) {
     return createDriver(() -> {
       AppiumDriver driver = new AndroidDriver(mobileHub, options);
       driver.manage().timeouts().implicitlyWait(Duration.ofMillis(timeout.toMillis()));
@@ -125,7 +148,7 @@ public class AppiumDriverFactory {
    * @param timeout   the timeout
    * @return the ios driver
    */
-  public static AppiumDriver getIosDriver(URL mobileHub, DesiredCapabilities options, Duration timeout) {
+  public static AppiumDriver getIosDriver(URL mobileHub, Mac2Options options, Duration timeout) {
     return createDriver(() -> {
       AppiumDriver driver = new IOSDriver(mobileHub, options);
       driver.manage().timeouts().implicitlyWait(Duration.ofMillis(timeout.toMillis()));
@@ -141,7 +164,7 @@ public class AppiumDriverFactory {
    * @param timeout   the timeout
    * @return the windows driver
    */
-  public static AppiumDriver getWindowsDriver(URL mobileHub, DesiredCapabilities options,
+  public static AppiumDriver getWindowsDriver(URL mobileHub, WindowsOptions options,
       Duration timeout) {
     return createDriver(() -> {
       AppiumDriver driver = new WindowsDriver(mobileHub, options);
@@ -160,9 +183,7 @@ public class AppiumDriverFactory {
    */
   public static DesiredCapabilities mergeCapabilities(DesiredCapabilities capabilities,
       Map<String, Object> capabilitiesAsObjects) {
-
-    Consumer<String> mergeConsumer = (String s) -> capabilities
-        .setCapability(s, capabilitiesAsObjects.get(s));
+    Consumer<String> mergeConsumer = (String s) -> capabilities.setCapability(s, capabilitiesAsObjects.get(s));
     capabilitiesAsObjects.keySet().iterator().forEachRemaining(mergeConsumer);
     return capabilities;
   }
@@ -173,8 +194,7 @@ public class AppiumDriverFactory {
    * @param createFunction the create function
    * @return the appium driver
    */
-  public static AppiumDriver createDriver(
-      Supplier<AppiumDriver> createFunction) {
+  public static AppiumDriver createDriver(Supplier<AppiumDriver> createFunction) {
     AppiumDriver appiumDriver = null;
 
     try {

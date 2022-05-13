@@ -8,7 +8,10 @@ import com.cognizantsoftvision.maqs.appium.constants.PlatformType;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.mac.options.Mac2Options;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.windows.options.WindowsOptions;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
@@ -26,10 +29,7 @@ import org.testng.annotations.Test;
  */
 public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
 
-  /**
-   * The Sauce labs config.
-   */
-  private static DesiredCapabilities sauceLabsConfig;
+  private static Map<String, Object> appiumCapsMaqs;
 
   /**
    * Sets up.
@@ -37,7 +37,10 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
   @BeforeClass
   public void setUp() {
     Map<String, Object> capabilitiesAsObjects = AppiumConfig.getCapabilitiesAsObjects();
-    sauceLabsConfig = new DesiredCapabilities();
+    appiumCapsMaqs = capabilitiesAsObjects;
+
+    // The Sauce labs config.
+    DesiredCapabilities sauceLabsConfig = new DesiredCapabilities();
     sauceLabsConfig.setCapability("username", capabilitiesAsObjects.get("username"));
     sauceLabsConfig.setCapability("accessKey", capabilitiesAsObjects.get("accessKey"));
     sauceLabsConfig.setCapability("deviceOrientation", "portrait");
@@ -99,14 +102,24 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.APPIUM)
   public void testGetAndroidDriver() {
-    DesiredCapabilities capabilities = new DesiredCapabilities();
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-    capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "6.0");
-    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android GoogleAPI Emulator");
-    capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
+    UiAutomator2Options options = new UiAutomator2Options();
+    options.setPlatformName("Android");
+    options.setPlatformVersion("6.0");
+    options.setDeviceName("Android GoogleAPI Emulator");
+    options.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+
+    for(Map.Entry<String, Object> entry:  appiumCapsMaqs.entrySet()) {
+      options.setCapability(entry.getKey(), entry.getValue());
+    }
+
+//    DesiredCapabilities capabilities = new DesiredCapabilities();
+//    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+//    capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+//    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "6.0");
+//    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android GoogleAPI Emulator");
+//    capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
     AppiumDriver androidDriver = AppiumDriverFactory.getAndroidDriver(AppiumConfig.getMobileHubUrl(),
-        capabilities, AppiumConfig.getMobileTimeout());
+        options, AppiumConfig.getMobileTimeout());
     Assert.assertNotNull(androidDriver, "Checking if android driver is null");
   }
 
@@ -115,13 +128,23 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.APPIUM)
   public void testGetIOSDriver() {
-    DesiredCapabilities capabilities = new DesiredCapabilities();
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-    capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Safari");
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.2");
-    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone X Simulator");
-    capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
-    AppiumDriver iosDriver = AppiumDriverFactory.getIosDriver(AppiumConfig.getMobileHubUrl(), capabilities,
+    Mac2Options options = new Mac2Options();
+    options.setPlatformName("iOS");
+    options.setPlatformVersion("12.2");
+    options.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone X Simulator");
+    options.setCapability(MobileCapabilityType.BROWSER_NAME, "Safari");
+
+    for(Map.Entry<String, Object> entry:  appiumCapsMaqs.entrySet()) {
+      options.setCapability(entry.getKey(), entry.getValue());
+    }
+
+//    DesiredCapabilities capabilities = new DesiredCapabilities();
+//    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+//    capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Safari");
+//    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.2");
+//    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone X Simulator");
+//    capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
+    AppiumDriver iosDriver = AppiumDriverFactory.getIosDriver(AppiumConfig.getMobileHubUrl(), options,
         AppiumConfig.getMobileTimeout());
     Assert.assertNotNull(iosDriver, "Checking if ios driver is null");
   }
@@ -132,13 +155,17 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   @Ignore("Work on Windows implementation")
   public void testGetWindowsDriver() {
-    DesiredCapabilities appCapabilities = new DesiredCapabilities();
-    appCapabilities.setCapability("app", "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
-    appCapabilities.setCapability(MobileCapabilityType.UDID, "0C0E26E7-966B-4C89-A765-32C5C997A456");
+    WindowsOptions options = new WindowsOptions();
+    options.setApp("Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
+    options.setCapability(MobileCapabilityType.UDID, "0C0E26E7-966B-4C89-A765-32C5C997A456");
+
+//    DesiredCapabilities appCapabilities = new DesiredCapabilities();
+//    appCapabilities.setCapability("app", "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
+//    appCapabilities.setCapability(MobileCapabilityType.UDID, "0C0E26E7-966B-4C89-A765-32C5C997A456");
     AppiumDriver windowsDriver = null;
 
     try {
-      windowsDriver = AppiumDriverFactory.getWindowsDriver(new URL("http://127.0.0.1:4723"), appCapabilities,
+      windowsDriver = AppiumDriverFactory.getWindowsDriver(new URL("http://127.0.0.1:4723"), options,
           AppiumConfig.getMobileTimeout());
     } catch (MalformedURLException e) {
       e.printStackTrace();
