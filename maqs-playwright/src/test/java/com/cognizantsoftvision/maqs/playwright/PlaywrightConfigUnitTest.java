@@ -110,7 +110,25 @@ public class PlaywrightConfigUnitTest {
   }
 
   /**
-   * Get expected proxy address configuration.
+   * Gets the command timeout.
+   */
+  @Test(groups = TestCategories.PLAYWRIGHT, expectedExceptions = IllegalArgumentException.class)
+  public void getCommandTimeout() {
+    Assert.assertEquals(PlaywrightConfig.getCommandTimeout(), 200000);
+
+    String oldValue = Config.getValueForSection(ConfigSection.PLAYWRIGHT_MAQS, "CommandTimeout");
+    try {
+      Config.addTestSettingValues(Collections.singletonMap("CommandTimeout", "asdXasd"),
+          ConfigSection.PLAYWRIGHT_MAQS, true);
+      PlaywrightConfig.getCommandTimeout();
+    } finally {
+      Config.addTestSettingValues(Collections.singletonMap("CommandTimeout", oldValue),
+          ConfigSection.PLAYWRIGHT_MAQS, true);
+    }
+  }
+
+  /**
+   * Get expected window size.
    */
   @Test(groups = TestCategories.PLAYWRIGHT, singleThreaded = true)
   public void getWindowSize() {
@@ -121,10 +139,50 @@ public class PlaywrightConfigUnitTest {
       ConfigSection.PLAYWRIGHT_MAQS, true);
       Assert.assertEquals(PlaywrightConfig.getBrowserSize().getHeight(), 900);
       Assert.assertEquals(PlaywrightConfig.getBrowserSize().getWidth(), 600);
-    }
-    finally{
+
+      Config.addTestSettingValues(Collections.singletonMap("BrowserSize", "DEFAULT"),
+          ConfigSection.PLAYWRIGHT_MAQS, true);
+      Assert.assertEquals(PlaywrightConfig.getBrowserSize().getHeight(), 720);
+      Assert.assertEquals(PlaywrightConfig.getBrowserSize().getWidth(), 1280);
+    } finally {
       Config.addTestSettingValues(Collections.singletonMap("BrowserSize", oldValue),
       ConfigSection.PLAYWRIGHT_MAQS, true);
+    }
+  }
+
+  /**
+   * Gets window size Illegal argument exception.
+   */
+  @Test(groups = TestCategories.PLAYWRIGHT, singleThreaded = true,
+      expectedExceptions = IllegalArgumentException.class)
+  public void getWindowSizeIllegalArgumentException() {
+    String oldValue = Config.getValueForSection(ConfigSection.PLAYWRIGHT_MAQS, "BrowserSize");
+
+    try {
+      Config.addTestSettingValues(Collections.singletonMap("BrowserSize", "600900"),
+          ConfigSection.PLAYWRIGHT_MAQS, true);
+      PlaywrightConfig.getBrowserSize();
+    } finally {
+      Config.addTestSettingValues(Collections.singletonMap("BrowserSize", oldValue),
+          ConfigSection.PLAYWRIGHT_MAQS, true);
+    }
+  }
+
+  /**
+   * Gets window size number format exception.
+   */
+  @Test(groups = TestCategories.PLAYWRIGHT, singleThreaded = true,
+      expectedExceptions = NumberFormatException.class)
+  public void getWindowSizeNumberFormatException() {
+    String oldValue = Config.getValueForSection(ConfigSection.PLAYWRIGHT_MAQS, "BrowserSize");
+
+    try {
+      Config.addTestSettingValues(Collections.singletonMap("BrowserSize", "asdXasd"),
+          ConfigSection.PLAYWRIGHT_MAQS, true);
+      PlaywrightConfig.getBrowserSize();
+    } finally {
+      Config.addTestSettingValues(Collections.singletonMap("BrowserSize", oldValue),
+          ConfigSection.PLAYWRIGHT_MAQS, true);
     }
   }
 }
