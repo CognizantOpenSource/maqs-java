@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class AppiumConfig.
+ * The Appium Config class.
  */
 public class AppiumConfig {
 
@@ -71,9 +71,9 @@ public class AppiumConfig {
   }
 
   /**
-   * Gets soft assert screen shot.
+   * Gets soft assert screenshot.
    *
-   * @return the soft assert screen shot
+   * @return the soft assert screenshot
    */
   public static boolean getSoftAssertScreenShot() {
     return Config.getValueForSection(APPIUM_SECTION, "SoftAssertScreenShot").equalsIgnoreCase("Yes");
