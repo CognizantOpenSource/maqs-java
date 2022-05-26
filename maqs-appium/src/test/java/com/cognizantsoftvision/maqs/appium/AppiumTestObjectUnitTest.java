@@ -12,7 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Appium test object test.
+ * The Appium Test Object unit test class.
  */
 public class AppiumTestObjectUnitTest extends BaseGenericTest {
 
@@ -83,7 +83,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
     }
 
     /**
-     * Test test set appium driver.
+     * Test setting the appium driver.
      */
     @Test(groups = TestCategories.APPIUM)
     public void testSetAppiumDriverWithSupplier() {
