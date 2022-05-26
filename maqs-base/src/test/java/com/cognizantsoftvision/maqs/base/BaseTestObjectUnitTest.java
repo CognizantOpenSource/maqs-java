@@ -9,6 +9,7 @@ import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.function.Supplier;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -216,12 +217,12 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     File temp = null;
     try {
-      temp = File.createTempFile("tempfile", ".tmp");
+      temp = File.createTempFile("tempFile", ".tmp");
     } catch (IOException e) {
       e.printStackTrace();
     }
-    assert temp.exists();
 
+    Assert.assertTrue(Objects.requireNonNull(temp).exists());
     Assert.assertTrue(testObject.addAssociatedFile(temp.getAbsolutePath()), "Checking that associated file was added");
     Assert.assertEquals((testObject.getArrayOfAssociatedFiles()).length, 1,
         "Checking that one file was added to array.");
@@ -235,15 +236,16 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     File temp = null;
     try {
-      temp = File.createTempFile("tempfile", ".tmp");
+      temp = File.createTempFile("tempFile", ".tmp");
     } catch (IOException e) {
       e.printStackTrace();
     }
-    assert temp.exists();
+
+    Assert.assertTrue(Objects.requireNonNull(temp).exists());
     final String path = temp.getAbsolutePath();
 
     Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
-    Assert.assertTrue(testObject.removeAssociatedFile(path), "Checking that assocai");
+    Assert.assertTrue(testObject.removeAssociatedFile(path), "Checking that associated file was removed");
   }
 
   /**
@@ -254,11 +256,12 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     File temp = null;
     try {
-      temp = File.createTempFile("tempfile", ".tmp");
+      temp = File.createTempFile("tempFile", ".tmp");
     } catch (IOException e) {
       e.printStackTrace();
     }
-    assert temp.exists();
+
+    Assert.assertTrue(Objects.requireNonNull(temp).exists());
     final String path = temp.getAbsolutePath();
     Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
     Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");
@@ -273,11 +276,12 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     File temp = null;
     try {
-      temp = File.createTempFile("tempfile", ".tmp");
+      temp = File.createTempFile("tempFile", ".tmp");
     } catch (IOException e) {
       e.printStackTrace();
     }
-    assert temp.exists();
+
+    Assert.assertTrue(Objects.requireNonNull(temp).exists());
     final String path = temp.getAbsolutePath();
     Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
     Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");

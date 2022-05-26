@@ -5,13 +5,11 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.*;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.util.ArrayList;
+import java.util.EnumSet;
+
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -20,16 +18,14 @@ import org.testng.annotations.Test;
 /**
  * Unit test class for BaseTest class.
  */
-@Test(groups = TestCategories.FRAMEWORK)
 public class BaseTestUnitTest extends BaseTest {
+
   /**
    * Verify fully qualified test name.
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void fullyQualifiedTestNameTest() {
-    String testName = this.getFullyQualifiedTestClassName();
-
-    Assert.assertEquals(testName,
+    Assert.assertEquals(this.getFullyQualifiedTestClassName(),
         "com.cognizantsoftvision.maqs.base.BaseTestUnitTest.fullyQualifiedTestNameTest");
   }
 
@@ -80,8 +76,18 @@ public class BaseTestUnitTest extends BaseTest {
    * Validate the Logging Enabled Setting is YES (set in Config).
    */
   @Test(groups = TestCategories.FRAMEWORK)
-  public void loggingEnabledSettingTest() {
+  public void getLoggingEnabledSettingTest() {
     Assert.assertEquals(this.getLoggingEnabledSetting(), LoggingConfig.getLoggingEnabledSetting());
+  }
+
+  /**
+   * Validate the Logging Enabled Setting is YES (set in Config).
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void setLoggingEnabledSettingTest() {
+    this.setLoggingEnabled(LoggingEnabled.NO);
+    Assert.assertEquals(this.getLoggingEnabledSetting(), LoggingEnabled.NO);
+
   }
 
   /**
