@@ -80,7 +80,7 @@ public class HtmlFileLoggerUnitTest {
    * not already exist. Delete Directory after each run.
    */
    @Test(singleThreaded = true)
-   public void HtmlFileLoggerConstructorCreateDirectory() throws IOException {
+   public void HtmlFileLoggerConstructorCreateDirectory() {
       HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
          "HtmlFileLoggerCreateDirectoryDelete").toString(),
       "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
@@ -404,7 +404,10 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    Assert.assertTrue(file.delete());
+
+    if (file.exists()) {
+      Assert.assertTrue(file.delete());
+    }
   }
 
   /**
@@ -451,7 +454,10 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    Assert.assertTrue(file.delete());
+
+    if (file.exists()) {
+      Assert.assertTrue(file.delete());
+    }
   }
 
   /**
