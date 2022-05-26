@@ -8,10 +8,12 @@ import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 
 /**
- * Response timer collection class.
- * Object to be owned by Test Class (Object), and passed to page Constructors to insert Performance Timers.
+ * The Performance Timer Collection class.
+ * Object to be owned by Test Class (Object),
+ * and passed to page Constructors to insert Performance Timers.
  */
 public class PerfTimerCollection implements IPerfTimerCollection {
+
   /**
    * The logger.
    */

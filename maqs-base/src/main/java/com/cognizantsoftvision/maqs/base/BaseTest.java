@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.base;
 
 import static java.lang.System.out;
 
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
@@ -246,7 +247,7 @@ public abstract class BaseTest {
    * Cleanup after a test.
    */
   @AfterMethod(alwaysRun = true)
-  public void teardown() throws Exception {
+  public void teardown() {
     try {
       this.beforeLoggingTeardown(testResult);
     } catch (Exception e) {
@@ -277,12 +278,15 @@ public abstract class BaseTest {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
 
-    try (ITestObject baseTestObject = this.getTestObject()) {
+    try {
+      ITestObject baseTestObject = this.getTestObject();
       // Release logged messages
       this.loggedExceptions.remove(fullyQualifiedTestName);
 
       // Release the Base Test Object
       this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
+    } catch (Exception e) {
+      throw new MAQSRuntimeException("there was an issue cleaning up", e);
     }
 
     // Create console logger to log subsequent messages

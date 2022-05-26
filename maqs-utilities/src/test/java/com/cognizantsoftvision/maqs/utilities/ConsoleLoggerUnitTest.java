@@ -9,10 +9,11 @@ import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import org.testng.annotations.Test;
 
 /**
- * Unit test class for ConsoleLogger.java
+ * The Console Logger unit test class.
  */
 @Test
 public class ConsoleLoggerUnitTest {
+
   /**
    * Log message to a new console logger
    */

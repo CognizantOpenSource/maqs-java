@@ -16,56 +16,50 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 /**
- * The type Appium config unit test.
+ * The Appium Config unit test class.
  */
 public class AppiumConfigUnitTest {
 
   /**
    * The Username.
    */
-  private String username = "username";
+  private final String username = "username";
   /**
    * The Browser name.
    */
-  private String browserName = "browserName";
+  private final String browserName = "browserName";
   /**
    * The Access key.
    */
-  private String accessKey = "accessKey";
+  private final String accessKey = "accessKey";
   /**
    * The Device orientation.
    */
-  private String deviceOrientation = "deviceOrientation";
+  private final String deviceOrientation = "deviceOrientation";
 
   /**
    * Test get os version.
-   *
-   * @throws Exception the exception
    */
   @Test(groups = TestCategories.APPIUM)
-  public void testGetOSVersion() throws Exception {
+  public void testGetOSVersion() {
     String osVersion = AppiumConfig.getPlatformVersion();
     Assert.assertTrue(osVersion.equalsIgnoreCase("11.0"));
   }
 
   /**
    * Test get device name.
-   *
-   * @throws Exception the exception
    */
   @Test(groups = TestCategories.APPIUM)
-  public void testGetDeviceName() throws Exception {
+  public void testGetDeviceName() {
     String deviceName = AppiumConfig.getDeviceName();
     Assert.assertTrue(deviceName.equalsIgnoreCase("Android GoogleAPI Emulator"));
   }
 
   /**
    * Test get mobile hub url string.
-   *
-   * @throws Exception the exception
    */
   @Test(groups = TestCategories.APPIUM)
-  public void testGetMobileHubUrlString() throws Exception {
+  public void testGetMobileHubUrlString() {
     String mobileHubUrl = AppiumConfig.getMobileHubUrlString();
     Assert.assertTrue(mobileHubUrl.equalsIgnoreCase("http://ondemand.saucelabs.com:80/wd/hub"));
   }
@@ -119,7 +113,7 @@ public class AppiumConfigUnitTest {
   }
 
   /**
-   * Test get soft assert screen shot.
+   * Test get soft assert screenshot.
    */
   @Test(groups = TestCategories.APPIUM)
   public void testGetSoftAssertScreenShot() {

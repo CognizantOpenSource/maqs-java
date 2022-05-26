@@ -111,11 +111,9 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
       } else {
         getLogger().logMessage(MessageType.INFORMATION, StringProcessor.safeFormatter("Local driver: " + browserType));
       }
-
     } catch (Exception e) {
       getLogger().logMessage(MessageType.ERROR,
           StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
-      System.out.println(StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
     }
   }
 }
