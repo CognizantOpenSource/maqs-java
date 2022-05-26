@@ -8,11 +8,11 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import org.apache.tools.ant.util.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -79,7 +79,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify HtmlFileLogger constructor creates the correct directory if it does
    * not already exist. Delete Directory after each run.
    */
-   @Test
+   @Test(singleThreaded = true)
    public void HtmlFileLoggerConstructorCreateDirectory() {
       HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
          "HtmlFileLoggerCreateDirectoryDelete").toString(),
@@ -90,12 +90,9 @@ public class HtmlFileLoggerUnitTest {
       File file = new File(logger.getFilePath());
       Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains(
       "Test to ensure that the file in the created directory can be written to."));
+      logger.close();
       Assert.assertTrue(file.delete());
-
-      file = new File(logger.getDirectory());
-      FileUtils.delete(file);
    }
-
 
   /**
    * Verify that HtmlFileLogger can log message without defining a Message Type
@@ -407,7 +404,10 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    Assert.assertTrue(file.delete());
+
+    if (file.exists()) {
+      Assert.assertTrue(file.delete());
+    }
   }
 
   /**
@@ -454,7 +454,10 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    Assert.assertTrue(file.delete());
+
+    if (file.exists()) {
+      Assert.assertTrue(file.delete());
+    }
   }
 
   /**
