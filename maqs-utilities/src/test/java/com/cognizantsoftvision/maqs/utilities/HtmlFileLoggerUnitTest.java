@@ -75,10 +75,11 @@ public class HtmlFileLoggerUnitTest {
       logger.logMessage(MessageType.WARNING,
       "Test to ensure that the file in the created directory can be written to.");
 
-      Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains(
+      File file = new File(logger.getFilePath());
+      Assert.assertTrue(this.readTextFile(file.getAbsolutePath()).contains(
       "Test to ensure that the file in the created directory can be written to."));
-
-      deleteFile(logger);
+      logger.close();
+      Assert.assertTrue(file.delete());
    }
 
   /**
