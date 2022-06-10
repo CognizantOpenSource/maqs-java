@@ -12,7 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -29,9 +28,7 @@ public class HtmlFileLoggerUnitTest {
   public void HtmlFileLoggerNoAppendTest() {
     HtmlFileLogger logger = new HtmlFileLogger(false, "", "WriteToHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -42,10 +39,7 @@ public class HtmlFileLoggerUnitTest {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
     logger.logMessage(MessageType.WARNING, "This is a test to append to current file.");
-
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -55,10 +49,7 @@ public class HtmlFileLoggerUnitTest {
   public void WriteToHtmlFileLogger() {
     HtmlFileLogger logger = new HtmlFileLogger("", "WriteToHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
-
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -69,10 +60,7 @@ public class HtmlFileLoggerUnitTest {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger", MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "This is a test.");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
-
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -87,11 +75,10 @@ public class HtmlFileLoggerUnitTest {
       logger.logMessage(MessageType.WARNING,
       "Test to ensure that the file in the created directory can be written to.");
 
-      File file = new File(logger.getFilePath());
       Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains(
       "Test to ensure that the file in the created directory can be written to."));
-      logger.close();
-      Assert.assertTrue(file.delete());
+
+      deleteFile(logger);
    }
 
   /**
@@ -102,12 +89,9 @@ public class HtmlFileLoggerUnitTest {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessage");
     logger.logMessage("Test to ensure LogMessage works as expected.");
     String htmlText = this.readTextFile(logger.getFilePath());
-
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
     Assert.assertTrue(htmlText.contains("Test to ensure LogMessage works as expected."),
         "Expected Log Message to be contained in log.");
+    deleteFile(logger);
   }
 
   /**
@@ -117,14 +101,11 @@ public class HtmlFileLoggerUnitTest {
   public void HtmlFileLoggerLogMessageSelectType() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessageType");
     logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
+
     String htmlText = this.readTextFile(logger.getFilePath());
-
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
-
     Assert.assertTrue(htmlText.contains("Test to ensure LogMessage works as expected."),
         "Expected Log Message to be contained in log.");
+    deleteFile(logger);
   }
 
   /**
@@ -179,9 +160,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -199,9 +178,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -220,9 +197,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -240,9 +215,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -260,9 +233,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -339,9 +310,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -359,9 +328,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -402,12 +369,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-
-    if (file.exists()) {
-      Assert.assertTrue(file.delete());
-    }
+    deleteFile(logger);
   }
 
   /**
@@ -427,9 +389,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-    Assert.assertTrue(file.delete());
+    deleteFile(logger);
   }
 
   /**
@@ -449,15 +409,9 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals("LogFolderFileNameMessagingLevel.html", logger.getFileName(),
         "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
-
     softAssert.assertAll();
 
-    File file = new File(logger.getFilePath());
-    logger.close();
-
-    if (file.exists()) {
-      Assert.assertTrue(file.delete());
-    }
+    deleteFile(logger);
   }
 
   /**
@@ -484,5 +438,18 @@ public class HtmlFileLoggerUnitTest {
     }
 
     return text;
+  }
+
+  /**
+   * Deletes the file in the logger.
+   * @param logger the HTML File Logger
+   */
+  private void deleteFile(HtmlFileLogger logger) {
+    File file = new File(logger.getFilePath());
+    logger.close();
+
+    if (file.exists()) {
+      Assert.assertTrue(file.delete());
+    }
   }
 }
