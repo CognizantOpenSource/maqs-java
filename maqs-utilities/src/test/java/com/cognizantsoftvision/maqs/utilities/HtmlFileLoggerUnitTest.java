@@ -25,7 +25,7 @@ public class HtmlFileLoggerUnitTest {
    * Test logging to a new file.
    */
   @Test
-  public void HtmlFileLoggerNoAppendTest() {
+  public void doNotAppendLoggerTest() {
     HtmlFileLogger logger = new HtmlFileLogger(false, "", "WriteToHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
     deleteFile(logger);
@@ -35,7 +35,7 @@ public class HtmlFileLoggerUnitTest {
    * Test logging to an existing file.
    */
   @Test
-  public void HtmlFileLoggerAppendFileTest() {
+  public void appendFileTest() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
     logger.logMessage(MessageType.WARNING, "This is a test to append to current file.");
@@ -43,51 +43,52 @@ public class HtmlFileLoggerUnitTest {
   }
 
   /**
-   * Test Writing to the Html File Logger
+   * Test Writing to the Html File Logger.
    */
   @Test
-  public void WriteToHtmlFileLogger() {
+  public void writeToHtmlFileLogger() {
     HtmlFileLogger logger = new HtmlFileLogger("", "WriteToHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
     deleteFile(logger);
   }
 
   /**
-   * Test Writing to an Existing Html File Logger
+   * Test Writing to an Existing Html File Logger.
    */
   @Test
-  public void WriteToExistingHtmlFileLogger() {
-    HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger", MessageType.GENERIC);
+  public void writeToExistingHtmlFileLogger() {
+    HtmlFileLogger logger = new HtmlFileLogger(true, "",
+        "WriteToExistingHtmlFileLogger", MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "This is a test.");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
     deleteFile(logger);
   }
 
   /**
-   * Verify HtmlFileLogger constructor creates the correct directory if it does
-   * not already exist. Delete Directory after each run.
+   * Verify the constructor creates the correct directory if it does not already exist.
+   * Delete Directory after each run.
    */
    @Test(singleThreaded = true)
-   public void HtmlFileLoggerConstructorCreateDirectory() {
+   public void constructorCreateDirectory() {
+     String expectedText = "Test to ensure that the file in the created directory can be written to.";
+
       HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
          "HtmlFileLoggerCreateDirectoryDelete").toString(),
       "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
-      logger.logMessage(MessageType.WARNING,
-          "Test to ensure that the file in the created directory can be written to.");
+      logger.logMessage(MessageType.WARNING, expectedText);
 
       String fileText = this.readTextFile(logger.getFilePath());
-      System.out.println(fileText);
-      Assert.assertTrue(
-          fileText.contains("Test to ensure that the file in the created directory can be written to."),
-          "Expected Log Message to be contained in log." + System.lineSeparator() + fileText);
+      Assert.assertTrue(fileText.contains(expectedText),
+          "Expected Log Message to be contained in log."
+              + System.lineSeparator() + "In the Log:" + fileText);
       deleteFile(logger);
    }
 
   /**
-   * Verify that HtmlFileLogger can log message without defining a Message Type
+   * Verify that HtmlFileLogger can log message without defining a Message Type.
    */
   @Test
-  public void HtmlFileLoggerLogMessage() {
+  public void testLoggingMessage() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessage");
     logger.logMessage("Test to ensure LogMessage works as expected.");
     String htmlText = this.readTextFile(logger.getFilePath());
@@ -100,7 +101,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify that HTML File Logger can log message and defining a Message Type.
    */
   @Test
-  public void HtmlFileLoggerLogMessageSelectType() {
+  public void logMessageSelectType() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessageType");
     logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
 
@@ -114,7 +115,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify that File Path field can be accessed and updated.
    */
   @Test
-  public void HtmlFileLoggerSetFilePath() {
+  public void setFilePath() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerSetFilePath", MessageType.GENERIC);
     logger.setFilePath("test file path");
     String filePath = logger.getFilePath();
@@ -129,7 +130,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify that HTML File Logger catches and handles errors caused by incorrect file Paths
    */
   @Test
-  public void HtmlFileLoggerCatchThrownException() {
+  public void catchThrownException() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerCatchThrownException", MessageType.GENERIC);
     logger.setFilePath("<>");
 
@@ -143,7 +144,7 @@ public class HtmlFileLoggerUnitTest {
    * handles errors caused by incorrect file Paths.
    */
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void FileLoggerEmptyFileNameException() {
+  public void emptyFileNameException() {
     HtmlFileLogger logger = new HtmlFileLogger("");
     logger.close();
   }
@@ -152,7 +153,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify File Logger with No Parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerNoParameters() {
+  public void testWithNoParameters() {
     HtmlFileLogger logger = new HtmlFileLogger();
 
     SoftAssert softAssert = new SoftAssert();
@@ -170,7 +171,7 @@ public class HtmlFileLoggerUnitTest {
    * values.
    */
   @Test
-  public void FileLoggerAppendOnly() {
+  public void appendTheLoggerOnly() {
     HtmlFileLogger logger = new HtmlFileLogger(true);
 
     SoftAssert softAssert = new SoftAssert();
@@ -189,7 +190,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify default extension is added: '.html'
    */
   @Test
-  public void FileLoggerNameOnlyAddExtension() {
+  public void nameOnlyAddExtension() {
     HtmlFileLogger logger = new HtmlFileLogger("FileNameOnly");
 
     SoftAssert softAssert = new SoftAssert();
@@ -207,7 +208,7 @@ public class HtmlFileLoggerUnitTest {
    * parameter assigns the correct default values.
    */
   @Test
-  public void FileLoggerMessageTypeOnly() {
+  public void messageTypeOnly() {
     HtmlFileLogger logger = new HtmlFileLogger(MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
@@ -225,7 +226,7 @@ public class HtmlFileLoggerUnitTest {
    * File Name parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerAppendFileName() {
+  public void appendFileName() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "AppendFileName");
 
     SoftAssert softAssert = new SoftAssert();
@@ -243,7 +244,7 @@ public class HtmlFileLoggerUnitTest {
    * Append parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerAppendLogFolder() {
+  public void appendLogFolder() {
     final String append_file_directory_path = LoggingConfig.getLogDirectory() + "/" + "Append File Directory";
     HtmlFileLogger logger = new HtmlFileLogger(append_file_directory_path, true);
 
@@ -262,7 +263,7 @@ public class HtmlFileLoggerUnitTest {
    * File Name parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerLogFolderFileName() {
+  public void logFolderFileName() {
     final String log_folder_file_name_directory = LoggingConfig.getLogDirectory() + "/"
         + "Log Folder File Name Directory";
     HtmlFileLogger logger = new HtmlFileLogger(log_folder_file_name_directory, "LogFolderFileName.html");
@@ -282,7 +283,7 @@ public class HtmlFileLoggerUnitTest {
    * Messaging Level parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerLogFolderMessagingLevel() {
+  public void logFolderMessagingLevel() {
     final String log_folder_messaging_level_directory_path = LoggingConfig.getLogDirectory() + "/"
         + "Log Folder Messaging Level Directory";
     HtmlFileLogger logger = new HtmlFileLogger(log_folder_messaging_level_directory_path, MessageType.WARNING);
@@ -302,7 +303,7 @@ public class HtmlFileLoggerUnitTest {
    * Messaging Level parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerAppendMessagingLevel() {
+  public void appendMessagingLevel() {
     HtmlFileLogger logger = new HtmlFileLogger(true, MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
@@ -320,7 +321,7 @@ public class HtmlFileLoggerUnitTest {
    * file name parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerMessagingLevelFileName() {
+  public void messagingLevelFileName() {
     HtmlFileLogger logger = new HtmlFileLogger(MessageType.WARNING, "MessagingTypeFile.html");
 
     SoftAssert softAssert = new SoftAssert();
@@ -338,7 +339,7 @@ public class HtmlFileLoggerUnitTest {
    * assigns the correct default values.
    */
   @Test
-  public void FileLoggerAppendLogFolderFileName() {
+  public void appendLogFolderFileName() {
     final String appendLogFolderFileNameDirectoryPath = LoggingConfig.getLogDirectory() + "/"
         + "AppendLogFolderFileNameDirectory";
     HtmlFileLogger logger = new HtmlFileLogger(true, appendLogFolderFileNameDirectoryPath,
@@ -359,7 +360,7 @@ public class HtmlFileLoggerUnitTest {
    * parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerAppendLogFolderMessagingLevel() {
+  public void appendLogFolderMessagingLevel() {
     final String appendLogFolderFileNameDirectory = LoggingConfig.getLogDirectory() + "/"
         + "AppendLogFolderFileNameDirectory";
     HtmlFileLogger logger = new HtmlFileLogger(true, appendLogFolderFileNameDirectory, MessageType.WARNING);
@@ -379,7 +380,7 @@ public class HtmlFileLoggerUnitTest {
    * Messaging Level parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerFileNameAppendMessagingLevel() {
+  public void fileNameAppendMessagingLevel() {
     HtmlFileLogger logger = new HtmlFileLogger(
         "FileNameAppendMessagingLevel.html", true, MessageType.WARNING);
 
@@ -399,7 +400,7 @@ public class HtmlFileLoggerUnitTest {
    * parameters assigns the correct default values.
    */
   @Test
-  public void FileLoggerLogFolderFileNameMessagingLevel() {
+  public void logFolderFileNameMessagingLevel() {
     final String logFolderFileNameMessagingLevelDirectoryPath = LoggingConfig.getLogDirectory() + "/"
         + "LogFolderFileNameMessagingLevelDirectory";
     HtmlFileLogger logger = new HtmlFileLogger(logFolderFileNameMessagingLevelDirectoryPath,
@@ -414,15 +415,6 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
-  }
-
-  /**
-   * Verify that HTML File Logger catches and handles errors caused by empty file name.
-   */
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void HtmlFileLoggerEmptyFileNameException() {
-    HtmlFileLogger logger = new HtmlFileLogger("");
-    logger.close();
   }
 
   /**
