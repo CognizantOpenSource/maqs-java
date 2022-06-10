@@ -78,6 +78,7 @@ public class HtmlFileLoggerUnitTest {
       logger.logMessage(MessageType.WARNING, expectedText);
 
       String fileText = this.readTextFile(logger.getFilePath());
+
       Assert.assertTrue(fileText.contains(expectedText),
           "Expected Log Message to be contained in log."
               + System.lineSeparator() + "In the Log: " + fileText + System.lineSeparator());

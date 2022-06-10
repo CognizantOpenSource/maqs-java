@@ -204,11 +204,6 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
 
-      // Create log file if one does not already exist
-      if (!new File(this.getFilePath()).isDirectory()) {
-        new File(this.getFilePath());
-      }
-
       // Log the message
       try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
         Date dateObject = new Date();
