@@ -69,18 +69,16 @@ public class HtmlFileLoggerUnitTest {
    */
    @Test(singleThreaded = true)
    public void HtmlFileLoggerConstructorCreateDirectory() {
-     String testString = "Test to ensure that the file in the created directory can be written to.";
+      String testString = "Test to ensure that the file in the created directory can be written to.";
 
       HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
          "HtmlFileLoggerCreateDirectoryDelete").toString(),
       "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
-      logger.logMessage(MessageType.WARNING,
-      testString);
+      logger.logMessage(MessageType.WARNING, testString);
 
       String fileText = this.readTextFile(logger.getFilePath());
       System.out.println(fileText);
-      Assert.assertEquals(testString, fileText);
-      Assert.assertTrue(fileText.contains(testString), fileText);
+      Assert.assertTrue(fileText.contains(testString));
       deleteFile(logger);
    }
 
