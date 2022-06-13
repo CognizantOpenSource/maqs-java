@@ -70,19 +70,19 @@ public class HtmlFileLoggerUnitTest {
    */
    @Test(singleThreaded = true)
    public void constructorCreateDirectory() {
-     String expectedText = "Test to ensure that the file in the created directory can be written to.";
+      String expectedText = "Test to ensure that the file in the created directory can be written to.";
 
       HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
-         "HtmlFileLoggerCreateDirectoryDelete").toString(),
-      "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
+         "createDirectoryDelete").toString(), "createDirectory", MessageType.GENERIC);
       logger.logMessage(MessageType.WARNING, expectedText);
 
       String fileText = this.readTextFile(logger.getFilePath());
 
       Assert.assertTrue(fileText.contains(expectedText),
           "Expected Log Message to be contained in log."
-              + System.lineSeparator() + "In the Log: " + fileText + System.lineSeparator());
+              + System.lineSeparator() + "In the Log: /" + fileText + "/" + System.lineSeparator());
       deleteFile(logger);
+      deleteDirectory(logger);
    }
 
   /**
@@ -254,9 +254,10 @@ public class HtmlFileLoggerUnitTest {
         "Expected Directory 'Append File Directory'.");
     softAssert.assertEquals("FileLog.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
-
-    logger.close();
     softAssert.assertAll();
+
+    deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -274,9 +275,10 @@ public class HtmlFileLoggerUnitTest {
         "Expected Directory 'Log Folder File Name Directory'.");
     softAssert.assertEquals("LogFolderFileName.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
-
-    logger.close();
     softAssert.assertAll();
+
+    deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -294,9 +296,10 @@ public class HtmlFileLoggerUnitTest {
         "Expected Directory 'Log Folder Messaging Level Directory'.");
     softAssert.assertEquals("FileLog.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
-
-    logger.close();
     softAssert.assertAll();
+
+    deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -351,9 +354,10 @@ public class HtmlFileLoggerUnitTest {
         " Expected Directory AppendLogFolderFileNameDirectory");
     softAssert.assertEquals("AppendLogFolderFileName.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
-
-    logger.close();
     softAssert.assertAll();
+
+    deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -416,6 +420,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -442,6 +447,14 @@ public class HtmlFileLoggerUnitTest {
   private void deleteFile(HtmlFileLogger logger) {
     File file = new File(logger.getFilePath());
     logger.close();
+
+    if (file.exists()) {
+      Assert.assertTrue(file.delete());
+    }
+  }
+
+  private void deleteDirectory(HtmlFileLogger logger) {
+    File file = new File(logger.getDirectory());
 
     if (file.exists()) {
       Assert.assertTrue(file.delete());
