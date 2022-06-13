@@ -212,12 +212,12 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         writer.write(this.getTextWithColorFlag(messageType));
 
         // Add the content
-
         writer.write(StringEscapeUtils.escapeHtml4(
             StringProcessor.safeFormatter("%s%s%s", System.lineSeparator(), System.lineSeparator(), date)));
-        writer.write(StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(" %s:", messageType.name())));
-        writer.write(
-            StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
+        writer.write(StringEscapeUtils.escapeHtml4(
+            StringProcessor.safeFormatter(" %s:", messageType.name())));
+        writer.write(StringEscapeUtils.escapeHtml4(
+            StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
 
         // Close off the style
         writer.write("</p>");
@@ -283,7 +283,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
       case WARNING:
         return "<p style=\"color:orange\">";
       default:
-        logMessage(this.unknownMessageTypeMessage(type));
+        System.out.println(this.unknownMessageTypeMessage(type));
         return "<p style=\"color:hotpink\">";
     }
   }
