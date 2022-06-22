@@ -2,10 +2,8 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.logging;
 
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import org.testng.annotations.Test;
 
 /**

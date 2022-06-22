@@ -2,12 +2,9 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.logging;
 
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -246,7 +243,7 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void appendLogFolder() {
-    final String append_file_directory_path = LoggingConfig.getLogDirectory() + "/" + "Append File Directory";
+    final String append_file_directory_path = LoggingConfig.getLogDirectory() + File.separator + "Append File Directory";
     HtmlFileLogger logger = new HtmlFileLogger(append_file_directory_path, true);
 
     SoftAssert softAssert = new SoftAssert();
@@ -266,7 +263,7 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void logFolderFileName() {
-    final String log_folder_file_name_directory = LoggingConfig.getLogDirectory() + "/"
+    final String log_folder_file_name_directory = LoggingConfig.getLogDirectory() + File.separator
         + "Log Folder File Name Directory";
     HtmlFileLogger logger = new HtmlFileLogger(log_folder_file_name_directory, "LogFolderFileName.html");
 
@@ -287,7 +284,7 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void logFolderMessagingLevel() {
-    final String log_folder_messaging_level_directory_path = LoggingConfig.getLogDirectory() + "/"
+    final String log_folder_messaging_level_directory_path = LoggingConfig.getLogDirectory() + File.separator
         + "Log Folder Messaging Level Directory";
     HtmlFileLogger logger = new HtmlFileLogger(log_folder_messaging_level_directory_path, MessageType.WARNING);
 
@@ -344,7 +341,7 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test
   public void appendLogFolderFileName() {
-    final String appendLogFolderFileNameDirectoryPath = LoggingConfig.getLogDirectory() + "/"
+    final String appendLogFolderFileNameDirectoryPath = LoggingConfig.getLogDirectory() + File.separator
         + "AppendLogFolderFileNameDirectory";
     HtmlFileLogger logger = new HtmlFileLogger(true, appendLogFolderFileNameDirectoryPath,
         "AppendLogFolderFileName.html");
@@ -378,6 +375,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**

@@ -2,16 +2,11 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.logging;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+
 import java.io.File;
 import java.util.HashMap;
 import org.testng.Assert;

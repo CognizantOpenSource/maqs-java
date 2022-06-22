@@ -2,16 +2,10 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.logging;
 
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,7 +30,7 @@ import org.testng.asserts.SoftAssert;
 @Test(singleThreaded = true)
 public class FileLoggerUnitTest {
 
-  public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY = LoggingConfig.getLogDirectory() + "/"
+  public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY = LoggingConfig.getLogDirectory() + File.separator
       + "Log Folder Messaging Level Directory";
 
   @DataProvider(name = "logLevels")
@@ -419,7 +413,7 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerAppendLogFolder() {
-    final String append_file_directory = LoggingConfig.getLogDirectory() + "/" + "Append File Directory";
+    final String append_file_directory = LoggingConfig.getLogDirectory() + File.separator + "Append File Directory";
     FileLogger logger = new FileLogger(append_file_directory, true);
 
     SoftAssert softAssert = new SoftAssert();
@@ -429,7 +423,7 @@ public class FileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
     softAssert.assertAll();
 
-    deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -438,7 +432,7 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerLogFolderFileName() {
-    final String log_folder_file_name_directory = LoggingConfig.getLogDirectory() + "/"
+    final String log_folder_file_name_directory = LoggingConfig.getLogDirectory() + File.separator
         + "Log Folder File Name Directory";
     FileLogger logger = new FileLogger(log_folder_file_name_directory, "LogFolderFileName.txt");
 
@@ -512,7 +506,7 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerAppendLogFolderFileName() {
-    final String appendLogFolderFileNameDirectory = LoggingConfig.getLogDirectory() + "/"
+    final String appendLogFolderFileNameDirectory = LoggingConfig.getLogDirectory() + File.separator
         + "AppendLogFolderFileNameDirectory";
     FileLogger logger = new FileLogger(true, appendLogFolderFileNameDirectory, "AppendLogFolderFileName.txt");
 
@@ -532,7 +526,7 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerAppendLogFolderMessagingLevel() {
-    final String appendLogFolderFileNameDirectory = LoggingConfig.getLogDirectory() + "/"
+    final String appendLogFolderFileNameDirectory = LoggingConfig.getLogDirectory() + File.separator
         + "AppendLogFolderFileNameDirectory";
     FileLogger logger = new FileLogger(true, appendLogFolderFileNameDirectory, MessageType.WARNING);
 
@@ -570,7 +564,7 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void FileLoggerLogFolderFileNameMessagingLevel() {
-    final String logFolderFileNameMessagingLevelDirectory = LoggingConfig.getLogDirectory() + "/"
+    final String logFolderFileNameMessagingLevelDirectory = LoggingConfig.getLogDirectory() + File.separator
         + "LogFolderFileNameMessagingLevelDirectory";
     FileLogger logger = new FileLogger(logFolderFileNameMessagingLevelDirectory, "LogFolderFileNameMessagingLevel.txt",
         MessageType.WARNING);
@@ -678,6 +672,18 @@ public class FileLoggerUnitTest {
    */
   private void deleteFile(FileLogger logger) {
     File file = new File(logger.getFilePath());
+
+    if (file.exists()) {
+      Assert.assertTrue(file.delete());
+    }
+  }
+
+  /**
+   * Deletes the file in the logger.
+   * @param logger the File Logger
+   */
+  private void deleteDirectory(FileLogger logger) {
+    File file = new File(logger.getDirectory());
 
     if (file.exists()) {
       Assert.assertTrue(file.delete());
