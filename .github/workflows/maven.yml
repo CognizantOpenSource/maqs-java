@@ -50,7 +50,7 @@ jobs:
 
   draftRelease:
     name: Draft release
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       # Drafts your next Release notes as Pull Requests are merged into "master"
