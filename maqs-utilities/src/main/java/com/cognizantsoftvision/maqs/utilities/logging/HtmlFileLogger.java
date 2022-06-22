@@ -8,26 +8,46 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.nio.file.Files;
 import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * The HTML File Logger class.
  * Helper class for adding logs to an HTML file. Allows configurable file path.
  */
-public class HtmlFileLogger extends FileLogger implements AutoCloseable {
+public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
 
   /**
    * The default log name.
    */
   private static final String DEFAULT_LOG_NAME = "FileLog.html";
 
+  private static final String FILES = "../com/cognizantsoftvision/maqs/utilities/logging/files/";
+
   /**
    * Default header for the HTML file, this gives us our colored text.
    */
-  private static final String DEFAULT_HTML_HEADER =
-      "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
+  private static final File DEFAULT_HTML_HEADER = new File(FILES + "defaultHeader.html");
+
+//      "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
+//          + "<meta name='viewport' content='width=device-width, initial-scale=1'><title>{0}</title>"
+//          + "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>"
+//          + "<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script> <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script> <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous'></script> <script src='https://use.fontawesome.com/releases/v5.0.8/js/all.js'></script> </head><body>";
+//      "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
+
+  private static final File SCRIPT_AND_CSS_TAGS = new File(FILES + "scriptAndCssTags.html");
+
+  private static final File FILTER_DROPDOWN = new File(FILES + "filterDropdown.html");
+
+  private static final File EMBED_IMAGE = new File(FILES + "embedImage.html");
+
+  private static final File LOG_MESSAGE = new File(FILES + "logMessage.html");
+
+  /**
+   * The beginning to the cards section.
+   */
+  private static final String CARD_START = "<div class='container-fluid'><div class='row'>";
+
   private static final String LOG_ERROR_MESSAGE = "Failed to write to event log because: %s";
 
   /**
@@ -180,8 +200,21 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   public HtmlFileLogger(Boolean append, String logFolder, String name, MessageType messageLevel) {
     super(append, logFolder, name, messageLevel);
 
+//    try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
+//      writer.write(new String(Files.readAllBytes(Paths.get(FILES + "defaultHeader.html"))));
+//    } catch (IOException e) {
+//      ConsoleLogger console = new ConsoleLogger();
+//      console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
+//    }
+
     try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-      writer.write(DEFAULT_HTML_HEADER);
+      String defaultCDNTags = Files.readString(DEFAULT_HTML_HEADER.toPath());
+      defaultCDNTags = defaultCDNTags.replace("{0}", this.getFilePath());
+
+      writer.write(System.lineSeparator() + defaultCDNTags + this.getFilePath());
+      writer.write(System.lineSeparator() + Files.readString(SCRIPT_AND_CSS_TAGS.toPath()));
+      writer.write(System.lineSeparator() + Files.readString(FILTER_DROPDOWN.toPath()));
+      writer.write(System.lineSeparator() + CARD_START);
     } catch (IOException e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
@@ -203,36 +236,43 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   public void logMessage(MessageType messageType, String message, Object... args) {
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
-      // Log the message
+      try {
+        String logMessage = Files.readString(LOG_MESSAGE.toPath());
+        logMessage = logMessage.replace("{0}", messageType.name());
+        logMessage = logMessage.replace("{1}", getTextWithColorFlag(messageType));
+        logMessage = logMessage.replace("{2}", messageType.name());
+        logMessage = logMessage.replace("{3}", currentDateTime());
+        logMessage = logMessage.replace("{4}", StringEscapeUtils.escapeHtml4(
+            StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
+        insertHtml(logMessage);
+      } catch (IOException e) {
+        ConsoleLogger console = new ConsoleLogger();
+        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
+      }
+
+//      insertHtml("<div class='collapse col-12 show' data-logtype='" + messageType + "'>"
+//          + "<div class='card'><div class='card-body " + getTextWithColorFlag(messageType) + "'>"
+//          + "<h5 class='card-title mb-1'>" + messageType + "</h5><h6 class='card-subtitle mb-1'>"
+//          + currentDateTime() + "</h6><p class='card-text'>"
+//          + StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(
+//                  System.lineSeparator() + message, args)) + "</p></div></div></div>");
+    }
+  }
+
+  /**
+   * Write the formatted message (one line) to the console as a generic message.
+   * @param html Html content
+   */
+  private void insertHtml(String html) {
+    // Log the message
       try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-        Date dateObject = new Date();
-        SimpleDateFormat format = new SimpleDateFormat(Logger.DEFAULT_DATE_FORMAT);
-        String date = format.format(dateObject);
-
-        // Set the style
-        writer.write(this.getTextWithColorFlag(messageType));
-
-        // Add the content
-        writer.write(StringEscapeUtils.escapeHtml4(
-            StringProcessor.safeFormatter("%s%s%s", System.lineSeparator(), System.lineSeparator(), date)));
-        writer.write(StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter("%s:\t", messageType.name())));
-        writer.write(
-            StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
-
-        // Close off the style
-        writer.write("</p>");
-
-        // Close the pre tag when logging Errors
-        if (messageType.name().equals("ERROR")) {
-          writer.write("</pre>");
-        }
+          writer.write(System.lineSeparator() + html);
       } catch (Exception e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
-        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
-        console.logMessage(messageType, message, args);
+        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage())
+            + System.lineSeparator() + "Content: " + html);
       }
-    }
   }
 
   /**
@@ -262,6 +302,29 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   }
 
   /**
+   * Embed a base 64 image.
+   * @param base64String Base 64 image string
+   */
+  @Override
+  public void embedImage(String base64String) {
+    // Image DIV.
+    try {
+      String imageDiv = Files.readString(EMBED_IMAGE.toPath());
+      imageDiv = imageDiv.replace("{0}", currentDateTime());
+      imageDiv = imageDiv.replace("{1}", base64String);
+      insertHtml(imageDiv);
+    } catch (IOException e) {
+      ConsoleLogger console = new ConsoleLogger();
+      console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
+    }
+
+//    String imageDiv = "<div class='collapse col-12 show' data-logtype='IMAGE'><div class='card'>"
+//        + "<div class='card-body'><h5 class='card-title mb-1'>IMAGE</h5>"
+//        + "<h6 class='card-subtitle mb-1'>{0}</h6></div><a class='pop'>"
+//        + "<img class='card-img-top rounded' src='data:image/png;base64, {1}'style='width: 200px;'></a></div></div>";
+  }
+
+  /**
    * Get the HTML style key for the given message type.
    *
    * @param type The message type
@@ -270,20 +333,24 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   private String getTextWithColorFlag(MessageType type) {
     switch (type) {
       case VERBOSE:
-        return "<p style =\"color:purple\">";
+        return "bg-secondary";
+      case ACTION:
+        return "text-info";
+      case STEP:
+        return "text-primary";
       case ERROR:
-        return "<pre><p style=\"color:red\">";
+        return "text-danger";
       case GENERIC:
-        return "<p style =\"color:black\">";
+        return "";
       case INFORMATION:
-        return "<p style =\"color:blue\">";
+        return "text-secondary";
       case SUCCESS:
-        return "<p style=\"color:green\">";
+        return "text-success";
       case WARNING:
-        return "<p style=\"color:orange\">";
+        return "text-warning";
       default:
         System.out.println(this.unknownMessageTypeMessage(type));
-        return "<p style=\"color:hotpink\">";
+        return "text-white bg-dark";
     }
   }
 }

@@ -16,6 +16,8 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+
+import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -84,6 +86,38 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                                         new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
                                                         .contains(testAppend),
                                         "Checking that appended value was added to file");
+                } finally {
+                        webDriver.quit();
+                }
+        }
+
+        /**
+         * Test capture screenshot append.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testCaptureScreenshotAppendScreenshot() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
+                try {
+                        HtmlFileLogger fileLogger = (HtmlFileLogger) this.getTestObject().getLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                            this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
+
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        final String testAppend = "testAppend";
+                        boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject, testAppend);
+
+                        // Assert screenshot was successful
+                        Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+                        String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+                        Assert.assertTrue(
+                            new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+                            "Checking that expected file path exists");
+                        Assert.assertTrue(
+                            new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
+                                .contains(testAppend),
+                            "Checking that appended value was added to file");
                 } finally {
                         webDriver.quit();
                 }
