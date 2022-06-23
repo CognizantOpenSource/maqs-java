@@ -248,14 +248,14 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
    */
   private void insertHtml(String html) {
     // Log the message
-      try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-          writer.write(System.lineSeparator() + html);
-      } catch (Exception e) {
-        // Failed to write to the event log, write error to the console instead
-        ConsoleLogger console = new ConsoleLogger();
-        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage())
-            + System.lineSeparator() + "Content: " + html);
-      }
+    try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
+        writer.write(System.lineSeparator() + html);
+    } catch (Exception e) {
+      // Failed to write to the event log, write error to the console instead
+      ConsoleLogger console = new ConsoleLogger();
+      console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage())
+          + System.lineSeparator() + "Content: " + html);
+    }
   }
 
   /**
