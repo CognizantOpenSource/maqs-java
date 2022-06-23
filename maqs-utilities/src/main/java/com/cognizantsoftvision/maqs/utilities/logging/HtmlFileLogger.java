@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import org.apache.commons.text.StringEscapeUtils;
 
 /**
@@ -22,18 +23,14 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
    */
   private static final String DEFAULT_LOG_NAME = "FileLog.html";
 
-  private static final String FILES = "../com/cognizantsoftvision/maqs/utilities/logging/files/";
+  private static final File FILE_DIRECTORY = new File("src/main/java/com/cognizantsoftvision/maqs/utilities/logging/htmlFiles");
+
+  private static final String FILES = FILE_DIRECTORY.getAbsolutePath();
 
   /**
    * Default header for the HTML file, this gives us our colored text.
    */
   private static final File DEFAULT_HTML_HEADER = new File(FILES + "defaultHeader.html");
-
-//      "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
-//          + "<meta name='viewport' content='width=device-width, initial-scale=1'><title>{0}</title>"
-//          + "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>"
-//          + "<script src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous'></script> <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script> <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous'></script> <script src='https://use.fontawesome.com/releases/v5.0.8/js/all.js'></script> </head><body>";
-//      "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
 
   private static final File SCRIPT_AND_CSS_TAGS = new File(FILES + "scriptAndCssTags.html");
 
@@ -41,7 +38,7 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
 
   private static final File EMBED_IMAGE = new File(FILES + "embedImage.html");
 
-  private static final File LOG_MESSAGE = new File(FILES + "logMessage.html");
+  private static final File LOG_MESSAGE = new File(FILES + File.separator  + "logMessage.html");
 
   /**
    * The beginning to the cards section.
@@ -200,13 +197,6 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
   public HtmlFileLogger(Boolean append, String logFolder, String name, MessageType messageLevel) {
     super(append, logFolder, name, messageLevel);
 
-//    try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-//      writer.write(new String(Files.readAllBytes(Paths.get(FILES + "defaultHeader.html"))));
-//    } catch (IOException e) {
-//      ConsoleLogger console = new ConsoleLogger();
-//      console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
-//    }
-
     try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
       String defaultCDNTags = Files.readString(DEFAULT_HTML_HEADER.toPath());
       defaultCDNTags = defaultCDNTags.replace("{0}", this.getFilePath());
@@ -237,25 +227,17 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
       try {
-        String logMessage = Files.readString(LOG_MESSAGE.toPath());
-        logMessage = logMessage.replace("{0}", messageType.name());
-        logMessage = logMessage.replace("{1}", getTextWithColorFlag(messageType));
-        logMessage = logMessage.replace("{2}", messageType.name());
-        logMessage = logMessage.replace("{3}", currentDateTime());
-        logMessage = logMessage.replace("{4}", StringEscapeUtils.escapeHtml4(
+        String logMessage = Files.readString(Paths.get(LOG_MESSAGE.getAbsolutePath()));
+        logMessage = logMessage.replace("{messageType}", messageType.name());
+        logMessage = logMessage.replace("{0}", getTextWithColorFlag(messageType));
+        logMessage = logMessage.replace("{1}", currentDateTime());
+        logMessage = logMessage.replace("{2}", StringEscapeUtils.escapeHtml4(
             StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
         insertHtml(logMessage);
       } catch (IOException e) {
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
       }
-
-//      insertHtml("<div class='collapse col-12 show' data-logtype='" + messageType + "'>"
-//          + "<div class='card'><div class='card-body " + getTextWithColorFlag(messageType) + "'>"
-//          + "<h5 class='card-title mb-1'>" + messageType + "</h5><h6 class='card-subtitle mb-1'>"
-//          + currentDateTime() + "</h6><p class='card-text'>"
-//          + StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(
-//                  System.lineSeparator() + message, args)) + "</p></div></div></div>");
     }
   }
 
@@ -317,11 +299,6 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
     }
-
-//    String imageDiv = "<div class='collapse col-12 show' data-logtype='IMAGE'><div class='card'>"
-//        + "<div class='card-body'><h5 class='card-title mb-1'>IMAGE</h5>"
-//        + "<h6 class='card-subtitle mb-1'>{0}</h6></div><a class='pop'>"
-//        + "<img class='card-img-top rounded' src='data:image/png;base64, {1}'style='width: 200px;'></a></div></div>";
   }
 
   /**
