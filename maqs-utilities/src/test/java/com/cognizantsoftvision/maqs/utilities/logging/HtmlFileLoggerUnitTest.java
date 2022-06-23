@@ -74,10 +74,10 @@ public class HtmlFileLoggerUnitTest {
       logger.logMessage(MessageType.WARNING, expectedText);
 
       String fileText = this.readTextFile(logger.getFilePath());
-
+      Assert.assertNotNull(fileText, "the text in the file was empty");
       Assert.assertTrue(fileText.contains(expectedText),
           "Expected Log Message to be contained in log."
-              + System.lineSeparator() + "In the Log: /" + fileText + "/" + System.lineSeparator());
+              + System.lineSeparator() + "In the Log: " + fileText + "" + System.lineSeparator());
       deleteFile(logger);
       deleteDirectory(logger);
    }
