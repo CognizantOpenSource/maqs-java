@@ -5,7 +5,9 @@
 package com.cognizantsoftvision.maqs.utilities.performance;
 
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -14,13 +16,15 @@ import org.testng.annotations.Test;
 public class PerfTimerCollectionUnitTest {
 
   /**
-   * tests the get log functionality.
+   * Tests the get and set log functionality.
    */
   @Test
-  public void testGetLog() {
+  public void testGetAndSetLog() {
     ConsoleLogger logger = new ConsoleLogger();
+    logger.setLoggingLevel(MessageType.SUCCESS);
     PerfTimerCollection perfTimerCollection = new PerfTimerCollection(logger, "TestCase");
-    Assert.assertNotNull(perfTimerCollection.getLog());
+    perfTimerCollection.setLog(logger);
+    Assert.assertEquals(perfTimerCollection.getLog().getLoggingLevel(), MessageType.SUCCESS);
   }
 
   /**
@@ -43,6 +47,5 @@ public class PerfTimerCollectionUnitTest {
     Assert.assertEquals(perfTimerCollection.getTestName(), "TestCase");
     perfTimerCollection.setTestName("NewTestCaseName");
     Assert.assertEquals(perfTimerCollection.getTestName(), "NewTestCaseName");
-
   }
 }

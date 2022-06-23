@@ -203,11 +203,10 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   public void logMessage(MessageType messageType, String message, Object... args) {
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
+
       // Log the message
       try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-        Date dateObject = new Date();
-        SimpleDateFormat format = new SimpleDateFormat(Logger.DEFAULT_DATE_FORMAT);
-        String date = format.format(dateObject);
+        String date = new SimpleDateFormat(Logger.DEFAULT_DATE_FORMAT).format(new Date());
 
         // Set the style
         writer.write(this.getTextWithColorFlag(messageType));
@@ -215,9 +214,10 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         // Add the content
         writer.write(StringEscapeUtils.escapeHtml4(
             StringProcessor.safeFormatter("%s%s%s", System.lineSeparator(), System.lineSeparator(), date)));
-        writer.write(StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter("%s:\t", messageType.name())));
-        writer.write(
-            StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
+        writer.write(StringEscapeUtils.escapeHtml4(
+            StringProcessor.safeFormatter(" %s:", messageType.name())));
+        writer.write(StringEscapeUtils.escapeHtml4(
+            StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
 
         // Close off the style
         writer.write("</p>");
@@ -226,6 +226,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         if (messageType.name().equals("ERROR")) {
           writer.write("</pre>");
         }
+
       } catch (Exception e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
