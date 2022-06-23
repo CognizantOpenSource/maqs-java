@@ -89,7 +89,8 @@ public class HtmlFileLoggerUnitTest {
       "Test to ensure that the file in the created directory can be written to.");
 
       File file = new File(logger.getFilePath());
-      System.out.println(file.getAbsolutePath());
+      ConsoleLogger consoleLogger = new ConsoleLogger();
+      consoleLogger.logMessage(file.getAbsolutePath());
       Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains(
       "Test to ensure that the file in the created directory can be written to."));
       logger.close();
