@@ -199,12 +199,11 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
     super(append, logFolder, name, messageLevel);
 
     try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-      String defaultCDNTags = Files.readString(DEFAULT_HTML_HEADER.toPath());
+      String defaultCDNTags = Files.readString(Paths.get(DEFAULT_HTML_HEADER.getAbsolutePath()));
       defaultCDNTags = defaultCDNTags.replace("{0}", this.getFilePath());
-
-      writer.write(System.lineSeparator() + defaultCDNTags + this.getFilePath());
-      writer.write(System.lineSeparator() + Files.readString(SCRIPT_AND_CSS_TAGS.toPath()));
-      writer.write(System.lineSeparator() + Files.readString(FILTER_DROPDOWN.toPath()));
+      writer.write(defaultCDNTags + this.getFilePath());
+      writer.write(System.lineSeparator() + Files.readString(Paths.get(SCRIPT_AND_CSS_TAGS.getAbsolutePath())));
+      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILTER_DROPDOWN.getAbsolutePath())));
       writer.write(System.lineSeparator() + CARD_START);
     } catch (IOException e) {
       ConsoleLogger console = new ConsoleLogger();
@@ -275,7 +274,7 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
     File file = new File(this.getFilePath());
     if (file.exists()) {
       try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-        writer.write("</body></html>");
+        writer.write("</div></div></body></html>");
       } catch (IOException e) {
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));

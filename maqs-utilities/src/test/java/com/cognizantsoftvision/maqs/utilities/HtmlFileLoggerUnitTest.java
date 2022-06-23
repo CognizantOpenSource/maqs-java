@@ -81,16 +81,20 @@ public class HtmlFileLoggerUnitTest {
    @Test(groups = TestCategories.UTILITIES, singleThreaded = true)
    public void constructorCreateDirectory() {
       HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
-         "HtmlFileLoggerCreateDirectoryDelete").toString(),
-      "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
+         "CreateDirectoryDelete").toString(),
+      "CreateDirectory", MessageType.GENERIC);
       logger.logMessage(MessageType.WARNING,
       "Test to ensure that the file in the created directory can be written to.");
 
       File file = new File(logger.getFilePath());
-      Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains(
+      File directory = new File(logger.getDirectory());
+
+      Assert.assertTrue(directory.isDirectory(), "Directory was not created");
+      Assert.assertTrue(this.readTextFile(file.getAbsolutePath()).contains(
       "Test to ensure that the file in the created directory can be written to."));
       logger.close();
       Assert.assertTrue(file.delete());
+      Assert.assertTrue(directory.delete());
    }
 
   /**
