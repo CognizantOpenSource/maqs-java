@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;
@@ -107,7 +108,7 @@ public class FileLoggerUnitTest {
    * @param logLevel The type of logging.
    * @param levels   What should appear for each level.
    */
-  @Test(dataProvider = "logLevels")
+  @Test(groups = TestCategories.UTILITIES, dataProvider = "logLevels")
   public void testHierarchicalTxtFileLogger(String logLevel, HashMap<String, Boolean> levels) {
     FileLogger logger = new FileLogger(true, LoggingConfig.getLogDirectory(),
         this.getFileName("TestHierarchicalTxtFileLogger_" + logLevel, "txt"), MessageType.GENERIC);
@@ -121,7 +122,7 @@ public class FileLoggerUnitTest {
    * @param logLevel The type of logging.
    * @param levels   What should appear for each level.
    */
-  @Test(dataProvider = "logLevels")
+  @Test(groups = TestCategories.UTILITIES, dataProvider = "logLevels")
   public void testHierarchicalConsoleLogger(String logLevel, HashMap<String, Boolean> levels) {
     // Calculate a file path
     String path = Paths.get(LoggingConfig.getLogDirectory(), this.getFileName(
@@ -144,7 +145,7 @@ public class FileLoggerUnitTest {
    * @param logLevel The type of logging.
    * @param levels   What should appear for each level.
    */
-  @Test(dataProvider = "logLevels")
+  @Test(groups = TestCategories.UTILITIES, dataProvider = "logLevels")
   public void testHierarchicalHtmlFileLogger(String logLevel, HashMap<String, Boolean> levels) {
     HtmlFileLogger logger = new HtmlFileLogger(true, LoggingConfig.getLogDirectory(),
         this.getFileName("TestHierarchicalHtmlFileLogger" + logLevel, "html"), MessageType.GENERIC);
@@ -156,7 +157,7 @@ public class FileLoggerUnitTest {
   /**
    * Test logging to a new file.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void fileLoggerNoAppendTest() {
     FileLogger logger = new FileLogger(false, "", "WriteToFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
@@ -166,7 +167,7 @@ public class FileLoggerUnitTest {
   /**
    * Test logging to an existing file.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void fileLoggerAppendFileTest() {
     FileLogger logger = new FileLogger(true, "", "WriteToExistingFileLogger");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
@@ -176,7 +177,7 @@ public class FileLoggerUnitTest {
   /**
    * Verify the logging suspension functions
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void TestSuspendLogger() {
     SoftAssert softAssert = new SoftAssert();
 
@@ -219,7 +220,7 @@ public class FileLoggerUnitTest {
   /**
    * Test Writing to the File Logger
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void WriteToFileLogger() {
     FileLogger logger = new FileLogger("", "WriteToFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
@@ -229,7 +230,7 @@ public class FileLoggerUnitTest {
   /**
    * Test Writing to an Existing File Logger
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void WriteToExistingFileLogger() {
     FileLogger logger = new FileLogger(true, "", "WriteToExistingFileLogger", MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "This is a test.");
@@ -244,7 +245,7 @@ public class FileLoggerUnitTest {
    * @throws IOException if an exception is thrown
    */
     @Ignore
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void FileLoggerConstructorCreateDirectory() throws IOException {
       String message = "Test to ensure that the file in the created directory can be written to.";
       FileLogger logger = new FileLogger(true,
@@ -266,7 +267,7 @@ public class FileLoggerUnitTest {
   /**
    * Verify that File Logger can log message without defining a Message Type
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerLogMessage() {
     FileLogger logger = new FileLogger(true, "", "FileLoggerLogMessage");
     logger.logMessage("Test to ensure LogMessage works as expected.");
@@ -278,7 +279,7 @@ public class FileLoggerUnitTest {
   /**
    * Verify that File Logger can log message and defining a Message Type
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerLogMessageSelectType() {
     FileLogger logger = new FileLogger(true, "", "FileLoggerLogMessage");
     logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
@@ -290,7 +291,7 @@ public class FileLoggerUnitTest {
   /**
    * Verify that File Path field can be accessed and updated
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerSetFilePath() {
     FileLogger logger = new FileLogger(true, "", "FileLoggerSetFilePath", MessageType.GENERIC);
     logger.setFilePath("test file path");
@@ -302,7 +303,7 @@ public class FileLoggerUnitTest {
    * Verify that File Logger catches and handles errors caused by incorrect file
    * Paths
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerCatchThrownException() {
     FileLogger logger = new FileLogger(true, "", "FileLoggerCatchThrownException", MessageType.GENERIC);
     logger.setFilePath("<>");
@@ -313,7 +314,7 @@ public class FileLoggerUnitTest {
   /**
    * Test File Logger with empty file name throws Illegal Argument Exception.
    */
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(groups = TestCategories.UTILITIES, expectedExceptions = IllegalArgumentException.class)
   public void FileLoggerEmptyFileNameException() {
     new FileLogger("");
   }
@@ -321,7 +322,7 @@ public class FileLoggerUnitTest {
   /**
    * Verify File Logger with No Parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerNoParameters() {
     FileLogger logger = new FileLogger();
 
@@ -339,7 +340,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only append parameter assigns the correct default
    * values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerAppendOnly() {
     FileLogger logger = new FileLogger(true);
 
@@ -357,7 +358,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only File Name parameter assigns the correct default
    * values. Verify default extension is added '.txt'
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerNameOnlyAddExtension() {
     FileLogger logger = new FileLogger("FileNameOnly");
 
@@ -375,7 +376,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Message Type parameter assigns the correct
    * default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerMessageTypeOnly() {
     FileLogger logger = new FileLogger(MessageType.WARNING);
 
@@ -393,7 +394,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Append and File Name parameters assigns the
    * correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerAppendFileName() {
     FileLogger logger = new FileLogger(true, "AppendFileName");
 
@@ -411,7 +412,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Log Folder and Append parameters assigns the
    * correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerAppendLogFolder() {
     final String append_file_directory = LoggingConfig.getLogDirectory() + File.separator + "Append File Directory";
     FileLogger logger = new FileLogger(append_file_directory, true);
@@ -430,7 +431,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Log Folder and File Name parameters assigns the
    * correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerLogFolderFileName() {
     final String log_folder_file_name_directory = LoggingConfig.getLogDirectory() + File.separator
         + "Log Folder File Name Directory";
@@ -450,7 +451,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Log Folder and Messaging Level parameters
    * assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerLogFolderMessagingLevel() {
     FileLogger logger = new FileLogger(LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY, MessageType.WARNING);
 
@@ -468,7 +469,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Append and Messaging Level parameters assigns
    * the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerAppendMessagingLevel() {
     FileLogger logger = new FileLogger(true, MessageType.WARNING);
 
@@ -486,7 +487,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Messaging Level and file name parameters assigns
    * the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerMessagingLevelFileName() {
     FileLogger logger = new FileLogger(MessageType.WARNING, "MessagingTypeFile.txt");
 
@@ -504,7 +505,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Append, log folder and file name parameters
    * assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerAppendLogFolderFileName() {
     final String appendLogFolderFileNameDirectory = LoggingConfig.getLogDirectory() + File.separator
         + "AppendLogFolderFileNameDirectory";
@@ -524,7 +525,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Append, log folder and Messaging Level
    * parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerAppendLogFolderMessagingLevel() {
     final String appendLogFolderFileNameDirectory = LoggingConfig.getLogDirectory() + File.separator
         + "AppendLogFolderFileNameDirectory";
@@ -544,7 +545,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only File Name, Append and Messaging Level parameters
    * assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerFileNameAppendMessagingLevel() {
     FileLogger logger = new FileLogger("FileNameAppendMessagingLevel.txt", true, MessageType.WARNING);
 
@@ -562,7 +563,7 @@ public class FileLoggerUnitTest {
    * Verify File Logger with only Log Folder, File Name and Messaging Level
    * parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void FileLoggerLogFolderFileNameMessagingLevel() {
     final String logFolderFileNameMessagingLevelDirectory = LoggingConfig.getLogDirectory() + File.separator
         + "LogFolderFileNameMessagingLevelDirectory";

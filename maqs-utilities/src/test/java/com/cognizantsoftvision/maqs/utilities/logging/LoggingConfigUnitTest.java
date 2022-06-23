@@ -9,6 +9,8 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 
 import java.io.File;
 import java.util.HashMap;
+
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,7 +24,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Enabled Setting. Override Config to 'YES'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingEnabledSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "YES");
@@ -34,7 +36,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Enabled Setting. Override Config to 'ONFAIL'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingEnabledOnFailSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "ONFAIL");
@@ -46,7 +48,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Enabled Setting. Override Config to 'NO'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingDisabledSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "NO");
@@ -59,7 +61,7 @@ public class LoggingConfigUnitTest {
      * Test getting Logging Enabled Setting with an Illegal Argument Override Config
      * to 'INVALIDVALUE' - Expect IllegalArgumentException
      */
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = TestCategories.UTILITIES, expectedExceptions = IllegalArgumentException.class)
     public void getLoggingSettingIllegalArgumentTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "INVALIDVALUE");
@@ -70,7 +72,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Level Setting. Override Config to 'VERBOSE'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingLevelVerboseSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "VERBOSE");
@@ -82,7 +84,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Level Setting. Override Config to 'INFORMATION'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingLevelInformationSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INFORMATION");
@@ -94,7 +96,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Level Setting. Override Config to 'GENERIC'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingLevelGenericSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "GENERIC");
@@ -106,7 +108,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Level Setting. Override Config to 'SUCCESS'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingLevelSuccessSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "SUCCESS");
@@ -118,7 +120,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Level Setting. Override Config to 'WARNING'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingLevelWarningSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "WARNING");
@@ -130,7 +132,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Level Setting. Override Config to 'ERROR'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingLevelErrorSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "ERROR");
@@ -142,7 +144,7 @@ public class LoggingConfigUnitTest {
     /**
      * Test getting Logging Level Setting. Override Config to 'SUSPENDED'
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLoggingLevelSuspendedSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "SUSPENDED");
@@ -155,7 +157,7 @@ public class LoggingConfigUnitTest {
      * Test getting Logging Level Setting with Illegal Argument. Override Config to
      * 'INVALIDVALUE' - Expect IllegalArgumentException
      */
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = TestCategories.UTILITIES, expectedExceptions = IllegalArgumentException.class)
     public void getLoggingLevelIllegalArgumentTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INVALIDVALUE");
@@ -167,7 +169,7 @@ public class LoggingConfigUnitTest {
      * Test getting File Logger. Override Config LogType to 'TXT' which creates
      * FileLogger.
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getFileLoggerTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogType", "TXT");
@@ -182,7 +184,7 @@ public class LoggingConfigUnitTest {
      * Test getting File Logger. Override Config LogType to 'CONSOLE' which creates
      * ConsoleLogger.
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getConsoleLoggerTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogType", "CONSOLE");
@@ -197,7 +199,7 @@ public class LoggingConfigUnitTest {
      * Test getting File Logger. Override Config Log to 'NO' which creates
      * ConsoleLogger by default.
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getConsoleLoggerLoggingDisabledTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "NO");
@@ -211,7 +213,7 @@ public class LoggingConfigUnitTest {
      * Test getting Log Directory.
      * Config value not defined - Compare to Default Path.
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void getLogDirectoryTest() {
         String defaultPath = new File("").getAbsolutePath().concat(
             File.separator + "target" + File.separator + "logs");
