@@ -23,20 +23,21 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
    */
   private static final String DEFAULT_LOG_NAME = "FileLog.html";
 
-  private static final File FILE_DIRECTORY = new File("src/main/java/com/cognizantsoftvision/maqs/utilities/logging/htmlFiles");
+  private static final File FILE_DIRECTORY = new File(
+      "src/main/java/com/cognizantsoftvision/maqs/utilities/logging/htmlFiles");
 
   private static final String FILES = FILE_DIRECTORY.getAbsolutePath();
 
   /**
    * Default header for the HTML file, this gives us our colored text.
    */
-  private static final File DEFAULT_HTML_HEADER = new File(FILES + "defaultHeader.html");
+  private static final File DEFAULT_HTML_HEADER = new File(FILES + File.separator + "defaultHeader.html");
 
-  private static final File SCRIPT_AND_CSS_TAGS = new File(FILES + "scriptAndCssTags.html");
+  private static final File SCRIPT_AND_CSS_TAGS = new File(FILES + File.separator + "scriptAndCssTags.html");
 
-  private static final File FILTER_DROPDOWN = new File(FILES + "filterDropdown.html");
+  private static final File FILTER_DROPDOWN = new File(FILES + File.separator + "filterDropdown.html");
 
-  private static final File EMBED_IMAGE = new File(FILES + "embedImage.html");
+  private static final File EMBED_IMAGE = new File(FILES + File.separator + "embedImage.html");
 
   private static final File LOG_MESSAGE = new File(FILES + File.separator  + "logMessage.html");
 
