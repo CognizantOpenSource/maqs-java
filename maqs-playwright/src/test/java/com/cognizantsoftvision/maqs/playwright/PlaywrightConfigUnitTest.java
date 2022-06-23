@@ -58,7 +58,7 @@ public class PlaywrightConfigUnitTest {
     for (String browserName : browserNames) {
       Config.addTestSettingValues(Collections.singletonMap(browser, browserName),
           ConfigSection.PLAYWRIGHT_MAQS, true);
-      Assert.assertEquals(PlaywrightConfig.getBrowserName(), browserName);
+      Assert.assertEquals(PlaywrightConfig.getBrowserName().toUpperCase(), browserName.toUpperCase());
     }
   }
 
@@ -78,7 +78,8 @@ public class PlaywrightConfigUnitTest {
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void configBrowserEnum() {
     for (PlaywrightBrowser currentBrowser : PlaywrightBrowser.class.getEnumConstants()) {
-      Config.addTestSettingValues(Collections.singletonMap(browser, currentBrowser.name()), ConfigSection.PLAYWRIGHT_MAQS, true);
+      Config.addTestSettingValues(Collections.singletonMap(
+          browser, currentBrowser.name()), ConfigSection.PLAYWRIGHT_MAQS, true);
       Assert.assertEquals(currentBrowser, PlaywrightConfig.getBrowserType());
     }
   }
