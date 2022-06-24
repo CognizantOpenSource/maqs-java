@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -21,25 +22,12 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
   /**
    * The default log name.
    */
-  private static final String DEFAULT_LOG_NAME = "FileLog.html";
+  private static final String DEFAULT_LOG_NAME = "HtmlFileLog.html";
 
   private static final File FILE_DIRECTORY = new File(
-      "src/main/java/com/cognizantsoftvision/maqs/utilities/logging/htmlFiles");
+      "src/main/java/com/cognizantsoftvision/maqs/utilities/logging/resources");
 
-  private static final String FILES = FILE_DIRECTORY.getAbsolutePath();
-
-  /**
-   * Default header for the HTML file, this gives us our colored text.
-   */
-  private static final File DEFAULT_HTML_HEADER = new File(FILES + File.separator + "defaultHeader.html");
-
-  private static final File SCRIPT_AND_CSS_TAGS = new File(FILES + File.separator + "scriptAndCssTags.html");
-
-  private static final File FILTER_DROPDOWN = new File(FILES + File.separator + "filterDropdown.html");
-
-  private static final File EMBED_IMAGE = new File(FILES + File.separator + "embedImage.html");
-
-  private static final File LOG_MESSAGE = new File(FILES + File.separator  + "logMessage.html");
+  private static final String FILES = FILE_DIRECTORY.getAbsolutePath() + File.separator;
 
   /**
    * The beginning to the cards section.
@@ -199,11 +187,13 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
     super(append, logFolder, name, messageLevel);
 
     try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-      String defaultCDNTags = Files.readString(Paths.get(DEFAULT_HTML_HEADER.getAbsolutePath()));
+      String defaultCDNTags = Files.readString(Paths.get(FILES + "defaultHeader.html"));
       defaultCDNTags = defaultCDNTags.replace("{0}", this.getFilePath());
-      writer.write(defaultCDNTags + this.getFilePath());
-      writer.write(System.lineSeparator() + Files.readString(Paths.get(SCRIPT_AND_CSS_TAGS.getAbsolutePath())));
-      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILTER_DROPDOWN.getAbsolutePath())));
+      String css = String.valueOf(Files.readString(Paths.get(FILES + "htmlLogger.css")));
+      defaultCDNTags = defaultCDNTags.replace("{1}", css);
+      writer.write(defaultCDNTags);
+      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "scriptAndCssTags2.html")));
+      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "filterDropdown.html")));
       writer.write(System.lineSeparator() + CARD_START);
     } catch (IOException e) {
       ConsoleLogger console = new ConsoleLogger();
@@ -227,7 +217,7 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
     // If the message level is greater that the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
       try {
-        String logMessage = Files.readString(Paths.get(LOG_MESSAGE.getAbsolutePath()));
+        String logMessage = Files.readString(Paths.get(FILES + "logMessage.html"));
         logMessage = logMessage.replace("{messageType}", messageType.name());
         logMessage = logMessage.replace("{0}", getTextWithColorFlag(messageType));
         logMessage = logMessage.replace("{1}", currentDateTime());
@@ -274,6 +264,7 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
     File file = new File(this.getFilePath());
     if (file.exists()) {
       try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
+        writer.write(Files.readString(Path.of(FILES + "modalDiv.html")));
         writer.write("</div></div></body></html>");
       } catch (IOException e) {
         ConsoleLogger console = new ConsoleLogger();
@@ -291,7 +282,7 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
   public void embedImage(String base64String) {
     // Image DIV.
     try {
-      String imageDiv = Files.readString(EMBED_IMAGE.toPath());
+      String imageDiv = Files.readString(Path.of(FILES + "embedImage.html"));
       imageDiv = imageDiv.replace("{0}", currentDateTime());
       imageDiv = imageDiv.replace("{1}", base64String);
       insertHtml(imageDiv);

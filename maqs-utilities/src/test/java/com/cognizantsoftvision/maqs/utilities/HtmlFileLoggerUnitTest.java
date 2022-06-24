@@ -65,7 +65,9 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void writeToExistingHtmlFileLogger() {
-    HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger", MessageType.GENERIC);
+    HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
+        "WriteToExistingFileLoggerDelete").toString(),
+        "WriteToExistingHtmlFileLogger", MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "This is a test.");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
 
@@ -431,7 +433,6 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals("LogFolderFileNameMessagingLevel.html", logger.getFileName(),
         "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
-
     softAssert.assertAll();
 
     deleteFile(logger);
