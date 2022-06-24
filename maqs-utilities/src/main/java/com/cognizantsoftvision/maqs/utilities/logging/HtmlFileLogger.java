@@ -192,7 +192,7 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
       String css = String.valueOf(Files.readString(Paths.get(FILES + "htmlLogger.css")));
       defaultCDNTags = defaultCDNTags.replace("{1}", css);
       writer.write(defaultCDNTags);
-      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "scriptAndCssTags2.html")));
+      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "scriptAndCssTags.html")));
       writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "filterDropdown.html")));
       writer.write(System.lineSeparator() + CARD_START);
     } catch (IOException e) {

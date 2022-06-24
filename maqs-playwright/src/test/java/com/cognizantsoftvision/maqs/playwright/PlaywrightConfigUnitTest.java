@@ -57,7 +57,7 @@ public class PlaywrightConfigUnitTest {
     for (String browserName : browserNames) {
       Config.addTestSettingValues(Collections.singletonMap(browser, browserName),
           ConfigSection.PLAYWRIGHT_MAQS, true);
-      Assert.assertEquals(PlaywrightConfig.getBrowserName(), browserName);
+      Assert.assertEquals(PlaywrightConfig.getBrowserName().toUpperCase(), browserName.toUpperCase());
     }
   }
 
