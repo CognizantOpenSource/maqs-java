@@ -161,11 +161,8 @@ public class HtmlReporter {
     final int passCount = getCount(results.getPasses());
     final int inapplicableCount = getCount(results.getInapplicable());
 
-    String stringBuilder = "<!DOCTYPE html>\r\n" + "<html lang=\"en\">" + "<head>"
-        + "<meta charset=\"utf-8\">"
-        + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
-        + "<title>Accessibility Check</title><style></style>"
-        + "</head>" + "<body><content></content><script></script></body>" + "</html>";
+    String stringBuilder = String.valueOf(Files.readAllLines(Paths.get(RESOURCES_FILE + "htmlReporterTags.html")));
+    stringBuilder = stringBuilder.replace(System.lineSeparator(), "");
 
     Document doc = Jsoup.parse(stringBuilder);
 
@@ -539,7 +536,7 @@ public class HtmlReporter {
    * @throws IOException if an exception is thrown
    */
   private static String getCss(SearchContext context) throws IOException {
-    String css = new String(Files.readAllBytes(
+    String css = String.valueOf(Files.readAllLines(
         Paths.get(RESOURCES_FILE + "htmlReporter.css")));
     return  css.replace("url('", "url('" + getDataImageString(context));
   }
@@ -571,6 +568,6 @@ public class HtmlReporter {
    * @throws IOException if an exception is thrown
    */
   private static String getJavascriptFileToString() throws IOException {
-    return new String(Files.readAllBytes(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
+    return String.valueOf(Files.readAllLines(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
   }
 }
