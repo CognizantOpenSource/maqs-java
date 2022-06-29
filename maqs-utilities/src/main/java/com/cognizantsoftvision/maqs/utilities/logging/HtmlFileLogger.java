@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import org.apache.commons.text.StringEscapeUtils;
 
 /**
@@ -189,10 +190,12 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
     try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
       String defaultCDNTags = Files.readString(Paths.get(FILES + "defaultHeader.html"));
       defaultCDNTags = defaultCDNTags.replace("{0}", this.getFilePath());
+
       String css = String.valueOf(Files.readString(Paths.get(FILES + "htmlLogger.css")));
       defaultCDNTags = defaultCDNTags.replace("{1}", css);
+
       writer.write(defaultCDNTags);
-      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "scriptAndCssTags.html")));
+      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "script.html")));
       writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "filterDropdown.html")));
       writer.write(System.lineSeparator() + CARD_START);
     } catch (IOException e) {
@@ -224,7 +227,7 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
         logMessage = logMessage.replace("{2}", StringEscapeUtils.escapeHtml4(
             StringProcessor.safeFormatter(System.lineSeparator() + message, args)));
         insertHtml(logMessage);
-      } catch (IOException e) {
+      } catch (Exception e) {
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
       }
@@ -286,7 +289,7 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
       imageDiv = imageDiv.replace("{0}", currentDateTime());
       imageDiv = imageDiv.replace("{1}", base64String);
       insertHtml(imageDiv);
-    } catch (IOException e) {
+    } catch (Exception e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
     }
@@ -317,7 +320,7 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
       case WARNING:
         return "text-warning";
       default:
-        System.out.println(this.unknownMessageTypeMessage(type));
+        logMessage(this.unknownMessageTypeMessage(type));
         return "text-white bg-dark";
     }
   }

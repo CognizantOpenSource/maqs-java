@@ -439,6 +439,7 @@ public class FileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -459,6 +460,7 @@ public class FileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -477,6 +479,7 @@ public class FileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -533,6 +536,7 @@ public class FileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -541,18 +545,19 @@ public class FileLoggerUnitTest {
    */
   @Test
   public void appendLogFolderMessagingLevel() {
-    final String appendLogFolderFileNameDirectory = LoggingConfig.getLogDirectory() + "/"
-        + "AppendLogFolderFileNameDirectory";
-    FileLogger logger = new FileLogger(true, appendLogFolderFileNameDirectory, MessageType.WARNING);
+    final String appendLogFolderMessagingLevelDirectory = LoggingConfig.getLogDirectory() + "/"
+        + "AppendLogFolderMessagingLevelDirectory";
+    FileLogger logger = new FileLogger(true, appendLogFolderMessagingLevelDirectory, MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(appendLogFolderFileNameDirectory, logger.getDirectory(),
-        " Expected Directory AppendLogFolderFileNameDirectory");
+    softAssert.assertEquals(appendLogFolderMessagingLevelDirectory, logger.getDirectory(),
+        " Expected Directory AppendLogFolderMessagingLevelDirectory");
     softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -592,6 +597,7 @@ public class FileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
   }
 
   /**
@@ -683,6 +689,14 @@ public class FileLoggerUnitTest {
 
   private void deleteFile(FileLogger logger) {
     File file = new File(logger.getFilePath());
+
+    if (file.exists()) {
+      Assert.assertTrue(file.delete());
+    }
+  }
+
+  private void deleteDirectory(FileLogger logger) {
+    File file = new File(logger.getDirectory());
 
     if (file.exists()) {
       Assert.assertTrue(file.delete());

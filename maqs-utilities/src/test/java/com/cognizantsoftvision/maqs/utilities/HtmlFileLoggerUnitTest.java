@@ -188,6 +188,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
+    logger.close();
   }
 
   /**
@@ -277,9 +278,11 @@ public class HtmlFileLoggerUnitTest {
         "Expected Directory 'Append File Directory'.");
     softAssert.assertEquals("HtmlFileLog.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
-
-    logger.close();
     softAssert.assertAll();
+
+    deleteFile(logger);
+    deleteDirectory(logger);
+    logger.close();
   }
 
   /**
@@ -297,9 +300,11 @@ public class HtmlFileLoggerUnitTest {
         "Expected Directory 'Log Folder File Name Directory'.");
     softAssert.assertEquals("LogFolderFileName.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
-
-    logger.close();
     softAssert.assertAll();
+
+    deleteFile(logger);
+    deleteDirectory(logger);
+    logger.close();
   }
 
   /**
@@ -317,9 +322,11 @@ public class HtmlFileLoggerUnitTest {
         "Expected Directory 'Log Folder Messaging Level Directory'.");
     softAssert.assertEquals("HtmlFileLog.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
-
-    logger.close();
     softAssert.assertAll();
+
+    deleteFile(logger);
+    deleteDirectory(logger);
+    logger.close();
   }
 
   /**
@@ -374,9 +381,11 @@ public class HtmlFileLoggerUnitTest {
         " Expected Directory AppendLogFolderFileNameDirectory");
     softAssert.assertEquals("AppendLogFolderFileName.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
-
-    logger.close();
     softAssert.assertAll();
+
+    deleteFile(logger);
+    deleteDirectory(logger);
+    logger.close();
   }
 
   /**
@@ -385,18 +394,20 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void appendLogFolderMessagingLevel() {
-    final String appendLogFolderFileNameDirectory = LoggingConfig.getLogDirectory() + "/"
-        + "AppendLogFolderFileNameDirectory";
-    HtmlFileLogger logger = new HtmlFileLogger(true, appendLogFolderFileNameDirectory, MessageType.WARNING);
+    final String appendLogFolderFolderMessagingDirectory = LoggingConfig.getLogDirectory() + "/"
+        + "AppendLogFolderMessagingLevelDirectory";
+    HtmlFileLogger logger = new HtmlFileLogger(true, appendLogFolderFolderMessagingDirectory, MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(appendLogFolderFileNameDirectory, logger.getDirectory(),
-        " Expected Directory AppendLogFolderFileNameDirectory");
+    softAssert.assertEquals(appendLogFolderFolderMessagingDirectory, logger.getDirectory(),
+        " Expected Directory AppendLogFolderMessagingLevelDirectory");
     softAssert.assertEquals("HtmlFileLog.html", logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
+    logger.close();
   }
 
   /**
@@ -439,6 +450,8 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertAll();
 
     deleteFile(logger);
+    deleteDirectory(logger);
+    logger.close();
   }
 
   /**
@@ -464,10 +477,19 @@ public class HtmlFileLoggerUnitTest {
    */
   private void deleteFile(HtmlFileLogger logger) {
     File file = new File(logger.getFilePath());
-    logger.close();
 
     if (file.exists()) {
       Assert.assertTrue(file.delete());
+      Assert.assertFalse(file.exists());
+    }
+  }
+
+  private void deleteDirectory(HtmlFileLogger logger) {
+    File directory = new File(logger.getDirectory());
+
+    if (directory.exists()) {
+      Assert.assertTrue(directory.delete());
+      Assert.assertFalse(directory.exists());
     }
   }
 }
