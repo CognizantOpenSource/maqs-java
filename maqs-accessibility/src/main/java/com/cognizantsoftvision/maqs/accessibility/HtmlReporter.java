@@ -161,7 +161,7 @@ public class HtmlReporter {
     final int passCount = getCount(results.getPasses());
     final int inapplicableCount = getCount(results.getInapplicable());
 
-    String stringBuilder = String.valueOf(Files.readAllLines(Paths.get(RESOURCES_FILE + "htmlReporterTags.html")));
+    String stringBuilder = String.valueOf(Files.readString(Paths.get(RESOURCES_FILE + "htmlReporterTags.html")));
     stringBuilder = stringBuilder.replace(System.lineSeparator(), "");
 
     Document doc = Jsoup.parse(stringBuilder);

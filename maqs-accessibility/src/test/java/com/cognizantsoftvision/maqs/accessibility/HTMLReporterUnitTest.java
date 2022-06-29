@@ -292,7 +292,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   private void validateReport(String path, int violationCount, int passCount, int incompleteCount, int inapplicableCount)
       throws IOException {
-    String text = String.valueOf(Files.readAllLines(Paths.get(path)));
+    String text = String.valueOf(Files.readString(Paths.get(path)));
     Document doc = Jsoup.parse(text);
 
     // Check the Element count for each result type
