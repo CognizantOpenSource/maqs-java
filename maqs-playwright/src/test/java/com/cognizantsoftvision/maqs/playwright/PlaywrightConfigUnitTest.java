@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 /**
  * The Config Unit tests for playwright config content.
  */
+@Test(singleThreaded = true)
 public class PlaywrightConfigUnitTest {
 
   /**
