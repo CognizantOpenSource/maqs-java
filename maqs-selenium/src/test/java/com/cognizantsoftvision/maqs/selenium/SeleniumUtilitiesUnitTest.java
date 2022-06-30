@@ -32,6 +32,8 @@ import org.testng.annotations.Test;
  */
 public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
+        private final String dateTimeFormatter = "uuuu-MM-dd-HH-mm-ss-SSSS";
+
         /**
          * Test capture screenshot no append.
          */
@@ -161,7 +163,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
                         // Open Google and take a screenshot
                         webDriver.navigate().to("http://www.google.com");
-                        String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+                        String dateTime = DateTimeFormatter.ofPattern(dateTimeFormatter, Locale.getDefault())
                                         .format(LocalDateTime.now(Clock.systemUTC()));
                         String filePath = SeleniumUtilities.captureScreenshot(webDriver, testObject,
                                         fileLogger.getDirectory(),
@@ -251,7 +253,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
                         // Open Google and take a screenshot
                         webDriver.navigate().to("http://www.google.com");
-                        String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+                        String dateTime = DateTimeFormatter.ofPattern(dateTimeFormatter, Locale.getDefault())
                                         .format(LocalDateTime.now(Clock.systemUTC()));
                         String filePath = SeleniumUtilities.savePageSource(webDriver, testObject,
                                         fileLogger.getDirectory(),
