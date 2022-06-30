@@ -98,7 +98,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
         public void testCaptureScreenshotAppendScreenshot() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
                 try {
-                        HtmlFileLogger fileLogger = (HtmlFileLogger) this.getTestObject().getLogger();
+                        HtmlFileLogger fileLogger = new HtmlFileLogger("Capture Screenshot Append");
+                        this.getTestObject().setLogger(fileLogger);
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                             this.getTestObject().getFullyQualifiedTestName());
                         this.setTestObject(testObject);
