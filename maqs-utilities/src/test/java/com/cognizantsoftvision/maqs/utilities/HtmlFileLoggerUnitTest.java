@@ -19,6 +19,7 @@ import org.testng.asserts.SoftAssert;
 /**
  * The Html File Logger unit test class.
  */
+@Test(singleThreaded = true)
 public class HtmlFileLoggerUnitTest {
 
   /**
