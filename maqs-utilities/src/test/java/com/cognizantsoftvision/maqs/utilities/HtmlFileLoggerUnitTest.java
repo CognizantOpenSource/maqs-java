@@ -92,11 +92,18 @@ public class HtmlFileLoggerUnitTest {
       File file = new File(logger.getFilePath());
       File directory = new File(logger.getDirectory());
 
-      Assert.assertTrue(this.readTextFile(file.getAbsolutePath()).contains(
-      "Test to ensure that the file in the created directory can be written to."));
+      String fileText = this.readTextFile(file.getAbsolutePath());
 
-      Assert.assertTrue(file.delete());
-      Assert.assertTrue(directory.delete());
+      if (fileText.isEmpty()) {
+        Assert.fail("No content in the file: " + file.getName());
+      }
+
+      Assert.assertTrue(fileText.contains(
+      "Test to ensure that the file in the created directory can be written to."),
+          "Actual file contains: " + fileText);
+
+      deleteFile(logger);
+      deleteDirectory(logger);
       logger.close();
    }
 
