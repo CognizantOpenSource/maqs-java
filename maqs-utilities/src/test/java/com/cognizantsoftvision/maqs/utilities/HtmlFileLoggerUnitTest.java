@@ -84,8 +84,7 @@ public class HtmlFileLoggerUnitTest {
    @Test(groups = TestCategories.UTILITIES, singleThreaded = true)
    public void constructorCreateDirectory() {
       HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
-         "CreateDirectoryDelete").toString(),
-      "CreateDirectory", MessageType.GENERIC);
+         "CreateDirectory").toString(), "CreateDirectory", MessageType.GENERIC);
       logger.logMessage(MessageType.WARNING,
       "Test to ensure that the file in the created directory can be written to.");
 
