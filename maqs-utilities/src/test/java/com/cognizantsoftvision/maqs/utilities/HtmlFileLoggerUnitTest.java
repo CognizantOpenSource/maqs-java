@@ -95,7 +95,6 @@ public class HtmlFileLoggerUnitTest {
       File file = new File(logger.getFilePath());
       File directory = new File(logger.getDirectory());
 
-      Assert.assertTrue(directory.exists(), "Directory was not created");
       Assert.assertTrue(this.readTextFile(file.getAbsolutePath()).contains(
       "Test to ensure that the file in the created directory can be written to."));
       logger.close();
