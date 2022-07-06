@@ -38,8 +38,8 @@ public class HtmlFileLoggerUnitTest {
    * Test logging to an existing file.
    */
   @Test(groups = TestCategories.UTILITIES)
-  public void appendFileTest() {
-    HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger");
+  public void appendHtmlFileTest() {
+    HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToHtmlFile");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
     logger.logMessage(MessageType.WARNING, "This is a test to append to current file.");
 
@@ -72,12 +72,9 @@ public class HtmlFileLoggerUnitTest {
     logger.logMessage(MessageType.WARNING, "This is a test.");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
 
-    File file = new File(logger.getFilePath());
-    File directory = new File(logger.getDirectory());
+    deleteFile(logger);
+    deleteDirectory(logger);
     logger.close();
-    Assert.assertTrue(file.delete());
-    Assert.assertTrue(directory.delete());
-
   }
 
   /**
@@ -97,9 +94,10 @@ public class HtmlFileLoggerUnitTest {
 
       Assert.assertTrue(this.readTextFile(file.getAbsolutePath()).contains(
       "Test to ensure that the file in the created directory can be written to."));
-      logger.close();
+
       Assert.assertTrue(file.delete());
       Assert.assertTrue(directory.delete());
+      logger.close();
    }
 
   /**
@@ -479,8 +477,8 @@ public class HtmlFileLoggerUnitTest {
     File file = new File(logger.getFilePath());
 
     if (file.exists()) {
-      Assert.assertTrue(file.delete());
-      Assert.assertFalse(file.exists());
+      Assert.assertTrue(file.delete(), "could not delete file");
+      Assert.assertFalse(file.exists(), "the file still exists");
     }
   }
 
@@ -488,8 +486,8 @@ public class HtmlFileLoggerUnitTest {
     File directory = new File(logger.getDirectory());
 
     if (directory.exists()) {
-      Assert.assertTrue(directory.delete());
-      Assert.assertFalse(directory.exists());
+      Assert.assertTrue(directory.delete(), "could not delete directory");
+      Assert.assertFalse(directory.exists(), "the directory still exists");
     }
   }
 }
