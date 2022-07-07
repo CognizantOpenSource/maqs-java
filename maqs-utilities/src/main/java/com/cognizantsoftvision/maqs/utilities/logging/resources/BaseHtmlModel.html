@@ -21,23 +21,18 @@
 <style></style>
 <script>
     $(function (){$('.pop').on('click', function (e){$('.imagepreview').attr('src', $(this).find('img').attr('src'));$('#imagemodal').modal('show');});});
-
 </script>
 <script>
     $(function (){$('.pop2').on('click', function (){$('.imagepreview').attr('src', $(this).attr('src'));$('#imagemodal').modal('show');});});
-
 </script>
 <script>
     $(function (){$('.dropdown-item').on('click', function (e){$(this).attr('class', function (i, old){return old=='dropdown-item' ? 'dropdown-item bg-secondary' :'dropdown-item';});var temp=$(this).data('name');$('[data-logtype=\\\'' + temp + '\\\']').toggleClass('show');e.stopPropagation();});});
-
 </script>
 <script>
     $(function (){$(document).ready(function(){$('#Header').append(' ' + $('title').text())})});
-
 </script>
 <script>
     $(function(){$(document).ready(function(){$('.card-text:contains(\\\'Test\\\')').each(function (index, element){switch($(this).text()){case 'Test passed': $('#TestResult:not([class])').addClass('text-success'); case 'Test failed': $('#TestResult:not([class])').addClass('text-danger'); case 'Test was inconclusive': $('#TestResult:not([class])').addClass('text-danger'); $('#TestResult').text($(this).text()); $('#TestResult').addClass('font-weight-bold'); break;}})})})
-
 </script>
 <div id='Header' class='dropdown'>
     <button class='btn btn-secondary dropdown-toggle'
@@ -62,37 +57,6 @@
 </div>
 <div class='container-fluid'>
     <div class='row'>
-        <div class='collapse col-12 show' data-logtype='WARNING'>
-            <div class='card'>
-                <div class='card-body text-warning'>
-                    <h5 class='card-title mb-1'>WARNING</h5>
-                    <h6 class='card-subtitle mb-1'>2022-06-29 09:42:55</h6>
-                    <p class='card-text'>
-                        This is a test.</p></div>
-            </div>
-        </div>
-        <div class='collapse col-12 show' data-logtype='WARNING'>
-            <div class='card'>
-                <div class='card-body text-warning'>
-                    <h5 class='card-title mb-1'>WARNING</h5>
-                    <h6 class='card-subtitle mb-1'>2022-06-29 09:42:55</h6>
-                    <p class='card-text'>
-                        This is a test to write to an existing file.</p></div>
-            </div>
-        </div>
-        <div class='modal fade' id='imagemodal' tabindex='-1' role='dialog'
-             aria-labelledby='myModalLabel'
-             aria-hidden='true'>
-            <div class='modal-dialog'>
-                <div class='modal-content'>
-                    <div class='modal-body'>
-                        <button type='button' class='close' data-dismiss='modal'><span
-                                aria-hidden='true'>&times;</span><span
-                                class='sr-only'>Close</span></button>
-                        <img src='' alt="" class='imagepreview' style='width: 100%;'></div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 </body>

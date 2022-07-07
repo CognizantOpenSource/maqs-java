@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 import org.apache.commons.text.StringEscapeUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 /**
  * The HTML File Logger class.
@@ -185,18 +189,22 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
    */
   public HtmlFileLogger(Boolean append, String logFolder, String name, MessageType messageLevel) {
     super(append, logFolder, name, messageLevel);
+    startHtmlFile();
+  }
 
-    try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-      String defaultCDNTags = Files.readString(Paths.get(FILES + "defaultHeader.html"));
+  private void startHtmlFile() {
+    try (FileWriter writer = new FileWriter(this.getFilePath(), false)) {
+      String defaultCDNTags = Files.readString(Paths.get(FILES + "BaseHtmlModel.html"));
       defaultCDNTags = defaultCDNTags.replace("{0}", this.getFilePath());
 
-      String css = String.valueOf(Files.readString(Paths.get(FILES + "htmlLogger.css")));
-      defaultCDNTags = defaultCDNTags.replace("{1}", css);
+      Document doc = Jsoup.parse(defaultCDNTags);
+      Element style = doc.select("style").first();
+      Objects.requireNonNull(style).text(this.getFilePath());
 
-      writer.write(defaultCDNTags);
-      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "script.html")));
-      writer.write(System.lineSeparator() + Files.readString(Paths.get(FILES + "filterDropdown.html")));
-      writer.write(System.lineSeparator() + CARD_START);
+      Element body = doc.select("body").first();
+      Objects.requireNonNull(body).append(CARD_START);
+
+      writer.write(doc.outerHtml());
     } catch (IOException e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
@@ -234,19 +242,46 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
   }
 
   /**
+   * Embed a base 64 image.
+   * @param base64String Base 64 image string
+   */
+  @Override
+  public void embedImage(String base64String) {
+    // Image DIV.
+    try {
+      String imageDiv = Files.readString(Path.of(FILES + "embedImage.html"));
+      imageDiv = imageDiv.replace("{0}", currentDateTime());
+      imageDiv = imageDiv.replace("{1}", base64String);
+      insertHtml(imageDiv);
+    } catch (Exception e) {
+      ConsoleLogger console = new ConsoleLogger();
+      console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
+    }
+  }
+
+  /**
    * Write the formatted message (one line) to the console as a generic message.
    * @param html Html content
    */
-  private void insertHtml(String html) {
+  private void insertHtml(String html) throws IOException {
+    Document doc = getCurrentLog();
+
     // Log the message
-    try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-      writer.write(System.lineSeparator() + html);
+    try (FileWriter writer = new FileWriter(this.getFilePath(), false)) {
+      Element body = doc.select("body").first();
+      Objects.requireNonNull(body).append(html);
+      writer.write(doc.outerHtml());
     } catch (Exception e) {
       // Failed to write to the event log, write error to the console instead
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage())
           + System.lineSeparator() + "Content: " + html);
     }
+  }
+
+  protected Document getCurrentLog() throws IOException {
+    String logFile = Files.readString(Paths.get(this.getFilePath()));
+    return Jsoup.parse(logFile);
   }
 
   /**
@@ -267,31 +302,12 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
     if (file.exists()) {
       try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
         writer.write(Files.readString(Path.of(FILES + "modalDiv.html")));
-        writer.write("</div></div></body></html>");
       } catch (IOException e) {
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
       }
     }
 
-  }
-
-  /**
-   * Embed a base 64 image.
-   * @param base64String Base 64 image string
-   */
-  @Override
-  public void embedImage(String base64String) {
-    // Image DIV.
-    try {
-      String imageDiv = Files.readString(Path.of(FILES + "embedImage.html"));
-      imageDiv = imageDiv.replace("{0}", currentDateTime());
-      imageDiv = imageDiv.replace("{1}", base64String);
-      insertHtml(imageDiv);
-    } catch (Exception e) {
-      ConsoleLogger console = new ConsoleLogger();
-      console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
-    }
   }
 
   /**
