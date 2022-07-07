@@ -133,7 +133,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
     validateReport(path, 4, 26, 0, 69);
 
-    deleteFile(new File(path));
+//    deleteFile(new File(path));
   }
 
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -287,7 +287,8 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   }
 
   private String createReportPath() {
-    return FileSystems.getDefault().getPath("target/logs") + UUID.randomUUID().toString() + ".html";
+    return FileSystems.getDefault().getPath("target" + File.separator + "logs")
+        + File.separator + UUID.randomUUID() + ".html";
   }
 
   private void validateReport(String path, int violationCount, int passCount, int incompleteCount, int inapplicableCount)
