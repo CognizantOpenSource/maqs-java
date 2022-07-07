@@ -14,10 +14,8 @@ import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.stream.Collectors;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -47,8 +45,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     setup();
     String filePath = ((FileLogger)getLogger()).getFilePath();
     AccessibilityUtilities.checkAccessibility(getTestObject(), false);
-    String logContent = Files.lines(Paths.get(filePath),
-        StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
+    String logContent = Files.readString(Paths.get(filePath));
 
     Assert.assertTrue(logContent.contains("Found 15 items"), "Expected to find 15 pass matches.");
     Assert.assertTrue(logContent.contains("Found 66 items"), "Expected to find 66 inapplicable matches.");
@@ -69,8 +66,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     try {
       AccessibilityUtilities.checkAccessibility(getTestObject().getWebDriver(), fileLogger, false);
 
-      String logContent = Files.lines(Paths.get(fileLogger.getFilePath()),
-          StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
+      String logContent = Files.readString(Paths.get(fileLogger.getFilePath()));
 
       Assert.assertFalse(logContent.contains("PASSES check for"),
           "Did not expect expected to check for pass matches.");
@@ -99,8 +95,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     try {
       AccessibilityUtilities.checkAccessibilityInapplicable(
           getTestObject().getWebDriver(), fileLogger, MessageType.WARNING, false);
-      String logContent = Files.lines(Paths.get(fileLogger.getFilePath()),
-          StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
+      String logContent = Files.readString(Paths.get(fileLogger.getFilePath()));
 
       Assert.assertFalse(logContent.contains("PASSES check"), "Did not expect pass check");
       Assert.assertFalse(logContent.contains("INAPPLICABLE check"), "Did not expect inapplicable check");
@@ -125,8 +120,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     try {
       AccessibilityUtilities.checkAccessibilityIncomplete(
           getTestObject().getWebDriver(), fileLogger, MessageType.WARNING, false);
-      String logContent = Files.lines(Paths.get(fileLogger.getFilePath()),
-          StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
+      String logContent = Files.readString(Paths.get(fileLogger.getFilePath()));
 
       Assert.assertFalse(logContent.contains("PASSES check"), "Did not expect pass check");
       Assert.assertFalse(logContent.contains("INAPPLICABLE check"), "Did not expect inapplicable check");
@@ -151,8 +145,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     try {
       AccessibilityUtilities
           .checkAccessibilityPasses(getTestObject().getWebDriver(), fileLogger, MessageType.SUCCESS);
-      String logContent = Files.lines(Paths.get(fileLogger.getFilePath()),
-          StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
+      String logContent = Files.readString(Paths.get(fileLogger.getFilePath()));
 
       Assert.assertFalse(logContent.contains("PASSES check"), "Did not expect pass check");
       Assert.assertFalse(logContent.contains("INAPPLICABLE check"), "Did not expect inapplicable check");
@@ -177,8 +170,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     try {
       AccessibilityUtilities
           .checkAccessibilityViolations(getTestObject().getWebDriver(), fileLogger, MessageType.ERROR, false);
-      String logContent = Files.lines(Paths.get(fileLogger.getFilePath()),
-          StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
+      String logContent = Files.readString(Paths.get(fileLogger.getFilePath()));
 
       Assert.assertFalse(logContent.contains("PASSES check"), "Did not expect pass check");
       Assert.assertFalse(logContent.contains("INAPPLICABLE check"), "Did not expect inapplicable check");
