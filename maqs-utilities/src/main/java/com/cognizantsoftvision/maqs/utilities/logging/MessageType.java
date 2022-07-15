@@ -35,14 +35,24 @@ public enum MessageType {
   GENERIC(3),
 
   /**
+   * Step Message test engineer would insert.
+   */
+  STEP(4),
+
+  /**
+   * Action Message reflects actions a user would take.
+   */
+  ACTION(5),
+
+  /**
    * Informational message - Our default message type.
    */
-  INFORMATION(4),
+  INFORMATION(6),
 
   /**
    * Verbose message.
    */
-  VERBOSE(5);
+  VERBOSE(7);
 
   /**
    * The value of current Message Type.

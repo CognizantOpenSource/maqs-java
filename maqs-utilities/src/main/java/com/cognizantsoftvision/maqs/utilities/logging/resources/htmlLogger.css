@@ -1,0 +1,11 @@
+.modal-dialog {
+  max-width: fit-content
+}
+
+p {
+white-space: pre-wrap
+}
+
+.pop {
+cursor: pointer;
+}
