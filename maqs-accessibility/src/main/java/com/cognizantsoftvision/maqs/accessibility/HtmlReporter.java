@@ -274,7 +274,7 @@ public class HtmlReporter {
    */
   private static void getReadableAxeResults(List<Rule> results, ResultType type, Element body) {
     Element resultWrapper = new Element("div");
-    resultWrapper.addClass( "resultWrapper");
+    resultWrapper.addClass("resultWrapper");
     body.appendChild(resultWrapper);
 
     Element sectionButton = new Element("button");
@@ -292,7 +292,7 @@ public class HtmlReporter {
     sectionButton.appendChild(sectionButtonExpando);
 
     Element section = new Element("div");
-    section.addClass( "majorSection");
+    section.addClass("majorSection");
     section.attributes().put("id", type.name() + "Section");
     resultWrapper.appendChild(section);
 
@@ -300,7 +300,7 @@ public class HtmlReporter {
 
     for (Rule element : results) {
       Element childEl = new Element("div");
-      childEl.addClass( "findings");
+      childEl.addClass("findings");
       childEl.appendText(loops++ + ": " + element.getHelp());
       section.appendChild(childEl);
 
@@ -332,7 +332,7 @@ public class HtmlReporter {
       }
 
       Element childEl2 = new Element("div");
-      childEl2.addClass( "emTwo");
+      childEl2.addClass("emTwo");
       childEl.appendChild(content);
 
       for (CheckedNode item : element.getNodes()) {
@@ -354,7 +354,7 @@ public class HtmlReporter {
         htmlAndSelectorWrapper.appendText("Selector:");
 
         htmlAndSelector = new Element("p");
-        htmlAndSelector.addClass( "wrapTwo");
+        htmlAndSelector.addClass("wrapTwo");
 
         for (Object target : Collections.singletonList(item.getTarget())) {
           String targetString = target.toString().replace("[", "").replace("]", "");
