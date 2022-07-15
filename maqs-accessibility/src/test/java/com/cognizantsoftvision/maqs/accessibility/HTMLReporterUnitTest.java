@@ -129,7 +129,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
     validateReport(path, 4, 26, 0, 69);
 
-//    deleteFile(new File(path));
+    deleteFile(new File(path));
   }
 
   @Test(groups = TestCategories.ACCESSIBILITY)
