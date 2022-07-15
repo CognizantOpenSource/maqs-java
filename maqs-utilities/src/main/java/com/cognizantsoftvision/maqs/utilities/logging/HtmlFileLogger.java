@@ -198,10 +198,11 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
       defaultCDNTags = defaultCDNTags.replace("{0}", this.getFilePath());
 
       Document doc = Jsoup.parse(defaultCDNTags);
-      Element style = doc.select("style").first();
-      Objects.requireNonNull(style).text(this.getFilePath());
+      Element style = new Element("style");
+      style.appendText(this.getFilePath());
 
       Element body = doc.select("body").first();
+      Objects.requireNonNull(body).appendChild(style);
       Objects.requireNonNull(body).append(CARD_START);
 
       writer.write(doc.outerHtml());

@@ -89,11 +89,10 @@ public class HtmlFileLoggerUnitTest {
       "Test to ensure that the file in the created directory can be written to.");
 
       File file = new File(logger.getFilePath());
-      File directory = new File(logger.getDirectory());
 
       String fileText = this.readTextFile(file.getAbsolutePath());
 
-      if (fileText.isEmpty()) {
+      if (this.readTextFile(file.getAbsolutePath()).isEmpty()) {
         Assert.fail("No content in the file: " + file.getName());
       }
 
