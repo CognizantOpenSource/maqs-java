@@ -198,6 +198,13 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
       defaultCDNTags = defaultCDNTags.replace("{0}", this.getFilePath());
 
       Document doc = Jsoup.parse(defaultCDNTags);
+
+      Element head = doc.select("head").first();
+
+      Element script = new Element("script");
+      script.attr("src", "https://use.fontawesome.com/releases/v5.0.8/js/all.js'");
+      Objects.requireNonNull(head).appendChild(script);
+
       Element style = new Element("style");
       style.appendText(this.getFilePath());
 
