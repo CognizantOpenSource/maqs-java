@@ -29,9 +29,9 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
   private static final String DEFAULT_LOG_NAME = "HtmlFileLog.html";
 
   private static final File FILE_DIRECTORY = new File(
-      "src/main/java/com/cognizantsoftvision/maqs/utilities/logging/resources");
+      "../maqs-utilities/src/main/java/com/cognizantsoftvision/maqs/utilities/logging/resources");
 
-  private static final String FILES = FILE_DIRECTORY.getAbsolutePath() + File.separator;
+  private static final String FILES = FILE_DIRECTORY.getPath() + File.separator;
 
   /**
    * The beginning to the cards section.
