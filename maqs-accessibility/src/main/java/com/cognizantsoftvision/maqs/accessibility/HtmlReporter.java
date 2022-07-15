@@ -305,7 +305,7 @@ public class HtmlReporter {
       section.appendChild(childEl);
 
       Element content = new Element("div");
-      content.addClass( "emTwo");
+      content.addClass("emTwo");
       content.text("Description: " + element.getDescription());
       content.appendChild(new Element("br"));
       content.appendText("Help: " + element.getHelp());
