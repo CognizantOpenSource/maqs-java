@@ -89,7 +89,6 @@ public class HtmlFileLoggerUnitTest {
       "Test to ensure that the file in the created directory can be written to.");
 
       File file = new File(logger.getFilePath());
-
       String fileText = this.readTextFile(file.getAbsolutePath());
 
       if (this.readTextFile(file.getAbsolutePath()).isEmpty()) {
@@ -429,6 +428,21 @@ public class HtmlFileLoggerUnitTest {
         logger.getFileName(), "Expected correct File Name.");
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
     softAssert.assertAll();
+
+    deleteFile(logger);
+  }
+
+  @Test(groups = TestCategories.UTILITIES)
+  public void logEmbeddedImage() {
+    HtmlFileLogger logger = new HtmlFileLogger(
+        "FileNameLogEmbeddedImage.html", true, MessageType.WARNING);
+    logger.embedImage("");
+
+    File file = new File(logger.getFilePath());
+    String htmlText = this.readTextFile(file.getAbsolutePath());
+    logger.close();
+
+    Assert.assertTrue(htmlText.contains("IMAGE"));
 
     deleteFile(logger);
   }

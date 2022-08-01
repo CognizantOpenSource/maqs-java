@@ -315,7 +315,6 @@ public class HtmlFileLogger extends FileLogger implements IHtmlFileLogger {
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
       }
     }
-
   }
 
   /**
