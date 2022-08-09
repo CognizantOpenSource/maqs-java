@@ -41,11 +41,6 @@ import org.openqa.selenium.WrapsElement;
 public class HtmlReporter {
 
   /**
-   * Placeholder for class tag string type.
-   */
-  private static final String CLASS = "class";
-
-  /**
    * Placeholder for wrap one tag string type.
    */
   private static final String WRAP_ONE = "wrapOne";
@@ -341,17 +336,17 @@ public class HtmlReporter {
 
       for (CheckedNode item : element.getNodes()) {
         Element elementNodes = new Element("div");
-        elementNodes.attr(CLASS, "htmlTable");
+        elementNodes.addClass("htmlTable");
         childEl.appendChild(elementNodes);
 
         Element htmlAndSelectorWrapper = new Element("div");
-        htmlAndSelectorWrapper.attr(CLASS, "emThree");
+        htmlAndSelectorWrapper.addClass("emThree");
         htmlAndSelectorWrapper.text("Html:");
         htmlAndSelectorWrapper.appendChild(new Element("br"));
         elementNodes.appendChild(htmlAndSelectorWrapper);
 
         Element htmlAndSelector = new Element("p");
-        htmlAndSelector.attr(CLASS, WRAP_ONE);
+        htmlAndSelector.addClass(WRAP_ONE);
         htmlAndSelector.html(item.getHtml());
         htmlAndSelector.text(item.getHtml());
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
@@ -393,7 +388,7 @@ public class HtmlReporter {
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       htmlAndSelector = new Element("p");
-      htmlAndSelector.attr(CLASS, "wrapTwo");
+      htmlAndSelector.addClass("wrapTwo");
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       if (!allCheckResults.isEmpty() || !noneCheckResults.isEmpty()) {
@@ -415,7 +410,7 @@ public class HtmlReporter {
   private static void fixAllIssues(Element htmlAndSelectorWrapper,
       List<Check> allCheckResults, List<Check> noneCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr(CLASS, WRAP_ONE);
+    htmlAndSelector.addClass(WRAP_ONE);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
@@ -443,7 +438,7 @@ public class HtmlReporter {
    */
   private static void fixAnyIssues(Element htmlAndSelectorWrapper, List<Check> anyCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr(CLASS, WRAP_ONE);
+    htmlAndSelector.addClass(WRAP_ONE);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
@@ -535,7 +530,7 @@ public class HtmlReporter {
    * @throws IOException if an exception is thrown
    */
   private static String getCss(SearchContext context) throws IOException {
-    String css = new String(Files.readAllBytes(
+    String css = String.valueOf(Files.readAllLines(
         Paths.get(RESOURCES_FILE + "htmlReporter.css")));
     return  css.replace("url('", "url('" + getDataImageString(context));
   }
@@ -567,6 +562,6 @@ public class HtmlReporter {
    * @throws IOException if an exception is thrown
    */
   private static String getJavascriptFileToString() throws IOException {
-    return new String(Files.readAllBytes(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
+    return String.valueOf(Files.readAllLines(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
   }
 }

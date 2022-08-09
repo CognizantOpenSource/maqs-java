@@ -7,6 +7,7 @@ package com.cognizantsoftvision.maqs.selenium;
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
@@ -63,6 +64,8 @@ public class SeleniumUtilities {
       // Check if we are using a file logger. If not, return false.
       if (!(testObject.getLogger() instanceof FileLogger)) {
         return false;
+      } else if (testObject.getLogger() instanceof HtmlFileLogger) {
+        new HtmlFileLogger().embedImage(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BASE64));
       }
 
       testObject.getLogger().logMessage(MessageType.VERBOSE, "Before screenshot capture");

@@ -21,7 +21,11 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.Objects;
+import java.util.UUID;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -289,8 +293,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   private void validateReport(String path, int violationCount, int passCount, int incompleteCount, int inapplicableCount)
       throws IOException {
-    String text = Files.readString(Paths.get(path));
-
+    String text = String.valueOf(Files.readString(Paths.get(path)));
     Document doc = Jsoup.parse(text);
 
     // Check the Element count for each result type
@@ -325,7 +328,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   private void validateResultNotWritten(String path, EnumSet<ResultType> resultTypeArray) throws IOException {
     loadTestPage(integrationTestTargetSimpleUrl);
-    String text = Files.readString(Paths.get(path));
+    String text = String.valueOf(Files.readAllLines(Paths.get(path)));
 
     for (ResultType resultType : resultTypeArray) {
       Assert.assertFalse(text.contains(resultType + ": "),
