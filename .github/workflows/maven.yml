@@ -116,7 +116,7 @@ jobs:
           echo Cannot run Appium tests when build was triggered by dependabot
           exit 1  
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         if: matrix.module-name == 'maqs-playwright'
         with:
           node-version: '14.x'
@@ -133,7 +133,7 @@ jobs:
       - name: Test Reporting
         if: always() && github.actor != 'dependabot[bot]'
         id: test-report
-        uses: phoenix-actions/test-reporting@v6
+        uses: phoenix-actions/test-reporting@v8
         with:
           name: ${{matrix.module-name}} Test Results
           path: '**/junitreports/TEST-**.xml'
