@@ -17,7 +17,7 @@
 
     <properties>
         <commons-io.version>2.11.0</commons-io.version>
-        <commons.configuration2.version>2.7</commons.configuration2.version>
+        <commons.configuration2.version>2.8.0</commons.configuration2.version>
         <commons.bean-utils.version>1.9.4</commons.bean-utils.version>
         <apache.commons-text.version>1.9</apache.commons-text.version>
         <jsoup.version>1.14.3</jsoup.version>
