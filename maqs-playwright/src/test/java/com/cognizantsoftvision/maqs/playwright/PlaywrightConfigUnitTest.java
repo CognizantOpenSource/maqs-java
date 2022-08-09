@@ -9,15 +9,14 @@ import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
  * The Config Unit tests for playwright config content.
  */
+@Test(singleThreaded = true)
 public class PlaywrightConfigUnitTest {
 
   /**
@@ -45,41 +44,32 @@ public class PlaywrightConfigUnitTest {
   }
 
   /**
-   * Data provider for config browser name test.
-   * @return browser name data
-   */
-  @DataProvider (name = "browserType")
-  public Object[] browserType() {
-     ArrayList<String> data = new ArrayList<>();
-     data.add("Chromium");
-     data.add("Firefox");
-     data.add("Edge");
-     data.add("Webkit");
-     data.add("Chrome");
-     return new Object[] {data};
-  }
-
-  /**
    * Test the config browser name.
-   * @param browserNames the incoming browser name to test
    */
-  @Test(groups = TestCategories.PLAYWRIGHT, dataProvider = "browserType")
-  public void configBrowserName(List<String> browserNames) {
+  @Test(groups = TestCategories.PLAYWRIGHT)
+  public void configBrowserName() {
+    ArrayList<String> browserNames = new ArrayList<>();
+    browserNames.add("Chromium");
+    browserNames.add("Firefox");
+    browserNames.add("Edge");
+    browserNames.add("Webkit");
+    browserNames.add("Chrome");
+
     for (String browserName : browserNames) {
       Config.addTestSettingValues(Collections.singletonMap(browser, browserName),
           ConfigSection.PLAYWRIGHT_MAQS, true);
-      Assert.assertEquals(PlaywrightConfig.getBrowserName(), browserName);
+      Assert.assertEquals(PlaywrightConfig.getBrowserName().toUpperCase(), browserName.toUpperCase());
     }
   }
 
   /**
    * Make sure error correct error is thrown if we use a bad browser name.
    */
-  @Test(groups = TestCategories.PLAYWRIGHT, expectedExceptions = IllegalArgumentException.class)
+  @Test(groups = TestCategories.PLAYWRIGHT, expectedExceptions = IllegalArgumentException.class,
+      expectedExceptionsMessageRegExp = "Browser type 'IE' is not supported")
   public void configBadBrowserName() {
     Config.addTestSettingValues(Collections.singletonMap(browser, "IE"), ConfigSection.PLAYWRIGHT_MAQS, true);
-    PlaywrightBrowser type = PlaywrightConfig.getBrowserType();
-    Assert.fail("IE returned type: " + type);
+    PlaywrightConfig.getBrowserType();
   }
 
   /**
@@ -121,8 +111,7 @@ public class PlaywrightConfigUnitTest {
       ConfigSection.PLAYWRIGHT_MAQS, true);
       Assert.assertEquals(PlaywrightConfig.getBrowserSize().getHeight(), 900);
       Assert.assertEquals(PlaywrightConfig.getBrowserSize().getWidth(), 600);
-    }
-    finally{
+    } finally {
       Config.addTestSettingValues(Collections.singletonMap("BrowserSize", oldValue),
       ConfigSection.PLAYWRIGHT_MAQS, true);
     }

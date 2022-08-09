@@ -4,6 +4,9 @@
 
 package com.cognizantsoftvision.maqs.utilities.logging;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * The Logging class.
  */
@@ -100,4 +103,13 @@ public abstract class Logger implements ILogger {
    * {@inheritDoc}
    */
   public abstract MessageType getMessageType();
+
+  /**
+   * Get current date time for logging purposes.
+   * @return Current data time in UTC format
+   */
+  public String currentDateTime() {
+    SimpleDateFormat format = new SimpleDateFormat(Logger.DEFAULT_DATE_FORMAT);
+    return format.format(new Date());
+  }
 }
