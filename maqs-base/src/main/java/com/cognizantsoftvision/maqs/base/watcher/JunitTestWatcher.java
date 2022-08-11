@@ -22,7 +22,7 @@ public class JunitTestWatcher implements TestWatcher {
 
   public JunitTestWatcher(BaseTest testInstance) {
     this.testInstance = testInstance;
-}
+  }
 
   @Override
   public void testSuccessful(ExtensionContext context) {

@@ -278,7 +278,8 @@ public abstract class BaseTest {
   /**
    * Cleanup after a TestNG test.
    */
-  @AfterMethod(alwaysRun = true) public void teardown() {
+  @AfterMethod(alwaysRun = true)
+  public void teardown() {
     try {
       this.beforeLoggingTeardown(testResult);
     } catch (Exception e) {
