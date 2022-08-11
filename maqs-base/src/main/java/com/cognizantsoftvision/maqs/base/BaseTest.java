@@ -229,12 +229,30 @@ public abstract class BaseTest {
   }
 
   /**
+   * Setup before a JUnit test.
+   *
+   * @param info the test info of the unit test being run
+   */
+  @BeforeEach public void setup(TestInfo info) {
+    //this.context = context;
+
+    // Get the Fully Qualified Test Class Name and set it in the object
+    String testName =
+        info.getTestClass().get().getName() + "." + info.getTestMethod().get().getName();
+    testName = testName.replaceFirst("class ", "");
+    this.fullyQualifiedTestClassName.set(testName);
+
+    this.createNewTestObject();
+  }
+
+  /**
    * Setup before a testng unit test.
    *
    * @param method      The initial executing Method object
    * @param testContext The initial executing Test Context object
    */
-  @BeforeMethod(alwaysRun = true) public void setup(Method method, ITestContext testContext) {
+  @BeforeMethod(alwaysRun = true)
+  public void setup(Method method, ITestContext testContext) {
     this.testContextInstance = testContext;
 
     // Get the Fully Qualified Test Class Name and set it in the object
@@ -251,23 +269,6 @@ public abstract class BaseTest {
   public void customSetup(String testName, ITestContext testContext) {
     this.testContextInstance = testContext;
 
-    testName = testName.replaceFirst("class ", "");
-    this.fullyQualifiedTestClassName.set(testName);
-
-    this.createNewTestObject();
-  }
-
-  /**
-   * Setup before a JUnit test.
-   *
-   * @param info the test info of the unit test being run
-   */
-  @BeforeEach public void setup(TestInfo info) {
-    //this.context = context;
-
-    // Get the Fully Qualified Test Class Name and set it in the object
-    String testName =
-        info.getTestClass().get().getName() + "." + info.getTestMethod().get().getName();
     testName = testName.replaceFirst("class ", "");
     this.fullyQualifiedTestClassName.set(testName);
 
