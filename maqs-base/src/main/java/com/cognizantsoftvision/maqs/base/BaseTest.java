@@ -380,7 +380,8 @@ public abstract class BaseTest {
    *
    * @param testResult The result object
    */
-  @AfterMethod(alwaysRun = true) public void setTestResult(ITestResult testResult) {
+  @AfterMethod(alwaysRun = true)
+  public void setTestResult(ITestResult testResult) {
     this.testContextInstance = testResult.getTestContext();
     this.testResult = testResult;
   }
