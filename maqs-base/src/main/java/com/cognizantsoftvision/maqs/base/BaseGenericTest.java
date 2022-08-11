@@ -4,8 +4,6 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.base.watcher.JunitTestWatcher;
-import org.junit.jupiter.api.extension.RegisterExtension;
 import org.testng.ITestResult;
 
 /**

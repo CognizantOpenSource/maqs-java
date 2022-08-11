@@ -14,9 +14,4 @@ public class BaseGenericTestUnitTest extends BaseGenericTest {
   public void testCreateTestObject() {
     Assert.assertNotNull(this.getTestObject());
   }
-
-  @org.junit.jupiter.api.Test
-  public void testCreateTestObject_junit() {
-    Assert.assertNotNull(this.getTestObject());
-  }
 }
