@@ -7,7 +7,7 @@ package com.cognizantsoftvision.maqs.base;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class BaseGenericJUnitTest extends BaseGenericTest {
+class BaseGenericTestJUnitTest extends BaseGenericTest {
 
   @Test
   public void testCreateTestObject() {
