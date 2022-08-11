@@ -1,3 +1,7 @@
+/*
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
+ */
+
 package com.cognizantsoftvision.maqs.base.watcher;
 
 import com.cognizantsoftvision.maqs.base.BaseTest;
@@ -6,6 +10,9 @@ import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 
+/**
+ * The JUnit Test Watcher class.
+ */
 public class JunitTestWatcher implements TestWatcher {
     /**
      * Test instance of the test being executed per each thread
