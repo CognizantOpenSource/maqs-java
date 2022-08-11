@@ -15,9 +15,7 @@ import org.junit.jupiter.api.extension.TestWatcher;
  */
 public class JunitTestWatcher implements TestWatcher {
 
-  /**
-  * Test instance of the test being executed per each thread
-  */
+  // Test instance of the test being executed per each thread.
   BaseTest testInstance;
 
   public JunitTestWatcher(BaseTest testInstance) {
