@@ -20,6 +20,7 @@ import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
+
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -30,10 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.testng.ITestContext;
@@ -85,9 +86,7 @@ public abstract class BaseTest {
    */
   ThreadLocal<String> fullyQualifiedTestClassName = new ThreadLocal<>();
 
-  @RegisterExtension
-  public JunitTestWatcher testWatcher;
-
+  @RegisterExtension public JunitTestWatcher testWatcher;
 
   /**
    * Initializes a new instance of the BaseTest class.
@@ -173,7 +172,8 @@ public abstract class BaseTest {
    * @param loggedExceptionList ArrayList of logged exceptions to use.
    */
   public void setLoggedExceptions(List<String> loggedExceptionList) {
-    this.loggedExceptions.put(this.fullyQualifiedTestClassName.get(), (ArrayList<String>) loggedExceptionList);
+    this.loggedExceptions.put(this.fullyQualifiedTestClassName.get(),
+        (ArrayList<String>) loggedExceptionList);
   }
 
   /**
@@ -231,13 +231,12 @@ public abstract class BaseTest {
   }
 
   /**
-   * Setup before a test.
+   * Setup before a testng unit test.
    *
    * @param method      The initial executing Method object
    * @param testContext The initial executing Test Context object
    */
-  @BeforeMethod(alwaysRun = true)
-  public void setup(Method method, ITestContext testContext) {
+  @BeforeMethod(alwaysRun = true) public void setup(Method method, ITestContext testContext) {
     this.testContextInstance = testContext;
 
     // Get the Fully Qualified Test Class Name and set it in the object
@@ -260,12 +259,17 @@ public abstract class BaseTest {
     this.createNewTestObject();
   }
 
-  @BeforeEach
-  public void setup(TestInfo info) {
+  /**
+   * Setup before a JUnit test.
+   *
+   * @param info the test info of the unit test being run
+   */
+  @BeforeEach public void setup(TestInfo info) {
     //this.context = context;
 
     // Get the Fully Qualified Test Class Name and set it in the object
-    String testName = info.getTestClass().get().getName() + "." + info.getTestMethod().get().getName();
+    String testName =
+        info.getTestClass().get().getName() + "." + info.getTestMethod().get().getName();
     testName = testName.replaceFirst("class ", "");
     this.fullyQualifiedTestClassName.set(testName);
 
@@ -273,14 +277,14 @@ public abstract class BaseTest {
   }
 
   /**
-   * Cleanup after a test.
+   * Cleanup after a TestNG test.
    */
-  @AfterMethod(alwaysRun = true)
-  public void teardown() {
+  @AfterMethod(alwaysRun = true) public void teardown() {
     try {
       this.beforeLoggingTeardown(testResult);
     } catch (Exception e) {
-      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
+      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s",
+          e.getMessage());
     }
 
     // Log the test result
@@ -324,15 +328,14 @@ public abstract class BaseTest {
   }
 
   /**
-   * Cleanup after a test.
+   * Cleanup after a JUnit test.
    */
-  //@AfterEach
-  public void teardown_junit() {
-//    try {
-//      this.beforeLoggingTeardown(junitTestResult);
-//    } catch (Exception e) {
-//      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
-//    }
+  @AfterEach public void teardownJunit() {
+    //    try {
+    //      this.beforeLoggingTeardown(junitTestResult);
+    //    } catch (Exception e) {
+    //      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
+    //    }
 
     // Log the test result
     if (junitTestResult.getStatus() == TestResultType.PASS) {
@@ -347,8 +350,9 @@ public abstract class BaseTest {
 
     // Cleanup log files we don't want
     try {
-      if ((this.getLogger() instanceof FileLogger) && junitTestResult.getStatus() == TestResultType.PASS
-              && this.loggingEnabledSetting == LoggingEnabled.ONFAIL) {
+      if ((this.getLogger() instanceof FileLogger)
+          && junitTestResult.getStatus() == TestResultType.PASS
+          && this.loggingEnabledSetting == LoggingEnabled.ONFAIL) {
         Files.delete(Paths.get(((FileLogger) this.getLogger()).getFilePath()));
       }
     } catch (Exception e) {
@@ -376,8 +380,7 @@ public abstract class BaseTest {
    *
    * @param testResult The result object
    */
-  @AfterMethod(alwaysRun = true)
-  public void setTestResult(ITestResult testResult) {
+  @AfterMethod(alwaysRun = true) public void setTestResult(ITestResult testResult) {
     this.testContextInstance = testResult.getTestContext();
     this.testResult = testResult;
   }
@@ -407,9 +410,10 @@ public abstract class BaseTest {
     this.setLoggedExceptions(new ArrayList<>());
 
     if (this.loggingEnabledSetting != LoggingEnabled.NO) {
-      log = LoggingConfig.getLogger(StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
-          DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
-              .format(LocalDateTime.now(Clock.systemUTC()))));
+      log = LoggingConfig.getLogger(
+          StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
+              DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+                  .format(LocalDateTime.now(Clock.systemUTC()))));
     } else {
       log = new ConsoleLogger();
     }
@@ -500,8 +504,8 @@ public abstract class BaseTest {
 
     for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
       // If the stack trace element is from this package (excluding this method) append the stack trace line
-      if (element.toString().startsWith("com.cognizantsoftvision")
-          && !element.toString().contains("BaseTest.logVerbose")) {
+      if (element.toString().startsWith("com.cognizantsoftvision") && !element.toString()
+          .contains("BaseTest.logVerbose")) {
         messages.append(element).append(System.lineSeparator());
       }
     }

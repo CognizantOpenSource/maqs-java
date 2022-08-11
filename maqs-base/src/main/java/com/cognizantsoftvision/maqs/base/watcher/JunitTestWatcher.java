@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.TestWatcher;
  * The JUnit Test Watcher class.
  */
 public class JunitTestWatcher implements TestWatcher {
+
     /**
      * Test instance of the test being executed per each thread
      */
@@ -26,12 +27,12 @@ public class JunitTestWatcher implements TestWatcher {
     @Override
     public void testSuccessful(ExtensionContext context) {
         this.testInstance.setTestResult(new JunitTestResult(TestResultType.PASS), context);
-        this.testInstance.teardown_junit();
+        this.testInstance.teardownJunit();
     }
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
         this.testInstance.setTestResult(new JunitTestResult(TestResultType.FAIL), context);
-        this.testInstance.teardown_junit();
+        this.testInstance.teardownJunit();
     }
 }
