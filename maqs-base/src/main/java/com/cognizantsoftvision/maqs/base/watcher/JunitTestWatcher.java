@@ -24,13 +24,13 @@ public class JunitTestWatcher implements TestWatcher {
 
   @Override
   public void testSuccessful(ExtensionContext context) {
-    this.testInstance.setTestResult(new JunitTestResult(TestResultType.PASS), context);
+    this.testInstance.setTestResult(new JunitTestResult(TestResultType.PASS));
     this.testInstance.teardownJunit();
   }
 
   @Override
   public void testFailed(ExtensionContext context, Throwable cause) {
-    this.testInstance.setTestResult(new JunitTestResult(TestResultType.FAIL), context);
+    this.testInstance.setTestResult(new JunitTestResult(TestResultType.FAIL));
     this.testInstance.teardownJunit();
   }
 }

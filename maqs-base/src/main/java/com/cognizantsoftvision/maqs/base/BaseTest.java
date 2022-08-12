@@ -33,7 +33,6 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
-import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -76,8 +75,6 @@ public abstract class BaseTest {
    * The TestNG Test Context.
    */
   private ITestContext testContextInstance;
-
-  private ExtensionContext context;
 
   /**
    * The Fully Qualified Test Class Name.
@@ -235,7 +232,6 @@ public abstract class BaseTest {
    */
   @BeforeEach
   public void setup(TestInfo info) {
-    //this.context = context;
     String testClassName = null;
     String testMethodName = null;
 
@@ -284,7 +280,7 @@ public abstract class BaseTest {
     customSetup(testName);
   }
 
-  public void customSetup(String testName) {
+  private void customSetup(String testName) {
     testName = testName.replaceFirst("class ", "");
     this.fullyQualifiedTestClassName.set(testName);
     this.createNewTestObject();
@@ -330,12 +326,6 @@ public abstract class BaseTest {
    * Cleanup after a JUnit test.
    */
   public void teardownJunit() {
-    //        try {
-    //          this.beforeLoggingTeardown(junitTestResult);
-    //        } catch (Exception e) {
-    //          this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
-    //        }
-
     // Log the test result
     if (junitTestResult.getStatus() == TestResultType.PASS) {
       this.tryToLog(MessageType.SUCCESS, "Test Passed");
@@ -395,8 +385,7 @@ public abstract class BaseTest {
     this.testResult = testResult;
   }
 
-  public void setTestResult(TestResult testResult, ExtensionContext context) {
-    this.context = context;
+  public void setTestResult(TestResult testResult) {
     this.junitTestResult = testResult;
   }
 

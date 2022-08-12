@@ -2,8 +2,12 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.base;
+package com.cognizantsoftvision.maqs.base.junit;
 
+import com.cognizantsoftvision.maqs.base.BaseGenericTest;
+import com.cognizantsoftvision.maqs.base.BaseTestObject;
+import com.cognizantsoftvision.maqs.base.DriverManager;
+import com.cognizantsoftvision.maqs.base.ITestObject;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import org.junit.jupiter.api.Test;
