@@ -248,9 +248,9 @@ public abstract class BaseTest {
     }
 
     if (info.getTestMethod().isPresent()) {
-     Optional<Method> optional = info.getTestMethod();
-     if (optional.isPresent()) {
-       testMethodName = optional.get().getName();
+      Optional<Method> optional = info.getTestMethod();
+      if (optional.isPresent()) {
+        testMethodName = optional.get().getName();
      }
     }
 
@@ -281,10 +281,6 @@ public abstract class BaseTest {
    */
   public void customSetup(String testName, ITestContext testContext) {
     this.testContextInstance = testContext;
-
-//    testName = testName.replaceFirst("class ", "");
-//    this.fullyQualifiedTestClassName.set(testName);
-//    this.createNewTestObject();
     customSetup(testName);
   }
 
@@ -327,23 +323,7 @@ public abstract class BaseTest {
       this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
     }
 
-    // Get the Fully Qualified Test Name
-    String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
-
-    try {
-      ITestObject baseTestObject = this.getTestObject();
-      // Release logged messages
-      this.loggedExceptions.remove(fullyQualifiedTestName);
-
-      // Release the Base Test Object
-      this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
-    } catch (Exception e) {
-      throw new MAQSRuntimeException("there was an issue cleaning up", e);
-    }
-
-    // Create console logger to log subsequent messages
-    this.setTestObject(new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName));
-    this.fullyQualifiedTestClassName.remove();
+    cleanUpFiles();
   }
 
   /**
@@ -379,15 +359,25 @@ public abstract class BaseTest {
       this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
     }
 
+    cleanUpFiles();
+  }
+
+  /**
+   * Cleans up logs and files after the test.
+   */
+  private void cleanUpFiles() {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
 
-    try (BaseTestObject baseTestObject = (BaseTestObject) this.getTestObject()) {
+    try {
+      ITestObject baseTestObject = this.getTestObject();
       // Release logged messages
       this.loggedExceptions.remove(fullyQualifiedTestName);
 
       // Release the Base Test Object
       this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
+    } catch (Exception e) {
+      throw new MAQSRuntimeException("there was an issue cleaning up", e);
     }
 
     // Create console logger to log subsequent messages
