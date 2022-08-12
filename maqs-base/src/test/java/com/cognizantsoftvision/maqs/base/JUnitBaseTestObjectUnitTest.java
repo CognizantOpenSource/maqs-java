@@ -4,10 +4,8 @@
 
 package com.cognizantsoftvision.maqs.base;
 
-import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import java.io.File;
@@ -24,7 +22,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test Constructor with Log and Method.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testBaseTestObject1() {
         final ITestObject testObject = this.getTestObject();
 
@@ -37,7 +34,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test Constructor with Test Object.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testBaseTestObject2() {
         final ITestObject testObject = this.getTestObject();
         BaseTestObject baseTestObject = new BaseTestObject(testObject);
@@ -49,7 +45,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test set value.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testSetValue() {
         ITestObject testObject = this.getTestObject();
         final String key = "SetKey";
@@ -63,7 +58,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test set object.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testSetObject() {
         ITestObject testObject = this.getTestObject();
         final String key = "SetObject";
@@ -77,7 +71,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test get log.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testGetLog() {
         ITestObject testObject = this.getTestObject();
         Assertions.assertNotNull(testObject.getLogger(), "Checking that logger is not null.");
@@ -87,7 +80,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test set log.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testSetLog() {
         ITestObject testObject = this.getTestObject();
         final ILogger logger = this.getLogger();
@@ -99,7 +91,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test Get Perf Collection Timer - Not Null.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testGetPerfTimerCollectionNotNull() {
         ITestObject testObject = this.getTestObject();
         Assertions.assertNotNull(testObject.getPerfTimerCollection(), "Checking that logger is not null.");
@@ -109,7 +100,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test Set Perf Collection Timer - Get/Set.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testSetPerfTimerCollectionGetSet() {
         ITestObject testObject = this.getTestObject();
         final PerfTimerCollection perfTimerCollection = new PerfTimerCollection(testObject.getLogger(), "FakeTestName");
@@ -122,7 +112,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test get values.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testGetValues() {
         ITestObject testObject = this.getTestObject();
         Assertions.assertNotNull(testObject.getValues(), "Checking that values is not null.");
@@ -132,7 +121,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test get objects.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testGetObjects() {
         ITestObject testObject = this.getTestObject();
         Assertions.assertNotNull(testObject.getObjects(), "Checking that objects is not null.");
@@ -142,7 +130,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test Get Manager Store - Not Null.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testGetManagerStoreNotNull() {
         ITestObject testObject = this.getTestObject();
         Assertions.assertNotNull(testObject.getManagerStore(), "Checking that objects is not null.");
@@ -152,7 +139,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test add driver manager.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testAddDriverManager() {
         ITestObject testObject = this.getTestObject();
         final Supplier<String> supplier = () -> null;
@@ -167,7 +153,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test add driver manager - Overwrite True.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testAddDriverManagerTrue() {
         ITestObject testObject = this.getTestObject();
         final Supplier<String> supplier = () -> null;
@@ -184,7 +169,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test add driver manager - Overwrite False.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testAddDriverManagerFalse() {
         ITestObject testObject = this.getTestObject();
         final Supplier<String> supplier = () -> null;
@@ -199,7 +183,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test add driver manager 2.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testAddDriverManager2() {
         ITestObject testObject = this.getTestObject();
         final Supplier<String> supplier = () -> null;
@@ -215,7 +198,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test close.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testClose() throws Exception {
         ITestObject testObject = this.getTestObject();
         final Supplier<String> supplier = () -> null;
@@ -232,7 +214,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test add associated file.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testAddAssociatedFile() {
         ITestObject testObject = this.getTestObject();
         File temp = null;
@@ -251,7 +232,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test remove associated file.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testRemoveAssociatedFile() {
         ITestObject testObject = this.getTestObject();
         File temp = null;
@@ -272,7 +252,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test get array of associated files.
      */
     @Test
-    @Tag(TestCategories.FRAMEWORK)
     void testGetArrayOfAssociatedFiles() {
         ITestObject testObject = this.getTestObject();
         File temp = null;
@@ -293,7 +272,6 @@ class JUnitBaseTestObjectUnitTest extends BaseGenericTest {
      * Test contains associated file.
      */
     @Test()
-    @Tag(TestCategories.FRAMEWORK)
     void testContainsAssociatedFile() {
         ITestObject testObject = this.getTestObject();
         File temp = null;

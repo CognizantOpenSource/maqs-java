@@ -8,7 +8,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class BaseGenericTestUnitTest extends BaseGenericTest {
+public class BaseGenericTestNGUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testCreateTestObject() {

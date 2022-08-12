@@ -29,8 +29,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -233,16 +233,29 @@ public abstract class BaseTest {
    *
    * @param info the test info of the unit test being run
    */
-  @BeforeEach public void setup(TestInfo info) {
+  @BeforeEach
+  public void setup(TestInfo info) {
     //this.context = context;
+    String testClassName = null;
+    String testMethodName = null;
 
     // Get the Fully Qualified Test Class Name and set it in the object
-    String testName =
-        info.getTestClass().get().getName() + "." + info.getTestMethod().get().getName();
-    testName = testName.replaceFirst("class ", "");
-    this.fullyQualifiedTestClassName.set(testName);
+    if (info.getTestClass().isPresent()) {
+      Optional<Class<?>> optional = info.getTestClass();
+      if (optional.isPresent()) {
+        testClassName = optional.get().getName();
+      }
+    }
 
-    this.createNewTestObject();
+    if (info.getTestMethod().isPresent()) {
+     Optional<Method> optional = info.getTestMethod();
+     if (optional.isPresent()) {
+       testMethodName = optional.get().getName();
+     }
+    }
+
+    String testName = testClassName + "." + testMethodName;
+    customSetup(testName);
   }
 
   /**
@@ -269,9 +282,15 @@ public abstract class BaseTest {
   public void customSetup(String testName, ITestContext testContext) {
     this.testContextInstance = testContext;
 
+//    testName = testName.replaceFirst("class ", "");
+//    this.fullyQualifiedTestClassName.set(testName);
+//    this.createNewTestObject();
+    customSetup(testName);
+  }
+
+  public void customSetup(String testName) {
     testName = testName.replaceFirst("class ", "");
     this.fullyQualifiedTestClassName.set(testName);
-
     this.createNewTestObject();
   }
 
@@ -330,12 +349,13 @@ public abstract class BaseTest {
   /**
    * Cleanup after a JUnit test.
    */
-  @AfterEach public void teardownJunit() {
-    //    try {
-    //      this.beforeLoggingTeardown(junitTestResult);
-    //    } catch (Exception e) {
-    //      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
-    //    }
+//  @AfterEach
+  public void teardownJunit() {
+//        try {
+//          this.beforeLoggingTeardown(junitTestResult);
+//        } catch (Exception e) {
+//          this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
+//        }
 
     // Log the test result
     if (junitTestResult.getStatus() == TestResultType.PASS) {
@@ -386,7 +406,6 @@ public abstract class BaseTest {
     this.testResult = testResult;
   }
 
-  //@AfterEach
   public void setTestResult(TestResult testResult, ExtensionContext context) {
     this.context = context;
     this.junitTestResult = testResult;
