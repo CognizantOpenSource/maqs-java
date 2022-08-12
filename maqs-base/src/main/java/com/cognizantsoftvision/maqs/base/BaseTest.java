@@ -251,7 +251,7 @@ public abstract class BaseTest {
       Optional<Method> optional = info.getTestMethod();
       if (optional.isPresent()) {
         testMethodName = optional.get().getName();
-     }
+      }
     }
 
     String testName = testClassName + "." + testMethodName;
@@ -329,13 +329,12 @@ public abstract class BaseTest {
   /**
    * Cleanup after a JUnit test.
    */
-//  @AfterEach
   public void teardownJunit() {
-//        try {
-//          this.beforeLoggingTeardown(junitTestResult);
-//        } catch (Exception e) {
-//          this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
-//        }
+    //        try {
+    //          this.beforeLoggingTeardown(junitTestResult);
+    //        } catch (Exception e) {
+    //          this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
+    //        }
 
     // Log the test result
     if (junitTestResult.getStatus() == TestResultType.PASS) {
