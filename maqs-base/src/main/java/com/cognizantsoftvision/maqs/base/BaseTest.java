@@ -319,7 +319,7 @@ public abstract class BaseTest {
       this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
     }
 
-    cleanUpFiles();
+    cleanUpTest();
   }
 
   /**
@@ -348,13 +348,13 @@ public abstract class BaseTest {
       this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
     }
 
-    cleanUpFiles();
+    cleanUpTest();
   }
 
   /**
    * Cleans up logs and files after the test.
    */
-  private void cleanUpFiles() {
+  private void cleanUpTest() {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
 
