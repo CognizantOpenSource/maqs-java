@@ -63,13 +63,13 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   /**
    * The file to be converted into a result type.
    */
-  private static final File integrationTestJsonResultFile = new File(
+  private static final File integrationTestSampleResultFile = new File(
       "src/test/resources/testFiles/sampleResults.json");
 
   /**
    * The path to the file converted into a result type.
    */
-  private static final String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
+  private static final String integrationTestSampleResultUrl = integrationTestSampleResultFile.getAbsolutePath();
 
   /**
    * String value of main element selector.
@@ -193,7 +193,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void reportSampleResults() throws IOException, ParseException {
     String path = createReportPath();
-    Results results = new ObjectMapper().readValue(new File(integrationTestJsonResultUrl), Results.class);
+    Results results = new ObjectMapper().readValue(new File(integrationTestSampleResultUrl), Results.class);
 
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), results, path);
     validateReport(path, 3, 5, 2, 4);
@@ -202,6 +202,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     Document doc = Jsoup.parse(text);
 
     String errorMessage = Objects.requireNonNull(doc.selectFirst("#ErrorMessage")).text();
+    //String errorMessage = doc.selectFirst("#ErrorMessage").text();
     Assert.assertEquals(errorMessage, "java.lang.Exception: AutomationError");
 
     String reportContext = Objects.requireNonNull(doc.selectFirst("#reportContext")).text();

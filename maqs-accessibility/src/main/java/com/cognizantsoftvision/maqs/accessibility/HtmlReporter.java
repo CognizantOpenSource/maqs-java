@@ -10,6 +10,8 @@ import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,21 +19,27 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
@@ -49,6 +57,8 @@ public class HtmlReporter {
    * File path to resources java resources folder.
    */
   private static final String RESOURCES_FILE = "../maqs-accessibility/src/main/resources/";
+
+  private static final String DATA_SOURCE = "data:image/png;base64,";
 
   /**
    * Class constructor.
@@ -161,6 +171,8 @@ public class HtmlReporter {
 
     Document doc = Jsoup.parse(stringBuilder);
 
+    TakesScreenshot screenshot = getScreenShot(context);
+
     doc.select("style").append(getCss(context));
 
     Element contentArea = doc.select("content").first();
@@ -233,10 +245,12 @@ public class HtmlReporter {
 
     if (violationCount > 0 && requestedResults.contains(ResultType.Violations)) {
       getReadableAxeResults(results.getViolations(), ResultType.Violations, resultsFlex);
+      setImages(ResultType.Violations, doc, context, screenshot);
     }
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
       getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete, resultsFlex);
+      setImages(ResultType.Incomplete, doc, context, screenshot);
     }
 
     if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
@@ -286,10 +300,10 @@ public class HtmlReporter {
     sectionButtonHeader.text(type.name() + ": " + getCount(results));
     sectionButton.appendChild(sectionButtonHeader);
 
-    Element sectionButtonExpando = new Element("h2");
+    Element sectionButtonExpander = new Element("h2");
     sectionButtonExpando.addClass("buttonExpandoText");
-    sectionButtonExpando.text("-");
-    sectionButton.appendChild(sectionButtonExpando);
+    sectionButtonExpander.text("-");
+    sectionButton.appendChild(sectionButtonExpander);
 
     Element section = new Element("div");
     section.addClass("majorSection");
@@ -357,13 +371,21 @@ public class HtmlReporter {
         htmlAndSelector.addClass("wrapTwo");
 
         for (Object target : Collections.singletonList(item.getTarget())) {
-          String targetString = target.toString().replace("[", "").replace("]", "");
+          String targetString = target.toString();
+          targetString = targetString.contains("[[") && targetString.contains("]]")
+              ? targetString.substring(2, targetString.length() - 2)
+                : targetString.substring(1, targetString.length() - 1);
+
           htmlAndSelector.text(targetString);
           htmlAndSelector.html(targetString);
         }
 
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+
+        htmlAndSelectorWrapper = new Element("div");
+        elementNodes.appendChild(htmlAndSelectorWrapper);
         addFixes(item, type, htmlAndSelectorWrapper);
+        htmlAndSelectorWrapper.addClass("emFour");
       }
     }
   }
@@ -452,6 +474,84 @@ public class HtmlReporter {
 
     htmlAndSelector.appendChild(htmlSet);
     htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+  }
+
+  private static void setImages(ResultType resultType, Element doc,
+      SearchContext searchContext, TakesScreenshot screenshot) throws IOException {
+    if (!checkForNoWebDriver(searchContext) || screenshot == null) {
+      return;
+    }
+
+    Element section = doc.getElementById(resultType.name() + "Section");
+    Elements findings = section.getElementsByClass("findings");
+    int count = 1;
+
+    for (Element finding : findings) {
+      for (Element table : finding.getElementsByClass("htmlTable")) {
+        String elementName = resultType.name() + "Element" + count++;
+
+        Element emThree = table.selectFirst("div.emThree");
+        String selectorText = emThree.selectFirst("p.wrapTwo").text();
+        By by = By.cssSelector(selectorText);
+        WebElement foundElement = searchContext.findElement(By.cssSelector(selectorText));
+
+        Point location = searchContext.findElement(by).getLocation();
+        String imageString = getDataElementString(searchContext, by);
+
+        Element image = new Element("img");
+        image.attributes().put("src", imageString);
+        image.attributes().put("alt", elementName);
+        image.attributes().put("class", elementName);
+
+        Element emFour = table.selectFirst("div.emFour");
+        emFour.appendChild(image);
+      }
+    }
+  }
+
+  private static boolean checkForNoWebDriver(SearchContext searchContext) {
+    if (searchContext instanceof WebDriver) {
+      try {
+        if (((WebDriver) searchContext).getCurrentUrl().contains("http")) {
+          return true;
+        }
+      } catch (Exception e) {
+        throw new WebDriverException("web driver is not open");
+      }
+    }
+    return false;
+  }
+
+  private static TakesScreenshot getScreenShot(SearchContext context) {
+    return (TakesScreenshot) context;
+  }
+
+  private static String getDataElementString(SearchContext webDriver, By by) {
+    WebElement webElement = webDriver.findElement(by);
+    String base64bytes = Base64.getEncoder().encodeToString(webElement.getScreenshotAs(OutputType.BYTES));
+    return DATA_SOURCE + base64bytes;
+  }
+
+  private static String getDataElementString(
+      TakesScreenshot screenshot, SearchContext webDriver, By by) throws IOException {
+    // Get screenshot as a file
+    File screenshotFile = screenshot.getScreenshotAs(OutputType.FILE);
+
+    // Convert the screenshot into BufferedImage
+    BufferedImage fullScreen = ImageIO.read(screenshotFile);
+
+    // Find location of the web element on the page
+    WebElement element = webDriver.findElement(by);
+    Point location = webDriver.findElement(by).getLocation();
+
+    // cropping the full image to get only the element screenshot
+    BufferedImage bufferedImage = fullScreen.getSubimage(location.getX(), location.getY(),
+        element.getSize().getWidth(), element.getSize().getHeight());
+
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    ImageIO.write(bufferedImage, "PNG", out);
+    String base64bytes = Base64.getEncoder().encodeToString(out.toByteArray());
+    return DATA_SOURCE + base64bytes;
   }
 
   /**
@@ -543,7 +643,7 @@ public class HtmlReporter {
    */
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
-    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
+    return DATA_SOURCE + newScreen.getScreenshotAs(OutputType.BASE64);
   }
 
   /**
