@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.utilities;
 
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
@@ -16,11 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;
@@ -29,7 +25,7 @@ import org.testng.asserts.SoftAssert;
 
 /**
  * The File Logger unit test class.
- *
+ * <p>
  * Don't check for serial version unique IDs
  * as we will never serialize the test data
  */
@@ -630,13 +626,6 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.SUCCESS, logLine, MessageType.SUCCESS);
     logger.logMessage(MessageType.WARNING, logLine, MessageType.WARNING);
     logger.logMessage(MessageType.ERROR, logLine, MessageType.ERROR);
-
-    // Gives the writing time
-    try {
-      TimeUnit.MILLISECONDS.sleep(250);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
 
     // Get the file content
     String logContents = this.readTextFile(filePath);
