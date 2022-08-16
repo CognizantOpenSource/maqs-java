@@ -15,6 +15,14 @@ import java.util.Set;
  * A dummy test result class for unit testing
  */
 public class DummyTestResult implements ITestResult {
+    /**
+     * Test ID string
+     */
+    @Override
+    public String id()
+    {
+        return "";
+    }
 
     /**
      * The test context

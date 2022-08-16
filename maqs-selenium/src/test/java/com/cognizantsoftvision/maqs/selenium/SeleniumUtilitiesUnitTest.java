@@ -16,11 +16,14 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+
+import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -29,14 +32,14 @@ import org.testng.annotations.Test;
  */
 public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
+        private final String dateTimeFormatter = "uuuu-MM-dd-HH-mm-ss-SSSS";
+
         /**
          * Test capture screenshot no append.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testCaptureScreenshotNoAppend() throws Exception {
-
+        public void testCaptureScreenshotNoAppend() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -62,9 +65,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test capture screenshot append.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testCaptureScreenshotAppend() throws Exception {
+        public void testCaptureScreenshotAppend() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -92,12 +94,44 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
         }
 
         /**
+         * Test capture screenshot append.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testCaptureScreenshotAppendScreenshot() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
+                try {
+                        HtmlFileLogger fileLogger = new HtmlFileLogger("Capture Screenshot Append");
+                        this.getTestObject().setLogger(fileLogger);
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                            this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
+
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        final String testAppend = "testAppend";
+                        boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject, testAppend);
+
+                        // Assert screenshot was successful
+                        Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+                        String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+                        Assert.assertTrue(
+                            new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+                            "Checking that expected file path exists");
+                        Assert.assertTrue(
+                            new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
+                                .contains(testAppend),
+                            "Checking that appended value was added to file");
+                } finally {
+                        webDriver.quit();
+                }
+        }
+
+        /**
          * Test capture screenshot console logger.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testCaptureScreenshotConsoleLogger() throws Exception {
+        public void testCaptureScreenshotConsoleLogger() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         ConsoleLogger consoleLogger = new ConsoleLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
@@ -119,9 +153,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test capture screenshot custom directory file name.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testCaptureScreenshotCustomDirectoryFileName() throws Exception {
+        public void testCaptureScreenshotCustomDirectoryFileName() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -130,7 +163,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
                         // Open Google and take a screenshot
                         webDriver.navigate().to("http://www.google.com");
-                        String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+                        String dateTime = DateTimeFormatter.ofPattern(dateTimeFormatter, Locale.getDefault())
                                         .format(LocalDateTime.now(Clock.systemUTC()));
                         String filePath = SeleniumUtilities.captureScreenshot(webDriver, testObject,
                                         fileLogger.getDirectory(),
@@ -151,9 +184,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test save page source no append.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testSavePageSourceNoAppend() throws Exception {
+        public void testSavePageSourceNoAppend() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -179,9 +211,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test save page source append.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testSavePageSourceAppend() throws Exception {
+        public void testSavePageSourceAppend() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -212,9 +243,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test save page source custom directory file name.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testSavePageSourceCustomDirectoryFileName() throws Exception {
+        public void testSavePageSourceCustomDirectoryFileName() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
@@ -223,7 +253,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
                         // Open Google and take a screenshot
                         webDriver.navigate().to("http://www.google.com");
-                        String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+                        String dateTime = DateTimeFormatter.ofPattern(dateTimeFormatter, Locale.getDefault())
                                         .format(LocalDateTime.now(Clock.systemUTC()));
                         String filePath = SeleniumUtilities.savePageSource(webDriver, testObject,
                                         fileLogger.getDirectory(),
@@ -249,9 +279,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test save page source console logger.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testSavePageSourceConsoleLogger() throws Exception {
+        public void testSavePageSourceConsoleLogger() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         ConsoleLogger consoleLogger = new ConsoleLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
@@ -277,20 +306,21 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test web element to web driver.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testWebElementToWebDriver() throws Exception {
+        public void testWebElementToWebDriver() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
-                        EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(webDriver);
+                        WebDriverListener listener = new EventHandler(this.getLogger());
+                        webDriver = new EventFiringDecorator(listener).decorate(webDriver);
+
                         ConsoleLogger consoleLogger = new ConsoleLogger();
-                        SeleniumTestObject testObject = new SeleniumTestObject(eventFiringWebDriver, consoleLogger,
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
                             this.getTestObject().getFullyQualifiedTestName());
                         this.setTestObject(testObject);
 
                         // Open Google and take a screenshot
-                        eventFiringWebDriver.navigate().to("http://www.google.com");
-                        UIWaitFactory.getWaitDriver(eventFiringWebDriver).waitForPageLoad();
-                        WebElement input = eventFiringWebDriver.findElement(By.tagName("div"));
+                        webDriver.navigate().to("http://www.google.com");
+                        UIWaitFactory.getWaitDriver(webDriver).waitForPageLoad();
+                        WebElement input = webDriver.findElement(By.tagName("div"));
                         WebDriver webElementToWebDriver = SeleniumUtilities.webElementToWebDriver(input);
                         Assert.assertNotNull(webElementToWebDriver, "Expected extracted web driver to not be null");
                 } finally {
@@ -302,9 +332,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test kill driver.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testKillDriver() throws Exception {
+        public void testKillDriver() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-
                 try {
                         ConsoleLogger consoleLogger = new ConsoleLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,

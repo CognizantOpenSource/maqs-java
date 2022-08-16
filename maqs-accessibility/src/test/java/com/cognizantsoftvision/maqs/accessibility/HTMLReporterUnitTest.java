@@ -17,7 +17,6 @@ import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,8 +24,8 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -76,6 +75,12 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
    * String value of main element selector.
    */
   private static final String mainElementSelector = "main";
+
+  private void loadTestPage(String testPage) {
+    this.getWebDriver().get("file:///" + new File(testPage).getAbsolutePath());
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitUntilVisibleElement(By.cssSelector(mainElementSelector));
+  }
 
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void runScanOnPage() {
@@ -196,10 +201,10 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     String text = new String(Files.readAllBytes(Paths.get(path)));
     Document doc = Jsoup.parse(text);
 
-    String errorMessage = doc.selectFirst("#ErrorMessage").text();
+    String errorMessage = Objects.requireNonNull(doc.selectFirst("#ErrorMessage")).text();
     Assert.assertEquals(errorMessage, "java.lang.Exception: AutomationError");
 
-    String reportContext = doc.selectFirst("#reportContext").text();
+    String reportContext = Objects.requireNonNull(doc.selectFirst("#reportContext")).text();
     Assert.assertTrue(reportContext.contains("Url: https://www.google.com/"), "URL is not in the document");
     Assert.assertTrue(reportContext.contains("Orientation: landscape-primary"), "Orientation is not in the document");
     Assert.assertTrue(reportContext.contains("Size: 1200 x 646"), "Size is not in the document");
@@ -282,14 +287,13 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   }
 
   private String createReportPath() {
-    return FileSystems.getDefault().getPath("target/logs") + UUID.randomUUID().toString() + ".html";
+    return FileSystems.getDefault().getPath("target" + File.separator + "logs")
+        + File.separator + UUID.randomUUID() + ".html";
   }
 
   private void validateReport(String path, int violationCount, int passCount, int incompleteCount, int inapplicableCount)
       throws IOException {
-    String text = Files.lines(Paths.get(path), StandardCharsets.UTF_8)
-        .collect(Collectors.joining(System.lineSeparator()));
-
+    String text = String.valueOf(Files.readString(Paths.get(path)));
     Document doc = Jsoup.parse(text);
 
     // Check the Element count for each result type
@@ -311,7 +315,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   private void validateElementCount(Document doc, int count, ResultType resultType) {
     String ending = resultType.equals(ResultType.Inapplicable) ? "div.findings" : "div > div.htmlTable";
     String xpath = "#" + resultType + "Section > " + ending;
-    Elements liNodes = doc.select(xpath) != null ? doc.select(xpath) : new Elements();
+    Elements liNodes = !doc.select(xpath).isEmpty() ? doc.select(xpath) : new Elements();
     Assert.assertEquals(liNodes.size(), count, "Expected " + count + " " + resultType);
   }
 
@@ -324,19 +328,12 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   private void validateResultNotWritten(String path, EnumSet<ResultType> resultTypeArray) throws IOException {
     loadTestPage(integrationTestTargetSimpleUrl);
-    String text = Files.lines(Paths.get(path), StandardCharsets.UTF_8)
-        .collect(Collectors.joining(System.lineSeparator()));
+    String text = String.valueOf(Files.readAllLines(Paths.get(path)));
 
     for (ResultType resultType : resultTypeArray) {
       Assert.assertFalse(text.contains(resultType + ": "),
           "Expected to not find '" + resultType  + ": '");
     }
-  }
-
-  private void loadTestPage(String testPage) {
-    this.getWebDriver().get("file:///" + new File(testPage).getAbsolutePath());
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitUntilVisibleElement(By.cssSelector(mainElementSelector));
   }
 
   private void deleteFile(File file) {

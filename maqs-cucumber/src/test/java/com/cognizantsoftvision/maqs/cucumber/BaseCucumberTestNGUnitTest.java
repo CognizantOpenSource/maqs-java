@@ -20,21 +20,21 @@ public class BaseCucumberTestNGUnitTest extends BaseGenericTest {
     /**
      * Verifies the before method properly sets the Scenario Context
      */
-    @Test(groups = TestCategories.CUCUMBER)
+    @Test(groups = TestCategories.CUCUMBER, singleThreaded = true, priority = 0)
     public void testBeforeMethod() {
         DummyBaseCucumberTestNG dummyCucumber = new DummyBaseCucumberTestNG();
         String[] dummyArgs = {"Dummy Arg 1", "Dummy Arg 2"};
 
-        Assert.assertNull(ScenarioContext.get(ScenarioContext.JMAQS_HOLDER));
+        Assert.assertNull(ScenarioContext.get(ScenarioContext.MAQS_HOLDER));
         dummyCucumber.beforeMethod(null, dummyArgs, this.getTestContext());
-        Assert.assertNotNull(ScenarioContext.get(ScenarioContext.JMAQS_HOLDER));
+        Assert.assertNotNull(ScenarioContext.get(ScenarioContext.MAQS_HOLDER));
     }
 
     /**
      * Verifies the tear down process correctly cleans up the Scenario Context
      */
     @Test(groups = TestCategories.CUCUMBER)
-    public void testTearDown() {
+    public void testTearDown() throws Exception {
         DummyBaseCucumberTestNG dummyCucumber = new DummyBaseCucumberTestNG();
         BaseTest dummyTest = dummyCucumber.createSpecificBaseTest();
         String[] dummyArgs = {"Dummy Arg 1", "Dummy Arg 2"};
@@ -43,7 +43,7 @@ public class BaseCucumberTestNGUnitTest extends BaseGenericTest {
         DummyTestResult dummyResult = new DummyTestResult(dummyTest.getTestContext());
         dummyCucumber.tearDown(dummyResult);
 
-        Assert.assertNull(ScenarioContext.get(ScenarioContext.JMAQS_HOLDER));
+        Assert.assertNull(ScenarioContext.get(ScenarioContext.MAQS_HOLDER));
     }
 
     /**

@@ -41,11 +41,6 @@ import org.openqa.selenium.WrapsElement;
 public class HtmlReporter {
 
   /**
-   * Placeholder for class tag string type.
-   */
-  private static final String CLASS = "class";
-
-  /**
    * Placeholder for wrap one tag string type.
    */
   private static final String WRAP_ONE = "wrapOne";
@@ -62,11 +57,11 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with All result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param destination The file path where the html report will be stored
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for an entire web page.
+   * @param webDriver the web driver used in the scan
+   * @param destination the destination file the html report will go to
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination)
       throws IOException, ParseException {
@@ -74,12 +69,12 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with a list of specified result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param destination The file path where the html report will be stored
-   * @param requestedResults The result types that will be included on the html report
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for an entire web page with specific Result types.
+   * @param webDriver the web driver used in the scan
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
       throws IOException, ParseException {
@@ -87,12 +82,12 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with All result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param element The element that will be reported on
-   * @param destination The file path where the html report will be stored
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for a specific element.
+   * @param webDriver the web driver used in the scan
+   * @param element the element to be scanned
+   * @param destination the destination file the html report will go to
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
       throws IOException, ParseException {
@@ -100,13 +95,13 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with a list of specified result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param element The element that will be reported on
-   * @param destination The file path where the html report will be stored
-   * @param requestedResults The result types that will be included on the html report
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for a specific element and specified result types.
+   * @param webDriver the web driver used in the scan
+   * @param element the element to be scanned
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
@@ -114,12 +109,12 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with All result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param results The results that will be used for the html report
-   * @param destination The file path where the html report will be stored
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for an entire web page with already scanned results.
+   * @param webDriver the web driver used in the scan
+   * @param results the results type variable used after scanning the web page
+   * @param destination the destination file the html report will go to
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
       throws IOException, ParseException {
@@ -127,13 +122,14 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with a list of specified result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param results The results that will be used for the html report
-   * @param destination The file path where the html report will be stored
-   * @param requestedResults The result types that will be included on the html report
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for an entire web page with specified Result types
+   * and inputted already scanned results.
+   * @param webDriver the web driver used in the scan
+   * @param results the results object created after scanning the web page
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
@@ -141,13 +137,13 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report.
-   * @param context the web driver or web element to be used for the scan
-   * @param results The results that will be used for the html report
-   * @param destination The file path where the html report will be stored
-   * @param requestedResults The result types that will be included on the html report
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Creates an HTML accessibility report.
+   * @param context the Search Context to be used in the scan
+   * @param results the results object created after scanning the web page
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   private static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
@@ -160,11 +156,8 @@ public class HtmlReporter {
     final int passCount = getCount(results.getPasses());
     final int inapplicableCount = getCount(results.getInapplicable());
 
-    String stringBuilder = "<!DOCTYPE html>\r\n" + "<html lang=\"en\">" + "<head>"
-        + "<meta charset=\"utf-8\">"
-        + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
-        + "<title>Accessibility Check</title><style></style>"
-        + "</head>" + "<body><content></content><script></script></body>" + "</html>";
+    String stringBuilder = String.valueOf(Files.readString(Paths.get(RESOURCES_FILE + "htmlReporterTags.html")));
+    stringBuilder = stringBuilder.replace(System.lineSeparator(), "");
 
     Document doc = Jsoup.parse(stringBuilder);
 
@@ -189,7 +182,7 @@ public class HtmlReporter {
     contextGroup.appendChild(contextHeader);
 
     Element contextContent = new Element("div");
-    contextContent.attributes().put(CLASS, "emOne");
+    contextContent.addClass("emOne");
     contextContent.attributes().put("id", "reportContext");
     getContextContent(results, contextContent);
     contextGroup.appendChild(contextContent);
@@ -203,7 +196,7 @@ public class HtmlReporter {
     imgGroup.appendChild(imageHeader);
 
     Element imageContent = new Element("img");
-    imageContent.attributes().put(CLASS, "thumbnail");
+    imageContent.addClass("thumbnail");
     imageContent.attributes().put("id", "screenshotThumbnail");
     imageContent.attributes().put("alt", "A Screenshot of the page");
     imageContent.attributes().put("width", "33%");
@@ -219,7 +212,7 @@ public class HtmlReporter {
     countsGroup.appendChild(countsHeader);
 
     Element countsContent = new Element("div");
-    countsContent.attributes().put(CLASS, "emOne");
+    countsContent.addClass("emOne");
     getCountContent(violationCount, incompleteCount, passCount, inapplicableCount, requestedResults, countsContent);
     countsGroup.appendChild(countsContent);
 
@@ -281,25 +274,25 @@ public class HtmlReporter {
    */
   private static void getReadableAxeResults(List<Rule> results, ResultType type, Element body) {
     Element resultWrapper = new Element("div");
-    resultWrapper.attributes().put(CLASS, "resultWrapper");
+    resultWrapper.addClass("resultWrapper");
     body.appendChild(resultWrapper);
 
     Element sectionButton = new Element("button");
-    sectionButton.attributes().put(CLASS, "sectionbutton active");
+    sectionButton.addClass("sectionbutton active");
     resultWrapper.appendChild(sectionButton);
 
     Element sectionButtonHeader = new Element("h2");
-    sectionButtonHeader.attributes().put(CLASS, "buttonInfoText");
+    sectionButtonHeader.addClass("buttonInfoText");
     sectionButtonHeader.text(type.name() + ": " + getCount(results));
     sectionButton.appendChild(sectionButtonHeader);
 
     Element sectionButtonExpando = new Element("h2");
-    sectionButtonExpando.attributes().put(CLASS, "buttonExpandoText");
+    sectionButtonExpando.addClass("buttonExpandoText");
     sectionButtonExpando.text("-");
     sectionButton.appendChild(sectionButtonExpando);
 
     Element section = new Element("div");
-    section.attributes().put(CLASS, "majorSection");
+    section.addClass("majorSection");
     section.attributes().put("id", type.name() + "Section");
     resultWrapper.appendChild(section);
 
@@ -307,12 +300,12 @@ public class HtmlReporter {
 
     for (Rule element : results) {
       Element childEl = new Element("div");
-      childEl.attributes().put(CLASS, "findings");
+      childEl.addClass("findings");
       childEl.appendText(loops++ + ": " + element.getHelp());
       section.appendChild(childEl);
 
       Element content = new Element("div");
-      content.attributes().put(CLASS, "emTwo");
+      content.addClass("emTwo");
       content.text("Description: " + element.getDescription());
       content.appendChild(new Element("br"));
       content.appendText("Help: " + element.getHelp());
@@ -339,29 +332,29 @@ public class HtmlReporter {
       }
 
       Element childEl2 = new Element("div");
-      childEl2.attributes().put(CLASS, "emTwo");
+      childEl2.addClass("emTwo");
       childEl.appendChild(content);
 
       for (CheckedNode item : element.getNodes()) {
         Element elementNodes = new Element("div");
-        elementNodes.attr(CLASS, "htmlTable");
+        elementNodes.addClass("htmlTable");
         childEl.appendChild(elementNodes);
 
         Element htmlAndSelectorWrapper = new Element("div");
-        htmlAndSelectorWrapper.attr(CLASS, "emThree");
+        htmlAndSelectorWrapper.addClass("emThree");
         htmlAndSelectorWrapper.text("Html:");
         htmlAndSelectorWrapper.appendChild(new Element("br"));
         elementNodes.appendChild(htmlAndSelectorWrapper);
 
         Element htmlAndSelector = new Element("p");
-        htmlAndSelector.attr(CLASS, WRAP_ONE);
+        htmlAndSelector.addClass(WRAP_ONE);
         htmlAndSelector.html(item.getHtml());
         htmlAndSelector.text(item.getHtml());
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
         htmlAndSelectorWrapper.appendText("Selector:");
 
         htmlAndSelector = new Element("p");
-        htmlAndSelector.attributes().put(CLASS, "wrapTwo");
+        htmlAndSelector.addClass("wrapTwo");
 
         for (Object target : Collections.singletonList(item.getTarget())) {
           String targetString = target.toString().replace("[", "").replace("]", "");
@@ -396,7 +389,7 @@ public class HtmlReporter {
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       htmlAndSelector = new Element("p");
-      htmlAndSelector.attr(CLASS, "wrapTwo");
+      htmlAndSelector.addClass("wrapTwo");
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       if (!allCheckResults.isEmpty() || !noneCheckResults.isEmpty()) {
@@ -418,7 +411,7 @@ public class HtmlReporter {
   private static void fixAllIssues(Element htmlAndSelectorWrapper,
       List<Check> allCheckResults, List<Check> noneCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr(CLASS, WRAP_ONE);
+    htmlAndSelector.addClass(WRAP_ONE);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
@@ -442,11 +435,11 @@ public class HtmlReporter {
   /**
    * Adds the issues in the Any category in the list of Checks.
    * @param htmlAndSelectorWrapper The element that all the content will be appended to
-   * @param anyCheckResults A list of the any check results
+   * @param anyCheckResults A list of the Any check results
    */
   private static void fixAnyIssues(Element htmlAndSelectorWrapper, List<Check> anyCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr(CLASS, WRAP_ONE);
+    htmlAndSelector.addClass(WRAP_ONE);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
@@ -538,7 +531,7 @@ public class HtmlReporter {
    * @throws IOException if an exception is thrown
    */
   private static String getCss(SearchContext context) throws IOException {
-    String css = new String(Files.readAllBytes(
+    String css = String.valueOf(Files.readAllLines(
         Paths.get(RESOURCES_FILE + "htmlReporter.css")));
     return  css.replace("url('", "url('" + getDataImageString(context));
   }
@@ -554,7 +547,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Gets the date format into a string.
+   * Gets the timestamp into a specified date format..
    * @param timestamp The time to be made into a date format
    * @return The timestamp as a specified date formatted string
    * @throws ParseException If parse exception occurs
@@ -570,6 +563,6 @@ public class HtmlReporter {
    * @throws IOException if an exception is thrown
    */
   private static String getJavascriptFileToString() throws IOException {
-    return new String(Files.readAllBytes(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
+    return String.valueOf(Files.readAllLines(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
   }
 }

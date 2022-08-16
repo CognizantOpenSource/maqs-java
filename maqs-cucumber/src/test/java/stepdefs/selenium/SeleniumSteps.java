@@ -11,7 +11,6 @@ public class SeleniumSteps extends BaseSeleniumStep {
 
     @Given("^Selenium Step$")
     public void Step() {
-
         this.getDriver().navigate().to("https://magenicautomation.azurewebsites.net/");
         this.getLogger().logMessage("info");
     }

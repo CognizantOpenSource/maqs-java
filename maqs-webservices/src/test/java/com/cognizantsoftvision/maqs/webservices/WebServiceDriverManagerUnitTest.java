@@ -13,7 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit Tests for Web Service Driver Manager.
+ * The Web Service Driver Manager unit test class.
  */
 public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
 

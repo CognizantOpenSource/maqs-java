@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.appium;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
-
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;
@@ -13,9 +12,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Mobile driver manager unit test.
+ * The Mobile Driver Manager unit test class.
  */
 public class MobileDriverManagerUnitTest extends BaseGenericTest {
+
   /**
    * Test get mobile driver.
    */
@@ -47,7 +47,8 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
    */
   @Test
   public void testCloseWithInstantiatedDriver() {
-    MobileDriverManager mobileDriverManager = new MobileDriverManager(AppiumDriverFactory.getDefaultMobileDriver(), this.getTestObject());
+    MobileDriverManager mobileDriverManager = new MobileDriverManager(
+        AppiumDriverFactory.getDefaultMobileDriver(), this.getTestObject());
     mobileDriverManager.close();
     Assert.assertNull(mobileDriverManager.getBaseDriver(), "Expected Mobile Driver to be null.");
   }
@@ -67,6 +68,5 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
     mobileDriverManager.close();
 
     Assert.assertNull(mobileDriverManager.getBaseDriver(), "Expected Base Driver to be null.");
-
   }
 }

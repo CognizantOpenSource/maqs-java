@@ -5,9 +5,10 @@
 package com.cognizantsoftvision.maqs.utilities.logging;
 
 /**
- * The type of message.
+ * The Message Type enum class.
  */
 public enum MessageType {
+
   /**
    * Suspended message.
    */
@@ -34,19 +35,29 @@ public enum MessageType {
   GENERIC(3),
 
   /**
+   * Step Message test engineer would insert.
+   */
+  STEP(4),
+
+  /**
+   * Action Message reflects actions a user would take.
+   */
+  ACTION(5),
+
+  /**
    * Informational message - Our default message type.
    */
-  INFORMATION(4),
+  INFORMATION(6),
 
   /**
    * Verbose message.
    */
-  VERBOSE(5);
+  VERBOSE(7);
 
   /**
    * The value of current Message Type.
    */
-  private int value;
+  private final int value;
 
   /**
    * Initializes a new instance of Message Type.

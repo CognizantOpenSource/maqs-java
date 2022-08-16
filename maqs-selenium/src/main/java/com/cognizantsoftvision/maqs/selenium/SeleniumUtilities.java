@@ -4,8 +4,10 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
@@ -24,7 +26,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
  * The type Selenium utilities.
@@ -45,7 +46,7 @@ public class SeleniumUtilities {
    * @param testObject the test object
    * @return the boolean
    */
-  public static boolean captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject) {
+  public static boolean captureScreenshot(WebDriver webDriver, ISeleniumTestObject testObject) {
     return captureScreenshot(webDriver, testObject, "");
   }
 
@@ -54,16 +55,20 @@ public class SeleniumUtilities {
    *
    * @param webDriver  the web driver
    * @param testObject the test object
-   * @param appendName the append name
+   * @param appendName the appended name
    * @return the boolean
    */
-  public static boolean captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
+  public static boolean captureScreenshot(WebDriver webDriver, ISeleniumTestObject testObject,
       String appendName) {
     try {
       // Check if we are using a file logger. If not, return false.
       if (!(testObject.getLogger() instanceof FileLogger)) {
         return false;
+      } else if (testObject.getLogger() instanceof HtmlFileLogger) {
+        new HtmlFileLogger().embedImage(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BASE64));
       }
+
+      testObject.getLogger().logMessage(MessageType.VERBOSE, "Before screenshot capture");
 
       // Calculate the file name with Date Time Stamp
       String directory = ((FileLogger) testObject.getLogger()).getDirectory();
@@ -74,6 +79,7 @@ public class SeleniumUtilities {
       captureScreenshot(webDriver, testObject, directory, fileNameWithoutExtension);
 
       testObject.getLogger().logMessage(MessageType.INFORMATION, "Screenshot saved.");
+      testObject.getLogger().logMessage(MessageType.VERBOSE, "After screenshot capture");
       return true;
     } catch (Exception exception) {
       testObject.getLogger().logMessage(MessageType.ERROR,
@@ -91,7 +97,7 @@ public class SeleniumUtilities {
    * @param fileNameWithoutExtension the file name without extension
    * @return the string
    */
-  public static String captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
+  public static String captureScreenshot(WebDriver webDriver, ISeleniumTestObject testObject,
       String directory, String fileNameWithoutExtension) {
     File tempFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
     String path = calculateFileName(directory, fileNameWithoutExtension, ".png");
@@ -131,13 +137,13 @@ public class SeleniumUtilities {
    *
    * @param webDriver  the web driver
    * @param testObject the test object
-   * @param appendName the append name
+   * @param appendName the appended name
    * @return the boolean
    */
   public static boolean savePageSource(WebDriver webDriver, SeleniumTestObject testObject,
       String appendName) {
     try {
-      String path = "";
+      String path;
 
       // Check if we are using a file logger.
       if (!(testObject.getLogger() instanceof FileLogger)) {
@@ -204,7 +210,7 @@ public class SeleniumUtilities {
     return Paths.get(directory, fileNameWithoutExtension + fileExtension).normalize().toString();
   }
 
-  private static void validateDirectoryStructure(SeleniumTestObject testObject, String directory) {
+  private static void validateDirectoryStructure(ISeleniumTestObject testObject, String directory) {
     try {
       Path path = new File(directory).toPath();
       if (!path.toFile().isDirectory()) {
@@ -227,8 +233,8 @@ public class SeleniumUtilities {
     driver = ((WrapsDriver) webElement).getWrappedDriver();
 
     // If this an even firing wrapper get the base wrapper
-    if (driver instanceof EventFiringWebDriver) {
-      return ((EventFiringWebDriver) driver).getWrappedDriver();
+    if (driver instanceof WrapsDriver) {
+      return ((WrapsDriver) driver).getWrappedDriver();
     }
 
     return driver;
@@ -244,6 +250,22 @@ public class SeleniumUtilities {
       webDriver.close();
     } finally {
       webDriver.quit();
+    }
+  }
+
+  /**
+   * Switches to a different window.
+   * @param testObject the test object to be used
+   * @param windowName the name of the window being switched to
+   */
+  public static void switchToWindow(ISeleniumTestObject testObject, String windowName) {
+    testObject.getLogger().logMessage(MessageType.VERBOSE, "Before switching to window: %s", windowName);
+
+    try {
+      testObject.getWebDriver().switchTo().window(windowName);
+      testObject.getLogger().logMessage(MessageType.VERBOSE, "After switching to window: %s", windowName);
+    } catch (Exception e) {
+      throw new MAQSRuntimeException(e.getMessage(), e);
     }
   }
 }

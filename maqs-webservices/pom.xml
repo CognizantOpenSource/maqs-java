@@ -16,6 +16,7 @@
     <version>${revision}</version>
 
     <properties>
+        <spring.web.version>5.3.15</spring.web.version>
         <jackson.version>2.13.2</jackson.version>
         <spring.web.version>5.3.16</spring.web.version>
 
@@ -41,22 +42,22 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.13.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.13.2.1</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.13.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.13.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

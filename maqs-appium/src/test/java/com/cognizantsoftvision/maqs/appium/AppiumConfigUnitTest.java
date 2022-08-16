@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.appium;
 
 import com.cognizantsoftvision.maqs.appium.constants.PlatformType;
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -17,56 +16,50 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 /**
- * The type Appium config unit test.
+ * The Appium Config unit test class.
  */
-public class AppiumConfigUnitTest extends BaseGenericTest {
+public class AppiumConfigUnitTest {
 
   /**
    * The Username.
    */
-  private String username = "username";
+  private final String username = "username";
   /**
    * The Browser name.
    */
-  private String browserName = "browserName";
+  private final String browserName = "browserName";
   /**
    * The Access key.
    */
-  private String accessKey = "accessKey";
+  private final String accessKey = "accessKey";
   /**
    * The Device orientation.
    */
-  private String deviceOrientation = "deviceOrientation";
+  private final String deviceOrientation = "deviceOrientation";
 
   /**
    * Test get os version.
-   *
-   * @throws Exception the exception
    */
   @Test(groups = TestCategories.APPIUM)
-  public void testGetOSVersion() throws Exception {
+  public void testGetOSVersion() {
     String osVersion = AppiumConfig.getPlatformVersion();
     Assert.assertTrue(osVersion.equalsIgnoreCase("11.0"));
   }
 
   /**
    * Test get device name.
-   *
-   * @throws Exception the exception
    */
   @Test(groups = TestCategories.APPIUM)
-  public void testGetDeviceName() throws Exception {
+  public void testGetDeviceName() {
     String deviceName = AppiumConfig.getDeviceName();
     Assert.assertTrue(deviceName.equalsIgnoreCase("Android GoogleAPI Emulator"));
   }
 
   /**
    * Test get mobile hub url string.
-   *
-   * @throws Exception the exception
    */
   @Test(groups = TestCategories.APPIUM)
-  public void testGetMobileHubUrlString() throws Exception {
+  public void testGetMobileHubUrlString() {
     String mobileHubUrl = AppiumConfig.getMobileHubUrlString();
     Assert.assertTrue(mobileHubUrl.equalsIgnoreCase("http://ondemand.saucelabs.com:80/wd/hub"));
   }
@@ -83,7 +76,7 @@ public class AppiumConfigUnitTest extends BaseGenericTest {
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "JMAQS");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsStrings.get(accessKey), "80592d42-18a3-4303-9b65-b8f8181d0e67");
+        .assertNotEquals(capabilitiesAsStrings.get(accessKey), "");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(deviceOrientation));
@@ -103,7 +96,7 @@ public class AppiumConfigUnitTest extends BaseGenericTest {
     softAssert.assertEquals(capabilitiesAsObjects.get(username), "JMAQS");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsObjects.get(accessKey), "80592d42-18a3-4303-9b65-b8f8181d0e67");
+        .assertNotEquals(capabilitiesAsObjects.get(accessKey), "");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsObjects.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(deviceOrientation));
@@ -120,7 +113,7 @@ public class AppiumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Test get soft assert screen shot.
+   * Test get soft assert screenshot.
    */
   @Test(groups = TestCategories.APPIUM)
   public void testGetSoftAssertScreenShot() {

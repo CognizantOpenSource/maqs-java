@@ -22,7 +22,7 @@ public class BaseSeleniumStepUnitTest extends BaseSeleniumTest {
     @Test(groups = TestCategories.CUCUMBER)
     public void testGetDriver() {
         DummyBaseSeleniumStep stepClass = new DummyBaseSeleniumStep();
-        ScenarioContext.put(ScenarioContext.JMAQS_HOLDER, this);
+        ScenarioContext.put(ScenarioContext.MAQS_HOLDER, this);
         Assert.assertNotNull(stepClass.getDriver(), "Checking that Selenium Driver is not null through BaseSeleniumStep");
     }
 
@@ -32,7 +32,7 @@ public class BaseSeleniumStepUnitTest extends BaseSeleniumTest {
     @Test(groups = TestCategories.CUCUMBER)
     public void testGetTestObject() {
         DummyBaseSeleniumStep stepClass = new DummyBaseSeleniumStep();
-        ScenarioContext.put(ScenarioContext.JMAQS_HOLDER, this);
+        ScenarioContext.put(ScenarioContext.MAQS_HOLDER, this);
         Assert.assertNotNull(stepClass.getTestObject(), "Checking that Test Object is not null through BaseSeleniumStep");
     }
 }

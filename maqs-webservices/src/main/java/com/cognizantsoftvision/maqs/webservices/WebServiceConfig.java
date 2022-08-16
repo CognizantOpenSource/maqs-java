@@ -9,7 +9,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 import java.net.URI;
 
 /**
- * Web service specific configuration settings.
+ * The Web Service Configuration class.
  */
 public final class WebServiceConfig {
 

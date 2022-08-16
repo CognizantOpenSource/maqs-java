@@ -13,7 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Unit tests the Web Service Test Object functionality.
+ * The Web Service Test Object unit test class.
  */
 public class WebServiceTestObjectUnitTest extends BaseGenericTest {
 
