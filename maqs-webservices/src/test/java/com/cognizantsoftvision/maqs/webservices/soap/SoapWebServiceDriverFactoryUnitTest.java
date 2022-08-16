@@ -1,7 +1,7 @@
 package com.cognizantsoftvision.maqs.webservices.soap;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import javax.xml.soap.SOAPException;
 

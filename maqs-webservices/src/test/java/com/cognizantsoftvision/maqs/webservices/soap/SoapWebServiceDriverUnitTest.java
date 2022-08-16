@@ -2,7 +2,7 @@ package com.cognizantsoftvision.maqs.webservices.soap;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 import java.io.IOException;
@@ -50,6 +50,6 @@ public class SoapWebServiceDriverUnitTest extends BaseSoapWebServiceTest {
       ParserConfigurationException, SAXException {
     SoapWebServiceDriver driver = new SoapWebServiceDriver(WebServiceConfig.getWebServiceUri());
     driver.addObjectToSoapMessage("Test String");
-    Assert.assertEquals("Test String", driver.getSoapBodyString());
+    Assert.assertEquals(driver.getSoapBodyString(), "Test String");
   }
 }
