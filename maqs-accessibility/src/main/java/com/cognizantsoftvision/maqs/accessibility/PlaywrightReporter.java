@@ -4,21 +4,22 @@
 
 package com.cognizantsoftvision.maqs.accessibility;
 
-import com.deque.html.axecore.results.Check;
-import com.deque.html.axecore.results.CheckedNode;
-import com.deque.html.axecore.results.Results;
-import com.deque.html.axecore.results.Rule;
-import com.deque.html.axecore.selenium.AxeBuilder;
+
+import com.deque.html.axecore.playwright.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
+import com.deque.html.axecore.utilities.axeresults.AxeResults;
+import com.deque.html.axecore.utilities.axeresults.Check;
+import com.deque.html.axecore.utilities.axeresults.CheckedNode;
+import com.deque.html.axecore.utilities.axeresults.Rule;
+import com.microsoft.playwright.Page;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Collections;
-import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
@@ -28,17 +29,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
 
 /**
  * The HTML reporter class.
  */
-public class HtmlReporter {
+public class PlaywrightReporter extends HtmlReporter {
 
   /**
    * Placeholder for wrap one tag string type.
@@ -53,87 +49,87 @@ public class HtmlReporter {
   /**
    * Class constructor.
    */
-  protected HtmlReporter() {
+  protected PlaywrightReporter() {
   }
 
   /**
    * Create an HTML accessibility report for an entire web page.
-   * @param webDriver the web driver used in the scan
+   * @param page the web driver used in the scan
    * @param destination the destination file the html report will go to
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, String destination)
+  public static void createAxeHtmlReport(Page page, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, destination, EnumSet.allOf(ResultType.class));
+    createAxeHtmlReport(page, destination, EnumSet.allOf(ResultType.class));
   }
 
   /**
    * Create an HTML accessibility report for an entire web page with specific Result types.
-   * @param webDriver the web driver used in the scan
+   * @param page the web driver used in the scan
    * @param destination the destination file the html report will go to
    * @param requestedResults the specified result types to include in the report
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
+  public static void createAxeHtmlReport(Page page, String destination, Set<ResultType> requestedResults)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver), destination, requestedResults);
+    createAxeHtmlReport(page, new AxeBuilder(page).analyze(), destination, requestedResults);
   }
 
   /**
    * Create an HTML accessibility report for a specific element.
-   * @param webDriver the web driver used in the scan
+   * @param page the web driver used in the scan
    * @param element the element to be scanned
    * @param destination the destination file the html report will go to
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
+  public static void createAxeHtmlReport(Page page, WebElement element, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, element, destination, EnumSet.allOf(ResultType.class));
+    createAxeHtmlReport(page, element, destination, EnumSet.allOf(ResultType.class));
   }
 
   /**
    * Create an HTML accessibility report for a specific element and specified result types.
-   * @param webDriver the web driver used in the scan
+   * @param page the web driver used in the scan
    * @param element the element to be scanned
    * @param destination the destination file the html report will go to
    * @param requestedResults the specified result types to include in the report
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
+  public static void createAxeHtmlReport(Page page, WebElement element, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver, element), destination, requestedResults);
+//    createAxeHtmlReport(page, new AxeBuilder(page).analyze(element), destination, requestedResults);
   }
 
   /**
    * Create an HTML accessibility report for an entire web page with already scanned results.
-   * @param webDriver the web driver used in the scan
+   * @param page the web driver used in the scan
    * @param results the results type variable used after scanning the web page
    * @param destination the destination file the html report will go to
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
+  public static void createAxeHtmlReport(Page page, AxeResults results, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, results, destination, EnumSet.allOf(ResultType.class));
+    createAxeHtmlReport(page, results, destination, EnumSet.allOf(ResultType.class));
   }
 
   /**
    * Create an HTML accessibility report for an entire web page with specified Result types
    * and inputted already scanned results.
-   * @param webDriver the web driver used in the scan
+   * @param page the web driver used in the scan
    * @param results the results object created after scanning the web page
    * @param destination the destination file the html report will go to
    * @param requestedResults the specified result types to include in the report
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination,
+  public static void createAxeHtmlReport(Page page, AxeResults results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
-    createAxeHtmlReportFile(webDriver, results, destination, requestedResults);
+    createAxeHtmlReportFile(page, results, destination, requestedResults);
   }
 
   /**
@@ -145,12 +141,8 @@ public class HtmlReporter {
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  private static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
+  private static void createAxeHtmlReportFile(Page context, AxeResults results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
-    // Get the unwrapped element if we are using a wrapped element
-    context = (context instanceof WrapsElement)
-        ? ((WrapsElement) context).getWrappedElement() : context;
-
     final int violationCount = getCount(results.getViolations());
     final int incompleteCount = getCount(results.getIncomplete());
     final int passCount = getCount(results.getPasses());
@@ -261,7 +253,7 @@ public class HtmlReporter {
     modal.appendChild(modalImage);
 
     Element script = doc.select("script").first();
-    Objects.requireNonNull(script).appendChild(new DataNode(getJavascriptFileToString()));
+    Objects.requireNonNull(script).appendChild(new DataNode(HtmlReporter.getJavascriptFileToString()));
 
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
@@ -460,7 +452,7 @@ public class HtmlReporter {
    * @param element the element that the content will be added to
    * @throws ParseException if an exception is thrown
    */
-  private static void getContextContent(Results results, Element element) throws ParseException {
+  private static void getContextContent(AxeResults results, Element element) throws ParseException {
     element.text("Url: " + results.getUrl());
     element.appendChild(new Element("br"));
     element.appendText("Orientation: " + results.getTestEnvironment().getOrientationType());
@@ -468,7 +460,7 @@ public class HtmlReporter {
     element.appendText("Size: " + results.getTestEnvironment().getwindowWidth() + " x  "
         + results.getTestEnvironment().getWindowHeight());
     element.appendChild(new Element("br"));
-    element.appendText("Time: " + getDateFormat(results.getTimestamp()));
+    element.appendText("Time: " + HtmlReporter.getDateFormat(results.getTimestamp()));
     element.appendChild(new Element("br"));
     element.appendText("User agent: " + results.getTestEnvironment().getUserAgent());
     element.appendChild(new Element("br"));
@@ -530,7 +522,7 @@ public class HtmlReporter {
    * @return the CSS file script as a string
    * @throws IOException if an exception is thrown
    */
-  private static String getCss(SearchContext context) throws IOException {
+  private static String getCss(Page context) throws IOException {
     String css = String.valueOf(Files.readAllLines(
         Paths.get(RESOURCES_FILE + "htmlReporter.css")));
     return  css.replace("url('", "url('" + getDataImageString(context));
@@ -541,28 +533,10 @@ public class HtmlReporter {
    * @param context The web driver or element to take a screenshot of
    * @return the base 64 data image as a string
    */
-  private static String getDataImageString(SearchContext context) {
-    TakesScreenshot newScreen = (TakesScreenshot) context;
-    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
-  }
-
-  /**
-   * Gets the timestamp into a specified date format..
-   * @param timestamp The time to be made into a date format
-   * @return The timestamp as a specified date formatted string
-   * @throws ParseException If parse exception occurs
-   */
-  static String getDateFormat(String timestamp) throws ParseException {
-    Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(timestamp);
-    return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
-  }
-
-  /**
-   * Gets the javascript file into a string format.
-   * @return the javascript file script as a string
-   * @throws IOException if an exception is thrown
-   */
-  public static String getJavascriptFileToString() throws IOException {
-    return String.valueOf(Files.readAllLines(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
+  private static String getDataImageString(Page context) {
+    //TakesScreenshot newScreen = (TakesScreenshot) context;
+    //return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
+    byte[] bytes = context.screenshot();
+    return "data:image/png;base64," + Base64.getEncoder().encodeToString(bytes);
   }
 }

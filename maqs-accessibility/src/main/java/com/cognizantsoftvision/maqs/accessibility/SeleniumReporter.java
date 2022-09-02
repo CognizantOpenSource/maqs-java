@@ -16,9 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
@@ -28,17 +26,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.*;
 
 /**
  * The HTML reporter class.
  */
-public class HtmlReporter {
+public class SeleniumReporter extends HtmlReporter {
 
   /**
    * Placeholder for wrap one tag string type.
@@ -53,7 +46,7 @@ public class HtmlReporter {
   /**
    * Class constructor.
    */
-  protected HtmlReporter() {
+  protected SeleniumReporter() {
   }
 
   /**
@@ -261,7 +254,7 @@ public class HtmlReporter {
     modal.appendChild(modalImage);
 
     Element script = doc.select("script").first();
-    Objects.requireNonNull(script).appendChild(new DataNode(getJavascriptFileToString()));
+    Objects.requireNonNull(script).appendChild(new DataNode(HtmlReporter.getJavascriptFileToString()));
 
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
@@ -468,7 +461,7 @@ public class HtmlReporter {
     element.appendText("Size: " + results.getTestEnvironment().getwindowWidth() + " x  "
         + results.getTestEnvironment().getWindowHeight());
     element.appendChild(new Element("br"));
-    element.appendText("Time: " + getDateFormat(results.getTimestamp()));
+    element.appendText("Time: " + HtmlReporter.getDateFormat(results.getTimestamp()));
     element.appendChild(new Element("br"));
     element.appendText("User agent: " + results.getTestEnvironment().getUserAgent());
     element.appendChild(new Element("br"));
@@ -544,25 +537,5 @@ public class HtmlReporter {
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
     return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
-  }
-
-  /**
-   * Gets the timestamp into a specified date format..
-   * @param timestamp The time to be made into a date format
-   * @return The timestamp as a specified date formatted string
-   * @throws ParseException If parse exception occurs
-   */
-  static String getDateFormat(String timestamp) throws ParseException {
-    Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(timestamp);
-    return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
-  }
-
-  /**
-   * Gets the javascript file into a string format.
-   * @return the javascript file script as a string
-   * @throws IOException if an exception is thrown
-   */
-  public static String getJavascriptFileToString() throws IOException {
-    return String.valueOf(Files.readAllLines(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
   }
 }
