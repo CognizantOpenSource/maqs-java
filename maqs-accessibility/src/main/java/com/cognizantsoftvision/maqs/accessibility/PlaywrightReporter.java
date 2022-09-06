@@ -101,7 +101,7 @@ public class PlaywrightReporter extends HtmlReporter {
    */
   public static void createAxeHtmlReport(Page page, WebElement element, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
-//    createAxeHtmlReport(page, new AxeBuilder(page).analyze(element), destination, requestedResults);
+  //    createAxeHtmlReport(page, new AxeBuilder(page).analyze(element), destination, requestedResults);
   }
 
   /**
