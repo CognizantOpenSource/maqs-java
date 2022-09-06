@@ -18,7 +18,7 @@
     <properties>
         <deque.axe.version>4.4.1</deque.axe.version>
         <apache.commons.version>1.9</apache.commons.version>
-        <jsoup.version>1.14.3</jsoup.version>
+        <jsoup.version>1.15.2</jsoup.version>
     </properties>
 
     <dependencies>
@@ -27,8 +27,17 @@
             <artifactId>maqs-selenium</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.cognizantsoftvision.maqs.playwright</groupId>
+            <artifactId>maqs-playwright</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.deque.html.axe-core</groupId>
             <artifactId>selenium</artifactId>
+            <version>${deque.axe.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.deque.html.axe-core</groupId>
+            <artifactId>playwright</artifactId>
             <version>${deque.axe.version}</version>
         </dependency>
         <dependency>
