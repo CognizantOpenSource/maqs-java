@@ -1,17 +1,21 @@
+/*
+ * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
+ */
+
 package com.cognizantsoftvision.maqs.accessibility.htmlReporter;
 
-import com.cognizantsoftvision.maqs.accessibility.PlaywrightReporter;
-import com.cognizantsoftvision.maqs.playwright.BasePlaywrightTest;
-import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import com.deque.html.axecore.playwright.AxeBuilder;
+import com.cognizantsoftvision.maqs.accessibility.SeleniumReporter;
+import com.deque.html.axecore.axeargs.AxeRunOptions;
+import com.deque.html.axecore.results.Check;
+import com.deque.html.axecore.results.CheckedNode;
+import com.deque.html.axecore.results.Results;
+import com.deque.html.axecore.results.Rule;
+import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
-import com.deque.html.axecore.utilities.axeresults.AxeResults;
-import com.deque.html.axecore.utilities.axeresults.Check;
-import com.deque.html.axecore.utilities.axeresults.CheckedNode;
-import com.deque.html.axecore.utilities.axeresults.Rule;
-import com.deque.html.axecore.utilities.axerunoptions.AxeRunOptions;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.microsoft.playwright.options.LoadState;
+import com.cognizantsoftvision.maqs.selenium.BaseSeleniumTest;
+import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -26,14 +30,14 @@ import java.util.UUID;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.testng.Assert;
-import org.testng.annotations.Ignore;
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import org.testng.Assert;
 
 /**
- * Accessibility HTML Playwright Reporter unit tests.
+ * Accessibility HTML Reporter unit tests.
  */
-public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
+public class SeleniumUnitTest extends BaseSeleniumTest {
 
   /**
    * The file to be opened in the browser.
@@ -74,9 +78,9 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
   private static final String mainElementSelector = "main";
 
   private void loadTestPage(String testPage) {
-    this.getPage().getAsyncPage().navigate("file:///" + new File(testPage).getAbsolutePath());
-    this.getPage().getAsyncPage().waitForLoadState(LoadState.DOMCONTENTLOADED);
-    this.getPage().getAsyncPage().isVisible(mainElementSelector);
+    this.getWebDriver().get("file:///" + new File(testPage).getAbsolutePath());
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitUntilVisibleElement(By.cssSelector(mainElementSelector));
   }
 
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -88,13 +92,13 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
     AxeRunOptions axeRunOptions = new AxeRunOptions();
     axeRunOptions.setXPath(true);
 
-    AxeBuilder builder = new AxeBuilder(this.getPage().getAsyncPage());
-    builder.options(axeRunOptions);
-    builder.withTags(Arrays.asList("wcag2a", "wcag2aa"));
-    builder.disableRules(Collections.singletonList("color-contrast"));
-    //        builder.withOutputFile("./raw-axe-results.json");
+    AxeBuilder builder = new AxeBuilder();
+        builder.withOptions(axeRunOptions);
+        builder.withTags(Arrays.asList("wcag2a", "wcag2aa"));
+        builder.disableRules(Collections.singletonList("color-contrast"));
+        builder.withOutputFile("./raw-axe-results.json");
 
-    AxeResults results = builder.analyze();
+    Results results = builder.analyze(this.getWebDriver());
 
     Assert.assertEquals(results.getViolations().size(), 2);
 
@@ -107,16 +111,17 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
     }
 
     Assert.assertNotNull(results.getViolations().get(0).getNodes().get(0));
+
+//    File.GetLastWriteTime(@"./raw-axe-results.json").Should().BeOnOrAfter(timeBeforeScan);
   }
 
-  @Ignore
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void runScanOnGivenElement()
       throws IOException, ParseException {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
-    //    HtmlPlaywrightReporter.createAxeHtmlReport(this.getPage().getAsyncPage(),
-    //        this.getPageDriver().waitForSelector(mainElementSelector), path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(),
+        this.getWebDriver().findElement(By.cssSelector(mainElementSelector)), path);
     validateReport(path, 3, 14, 0, 75);
 
     deleteFile(new File(path));
@@ -126,7 +131,7 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
   public void reportFullPage() throws IOException, ParseException {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
-    PlaywrightReporter.createAxeHtmlReport(this.getPageDriver().getAsyncPage(), path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), path);
     validateReport(path, 4, 26, 0, 69);
 
     deleteFile(new File(path));
@@ -137,8 +142,7 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
       throws IOException, ParseException {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
-    PlaywrightReporter.createAxeHtmlReport(this.getPageDriver().getAsyncPage(), path, EnumSet.of(
-        ResultType.Violations));
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), path, EnumSet.of(ResultType.Violations));
 
     // Check violations
     validateReport(path, 4, 0, 0, 0);
@@ -153,7 +157,7 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
       throws IOException, ParseException {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
-    PlaywrightReporter.createAxeHtmlReport(this.getPageDriver().getAsyncPage(), path,
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), path,
         EnumSet.of(ResultType.Passes, ResultType.Inapplicable, ResultType.Violations));
 
     // Check Passes
@@ -164,13 +168,12 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
   }
 
   @Test(groups = TestCategories.ACCESSIBILITY)
-  @Ignore
   public void reportOnElement() throws IOException, ParseException {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
 
-    var mainElement = this.getPageDriver().getAsyncPage().waitForSelector(mainElementSelector);
-    //    HtmlPlaywrightReporter.createAxeHtmlReport(this.getPageDriver().getAsyncPage(), mainElement, path);
+    var mainElement = this.getWebDriver().findElement(By.cssSelector(mainElementSelector));
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), mainElement, path);
 
     validateReport(path, 3, 14, 0, 75);
     deleteFile(new File(path));
@@ -181,8 +184,8 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
 
-    var builder = new AxeBuilder(this.getPageDriver().getAsyncPage()).disableRules(Collections.singletonList("color-contrast"));
-    PlaywrightReporter.createAxeHtmlReport(this.getPageDriver().getAsyncPage(), builder.analyze(), path);
+    var builder = new AxeBuilder().disableRules(Collections.singletonList("color-contrast"));
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
 
     validateReport(path, 3, 21, 0, 69);
     deleteFile(new File(path));
@@ -191,9 +194,9 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void reportSampleResults() throws IOException, ParseException {
     String path = createReportPath();
-    AxeResults results = new ObjectMapper().readValue(new File(integrationTestJsonResultUrl), AxeResults.class);
+    Results results = new ObjectMapper().readValue(new File(integrationTestJsonResultUrl), Results.class);
 
-    PlaywrightReporter.createAxeHtmlReport(this.getPageDriver().getAsyncPage(), results, path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), results, path);
     validateReport(path, 3, 5, 2, 4);
 
     String text = new String(Files.readAllBytes(Paths.get(path)));
@@ -218,7 +221,7 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
     loadTestPage(integrationTestTargetComplexUrl);
     String path = createReportPath();
 
-    PlaywrightReporter.createAxeHtmlReport(this.getPageDriver().getAsyncPage(), path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), path);
     validateReport(path, 4, 43, 0, 64);
 
     deleteFile(new File(path));
@@ -232,9 +235,9 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
     AxeRunOptions runOptions = new AxeRunOptions();
     runOptions.setIFrames(true);
 
-    var builder = new AxeBuilder(getPageDriver().getAsyncPage()).options(runOptions);
+    var builder = new AxeBuilder().withOptions(runOptions);
 
-    PlaywrightReporter.createAxeHtmlReport(this.getPageDriver().getAsyncPage(), builder.analyze(), path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
     validateReport(path, 4, 43, 0, 64);
 
     deleteFile(new File(path));
@@ -248,8 +251,8 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
     AxeRunOptions runOptions = new AxeRunOptions();
     runOptions.setIFrames(false);
 
-    var builder = new AxeBuilder(getPageDriver().getAsyncPage()).options(runOptions);
-    PlaywrightReporter.createAxeHtmlReport(getPageDriver().getAsyncPage(), builder.analyze(), path);
+    var builder = new AxeBuilder().withOptions(runOptions);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
     validateReport(path, 4, 43, 0, 64);
 
     deleteFile(new File(path));
@@ -259,8 +262,8 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
   public void runSiteThatReturnsMultipleTargets() {
     loadTestPage(integrationTestTargetComplexUrl);
 
-    AxeResults axeResult = new AxeBuilder(getPageDriver().getAsyncPage()).analyze();
-    //        .withOutputFile("./raw-axe-results.json").analyze();
+    Results axeResult = new AxeBuilder()
+        .withOutputFile("./raw-axe-results.json").analyze(this.getWebDriver());
 
     Rule colorContrast = null;
 
