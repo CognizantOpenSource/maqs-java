@@ -34,6 +34,7 @@ import org.testng.annotations.Test;
  * Accessibility HTML Playwright Reporter unit tests.
  */
 public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
+
   /**
    * The file to be opened in the browser.
    */
@@ -108,6 +109,7 @@ public class HTMLReporterPlaywrightUnitTest extends BasePlaywrightTest {
     Assert.assertNotNull(results.getViolations().get(0).getNodes().get(0));
   }
 
+  @Ignore
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void runScanOnGivenElement()
       throws IOException, ParseException {
