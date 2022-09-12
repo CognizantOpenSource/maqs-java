@@ -6,8 +6,11 @@
 package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import java.net.URI;
+import java.net.URISyntaxException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 
 /**
  * The Web Service Config unit test class.
@@ -18,9 +21,9 @@ public class WebServiceConfigUnitTest {
    * gets if proxy can be used.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void getWebServiceUri() {
+  public void getWebServiceUri() throws URISyntaxException {
     Assert.assertEquals(WebServiceConfig.getWebServiceUri(),
-        "http://localhost:5026", "the web service URI does not match");
+        new URI("http://localhost:5026"), "the web service URI does not match");
   }
 
   /**

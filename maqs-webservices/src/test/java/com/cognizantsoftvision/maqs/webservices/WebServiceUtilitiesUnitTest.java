@@ -26,7 +26,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   /**
    * String to hold the URL.
    */
-  private static final String baseUrl = WebServiceConfig.getWebServiceUri();
+  private static final String baseUrl = WebServiceConfig.getWebServiceURIString();
 
 	/**
    * Tests the functionality of the Get Response body.

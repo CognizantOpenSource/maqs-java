@@ -6,7 +6,6 @@ package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.util.function.Supplier;
@@ -129,6 +128,6 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
    * @return a web service driver.
    */
   private WebServiceDriver getWebServiceDriver() {
-    return new WebServiceDriver(HttpRequest.newBuilder(URI.create(WebServiceConfig.getWebServiceUri())));
+    return new WebServiceDriver(HttpRequest.newBuilder(WebServiceConfig.getWebServiceUri()));
   }
 }
