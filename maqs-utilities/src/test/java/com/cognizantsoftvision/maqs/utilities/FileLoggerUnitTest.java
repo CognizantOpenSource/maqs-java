@@ -25,9 +25,7 @@ import org.testng.asserts.SoftAssert;
 
 /**
  * The File Logger unit test class.
- * <p>
- * Don't check for serial version unique IDs
- * as we will never serialize the test data
+ * Don't check for serial version unique IDs as we will never serialize the test data
  */
 @Test(singleThreaded = true)
 public class FileLoggerUnitTest {
