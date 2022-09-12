@@ -63,7 +63,6 @@ import com.cognizantsoftvision.maqs.database.DatabaseDriver;
 import com.cognizantsoftvision.maqs.database.DatabaseDriverManager;
 import com.cognizantsoftvision.maqs.selenium.BaseSeleniumTest;
 import com.cognizantsoftvision.maqs.selenium.SeleniumConfig;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;

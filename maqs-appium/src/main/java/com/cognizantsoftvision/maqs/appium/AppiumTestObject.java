@@ -10,7 +10,7 @@ import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
 
 /**
- * Class AppiumTestObject.
+ * The Appium Test Object class.
  */
 public class AppiumTestObject extends BaseTestObject implements IAppiumTestObject {
 

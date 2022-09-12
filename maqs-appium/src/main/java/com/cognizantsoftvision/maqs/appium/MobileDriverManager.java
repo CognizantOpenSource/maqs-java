@@ -12,7 +12,7 @@ import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
 
 /**
- * Mobile Driver Manager Class.
+ * The Mobile Driver Manager class.
  */
 public class MobileDriverManager extends DriverManager<AppiumDriver> {
   /**

@@ -12,7 +12,7 @@ import io.appium.java_client.AppiumDriver;
 import org.testng.ITestResult;
 
 /**
- * Base Appium Test Class.
+ * The Base Appium Test class.
  */
 public class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
 
@@ -51,7 +51,7 @@ public class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
   }
 
   /**
-   * Steps to do before logging teardown results.
+   * Steps to take before logging teardown results.
    *
    * @param resultType The test result
    */

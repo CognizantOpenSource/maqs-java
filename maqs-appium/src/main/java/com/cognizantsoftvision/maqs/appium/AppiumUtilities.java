@@ -23,7 +23,7 @@ import java.util.Locale;
 import org.openqa.selenium.OutputType;
 
 /**
- * Appium Utilities class.
+ * The Appium Utilities class.
  */
 public class AppiumUtilities {
 

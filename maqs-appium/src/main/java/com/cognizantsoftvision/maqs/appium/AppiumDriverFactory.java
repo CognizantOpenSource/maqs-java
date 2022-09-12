@@ -26,7 +26,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
- * The type Appium driver factory.
+ * The Appium Driver Factory class.
  */
 public class AppiumDriverFactory {
 
@@ -157,12 +157,12 @@ public class AppiumDriverFactory {
   }
 
   /**
-   * Gets windows driver.
+   * Gets Windows driver.
    *
    * @param mobileHub the mobile hub
    * @param options   the options
    * @param timeout   the timeout
-   * @return the windows driver
+   * @return the Windows driver
    */
   public static AppiumDriver getWindowsDriver(URL mobileHub, WindowsOptions options,
       Duration timeout) {
@@ -207,7 +207,6 @@ public class AppiumDriverFactory {
         try {
           Optional<AppiumDriver> driverOptional = Optional.ofNullable(appiumDriver);
           driverOptional.ifPresent(AppiumDriver::quit);
-
         } catch (Exception quitException) {
           throw new WebDriverException(
               "Appium driver setup and teardown failed. Your driver may be out of date",
