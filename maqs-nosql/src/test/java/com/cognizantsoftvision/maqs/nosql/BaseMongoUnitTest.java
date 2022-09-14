@@ -18,6 +18,8 @@ public class BaseMongoUnitTest extends BaseMongoTest {
    */
   @Test(groups = TestCategories.MONGO)
   public void testGetMongoDBDriver() {
+    this.setMongoDBDriver(new MongoDBDriver(
+            MongoDBConfig.getConnectionString(), MongoDBConfig.getDatabaseString(), MongoDBConfig.getCollectionString()));
     MongoDBDriver mongoDBDriver = this.getMongoDBDriver();
     Assert.assertNotNull(mongoDBDriver,
         "Checking that MongoDB Driver is not null through BaseMongoTest");

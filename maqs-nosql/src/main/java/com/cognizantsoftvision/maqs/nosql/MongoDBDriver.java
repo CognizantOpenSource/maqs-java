@@ -50,6 +50,7 @@ public class MongoDBDriver implements AutoCloseable {
 
   /**
    * Initializes a new instance of the MongoDBDriver class.
+   * @param clientSettings the mongo client settings
    * @param collectionString Name of the collection
    */
   public MongoDBDriver(MongoClientSettings clientSettings, String databaseString, String collectionString) {
@@ -104,20 +105,20 @@ public class MongoDBDriver implements AutoCloseable {
 
   /**
    * Sets the database object.
+   * @param mongoDatabase the name of the mongo database
+   */
+  public void setDatabase(String mongoDatabase) {
+    this.database = this.getMongoClient().getDatabase(mongoDatabase);
+  }
+
+  /**
+   * Sets the database object.
    * @param mongoClient the mongo DB client of the database
    * @param mongoDatabase the name of the mongo database
    */
   public void setDatabase(MongoClient mongoClient, String mongoDatabase) {
     this.client = mongoClient;
     setDatabase(mongoDatabase);
-  }
-
-  /**
-   * Sets the database object.
-   * @param mongoDatabase the name of the mongo database
-   */
-  public void setDatabase(String mongoDatabase) {
-    this.database = this.getMongoClient().getDatabase(mongoDatabase);
   }
 
   /**

@@ -4,9 +4,11 @@
 
 package com.cognizantsoftvision.maqs.nosql;
 
-
 import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.base.DriverManager;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import com.mongodb.client.MongoCollection;
 import java.util.function.Supplier;
 import org.bson.Document;
@@ -19,7 +21,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
   /**
    * Cached copy of the connection driver.
    */
-  private MongoDBDriver mongoDBDriver;
+  private MongoDBDriver driver;
 
   /**
    * Initializes a new instance of the MongoDriverManager class.
@@ -48,7 +50,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param overrideDriver The new Mongo driver
    */
   public void overrideDriver(MongoDBDriver overrideDriver) {
-    mongoDBDriver = overrideDriver;
+    driver = overrideDriver;
     this.setBaseDriver(new MongoDBDriver(overrideDriver.getCollection()));
   }
 
@@ -59,7 +61,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param collectionString Collection string to use
    */
   public void overrideDriver(String connectionString, String databaseString, String collectionString) {
-    mongoDBDriver = null;
+    driver = null;
     this.overrideDriverGet(() -> MongoFactory.getCollection(connectionString, databaseString, collectionString));
   }
 
@@ -68,7 +70,7 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    * @param overrideCollectionConnection The new collection connection
    */
   public void overrideDriver(Supplier<MongoCollection<Document>> overrideCollectionConnection) {
-    mongoDBDriver = null;
+    driver = null;
     this.overrideDriverGet(overrideCollectionConnection);
   }
 
@@ -78,22 +80,29 @@ public class MongoDriverManager extends DriverManager<MongoDBDriver> {
    */
   public MongoDBDriver getMongoDriver() {
     // Create default Web Service Driver if null.
-    if (this.mongoDBDriver == null) {
-      this.mongoDBDriver = new MongoDBDriver(getBase().getCollection());
+    if (this.driver == null) {
+      MongoCollection<Document> temp = getBase().getCollection();
+
+      if (LoggingConfig.getLoggingEnabledSetting() == LoggingEnabled.NO) {
+        this.getLogger().logMessage(MessageType.INFORMATION, "Getting Mongo driver");
+      }
+
+      this.driver = new MongoDBDriver(temp);
     }
-    return this.mongoDBDriver;
+    return this.driver;
   }
 
   protected void overrideDriverGet(Supplier<MongoCollection<Document>> driverGet) {
-    this.setBaseDriver(new MongoDBDriver(driverGet.get()));
+    this.getMongoDriver();
   }
 
+  @Override
   public void close() {
     if (!this.isDriverInitialized()) {
       return;
     }
 
-    mongoDBDriver.getMongoClient().close();
+    driver.getMongoClient().close();
     this.baseDriver = null;
   }
 }

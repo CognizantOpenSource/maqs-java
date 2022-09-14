@@ -33,15 +33,15 @@ public class MongoTestObject extends BaseTestObject implements IMongoTestObject 
   /**
    * {@inheritDoc}
    */
-  public MongoDBDriver getMongoDBDriver() {
-    return this.getMongoDBManager().getMongoDriver();
+  public MongoDriverManager getMongoDBManager() {
+    return this.getManagerStore().getDriver(MongoDriverManager.class.getCanonicalName());
   }
 
   /**
    * {@inheritDoc}
    */
-  public MongoDriverManager getMongoDBManager() {
-    return this.getManagerStore().getDriver(MongoDriverManager.class.getCanonicalName());
+  public MongoDBDriver getMongoDBDriver() {
+    return this.getMongoDBManager().getMongoDriver();
   }
 
   /**
