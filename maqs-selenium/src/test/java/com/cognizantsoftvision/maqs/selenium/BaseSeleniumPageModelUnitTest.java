@@ -23,8 +23,6 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   public void testGetLogger() {
     AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     Assert.assertNotNull(automationPageModel.getLogger());
-
-
   }
 
   /**
