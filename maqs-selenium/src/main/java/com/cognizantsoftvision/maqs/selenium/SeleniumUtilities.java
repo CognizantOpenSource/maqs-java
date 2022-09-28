@@ -6,8 +6,11 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.*;
-
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
