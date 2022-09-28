@@ -325,7 +325,7 @@ public abstract class BaseTest {
 
     if (this.loggingEnabledSetting != LoggingEnabled.NO) {
       log = LoggingConfig.getLogger(StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
-          DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+          DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
               .format(LocalDateTime.now(Clock.systemUTC()))));
     } else {
       log = new ConsoleLogger();

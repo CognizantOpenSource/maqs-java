@@ -34,15 +34,19 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 
 /**
- * Accessibility HTML Reporter unit tests.
+ * The Accessibility HTML Reporter unit tests.
  */
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
   /**
+   * The file path to the html testing page.
+   */
+  private static final String filePath = "src/test/resources/testFiles/integration-test-target.html";
+
+  /**
    * The file to be opened in the browser.
    */
-  private static final File integrationTestTargetSimpleFile = new File(
-      "src/test/resources/testFiles/integration-test-target.html");
+  private static final File integrationTestTargetSimpleFile = new File(filePath);
 
   /**
    * The url to be opened in the browser.

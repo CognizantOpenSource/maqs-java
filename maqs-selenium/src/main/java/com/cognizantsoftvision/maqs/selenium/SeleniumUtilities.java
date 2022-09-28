@@ -6,10 +6,8 @@ package com.cognizantsoftvision.maqs.selenium;
 
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,7 +30,7 @@ import org.openqa.selenium.WrapsDriver;
  */
 public class SeleniumUtilities {
 
-  private static final String DEFAULT_DATE_TIME_FORMAT = "uuuu-MM-dd-HH-mm-ss-SSSS";
+  private static final String DEFAULT_DATE_TIME_FORMAT = Logger.DEFAULT_DATE_TIME_FORMAT;
 
   private static final String LOG_MESSAGE_PREFIX = "%s - %s%s";
 

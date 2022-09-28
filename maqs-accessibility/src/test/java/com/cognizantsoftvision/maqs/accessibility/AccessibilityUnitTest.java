@@ -20,7 +20,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * THe Accessibility Unit test class.
+ * The Accessibility Unit test class.
  */
 public class AccessibilityUnitTest extends BaseSeleniumTest {
 
