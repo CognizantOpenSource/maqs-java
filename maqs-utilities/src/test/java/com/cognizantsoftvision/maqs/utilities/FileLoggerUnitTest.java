@@ -108,7 +108,8 @@ public class FileLoggerUnitTest {
    * @param levels   What should appear for each level.
    */
   @Test(dataProvider = "logLevels")
-  public void testHierarchicalTxtFileLogger(String logLevel, HashMap<String, Boolean> levels) {
+  public void testHierarchicalTxtFileLogger(String logLevel, HashMap<String, Boolean> levels)
+      throws InterruptedException {
     FileLogger logger = new FileLogger(true, LoggingConfig.getLogDirectory(),
         this.getFileName("TestHierarchicalTxtFileLogger_" + logLevel, "txt"), MessageType.GENERIC);
     this.testHierarchicalLogging(logger, logger.getFilePath(), logLevel, levels);
@@ -133,6 +134,8 @@ public class FileLoggerUnitTest {
     try (ConsoleCopy ignored = new ConsoleCopy(path)) {
       ConsoleLogger consoleLogger = new ConsoleLogger();
       this.testHierarchicalLogging(consoleLogger, path, logLevel, levels);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e.getMessage(), e);
     }
 
     File file = new File(path);
@@ -148,7 +151,8 @@ public class FileLoggerUnitTest {
    * @param levels   What should appear for each level.
    */
   @Test(dataProvider = "logLevels")
-  public void testHierarchicalHtmlFileLogger(String logLevel, HashMap<String, Boolean> levels) {
+  public void testHierarchicalHtmlFileLogger(String logLevel, HashMap<String, Boolean> levels)
+      throws InterruptedException {
     HtmlFileLogger logger = new HtmlFileLogger(true, LoggingConfig.getLogDirectory(),
         this.getFileName("TestHierarchicalHtmlFileLogger" + logLevel, "html"), MessageType.GENERIC);
 
@@ -606,7 +610,7 @@ public class FileLoggerUnitTest {
    * @param levels       What should appear for each level
    */
   private void testHierarchicalLogging(Logger logger, String filePath, String logLevelText,
-      HashMap<String, Boolean> levels) {
+      HashMap<String, Boolean> levels) throws InterruptedException {
     // Create a soft assert
     SoftAssert softAssert = new SoftAssert();
 
@@ -627,6 +631,9 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.SUCCESS, logLine, MessageType.SUCCESS);
     logger.logMessage(MessageType.WARNING, logLine, MessageType.WARNING);
     logger.logMessage(MessageType.ERROR, logLine, MessageType.ERROR);
+
+    // Give the write-time
+    Thread.sleep(250);
 
     // Get the file content
     String logContents = this.readTextFile(filePath);
