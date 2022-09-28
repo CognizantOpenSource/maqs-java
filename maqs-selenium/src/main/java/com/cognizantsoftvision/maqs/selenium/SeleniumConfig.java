@@ -8,8 +8,10 @@ import com.cognizantsoftvision.maqs.selenium.constants.BrowserType;
 import com.cognizantsoftvision.maqs.selenium.constants.RemoteBrowserType;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigValidation;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +24,19 @@ public final class SeleniumConfig {
    * Private constructor.
    */
   private SeleniumConfig() {
+  }
 
+  static {
+    checkConfig();
+  }
+
+  /**
+   * Ensure required fields are in the config.
+   */
+  private static void checkConfig() {
+    ConfigValidation validator = new ConfigValidation();
+    validator.setRequiredFields(Collections.singletonList("BrowserTimeout"));
+    Config.validate(ConfigSection.SELENIUM_MAQS, validator);
   }
 
   /**

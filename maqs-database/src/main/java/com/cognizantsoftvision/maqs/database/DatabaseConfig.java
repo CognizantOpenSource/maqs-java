@@ -10,15 +10,30 @@ import com.cognizantsoftvision.maqs.database.providers.SQLProvider;
 import com.cognizantsoftvision.maqs.database.providers.SQLiteProvider;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigValidation;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The type Database config.
+ * The Database Config class.
  */
 public class DatabaseConfig {
 
   private DatabaseConfig() {
+  }
+
+  static {
+    checkConfig();
+  }
+
+  /**
+   * Ensure required fields are in the config
+   */
+  private static void checkConfig() {
+    var validator = new ConfigValidation();
+    validator.setRequiredOneOfFields(Arrays.asList("DataBaseConnectionString", "DataBaseProviderType"));
+    Config.validate(ConfigSection.DATABASE_MAQS, validator);
   }
 
   /**
