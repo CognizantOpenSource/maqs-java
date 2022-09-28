@@ -30,8 +30,8 @@ import org.testng.asserts.SoftAssert;
 @Test(singleThreaded = true)
 public class FileLoggerUnitTest {
 
-  public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY = LoggingConfig.getLogDirectory() + "/"
-      + "Log Folder Messaging Level Directory";
+  public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY =
+      LoggingConfig.getLogDirectory() + File.separator + "Log Folder Messaging Level Directory";
 
   @DataProvider(name = "logLevels")
   public static Object[][] data() {
@@ -124,12 +124,13 @@ public class FileLoggerUnitTest {
    */
   @Test(dataProvider = "logLevels")
   public void testHierarchicalConsoleLogger(String logLevel, HashMap<String, Boolean> levels) {
-    // Calculate a file path
-    String path = Paths
-        .get(LoggingConfig.getLogDirectory(), this.getFileName("TestHierarchicalConsoleLogger" + logLevel, "txt"))
-        .toString();
+    String fileName = "TestHierarchicalConsoleLogger";
 
-    try (ConsoleCopy consoleCopy = new ConsoleCopy(path)) {
+    // Calculate a file path
+    String path = Paths.get(LoggingConfig.getLogDirectory(),
+            this.getFileName(fileName + logLevel, "txt")).toString();
+
+    try (ConsoleCopy ignored = new ConsoleCopy(path)) {
       ConsoleLogger consoleLogger = new ConsoleLogger();
       this.testHierarchicalLogging(consoleLogger, path, logLevel, levels);
     }
