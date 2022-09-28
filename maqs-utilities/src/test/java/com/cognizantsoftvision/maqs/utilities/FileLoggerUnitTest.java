@@ -136,7 +136,9 @@ public class FileLoggerUnitTest {
     }
 
     File file = new File(path);
-    Assert.assertTrue(file.delete());
+   if (file.exists()) {
+     Assert.assertTrue(file.delete());
+   }
   }
 
   /**
