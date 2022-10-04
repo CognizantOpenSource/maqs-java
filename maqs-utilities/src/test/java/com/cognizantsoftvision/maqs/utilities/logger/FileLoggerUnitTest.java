@@ -17,7 +17,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;
@@ -627,15 +626,15 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.WARNING, logLine, MessageType.WARNING);
     logger.logMessage(MessageType.ERROR, logLine, MessageType.ERROR);
 
-    // Gives the writing time
-    try {
-      TimeUnit.MILLISECONDS.sleep(250);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
 
-    // Get the file content
-    String logContents = this.readTextFile(filePath);
+    // Gives the writing time
+      String logContents;
+
+      do {
+        logContents = this.readTextFile(filePath);
+      } while (!logContents.contains(logLevelText));
+
+      logContents = this.readTextFile(filePath);
 
     // Verify that only the logged messages at the log level or below are logged
     for (HashMap.Entry<String, Boolean> level : levels.entrySet()) {
