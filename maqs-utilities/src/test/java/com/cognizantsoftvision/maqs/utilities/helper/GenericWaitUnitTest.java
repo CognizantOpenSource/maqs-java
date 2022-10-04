@@ -2,18 +2,14 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.helper;
 
-import com.cognizantsoftvision.maqs.utilities.helper.GenericWait;
-import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
-
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

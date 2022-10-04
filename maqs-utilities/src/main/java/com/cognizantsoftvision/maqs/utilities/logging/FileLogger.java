@@ -235,8 +235,8 @@ public class FileLogger extends Logger implements IFileLogger {
       } catch (IOException e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
-        console.logMessage(MessageType.ERROR,
-            StringProcessor.safeFormatter("Failed to write to event log because: %s", e.getMessage()));
+        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
+            "Failed to write to event log because: " + e.getMessage(), (Object[]) e.getStackTrace()));
       }
     }
   }

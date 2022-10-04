@@ -2,15 +2,9 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
-
-import com.cognizantsoftvision.maqs.utilities.helper.Config;
-import com.cognizantsoftvision.maqs.utilities.helper.ListProcessor;
-import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+package com.cognizantsoftvision.maqs.utilities.helper;
 
 import java.util.ArrayList;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
