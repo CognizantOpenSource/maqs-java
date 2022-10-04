@@ -307,7 +307,7 @@ public class FileLogger extends Logger implements IFileLogger {
       try (FileWriter fw = new FileWriter(this.filePath, true);
           BufferedWriter bw = new BufferedWriter(fw);
           PrintWriter writer = new PrintWriter(bw)) {
-        writer.println(StringProcessor.safeFormatter("%s%s", Config.NEW_LINE, System.currentTimeMillis()));
+        writer.println(StringProcessor.safeFormatter("%s%s", Config.NEW_LINE, currentDateTime()));
         writer.print(StringProcessor.safeFormatter("%s:\t", messageType.toString()));
 
         writer.println(StringProcessor.safeFormatter(message, args));
@@ -316,7 +316,7 @@ public class FileLogger extends Logger implements IFileLogger {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR,
-            StringProcessor.safeFormatter("Failed to write to event log because: %s", e));
+            StringProcessor.safeFormatter("Failed to write to event log because: %s", e.getMessage()));
         console.logMessage(messageType, message, args);
       }
     }
