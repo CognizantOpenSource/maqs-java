@@ -268,12 +268,8 @@ public class GenericWaitUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void waitUntilMatchNeverMatch() {
-    try {
-      String[] loop = { "aa" };
-      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "", "bb"), "aa");
-    } catch (InterruptedException e) {
-      Assert.fail("waitUntil threw unexpected exception", e);
-    }
+    String[] loop = { "aa" };
+    Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "", "bb"), "aa");
   }
 
   /**
@@ -281,12 +277,8 @@ public class GenericWaitUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void waitUntilMatch() {
-    try {
       String[] loop = { "" };
       Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "a", "aaa"), "aaa");
-    } catch (InterruptedException e) {
-      Assert.fail("waitUntil threw unexpected exception", e);
-    }
   }
 
   /**

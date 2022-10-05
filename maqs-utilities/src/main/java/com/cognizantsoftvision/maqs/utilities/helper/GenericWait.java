@@ -124,8 +124,7 @@ public final class GenericWait {
    * @param retryTime        the retry time
    * @param timeout          the timeout
    * @param comparativeValue the comparative value
-   * @return the t
-   * @throws InterruptedException the interrupted exception
+   * @return the t object
    */
   public static <T> T waitUntilMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
       throws InterruptedException {
