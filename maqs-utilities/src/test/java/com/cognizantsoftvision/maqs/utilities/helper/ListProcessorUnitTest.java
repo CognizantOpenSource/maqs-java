@@ -82,7 +82,7 @@ public class ListProcessorUnitTest {
     ListProcessor.listOfStringsComparer(expectedList, actualList, results, false);
 
     if (results.length() > 0) {
-      Assert.fail(StringProcessor.safeFormatter("%s%s", results.toString(), Config.NEW_LINE));
+      Assert.fail(StringProcessor.safeFormatter("%s%s", results.toString(), System.lineSeparator()));
     }
   }
 
@@ -111,7 +111,7 @@ public class ListProcessorUnitTest {
     ListProcessor.listOfStringsComparer(expectedList, actualList, results, true);
 
     if (results.length() > 0) {
-      Assert.fail(StringProcessor.safeFormatter("%s%s", results.toString(), Config.NEW_LINE));
+      Assert.fail(StringProcessor.safeFormatter("%s%s", results.toString(), System.lineSeparator()));
     }
   }
 

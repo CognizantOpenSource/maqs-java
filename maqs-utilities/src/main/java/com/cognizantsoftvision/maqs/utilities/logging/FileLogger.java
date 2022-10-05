@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.utilities.logging;
 
-import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -253,6 +252,14 @@ public class FileLogger extends Logger implements IFileLogger {
    * {@inheritDoc}
    */
   @Override
+  public void setFilePath(String path) {
+    this.filePath = path;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public MessageType getMessageType() {
     return this.messageType;
   }
@@ -265,13 +272,6 @@ public class FileLogger extends Logger implements IFileLogger {
     return this.directory;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setFilePath(String path) {
-    this.filePath = path;
-  }
 
   /**
    * {@inheritDoc}
@@ -307,7 +307,7 @@ public class FileLogger extends Logger implements IFileLogger {
       try (FileWriter fw = new FileWriter(this.filePath, true);
           BufferedWriter bw = new BufferedWriter(fw);
           PrintWriter writer = new PrintWriter(bw)) {
-        writer.println(StringProcessor.safeFormatter("%s%s", Config.NEW_LINE, currentDateTime()));
+        writer.println(StringProcessor.safeFormatter("%s%s", System.lineSeparator(), currentDateTime()));
         writer.print(StringProcessor.safeFormatter("%s:\t", messageType.toString()));
 
         writer.println(StringProcessor.safeFormatter(message, args));

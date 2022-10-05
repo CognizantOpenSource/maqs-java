@@ -573,6 +573,14 @@ public class FileLoggerUnitTest {
     deleteFile(logger);
   }
 
+  public void testFileLoggerException() {
+    FileLogger logger = new FileLogger(false, "", MessageType.INFORMATION);
+    Assert.assertNotNull(logger);
+
+    logger = new FileLogger(false, null, MessageType.GENERIC);
+    Assert.assertNotNull(logger);
+  }
+
   /**
    * Verify File Logger with only Log Folder, File Name and Messaging Level
    * parameters assigns the correct default values.

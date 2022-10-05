@@ -19,12 +19,11 @@ import java.util.function.Supplier;
 public final class GenericWait {
 
   private GenericWait() {
-    throw new IllegalStateException("Utility class");
   }
 
-  private static final long RETRY_TIME_FROM_CONFIG = Long.parseLong(Config.getGeneralValue("WaitTime", "0"));
+  private static final long RETRY_TIME_FROM_CONFIG = Long.parseLong(Config.getGeneralValue("WaitTime", "2"));
 
-  private static final long TIMEOUT_FROM_CONFIG = Long.parseLong(Config.getGeneralValue("Timeout", "0"));
+  private static final long TIMEOUT_FROM_CONFIG = Long.parseLong(Config.getGeneralValue("Timeout", "2"));
 
   /**
    * Wait until boolean.
@@ -88,10 +87,9 @@ public final class GenericWait {
    * @param <T>              the type parameter
    * @param waitForTrue      the wait for true
    * @param comparativeValue the comparative value
-   * @return the t
-   * @throws InterruptedException the interrupted exception
+   * @return the t object
    */
-  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue) throws InterruptedException {
+  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -103,7 +101,7 @@ public final class GenericWait {
     // While the params are not equal & the timeout hasn't met, keep checking
     while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < TIMEOUT_FROM_CONFIG) {
       // If they aren't, wait
-      Thread.sleep(RETRY_TIME_FROM_CONFIG);
+
 
       value = waitForTrue.get();
 
