@@ -2,18 +2,14 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.helper;
 
-import com.cognizantsoftvision.maqs.utilities.helper.GenericWait;
-import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.TimeoutException;
-
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -272,12 +268,8 @@ public class GenericWaitUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void waitUntilMatchNeverMatch() {
-    try {
-      String[] loop = { "aa" };
-      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "", "bb"), "aa");
-    } catch (InterruptedException e) {
-      Assert.fail("waitUntil threw unexpected exception", e);
-    }
+    String[] loop = { "aa" };
+    Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "", "bb"), "aa");
   }
 
   /**
@@ -285,12 +277,8 @@ public class GenericWaitUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void waitUntilMatch() {
-    try {
       String[] loop = { "" };
       Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "a", "aaa"), "aaa");
-    } catch (InterruptedException e) {
-      Assert.fail("waitUntil threw unexpected exception", e);
-    }
   }
 
   /**
