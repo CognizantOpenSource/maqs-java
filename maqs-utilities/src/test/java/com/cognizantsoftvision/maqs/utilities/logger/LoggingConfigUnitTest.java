@@ -2,7 +2,7 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.logger;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
@@ -97,6 +97,18 @@ public class LoggingConfigUnitTest {
     }
 
     /**
+     * Test getting Logging Level Setting. Override Config to 'INFORMATION'
+     */
+    @Test
+    public void getLoggingLevelActionSettingTest() {
+        HashMap<String, String> newValueMap = new HashMap<>();
+        newValueMap.put("LogLevel", "ACTION");
+        Config.addGeneralTestSettingValues(newValueMap, true);
+        Assert.assertEquals(LoggingConfig.getLoggingLevelSetting(), MessageType.ACTION,
+            "Expected Logging Level Setting ACTION.");
+    }
+
+    /**
      * Test getting Logging Level Setting. Override Config to 'GENERIC'
      */
     @Test
@@ -173,7 +185,7 @@ public class LoggingConfigUnitTest {
      * FileLogger.
      */
     @Test
-    public void getFileLoggerTest() {
+    public void getTextFileLoggerTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogType", "TXT");
         newValueMap.put("Log", "YES");
@@ -181,6 +193,20 @@ public class LoggingConfigUnitTest {
         String fileName = "TestLog.txt";
         Logger logger = LoggingConfig.getLogger(fileName);
         Assert.assertTrue(logger instanceof FileLogger, "Expected Logger to be of Type FileLogger.");
+    }
+
+    /**
+     * Test getting File Logger. Override Config LogType to 'TXT' which creates
+     * FileLogger.
+     */
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void getInvalidFileLoggerTest() {
+        HashMap<String, String> newValueMap = new HashMap<>();
+        newValueMap.put("LogType", "XML");
+        newValueMap.put("Log", "YES");
+        Config.addGeneralTestSettingValues(newValueMap, true);
+        String fileName = "TestLog.txt";
+        LoggingConfig.getLogger(fileName);
     }
 
     /**
