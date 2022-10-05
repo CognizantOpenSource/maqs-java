@@ -25,11 +25,6 @@ public final class Config {
   }
 
   /**
-   * Constant platform independent new line.
-   */
-  public static final String NEW_LINE = System.getProperty("line.separator");
-
-  /**
    * The default section GlobalMaqs.
    */
   public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.GLOBAL_MAQS;

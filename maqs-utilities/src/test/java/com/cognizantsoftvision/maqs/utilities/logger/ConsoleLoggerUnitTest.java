@@ -2,7 +2,7 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.logger;
 
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;

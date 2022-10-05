@@ -120,7 +120,6 @@ public class ConsoleLogger extends Logger {
   /**
    * write the message to the console.
    * 
-   * 
    * @param type
    *          The type of message
    * @param line

@@ -15,7 +15,7 @@ public abstract class Logger implements ILogger {
   /**
    * Default date format.
    */
-  protected static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+  private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
 
   /**
    * Log Level value area.
