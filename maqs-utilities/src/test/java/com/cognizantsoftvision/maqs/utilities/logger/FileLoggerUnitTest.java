@@ -2,10 +2,9 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.logger;
 
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
@@ -16,11 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Ignore;
@@ -29,15 +25,14 @@ import org.testng.asserts.SoftAssert;
 
 /**
  * The File Logger unit test class.
- *
  * Don't check for serial version unique IDs
  * as we will never serialize the test data
  */
 @Test(singleThreaded = true)
 public class FileLoggerUnitTest {
 
-  public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY = LoggingConfig.getLogDirectory() + "/"
-      + "Log Folder Messaging Level Directory";
+  public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY
+      = LoggingConfig.getLogDirectory() + File.pathSeparator + "Log Folder Messaging Level Directory";
 
   @DataProvider(name = "logLevels")
   public static Object[][] data() {
@@ -578,6 +573,14 @@ public class FileLoggerUnitTest {
     deleteFile(logger);
   }
 
+  public void testFileLoggerException() {
+    FileLogger logger = new FileLogger(false, "", MessageType.INFORMATION);
+    Assert.assertNotNull(logger);
+
+    logger = new FileLogger(false, null, MessageType.GENERIC);
+    Assert.assertNotNull(logger);
+  }
+
   /**
    * Verify File Logger with only Log Folder, File Name and Messaging Level
    * parameters assigns the correct default values.
@@ -631,15 +634,15 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.WARNING, logLine, MessageType.WARNING);
     logger.logMessage(MessageType.ERROR, logLine, MessageType.ERROR);
 
-    // Gives the writing time
-    try {
-      TimeUnit.MILLISECONDS.sleep(250);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
 
-    // Get the file content
-    String logContents = this.readTextFile(filePath);
+    // Gives the writing time
+      String logContents;
+
+      do {
+        logContents = this.readTextFile(filePath);
+      } while (!logContents.contains(logLevelText));
+
+      logContents = this.readTextFile(filePath);
 
     // Verify that only the logged messages at the log level or below are logged
     for (HashMap.Entry<String, Boolean> level : levels.entrySet()) {
