@@ -5,6 +5,7 @@
 package com.cognizantsoftvision.maqs.utilities.performance;
 
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,6 +22,16 @@ public class PerfTimerCollectionUnitTest {
     ConsoleLogger logger = new ConsoleLogger();
     PerfTimerCollection perfTimerCollection = new PerfTimerCollection(logger, "TestCase");
     Assert.assertNotNull(perfTimerCollection.getLog());
+  }
+
+  @Test
+  public void testSetLog() {
+    ConsoleLogger logger = new ConsoleLogger();
+    PerfTimerCollection perfTimerCollection = new PerfTimerCollection(logger, "TestCase");
+    
+    FileLogger fileLogger = new FileLogger();
+    perfTimerCollection.setLog(fileLogger);
+    Assert.assertTrue(perfTimerCollection.getLog() instanceof FileLogger);
   }
 
   /**

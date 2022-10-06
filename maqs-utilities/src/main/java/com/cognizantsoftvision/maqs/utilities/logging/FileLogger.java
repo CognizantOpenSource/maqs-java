@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.utilities.logging;
 
-import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -235,8 +234,8 @@ public class FileLogger extends Logger implements IFileLogger {
       } catch (IOException e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
-        console.logMessage(MessageType.ERROR,
-            StringProcessor.safeFormatter("Failed to write to event log because: %s", e.getMessage()));
+        console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
+            "Failed to write to event log because: " + e.getMessage(), (Object[]) e.getStackTrace()));
       }
     }
   }
@@ -247,6 +246,14 @@ public class FileLogger extends Logger implements IFileLogger {
   @Override
   public String getFilePath() {
     return this.filePath;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFilePath(String path) {
+    this.filePath = path;
   }
 
   /**
@@ -265,13 +272,6 @@ public class FileLogger extends Logger implements IFileLogger {
     return this.directory;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setFilePath(String path) {
-    this.filePath = path;
-  }
 
   /**
    * {@inheritDoc}
@@ -307,7 +307,7 @@ public class FileLogger extends Logger implements IFileLogger {
       try (FileWriter fw = new FileWriter(this.filePath, true);
           BufferedWriter bw = new BufferedWriter(fw);
           PrintWriter writer = new PrintWriter(bw)) {
-        writer.println(StringProcessor.safeFormatter("%s%s", Config.NEW_LINE, System.currentTimeMillis()));
+        writer.println(StringProcessor.safeFormatter("%s%s", System.lineSeparator(), currentDateTime()));
         writer.print(StringProcessor.safeFormatter("%s:\t", messageType.toString()));
 
         writer.println(StringProcessor.safeFormatter(message, args));
@@ -316,7 +316,7 @@ public class FileLogger extends Logger implements IFileLogger {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR,
-            StringProcessor.safeFormatter("Failed to write to event log because: %s", e));
+            StringProcessor.safeFormatter("Failed to write to event log because: %s", e.getMessage()));
         console.logMessage(messageType, message, args);
       }
     }

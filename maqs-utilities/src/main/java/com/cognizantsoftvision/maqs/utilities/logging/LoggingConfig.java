@@ -51,6 +51,8 @@ public class LoggingConfig {
         return MessageType.VERBOSE;         // Includes this and all of those below
       case "INFORMATION":
         return MessageType.INFORMATION;     // Includes this and all of those below
+      case "ACTION":
+        return MessageType.ACTION;        // Includes this and all of those below
       case "GENERIC":
         return MessageType.GENERIC;         // Includes this and all of those below
       case "SUCCESS":
