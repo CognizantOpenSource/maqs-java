@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.utilities.logger;
 
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import org.testng.annotations.Test;
@@ -11,13 +12,12 @@ import org.testng.annotations.Test;
 /**
  * The Console Logger unit test class.
  */
-@Test
 public class ConsoleLoggerUnitTest {
 
   /**
    * Log message to a new console logger
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void consoleLoggerLogMessage() {
     ConsoleLogger console = new ConsoleLogger();
     console.logMessage("Test String %s %s", "args1", "args2");
@@ -26,7 +26,7 @@ public class ConsoleLoggerUnitTest {
   /**
    * Log message to a new console logger using defined message type
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void consoleLoggerLogMessageSelectType() {
     ConsoleLogger console = new ConsoleLogger();
     console.logMessage(MessageType.GENERIC, "Test String %s", "args1");
@@ -35,7 +35,7 @@ public class ConsoleLoggerUnitTest {
   /**
    * Write message to new console logger
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void consoleLoggerWriteMessage() {
     ConsoleLogger console = new ConsoleLogger();
     console.write("Test String %s %s", "args1", "args2");
@@ -44,7 +44,7 @@ public class ConsoleLoggerUnitTest {
   /**
    * Write message to new console logger using defined message type
    */
-  @Test
+  @Test(groups = TestCategories.UTILITIES)
   public void consoleLoggerWriteMessageSelectType() {
     ConsoleLogger console = new ConsoleLogger();
     console.write(MessageType.GENERIC, "TestString %s", "args1");
@@ -53,7 +53,7 @@ public class ConsoleLoggerUnitTest {
     /**
      * Write message with new line to new console logger
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void consoleLoggerWriteLineMessage() {
         ConsoleLogger console = new ConsoleLogger();
         console.write("Test String %s %s", "args1", "args2");
@@ -62,7 +62,7 @@ public class ConsoleLoggerUnitTest {
     /**
      * Write message with new line to new console logger using defined message type
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void consoleLoggerWriteMessageLineSelectType() {
         ConsoleLogger console = new ConsoleLogger();
         console.write(MessageType.GENERIC, "TestString %s", "args1");
