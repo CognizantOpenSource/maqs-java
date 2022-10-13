@@ -12,6 +12,7 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.mac.options.Mac2Options;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.windows.options.WindowsOptions;
 import io.appium.java_client.windows.WindowsDriver;
 import java.net.URL;
 import java.time.Duration;
@@ -19,8 +20,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-
-import io.appium.java_client.windows.options.WindowsOptions;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
