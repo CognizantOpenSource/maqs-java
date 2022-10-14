@@ -127,8 +127,8 @@ public class FileLoggerUnitTest {
   @Test(groups = TestCategories.UTILITIES, dataProvider = "logLevels")
   public void testHierarchicalConsoleLogger(String logLevel, HashMap<String, Boolean> levels) {
     // Calculate a file path
-    String path = Paths
-        .get(LoggingConfig.getLogDirectory(), this.getFileName("TestHierarchicalConsoleLogger" + logLevel, "txt"))
+    String path = Paths.get(LoggingConfig.getLogDirectory(),
+            this.getFileName("TestHierarchicalConsoleLogger" + logLevel, "txt"))
         .toString();
 
     try (ConsoleCopy consoleCopy = new ConsoleCopy(path)) {
