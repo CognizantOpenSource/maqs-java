@@ -8,14 +8,7 @@ import static java.lang.System.out;
 
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
+import com.cognizantsoftvision.maqs.utilities.logging.*;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
@@ -317,21 +310,25 @@ public abstract class BaseTest {
    *
    * @return Logger
    */
-  protected Logger createLogger() {
-    Logger log;
-
+  protected ILogger createLogger() {
     this.loggingEnabledSetting = LoggingConfig.getLoggingEnabledSetting();
     this.setLoggedExceptions(new ArrayList<>());
 
-    if (this.loggingEnabledSetting != LoggingEnabled.NO) {
-      log = LoggingConfig.getLogger(StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
-          DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
-              .format(LocalDateTime.now(Clock.systemUTC()))));
-    } else {
-      log = new ConsoleLogger();
-    }
+    try {
+      if (this.loggingEnabledSetting != LoggingEnabled.NO) {
 
-    return log;
+        return LoggerFactory.getLogger(
+            StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
+            DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS",
+                Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()))));
+      } else {
+        return LoggerFactory.getConsoleLogger();
+      }
+    } catch (Exception e) {
+      ILogger newLogger = LoggerFactory.getConsoleLogger();
+      newLogger.logMessage(MessageType.WARNING, "");
+      return newLogger;
+    }
   }
 
   /**
@@ -357,7 +354,7 @@ public abstract class BaseTest {
    *
    * @return The test result type as text
    */
-  protected String getResultText() {
+  protected String getTestNGResultText() {
     switch (this.testResult.getStatus()) {
       case ITestResult.SUCCESS:
         return "SUCCESS";
@@ -430,7 +427,7 @@ public abstract class BaseTest {
    * Create a Base test object.
    */
   protected void createNewTestObject() {
-    Logger newLogger = this.createLogger();
+    ILogger newLogger = this.createLogger();
     this.setTestObject(new BaseTestObject(newLogger, this.fullyQualifiedTestClassName.get()));
   }
 }

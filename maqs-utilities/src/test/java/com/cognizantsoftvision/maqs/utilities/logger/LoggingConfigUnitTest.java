@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.utilities.logger;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.MaqsLoggingConfigException;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
@@ -88,7 +89,7 @@ public class LoggingConfigUnitTest {
      * Test getting Logging Level Setting. Override Config to 'INFORMATION'
      */
     @Test
-    public void getLoggingLevelInformationSettingTest() {
+    public void getLoggingLevelInformationSettingTest() throws MaqsLoggingConfigException {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INFORMATION");
         Config.addGeneralTestSettingValues(newValueMap, true);

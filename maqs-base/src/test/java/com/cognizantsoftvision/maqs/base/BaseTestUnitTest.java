@@ -51,6 +51,7 @@ public class BaseTestUnitTest extends BaseTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void logVerboseTest() {
     this.logVerbose("This is a test to log verbose.");
+    this.logVerbose("This is another test to log verbose");
   }
 
   /**
