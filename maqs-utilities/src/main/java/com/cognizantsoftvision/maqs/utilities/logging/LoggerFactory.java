@@ -64,6 +64,6 @@ public class LoggerFactory {
         return new HtmlFileLogger(logDirectory, logName, loggingLevel);
       default:
         throw new MaqsLoggingConfigException("Log type '" + logType + "' is not a valid option");
-      }
     }
+  }
 }
