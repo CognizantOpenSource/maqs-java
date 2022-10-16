@@ -39,7 +39,7 @@ public class LoggerFactory {
 
     return getLogger(logName, Config.getGeneralValue("LogType", console),
         LoggingConfig.getLoggingLevelSetting());
-    }
+  }
 
   /**
    * Get a logger.
@@ -54,16 +54,16 @@ public class LoggerFactory {
     String logDirectory = LoggingConfig.getLogDirectory();
 
     switch (logType.toUpperCase()) {
-     case "CONSOLE":
-       return new ConsoleLogger(loggingLevel);
-     case "TXT":
-     case "TEXT":
-       return new FileLogger(logDirectory, logName, loggingLevel);
-     case "HTML":
-     case "HTM":
-       return new HtmlFileLogger(logDirectory, logName, loggingLevel);
-     default:
-       throw new MaqsLoggingConfigException("Log type '" + logType + "' is not a valid option");
+      case "CONSOLE":
+        return new ConsoleLogger(loggingLevel);
+      case "TXT":
+      case "TEXT":
+        return new FileLogger(logDirectory, logName, loggingLevel);
+      case "HTML":
+      case "HTM":
+        return new HtmlFileLogger(logDirectory, logName, loggingLevel);
+      default:
+        throw new MaqsLoggingConfigException("Log type '" + logType + "' is not a valid option");
       }
     }
 }

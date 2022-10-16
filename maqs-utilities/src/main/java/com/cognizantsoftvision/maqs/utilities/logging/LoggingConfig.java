@@ -7,7 +7,6 @@ package com.cognizantsoftvision.maqs.utilities.logging;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.MaqsLoggingConfigException;
-
 import java.io.File;
 
 /**
