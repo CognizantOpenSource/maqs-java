@@ -55,6 +55,5 @@ public class PerfTimerCollectionUnitTest {
     Assert.assertEquals(perfTimerCollection.getTestName(), "TestCase");
     perfTimerCollection.setTestName("NewTestCaseName");
     Assert.assertEquals(perfTimerCollection.getTestName(), "NewTestCaseName");
-
   }
 }
