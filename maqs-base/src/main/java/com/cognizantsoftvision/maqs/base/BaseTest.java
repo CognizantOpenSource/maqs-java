@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -258,6 +259,10 @@ public abstract class BaseTest {
     if (testResult.getStatus() == ITestResult.SUCCESS) {
       this.tryToLog(MessageType.SUCCESS, "Test Passed");
     } else if (testResult.getStatus() == ITestResult.FAILURE) {
+      if (this.getLoggingEnabledSetting() == LoggingEnabled.YES && this.getLogger() instanceof FileLogger) {
+        String stackTrace = ExceptionUtils.getStackTrace(testResult.getThrowable());
+        this.tryToLog(MessageType.ERROR, stackTrace, "");
+      }
       this.tryToLog(MessageType.ERROR, "Test Failed");
     } else if (testResult.getStatus() == ITestResult.SKIP) {
       this.tryToLog(MessageType.INFORMATION, "Test was skipped");

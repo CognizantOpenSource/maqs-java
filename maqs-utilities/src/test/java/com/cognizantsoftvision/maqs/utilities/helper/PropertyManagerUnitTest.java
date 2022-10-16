@@ -46,7 +46,7 @@ public class PropertyManagerUnitTest {
     /**
      * tests the property set is maintained functionality.
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void testPropertySetIsMaintained() {
         assertEquals(PropertyManager.get(VALID_KEY), VALID_VALUE);
     }
@@ -54,7 +54,7 @@ public class PropertyManagerUnitTest {
     /**
      * tests the property not set returns null functionality.
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void testPropertyNotSetReturnsNull() {
         assertNull(
                 PropertyManager.get(INVALID_KEY),
@@ -64,7 +64,7 @@ public class PropertyManagerUnitTest {
     /**
      * tests the property not set returns default functionality.
      */
-    @Test
+    @Test(groups = TestCategories.UTILITIES)
     public void testPropertyNotSetReturnsDefault() {
         assertEquals(PropertyManager.get(INVALID_KEY, DEFAULT_VALUE), DEFAULT_VALUE);
     }
