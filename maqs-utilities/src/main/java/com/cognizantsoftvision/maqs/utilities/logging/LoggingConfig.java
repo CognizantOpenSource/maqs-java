@@ -36,7 +36,7 @@ public class LoggingConfig {
       case "NO":
         return LoggingEnabled.NO;
       default:
-        throw new IllegalArgumentException(
+        throw new MaqsLoggingConfigException(
             StringProcessor.safeFormatter("Log value %s is not a valid option", Config.getGeneralValue("Log", "NO")));
     }
   }
