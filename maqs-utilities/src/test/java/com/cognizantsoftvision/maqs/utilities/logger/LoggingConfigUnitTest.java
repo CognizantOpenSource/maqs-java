@@ -65,7 +65,7 @@ public class LoggingConfigUnitTest {
      * Test getting Logging Enabled Setting with an Illegal Argument Override Config
      * to 'INVALIDVALUE' - Expect IllegalArgumentException
      */
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MaqsLoggingConfigException.class)
     public void getLoggingSettingIllegalArgumentTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "INVALIDVALUE");
@@ -89,7 +89,7 @@ public class LoggingConfigUnitTest {
      * Test getting Logging Level Setting. Override Config to 'INFORMATION'
      */
     @Test
-    public void getLoggingLevelInformationSettingTest() throws MaqsLoggingConfigException {
+    public void getLoggingLevelInformationSettingTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INFORMATION");
         Config.addGeneralTestSettingValues(newValueMap, true);
@@ -173,7 +173,7 @@ public class LoggingConfigUnitTest {
      * Test getting Logging Level Setting with Illegal Argument. Override Config to
      * 'INVALIDVALUE' - Expect IllegalArgumentException
      */
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MaqsLoggingConfigException.class)
     public void getLoggingLevelIllegalArgumentTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INVALIDVALUE");
@@ -200,7 +200,7 @@ public class LoggingConfigUnitTest {
      * Test getting File Logger. Override Config LogType to 'TXT' which creates
      * FileLogger.
      */
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MaqsLoggingConfigException.class)
     public void getInvalidFileLoggerTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogType", "XML");
