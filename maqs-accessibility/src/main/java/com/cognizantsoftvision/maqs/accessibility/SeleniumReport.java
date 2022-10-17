@@ -18,12 +18,12 @@ import org.openqa.selenium.WebElement;
  * The Selenium reporter class.
  * Sets up the report from selenium scans
  */
-public class SeleniumReporter {
+public class SeleniumReport {
 
   /**
    * Class constructor.
    */
-  private SeleniumReporter() {
+  private SeleniumReport() {
   }
 
   /**
@@ -33,9 +33,9 @@ public class SeleniumReporter {
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, String destination)
+  public static void createHtmlReport(WebDriver webDriver, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, destination, EnumSet.allOf(ResultType.class));
+    createHtmlReport(webDriver, destination, EnumSet.allOf(ResultType.class));
   }
 
   /**
@@ -46,9 +46,9 @@ public class SeleniumReporter {
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
+  public static void createHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver), destination, requestedResults);
+    createHtmlReport(webDriver, new AxeBuilder().analyze(webDriver), destination, requestedResults);
   }
 
   /**
@@ -59,9 +59,9 @@ public class SeleniumReporter {
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
+  public static void createHtmlReport(WebDriver webDriver, WebElement element, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, element, destination, EnumSet.allOf(ResultType.class));
+    createHtmlReport(webDriver, element, destination, EnumSet.allOf(ResultType.class));
   }
 
   /**
@@ -73,9 +73,9 @@ public class SeleniumReporter {
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
+  public static void createHtmlReport(WebDriver webDriver, WebElement element, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver, element), destination, requestedResults);
+    createHtmlReport(webDriver, new AxeBuilder().analyze(webDriver, element), destination, requestedResults);
   }
 
   /**
@@ -86,9 +86,9 @@ public class SeleniumReporter {
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
+  public static void createHtmlReport(WebDriver webDriver, Results results, String destination)
       throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, results, destination, EnumSet.allOf(ResultType.class));
+    createHtmlReport(webDriver, results, destination, EnumSet.allOf(ResultType.class));
   }
 
   /**
@@ -101,8 +101,8 @@ public class SeleniumReporter {
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination,
+  public static void createHtmlReport(WebDriver webDriver, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
-    HtmlReporter.createAxeHtmlReportFile(webDriver, results, destination, requestedResults);
+    HtmlReporter.createHtmlReportFile(webDriver, results, destination, requestedResults);
   }
 }

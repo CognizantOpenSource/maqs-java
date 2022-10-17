@@ -53,6 +53,16 @@ public class HtmlReporter {
   }
 
   /**
+   * Gets the Basic HTML page tags into string format.
+   * @return the html page in string format
+   * @throws IOException if an exception is thrown
+   */
+  private static String getHtmlBase() throws IOException {
+    String stringBuilder = String.valueOf(Files.readString(Paths.get(RESOURCES_FILE + "htmlReporterTags.html")));
+    return stringBuilder.replace(System.lineSeparator(), "");
+  }
+
+  /**
    * Creates an HTML accessibility report.
    * @param context the Search Context to be used in the scan
    * @param results the results object created after scanning the web page
@@ -61,7 +71,7 @@ public class HtmlReporter {
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
+  static void createHtmlReportFile(SearchContext context, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     // Get the unwrapped element if we are using a wrapped element
     context = (context instanceof WrapsElement)
@@ -69,16 +79,10 @@ public class HtmlReporter {
 
     Document doc = Jsoup.parse(getHtmlBase());
     doc.select("style").append(getCss(context));
-    createAxeHtmlReportFile(doc, results, destination, requestedResults);
+    createHtmlReportFile(doc, results, destination, requestedResults);
   }
 
-  private static String getHtmlBase() throws IOException {
-    String stringBuilder = String.valueOf(Files.readString(Paths.get(RESOURCES_FILE + "htmlReporterTags.html")));
-    return stringBuilder.replace(System.lineSeparator(), "");
-  }
-
-
-  private static void createAxeHtmlReportFile(Document doc, Results results, String destination,
+  private static void createHtmlReportFile(Document doc, Results results, String destination,
       Set<ResultType> requestedResults) throws ParseException, IOException {
     final int violationCount = getCount(results.getViolations());
     final int incompleteCount = getCount(results.getIncomplete());

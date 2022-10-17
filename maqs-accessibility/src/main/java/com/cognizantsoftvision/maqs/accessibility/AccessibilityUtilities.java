@@ -257,7 +257,7 @@ public class AccessibilityUtilities {
       }
 
       results = getResults.get();
-      SeleniumReporter.createAxeHtmlReport(testObject.getWebDriver(), results, report, requestedResults);
+      SeleniumReport.createHtmlReport(testObject.getWebDriver(), results, report, requestedResults);
     } finally {
       // Restore logging if we suspended it
       if (restoreLogging) {
