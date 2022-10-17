@@ -201,6 +201,21 @@ public class LoggingConfigUnitTest {
      * Test getting File Logger. Override Config LogType to 'TXT' which creates
      * FileLogger.
      */
+    @Test(groups = TestCategories.UTILITIES)
+    public void getHTMLFileLoggerTest() {
+        HashMap<String, String> newValueMap = new HashMap<>();
+        newValueMap.put("LogType", "HTML");
+        newValueMap.put("Log", "YES");
+        Config.addGeneralTestSettingValues(newValueMap, true);
+        String fileName = "TestLog.html";
+        Logger logger = LoggingConfig.getLogger(fileName);
+        Assert.assertTrue(logger instanceof HtmlFileLogger, "Expected Logger to be of Type HtmlFileLogger.");
+    }
+
+    /**
+     * Test getting File Logger. Override Config LogType to 'TXT' which creates
+     * FileLogger.
+     */
     @Test(groups = TestCategories.UTILITIES, expectedExceptions = MaqsLoggingConfigException.class)
     public void getInvalidFileLoggerTest() {
         HashMap<String, String> newValueMap = new HashMap<>();

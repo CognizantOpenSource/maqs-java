@@ -90,6 +90,8 @@ public class LoggingConfig {
         return new ConsoleLogger(loggingLevel);
       case TXT:
         return new FileLogger(false, logDirectory, fileName, loggingLevel);
+      case "HTML":
+        return new HtmlFileLogger(logDirectory, fileName, loggingLevel);
       default:
         throw new MaqsLoggingConfigException(StringProcessor
             .safeFormatter("Log type %s is not a valid option", Config.getGeneralValue("LogType", CONSOLE)));

@@ -4,6 +4,7 @@
 
 package com.cognizantsoftvision.maqs.selenium;
 
+import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.selenium.factories.UIWaitFactory;
 import com.cognizantsoftvision.maqs.selenium.pageModel.AutomationPageModel;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
@@ -240,6 +241,21 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertTrue(logText.contains("After switching to window"),
         "Expected message to be logged after switching windows.");
     softAssert.assertAll();
+  }
+
+  /**
+   * Test that checks if the correct messages are logged when switching windows.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = MAQSRuntimeException.class)
+  public void eventHandlerSwitchInvalidWindow() {
+    // Navigate to the Automation site and set up the event handler
+    this.navigateToAutomationSiteUrl();
+    WebDriver webDriverWithHandler = this.getWebDriver();
+
+    // Use the Event Firing Web Driver to open a new tab, then get the log text
+    ((JavascriptExecutor) webDriverWithHandler).executeScript("window.open()");
+
+    SeleniumUtilities.switchToWindow(this.getTestObject(), "TestWindow");
   }
 
   /**
