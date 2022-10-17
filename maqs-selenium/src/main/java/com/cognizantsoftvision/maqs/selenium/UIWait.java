@@ -837,9 +837,9 @@ public class UIWait {
       try {
         counter--;
         before = this.driver.getPageSource();
-        Thread.sleep(this.fluentRetryTime);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(this.fluentRetryTime));
         after = this.driver.getPageSource();
-      } catch (InterruptedException e) {
+      } catch (Exception e) {
         Thread.currentThread().interrupt();
       }
     } while (!before.equals(after) && counter > 0);
