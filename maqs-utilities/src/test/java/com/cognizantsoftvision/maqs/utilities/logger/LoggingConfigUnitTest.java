@@ -7,12 +7,8 @@ package com.cognizantsoftvision.maqs.utilities.logger;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.*;
+
 import java.io.File;
 import java.util.HashMap;
 import org.testng.Assert;
@@ -194,6 +190,21 @@ public class LoggingConfigUnitTest {
         String fileName = "TestLog.txt";
         Logger logger = LoggingConfig.getLogger(fileName);
         Assert.assertTrue(logger instanceof FileLogger, "Expected Logger to be of Type FileLogger.");
+    }
+
+    /**
+     * Test getting File Logger. Override Config LogType to 'TXT' which creates
+     * FileLogger.
+     */
+    @Test(groups = TestCategories.UTILITIES)
+    public void getHTMLFileLoggerTest() {
+        HashMap<String, String> newValueMap = new HashMap<>();
+        newValueMap.put("LogType", "HTML");
+        newValueMap.put("Log", "YES");
+        Config.addGeneralTestSettingValues(newValueMap, true);
+        String fileName = "TestLog.html";
+        Logger logger = LoggingConfig.getLogger(fileName);
+        Assert.assertTrue(logger instanceof HtmlFileLogger, "Expected Logger to be of Type HtmlFileLogger.");
     }
 
     /**
