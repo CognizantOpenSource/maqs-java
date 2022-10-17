@@ -28,7 +28,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 /**
- * Base test class.
+ * The Base test class.
  */
 public abstract class BaseTest {
 
@@ -323,7 +323,8 @@ public abstract class BaseTest {
       if (this.loggingEnabledSetting != LoggingEnabled.NO) {
         return LoggerFactory.getLogger(
             StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
-                DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT, Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()))));
+                DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT,
+                    Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()))));
       } else {
         return LoggerFactory.getConsoleLogger();
       }
