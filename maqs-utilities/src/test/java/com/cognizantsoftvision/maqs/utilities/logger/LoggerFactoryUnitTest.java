@@ -20,6 +20,9 @@ import org.testng.annotations.Test;
  */
 public class LoggerFactoryUnitTest {
 
+  /**
+   * Test getting the logger.
+   */
   @Test(groups = TestCategories.UTILITIES)
   public void testGetLogger() {
     HashMap<String, String> newValueMap = new HashMap<>();
@@ -28,6 +31,9 @@ public class LoggerFactoryUnitTest {
     Assert.assertNotNull(LoggerFactory.getLogger("Test Name"));
   }
 
+  /**
+   * Test getting the console logger.
+   */
   @Test(groups = TestCategories.UTILITIES)
   public void testGetConsoleLogger() {
     Assert.assertNotNull(LoggerFactory.getConsoleLogger());
@@ -35,6 +41,9 @@ public class LoggerFactoryUnitTest {
     Assert.assertTrue(logger instanceof ConsoleLogger);
   }
 
+  /**
+   * Tests getting the file logger.
+   */
   @Test(groups = TestCategories.UTILITIES)
   public void testGetFileLogger() {
     List<String> logType = new ArrayList<>();
@@ -47,6 +56,9 @@ public class LoggerFactoryUnitTest {
     }
   }
 
+  /**
+   * Test getting the HTML file logger.
+   */
   @Test(groups = TestCategories.UTILITIES)
   public void testGetHtmlFileLogger() {
     List<String> logType = new ArrayList<>();
@@ -59,6 +71,9 @@ public class LoggerFactoryUnitTest {
     }
   }
 
+  /**
+   * Test throwing an exception with an unsupported log type.
+   */
   @Test(groups = TestCategories.UTILITIES, expectedExceptions = MaqsLoggingConfigException.class)
   public void testGetInvalidLogger() {
     LoggerFactory.getLogger("logName", "TEST", MessageType.ACTION);
