@@ -189,7 +189,6 @@ public abstract class AbstractLazyElement {
 
   /**
    * Gets the lazy element's location.
-   * 
    *
    * @return the location as a Point
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
@@ -528,7 +527,7 @@ public abstract class AbstractLazyElement {
         return this.getCachedElement();
       } catch (Exception e) {
         this.getTestObject().getLogger()
-            .logMessage(MessageType.VERBOSE, "Finding element again because: " + e.getMessage());
+            .logMessage(MessageType.VERBOSE, "Re-finding element again because: " + e.getMessage());
       }
     }
 

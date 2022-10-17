@@ -16,15 +16,14 @@ import javax.persistence.spi.PersistenceUnitTransactionType;
 import javax.sql.DataSource;
 
 public class DatabasePersistenceUnitInfo implements PersistenceUnitInfo {
-  private String persistenceUnitName;
-  private PersistenceUnitTransactionType transactionType = PersistenceUnitTransactionType.RESOURCE_LOCAL;
-  private String persistenceProviderClassName = "org.hibernate.jpa.HibernatePersistenceProvider";
-  private List<String> managedClassNames;
-  private List<String> mappingFileNames = new ArrayList<>();
-  private Properties properties;
+  private final String persistenceUnitName;
+  private static final PersistenceUnitTransactionType transactionType = PersistenceUnitTransactionType.RESOURCE_LOCAL;
+  private final List<String> managedClassNames;
+  private final List<String> mappingFileNames = new ArrayList<>();
+  private final Properties properties;
   private DataSource jtaDataSource;
   private DataSource nonJtaDataSource;
-  private List<ClassTransformer> transformers = new ArrayList<>();
+  private final List<ClassTransformer> transformers = new ArrayList<>();
 
   public DatabasePersistenceUnitInfo(String persistenceUnitName, List<String> managedClassNames,
       Properties properties) {
@@ -40,7 +39,7 @@ public class DatabasePersistenceUnitInfo implements PersistenceUnitInfo {
 
   @Override
   public String getPersistenceProviderClassName() {
-    return persistenceProviderClassName;
+    return "org.hibernate.jpa.HibernatePersistenceProvider";
   }
 
   @Override

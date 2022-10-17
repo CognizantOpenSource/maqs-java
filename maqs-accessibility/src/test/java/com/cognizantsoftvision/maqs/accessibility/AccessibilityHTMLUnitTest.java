@@ -31,20 +31,29 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Accessibility HTML unit tests.
+ * The Accessibility HTML unit tests.
  */
 public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
 
   /**
+   * The file path of the sample results json file.
+   */
+  private static final String filePath = "src/test/resources/testFiles/sampleResults.json";
+
+  /**
    * The file that has a sample result with an error.
    */
-  private static final File axeResultWithErrorFile = new File("src/test/resources/testFiles/sampleResults.json");
+  private static final File axeResultWithErrorFile = new File(filePath);
 
   /**
    * Unit testing site URL - Automation page.
    */
   private static final String testSiteAutomationUrl = SeleniumConfig.getWebSiteBase();
 
+  /**
+   * Sets up and navigates to the provided url.
+   * @param url the url to be navigated to
+   */
   public void setup(String url) {
     this.getWebDriver().navigate().to(url);
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();

@@ -12,10 +12,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Manager Dictionary Unit Tests.
+ * The Manager Dictionary unit test class.
  */
 public class ManagerStoreUnitTest extends BaseGenericTest {
 
+  /**
+   * Test closing the manager store.
+   */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testClose() {
     ManagerStore managerStore = new ManagerStore();
@@ -37,6 +40,9 @@ public class ManagerStoreUnitTest extends BaseGenericTest {
 
   }
 
+  /**
+   * Test getting the manager driver.
+   */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetDriver() {
     final String dm1 = "DM1";
@@ -47,6 +53,9 @@ public class ManagerStoreUnitTest extends BaseGenericTest {
     }
   }
 
+  /**
+   * Test adding to the manager store.
+   */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testPut() {
     final String dm1 = "DM1";
@@ -54,11 +63,18 @@ public class ManagerStoreUnitTest extends BaseGenericTest {
       managerStore.put(dm1, getTestDriverManager());
       Assert.assertTrue(managerStore.containsKey(dm1));
       assertNotNull(managerStore.get(dm1));
+
+      this.getManagerStore().put(getTestDriverManager());
+      this.getManagerStore().getManager("TEST");
     }
   }
 
+  /**
+   * gets the driver manager.
+   * @return a test driver manager.
+   */
   private TestDriverManager getTestDriverManager() {
-    Supplier<Object> supplier = () -> null;
+    Supplier<Object> supplier = () -> "TEST";
     return new TestDriverManager(supplier, (BaseTestObject) getTestObject());
   }
 

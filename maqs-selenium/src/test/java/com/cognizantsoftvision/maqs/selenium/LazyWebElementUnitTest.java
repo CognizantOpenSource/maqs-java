@@ -718,7 +718,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	/**
 	 * Find elements respects action waits
 	 */
-	@Test(groups = TestCategories.SELENIUM, expectedExceptions = { TimeoutException.class })
+	@Test(groups = TestCategories.SELENIUM, expectedExceptions = TimeoutException.class)
 	public void lazyElementFindElementsRespectAction()
 			throws InterruptedException, TimeoutException, ExecutionFailedException {
 		LazyWebElement firstElement = this.getDivRoot().findElements(this.getDisabledItem().getBy()).get(0);

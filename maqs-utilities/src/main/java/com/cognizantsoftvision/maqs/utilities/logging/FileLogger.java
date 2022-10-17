@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * The File Logger class.
@@ -235,7 +236,8 @@ public class FileLogger extends Logger implements IFileLogger {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-            "Failed to write to event log because: " + e.getMessage(), (Object[]) e.getStackTrace()));
+            "Failed to write to event log because: " + e.getMessage())
+            + System.lineSeparator() + Arrays.toString(e.getStackTrace()));
       }
     }
   }
@@ -316,7 +318,8 @@ public class FileLogger extends Logger implements IFileLogger {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR,
-            StringProcessor.safeFormatter("Failed to write to event log because: %s", e.getMessage()));
+            StringProcessor.safeFormatter("Failed to write to event log because: %s", e.getMessage())
+                + System.lineSeparator() + Arrays.toString(e.getStackTrace()));
         console.logMessage(messageType, message, args);
       }
     }
