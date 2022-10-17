@@ -5,11 +5,7 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.*;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.util.ArrayList;
 import org.testng.Assert;
@@ -52,6 +48,7 @@ public class BaseTestUnitTest extends BaseTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void logVerboseTest() {
     this.logVerbose("This is a test to log verbose.");
+    this.logVerbose("This is also a test to log verbose");
   }
 
   /**
@@ -82,7 +79,18 @@ public class BaseTestUnitTest extends BaseTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void loggingEnabledSettingTest() {
-    Assert.assertEquals(this.getLoggingEnabledSetting(), LoggingConfig.getLoggingEnabledSetting());
+    Assert.assertEquals(this.getLoggingEnabled(), LoggingConfig.getLoggingEnabledSetting());
+  }
+
+  /**
+   * Validate the Logging Enabled Settings.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void setLoggingEnabledSettingTest() {
+    this.setLoggingEnabled(LoggingEnabled.ONFAIL);
+    Assert.assertEquals(this.getLoggingEnabled(), LoggingEnabled.ONFAIL);
+    this.setLoggingEnabled(LoggingEnabled.YES);
+    Assert.assertEquals(this.getLoggingEnabled(), LoggingEnabled.YES);
   }
 
   /**

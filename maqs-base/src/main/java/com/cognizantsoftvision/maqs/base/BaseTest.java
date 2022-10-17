@@ -15,7 +15,6 @@ import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
@@ -123,7 +122,7 @@ public abstract class BaseTest {
    *
    * @return Logging Enabled setting
    */
-  public LoggingEnabled getLoggingEnabledSetting() {
+  public LoggingEnabled getLoggingEnabled() {
     return this.loggingEnabledSetting;
   }
 
@@ -259,7 +258,7 @@ public abstract class BaseTest {
     if (testResult.getStatus() == ITestResult.SUCCESS) {
       this.tryToLog(MessageType.SUCCESS, "Test Passed");
     } else if (testResult.getStatus() == ITestResult.FAILURE) {
-      if (this.getLoggingEnabledSetting() == LoggingEnabled.YES && this.getLogger() instanceof FileLogger) {
+      if (this.getLoggingEnabled() == LoggingEnabled.YES && this.getLogger() instanceof FileLogger) {
         String stackTrace = ExceptionUtils.getStackTrace(testResult.getThrowable());
         this.tryToLog(MessageType.ERROR, stackTrace, "");
       }
@@ -337,42 +336,6 @@ public abstract class BaseTest {
     }
 
     return log;
-  }
-
-  /**
-   * Get the type of test result.
-   *
-   * @return The type of test result
-   */
-  protected TestResultType getResultType() {
-    switch (this.testResult.getStatus()) {
-      case ITestResult.SUCCESS:
-        return TestResultType.PASS;
-      case ITestResult.FAILURE:
-        return TestResultType.FAIL;
-      case ITestResult.SKIP:
-        return TestResultType.SKIP;
-      default:
-        return TestResultType.OTHER;
-    }
-  }
-
-  /**
-   * Get the test result type as text.
-   *
-   * @return The test result type as text
-   */
-  protected String getResultText() {
-    switch (this.testResult.getStatus()) {
-      case ITestResult.SUCCESS:
-        return "SUCCESS";
-      case ITestResult.FAILURE:
-        return "FAILURE";
-      case ITestResult.SKIP:
-        return "SKIP";
-      default:
-        return "OTHER";
-    }
   }
 
   /**

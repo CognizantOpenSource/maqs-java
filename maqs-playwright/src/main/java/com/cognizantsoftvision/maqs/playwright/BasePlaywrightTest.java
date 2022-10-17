@@ -96,14 +96,14 @@ public class BasePlaywrightTest extends BaseExtendableTest<IPlaywrightTestObject
     // Try to take a screenshot.
     try {
       // Just stop if we are not logging or the driver was not initialized or there is no browser
-      if (this.getLoggingEnabledSetting() == LoggingEnabled.NO
+      if (this.getLoggingEnabled() == LoggingEnabled.NO
           || !this.getTestObject().getPageManager().isDriverInitialized()
           || this.getPageDriver().getParentBrowser() == null) {
         return;
       }
 
       // The test did not pass, or we want it logged regardless
-      if (this.getLoggingEnabledSetting() == LoggingEnabled.YES || !resultType.isSuccess()) {
+      if (this.getLoggingEnabled() == LoggingEnabled.YES || !resultType.isSuccess()) {
         String fullPath = ((IFileLogger)this.getLogger()).getFilePath();
         String fileNameWithoutExtension = Path.of(fullPath).getFileName().toString();
         attachTestFiles(this.getPageDriver().getParentBrowser(), fileNameWithoutExtension);
