@@ -12,7 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Manager Dictionary Unit Tests.
+ * The Manager Dictionary unit test class.
  */
 public class ManagerStoreUnitTest extends BaseGenericTest {
 

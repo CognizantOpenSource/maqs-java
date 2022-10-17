@@ -137,7 +137,9 @@ public class FileLoggerUnitTest {
     }
 
     File file = new File(path);
-    Assert.assertTrue(file.delete());
+   if (file.exists()) {
+     Assert.assertTrue(file.delete());
+   }
   }
 
   /**
@@ -651,8 +653,8 @@ public class FileLoggerUnitTest {
         // Verify if the Message Type is found
         boolean logMessageFound = logContents.contains(String.format(logLine, level.getKey()));
         softAssert.assertEquals(Boolean.toString(logMessageFound), level.getValue().toString(),
-            "Looking for '" + String.format(logLine, level.getKey()) + "' with Logger of type '" + logLevel.name()
-                + "'." + System.lineSeparator() + "Log Contents: " + logContents);
+            "Looking for '" + String.format(logLine, level.getKey()) + "' with Logger of type '"
+                + logLevel.name() + "'." + System.lineSeparator() + "Log Contents: " + logContents);
       }
     }
 

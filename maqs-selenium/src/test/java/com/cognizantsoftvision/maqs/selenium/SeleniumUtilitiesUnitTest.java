@@ -16,8 +16,8 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
 import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,11 +28,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Selenium utilities test.
+ * The Selenium Utilities unit test class.
  */
 public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
-        private final String dateTimeFormatter = "uuuu-MM-dd-HH-mm-ss-SSSS";
+        private final String dateTimeFormatter = Logger.DEFAULT_DATE_TIME_FORMAT;
 
         /**
          * Test capture screenshot no append.

@@ -14,10 +14,11 @@ import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
- * Unit test class for BaseTest class.
+ * The Base Test unit test class.
  */
 @Test(groups = TestCategories.FRAMEWORK)
 public class BaseTestUnitTest extends BaseTest {
+
   /**
    * Verify fully qualified test name.
    */
