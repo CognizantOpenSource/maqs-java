@@ -678,6 +678,9 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementFindElement() throws TimeoutException, InterruptedException {
 		WebElement firstElement = this.getFlowerTableLazyElement().findRawElement(By.cssSelector(THREAD));
 		assertEquals(firstElement.getText(), "Flowers");
+
+		LazyWebElement lazyWebElement = this.getFlowerTableLazyElement().findElement(By.cssSelector(THREAD));
+		assertEquals(lazyWebElement.getText(), "Flowers");
 	}
 
 	/**
