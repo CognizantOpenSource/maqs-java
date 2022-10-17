@@ -141,6 +141,12 @@ public class BaseTestUnitTest extends BaseTest {
     Assert.assertNotNull(this.getManagerStore());
   }
 
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testCleanUpLogs() {
+    this.setLogger(new FileLogger());
+    this.setLoggingEnabled(LoggingEnabled.ONFAIL);
+  }
+
   /*
    * (non-Javadoc)
    *
