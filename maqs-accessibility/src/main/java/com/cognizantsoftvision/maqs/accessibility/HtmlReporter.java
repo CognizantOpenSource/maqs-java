@@ -8,7 +8,6 @@ import com.deque.html.axecore.results.Check;
 import com.deque.html.axecore.results.CheckedNode;
 import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.results.Rule;
-import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +18,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -31,8 +29,6 @@ import org.jsoup.nodes.Element;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
 /**
@@ -53,87 +49,7 @@ public class HtmlReporter {
   /**
    * Class constructor.
    */
-  protected HtmlReporter() {
-  }
-
-  /**
-   * Create an HTML accessibility report for an entire web page.
-   * @param webDriver the web driver used in the scan
-   * @param destination the destination file the html report will go to
-   * @throws IOException if an IO exception is thrown
-   * @throws ParseException if a parse exception is thrown
-   */
-  public static void createAxeHtmlReport(WebDriver webDriver, String destination)
-      throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, destination, EnumSet.allOf(ResultType.class));
-  }
-
-  /**
-   * Create an HTML accessibility report for an entire web page with specific Result types.
-   * @param webDriver the web driver used in the scan
-   * @param destination the destination file the html report will go to
-   * @param requestedResults the specified result types to include in the report
-   * @throws IOException if an IO exception is thrown
-   * @throws ParseException if a parse exception is thrown
-   */
-  public static void createAxeHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
-      throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver), destination, requestedResults);
-  }
-
-  /**
-   * Create an HTML accessibility report for a specific element.
-   * @param webDriver the web driver used in the scan
-   * @param element the element to be scanned
-   * @param destination the destination file the html report will go to
-   * @throws IOException if an IO exception is thrown
-   * @throws ParseException if a parse exception is thrown
-   */
-  public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
-      throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, element, destination, EnumSet.allOf(ResultType.class));
-  }
-
-  /**
-   * Create an HTML accessibility report for a specific element and specified result types.
-   * @param webDriver the web driver used in the scan
-   * @param element the element to be scanned
-   * @param destination the destination file the html report will go to
-   * @param requestedResults the specified result types to include in the report
-   * @throws IOException if an IO exception is thrown
-   * @throws ParseException if a parse exception is thrown
-   */
-  public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
-      Set<ResultType> requestedResults) throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver, element), destination, requestedResults);
-  }
-
-  /**
-   * Create an HTML accessibility report for an entire web page with already scanned results.
-   * @param webDriver the web driver used in the scan
-   * @param results the results type variable used after scanning the web page
-   * @param destination the destination file the html report will go to
-   * @throws IOException if an IO exception is thrown
-   * @throws ParseException if a parse exception is thrown
-   */
-  public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
-      throws IOException, ParseException {
-    createAxeHtmlReport(webDriver, results, destination, EnumSet.allOf(ResultType.class));
-  }
-
-  /**
-   * Create an HTML accessibility report for an entire web page with specified Result types
-   * and inputted already scanned results.
-   * @param webDriver the web driver used in the scan
-   * @param results the results object created after scanning the web page
-   * @param destination the destination file the html report will go to
-   * @param requestedResults the specified result types to include in the report
-   * @throws IOException if an IO exception is thrown
-   * @throws ParseException if a parse exception is thrown
-   */
-  public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination,
-      Set<ResultType> requestedResults) throws IOException, ParseException {
-    createAxeHtmlReportFile(webDriver, results, destination, requestedResults);
+  private HtmlReporter() {
   }
 
   /**
@@ -145,22 +61,29 @@ public class HtmlReporter {
    * @throws IOException if an IO exception is thrown
    * @throws ParseException if a parse exception is thrown
    */
-  private static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
+  static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     // Get the unwrapped element if we are using a wrapped element
     context = (context instanceof WrapsElement)
         ? ((WrapsElement) context).getWrappedElement() : context;
 
+    Document doc = Jsoup.parse(getHtmlBase());
+    doc.select("style").append(getCss(context));
+    createAxeHtmlReportFile(doc, results, destination, requestedResults);
+  }
+
+  private static String getHtmlBase() throws IOException {
+    String stringBuilder = String.valueOf(Files.readString(Paths.get(RESOURCES_FILE + "htmlReporterTags.html")));
+    return stringBuilder.replace(System.lineSeparator(), "");
+  }
+
+
+  private static void createAxeHtmlReportFile(Document doc, Results results, String destination,
+      Set<ResultType> requestedResults) throws ParseException, IOException {
     final int violationCount = getCount(results.getViolations());
     final int incompleteCount = getCount(results.getIncomplete());
     final int passCount = getCount(results.getPasses());
     final int inapplicableCount = getCount(results.getInapplicable());
-
-    String stringBuilder = String.valueOf(Files.readString(Paths.get(RESOURCES_FILE + "htmlReporterTags.html")));
-    stringBuilder = stringBuilder.replace(System.lineSeparator(), "");
-
-    Document doc = Jsoup.parse(stringBuilder);
-    doc.select("style").append(getCss(context));
 
     Element contentArea = doc.select("content").first();
 

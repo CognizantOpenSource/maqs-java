@@ -123,7 +123,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
       throws IOException, ParseException {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(),
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(),
         this.getWebDriver().findElement(By.cssSelector(mainElementSelector)), path);
     validateReport(path, 3, 14, 0, 75);
 
@@ -134,7 +134,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   public void reportFullPage() throws IOException, ParseException {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), path);
     validateReport(path, 4, 26, 0, 69);
 
     deleteFile(new File(path));
@@ -145,7 +145,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
       throws IOException, ParseException {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path, EnumSet.of(ResultType.Violations));
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), path, EnumSet.of(ResultType.Violations));
 
     // Check violations
     validateReport(path, 4, 0, 0, 0);
@@ -160,7 +160,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
       throws IOException, ParseException {
     loadTestPage(integrationTestTargetSimpleUrl);
     String path = createReportPath();
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path,
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), path,
         EnumSet.of(ResultType.Passes, ResultType.Inapplicable, ResultType.Violations));
 
     // Check Passes
@@ -176,7 +176,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     String path = createReportPath();
 
     var mainElement = this.getWebDriver().findElement(By.cssSelector(mainElementSelector));
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(), mainElement, path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), mainElement, path);
 
     validateReport(path, 3, 14, 0, 75);
     deleteFile(new File(path));
@@ -188,7 +188,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     String path = createReportPath();
 
     var builder = new AxeBuilder().disableRules(Collections.singletonList("color-contrast"));
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
 
     validateReport(path, 3, 21, 0, 69);
     deleteFile(new File(path));
@@ -199,7 +199,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     String path = createReportPath();
     Results results = new ObjectMapper().readValue(new File(integrationTestJsonResultUrl), Results.class);
 
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(), results, path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), results, path);
     validateReport(path, 3, 5, 2, 4);
 
     String text = new String(Files.readAllBytes(Paths.get(path)));
@@ -224,7 +224,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     loadTestPage(integrationTestTargetComplexUrl);
     String path = createReportPath();
 
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(), path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), path);
     validateReport(path, 4, 43, 0, 64);
 
     deleteFile(new File(path));
@@ -240,7 +240,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
 
     var builder = new AxeBuilder().withOptions(runOptions);
 
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
     validateReport(path, 4, 43, 0, 64);
 
     deleteFile(new File(path));
@@ -255,7 +255,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     runOptions.setIFrames(false);
 
     var builder = new AxeBuilder().withOptions(runOptions);
-    HtmlReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
+    SeleniumReporter.createAxeHtmlReport(this.getWebDriver(), builder.analyze(this.getWebDriver()), path);
     validateReport(path, 4, 43, 0, 64);
 
     deleteFile(new File(path));
