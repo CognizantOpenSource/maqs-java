@@ -83,10 +83,4 @@ public class ConsoleLoggerUnitTest {
     ConsoleLogger console = new ConsoleLogger();
     Assert.assertEquals(console.getLoggingLevel(), MessageType.INFORMATION);
   }
-
-  @Test(groups = TestCategories.UTILITIES)
-  public void consoleLoggerGetMessageType() {
-    ConsoleLogger console = new ConsoleLogger();
-    Assert.assertEquals(console.getMessageType(), MessageType.INFORMATION);
-  }
 }
