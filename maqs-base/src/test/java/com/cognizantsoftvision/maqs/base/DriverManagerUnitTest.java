@@ -14,6 +14,12 @@ import org.testng.annotations.Test;
 public class DriverManagerUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
+  public void testGetTestObject() {
+    DriverManager<String> driverManager = getDriverManager();
+    Assert.assertNotNull(driverManager.getTestObject());
+  }
+
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetBaseDriver() {
     DriverManager<String> driverManager = getDriverManager();
     driverManager.setBaseDriver("Fake String");

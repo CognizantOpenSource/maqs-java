@@ -12,6 +12,7 @@ import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggerFactory;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
@@ -34,7 +35,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 /**
- * Base test class.
+ * The Base test class.
  */
 public abstract class BaseTest {
 
@@ -321,21 +322,24 @@ public abstract class BaseTest {
    *
    * @return Logger
    */
-  protected Logger createLogger() {
-    Logger log;
-
+  protected ILogger createLogger() {
     this.loggingEnabledSetting = LoggingConfig.getLoggingEnabledSetting();
     this.setLoggedExceptions(new ArrayList<>());
 
-    if (this.loggingEnabledSetting != LoggingEnabled.NO) {
-      log = LoggingConfig.getLogger(StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
-          DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
-              .format(LocalDateTime.now(Clock.systemUTC()))));
-    } else {
-      log = new ConsoleLogger();
+    try {
+      if (this.loggingEnabledSetting != LoggingEnabled.NO) {
+        return LoggerFactory.getLogger(
+            StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
+                DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT,
+                    Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()))));
+      } else {
+        return LoggerFactory.getConsoleLogger();
+      }
+    } catch (Exception e) {
+      ILogger newLogger = LoggerFactory.getConsoleLogger();
+      newLogger.logMessage(MessageType.WARNING, "");
+      return newLogger;
     }
-
-    return log;
   }
 
   /**
@@ -398,7 +402,7 @@ public abstract class BaseTest {
    * Create a Base test object.
    */
   protected void createNewTestObject() {
-    Logger newLogger = this.createLogger();
+    ILogger newLogger = this.createLogger();
     this.setTestObject(new BaseTestObject(newLogger, this.fullyQualifiedTestClassName.get()));
   }
 }

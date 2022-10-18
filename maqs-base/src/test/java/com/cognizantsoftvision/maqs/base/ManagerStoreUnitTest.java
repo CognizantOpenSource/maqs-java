@@ -37,7 +37,6 @@ public class ManagerStoreUnitTest extends BaseGenericTest {
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
 
   /**

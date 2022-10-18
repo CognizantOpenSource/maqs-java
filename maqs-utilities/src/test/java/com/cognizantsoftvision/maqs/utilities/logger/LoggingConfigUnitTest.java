@@ -7,8 +7,8 @@ package com.cognizantsoftvision.maqs.utilities.logger;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.MaqsLoggingConfigException;
 import com.cognizantsoftvision.maqs.utilities.logging.*;
-
 import java.io.File;
 import java.util.HashMap;
 import org.testng.Assert;
@@ -61,7 +61,7 @@ public class LoggingConfigUnitTest {
      * Test getting Logging Enabled Setting with an Illegal Argument Override Config
      * to 'INVALIDVALUE' - Expect IllegalArgumentException
      */
-    @Test(groups = TestCategories.UTILITIES, expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MaqsLoggingConfigException.class)
     public void getLoggingSettingIllegalArgumentTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "INVALIDVALUE");
@@ -169,7 +169,7 @@ public class LoggingConfigUnitTest {
      * Test getting Logging Level Setting with Illegal Argument. Override Config to
      * 'INVALIDVALUE' - Expect IllegalArgumentException
      */
-    @Test(groups = TestCategories.UTILITIES, expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = TestCategories.UTILITIES, expectedExceptions = MaqsLoggingConfigException.class)
     public void getLoggingLevelIllegalArgumentTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INVALIDVALUE");
@@ -211,7 +211,7 @@ public class LoggingConfigUnitTest {
      * Test getting File Logger. Override Config LogType to 'TXT' which creates
      * FileLogger.
      */
-    @Test(groups = TestCategories.UTILITIES, expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = TestCategories.UTILITIES, expectedExceptions = MaqsLoggingConfigException.class)
     public void getInvalidFileLoggerTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogType", "XML");
