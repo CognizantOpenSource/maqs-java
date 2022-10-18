@@ -7,7 +7,6 @@ package com.cognizantsoftvision.maqs.appium;
 import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,11 +20,11 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
    */
   @Test
   public void testGetMobileDriver() {
-    Supplier<AppiumDriver<WebElement>> supplier = AppiumDriverFactory::getDefaultMobileDriver;
+    Supplier<AppiumDriver> supplier = AppiumDriverFactory::getDefaultMobileDriver;
     AppiumTestObject appiumTestObject = new AppiumTestObject(supplier, this.getLogger(),
         this.getTestObject().getFullyQualifiedTestName());
 
-    try (MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier, appiumTestObject)) {
+    try (MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier.get(), appiumTestObject)) {
       Assert.assertNotNull(mobileDriverManager.getMobileDriver(), "Expected Mobile Driver to not be null.");
     }
   }
@@ -35,8 +34,8 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
    */
   @Test
   public void testClose() {
-    Supplier<AppiumDriver<WebElement>> supplier = AppiumDriverFactory::getDefaultMobileDriver;
-    MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier, this.getTestObject());
+    Supplier<AppiumDriver> supplier = AppiumDriverFactory::getDefaultMobileDriver;
+    MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier.get(), this.getTestObject());
 
     mobileDriverManager.close();
     Assert.assertNull(mobileDriverManager.getBaseDriver(), "Expected Mobile Driver to be null.");
@@ -58,8 +57,8 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
    */
   @Test
   public void testCloseNullBaseDriver() {
-    Supplier<AppiumDriver<WebElement>> supplier = AppiumDriverFactory::getDefaultMobileDriver;
-    MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier, this.getTestObject());
+    Supplier<AppiumDriver> supplier = AppiumDriverFactory::getDefaultMobileDriver;
+    MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier.get(), this.getTestObject());
 
     // Close once to make Base Driver null
     mobileDriverManager.close();

@@ -21,12 +21,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.cognizantsoftvision.maqs.base</groupId>
-            <artifactId>maqs-base</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.cognizantsoftvision.maqs.utilities</groupId>
             <artifactId>maqs-utilities</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cognizantsoftvision.maqs.base</groupId>
+            <artifactId>maqs-base</artifactId>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>

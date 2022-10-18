@@ -8,7 +8,6 @@ import com.cognizantsoftvision.maqs.base.BaseTestObject;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
-import org.openqa.selenium.WebElement;
 
 /**
  * The Appium Test Object class.
@@ -22,7 +21,7 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public AppiumTestObject(AppiumDriver<WebElement> appiumDriver, ILogger logger,
+  public AppiumTestObject(AppiumDriver appiumDriver, ILogger logger,
       String fullyQualifiedTestName) {
     this(() -> appiumDriver, logger, fullyQualifiedTestName);
   }
@@ -34,17 +33,17 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public AppiumTestObject(Supplier<AppiumDriver<WebElement>> appiumDriverSupplier, ILogger logger,
+  public AppiumTestObject(Supplier<AppiumDriver> appiumDriverSupplier, ILogger logger,
       String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),
-        new MobileDriverManager(appiumDriverSupplier, this));
+        new MobileDriverManager(appiumDriverSupplier.get(), this));
   }
 
   /**
    * {@inheritDoc}
    */
-  public AppiumDriver<WebElement> getAppiumDriver() {
+  public AppiumDriver getAppiumDriver() {
     return this.getAppiumManager().getMobileDriver();
   }
 
@@ -59,7 +58,7 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
   /**
    * {@inheritDoc}
    */
-  public void setAppiumDriver(AppiumDriver<WebElement> appiumDriver) {
+  public void setAppiumDriver(AppiumDriver appiumDriver) {
     this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),
         new MobileDriverManager((() -> appiumDriver), this));
   }
@@ -67,8 +66,8 @@ public class AppiumTestObject extends BaseTestObject implements IAppiumTestObjec
   /**
    * {@inheritDoc}
    */
-  public void setAppiumDriver(Supplier<AppiumDriver<WebElement>> appiumDriverSupplier) {
+  public void setAppiumDriver(Supplier<AppiumDriver> appiumDriverSupplier) {
     this.getManagerStore().put(MobileDriverManager.class.getCanonicalName(),
-        new MobileDriverManager(appiumDriverSupplier, this));
+        new MobileDriverManager(appiumDriverSupplier.get(), this));
   }
 }

@@ -10,19 +10,18 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
-import org.openqa.selenium.WebElement;
 
 /**
  * The Mobile Driver Manager class.
  */
-public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>> {
+public class MobileDriverManager extends DriverManager<AppiumDriver> {
   /**
    * Instantiates a new Mobile Driver Manager.
    *
    * @param getDriverFunction Function that specifies how to get the driver.
    * @param baseTestObject    The Base Test Object.
    */
-  public MobileDriverManager(Supplier<AppiumDriver<WebElement>> getDriverFunction, ITestObject baseTestObject) {
+  public MobileDriverManager(Supplier<AppiumDriver> getDriverFunction, ITestObject baseTestObject) {
     super(getDriverFunction, baseTestObject);
   }
 
@@ -32,7 +31,7 @@ public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>>
    * @param driver         Appium Driver
    * @param baseTestObject The Base Test Object.
    */
-  public MobileDriverManager(AppiumDriver<WebElement> driver, ITestObject baseTestObject) {
+  public MobileDriverManager(AppiumDriver driver, ITestObject baseTestObject) {
     super(() -> driver, baseTestObject);
     this.baseDriver = driver;
   }
@@ -42,7 +41,7 @@ public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>>
    *
    * @return The Appium Driver
    */
-  public AppiumDriver<WebElement> getMobileDriver() {
+  public AppiumDriver getMobileDriver() {
     return getBase();
   }
 
@@ -56,7 +55,7 @@ public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>>
     }
 
     try {
-      AppiumDriver<WebElement> driver = this.getMobileDriver();
+      AppiumDriver driver = this.getMobileDriver();
       driver.quit();
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR,
