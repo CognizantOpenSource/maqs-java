@@ -268,14 +268,11 @@
         <puppycheckstyle.plugin.version>9.2.1</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.7</jacoco.version>
         <testng.version>7.5</testng.version>
-        <selenium.version>4.4.0</selenium.version>
+        <selenium.version>4.5.0</selenium.version>
 
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
         <jdk.version>11</jdk.version>
-        <chromedriver.version>94.0.4606.41</chromedriver.version>
-        <geckodriver.version>0.28.0</geckodriver.version>
-        <edgedriver.version>5.16299</edgedriver.version>
         <slf4j.version>1.7.32</slf4j.version>
     </properties>
 

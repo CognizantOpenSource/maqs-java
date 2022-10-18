@@ -42,7 +42,7 @@
         <MobileHubUrl>http://ondemand.saucelabs.com:80/wd/hub</MobileHubUrl>
 
         <!-- Command time-out in milliseconds -->
-        <MobileCommandTimeout>122000</MobileCommandTimeout>
+        <MobileCommandTimeout>200000</MobileCommandTimeout>
 
         <!-- Wait time in milliseconds - AKA how long do you wait for rechecking something -->
         <MobileWaitTime>1000</MobileWaitTime>

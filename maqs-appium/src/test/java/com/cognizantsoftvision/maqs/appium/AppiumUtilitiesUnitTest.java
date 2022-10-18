@@ -17,13 +17,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
  * The Appium Utilities unit test class.
  */
-@Ignore
 public class AppiumUtilitiesUnitTest extends BaseGenericTest {
 
   /**
