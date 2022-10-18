@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.appium;
 
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import io.appium.java_client.AppiumDriver;
@@ -30,7 +31,7 @@ public class AppiumUtilities {
   /**
    * Default Date Time Format for appending to the files.
    */
-  private static final String DEFAULT_DATE_TIME_FORMAT = "uuuu-MM-dd-HH-mm-ss-SSSS";
+  private static final String DEFAULT_DATE_TIME_FORMAT = Logger.DEFAULT_DATE_TIME_FORMAT;
 
   /**
    * The Message format.

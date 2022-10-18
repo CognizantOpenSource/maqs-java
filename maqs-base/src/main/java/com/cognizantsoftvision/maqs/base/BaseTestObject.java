@@ -263,18 +263,6 @@ public class BaseTestObject implements ITestObject {
 
   /**
    * Dispose of the driver store.
-   *
-   * @param closing the closing
-   */
-  // In C#, but might not be necessary
-  public void close(final boolean closing) {
-    if (!closing) {
-      this.close();
-    }
-  }
-
-  /**
-   * Dispose of the driver store.
    */
   @Override
   public void close() {
