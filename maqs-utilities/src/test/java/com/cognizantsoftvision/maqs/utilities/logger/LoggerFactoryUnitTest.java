@@ -25,6 +25,8 @@ public class LoggerFactoryUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void testGetLogger() {
+    Assert.assertNotNull(LoggerFactory.getLogger("Test Name"));
+
     HashMap<String, String> newValueMap = new HashMap<>();
     newValueMap.put("Log", "NO");
     Config.addGeneralTestSettingValues(newValueMap, true);

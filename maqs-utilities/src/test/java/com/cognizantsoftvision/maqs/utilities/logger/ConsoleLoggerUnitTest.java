@@ -7,6 +7,7 @@ package com.cognizantsoftvision.maqs.utilities.logger;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -67,4 +68,16 @@ public class ConsoleLoggerUnitTest {
         ConsoleLogger console = new ConsoleLogger();
         console.write(MessageType.GENERIC, "TestString %s", "args1");
     }
+
+  @Test(groups = TestCategories.UTILITIES)
+  public void consoleLoggerGetLoggingLevel() {
+    ConsoleLogger console = new ConsoleLogger();
+    Assert.assertEquals(console.getLoggingLevel(), MessageType.INFORMATION);
+  }
+
+  @Test(groups = TestCategories.UTILITIES)
+  public void consoleLoggerGetMessageType() {
+    ConsoleLogger console = new ConsoleLogger();
+    Assert.assertEquals(console.getMessageType(), MessageType.INFORMATION);
+  }
 }
