@@ -16,7 +16,6 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testClear() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     newHash.put("2", new BaseTestObject(this.getTestObject()));
@@ -28,7 +27,6 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testRemoveWithKey() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
@@ -42,7 +40,6 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testRemoveWithKeyAndValue() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
@@ -56,7 +53,6 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testReplace() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
@@ -74,7 +70,6 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testReplaceWithNewAndOld() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
@@ -94,15 +89,14 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
-    BaseTestObject temp2 = new BaseTestObject(this.getTestObject());
     newHash.put("2", temp);
+    Assert.assertTrue(newHash.containsKey("1"));
+    Assert.assertTrue(newHash.containsKey("2"));
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#beforeLoggingTeardown(org.testng.
-   * ITestResult)
+  /**
+   * Adds logs before tearing the test run down.
+   * @param resultType The test result
    */
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {

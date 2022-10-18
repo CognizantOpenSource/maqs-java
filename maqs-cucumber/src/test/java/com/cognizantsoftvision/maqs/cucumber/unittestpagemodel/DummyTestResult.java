@@ -27,7 +27,7 @@ public class DummyTestResult implements ITestResult {
     /**
      * The test context
      */
-    private ITestContext testContext;
+    private final ITestContext testContext;
 
     /**
      * Initializes a new instance of the DummyTestResult class

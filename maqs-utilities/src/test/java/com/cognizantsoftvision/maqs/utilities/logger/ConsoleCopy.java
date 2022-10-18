@@ -2,7 +2,7 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.logger;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;

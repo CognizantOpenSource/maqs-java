@@ -8,15 +8,13 @@ import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.*;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.util.ArrayList;
-import java.util.EnumSet;
-
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
- * Unit test class for BaseTest class.
+ * The Base Test unit test class.
  */
 public class BaseTestUnitTest extends BaseTest {
 
@@ -47,6 +45,7 @@ public class BaseTestUnitTest extends BaseTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void logVerboseTest() {
     this.logVerbose("This is a test to log verbose.");
+    this.logVerbose("This is another test to log verbose");
   }
 
   /**
@@ -76,18 +75,19 @@ public class BaseTestUnitTest extends BaseTest {
    * Validate the Logging Enabled Setting is YES (set in Config).
    */
   @Test(groups = TestCategories.FRAMEWORK)
-  public void getLoggingEnabledSettingTest() {
-    Assert.assertEquals(this.getLoggingEnabledSetting(), LoggingConfig.getLoggingEnabledSetting());
+  public void loggingEnabledSettingTest() {
+    Assert.assertEquals(this.getLoggingEnabled(), LoggingConfig.getLoggingEnabledSetting());
   }
 
   /**
-   * Validate the Logging Enabled Setting is YES (set in Config).
+   * Validate the Logging Enabled Settings.
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void setLoggingEnabledSettingTest() {
-    this.setLoggingEnabled(LoggingEnabled.NO);
-    Assert.assertEquals(this.getLoggingEnabledSetting(), LoggingEnabled.NO);
-
+    this.setLoggingEnabled(LoggingEnabled.ONFAIL);
+    Assert.assertEquals(this.getLoggingEnabled(), LoggingEnabled.ONFAIL);
+    this.setLoggingEnabled(LoggingEnabled.YES);
+    Assert.assertEquals(this.getLoggingEnabled(), LoggingEnabled.YES);
   }
 
   /**
@@ -136,6 +136,12 @@ public class BaseTestUnitTest extends BaseTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetManagerStore() {
     Assert.assertNotNull(this.getManagerStore());
+  }
+
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testCleanUpLogs() {
+    this.setLogger(new FileLogger());
+    this.setLoggingEnabled(LoggingEnabled.ONFAIL);
   }
 
   /*

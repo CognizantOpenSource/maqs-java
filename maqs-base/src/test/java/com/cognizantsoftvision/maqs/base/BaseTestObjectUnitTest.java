@@ -9,7 +9,7 @@ import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -54,14 +54,45 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   }
 
   /**
+   * Test set values.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testSetValues() {
+    ITestObject testObject = this.getTestObject();
+    final String key = "SetKey";
+    final String value = "SetKey Value";
+    ConcurrentHashMap <String, String> hashMap = new ConcurrentHashMap<>();
+    hashMap.put(key, value);
+    testObject.setValues(hashMap);
+    Assert.assertTrue(testObject.getValues().containsKey(key), "Checking that key exists in test object dictionary");
+    Assert.assertEquals(testObject.getValues().get(key), value, "Checking that value set correctly");
+  }
+
+  /**
    * Test set object.
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testSetObject() {
-    ITestObject testObject = this.getTestObject();
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
     final String key = "SetObject";
     final Object object = new Object();
     testObject.setObject(key, object);
+    Assert.assertTrue(testObject.getObjects().containsKey(key), "Checking that key exists in test object dictionary");
+    Assert.assertEquals(testObject.getObjects().get(key), object, "Checking that value set correctly");
+  }
+
+  /**
+   * Test set objects.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testSetObjects() {
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
+    final String key = "SetObject";
+    final Object object = new Object();
+    ConcurrentHashMap<String, Object> hashMap = new ConcurrentHashMap<>();
+    hashMap.put(key, object);
+
+    testObject.setObjects(hashMap);
     Assert.assertTrue(testObject.getObjects().containsKey(key), "Checking that key exists in test object dictionary");
     Assert.assertEquals(testObject.getObjects().get(key), object, "Checking that value set correctly");
   }
@@ -145,7 +176,18 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
     testObject.addDriverManager("new Driver", driverManager);
     Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
+  }
 
+  /**
+   * Test overriding the driver manager.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testOverrideDriverManager() {
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
+    DriverManager<String> driverManager = getDriverManager(testObject, null);
+    driverManager.baseDriver = "Test String";
+    testObject.overrideDriverManager("Test", driverManager);
+    testObject.overrideDriverManager("Test", driverManager);
   }
 
   /**
@@ -158,7 +200,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     final DriverManager<String> driverManager = getDriverManager(testObject, supplier);
     final DriverManager<String> driverManager2 = getDriverManager(testObject, supplier);
     Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
-    testObject.addDriverManager(driverManager, true);
+    testObject.addDriverManager(driverManager);
     Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
     testObject.addDriverManager(driverManager2, true);
     Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
@@ -206,7 +248,6 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     testObject.close();
     Assert.assertNull(testObject.getManagerStore(), "Checking that manager store has been closed");
     Assert.assertEquals(testObject.getValues().size(), 0, "Checking if values in manager store are closed");
-
   }
 
   /**
@@ -222,10 +263,21 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
       e.printStackTrace();
     }
 
-    Assert.assertTrue(Objects.requireNonNull(temp).exists());
+    Assert.assertNotNull(temp);
+    Assert.assertTrue(temp.exists());
+
     Assert.assertTrue(testObject.addAssociatedFile(temp.getAbsolutePath()), "Checking that associated file was added");
     Assert.assertEquals((testObject.getArrayOfAssociatedFiles()).length, 1,
         "Checking that one file was added to array.");
+  }
+
+  /**
+   * Test try adding invalid associated file.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testAddInvalidAssociatedFile() {
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
+    Assert.assertFalse(testObject.addAssociatedFile(""), "Checking that associated file was added");
   }
 
   /**
@@ -241,11 +293,33 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
       e.printStackTrace();
     }
 
-    Assert.assertTrue(Objects.requireNonNull(temp).exists());
-    final String path = temp.getAbsolutePath();
+    Assert.assertNotNull(temp);
+    Assert.assertTrue(temp.exists());
 
     Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
     Assert.assertTrue(testObject.removeAssociatedFile(path), "Checking that associated file was removed");
+  }
+
+  /**
+   * Test getting the associated files.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testGetAssociatedFiles() {
+    BaseTestObject testObject = (BaseTestObject) this.getTestObject();
+    File temp = null;
+    try {
+      temp = File.createTempFile("tempfile", ".tmp");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    Assert.assertNotNull(temp);
+    Assert.assertTrue(temp.exists());
+
+    final String path = temp.getAbsolutePath();
+    Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
+    Assert.assertNotNull(testObject.getAssociatedFiles(), "Checking that array is instantiated");
+    Assert.assertEquals(testObject.getAssociatedFiles().size(), 1, "Checking that array is not empty");
   }
 
   /**
@@ -261,7 +335,9 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
       e.printStackTrace();
     }
 
-    Assert.assertTrue(Objects.requireNonNull(temp).exists());
+    Assert.assertNotNull(temp);
+    Assert.assertTrue(temp.exists());
+
     final String path = temp.getAbsolutePath();
     Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
     Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");
@@ -281,26 +357,14 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
       e.printStackTrace();
     }
 
-    Assert.assertTrue(Objects.requireNonNull(temp).exists());
+    Assert.assertNotNull(temp);
+    Assert.assertTrue(temp.exists());
+
     final String path = temp.getAbsolutePath();
     Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
     Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");
     Assert.assertTrue(testObject.containsAssociatedFile(path), "Checking if array contains file");
   }
-
-  // Test Setup Objects
-  /*
-   * private Logger getLogger() { return new Logger() {
-   * 
-   * @Override public void logMessage(MessageType messageType, String message,
-   * Object... args) {
-   * 
-   * }
-   * 
-   * @Override public void logMessage(String message, Object... args) {
-   * 
-   * } }; }
-   */
 
   private DriverManager<String> getDriverManager(ITestObject testObject, Supplier<String> supplier) {
     return new DriverManager<>(supplier, testObject) {

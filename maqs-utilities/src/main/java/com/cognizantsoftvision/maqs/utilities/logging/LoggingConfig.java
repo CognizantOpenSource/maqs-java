@@ -6,6 +6,7 @@ package com.cognizantsoftvision.maqs.utilities.logging;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.MaqsLoggingConfigException;
 import java.io.File;
 
 /**
@@ -35,7 +36,7 @@ public class LoggingConfig {
       case "NO":
         return LoggingEnabled.NO;
       default:
-        throw new IllegalArgumentException(
+        throw new MaqsLoggingConfigException(
             StringProcessor.safeFormatter("Log value %s is not a valid option", Config.getGeneralValue("Log", "NO")));
     }
   }
@@ -51,6 +52,8 @@ public class LoggingConfig {
         return MessageType.VERBOSE;         // Includes this and all of those below
       case "INFORMATION":
         return MessageType.INFORMATION;     // Includes this and all of those below
+      case "ACTION":
+        return MessageType.ACTION;        // Includes this and all of those below
       case "GENERIC":
         return MessageType.GENERIC;         // Includes this and all of those below
       case "SUCCESS":
@@ -62,7 +65,7 @@ public class LoggingConfig {
       case "SUSPENDED":
         return MessageType.SUSPENDED;       // All logging is suspended
       default:
-        throw new IllegalArgumentException(StringProcessor
+        throw new MaqsLoggingConfigException(StringProcessor
             .safeFormatter("Logging level value '{0}' is not a valid option", Config.getGeneralValue("LogLevel")));
     }
   }
@@ -87,8 +90,10 @@ public class LoggingConfig {
         return new ConsoleLogger(loggingLevel);
       case TXT:
         return new FileLogger(false, logDirectory, fileName, loggingLevel);
+      case "HTML":
+        return new HtmlFileLogger(logDirectory, fileName, loggingLevel);
       default:
-        throw new IllegalArgumentException(StringProcessor
+        throw new MaqsLoggingConfigException(StringProcessor
             .safeFormatter("Log type %s is not a valid option", Config.getGeneralValue("LogType", CONSOLE)));
     }
   }

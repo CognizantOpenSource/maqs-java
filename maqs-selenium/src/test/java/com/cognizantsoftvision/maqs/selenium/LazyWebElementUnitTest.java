@@ -678,6 +678,9 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementFindElement() throws TimeoutException, InterruptedException {
 		WebElement firstElement = this.getFlowerTableLazyElement().findRawElement(By.cssSelector(THREAD));
 		assertEquals(firstElement.getText(), "Flowers");
+
+		LazyWebElement lazyWebElement = this.getFlowerTableLazyElement().findElement(By.cssSelector(THREAD));
+		assertEquals(lazyWebElement.getText(), "Flowers");
 	}
 
 	/**
@@ -718,7 +721,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	/**
 	 * Find elements respects action waits
 	 */
-	@Test(groups = TestCategories.SELENIUM, expectedExceptions = { TimeoutException.class })
+	@Test(groups = TestCategories.SELENIUM, expectedExceptions = TimeoutException.class)
 	public void lazyElementFindElementsRespectAction()
 			throws InterruptedException, TimeoutException, ExecutionFailedException {
 		LazyWebElement firstElement = this.getDivRoot().findElements(this.getDisabledItem().getBy()).get(0);
