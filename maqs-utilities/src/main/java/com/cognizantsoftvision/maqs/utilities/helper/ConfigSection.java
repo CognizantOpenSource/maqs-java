@@ -41,6 +41,11 @@ public enum ConfigSection {
   GLOBAL_MAQS("GlobalMaqs"),
 
   /**
+   * The default mongoDB maqs section.
+   */
+  MONGO_MAQS("MongoMaqs"),
+
+  /**
    * The default playwright maqs section.
    */
   PLAYWRIGHT_MAQS("PlaywrightMaqs"),

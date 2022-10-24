@@ -61,4 +61,9 @@ public class TestCategories {
    * String for web service unit test category.
    */
   public static final String WEB_SERVICE = "Web Service Unit Tests";
+
+  /**
+   * String for MongoDB unit test category.
+   */
+  public static final String MONGO = "MongoDB Unit Tests";
 }
