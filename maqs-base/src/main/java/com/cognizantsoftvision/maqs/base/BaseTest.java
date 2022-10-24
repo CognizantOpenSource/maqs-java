@@ -10,7 +10,15 @@ import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.base.interfaces.TestResult;
 import com.cognizantsoftvision.maqs.base.watcher.JunitTestWatcher;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.*;
+import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggerFactory;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
@@ -24,10 +32,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -406,7 +414,9 @@ public abstract class BaseTest {
       if (this.loggingEnabledSetting != LoggingEnabled.NO) {
         return LoggerFactory.getLogger(
             StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
-                DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT, Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()))));
+                DateTimeFormatter.ofPattern(
+                    Logger.DEFAULT_DATE_TIME_FORMAT,
+                    Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()))));
       } else {
         return LoggerFactory.getConsoleLogger();
       }
