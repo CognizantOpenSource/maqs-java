@@ -10,14 +10,7 @@ import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
 import com.cognizantsoftvision.maqs.base.interfaces.TestResult;
 import com.cognizantsoftvision.maqs.base.watcher.JunitTestWatcher;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggerFactory;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.*;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
@@ -421,24 +414,6 @@ public abstract class BaseTest {
       ILogger newLogger = LoggerFactory.getConsoleLogger();
       newLogger.logMessage(MessageType.WARNING, "");
       return newLogger;
-    }
-  }
-
-  /**
-   * Get the type of test result.
-   *
-   * @return The type of test result
-   */
-  protected TestResultType getResultType() {
-    switch (this.testResult.getStatus()) {
-      case ITestResult.SUCCESS:
-        return TestResultType.PASS;
-      case ITestResult.FAILURE:
-        return TestResultType.FAIL;
-      case ITestResult.SKIP:
-        return TestResultType.SKIP;
-      default:
-        return TestResultType.OTHER;
     }
   }
 
