@@ -5,7 +5,6 @@
 package com.cognizantsoftvision.maqs.webservices.WebServiceDriverRequestUnitTest;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import com.cognizantsoftvision.maqs.webservices.BaseWebServiceTest;
 import com.cognizantsoftvision.maqs.webservices.HttpClientFactory;
 import com.cognizantsoftvision.maqs.webservices.MediaType;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
