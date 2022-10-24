@@ -14,15 +14,13 @@ import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.stream.Collectors;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * THe Accessibility Unit test class.
+ * The Accessibility Unit test class.
  */
 public class AccessibilityUnitTest extends BaseSeleniumTest {
 

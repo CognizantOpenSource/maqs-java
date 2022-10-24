@@ -12,10 +12,10 @@ import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggerFactory;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
-import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
@@ -28,13 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 /**
- * Base test class.
+ * The Base test class.
  */
 public abstract class BaseTest {
 
@@ -122,7 +123,7 @@ public abstract class BaseTest {
    *
    * @return Logging Enabled setting
    */
-  public LoggingEnabled getLoggingEnabledSetting() {
+  public LoggingEnabled getLoggingEnabled() {
     return this.loggingEnabledSetting;
   }
 
@@ -258,6 +259,10 @@ public abstract class BaseTest {
     if (testResult.getStatus() == ITestResult.SUCCESS) {
       this.tryToLog(MessageType.SUCCESS, "Test Passed");
     } else if (testResult.getStatus() == ITestResult.FAILURE) {
+      if (this.getLoggingEnabled() == LoggingEnabled.YES && this.getLogger() instanceof FileLogger) {
+        String stackTrace = ExceptionUtils.getStackTrace(testResult.getThrowable());
+        this.tryToLog(MessageType.ERROR, stackTrace, "");
+      }
       this.tryToLog(MessageType.ERROR, "Test Failed");
     } else if (testResult.getStatus() == ITestResult.SKIP) {
       this.tryToLog(MessageType.INFORMATION, "Test was skipped");
@@ -317,56 +322,23 @@ public abstract class BaseTest {
    *
    * @return Logger
    */
-  protected Logger createLogger() {
-    Logger log;
-
+  protected ILogger createLogger() {
     this.loggingEnabledSetting = LoggingConfig.getLoggingEnabledSetting();
     this.setLoggedExceptions(new ArrayList<>());
 
-    if (this.loggingEnabledSetting != LoggingEnabled.NO) {
-      log = LoggingConfig.getLogger(StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
-          DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
-              .format(LocalDateTime.now(Clock.systemUTC()))));
-    } else {
-      log = new ConsoleLogger();
-    }
-
-    return log;
-  }
-
-  /**
-   * Get the type of test result.
-   *
-   * @return The type of test result
-   */
-  protected TestResultType getResultType() {
-    switch (this.testResult.getStatus()) {
-      case ITestResult.SUCCESS:
-        return TestResultType.PASS;
-      case ITestResult.FAILURE:
-        return TestResultType.FAIL;
-      case ITestResult.SKIP:
-        return TestResultType.SKIP;
-      default:
-        return TestResultType.OTHER;
-    }
-  }
-
-  /**
-   * Get the test result type as text.
-   *
-   * @return The test result type as text
-   */
-  protected String getResultText() {
-    switch (this.testResult.getStatus()) {
-      case ITestResult.SUCCESS:
-        return "SUCCESS";
-      case ITestResult.FAILURE:
-        return "FAILURE";
-      case ITestResult.SKIP:
-        return "SKIP";
-      default:
-        return "OTHER";
+    try {
+      if (this.loggingEnabledSetting != LoggingEnabled.NO) {
+        return LoggerFactory.getLogger(
+            StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
+                DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT,
+                    Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()))));
+      } else {
+        return LoggerFactory.getConsoleLogger();
+      }
+    } catch (Exception e) {
+      ILogger newLogger = LoggerFactory.getConsoleLogger();
+      newLogger.logMessage(MessageType.WARNING, "");
+      return newLogger;
     }
   }
 
@@ -430,7 +402,7 @@ public abstract class BaseTest {
    * Create a Base test object.
    */
   protected void createNewTestObject() {
-    Logger newLogger = this.createLogger();
+    ILogger newLogger = this.createLogger();
     this.setTestObject(new BaseTestObject(newLogger, this.fullyQualifiedTestClassName.get()));
   }
 }

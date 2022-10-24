@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 public class PlaywrightDriverManagerUnitTest extends BaseGenericTest {
 
   /**
-   * Make we can update the store with a new manager using a Page.
+   * Make sure we can update the store with a new manager using a Page.
    */
   @Test(groups = TestCategories.PLAYWRIGHT)
   public void respectsNewPageViaManager() {

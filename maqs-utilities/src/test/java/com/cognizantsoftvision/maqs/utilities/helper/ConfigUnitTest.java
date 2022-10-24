@@ -2,11 +2,8 @@
  * Copyright 2022 (C) Cognizant SoftVision, All rights Reserved
  */
 
-package com.cognizantsoftvision.maqs.utilities;
+package com.cognizantsoftvision.maqs.utilities.helper;
 
-import com.cognizantsoftvision.maqs.utilities.helper.Config;
-import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
-import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;

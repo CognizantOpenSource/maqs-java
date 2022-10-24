@@ -9,6 +9,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import io.appium.java_client.AppiumDriver;
 import java.io.File;
 import java.nio.file.Paths;
@@ -30,7 +31,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Placeholder for the timestamp as a string value.
    */
-  private final String TIMESTAMP = "uuuu-MM-dd-HH-mm-ss-SSSS";
+  private final String TIMESTAMP = Logger.DEFAULT_DATE_TIME_FORMAT;
 
   /**
    * Test capture screenshot no append.

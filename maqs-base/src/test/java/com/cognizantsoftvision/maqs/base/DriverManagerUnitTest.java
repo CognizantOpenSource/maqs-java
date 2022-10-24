@@ -8,10 +8,19 @@ import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * The Driver Manager unit test class.
+ */
 public class DriverManagerUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
-  public void testGetBaseDriver() throws Exception {
+  public void testGetTestObject() {
+    DriverManager<String> driverManager = getDriverManager();
+    Assert.assertNotNull(driverManager.getTestObject());
+  }
+
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testGetBaseDriver() {
     DriverManager<String> driverManager = getDriverManager();
     driverManager.setBaseDriver("Fake String");
     Assert.assertNotNull(driverManager.getBaseDriver());
@@ -51,9 +60,8 @@ public class DriverManagerUnitTest extends BaseGenericTest {
   }
 
   private DriverManager<String> getDriverManager() {
-    return new DriverManager<String>(() -> "Fake String here", getTestObject()) {
-      @Override
-      public void close() throws Exception {
+    return new DriverManager<>(() -> "Fake String here", getTestObject()) {
+      @Override public void close() {
         this.close();
       }
     };
