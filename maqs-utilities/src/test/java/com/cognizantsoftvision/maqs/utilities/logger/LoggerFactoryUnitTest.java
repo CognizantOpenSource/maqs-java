@@ -8,7 +8,6 @@ import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.MaqsLoggingConfigException;
 import com.cognizantsoftvision.maqs.utilities.logging.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +17,7 @@ import org.testng.annotations.Test;
 /**
  * The Logger Factory unit test class.
  */
+@Test(singleThreaded = true)
 public class LoggerFactoryUnitTest {
 
   /**
@@ -29,6 +29,7 @@ public class LoggerFactoryUnitTest {
 
     HashMap<String, String> newValueMap = new HashMap<>();
     newValueMap.put("Log", "NO");
+    newValueMap.put("LogType","TXT");
     Config.addGeneralTestSettingValues(newValueMap, true);
     Assert.assertNotNull(LoggerFactory.getLogger("Test Name"));
   }
