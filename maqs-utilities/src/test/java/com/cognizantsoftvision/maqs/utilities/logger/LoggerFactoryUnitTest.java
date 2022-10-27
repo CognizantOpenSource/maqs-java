@@ -7,8 +7,12 @@ package com.cognizantsoftvision.maqs.utilities.logger;
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.MaqsLoggingConfigException;
-import com.cognizantsoftvision.maqs.utilities.logging.*;
-
+import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
+import com.cognizantsoftvision.maqs.utilities.logging.LoggerFactory;
+import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +33,7 @@ public class LoggerFactoryUnitTest {
 
     HashMap<String, String> newValueMap = new HashMap<>();
     newValueMap.put("Log", "NO");
+    newValueMap.put("LogType", "TXT");
     Config.addGeneralTestSettingValues(newValueMap, true);
     Assert.assertNotNull(LoggerFactory.getLogger("Test Name"));
   }
