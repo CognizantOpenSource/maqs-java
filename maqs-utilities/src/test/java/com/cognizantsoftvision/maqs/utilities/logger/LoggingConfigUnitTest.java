@@ -10,6 +10,7 @@ import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.utilities.helper.exceptions.MaqsLoggingConfigException;
 import com.cognizantsoftvision.maqs.utilities.logging.*;
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -219,6 +220,7 @@ public class LoggingConfigUnitTest {
         Config.addGeneralTestSettingValues(newValueMap, true);
         String fileName = "TestLog.txt";
         LoggingConfig.getLogger(fileName);
+        Config.addGeneralTestSettingValues(Collections.singletonMap("LogType","TXT"), true);
     }
 
     /**
