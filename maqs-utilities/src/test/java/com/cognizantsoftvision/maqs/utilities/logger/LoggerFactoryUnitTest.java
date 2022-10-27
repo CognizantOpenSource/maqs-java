@@ -22,6 +22,7 @@ import org.testng.annotations.Test;
 /**
  * The Logger Factory unit test class.
  */
+@Test(singleThreaded = true)
 public class LoggerFactoryUnitTest {
 
   /**

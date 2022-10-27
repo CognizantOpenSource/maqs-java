@@ -12,7 +12,6 @@ import com.cognizantsoftvision.maqs.utilities.logging.*;
 import java.io.File;
 import java.util.HashMap;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -212,9 +211,8 @@ public class LoggingConfigUnitTest {
      * Test getting File Logger. Override Config LogType to 'TXT' which creates
      * FileLogger.
      */
-    @Ignore
     @Test(groups = TestCategories.UTILITIES, expectedExceptions = MaqsLoggingConfigException.class)
-    public void getInvalidFileLoggerTest() {
+    public void getFileLoggerInvalidLogTypeTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogType", "XML");
         newValueMap.put("Log", "YES");
