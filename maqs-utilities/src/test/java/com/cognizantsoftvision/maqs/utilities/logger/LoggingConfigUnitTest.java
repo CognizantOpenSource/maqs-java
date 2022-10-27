@@ -16,6 +16,7 @@ import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -225,6 +226,7 @@ public class LoggingConfigUnitTest {
         Config.addGeneralTestSettingValues(newValueMap, true);
         String fileName = "TestLog.txt";
         LoggingConfig.getLogger(fileName);
+        Config.addGeneralTestSettingValues(Collections.singletonMap("LogType", "TXT"), true);
     }
 
     /**
