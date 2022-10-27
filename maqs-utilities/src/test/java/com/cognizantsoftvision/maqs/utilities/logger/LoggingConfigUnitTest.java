@@ -212,7 +212,7 @@ public class LoggingConfigUnitTest {
      * FileLogger.
      */
     @Test(groups = TestCategories.UTILITIES, expectedExceptions = MaqsLoggingConfigException.class)
-    public void getInvalidFileLoggerTest() {
+    public void getFileLoggerInvalidLogTypeTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogType", "XML");
         newValueMap.put("Log", "YES");
