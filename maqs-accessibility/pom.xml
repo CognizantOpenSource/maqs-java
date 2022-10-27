@@ -17,7 +17,7 @@
 
     <properties>
         <deque.axe.version>4.4.1</deque.axe.version>
-        <apache.commons.version>1.9</apache.commons.version>
+        <apache.commons.version>1.10.0</apache.commons.version>
         <jsoup.version>1.15.3</jsoup.version>
     </properties>
 
