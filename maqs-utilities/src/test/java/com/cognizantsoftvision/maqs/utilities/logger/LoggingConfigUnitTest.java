@@ -62,7 +62,7 @@ public class LoggingConfigUnitTest {
      * to 'INVALIDVALUE' - Expect IllegalArgumentException
      */
     @Test(expectedExceptions = MaqsLoggingConfigException.class)
-    public void getLoggingSettingIllegalArgumentTest() {
+    public void getCreateLogInvalidArgumentTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "INVALIDVALUE");
         Config.addGeneralTestSettingValues(newValueMap, true);
@@ -170,7 +170,7 @@ public class LoggingConfigUnitTest {
      * 'INVALIDVALUE' - Expect IllegalArgumentException
      */
     @Test(groups = TestCategories.UTILITIES, expectedExceptions = MaqsLoggingConfigException.class)
-    public void getLoggingLevelIllegalArgumentTest() {
+    public void getLoggingLevelInvalidArgumentTest() {
         HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INVALIDVALUE");
         Config.addGeneralTestSettingValues(newValueMap, true);

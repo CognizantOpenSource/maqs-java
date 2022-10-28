@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 /**
  * The Base Test unit test class.
  */
-@Test(groups = TestCategories.FRAMEWORK)
+@Test(singleThreaded = true)
 public class BaseTestUnitTest extends BaseTest {
 
   /**
@@ -25,7 +25,6 @@ public class BaseTestUnitTest extends BaseTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void fullyQualifiedTestNameTest() {
     String testName = this.getFullyQualifiedTestClassName();
-
     Assert.assertEquals(testName,
         "com.cognizantsoftvision.maqs.base.BaseTestUnitTest.fullyQualifiedTestNameTest");
   }
@@ -78,7 +77,7 @@ public class BaseTestUnitTest extends BaseTest {
    * Validate the Logging Enabled Setting is YES (set in Config).
    */
   @Test(groups = TestCategories.FRAMEWORK)
-  public void loggingEnabledSettingTest() {
+  public void getLoggingEnabledSettingTest() {
     Assert.assertEquals(this.getLoggingEnabled(), LoggingConfig.getLoggingEnabledSetting());
   }
 
@@ -157,5 +156,4 @@ public class BaseTestUnitTest extends BaseTest {
   protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
-
 }
