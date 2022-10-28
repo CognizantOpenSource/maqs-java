@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 /**
  * The Base Test unit test class.
  */
+@Test(singleThreaded = true)
 public class BaseTestUnitTest extends BaseTest {
 
   /**
