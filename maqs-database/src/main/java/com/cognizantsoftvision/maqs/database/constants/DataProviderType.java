@@ -14,8 +14,8 @@ public enum DataProviderType {
    * Values of DataProviderEnum.  Calling values multiple times is poor performance so holding a local copy.
    */
   private static final DataProviderType[] dataProviderTypes = values();
-  private String name;
-  private String dialectString;
+  private final String name;
+  private final String dialectString;
 
   DataProviderType(String name, String dialectString) {
     this.name = name;

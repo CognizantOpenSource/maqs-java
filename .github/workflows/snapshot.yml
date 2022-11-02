@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Draft Release Notes
         id: release-drafter
-        uses: release-drafter/release-drafter@v5.18.1
+        uses: release-drafter/release-drafter@v5.21.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - id: bash_v
@@ -30,13 +30,13 @@ jobs:
       JDK: 11
       VERSION: ${{needs.update_release_draft.outputs.version}}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK ${{env.JDK}}
-        uses: actions/setup-java@v3.4.1
+        uses: actions/setup-java@v3.5.1
         with:
           java-version: ${{env.JDK}}
       - name: Maven Cache
-        uses: actions/cache@v3.0.5
+        uses: actions/cache@v3.0.9
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
@@ -85,13 +85,13 @@ jobs:
 #         #repo: [github, ossrh]
 #         repo: [ ossrh ]
 #     steps:
-#       - uses: actions/checkout@v2
+#       - uses: actions/checkout@v3
 #       - name: Set up JDK ${{env.JDK}}
-#         uses: actions/setup-java@v3.4.1
+#         uses: actions/setup-java@v3.5.1
 #         with:
 #             java-version: ${{env.JDK}}
 #       - name: Maven Cache
-#         uses: actions/cache@v3.0.5
+#         uses: actions/cache@v3.0.9
 #         with:
 #           path: ~/.m2
 #           key: ${{runner.os}}-m2

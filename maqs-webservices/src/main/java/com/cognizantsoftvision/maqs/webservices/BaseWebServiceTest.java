@@ -6,7 +6,7 @@ package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.base.BaseExtendableTest;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
+import com.cognizantsoftvision.maqs.utilities.logging.ILogger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
@@ -55,7 +55,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<IWebServiceTestObject
    */
   @Override
   protected void createNewTestObject() {
-    Logger logger = this.createLogger();
+    ILogger logger = this.createLogger();
     try {
 
       WebServiceTestObject webServiceTestObject = new WebServiceTestObject(

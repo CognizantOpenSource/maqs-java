@@ -5,11 +5,7 @@
 package com.cognizantsoftvision.maqs.base;
 
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
-import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
-import com.cognizantsoftvision.maqs.utilities.logging.Logger;
-import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
-import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.*;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.util.ArrayList;
 import org.testng.Assert;
@@ -18,17 +14,17 @@ import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
- * Unit test class for BaseTest class.
+ * The Base Test unit test class.
  */
-@Test(groups = TestCategories.FRAMEWORK)
+@Test(singleThreaded = true)
 public class BaseTestUnitTest extends BaseTest {
+
   /**
    * Verify fully qualified test name.
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void fullyQualifiedTestNameTest() {
     String testName = this.getFullyQualifiedTestClassName();
-
     Assert.assertEquals(testName,
         "com.cognizantsoftvision.maqs.base.BaseTestUnitTest.fullyQualifiedTestNameTest");
   }
@@ -51,6 +47,7 @@ public class BaseTestUnitTest extends BaseTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void logVerboseTest() {
     this.logVerbose("This is a test to log verbose.");
+    this.logVerbose("This is another test to log verbose");
   }
 
   /**
@@ -80,8 +77,19 @@ public class BaseTestUnitTest extends BaseTest {
    * Validate the Logging Enabled Setting is YES (set in Config).
    */
   @Test(groups = TestCategories.FRAMEWORK)
-  public void loggingEnabledSettingTest() {
-    Assert.assertEquals(this.getLoggingEnabledSetting(), LoggingConfig.getLoggingEnabledSetting());
+  public void getLoggingEnabledSettingTest() {
+    Assert.assertEquals(this.getLoggingEnabled(), LoggingConfig.getLoggingEnabledSetting());
+  }
+
+  /**
+   * Validate the Logging Enabled Settings.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void setLoggingEnabledSettingTest() {
+    this.setLoggingEnabled(LoggingEnabled.ONFAIL);
+    Assert.assertEquals(this.getLoggingEnabled(), LoggingEnabled.ONFAIL);
+    this.setLoggingEnabled(LoggingEnabled.YES);
+    Assert.assertEquals(this.getLoggingEnabled(), LoggingEnabled.YES);
   }
 
   /**
@@ -132,6 +140,12 @@ public class BaseTestUnitTest extends BaseTest {
     Assert.assertNotNull(this.getManagerStore());
   }
 
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testCleanUpLogs() {
+    this.setLogger(new FileLogger());
+    this.setLoggingEnabled(LoggingEnabled.ONFAIL);
+  }
+
   /*
    * (non-Javadoc)
    *
@@ -142,5 +156,4 @@ public class BaseTestUnitTest extends BaseTest {
   protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
-
 }

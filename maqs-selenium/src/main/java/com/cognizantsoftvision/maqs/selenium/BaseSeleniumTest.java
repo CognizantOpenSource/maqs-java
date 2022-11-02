@@ -52,7 +52,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<ISeleniumTestObject> {
     // Try to take a screenshot
     try {
       if (this.getWebDriver() != null && resultType.getStatus() != ITestResult.SUCCESS
-          && this.getLoggingEnabledSetting() != LoggingEnabled.NO) {
+          && this.getLoggingEnabled() != LoggingEnabled.NO) {
         SeleniumUtilities.captureScreenshot(getWebDriver(), getTestObject());
       }
     } catch (Exception e) {

@@ -527,7 +527,7 @@ public abstract class AbstractLazyElement {
         return this.getCachedElement();
       } catch (Exception e) {
         this.getTestObject().getLogger()
-            .logMessage(MessageType.VERBOSE, "Finding element again because: " + e.getMessage());
+            .logMessage(MessageType.VERBOSE, "Re-finding element again because: " + e.getMessage());
       }
     }
 

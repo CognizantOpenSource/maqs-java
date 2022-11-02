@@ -16,8 +16,8 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
 import com.cognizantsoftvision.maqs.utilities.logging.HtmlFileLogger;
+import com.cognizantsoftvision.maqs.utilities.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,11 +28,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * The type Selenium utilities test.
+ * The Selenium Utilities unit test class.
  */
 public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
-
-        private final String dateTimeFormatter = "uuuu-MM-dd-HH-mm-ss-SSSS";
 
         /**
          * Test capture screenshot no append.
@@ -88,6 +86,30 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                                         new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
                                                         .contains(testAppend),
                                         "Checking that appended value was added to file");
+                } finally {
+                        webDriver.quit();
+                }
+        }
+
+        /**
+         * Test capture screenshot append.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testCaptureScreenshotNullWebDriver() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
+                try {
+                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                            this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
+
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        final String testAppend = "testAppend";
+                        boolean isSuccess = SeleniumUtilities.captureScreenshot(null, testObject, testAppend);
+
+                        // Assert screenshot was successful
+                        Assert.assertFalse(isSuccess, "Expected Screenshot to be successful.");
                 } finally {
                         webDriver.quit();
                 }
@@ -163,8 +185,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
                         // Open Google and take a screenshot
                         webDriver.navigate().to("http://www.google.com");
-                        String dateTime = DateTimeFormatter.ofPattern(dateTimeFormatter, Locale.getDefault())
-                                        .format(LocalDateTime.now(Clock.systemUTC()));
+                        String dateTime = DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT,
+                                Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()));
                         String filePath = SeleniumUtilities.captureScreenshot(webDriver, testObject,
                                         fileLogger.getDirectory(),
                                         StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
@@ -240,6 +262,31 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
         }
 
         /**
+         * Test save page source append.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testSavePageSourceNullWebDriver() {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
+                try {
+                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                            this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
+
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        final String testAppend = "testAppend";
+                        boolean isSuccess = SeleniumUtilities.savePageSource(null, testObject, testAppend);
+
+                        // Assert screenshot was not successful
+                        Assert.assertFalse(isSuccess, "Expected Screenshot to be successful.");
+                } finally {
+                        webDriver.quit();
+                }
+        }
+
+
+        /**
          * Test save page source custom directory file name.
          */
         @Test(groups = TestCategories.SELENIUM)
@@ -253,8 +300,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
                         // Open Google and take a screenshot
                         webDriver.navigate().to("http://www.google.com");
-                        String dateTime = DateTimeFormatter.ofPattern(dateTimeFormatter, Locale.getDefault())
-                                        .format(LocalDateTime.now(Clock.systemUTC()));
+                        String dateTime = DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT,
+                                Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()));
                         String filePath = SeleniumUtilities.savePageSource(webDriver, testObject,
                                         fileLogger.getDirectory(),
                                         StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));

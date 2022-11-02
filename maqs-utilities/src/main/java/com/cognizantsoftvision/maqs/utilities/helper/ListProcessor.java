@@ -61,10 +61,10 @@ public class ListProcessor {
   public static boolean listOfStringsComparer(List<String> expectedList, List<String> actualList,
       StringBuilder results, boolean verifyOrder) {
     if (expectedList.size() != actualList.size()) {
-      results.append(StringProcessor
-          .safeFormatter("The following lists are not the same size: Expected %s [%s] %s and got %s [%s]",
-              Config.NEW_LINE, createCommaDelimitedString(expectedList, false), Config.NEW_LINE, Config.NEW_LINE,
-              createCommaDelimitedString(actualList, false)));
+      results.append(StringProcessor.safeFormatter(
+          "The following lists are not the same size: Expected %s [%s] %s and got %s [%s]",
+              System.lineSeparator(), createCommaDelimitedString(expectedList, false),
+              System.lineSeparator(), System.lineSeparator(), createCommaDelimitedString(actualList, false)));
     }
 
     // Clone the first ArrayList
@@ -76,16 +76,16 @@ public class ListProcessor {
       String actualValue = actualList.get(i);
       if (!verifyOrder) {
         if (!clonedList.contains(actualValue)) {
-          results.append(StringProcessor
-              .safeFormatter("[%s] was found in the ArrayList but was not expected%s", actualValue, Config.NEW_LINE));
+          results.append(StringProcessor.safeFormatter(
+              "[%s] was found in the ArrayList but was not expected%s", actualValue, System.lineSeparator()));
         } else {
           // Remove these values from the ArrayList to make sure
           // duplicates are handled correctly
           clonedList.remove(actualValue);
         }
       } else if (clonedList.get(i) == null || !clonedList.get(i).equals(actualValue)) {
-        results.append(StringProcessor
-            .safeFormatter("Expected [%s] but found [%s]%s", clonedList.get(i), actualValue, Config.NEW_LINE));
+        results.append(StringProcessor.safeFormatter(
+                "Expected [%s] but found [%s]%s", clonedList.get(i), actualValue, System.lineSeparator()));
       }
     }
 

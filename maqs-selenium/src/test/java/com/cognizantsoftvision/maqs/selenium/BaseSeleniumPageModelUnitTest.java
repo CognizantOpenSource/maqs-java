@@ -11,8 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
-
 /**
  * The Base Selenium Page Model unit test class.
  */
@@ -25,8 +23,6 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   public void testGetLogger() {
     AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
     Assert.assertNotNull(automationPageModel.getLogger());
-
-
   }
 
   /**
