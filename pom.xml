@@ -92,11 +92,11 @@
             <distributionManagement>
                 <repository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
+                    <url>https://maven.pkg.github.com/CognizantOpenSource/maqs-java</url>
                 </repository>
                 <snapshotRepository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
+                    <url>https://maven.pkg.github.com/CognizantOpenSource/maqs-java</url>
                     <uniqueVersion>true</uniqueVersion>
                 </snapshotRepository>
             </distributionManagement>
