@@ -246,7 +246,7 @@ jobs:
           path: ~/.m2
           key: ${{runner.os}}-m2
       - name: Deploy Release v${{ needs.getVersion.outputs.buildNumber }} to GitHub
-        run: mvn -Drevision=${{ needs.getVersion.outputs.buildNumber }}}} deploy -P github,deploy
+        run: mvn -Drevision=${{ needs.getVersion.outputs.buildNumber }} deploy -P github,deploy
       - name: Publish GitHub release v${{ needs.getVersion.outputs.buildNumber }}
         uses: actions/github-script@v4
         with:
