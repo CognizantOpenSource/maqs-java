@@ -230,7 +230,7 @@ jobs:
     name: Publish Packages
     runs-on: ubuntu-latest
     needs: [sonarcloud, checkstyle, getVersion]
-    environment: Github
+    environment: GitHub
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&  github.event_name != 'schedule'
     steps:
       - uses: actions/checkout@v3
