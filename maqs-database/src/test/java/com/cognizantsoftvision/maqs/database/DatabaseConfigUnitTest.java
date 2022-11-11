@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.database;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.database.constants.DataProviderType;
 import com.cognizantsoftvision.maqs.database.providers.IDataSourceProvider;
 import com.cognizantsoftvision.maqs.database.providers.SQLProvider;

@@ -4,9 +4,9 @@
 
 package com.cognizantsoftvision.maqs.webservices;
 
+import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.math.BigDecimal;
 import java.net.http.HttpResponse;
 import org.testng.Assert;

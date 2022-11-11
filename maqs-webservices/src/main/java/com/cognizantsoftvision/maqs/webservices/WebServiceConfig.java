@@ -6,6 +6,9 @@ package com.cognizantsoftvision.maqs.webservices;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigValidation;
+
+import java.util.Arrays;
 
 /**
  * The Web Service Configuration class.
@@ -13,6 +16,19 @@ import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
 public final class WebServiceConfig {
 
   private WebServiceConfig() {
+  }
+
+  static {
+    checkConfig();
+  }
+
+  /**
+   * Ensure required fields are in the config.
+   */
+  private static void checkConfig() {
+    var validator = new ConfigValidation();
+    validator.setRequiredOneOfFields(Arrays.asList("WebServiceTimeout", "WebServiceUri"));
+    Config.validate(ConfigSection.WEB_SERVICE_MAQS, validator);
   }
 
   /**

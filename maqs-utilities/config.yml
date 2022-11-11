@@ -1,0 +1,34 @@
+
+GlobalMaqs:
+  timeout: 500
+  waitTime: 100
+  log: true
+  level: "VERBOSE"
+  type: "TXT"
+  path: "./target/logs"
+
+SeleniumMaqs:
+  softAssertOnFailure: true
+  format: "jpeg"
+  OnFailure: true
+  browser: "HEADLESSCHROME"
+  waitTime: 1000
+  browser.timeout: 20000
+  browser.size: 1920x1080
+  remote: "Chrome"
+  remote.name: "Chrome"
+  remote.url: "http://ondemand.saucelabs.com:80/wd/hub"
+  remote.platform: "OS X 10.11"
+  website.url: "https://cognizantopensource.github.io/maqs-dotnet-templates/Static/Automation/"
+
+#maqs.selenium.remote.capabilities
+
+WebServiceMaqs:
+  url: http://localhost:8080/maqs/services/
+
+
+AppiumCapsMaqs:
+  url: http://localhost:4723/wd/hub
+
+DatabaseMaqs:
+  url: jdbc:mysql://localhost:3306/maqs

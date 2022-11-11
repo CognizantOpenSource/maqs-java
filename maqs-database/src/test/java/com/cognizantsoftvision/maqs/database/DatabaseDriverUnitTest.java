@@ -4,7 +4,6 @@
 
 package com.cognizantsoftvision.maqs.database;
 
-import com.cognizantsoftvision.maqs.base.BaseGenericTest;
 import com.cognizantsoftvision.maqs.database.entities.StatesEntity;
 import com.cognizantsoftvision.maqs.utilities.helper.TestCategories;
 import java.util.List;

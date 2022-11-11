@@ -6,7 +6,9 @@ package com.cognizantsoftvision.maqs.playwright;
 
 import com.cognizantsoftvision.maqs.utilities.helper.Config;
 import com.cognizantsoftvision.maqs.utilities.helper.ConfigSection;
+import com.cognizantsoftvision.maqs.utilities.helper.ConfigValidation;
 import java.awt.Dimension;
+import java.util.Collections;
 
 /**
  * The Playwright Config class.
@@ -17,6 +19,19 @@ public class PlaywrightConfig {
    * Private playwright constructor.
    */
   protected PlaywrightConfig() {
+  }
+
+  static {
+    checkConfig();
+  }
+
+  /**
+   * Ensure required fields are in the config.
+   */
+  private static void checkConfig() {
+    var validator = new ConfigValidation();
+    validator.setRequiredOneOfFields(Collections.singletonList("Timeout"));
+    Config.validate(ConfigSection.PLAYWRIGHT_MAQS, validator);
   }
 
   /**
