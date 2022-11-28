@@ -7,6 +7,8 @@ package com.cognizantsoftvision.maqs.base;
 import static java.lang.System.out;
 
 import com.cognizantsoftvision.maqs.base.exceptions.MAQSRuntimeException;
+import com.cognizantsoftvision.maqs.base.interfaces.TestResult;
+import com.cognizantsoftvision.maqs.base.watcher.JunitTestWatcher;
 import com.cognizantsoftvision.maqs.utilities.helper.StringProcessor;
 import com.cognizantsoftvision.maqs.utilities.logging.ConsoleLogger;
 import com.cognizantsoftvision.maqs.utilities.logging.FileLogger;
@@ -16,6 +18,7 @@ import com.cognizantsoftvision.maqs.utilities.logging.LoggerFactory;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingConfig;
 import com.cognizantsoftvision.maqs.utilities.logging.LoggingEnabled;
 import com.cognizantsoftvision.maqs.utilities.logging.MessageType;
+import com.cognizantsoftvision.maqs.utilities.logging.TestResultType;
 import com.cognizantsoftvision.maqs.utilities.performance.IPerfTimerCollection;
 import com.cognizantsoftvision.maqs.utilities.performance.PerfTimerCollection;
 import java.lang.reflect.Method;
@@ -27,15 +30,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 /**
- * The Base test class.
+ * The Base Test class.
  */
 public abstract class BaseTest {
 
@@ -53,6 +60,8 @@ public abstract class BaseTest {
    * The test result object.
    */
   private ITestResult testResult;
+
+  private TestResult junitTestResult;
 
   /**
    * The Collection of Base Test Objects to use.
@@ -74,12 +83,15 @@ public abstract class BaseTest {
    */
   ThreadLocal<String> fullyQualifiedTestClassName = new ThreadLocal<>();
 
+  @RegisterExtension public JunitTestWatcher testWatcher;
+
   /**
    * Initializes a new instance of the BaseTest class.
    */
   protected BaseTest() {
     this.loggedExceptions = new ConcurrentHashMap<>();
     this.baseTestObjects = new ConcurrentManagerHashMap();
+    this.testWatcher = new JunitTestWatcher(this);
   }
 
   /**
@@ -215,7 +227,36 @@ public abstract class BaseTest {
   }
 
   /**
-   * Setup before a test.
+   * Setup before a JUnit test.
+   *
+   * @param info the test info of the unit test being run
+   */
+  @BeforeEach
+  public void setup(TestInfo info) {
+    String testClassName = null;
+    String testMethodName = null;
+
+    // Get the Fully Qualified Test Class Name and set it in the object
+    if (info.getTestClass().isPresent()) {
+      Optional<Class<?>> optional = info.getTestClass();
+      if (optional.isPresent()) {
+        testClassName = optional.get().getName();
+      }
+    }
+
+    if (info.getTestMethod().isPresent()) {
+      Optional<Method> optional = info.getTestMethod();
+      if (optional.isPresent()) {
+        testMethodName = optional.get().getName();
+      }
+    }
+
+    String testName = testClassName + "." + testMethodName;
+    customSetup(testName);
+  }
+
+  /**
+   * Setup before a testng unit test.
    *
    * @param method      The initial executing Method object
    * @param testContext The initial executing Test Context object
@@ -237,22 +278,25 @@ public abstract class BaseTest {
    */
   public void customSetup(String testName, ITestContext testContext) {
     this.testContextInstance = testContext;
+    customSetup(testName);
+  }
 
+  private void customSetup(String testName) {
     testName = testName.replaceFirst("class ", "");
     this.fullyQualifiedTestClassName.set(testName);
-
     this.createNewTestObject();
   }
 
   /**
-   * Cleanup after a test.
+   * Cleanup after a TestNG test.
    */
   @AfterMethod(alwaysRun = true)
   public void teardown() {
     try {
       this.beforeLoggingTeardown(testResult);
     } catch (Exception e) {
-      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
+      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s",
+          e.getMessage());
     }
 
     // Log the test result
@@ -280,6 +324,42 @@ public abstract class BaseTest {
       this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
     }
 
+    cleanUpTest();
+  }
+
+  /**
+   * Cleanup after a JUnit test.
+   */
+  public void teardownJunit() {
+    // Log the test result
+    if (junitTestResult.getStatus() == TestResultType.PASS) {
+      this.tryToLog(MessageType.SUCCESS, "Test Passed");
+    } else if (junitTestResult.getStatus() == TestResultType.FAIL) {
+      this.tryToLog(MessageType.ERROR, "Test Failed");
+    } else if (junitTestResult.getStatus() == TestResultType.SKIP) {
+      this.tryToLog(MessageType.INFORMATION, "Test was skipped");
+    } else {
+      this.tryToLog(MessageType.WARNING, "Test had an unexpected result.");
+    }
+
+    // Cleanup log files we don't want
+    try {
+      if ((this.getLogger() instanceof FileLogger)
+          && junitTestResult.getStatus() == TestResultType.PASS
+          && this.loggingEnabledSetting == LoggingEnabled.ONFAIL) {
+        Files.delete(Paths.get(((FileLogger) this.getLogger()).getFilePath()));
+      }
+    } catch (Exception e) {
+      this.tryToLog(MessageType.WARNING, "Failed to cleanup log files because: %s", e.getMessage());
+    }
+
+    cleanUpTest();
+  }
+
+  /**
+   * Cleans up logs and files after the test.
+   */
+  private void cleanUpTest() {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.fullyQualifiedTestClassName.get();
 
@@ -310,6 +390,10 @@ public abstract class BaseTest {
     this.testResult = testResult;
   }
 
+  public void setTestResult(TestResult testResult) {
+    this.junitTestResult = testResult;
+  }
+
   /**
    * Steps to take before logging teardown results.
    *
@@ -330,7 +414,8 @@ public abstract class BaseTest {
       if (this.loggingEnabledSetting != LoggingEnabled.NO) {
         return LoggerFactory.getLogger(
             StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
-                DateTimeFormatter.ofPattern(Logger.DEFAULT_DATE_TIME_FORMAT,
+                DateTimeFormatter.ofPattern(
+                    Logger.DEFAULT_DATE_TIME_FORMAT,
                     Locale.getDefault()).format(LocalDateTime.now(Clock.systemUTC()))));
       } else {
         return LoggerFactory.getConsoleLogger();
