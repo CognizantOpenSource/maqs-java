@@ -133,7 +133,7 @@ jobs:
       - name: Test Reporting
         if: always() && github.actor != 'dependabot[bot]'
         id: test-report
-        uses: phoenix-actions/test-reporting@v8
+        uses: phoenix-actions/test-reporting@v10
         with:
           name: ${{matrix.module-name}} Test Results
           path: '**/junitreports/TEST-**.xml'
