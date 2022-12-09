@@ -16,7 +16,7 @@
     <version>${revision}</version>
 
     <properties>
-        <playwright.version>1.21.0</playwright.version>
+        <playwright.version>1.28.1</playwright.version>
     </properties>
 
     <dependencies>

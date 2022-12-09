@@ -133,7 +133,7 @@ jobs:
       - name: Test Reporting
         if: always() && github.actor != 'dependabot[bot]'
         id: test-report
-        uses: phoenix-actions/test-reporting@v8
+        uses: phoenix-actions/test-reporting@v10
         with:
           name: ${{matrix.module-name}} Test Results
           path: '**/junitreports/TEST-**.xml'
@@ -252,7 +252,7 @@ jobs:
       - name: Deploy Release v${{ needs.getVersion.outputs.buildNumber }} to GitHub
         run: mvn -Drevision=${{ needs.getVersion.outputs.buildNumber }} deploy -P github,deploy
       - name: Publish GitHub release v${{ needs.getVersion.outputs.buildNumber }}
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
