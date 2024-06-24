@@ -110,7 +110,7 @@ public class AppiumConfig {
    */
   public static Duration getCommandTimeout() {
     String value = Config.getValueForSection(APPIUM_SECTION, "MobileCommandTimeout", "60000");
-    int timeoutValue;
+    long timeoutValue;
     try {
       timeoutValue = Integer.parseInt(value);
     } catch (NumberFormatException ex) {

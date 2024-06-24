@@ -7,7 +7,6 @@ package com.cognizantsoftvision.maqs.appium;
 import com.cognizantsoftvision.maqs.base.ITestObject;
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
-import org.openqa.selenium.WebElement;
 
 /**
  * The Appium Test Object interface class.
@@ -19,21 +18,21 @@ public interface IAppiumTestObject extends ITestObject {
    *
    * @return the appium driver
    */
-  AppiumDriver<WebElement> getAppiumDriver();
+  AppiumDriver getAppiumDriver();
 
   /**
    * Sets appium driver.
    *
    * @param appiumDriver the appium driver
    */
-  void setAppiumDriver(AppiumDriver<WebElement> appiumDriver);
+  void setAppiumDriver(AppiumDriver appiumDriver);
 
   /**
    * Sets appium driver.
    *
    * @param appiumDriverSupplier the appium driver supplier
    */
-  void setAppiumDriver(Supplier<AppiumDriver<WebElement>> appiumDriverSupplier);
+  void setAppiumDriver(Supplier<AppiumDriver> appiumDriverSupplier);
 
   /**
    * Gets appium manager.

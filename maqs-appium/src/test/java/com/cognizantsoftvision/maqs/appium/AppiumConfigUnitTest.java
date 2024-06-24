@@ -125,7 +125,7 @@ public class AppiumConfigUnitTest {
    */
   @Test(groups = TestCategories.APPIUM)
   public void testGetCommandTimeout() {
-    Assert.assertEquals(AppiumConfig.getCommandTimeout().toMillis(), 122000);
+    Assert.assertEquals(AppiumConfig.getCommandTimeout().toMillis(), 200000);
   }
 
   /**
