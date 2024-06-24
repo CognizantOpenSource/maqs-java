@@ -7,14 +7,14 @@ package com.cognizantsoftvision.maqs.utilities.helper.exceptions;
 /**
  * The Framework Configuration Exception class.
  */
-public class FrameworkConfigurationException extends RuntimeException {
+public class MaqsConfigException extends RuntimeException {
 
   /**
    * Instantiates a new Framework configuration exception.
    *
    * @param message the message
    */
-  public FrameworkConfigurationException(String message) {
+  public MaqsConfigException(String message) {
     super(message);
   }
 }

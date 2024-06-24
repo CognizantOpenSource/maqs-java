@@ -4,11 +4,10 @@
 
 package com.cognizantsoftvision.maqs.utilities.helper;
 
-import com.cognizantsoftvision.maqs.utilities.helper.exceptions.FrameworkConfigurationException;
+import com.cognizantsoftvision.maqs.utilities.helper.exceptions.MaqsConfigException;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
+
 import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
@@ -61,8 +60,53 @@ public final class Config {
       overrideConfig = new XMLConfiguration();
       overrideConfig.setSynchronizer(new ReadWriteSynchronizer());
     } catch (ConfigurationException exception) {
-      throw new FrameworkConfigurationException(StringProcessor.safeFormatter(
+      throw new MaqsConfigException(StringProcessor.safeFormatter(
           "Exception creating the xml configuration object from the file : %s", exception));
+    }
+  }
+
+  /**
+   * Validates the app config section by ensuring required values are present.
+   * @param configSection The config section to be validated
+   * @param configValidation A list of strings containing the required field names
+   */
+  public static void validate(ConfigSection configSection, ConfigValidation configValidation) {
+    // Don't run the validation if the user has decided to skip the validation
+    if (getGeneralValue("SkipConfigValidation").equals("Yes")) {
+      return;
+    }
+
+    if (configValidation == null) {
+      throw new MaqsConfigException("The value passed in for configValidation (required fields in a config) is null");
+    }
+
+    var configSectionPassed = getSection(configSection);
+    List<String> exceptions = new ArrayList<>();
+
+    // Check if we have any required fields
+    if (configValidation.getRequiredFields() != null && !configValidation.getRequiredFields().isEmpty()) {
+      for(var requiredField : configValidation.getRequiredFields()) {
+        if (!configSectionPassed.containsKey(requiredField)) {
+          exceptions.add("Key missing: " + requiredField);
+        }
+      }
+    }
+
+    // Check if we have any one of required fields
+    if (configValidation.getRequiredOneOfFields() != null && configValidation.getRequiredOneOfFields().size() > 0) {
+        // && !configValidation.getRequiredOneOfFields().Any(x -> configSectionPassed.containsKey(x))){
+      // We have one of fields and didn't find any of them
+      exceptions.add("Need at least one of the following keys: " + String.join(", ", configValidation.getRequiredOneOfFields()));
+    }
+
+    if (!exceptions.isEmpty()) {
+      StringBuilder message = new StringBuilder();
+      for (var exception : exceptions) {
+        message.append(exception);
+      }
+
+      message.append("*This check can be skipped by setting the 'SkipConfigValidation' configuration value to 'Yes'.");
+      throw new MaqsConfigException(message.toString());
     }
   }
 
@@ -275,5 +319,9 @@ public final class Config {
    */
   public static boolean doesGeneralKeyExist(String key) {
     return doesKeyExist(key, DEFAULT_MAQS_SECTION);
+  }
+
+  private static String getConfigFile() {
+    PropertyManager.get("maqs.config.location", "config.xml");
   }
 }

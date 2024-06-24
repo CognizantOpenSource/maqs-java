@@ -10,14 +10,14 @@ import com.cognizantsoftvision.maqs.webservices.MediaType;
 import com.cognizantsoftvision.maqs.webservices.WebServiceConfig;
 import com.cognizantsoftvision.maqs.webservices.WebServiceDriver;
 import com.cognizantsoftvision.maqs.webservices.models.Product;
-import org.springframework.http.HttpStatus;
-import org.testng.Assert;
-import org.testng.annotations.Ignore;
-import org.testng.annotations.Test;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
 import java.util.Collections;
+import org.springframework.http.HttpStatus;
+import org.testng.Assert;
+import org.testng.annotations.Ignore;
+import org.testng.annotations.Test;
 
 /**
  * The Web Driver Service Driver Delete unit test class.
