@@ -19,6 +19,6 @@ public class BaseGenericTest extends BaseExtendableTest<ITestObject> {
   @Override
   protected void createNewTestObject() {
     this.setTestObject(
-        new BaseTestObject(this.createLogger(), this.getFullyQualifiedTestClassName()));
+            new BaseTestObject(this.createLogger(), this.getFullyQualifiedTestClassName()));
   }
 }
